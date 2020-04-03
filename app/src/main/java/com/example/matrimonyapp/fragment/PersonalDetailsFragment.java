@@ -399,10 +399,10 @@ public class PersonalDetailsFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("PersonalDetailsId",String.valueOf(personalDetailsId));
-                params.put("UserId",67+"");
+                params.put("UserId",userModel.getUserId());
                 params.put("Height",String.valueOf(rulerValuePicker_height.getCurrentValue()));
                 params.put("Weight",String.valueOf(rulerValuePicker_weight.getCurrentValue()));
-                params.put("SkinColourId",textView_skinColor.getText().toString());
+                params.put("SkinColourId",  textView_skinColor.getText().toString());
                 params.put("MaritalStatusId",textView_maritalStatus.getText().toString());
                 params.put("FamilyStatusId",textView_familyStatus.getText().toString());
                 params.put("FamilyTypeId",textView_familyType.getText().toString());
@@ -430,7 +430,7 @@ public class PersonalDetailsFragment extends Fragment {
     {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_PERSONALDETAILS+"UserId="+67+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_PERSONALDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -555,7 +555,7 @@ public class PersonalDetailsFragment extends Fragment {
                 {
                     //String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_MARITALSTATUS+"Language="+userModel.getLanguage(),"MaritalStatusId",
-                            "MaritalStatusName", editText_maritalStatus, textView_skinColor,getContext(), customDialogLoadingProgressBar);
+                            "MaritalStatusName", editText_maritalStatus, textView_maritalStatus,getContext(), customDialogLoadingProgressBar);
 
                 }
                 else if(params[0].toString()=="FamilyStatus")

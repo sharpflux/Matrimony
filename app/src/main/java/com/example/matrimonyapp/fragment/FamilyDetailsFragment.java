@@ -106,8 +106,8 @@ public class FamilyDetailsFragment extends Fragment {
         editText_mamaMobileNo = view.findViewById(R.id.editText_mamaMobileNo);
         editText_mamaOccupation = view.findViewById(R.id.editText_mamaOccupation);
         textView_noOfSiblings = view.findViewById(R.id.textView_noOfSiblings);
-        imageView_add = view.findViewById(R.id.imageView_add);
-        imageView_subtract = view.findViewById(R.id.imageView_subtract);
+        //imageView_add = view.findViewById(R.id.imageView_add);
+        //imageView_subtract = view.findViewById(R.id.imageView_subtract);
         imageView_addSibling = view.findViewById(R.id.imageView_addSibling);
 
 

@@ -133,6 +133,10 @@ public class ProfessionalDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
+                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");
+
+
                 /*companyName = editText_companyName.getText().toString();
                 occupation = editText_occupation.getText().toString();
                 designation = editText_designation.getText().toString();
@@ -148,14 +152,7 @@ public class ProfessionalDetailsFragment extends Fragment {
                 bundle.putString("companyAddress",companyAddress);*/
 
 
-                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
-               // personalDetailsFragment.setArguments(bundle);
 
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
-                fragmentTransaction.commit() ;
             }
         });
 
@@ -169,12 +166,86 @@ public class ProfessionalDetailsFragment extends Fragment {
         return view;
     }
 
+    private void insertDetails()
+    {
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_PROFESSIONALDETAILS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if(jsonObject.getString("message").equals("Success") &&
+                                    !jsonObject.getBoolean("error"))
+                            {
+                                getDetails();
+
+                                Toast.makeText(getContext(),"Professional details saved successfully!", Toast.LENGTH_SHORT).show();
+
+
+                                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
+                                // personalDetailsFragment.setArguments(bundle);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
+                                fragmentTransaction.commit() ;
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("ProfessionalDetailsId",String.valueOf(professionalDetailsId));
+                params.put("UserId",userModel.getUserId());
+                params.put("CompanyName",editText_companyName.getText().toString());
+                params.put("CompanyAddress",editText_companyAddress.getText().toString());
+                params.put("OccupationId",textView_occupationId.getText().toString());
+                params.put("DesignationId",textView_designationId.getText().toString());
+                params.put("Experience",editText_experience.getText().toString());
+                params.put("MonthlyIncome",editText_income.getText().toString());
+                params.put("LanguageType",userModel.getLanguage());
+
+
+
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+
+    }
     void getDetails()
     {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+1+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -259,8 +330,12 @@ public class ProfessionalDetailsFragment extends Fragment {
                 if(params[0].toString().equals("getDetails"))
                 {
                     getDetails();
-
                 }
+                else if(params[0].toString().equals("insertDetails"))
+                {
+                    insertDetails();
+                }
+
                 if(params[0].toString().equals("Occupation"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_OCCUPATION+"Language="+userModel.getLanguage(),

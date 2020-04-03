@@ -185,26 +185,26 @@ public class BasicDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                        final Calendar calendar = Calendar.getInstance();
-                    //DatePickerDialog d = new DatePickerDialog()
-                        DatePickerDialog dialog = new DatePickerDialog(getActivity(),R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker arg0, int year, int month, int day_of_month) {
-                                calendar.set(Calendar.YEAR, year);
-                                calendar.set(Calendar.MONTH, (month));
-                                calendar.set(Calendar.DAY_OF_MONTH, day_of_month);
-                                String myFormat = "yyyy-MM-dd";
-                                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-                                editText_birthdate.setText(sdf.format(calendar.getTime()));
-                                String age = getAge(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                                editText_age.setText(age);
-                            }
-                        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                        // dialog.getDatePicker().setMinDate(calendar.getTimeInMillis());// TODO: used to hide previous date,month and year
-                        calendar.add(Calendar.YEAR, -20);
+                final Calendar calendar = Calendar.getInstance();
+                //DatePickerDialog d = new DatePickerDialog()
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(),R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker arg0, int year, int month, int day_of_month) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, (month));
+                        calendar.set(Calendar.DAY_OF_MONTH, day_of_month);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        editText_birthdate.setText(sdf.format(calendar.getTime()));
+                        String age = getAge(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                        editText_age.setText(age);
+                    }
+                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                // dialog.getDatePicker().setMinDate(calendar.getTimeInMillis());// TODO: used to hide previous date,month and year
+                calendar.add(Calendar.YEAR, -20);
 
-                        dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());// TODO: used to hide future date,month and year
-                        dialog.show();
+                dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());// TODO: used to hide future date,month and year
+                dialog.show();
 
 
 
@@ -352,10 +352,10 @@ public class BasicDetailsFragment extends Fragment {
                 String control = "District";
                 String id = textView_stateId.getText().toString();
                 runner.execute(control,id);
-/*
+                /*
 
 
-*/
+                 */
 
             }
         });
@@ -552,28 +552,28 @@ public class BasicDetailsFragment extends Fragment {
 
                             //converting response to json object
 
-                                JSONObject jsonObject = new JSONObject(response);
+                            JSONObject jsonObject = new JSONObject(response);
 
-                                if(jsonObject.getString("message").equals("Success") &&
-                                        !jsonObject.getBoolean("error"))
-                                {
-                                    getDetails();
+                            if(jsonObject.getString("message").equals("Success") &&
+                                    !jsonObject.getBoolean("error"))
+                            {
+                                getDetails();
 
-                                    Toast.makeText(context,"Basic details saved successfully!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context,"Basic details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                    fragmentTransaction.addToBackStack(null);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.addToBackStack(null);
 
-                                    ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
+                                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
 
-                                    fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
-                                    fragmentTransaction.commit();
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
+                                fragmentTransaction.commit();
 
-                                }
-                                else
-                                {
-                                    Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
-                                }
+                            }
+                            else
+                            {
+                                Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                            }
 
 
                         } catch (JSONException e) {
@@ -866,28 +866,28 @@ public class BasicDetailsFragment extends Fragment {
 
 
 
-   String getAge(int year, int month, int day)
-   {
+    String getAge(int year, int month, int day)
+    {
 
-       Calendar dob = Calendar.getInstance();
-       Calendar today = Calendar.getInstance();
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
 
-       dob.set(year, month, day);
+        dob.set(year, month, day);
 
-       int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-       if(today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR))
-       {
-           age--;
-       }
+        if(today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR))
+        {
+            age--;
+        }
 
-       //Integer ageInt = new Integer(age);
+        //Integer ageInt = new Integer(age);
 
-       return String.valueOf(age);
+        return String.valueOf(age);
 
 
 
-   }
+    }
 
 
     private void showPopUp(EditText editText, final String urlFor)
@@ -1032,10 +1032,6 @@ public class BasicDetailsFragment extends Fragment {
         }
 
     }
-
-
-
-
 
 
 

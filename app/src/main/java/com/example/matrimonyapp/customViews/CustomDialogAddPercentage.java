@@ -76,7 +76,7 @@ public class CustomDialogAddPercentage extends Dialog {
             @Override
             public void onClick(View view) {
 
-                percentage = numberPicker_per1.getValue()+"."+numberPicker_per2.getValue()+" %";
+                percentage = numberPicker_per1.getValue()+"."+String.format("%02d",numberPicker_per2.getValue())+" %";
                 editText.setText(percentage);
                 dismiss();
             }

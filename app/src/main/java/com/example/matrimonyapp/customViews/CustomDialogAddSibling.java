@@ -18,12 +18,14 @@ import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
 import com.example.matrimonyapp.adapter.PopupFetcher;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -36,9 +38,11 @@ public class CustomDialogAddSibling extends Dialog {
 
     public Context context;
 
-    public EditText editText_siblingRelation;
+    public EditText editText_siblingRelation, editText_occupation, editText_qualification,
+            editText_siblingName, editText_siblingMobileNo, editText_fatherInLawName, editText_fatherInLawMobileNo,
+            editText_fatherInLawVillage;
 
-    public TextView textView_login, textView_createNew, textView_relationId;
+    public TextView textView_login, textView_createNew, textView_relationId, textView_occupationId, textView_qualificationId;
     public RadioGroup radioGroup_marriageStatus;
     public RadioButton radioButton_married, radioButton_unmarried;
 
@@ -49,8 +53,10 @@ public class CustomDialogAddSibling extends Dialog {
 
     Map<String, Integer> list;
 
-    private TextView textView_stateId, textView_districtId, textView_talukaId;
+    private TextView textView_stateId, textView_districtId, textView_talukaId, textView_addSibling;
     private EditText editText_state, editText_taluka, editText_district;
+
+    private SQLiteSiblingDetails sqLiteSiblingDetails;
 
     DataFetcher dataFetcher;
 
@@ -82,15 +88,30 @@ public class CustomDialogAddSibling extends Dialog {
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
+        sqLiteSiblingDetails = new SQLiteSiblingDetails(context);
+
+
         setCanceledOnTouchOutside(true);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         editText_siblingRelation = findViewById(R.id.editText_siblingRelation);
         textView_relationId = findViewById(R.id.textView_relationId);
+        editText_siblingName = findViewById(R.id.editText_siblingName);
+        editText_siblingMobileNo = findViewById(R.id.editText_siblingMobileNo);
+        editText_qualification = findViewById(R.id.editText_siblingQualification);
+        textView_qualificationId = findViewById(R.id.textView_qualificationId);
+        editText_occupation = findViewById(R.id.editText_siblingOccupation);
+        textView_occupationId = findViewById(R.id.textView_occupationId);
         radioGroup_marriageStatus = findViewById(R.id.radioGroup_marriageStatus);
         radioButton_married = findViewById(R.id.radioButton_married);
         radioButton_unmarried = findViewById(R.id.radioButton_unmarried);
         linearLayout_fatherInLaw = findViewById(R.id.linearLayout_fatherInLaw);
+        editText_fatherInLawName = findViewById(R.id.editText_fatherInLawName);
+        editText_fatherInLawMobileNo = findViewById(R.id.editText_fatherInLawMobileNo);
+        editText_fatherInLawVillage = findViewById(R.id.editText_fatherInLawVillage);
+
+
+        textView_addSibling = findViewById(R.id.textView_addSibling);
 
         editText_state= findViewById(R.id.editText_state);
         editText_taluka = findViewById(R.id.editText_taluka);
@@ -140,8 +161,76 @@ public class CustomDialogAddSibling extends Dialog {
 
         textChangedListener();
 
+        onClickListener();
 
 
+    }
+
+
+    private void onClickListener()
+    {
+        editText_qualification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("QualificationName");
+            }
+        });
+
+        editText_occupation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("Occupation");
+            }
+        });
+
+
+        textView_addSibling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                String name = editText_siblingName.getText().toString().trim();
+                String mobileNo = editText_siblingMobileNo.getText().toString().trim();
+                String qualificationId = textView_qualificationId.getText().toString().trim();
+                String qualificationName = editText_qualification.getText().toString().trim();
+                String occupationId = textView_occupationId.getText().toString().trim();
+                String occupationName = editText_occupation.getText().toString().trim();
+                String maritalStatus = marriageSatus;//getText().toString().trim();
+                String relationId = textView_relationId.getText().toString().trim();
+                String relation = editText_siblingRelation.getText().toString().trim();
+                String fil_name = editText_fatherInLawName.getText().toString().trim();
+                String fil_mobileNo = editText_fatherInLawMobileNo.getText().toString().trim();
+                String fil_village = editText_fatherInLawVillage.getText().toString().trim();
+                String fil_state_id = textView_stateId.getText().toString().trim();
+                String fil_district_id = textView_districtId.getText().toString().trim();
+                String fil_taluka_id = textView_talukaId.getText().toString().trim();
+                String fil_state_name = editText_state.getText().toString().trim();
+                String fil_district_name = editText_district.getText().toString().trim();
+                String fil_taluka_name = editText_taluka.getText().toString().trim();
+
+
+                long res = sqLiteSiblingDetails.insertSibling(name, mobileNo, qualificationId, qualificationName,
+                        occupationId, occupationName, maritalStatus,
+                        relationId, relation, fil_name, fil_mobileNo, fil_village,
+                        fil_state_id, fil_district_id, fil_taluka_id,
+                        fil_state_name, fil_district_name, fil_taluka_name);
+
+                if(res!=-1)
+                {
+                    Toast.makeText(context, "Value added & id is "+res, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+            }
+        });
 
     }
 
@@ -202,11 +291,21 @@ public class CustomDialogAddSibling extends Dialog {
                 if(urlFor.equals("District"))
                 {
                     id =  textView_stateId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 if(urlFor.equals("Taluka"))
                 {
                     id = textView_districtId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select District first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                 }
 
                 runner.execute(urlFor, id);
@@ -299,6 +398,24 @@ public class CustomDialogAddSibling extends Dialog {
                             "SiblingListId","SiblingListName",editText_siblingRelation,
                             textView_relationId,context, R.style.MyCustomPopupMenu2);
                 }
+                else if(params[0].toString().equals("QualificationName"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId=1"+
+                                    "&Language="+userModel.getLanguage(),"QualificationId",
+                            "Qualification", editText_qualification, textView_qualificationId,context,
+                            customDialogLoadingProgressBar);
+
+                }
+
+                else if(params[0].toString().equals("Occupation"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_OCCUPATION+"Language="+userModel.getLanguage(),
+                            "OccupationId",
+                            "OccupationName", editText_occupation,
+                            textView_occupationId, context, customDialogLoadingProgressBar);
+
+                }
+
                 else if(params[0].toString()=="State")
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",

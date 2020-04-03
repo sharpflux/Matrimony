@@ -53,14 +53,14 @@
                     >
 
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-                            android:text="@string/relation"
-                            android:textColor="@color/text_black"
-                            android:textSize="15sp"
-                            />
+                        android:text="@string/relation"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        />
 
 
                     <androidx.cardview.widget.CardView
@@ -182,13 +182,22 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_siblingEducation"
-                        android:hint="@string/education"
+                        android:id="@+id/editText_siblingQualification"
+                        android:hint="@string/qualification"
                         android:inputType=""
                         android:textColor="@color/text_black"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:focusable="false"
+                        android:clickable="false"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_qualificationId"
+                    android:visibility="gone"
+                    />
+
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -207,7 +216,12 @@
                         android:textSize="15sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_occupationId"
+                    android:visibility="gone"
+                    />
 
 
                 <RadioGroup
@@ -248,7 +262,7 @@
                     android:id="@+id/linearLayout_fatherInLaw"
                     android:visibility="gone"
 
-                >
+                    >
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -257,80 +271,80 @@
                         />
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/text_black"
-                    android:textSize="15sp"
-                    android:text="@string/father_in_law_information"
-                    android:paddingStart="5dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="20dp"
-                    />
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-
-
-                    <EditText
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherInLawName"
-                        android:hint="@string/name"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
-                        android:digits="@string/only_text_with_space"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherInLawMobileNo"
-                        android:hint="Mobile No."
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherInLawVillage"
-                        android:hint="@string/village"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:maxLines="5"
+                        android:text="@string/father_in_law_information"
+                        android:paddingStart="5dp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"
                         />
 
-                </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp"
+                        >
+
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_fatherInLawName"
+                            android:hint="@string/name"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:digits="@string/only_text_with_space"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp"
+                        >
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_fatherInLawMobileNo"
+                            android:hint="@string/mobile"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp"
+                        >
+
+
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_fatherInLawVillage"
+                            android:hint="@string/village"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:lineSpacingMultiplier="1.2"
+                            android:maxLines="5"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -361,6 +375,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_stateId"
                         android:visibility="gone"
+                        android:text="@string/_0"
                         />
 
                     <LinearLayout
@@ -400,6 +415,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_districtId"
                             android:visibility="gone"
+                            android:text="@string/_0"
                             />
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -429,6 +445,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_talukaId"
                             android:visibility="gone"
+                            android:text="@string/_0"
                             />
 
 

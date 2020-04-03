@@ -149,7 +149,7 @@ public class ReligiousDetailsFragment extends Fragment {
 
 
 
-    onClickListener();
+        onClickListener();
 
 
 

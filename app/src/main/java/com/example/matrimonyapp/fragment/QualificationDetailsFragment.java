@@ -39,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -260,32 +261,32 @@ public class QualificationDetailsFragment extends Fragment {
         });
 */
 
-       editText_passingYear.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
+        editText_passingYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
 
-               CustomDialogAddYear customDialogAddYear = new CustomDialogAddYear(getContext(),editText_passingYear);
-               customDialogAddYear.show();
+                CustomDialogAddYear customDialogAddYear = new CustomDialogAddYear(getContext(),editText_passingYear);
+                customDialogAddYear.show();
 
-           }
-       });
+            }
+        });
 
 
-       editText_highestQualificationLevel.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               AsyncTaskLoad runner = new AsyncTaskLoad();
-               runner.execute("QualificationLevel");
-           }
-       });
+        editText_highestQualificationLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("QualificationLevel");
+            }
+        });
 
         editText_qualification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute("QualificationName");
+                runner.execute("QualificationName", textView_highestQualificationLevelId.getText().toString());
             }
         });
 
@@ -331,8 +332,8 @@ public class QualificationDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-/*                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");*/
+                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");
 
 
 
@@ -385,9 +386,16 @@ public class QualificationDetailsFragment extends Fragment {
     }
 
 
-    void insertDetails()
+    private void insertDetails()
     {
 
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, Integer.parseInt(editText_passingYear.getText().toString()));
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+        final String passingYear = sdf.format(calendar.getTime());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URLs.URL_POST_QUALIFICATIONDETAILS,
@@ -445,8 +453,8 @@ public class QualificationDetailsFragment extends Fragment {
                 params.put("QualificationLevelId",textView_highestQualificationLevelId.getText().toString());
                 params.put("QualificationId",textView_qualificationId.getText().toString());
                 params.put("Sch_Uni",editText_institue.getText().toString());
-                params.put("Percentage",editText_percentage.getText().toString());
-                params.put("PassingYear",editText_passingYear.getText().toString());
+                params.put("Percentage",editText_percentage.getText().toString().replaceAll("%","").trim());
+                params.put("PassingYear",passingYear);
                 params.put("Hobby",editText_hobby.getText().toString());
                 params.put("Social_Contribution",editText_socialContributions.getText().toString());
                 params.put("LanguageType",userModel.getLanguage());
@@ -465,7 +473,7 @@ public class QualificationDetailsFragment extends Fragment {
     {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+56+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -492,7 +500,7 @@ public class QualificationDetailsFragment extends Fragment {
                                     editText_highestQualificationLevel.setText(jsonObject.getString("QualificationLevelName"));
                                     editText_qualification.setText(jsonObject.getString("Qualification"));
                                     editText_institue.setText(jsonObject.getString("Sch_Uni"));
-                                    //editText_percentage.setText(jsonObject.getString("Percentage"));
+                                    editText_percentage.setText(jsonObject.getString("Percentage")+" %");
                                     editText_passingYear.setText(jsonObject.getString("PassingYearString"));
                                     editText_hobby.setText(jsonObject.getString("Hobby"));
                                     editText_socialContributions.setText(jsonObject.getString("Social_Contribution"));
@@ -582,7 +590,8 @@ public class QualificationDetailsFragment extends Fragment {
 
                 else if(params[0].toString().equals("QualificationName"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId=1"+
+                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId="
+                                    +params[1].toString()+
                                     "&Language="+userModel.getLanguage(),"QualificationId",
                             "Qualification", editText_qualification, textView_qualificationId,getContext(),
                             customDialogLoadingProgressBar);
