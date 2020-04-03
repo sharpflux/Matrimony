@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_rounded_corners"
+    android:layout_marginTop="100dp"
+    android:layout_marginBottom="100dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="0dp"
+
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/circleImage_customDialogProfile"
+            android:src="@drawable/noimage"
+            android:layout_marginStart="20dp"
+            android:layout_gravity="center_vertical"
+        />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_customDialogName"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            android:text="Name Here"
+            android:textStyle="bold"
+
+            />
+
+    </LinearLayout>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/shadow_down" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/imageView_previewImage"
+            android:src="@drawable/noimage"
+            android:scaleType="fitXY"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/shadow_down" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            >
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/imageView_like"
+                android:background="@drawable/black_heart"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                />
+
+<!--
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/red_heart"
+                android:scaleType="fitXY"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                />-->
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+
+    <!--
+    &lt;!&ndash;        <TextView
+                android:id="@+id/txt_ok"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/success_gradient"
+                android:gravity="center"
+                android:paddingBottom="17.3dp"
+                android:paddingTop="17.3dp"
+                android:text="Ok"
+                android:textColor="@color/white" />&ndash;&gt;
+
+
+
+        -->
+
+
+
+
+
+</RelativeLayout>

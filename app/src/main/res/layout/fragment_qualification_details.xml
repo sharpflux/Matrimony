@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:orientation="vertical">
+
+
+
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/shadow_down" />-->
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="29.7dp"
+                android:layout_marginStart="29.7dp"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_highestQualificationLevel"
+                        android:hint="@string/qualification_level"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_highestQualificationLevelId"
+                    android:text="id"
+                    android:visibility="gone"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_qualification"
+                        android:hint="@string/qualification"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_qualificationId"
+                    android:text="id"
+                    android:visibility="gone"
+                    />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_institue"
+                        android:hint="@string/institue_university"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType="textCapWords"
+                        android:maxLines="5"
+                        android:lineSpacingMultiplier="1.2"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_percentage"
+                        android:hint="@string/percentage"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_passingYear"
+                        android:hint="@string/passing_year"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_hobby"
+                        android:hint="@string/hobby"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType="textMultiLine"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxLines="5"
+                        android:scrollbars="none"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_socialContributions"
+                        android:hint="@string/social_contributions"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxLines="5"
+                        android:scrollbars="none"
+                        android:inputType="textMultiLine"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+           <!-- <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="29.7dp"
+                android:layout_marginStart="29.7dp"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:text="@string/ssc"
+                    android:paddingStart="5dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_sscNameOfInstitute"
+                            android:hint="@string/name_of_institute"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_sscPer"
+                            android:hint="@string/percentage"
+                            android:inputType="numberDecimal"
+                            android:maxLength="5"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:text="@string/hsc"
+                    android:paddingStart="5dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_hscNameOfInstitute"
+                            android:hint="@string/name_of_institute"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_hscPer"
+                            android:hint="@string/percentage"
+                            android:inputType="numberDecimal"
+                            android:maxLength="6"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:text="@string/graduation"
+                    android:paddingStart="5dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_gradCourse"
+                        android:hint="@string/course"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_gradNameOfInstitute"
+                            android:hint="@string/name_of_institute"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_gradPer"
+                            android:hint="@string/percentage"
+                            android:inputType="numberDecimal"
+                            android:maxLength="6"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:text="@string/post_graduation"
+                    android:paddingStart="3dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="8dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_pgCourse"
+                        android:hint="@string/course"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_pgNameOfInstitute"
+                            android:hint="@string/name_of_institute"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_pgPer"
+                            android:hint="@string/percentage"
+                            android:inputType="numberDecimal"
+                            android:maxLength="6"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+            </LinearLayout>-->
+
+
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+<!--    <TextView
+        android:id="@+id/txt_saveAndContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_place_order"
+        android:gravity="center"
+        android:paddingBottom="17.3dp"
+        android:paddingTop="17.3dp"
+        android:text="@string/save_cont"
+        android:textColor="@color/white" />-->
+
+
+</RelativeLayout>

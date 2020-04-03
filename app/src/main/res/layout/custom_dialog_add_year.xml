@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/custom_dialog_rounded_corner"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical">
+
+
+
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/pink"
+                    android:orientation="vertical"
+                    android:gravity="center"
+
+                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+
+                    android:text="@string/year"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    />
+
+                </LinearLayout>
+
+                <com.shawnlin.numberpicker.NumberPicker
+                    android:layout_width="80dp"
+                    android:layout_height="160dp"
+                    android:id="@+id/numberPicker_year"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:np_lineSpacingMultiplier="1.2"
+                    app:np_selectedTextColor="@color/pink"
+                    app:np_textColor="@color/text_gray"
+                    app:np_textSize="13sp"
+                    app:np_selectedTextSize="25sp"
+                    app:np_dividerColor="@color/transparent"
+                    style="@style/customNumberPicker"
+                    android:background="@color/white"
+                    android:showDividers="none"
+                    app:np_wrapSelectorWheel="true"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:id="@+id/textView_cancel"
+                        android:text="@string/cancel"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:id="@+id/textView_ok"
+                        android:text="@string/ok"
+                        android:textSize="15sp"
+                        android:textColor="@color/pink"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+
+
+</RelativeLayout>

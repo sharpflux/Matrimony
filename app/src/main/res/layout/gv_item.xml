@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_weight="1">
+
+    <ImageView
+        android:layout_height="120dp"
+        android:layout_width="120dp"
+        android:padding="0.6dp"
+        android:id="@+id/ivGallery"
+        android:src="@mipmap/ic_launcher_round"
+        android:scaleType="fitXY"
+        android:background="@color/transparent"
+        />
+
+</LinearLayout>

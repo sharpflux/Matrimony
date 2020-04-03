@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tickLabels_salary">
+        <item>10L</item>
+        <item>20L</item>
+        <item>30L</item>
+        <item>40L</item>
+        <item>50L</item>
+        <item>60L</item>
+        <item>70L</item>
+        <item>80L</item>
+        <item>90L</item>
+        <item>100L</item>
+    </string-array>
+
+
+    <string-array name="tickLabels_height">
+        <item>3ft</item>
+        <item>4ft</item>
+        <item>5ft</item>
+        <item>6ft</item>
+        <item>7ft</item>
+        <item>8ft</item>
+    </string-array>
+
+    <!--<string-array name="tickLabels_height">
+        <item>3.0ft</item>
+        <item>3.2ft</item>
+        <item>3.4ft</item>
+        <item>3.6ft</item>
+        <item>3.8ft</item>
+        <item>3.10ft</item>
+
+        <item>4.0ft</item>
+        <item>4.2ft</item>
+        <item>4.4ft</item>
+        <item>4.6ft</item>
+        <item>4.8ft</item>
+        <item>4.10ft</item>
+
+        <item>5.0ft</item>
+        <item>5.2ft</item>
+        <item>5.4ft</item>
+        <item>5.6ft</item>
+        <item>5.8ft</item>
+        <item>5.10ft</item>
+
+        <item>6.0ft</item>
+        <item>6.2ft</item>
+        <item>6.4ft</item>
+        <item>6.6ft</item>
+        <item>6.8ft</item>
+        <item>6.10ft</item>
+
+        <item>7.0ft</item>
+        <item>7.2ft</item>
+        <item>7.4ft</item>
+        <item>7.6ft</item>
+        <item>7.8ft</item>
+        <item>7.10ft</item>
+
+
+    </string-array>-->
+
+
+</resources>

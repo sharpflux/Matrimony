@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:background="@color/white">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_alignBottom="@+id/toolbar"/>
+
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/dynamic_fragment_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/shadow"
+        android:layout_marginTop="1dp"
+        />
+
+    <TextView
+        android:id="@+id/txt_saveAndContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_place_order"
+        android:gravity="center"
+        android:paddingBottom="17.3dp"
+        android:paddingTop="17.3dp"
+        android:text="@string/save_cont"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

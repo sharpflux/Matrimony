@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_rounded_corners"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical">
+
+
+<!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shadow_down" />-->
+
+
+<!--        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="&#45;&#45;Select State&#45;&#45;"
+            android:textColor="@color/text_black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            />-->
+
+
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/edittext__states"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@android:drawable/ic_menu_search"
+                android:layout_gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Search State"
+                android:textColorHint="@color/text_black"
+                android:textColor="@color/text_black"
+                android:paddingStart="15dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"
+                android:maxLines="1"
+
+                android:background="#00000000"
+                />
+
+        </LinearLayout>-->
+
+<!--
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchView_search"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search here"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+             />
+-->
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_search"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Search State"
+                android:textColorHint="@color/text_black"
+                android:textColor="@color/text_black"
+                android:paddingStart="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:drawableLeft="@android:drawable/ic_menu_search"
+                android:background="@drawable/edittext__states"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayout_progressBar"
+            android:gravity="center"
+            android:layout_marginBottom="50dp"
+            android:visibility="gone"
+            >
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center"
+            />
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:scrollbars="none"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:id="@+id/recyclerView_prompt"
+               >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/dialog_rounded_corners"
+       >
+
+       <TextView
+           android:id="@+id/txt_cancel"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:background="@drawable/gradient_bottom_rounded_corner"
+           android:gravity="center"
+           android:layout_gravity="center"
+           android:text="Cancel"
+           android:paddingBottom="17.3dp"
+           android:paddingTop="17.3dp"
+           android:textColor="@color/white"
+           android:duplicateParentState="true"
+           />
+
+
+   </LinearLayout>
+    <!--
+    &lt;!&ndash;        <TextView
+                android:id="@+id/txt_ok"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/success_gradient"
+                android:gravity="center"
+                android:paddingBottom="17.3dp"
+                android:paddingTop="17.3dp"
+                android:text="Ok"
+                android:textColor="@color/white" />&ndash;&gt;
+
+
+
+        -->
+
+
+
+
+
+</RelativeLayout>

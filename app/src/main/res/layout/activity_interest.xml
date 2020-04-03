@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/main_toolbar"
+            android:id="@+id/main_toolbar"
+            />
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                >
+
+
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                >
+
+                <com.google.android.material.tabs.TabLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tabLayout_interest"
+                    app:tabIndicatorColor="@color/project_color"
+                    app:tabIndicatorHeight="2dp"
+                    android:minHeight="40dp"
+                    app:tabMode="fixed"
+                    app:tabGravity="fill"
+                    app:tabTextAppearance="@style/MyCustomTextAppearance"
+                    app:tabTextColor="@color/text_black"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:tabSelectedTextColor="@color/project_color"
+                    android:foregroundGravity="center_horizontal"
+
+                    >
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="15 Received"
+
+                        />
+
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10 Sent"
+                        />
+
+
+
+                </com.google.android.material.tabs.TabLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/shadow"
+                    android:layout_height="1dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+
+                    />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollIndicators="none"
+                        >
+
+            <com.example.matrimonyapp.customViews.CustomViewPager
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/viewPager_interest"
+
+
+                />
+
+
+                    </ScrollView>
+
+                </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+    <include layout="@layout/main_footer"
+
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/main_footer"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_up"
+        android:layout_alignTop="@+id/main_footer"
+        />
+
+
+
+</RelativeLayout>

@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_rounded_corners"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="20dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+
+
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+
+                >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+
+                    android:background="@color/white"
+                    >
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/relation"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cardView_maritalStatus"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="10dp"
+                        app:cardElevation="1.3dp"
+                        app:cardCornerRadius="4dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_siblingRelation"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="10dp"
+                                android:layout_gravity="center"
+                                android:background="@null"
+                                android:paddingLeft="15dp"
+                                android:textColor="@color/text_black"
+                                android:textColorHint="@color/light_weight_gray"
+                                android:textSize="13sp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+
+                                android:src="@drawable/ic_action_right_arrow"
+                                android:padding="2dp"
+                                android:layout_marginEnd="15dp"
+                                android:tint="@color/text_gray"
+                                android:rotation="90"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_relationId"
+                                android:visibility="gone"
+                                />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_siblingName"
+                        android:hint="@string/name"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:digits="@string/only_text_with_space"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_siblingMobileNo"
+                        android:hint="Mobile No."
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_siblingEducation"
+                        android:hint="@string/education"
+                        android:inputType=""
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_siblingOccupation"
+                        android:hint="@string/occupation1"
+                        android:inputType=""
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup_marriageStatus"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:theme="@style/RadioButtonTheme"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_married"
+                        android:text="@string/married"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_black"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_unmarried"
+                        android:text="@string/unmarried"
+                        android:textSize="13sp"
+                        android:layout_marginStart="25dp"
+                        android:textColor="@color/text_black"
+                        android:checked="true"/>
+
+                </RadioGroup>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/linearLayout_fatherInLaw"
+                    android:visibility="gone"
+
+                >
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/quantum_grey300"
+                        />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:text="@string/father_in_law_information"
+                    android:paddingStart="5dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_fatherInLawName"
+                        android:hint="@string/name"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:digits="@string/only_text_with_space"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_fatherInLawMobileNo"
+                        android:hint="Mobile No."
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_fatherInLawVillage"
+                        android:hint="@string/village"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxLines="5"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_state"
+                            android:hint="@string/_state"
+                            android:drawableEnd="@drawable/ic_action_arrow_down"
+                            android:drawableTint="@color/text_gray"
+
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:nextFocusRight="@id/editText_district"
+                            android:singleLine="true"
+                            android:focusable="false"
+                            android:clickable="false"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_stateId"
+                        android:visibility="gone"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="30dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_district"
+                                android:hint="@string/_district"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_districtId"
+                            android:visibility="gone"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_taluka"
+                                android:hint="@string/_taluka"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:singleLine="true"
+                                android:focusable="false"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_talukaId"
+                            android:visibility="gone"
+                            />
+
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+
+        >
+
+        <TextView
+            android:id="@+id/textView_addSibling"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/gradient_bottom_rounded_corner"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/add_sibling"
+            android:paddingBottom="17.3dp"
+            android:paddingTop="17.3dp"
+            android:textColor="@color/white"
+            android:duplicateParentState="true"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

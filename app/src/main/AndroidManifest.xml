@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.matrimonyapp">
+
+    <uses-permission
+        android:name="org.apache.http.legacy"
+        android:required="false" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="androis.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon1"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".activity.SplashActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.PostsActivity"></activity>
+        <activity android:name=".activity.SetPreferencesActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.RegisterTransporterActivity" />
+        <activity android:name=".activity.ChatActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.DirectMessagesActivity" />
+        <activity android:name=".activity.InterestActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.ViewImageActivity" />
+        <activity android:name=".activity.ViewProfileActivity" />
+        <activity android:name=".activity.MyProfileActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.HomeActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.SignUp"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.VerifyOtpActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.GetOtpActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.ForgotPassword"
+            android:launchMode="singleInstance"/>
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".activity.SecondActivity" />
+        <activity android:name=".activity.MainActivity" />
+    </application>
+
+
+</manifest>

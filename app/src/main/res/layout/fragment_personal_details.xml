@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        android:orientation="vertical">
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="29.7dp"
+                android:layout_marginStart="29.7dp"
+                android:orientation="vertical">
+
+
+
+
+<!--                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_height"
+                        android:hint="@string/height"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_height"
+                        android:text="@string/height"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        android:layout_weight="1"
+                        />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_heightValue"
+                            android:text="5.7 ft"
+                            android:textColor="@color/text_gray"
+                            android:textSize="13sp"
+                            android:inputType=""
+                            android:maxLines="1"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            />
+
+                    </LinearLayout>
+             <!--   <NumberPicker
+                    android:layout_width="50dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/numberPicker_heightFt"
+                    android:backgroundTint="@color/white"
+                    style="@style/customNumberPicker"
+
+                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_black"
+                        android:text="@string/ft"
+                        android:layout_gravity="center"
+                        />
+                <NumberPicker
+                    android:layout_width="50dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:id="@+id/numberPicker_heightInch"
+                    android:backgroundTint="@color/white"
+                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_black"
+                        android:text="@string/inch"
+                        android:layout_gravity="center"
+                        />-->
+                </LinearLayout>
+
+<!--                <com.tistory.dwfox.dwrulerviewlibrary.view.DWRulerSeekbar
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/yellow_favorite"
+
+                    />-->
+
+                <!--<com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_weight"
+                        android:hint="@string/weight"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>-->
+
+
+                <com.kevalpatel2106.rulerpicker.RulerValuePicker
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/rulerValuePicker_height"
+                    android:background="@color/white"
+                    app:indicator_color="@color/text_black"
+                    app:indicator_interval="5dp"
+                    app:indicator_width="1dp"
+                    app:max_value="245"
+                    app:min_value="90"
+                    app:notch_color="@color/project_color"
+                    app:ruler_text_color="@color/text_black"
+                    app:ruler_text_size="4sp"
+
+                    />
+
+<!--                <com.tistory.dwfox.dwrulerviewlibrary.view.LineRulerView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/yellow_favorite"
+                />
+
+                <com.tistory.dwfox.dwrulerviewlibrary.view.LineRulerView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@color/text_gray"
+                    />
+                -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/textView_weight"
+                    android:text="@string/weight"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:inputType=""
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/textView_weightValue"
+                        android:text="60 kgs"
+                        android:textColor="@color/text_gray"
+                        android:textSize="13sp"
+                        android:inputType=""
+                        android:maxLines="1"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        />
+
+                </LinearLayout>
+
+                    <com.kevalpatel2106.rulerpicker.RulerValuePicker
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/rulerValuePicker_weight"
+                        android:background="@color/white"
+                        app:indicator_color="@color/text_black"
+                        app:indicator_interval="5dp"
+                        app:indicator_width="1dp"
+                        app:max_value="200"
+                        app:min_value="30"
+                        app:notch_color="@color/project_color"
+                        app:ruler_text_color="@color/text_black"
+                        app:ruler_text_size="4sp"
+                        />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_colour"
+                        android:hint="@string/colour"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_skinColor"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/prompt_separator"
+                    android:visibility="gone"
+                    />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_maritalStatus"
+                        android:hint="@string/marital_status"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_maritalStatus"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/prompt_separator"
+                    android:visibility="gone"
+                    />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_familyStatus"
+                        android:hint="@string/family_status"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_familyStatus"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/prompt_separator"
+                    android:visibility="gone"
+                    />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_familyType"
+                        android:hint="@string/family_type"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_familyType"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/prompt_separator"
+                    android:visibility="gone"
+                    />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_familyValues"
+                        android:hint="@string/family_values"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_familyValues"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_black"
+                    android:layout_marginTop="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/prompt_separator"
+                    android:visibility="gone"
+                    />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/disability"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                    <com.suke.widget.SwitchButton
+                        android:layout_width="45dp"
+                        android:layout_height="27dp"
+                        android:id="@+id/switchButton_disability"
+                        android:layout_marginEnd="03dp"
+                        app:sb_button_color="#8f329b"
+                        app:sb_checked="false"
+                        app:sb_checked_color="#8f329b"
+                        app:sb_checkline_color="@color/transparent"
+                        app:sb_checkline_width="0dp"
+                        app:sb_uncheck_color="#ebebeb"
+                        app:sb_uncheckcircle_radius="0dp" />
+
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_disabilityType"
+                        android:hint="@string/disability_type"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:inputType="textMultiLine"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxLines="3"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="25dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/diet"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup_diet"
+                        android:orientation="horizontal"
+                        android:theme="@style/RadioButtonTheme"
+                        >
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:id="@+id/radioButton_veg"
+                            android:text="Veg"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_black"
+                            android:layout_gravity="center_vertical"
+                            android:checked="true"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton_nonVeg"
+                            android:text="Non-Veg"
+                            android:textSize="13sp"
+                            android:layout_marginStart="15dp"
+                            android:textColor="@color/text_black"
+                            android:layout_gravity="center_vertical"/>
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/lives_with_family"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                    <com.suke.widget.SwitchButton
+                        android:layout_width="45dp"
+                        android:layout_height="27dp"
+                        android:id="@+id/switchButton_livesWithFamily"
+                        android:layout_marginEnd="03dp"
+                        app:sb_button_color="#8f329b"
+                        app:sb_checked="false"
+                        app:sb_checked_color="#8f329b"
+                        app:sb_checkline_color="@color/transparent"
+                        app:sb_checkline_width="0dp"
+                        app:sb_uncheck_color="#ebebeb"
+                        app:sb_uncheckcircle_radius="0dp" />
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+            <!--"TextInputLayout" is used with a styling theme...-->
+
+
+
+
+
+
+        </ScrollView>
+
+
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+<!--    <TextView
+        android:id="@+id/txt_saveAndContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_place_order"
+        android:gravity="center"
+        android:paddingBottom="17.3dp"
+        android:paddingTop="17.3dp"
+        android:text="@string/save_cont"
+        android:textColor="@color/white" />-->
+
+
+</RelativeLayout>

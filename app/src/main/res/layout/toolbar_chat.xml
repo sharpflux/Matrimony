@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_direct_messages"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetEnd="0dp"
+    android:background="@null"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="0dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="15dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView_back"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:src="@drawable/back"
+            android:tint="@color/black"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewLogo2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/flower2"
+            />
+
+        <TextView
+            android:id="@+id/loginTitle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:text="Chats"
+            android:textColor="@color/black"
+            android:layout_gravity="center_vertical"
+            android:textSize="17sp"
+            android:fontFamily="serif"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView_dotMenu"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:src="@drawable/dot_menu"
+            android:tint="@color/black"
+            android:scaleType="fitXY"
+            />
+
+
+    </LinearLayout>
+
+
+</androidx.appcompat.widget.Toolbar>
