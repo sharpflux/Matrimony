@@ -141,8 +141,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
     }
 
-
-
     public void rangeBarChangeListener(final String bar, RangeBar rangeBar, final TextView textView)
     {
         rangeBar.setSelected(true);
