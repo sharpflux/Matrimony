@@ -181,8 +181,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
         runner.execute(urlFor, id);
 
 
-
-
         /*Context wrapper = new ContextThemeWrapper(context,R.style.MyCustomPopupMenu);
 
         final PopupMenu popupMenu = new PopupMenu(wrapper, editText);
