@@ -130,7 +130,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
         popupMenuEditText(editText_familyType, "FamilyType", textView_familyTypeId.getText().toString());
         popupMenuEditText(editText_familyValues, "FamilyValues", textView_familyValuesId.getText().toString());
         popupMenuEditText(editText_color, "Color", textView_colorId.getText().toString());
-        //popupMenuEditText(editText_familyType, "FamilyType");
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override
