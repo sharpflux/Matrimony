@@ -72,6 +72,9 @@
     <string name="occupation">Occupation *</string>
     <string name="occupation1">Occupation</string>
     <string name="father_information">Father\'s Information</string>
+    <string name="is_alive">Is alive ?</string>
+    <string name="father_name">Father\'s Name</string>
+    <string name="mother_name">Mother\'s Name</string>
     <string name="mother_information">Mother\'s Information</string>
     <string name="occupation_father">Father\'s Occupation *</string>
     <string name="occupation_mother">Mother\'s Occupation *</string>
@@ -178,6 +181,7 @@
     <string name="siblings_information">Sibling\'s Information</string>
     <string name="education">Education</string>
     <string name="relative_information">Relative\'s Information</string>
+    <string name="relative_surname">Relative\'s Surname</string>
     <string name="relative1">Relative 1</string>
     <string name="relative2">Relative 2</string>
     <string name="relative3">Relative 3</string>

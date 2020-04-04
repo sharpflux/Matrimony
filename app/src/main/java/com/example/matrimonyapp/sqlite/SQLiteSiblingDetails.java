@@ -3,6 +3,7 @@ package com.example.matrimonyapp.sqlite;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -42,7 +43,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL("create table "+TABLE_NAME+" ( "
-                + ID +" int primary key, "
+                + ID +" INTEGER PRIMARY KEY autoincrement, "
                 + NAME +" text, "
                 + MOBILE_NO +" text, "
                 + EDUCATION_ID +" int, "
@@ -104,6 +105,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
+        //contentValues.put(ID, null);
         contentValues.put(NAME, name);
         contentValues.put(MOBILE_NO, mobileNo);
         contentValues.put(EDUCATION_ID, educationId);
@@ -168,6 +170,13 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     }
 
+
+    public  int numberOfRows()
+    {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        return (int) DatabaseUtils.queryNumEntries(sqLiteDatabase, TABLE_NAME);
+
+    }
 
 
 }

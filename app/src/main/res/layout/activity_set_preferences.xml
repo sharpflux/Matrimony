@@ -413,6 +413,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView_qualificationId"
+                                android:text="@string/_0"
                                 android:visibility="gone"
                                 />
 
@@ -509,6 +510,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView_maritalStatusId"
+                                android:text="@string/_0"
                                 android:visibility="gone"
                                 />
 
@@ -806,6 +808,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView_familyTypeId"
+                                android:text="@string/_0"
                                 android:visibility="gone"
                                 />
 
@@ -899,6 +902,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView_familyValuesId"
+                                android:text="@string/_0"
                                 android:visibility="gone"
                                 />
 
@@ -1091,6 +1095,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView_colorId"
+                                android:text="@string/_0"
                                 android:visibility="gone"
                                 />
 

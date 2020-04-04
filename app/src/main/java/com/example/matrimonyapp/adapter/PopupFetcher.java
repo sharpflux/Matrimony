@@ -42,7 +42,7 @@ public class PopupFetcher {
     }
 
     public void loadList(final String url, final String columnId, final String columnName,
-                         final EditText editText, final TextView textViewId, final Context context, int customStyle)
+                         final EditText editText, final TextView textViewId, final Context context, int customStyle, int id)
     {
 
         if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
@@ -59,7 +59,7 @@ public class PopupFetcher {
         popupMenu.getMenu().add("-- Select --");
         //popupMenu.getMenu().getItem(0).setEnabled(false);
 
-        editText.setText(popupMenu.getMenu().getItem(0).getTitle());
+        editText.setText(popupMenu.getMenu().getItem(id).getTitle());
 
         final Map<String, Integer> list = getSiblingsList(url, columnId, columnName, editText, popupMenu, context);
         //

@@ -4,6 +4,7 @@ package com.example.matrimonyapp.customViews;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -60,15 +61,18 @@ public class CustomDialogAddSibling extends Dialog {
 
     DataFetcher dataFetcher;
 
+    String id;
+
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     PopupFetcher popupFetcher;
     UserModel userModel;
     public String urlFor;
 
-    public CustomDialogAddSibling(Context context) {
+    public CustomDialogAddSibling(Context context, String id) {
         super(context);
         this.context = context;
+        this.id = id;
 
     }
 
@@ -122,7 +126,8 @@ public class CustomDialogAddSibling extends Dialog {
         textView_talukaId = findViewById(R.id.textView_talukaId);
 
 
-        FieldValidation.radioGroupValidation(radioGroup_marriageStatus);
+
+        marriageSatus =FieldValidation.radioGroupValidation(radioGroup_marriageStatus);
         radioGroup_marriageStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
@@ -138,6 +143,16 @@ public class CustomDialogAddSibling extends Dialog {
                 else{
                     //radioButton_married.setChecked(false);
                     linearLayout_fatherInLaw.setVisibility(View.GONE);
+                    editText_fatherInLawName.setText("");
+                    editText_fatherInLawMobileNo.setText("");
+                    editText_fatherInLawVillage.setText("");
+                    editText_state.setText("");
+                    textView_stateId.setText("");
+                    editText_district.setText("");
+                    textView_districtId.setText("");
+                    editText_taluka.setText("");
+                    textView_talukaId.setText("");
+
                 }
 
             }
@@ -156,13 +171,46 @@ public class CustomDialogAddSibling extends Dialog {
 
 
         AsyncTaskLoad runner = new AsyncTaskLoad();
-        runner.execute("SiblingRelation");
+        runner.execute("SiblingRelation", textView_relationId.getText().toString());
 
 
         textChangedListener();
 
         onClickListener();
 
+        if(!id.equals("0"))
+        {
+
+            Cursor cursor = sqLiteSiblingDetails.getDataById(Integer.parseInt(id));
+
+            for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext())
+            {
+
+                editText_siblingName.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.NAME)));
+                editText_siblingMobileNo.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.MOBILE_NO)));
+                textView_qualificationId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.EDUCATION_ID)));
+                editText_qualification.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.EDUCATION_NAME)));
+                textView_occupationId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.OCCUPATION_ID)));
+                editText_occupation.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.OCCUPATION_NAME)));
+                editText_fatherInLawName.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_NAME)));
+                editText_fatherInLawMobileNo.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_MOBILE_NO)));
+                editText_fatherInLawVillage.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)));
+                textView_stateId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_STATE_ID)));
+                editText_state.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_STATE_NAME)));
+                textView_districtId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_DISTRICT_ID)));
+                editText_district.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_DISTRICT_NAME)));
+                textView_talukaId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_TALUKA_ID)));
+                editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_TALUKA_NAME)));
+
+                //radioGroup_marriageStatus.set
+                textView_relationId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.RELATION_ID)));
+                editText_siblingRelation.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.RELATION)));
+
+            }
+
+
+
+        }
 
     }
 
@@ -213,21 +261,38 @@ public class CustomDialogAddSibling extends Dialog {
                 String fil_taluka_name = editText_taluka.getText().toString().trim();
 
 
-                long res = sqLiteSiblingDetails.insertSibling(name, mobileNo, qualificationId, qualificationName,
+                if(id.equals("0")) {
+                    long res = sqLiteSiblingDetails.insertSibling(name, mobileNo, qualificationId, qualificationName,
+                            occupationId, occupationName, maritalStatus,
+                            relationId, relation, fil_name, fil_mobileNo, fil_village,
+                            fil_state_id, fil_district_id, fil_taluka_id,
+                            fil_state_name, fil_district_name, fil_taluka_name);
+
+                    if (res != -1) {
+                        Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+                else
+                {
+                    int res = sqLiteSiblingDetails.updateSibling(id, name, mobileNo, qualificationId, qualificationName,
                         occupationId, occupationName, maritalStatus,
                         relationId, relation, fil_name, fil_mobileNo, fil_village,
                         fil_state_id, fil_district_id, fil_taluka_id,
                         fil_state_name, fil_district_name, fil_taluka_name);
 
-                if(res!=-1)
-                {
-                    Toast.makeText(context, "Value added & id is "+res, Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
+                    if (res != -1) {
+                        Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error in sqlite updation", Toast.LENGTH_SHORT).show();
+
+                    }
+
 
                 }
-
+                dismiss();
 
             }
         });
@@ -394,9 +459,12 @@ public class CustomDialogAddSibling extends Dialog {
 
                 if(params[0]=="SiblingRelation")
                 {
+                    int id = Integer.parseInt(params[1].toString());
+
+
                     popupFetcher.loadList(URLs.URL_GET_SIBLINGSLIST+"Language="+userModel.getLanguage(),
                             "SiblingListId","SiblingListName",editText_siblingRelation,
-                            textView_relationId,context, R.style.MyCustomPopupMenu2);
+                            textView_relationId,context, R.style.MyCustomPopupMenu2, id);
                 }
                 else if(params[0].toString().equals("QualificationName"))
                 {

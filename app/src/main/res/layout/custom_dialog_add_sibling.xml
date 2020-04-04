@@ -116,6 +116,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView_relationId"
+                                android:text="@string/_0"
                                 android:visibility="gone"
                                 />
 

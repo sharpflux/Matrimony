@@ -126,10 +126,10 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
 
-        popupMenuEditText(editText_maritalStatus,"MaritalStatus");
-        popupMenuEditText(editText_familyType, "FamilyType");
-        popupMenuEditText(editText_familyValues, "FamilyValues");
-        popupMenuEditText(editText_color, "Color");
+        popupMenuEditText(editText_maritalStatus,"MaritalStatus", textView_maritalStatusId.getText().toString());
+        popupMenuEditText(editText_familyType, "FamilyType", textView_familyTypeId.getText().toString());
+        popupMenuEditText(editText_familyValues, "FamilyValues", textView_familyValuesId.getText().toString());
+        popupMenuEditText(editText_color, "Color", textView_colorId.getText().toString());
         //popupMenuEditText(editText_familyType, "FamilyType");
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
@@ -175,12 +175,12 @@ public class SetPreferencesActivity extends AppCompatActivity {
         });
     }
 
-    public  void popupMenuEditText(final EditText editText, final String urlFor)
+    public  void popupMenuEditText(final EditText editText, final String urlFor, String id)
     {
 
 
         AsyncTaskLoad runner = new AsyncTaskLoad();
-        runner.execute(urlFor);
+        runner.execute(urlFor, id);
 
 
 
@@ -238,30 +238,34 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
                 if(params[0]=="MaritalStatus")
                 {
+                    int id = Integer.parseInt(params[1].toString());
                     popupFetcher.loadList(URLs.URL_GET_MARITALSTATUS+"Language="+userModel.getLanguage(),
                             "MaritalStatusId","MaritalStatusName",editText_maritalStatus,
-                            textView_maritalStatusId,context, R.style.MyCustomPopupMenu);
+                            textView_maritalStatusId,context, R.style.MyCustomPopupMenu,id);
                 }
 
                 else if(params[0]=="FamilyType")
                 {
+                    int id = Integer.parseInt(params[1].toString());
                     popupFetcher.loadList(URLs.URL_GET_FAMILYTYPE+"Language="+userModel.getLanguage(),
                             "FamilyTypeId","FamilyTypeName",editText_familyType,
-                            textView_familyTypeId,context, R.style.MyCustomPopupMenu);
+                            textView_familyTypeId,context, R.style.MyCustomPopupMenu,id);
                 }
 
                 else if(params[0]=="FamilyValues")
                 {
+                    int id = Integer.parseInt(params[1].toString());
                     popupFetcher.loadList(URLs.URL_GET_FAMILYVALUES+"Language="+userModel.getLanguage(),
                             "FamilyValuesId","FamilyValuesName",editText_familyValues,
-                            textView_familyValuesId,context, R.style.MyCustomPopupMenu);
+                            textView_familyValuesId,context, R.style.MyCustomPopupMenu,id);
                 }
 
                 else if(params[0]=="Color")
                 {
+                    int id = Integer.parseInt(params[1].toString());
                     popupFetcher.loadList(URLs.URL_GET_SKINCOLOR+"Language="+userModel.getLanguage(),
                             "SkinColourId","SkinColourName",editText_color,
-                            textView_colorId,context, R.style.MyCustomPopupMenu);
+                            textView_colorId,context, R.style.MyCustomPopupMenu,id);
                 }
 
 

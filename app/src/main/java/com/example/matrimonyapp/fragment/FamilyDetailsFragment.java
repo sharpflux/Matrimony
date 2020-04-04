@@ -2,6 +2,7 @@ package com.example.matrimonyapp.fragment;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,18 +15,28 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
+import com.example.matrimonyapp.adapter.AddPersonAdapter;
+import com.example.matrimonyapp.adapter.ChatAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
+import com.example.matrimonyapp.adapter.TimelineAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.AddPersonModel;
+import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.google.android.material.textfield.TextInputLayout;
 import com.suke.widget.SwitchButton;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +72,12 @@ public class FamilyDetailsFragment extends Fragment {
     DataFetcher dataFetcher;
 
     UserModel userModel;
+
+    ArrayList<AddPersonModel> addPersonModelArrayList_sibling;
+    RecyclerView recyclerView_addSibling;
+    AddPersonAdapter addPersonAdapter_sibling;
+
+    SQLiteSiblingDetails sqLiteSiblingDetails;
 
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     CustomDialogAddSibling customDialogAddSibling;
@@ -107,9 +124,9 @@ public class FamilyDetailsFragment extends Fragment {
         editText_mamaOccupation = view.findViewById(R.id.editText_mamaOccupation);
         textView_noOfSiblings = view.findViewById(R.id.textView_noOfSiblings);
         //imageView_add = view.findViewById(R.id.imageView_add);
-        //imageView_subtract = view.findViewById(R.id.imageView_subtract);
         imageView_addSibling = view.findViewById(R.id.imageView_addSibling);
 
+        recyclerView_addSibling = view.findViewById(R.id.recyclerView_addSibling);
 
 
 
@@ -134,6 +151,39 @@ public class FamilyDetailsFragment extends Fragment {
 
 
         onClickListener();
+
+
+        addPersonModelArrayList_sibling = new ArrayList<>();
+
+        sqLiteSiblingDetails = new SQLiteSiblingDetails(getContext());
+
+        Cursor cursor_sibling = sqLiteSiblingDetails.getAllData();
+
+        if(cursor_sibling!=null) {
+            for (boolean hasItem = cursor_sibling.moveToFirst(); hasItem; hasItem = cursor_sibling.moveToNext()) {
+                AddPersonModel addPersonModel = new AddPersonModel(
+                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.ID)),
+                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)),
+                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MOBILE_NO))
+                );
+
+                addPersonModelArrayList_sibling.add(addPersonModel);
+
+            }
+
+            addPersonAdapter_sibling = new AddPersonAdapter(getContext(), addPersonModelArrayList_sibling);
+            recyclerView_addSibling.setAdapter(addPersonAdapter_sibling);
+            recyclerView_addSibling.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            recyclerView_addSibling.setLayoutManager(mLayoutManager);
+
+        }
+
+
+        textView_noOfSiblings.setText(String.valueOf(sqLiteSiblingDetails.numberOfRows()));
+
+
+
 
 
         return view;
@@ -162,7 +212,7 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                customDialogAddSibling = new CustomDialogAddSibling(getContext());
+                customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0");
                 customDialogAddSibling.show();
 
             }
