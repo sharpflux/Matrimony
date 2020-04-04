@@ -95,7 +95,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
                     intent.putExtra("userId",bundle.getString("userId"));
                     startActivity(intent);
                 }
-
+//
                 if(otpSent.equals(otpEntered))
                 {
 
