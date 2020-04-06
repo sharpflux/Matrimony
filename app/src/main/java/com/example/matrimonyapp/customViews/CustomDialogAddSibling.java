@@ -23,14 +23,17 @@ import android.widget.Toast;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
+import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
 import com.example.matrimonyapp.adapter.PopupFetcher;
+import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class CustomDialogAddSibling extends Dialog {
@@ -68,12 +71,19 @@ public class CustomDialogAddSibling extends Dialog {
     PopupFetcher popupFetcher;
     UserModel userModel;
     public String urlFor;
+    private AddPersonAdapter addPersonAdapter;
+    private ArrayList<AddPersonModel> addPersonModelArrayList;
+    private int position;
 
-    public CustomDialogAddSibling(Context context, String id) {
+    public CustomDialogAddSibling(Context context, String id, AddPersonAdapter addPersonAdapter,
+                                  ArrayList<AddPersonModel> addPersonModelArrayList, int position)
+    {
         super(context);
         this.context = context;
         this.id = id;
-
+        this.addPersonAdapter = addPersonAdapter;
+        this.addPersonModelArrayList = addPersonModelArrayList;
+        this.position = position;
     }
 
 
@@ -270,6 +280,8 @@ public class CustomDialogAddSibling extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),name, mobileNo));
+                        addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
 
@@ -285,6 +297,9 @@ public class CustomDialogAddSibling extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), name, mobileNo));
+                        addPersonAdapter.notifyDataSetChanged();
+
                     } else {
                         Toast.makeText(context, "Error in sqlite updation", Toast.LENGTH_SHORT).show();
 

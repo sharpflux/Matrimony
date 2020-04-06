@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/relativeLayout_directMesssages"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="5dp"
+    android:background="@color/white">
+
+
 
 
     <LinearLayout
@@ -39,36 +42,57 @@
             />
 
 
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textView_mobileNo"
-            android:text="@string/mobile_"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            android:textColor="@color/text_gray"
-            android:textSize="13sp"
-
-            android:singleLine="true"
+            android:id="@+id/textView_dotMenu"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginStart="10dp"
+            android:text="@string/vertical_ellipses"
+            android:textColor="@color/text_black"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textStyle="bold"
             />
-
-        <TextView
+<!--        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView_edit"
             android:text="@string/edit"
             android:layout_marginStart="5dp"
-            android:textColor="@color/text_gray"
+            android:textColor="@color/text_black"
             android:textSize="13sp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:singleLine="true"
             android:background="@drawable/rounded_corner_gray_border"
-            />
+            />-->
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_mobileNo"
+        android:text="@string/mobile_"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp"
+
+        android:singleLine="true"
+        />
+<!--    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_qualification"
+        android:text="@string/qualification"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/text_gray"
+        android:textSize="12sp"
+        android:singleLine="true"
+        />-->
 
     <LinearLayout
         android:id="@+id/shadow"

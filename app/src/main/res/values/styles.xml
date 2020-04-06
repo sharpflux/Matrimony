@@ -10,6 +10,18 @@
     </style>
 
 
+    <style name="popupDotMenu" >
+        <item name="android:textColorPrimary">@color/text_black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:popupElevation">0dp</item>
+        <item name="android:popupBackground">@drawable/custom_dialog_rounded_corner</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:width">150dp</item>
+
+    </style>
+
+
+
     <style name="customNumberPicker" parent="AppTheme">
         <item name="android:textColorPrimary">@color/project_color</item>
         <item name="android:numbersSelectorColor">@color/project_color</item>

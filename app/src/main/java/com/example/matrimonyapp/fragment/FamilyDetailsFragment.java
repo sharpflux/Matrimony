@@ -150,7 +150,7 @@ public class FamilyDetailsFragment extends Fragment {
         dataFetcher = new DataFetcher("State",getContext());
 
 
-        onClickListener();
+
 
 
         addPersonModelArrayList_sibling = new ArrayList<>();
@@ -182,7 +182,7 @@ public class FamilyDetailsFragment extends Fragment {
 
         textView_noOfSiblings.setText(String.valueOf(sqLiteSiblingDetails.numberOfRows()));
 
-
+        onClickListener();
 
 
 
@@ -212,7 +212,8 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0");
+                customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0",
+                        addPersonAdapter_sibling, addPersonModelArrayList_sibling, 0);
                 customDialogAddSibling.show();
 
             }
