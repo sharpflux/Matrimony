@@ -98,7 +98,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
 //
                 if(otpSent.equals(otpEntered))
                 {
-
+//
                     if(parentActivity.equals("SignUp"))
                     {
                         fullName = bundle.getString("fullName");
