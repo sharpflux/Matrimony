@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_rounded_corners"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="20dp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            android:text="@string/mama_details"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:text="@string/is_alive"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                    <com.suke.widget.SwitchButton
+                        android:layout_width="45dp"
+                        android:layout_height="27dp"
+                        android:id="@+id/switchButton_mamaIsAlive"
+                        android:layout_marginEnd="03dp"
+                        app:sb_button_color="#8f329b"
+                        app:sb_checked="true"
+                        app:sb_checked_color="#8f329b"
+                        app:sb_checkline_color="@color/transparent"
+                        app:sb_checkline_width="0dp"
+                        app:sb_uncheck_color="#ebebeb"
+                        app:sb_uncheckcircle_radius="0dp" />
+
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <EditText
+                        android:id="@+id/editText_mamaName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/only_text_with_space"
+                        android:hint="@string/name"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:singleLine="true"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_mamaMobileNo"
+                        android:hint="Mobile No."
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_mamaOccupation"
+                        android:hint="@string/occupation1"
+                        android:inputType=""
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_mamaOccupationId"
+                    android:visibility="gone"
+                    />
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_mamaAddress"
+                        android:hint="@string/address_"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxLines="5"
+                        android:nextFocusDown="@id/editText_mamaState"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_mamaState"
+                            android:hint="@string/_state"
+                            android:drawableEnd="@drawable/ic_action_arrow_down"
+                            android:drawableTint="@color/text_gray"
+
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:nextFocusRight="@id/editText_mamaDistrict"
+                            android:singleLine="true"
+                            android:focusable="false"
+                            android:clickable="false"
+                            android:nextFocusDown="@id/editText_mamaDistrict"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_mamaStateId"
+                        android:visibility="gone"
+                        android:text="@string/_0"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_mamaDistrict"
+                                android:hint="@string/_district"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_mamaDistrictId"
+                            android:visibility="gone"
+                            android:text="@string/_0"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_mamaTaluka"
+                                android:hint="@string/_taluka"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:singleLine="true"
+                                android:focusable="false"
+
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_mamaTalukaId"
+                            android:visibility="gone"
+                            android:text="@string/_0"
+                            />
+
+
+                    </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <!--"alignParentBottom" property is used to stitch the textview
+    at the bottom pf the screen...-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+
+        >
+
+        <TextView
+            android:id="@+id/textView_addMama"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/gradient_bottom_rounded_corner"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@string/add_mama"
+            android:paddingBottom="17.3dp"
+            android:paddingTop="17.3dp"
+            android:textColor="@color/white"
+            android:duplicateParentState="true"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
