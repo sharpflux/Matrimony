@@ -16,6 +16,9 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.modal.AddPersonModel;
+import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
+import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
+import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 
 import java.util.ArrayList;
@@ -28,14 +31,17 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
     private AddPersonAdapter addPersonAdapter;
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
+    String relation ;
 
-    public CustomDialogDotMenuEditDelete(Context context, String id, AddPersonAdapter addPersonAdapter, ArrayList<AddPersonModel> addPersonModelArrayList, int position) {
+    public CustomDialogDotMenuEditDelete(Context context, String id, AddPersonAdapter addPersonAdapter,
+                                         ArrayList<AddPersonModel> addPersonModelArrayList, int position, String relation) {
         super(context);
         this.context = context;
         this.id = id;
         this.addPersonAdapter = addPersonAdapter;
         this.addPersonModelArrayList = addPersonModelArrayList;
         this.position = position;
+        this.relation = relation;
     }
 
 
@@ -56,8 +62,29 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
             @Override
             public void onClick(View view) {
 
-                CustomDialogAddSibling customDialogAddSibling = new CustomDialogAddSibling(context, id, addPersonAdapter, addPersonModelArrayList, position);
-                customDialogAddSibling.show();
+
+                if(relation.equalsIgnoreCase("Mama"))
+                {
+                    CustomDialogAddMama customDialogAddMama = new CustomDialogAddMama(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogAddMama.show();
+
+                }
+                else if(relation.equalsIgnoreCase("Sibling"))
+                {
+                    CustomDialogAddSibling customDialogAddSibling = new CustomDialogAddSibling(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogAddSibling.show();
+
+                }
+                else if(relation.equalsIgnoreCase("Property"))
+                {
+                    CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogAddProperty.show();
+                }
+                else if(relation.equalsIgnoreCase("Farm"))
+                {
+                    CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogAddFarm.show();
+                }
 
                 dismiss();
                 //Intent intent = new Intent(context, LoginActivity.class);
@@ -69,16 +96,63 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
             @Override
             public void onClick(View view) {
 
-                SQLiteSiblingDetails sqLiteSiblingDetails = new SQLiteSiblingDetails(context);
-                int deletedCount = sqLiteSiblingDetails.deleteSibling(Integer.parseInt(id));
-                if(deletedCount>0)
+
+
+                if(relation.equalsIgnoreCase("Mama"))
                 {
+                    SQLiteMamaDetails sqLiteMamaDetails = new SQLiteMamaDetails(context);
+                    int deletedCount = sqLiteMamaDetails.deleteMamaDetails(Integer.parseInt(id));
+                    if (deletedCount > 0) {
 
-                    addPersonModelArrayList.remove(position);
-                    addPersonAdapter.notifyDataSetChanged();
+                        addPersonModelArrayList.remove(position);
+                        addPersonAdapter.notifyDataSetChanged();
 
-                    Toast.makeText(context, deletedCount+" values deleted ", Toast.LENGTH_SHORT).show();
-                    dismiss();
+                        Toast.makeText(context, deletedCount + " values deleted ", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
+                }
+                else if(relation.equalsIgnoreCase("Sibling")) {
+
+                    SQLiteSiblingDetails sqLiteSiblingDetails = new SQLiteSiblingDetails(context);
+                    int deletedCount = sqLiteSiblingDetails.deleteSibling(Integer.parseInt(id));
+                    if (deletedCount > 0) {
+
+                        addPersonModelArrayList.remove(position);
+                        addPersonAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(context, deletedCount + " values deleted ", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
+                }
+                else if(relation.equalsIgnoreCase("Property")) {
+
+                    SQLitePropertyDetails sqLitePropertyDetails = new SQLitePropertyDetails(context);
+                    int deletedCount = sqLitePropertyDetails.deletePropertyDetails(Integer.parseInt(id));
+                    if (deletedCount > 0) {
+
+                        addPersonModelArrayList.remove(position);
+                        addPersonAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(context, deletedCount + " values deleted ", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
+                }
+                else if(relation.equalsIgnoreCase("Farm")) {
+
+                    SQLiteFarmDetails sqLiteFarmDetails = new SQLiteFarmDetails(context);
+                    int deletedCount = sqLiteFarmDetails.deleteFarmDetails(Integer.parseInt(id));
+                    if (deletedCount > 0) {
+
+                        addPersonModelArrayList.remove(position);
+                        addPersonAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(context, deletedCount + " values deleted ", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
                 }
 
             }

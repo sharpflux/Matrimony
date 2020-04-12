@@ -18,6 +18,8 @@
     <string name="personalDetails">Personal Details</string>
     <string name="contactDetails">Contact Details</string>
     <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="date">Date</string>
     <string name="birthdate">Birthdate </string>
     <string name="age">Age *</string>
@@ -70,6 +72,7 @@
     <string name="qualification">Qualification</string>
     <string name="qualification_level">Highest Qualification Level</string>
     <string name="occupation">Occupation *</string>
+    <string name="occupation_">Occupation</string>
     <string name="occupation1">Occupation</string>
     <string name="father_information">Father\'s Information</string>
     <string name="is_alive">Is alive ?</string>
@@ -78,11 +81,13 @@
     <string name="mother_information">Mother\'s Information</string>
     <string name="occupation_father">Father\'s Occupation *</string>
     <string name="occupation_mother">Mother\'s Occupation *</string>
-    <string name="annual_income_father">Father\'s Annual Income*</string>
-    <string name="annual_income_mother">Mother\'s Annual Income*</string>
+    <string name="annual_income">Annual Income</string>
+    <string name="annual_income_father">Father\'s Annual Income</string>
+    <string name="annual_income_mother">Mother\'s Annual Income</string>
     <string name="no_of_siblings">No. of siblings</string>
     <string name="no_of_mama">No. of mamas</string>
     <string name="add_sibling">Add sibling</string>
+    <string name="add_mama">Add Mama</string>
     <string name="name">Name</string>
     <string name="village">Village</string>
     <string name="father_in_law_information">Father-in-law\'s Information</string>
@@ -176,9 +181,17 @@
     <string name="lives_with_family">Lives with family ?</string>
 
 
+    <string name="add_property">Add Property Details</string>
+    <string name="add_farm">Add Farm Details</string>
+    <string name="property_details">Property Details</string>
+    <string name="farm_details">Farm Details</string>
+    <string name="crops_taken">Crops Taken</string>
+    <string name="full">Full</string>
+    <string name="partly">Partly</string>
     <string name="property">Property</string>
     <string name="siblings_name">Siblings Name</string>
     <string name="siblings_information">Sibling\'s Information</string>
+    <string name="siblings_details">Sibling\'s Details</string>
     <string name="education">Education</string>
     <string name="relative_information">Relative\'s Information</string>
     <string name="relative_surname">Relative\'s Surname</string>
@@ -191,6 +204,7 @@
     <string name="surname3">Surname 3</string>
     <string name="surname4">Surname 4</string>
     <string name="mama_information">Mama\'s Information</string>
+    <string name="mama_details">Mama\'s Details</string>
     <string name="mama_name">Mama Name</string>
 
     <string name="contine">CONTINUE</string>
@@ -266,6 +280,7 @@
     <string name="full_name">Full name *</string>
     <string name="contact_mobile_no">Contact Mobile Number</string>
     <string name="address">Address *</string>
+    <string name="address_">Address</string>
     <string name="area">Area</string>
 
 

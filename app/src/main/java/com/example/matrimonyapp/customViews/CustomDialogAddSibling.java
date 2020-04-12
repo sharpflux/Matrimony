@@ -137,7 +137,7 @@ public class CustomDialogAddSibling extends Dialog {
 
 
 
-        marriageSatus =FieldValidation.radioGroupValidation(radioGroup_marriageStatus);
+        marriageSatus = ((RadioButton)findViewById(radioGroup_marriageStatus.getCheckedRadioButtonId())).getText().toString();
         radioGroup_marriageStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
@@ -212,7 +212,18 @@ public class CustomDialogAddSibling extends Dialog {
                 textView_talukaId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_TALUKA_ID)));
                 editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_TALUKA_NAME)));
 
-                //radioGroup_marriageStatus.set
+                FieldValidation.setRadioButtonAccToValue(radioGroup_marriageStatus,cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.MARITAL_STATUS)));
+
+                if(radioButton_unmarried.isChecked())
+                {
+                    linearLayout_fatherInLaw.setVisibility(View.GONE);
+                }
+                else
+                {
+                    linearLayout_fatherInLaw.setVisibility(View.VISIBLE);
+                }
+
+
                 textView_relationId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.RELATION_ID)));
                 editText_siblingRelation.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.RELATION)));
 
@@ -257,7 +268,7 @@ public class CustomDialogAddSibling extends Dialog {
                 String qualificationName = editText_qualification.getText().toString().trim();
                 String occupationId = textView_occupationId.getText().toString().trim();
                 String occupationName = editText_occupation.getText().toString().trim();
-                String maritalStatus = marriageSatus;//getText().toString().trim();
+                String maritalStatus = ((RadioButton)findViewById(radioGroup_marriageStatus.getCheckedRadioButtonId())).getText().toString();;//getText().toString().trim();
                 String relationId = textView_relationId.getText().toString().trim();
                 String relation = editText_siblingRelation.getText().toString().trim();
                 String fil_name = editText_fatherInLawName.getText().toString().trim();
@@ -271,6 +282,8 @@ public class CustomDialogAddSibling extends Dialog {
                 String fil_taluka_name = editText_taluka.getText().toString().trim();
 
 
+
+
                 if(id.equals("0")) {
                     long res = sqLiteSiblingDetails.insertSibling(name, mobileNo, qualificationId, qualificationName,
                             occupationId, occupationName, maritalStatus,
@@ -280,7 +293,7 @@ public class CustomDialogAddSibling extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),name, mobileNo));
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),name, qualificationName));
                         addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
@@ -297,7 +310,7 @@ public class CustomDialogAddSibling extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), name, mobileNo));
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), name, qualificationName));
                         addPersonAdapter.notifyDataSetChanged();
 
                     } else {

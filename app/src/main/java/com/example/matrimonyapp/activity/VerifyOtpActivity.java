@@ -20,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 
@@ -168,7 +170,19 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                                 if(jsonObject.getString("message").equals("Success")) {
 
-                                        //CustomSharedPreference customSharedPreference = new CustomSharedPreference(getApplicationContext());
+                                    UserModel userModel = new UserModel(jsonObject.getString("UserId"),
+                                            fullName,
+                                            mobileNo,
+                                            emailId,
+                                            birthdate,
+                                            age,
+                                            gender,
+                                            "",
+                                            language);
+
+                                    CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
+
+
                                         Intent intent = new Intent(VerifyOtpActivity.this, LoginActivity.class);
                                         startActivity(intent);
 

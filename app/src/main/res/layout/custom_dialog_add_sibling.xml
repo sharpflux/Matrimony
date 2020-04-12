@@ -15,14 +15,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
-
-
-
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            android:text="@string/siblings_details"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            />
 
 
         <ScrollView
@@ -38,6 +45,7 @@
                 android:gravity="center"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
 
                 >
 
@@ -46,9 +54,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:orientation="vertical"
-
                     android:background="@color/white"
                     >
 
@@ -56,7 +63,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:text="@string/relation"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
@@ -148,7 +154,8 @@
                         android:hint="@string/name"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
-                        android:digits="@string/only_text_with_space"/>
+                        android:digits="@string/only_text_with_space"
+                        android:singleLine="true"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -214,7 +221,9 @@
                         android:hint="@string/occupation1"
                         android:inputType=""
                         android:textColor="@color/text_black"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
@@ -261,7 +270,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/linearLayout_fatherInLaw"
-                    android:visibility="gone"
+
 
                     >
                     <View
@@ -300,7 +309,8 @@
                             android:hint="@string/name"
                             android:textColor="@color/text_black"
                             android:textSize="15sp"
-                            android:digits="@string/only_text_with_space"/>
+                            android:digits="@string/only_text_with_space"
+                            android:singleLine="true"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -317,7 +327,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/editText_fatherInLawMobileNo"
-                            android:hint="@string/mobile"
+                            android:hint="@string/mobile_"
                             android:inputType="number"
                             android:maxLength="10"
                             android:textColor="@color/text_black"
@@ -338,7 +348,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/editText_fatherInLawVillage"
-                            android:hint="@string/village"
+                            android:hint="@string/address_"
                             android:textColor="@color/text_black"
                             android:textSize="15sp"
                             android:lineSpacingMultiplier="1.2"

@@ -1,16 +1,21 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,6 +23,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
@@ -25,18 +35,33 @@ import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.adapter.ChatAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
 import com.example.matrimonyapp.adapter.TimelineAdapter;
+import com.example.matrimonyapp.customViews.CustomDialogAddFarm;
+import com.example.matrimonyapp.customViews.CustomDialogAddMama;
+import com.example.matrimonyapp.customViews.CustomDialogAddProperty;
 import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
+import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
+import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
+import com.example.matrimonyapp.validation.FieldValidation;
+import com.example.matrimonyapp.validation.StateDistrictTalukaValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
+import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.suke.widget.SwitchButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,43 +69,55 @@ import java.util.ArrayList;
 public class FamilyDetailsFragment extends Fragment {
 
     View view;
-    private TextView textView_saveAndContinue, textView_fatherOccupationId, textView_motherOccupationId,
-            textView_siblingOccupationId, textView_mamaOccupationId, textView_noOfSiblings;
+    private Context context;
+    private TextView textView_fatherQualificationId, textView_fatherOccupationId, textView_fatherStateId,
+            textView_fatherDistrictId, textView_fatherTalukaId, textView_saveAndContinue,
+            textView_motherQualificationId, textView_motherOccupationId, textView_noOfSiblings;
 
-    private EditText editText_fatherName, editText_fatherMobileNo, editText_fatherOccupation,
-            editText_fatherAnnualIncome, editText_fatherProperty, editText_fatherAddress,
-            editText_motherName, editText_motherMobileNo, editText_motherOccupation,
-            editText_motherAnnualIncome, editText_siblingsName, editText_siblingEducation,
-            editText_siblingOccupation, editText_relative1, editText_relative2, editText_relative3,
-            editText_relative4, editText_mamaName, editText_mamaMobileNo, editText_mamaOccupation;
-
-
-    ImageView imageView_back, imageView_add, imageView_subtract, imageView_addSibling;
-
-    private String fatherName, fatherMobileNo, fatherOccupation, fatherAnnualIncome, fatherProperty,
-            fatherAddress, motherName, motherMobileNo, motherOccupation, motherAnnualIncome,
-            siblingsName, siblingEducation, siblingOccupation, relative1, relative2, relative3,
-            relative4, mamaName, mamaMobileNo, mamaOccupation;
+    private EditText editText_fatherName, editText_fatherMobileNo, editText_fatherQualification,
+            editText_fatherOccupation, editText_fatherState, editText_fatherDistrict, editText_fatherTaluka,
+            editText_fatherAnnualIncome, editText_fatherAddress,
+            editText_motherName, editText_motherMobileNo, editText_motherQualification, editText_motherOccupation,
+            editText_motherAnnualIncome, editText_relative1;
 
 
-    private TextInputLayout textField_mamaName, textField_mamaMobileNo, textField_mamaOccupation;
+    private ImageView imageView_back, imageView_addProperty,  imageView_addSibling, imageView_addMama, imageView_addFarm;
 
-    SwitchButton switchButton_haveFather, switchButton_haveMother, switchButton_haveMama;
+    private String fatherName, fatherMobileNo, fatherOccupationId, fatherQualificationId, fatherAnnualIncome,
+            fatherStateId, fatherDistrictId, fatherTalukaId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
+            motherOccupation, motherAnnualIncome, relative1;
+
+    SwitchButton switchButton_haveFather, switchButton_haveMother;
 
     Bundle bundle;
 
-    DataFetcher dataFetcher;
+    private StringBuilder stringBuilder_sibling, stringBuilder_mama, stringBuilder_property, stringBuilder_farm;
 
-    UserModel userModel;
+    private DataFetcher dataFetcher;
 
-    ArrayList<AddPersonModel> addPersonModelArrayList_sibling;
-    RecyclerView recyclerView_addSibling;
-    AddPersonAdapter addPersonAdapter_sibling;
+    private UserModel userModel;
 
-    SQLiteSiblingDetails sqLiteSiblingDetails;
+    private ArrayList<AddPersonModel> addPersonModelArrayList_sibling, addPersonModelArrayList_mama,
+            addPersonModelArrayList_property, addPersonModelArrayList_farm;
 
-    CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
-    CustomDialogAddSibling customDialogAddSibling;
+
+    private RecyclerView recyclerView_addSibling, recyclerView_addMama, recyclerView_addProperty, recyclerView_addFarm;
+
+    private AddPersonAdapter addPersonAdapter_sibling, addPersonAdapter_mama, addPersonAdapter_property,
+            addPersonAdapter_farm;
+
+    private SQLiteSiblingDetails sqLiteSiblingDetails;
+    private SQLiteMamaDetails sqLiteMamaDetails;
+    private SQLitePropertyDetails sqLitePropertyDetails;
+    private SQLiteFarmDetails sqLiteFarmDetails;
+
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+    private CustomDialogAddSibling customDialogAddSibling;
+    private CustomDialogAddMama customDialogAddMama;
+
+    protected int familyDetailsId=0;
+    protected int fatherDetailsId=0;
+    protected int motherDetailsId=0;
 
     public FamilyDetailsFragment() {
         // Required empty public constructor
@@ -93,6 +130,8 @@ public class FamilyDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_family_details, container, false);
 
+        context = getContext();
+
         bundle = getArguments();
 
 
@@ -102,44 +141,63 @@ public class FamilyDetailsFragment extends Fragment {
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
+
+        switchButton_haveFather = view.findViewById(R.id.switchButton_fatherIsAlive);
         editText_fatherName = view.findViewById(R.id.editText_fatherName);
         editText_fatherMobileNo = view.findViewById(R.id.editText_fatherMobileNo);
+        editText_fatherQualification = view.findViewById(R.id.editText_fatherQualification);
+        textView_fatherQualificationId = view.findViewById(R.id.textView_fatherQualificationId);
         editText_fatherOccupation = view.findViewById(R.id.editText_fatherOccupation);
+
+        editText_fatherState = view.findViewById(R.id.editText_fatherState);
+        textView_fatherStateId = view.findViewById(R.id.textView_fatherStateId);
+        editText_fatherDistrict = view.findViewById(R.id.editText_fatherDistrict);
+        textView_fatherDistrictId = view.findViewById(R.id.textView_fatherDistrictId);
+        editText_fatherTaluka = view.findViewById(R.id.editText_fatherTaluka);
+        textView_fatherTalukaId = view.findViewById(R.id.textView_fatherTalukaId);
+
+
+
         editText_fatherAnnualIncome = view.findViewById(R.id.editText_fatherAnnualIncome);
-        editText_fatherProperty = view.findViewById(R.id.editText_fatherProperty);
+        //editText_fatherProperty = view.findViewById(R.id.editText_fatherProperty);
         editText_fatherAddress = view.findViewById(R.id.editText_fatherAddress);
-        editText_motherName= view.findViewById(R.id.editText_motherName);
+
+        switchButton_haveMother = view.findViewById(R.id.switchButton_motherIsAlive);
+        editText_motherName = view.findViewById(R.id.editText_motherName);
         editText_motherMobileNo = view.findViewById(R.id.editText_motherMobileNo);
+        editText_motherQualification = view.findViewById(R.id.editText_motherQualification);
+        textView_motherQualificationId = view.findViewById(R.id.textView_motherQualificationId);
         editText_motherOccupation = view.findViewById(R.id.editText_motherOccupation);
         editText_motherAnnualIncome = view.findViewById(R.id.editText_motherAnnualIncome);
-        editText_siblingsName = view.findViewById(R.id.editText_siblingsName);
-        editText_siblingEducation = view.findViewById(R.id.editText_siblingEducation);
-        editText_siblingOccupation = view.findViewById(R.id.editText_siblingOccupation);
+
         editText_relative1 = view.findViewById(R.id.editText_relative1);
-        editText_relative2 = view.findViewById(R.id.editText_relative2);
+/*        editText_relative2 = view.findViewById(R.id.editText_relative2);
         editText_relative3 = view.findViewById(R.id.editText_relative3);
-        editText_relative4 = view.findViewById(R.id.editText_relative4);
-        editText_mamaName= view.findViewById(R.id.editText_mamaName);
-        editText_mamaMobileNo = view.findViewById(R.id.editText_mamaMobileNo);
-        editText_mamaOccupation = view.findViewById(R.id.editText_mamaOccupation);
+        editText_relative4 = view.findViewById(R.id.editText_relative4);*/
+
         textView_noOfSiblings = view.findViewById(R.id.textView_noOfSiblings);
         //imageView_add = view.findViewById(R.id.imageView_add);
         imageView_addSibling = view.findViewById(R.id.imageView_addSibling);
+        imageView_addMama = view.findViewById(R.id.imageView_addMama);
+        imageView_addProperty = view.findViewById(R.id.imageView_addProperty);
+        imageView_addFarm = view.findViewById(R.id.imageView_addFarm);
 
         recyclerView_addSibling = view.findViewById(R.id.recyclerView_addSibling);
+        recyclerView_addMama = view.findViewById(R.id.recyclerView_addMama);
+        recyclerView_addProperty = view.findViewById(R.id.recyclerView_addProperty);
+        recyclerView_addFarm = view.findViewById(R.id.recyclerView_addFarm);
 
 
 
         textView_fatherOccupationId = view.findViewById(R.id.textView_fatherOccupationId);
         textView_motherOccupationId = view.findViewById(R.id.textView_motherOccupationId);
-        textView_siblingOccupationId = view.findViewById(R.id.textView_siblingId);
-        textView_mamaOccupationId = view.findViewById(R.id.textView_mamaOccupationId);
 
-        textField_mamaName = view.findViewById(R.id.textField_mamaName);
+
+/*        textField_mamaName = view.findViewById(R.id.textField_mamaName);
         textField_mamaMobileNo = view.findViewById(R.id.textField_mamaMobileNo );
-        textField_mamaOccupation = view.findViewById(R.id.textField_mamaOccupation);
+        textField_mamaOccupation = view.findViewById(R.id.textField_mamaOccupation);*/
 
-        switchButton_haveMama = view.findViewById(R.id.switchButton_haveMama);
+        //switchButton_haveMama = view.findViewById(R.id.switchButton_haveMama);
 
         textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
@@ -149,10 +207,19 @@ public class FamilyDetailsFragment extends Fragment {
 
         dataFetcher = new DataFetcher("State",getContext());
 
+        stringBuilder_sibling = new StringBuilder();
+        stringBuilder_mama = new StringBuilder();
+        stringBuilder_property = new StringBuilder();
+        stringBuilder_farm = new StringBuilder();
 
 
 
 
+        AsyncTaskLoad getTask = new AsyncTaskLoad();
+        getTask.execute("getDetails");
+
+
+        // Sibling recycleView
         addPersonModelArrayList_sibling = new ArrayList<>();
 
         sqLiteSiblingDetails = new SQLiteSiblingDetails(getContext());
@@ -164,14 +231,14 @@ public class FamilyDetailsFragment extends Fragment {
                 AddPersonModel addPersonModel = new AddPersonModel(
                         cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.ID)),
                         cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)),
-                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MOBILE_NO))
+                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.EDUCATION_NAME))
                 );
 
                 addPersonModelArrayList_sibling.add(addPersonModel);
 
             }
 
-            addPersonAdapter_sibling = new AddPersonAdapter(getContext(), addPersonModelArrayList_sibling);
+            addPersonAdapter_sibling = new AddPersonAdapter(getContext(), addPersonModelArrayList_sibling, "Sibling");
             recyclerView_addSibling.setAdapter(addPersonAdapter_sibling);
             recyclerView_addSibling.setHasFixedSize(true);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
@@ -182,17 +249,238 @@ public class FamilyDetailsFragment extends Fragment {
 
         textView_noOfSiblings.setText(String.valueOf(sqLiteSiblingDetails.numberOfRows()));
 
+
+
+
+        // Mama recyclerView
+        addPersonModelArrayList_mama = new ArrayList<>();
+
+        sqLiteMamaDetails = new SQLiteMamaDetails(getContext());
+
+        Cursor cursor_mama = sqLiteMamaDetails.getAllData();
+
+        if(cursor_mama!=null) {
+            for (boolean hasItem = cursor_mama.moveToFirst(); hasItem; hasItem = cursor_mama.moveToNext()) {
+                AddPersonModel addPersonModel = new AddPersonModel(
+                        cursor_mama.getString(cursor_sibling.getColumnIndex(SQLiteMamaDetails.ID)),
+                        cursor_mama.getString(cursor_sibling.getColumnIndex(SQLiteMamaDetails.NAME)),
+                        cursor_mama.getString(5)
+                );
+
+                addPersonModelArrayList_mama.add(addPersonModel);
+
+            }
+
+            addPersonAdapter_mama = new AddPersonAdapter(getContext(), addPersonModelArrayList_mama, "Mama");
+            recyclerView_addMama.setAdapter(addPersonAdapter_mama);
+            recyclerView_addMama.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            recyclerView_addMama.setLayoutManager(mLayoutManager);
+
+
+        }
+
+
+
+        // Property recyclerView
+        addPersonModelArrayList_property = new ArrayList<>();
+
+        sqLitePropertyDetails = new SQLitePropertyDetails(getContext());
+
+        Cursor cursor_property = sqLitePropertyDetails.getAllData();
+
+        if(cursor_property!=null) {
+            for (boolean hasItem = cursor_property.moveToFirst(); hasItem; hasItem = cursor_property.moveToNext()) {
+                AddPersonModel addPersonModel = new AddPersonModel(
+                        cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ID)),
+                        cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.AREA)),
+                        cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))
+                );
+
+                addPersonModelArrayList_property.add(addPersonModel);
+
+            }
+
+            addPersonAdapter_property = new AddPersonAdapter(getContext(), addPersonModelArrayList_property,
+                    "Property");
+            recyclerView_addProperty.setAdapter(addPersonAdapter_property);
+            recyclerView_addProperty.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            recyclerView_addProperty.setLayoutManager(mLayoutManager);
+
+
+        }
+
+
+
+
+
+        // Farm recyclerView
+        addPersonModelArrayList_farm= new ArrayList<>();
+
+        sqLiteFarmDetails = new SQLiteFarmDetails(getContext());
+
+        Cursor cursor_farm= sqLiteFarmDetails.getAllData();
+
+        if(cursor_farm!=null) {
+            for (boolean hasItem = cursor_farm.moveToFirst(); hasItem; hasItem = cursor_farm.moveToNext()) {
+                AddPersonModel addPersonModel = new AddPersonModel(
+                        cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.ID)),
+                        cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA)),
+                        cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS))
+                );
+
+                addPersonModelArrayList_farm.add(addPersonModel);
+
+            }
+
+            addPersonAdapter_farm= new AddPersonAdapter(getContext(), addPersonModelArrayList_farm,
+                    "Farm");
+            recyclerView_addFarm.setAdapter(addPersonAdapter_farm);
+            recyclerView_addFarm.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+            recyclerView_addFarm.setLayoutManager(mLayoutManager);
+
+
+        }
+
+
+
+
+
+
+
+
+        showPopup(editText_motherQualification,"MotherQualification");
+        showPopup(editText_fatherQualification,"FatherQualification");
+        showPopup(editText_fatherOccupation,"FatherOccupation");
+        showPopup(editText_motherOccupation,"MotherOccupation");
+
+
+
         onClickListener();
 
+        showPopupSDT(editText_fatherState, "FatherState", null);
+        showPopupSDT(editText_fatherDistrict, "FatherDistrict", textView_fatherStateId);
+        showPopupSDT(editText_fatherTaluka, "FatherTaluka", textView_fatherDistrictId);
+        textChangedListener(editText_fatherState, editText_fatherDistrict, editText_fatherTaluka,
+                textView_fatherStateId, textView_fatherDistrictId, textView_fatherTalukaId);
 
 
         return view;
+    }
+
+    public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
+    {
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                String id="0";
+
+                if(textView_id!=null) {
+                    id = textView_id.getText().toString();
+
+                    if(id.equals("0"))
+                    {
+                        if(urlFor.contains("District")) {
+                            Toast.makeText(getContext(), "Select State first", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(urlFor.contains("Taluka"))
+                        {
+                            Toast.makeText(getContext(), "Select District first", Toast.LENGTH_SHORT).show();
+                        }
+                        return;
+                    }
+
+                }
+
+
+
+                AsyncTaskLoad runner =  new AsyncTaskLoad();
+                runner.execute(urlFor, id);
+            }
+        });
+
+
+
+
+    }
+
+
+    private void textChangedListener(EditText editText_state, final EditText editText_district,
+                                     final EditText editText_taluka, TextView textView_stateId,
+                                     final TextView textView_districtId, final TextView textView_talukaId)
+    {
+
+        editText_state.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                editText_district.setText("");
+                textView_districtId.setText("0");
+                editText_taluka.setText("");
+                textView_talukaId.setText("0");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        editText_district.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                editText_taluka.setText("");
+                textView_talukaId.setText("0");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
     }
 
 
 
     public void onClickListener()
     {
+
+        imageView_addProperty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(getContext(), "0",
+                        addPersonAdapter_property, addPersonModelArrayList_property, 0);
+                customDialogAddProperty.show();
+
+            }
+        });
+
+        imageView_addFarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), "0",
+                        addPersonAdapter_farm, addPersonModelArrayList_farm, 0);
+                customDialogAddFarm.show();
+
+            }
+        });
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,6 +496,7 @@ public class FamilyDetailsFragment extends Fragment {
         });
 
 
+
         imageView_addSibling.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,68 +508,14 @@ public class FamilyDetailsFragment extends Fragment {
             }
         });
 
-        switchButton_haveMama.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener()
-                                                         {
-                                                             @Override
-                                                             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
 
-                                                                 if(isChecked)
-                                                                 {
-
-                                                                     textField_mamaName.setVisibility(View.VISIBLE);
-                                                                     textField_mamaMobileNo.setVisibility(View.VISIBLE);
-                                                                     textField_mamaOccupation.setVisibility(View.VISIBLE);
-                                                                 }
-                                                                 else
-                                                                 {
-                                                                     textField_mamaName.setVisibility(View.GONE);
-                                                                     textField_mamaMobileNo.setVisibility(View.GONE);
-                                                                     textField_mamaOccupation.setVisibility(View.GONE);
-
-                                                                 }
-                                                             }
-                                                         }
-        );
-
-
-
-        editText_fatherOccupation.setOnClickListener(new View.OnClickListener() {
+        imageView_addMama.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "Father";
-                runner.execute(control);
-
-            }
-        });
-        editText_motherOccupation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "Mother";
-                runner.execute(control);
-
-            }
-        });
-        editText_siblingOccupation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "Mother";
-                runner.execute(control);
-
-            }
-        });
-        editText_mamaOccupation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "Mother";
-                runner.execute(control);
+                customDialogAddMama = new CustomDialogAddMama(getContext(), "0",
+                        addPersonAdapter_mama, addPersonModelArrayList_mama, 0);
+                customDialogAddMama.show();
 
             }
         });
@@ -291,67 +526,53 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("insertDetails");
+/*
                 fatherName = editText_fatherName.getText().toString();
-                fatherMobileNo= editText_fatherMobileNo.getText().toString();
-                fatherOccupation= editText_fatherOccupation.getText().toString();
+                fatherMobileNo = editText_fatherMobileNo.getText().toString();
+                fatherOccupationId = editText_fatherOccupation.getText().toString();
                 fatherAnnualIncome= editText_fatherAnnualIncome.getText().toString();
-                fatherProperty= editText_fatherProperty.getText().toString();
+                //fatherProperty= editText_fatherProperty.getText().toString();
                 fatherAddress= editText_fatherAddress.getText().toString();
                 motherName= editText_motherName.getText().toString();
                 motherMobileNo= editText_motherMobileNo.getText().toString();
                 motherOccupation= editText_motherOccupation.getText().toString();
                 motherAnnualIncome= editText_motherAnnualIncome.getText().toString();
-                siblingsName= editText_siblingsName.getText().toString();
-                siblingEducation= editText_siblingEducation.getText().toString();
-                siblingOccupation= editText_siblingOccupation.getText().toString();
-                relative1= editText_relative1.getText().toString();
-                relative2= editText_relative2.getText().toString();
+
+                relative1= editText_relative1.getText().toString();*/
+                /*relative2= editText_relative2.getText().toString();
                 relative3= editText_relative3.getText().toString();
-                relative4= editText_relative4.getText().toString();
-                mamaName= editText_mamaName.getText().toString();
-                mamaMobileNo= editText_mamaMobileNo.getText().toString();
-                mamaOccupation= editText_mamaOccupation.getText().toString();
+                relative4= editText_relative4.getText().toString();*/
 
                 /*= view.findViewById(R.id.);
                 = view.findViewById(R.id.);*/
 
-                if(bundle!=null)
+
+
+
+/*                if(bundle!=null)
                 {
                     bundle.putString("fatherName",fatherName);
                     bundle.putString("fatherMobileNo",fatherMobileNo);
-                    bundle.putString("fatherOccupation",fatherOccupation);
+                    bundle.putString("fatherOccupation",fatherOccupationId);
                     bundle.putString("fatherAnnualIncome",fatherAnnualIncome);
-                    bundle.putString("fatherProperty",fatherProperty);
-                    bundle.putString("fatherAddress",fatherAddress);
-                    bundle.putString("motherName",motherName);
-                    bundle.putString("motherMobileNo",motherMobileNo);
-                    bundle.putString("motherOccupation",motherOccupation);
-                    bundle.putString("motherAnnualIncome",motherAnnualIncome);
-                    bundle.putString("siblingsName",siblingsName);
-                    bundle.putString("siblingEducation",siblingEducation);
-                    bundle.putString("siblingOccupation",siblingOccupation);
-                    bundle.putString("relative1",relative1);
-                    bundle.putString("relative2",relative2);
-                    bundle.putString("relative3",relative3);
-                    bundle.putString("relative4",relative4);
-                    bundle.putString("mamaName",mamaName);
-                    bundle.putString("mamaMobileNo",mamaMobileNo);
-                    bundle.putString("mamaOccupation",mamaOccupation);
-                }
+
+
+                }*/
 
 
 /*                bundle.putString("",);
                 bundle.putString("",);*/
 
-
+/*
                 QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
                 qualificationDetailsFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                fragmentTransaction.commit() ;
+                fragmentTransaction.commit() ;*/
             }
         });
 
@@ -361,7 +582,440 @@ public class FamilyDetailsFragment extends Fragment {
     }
 
 
-    private class AsyncTaskLoad extends AsyncTask<String, String, String> {
+    private void showPopup(EditText editText, final String urlFor)
+    {
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute(urlFor);
+            }
+        });
+
+
+    }
+
+
+
+
+
+    void insertDetails()
+    {
+        final String father_isAlive = switchButton_haveFather.isChecked()? "1" : "0";
+        fatherName = editText_fatherName.getText().toString().trim();
+        fatherMobileNo = editText_fatherMobileNo.getText().toString().trim();
+        fatherQualificationId = textView_fatherQualificationId.getText().toString().trim();
+        fatherOccupationId = textView_fatherOccupationId.getText().toString().trim();
+        fatherAnnualIncome = editText_fatherAnnualIncome.getText().toString().trim();
+        //fatherProperty= editText_fatherProperty.getText().toString();
+        fatherAddress = editText_fatherAddress.getText().toString().trim();
+        fatherStateId = textView_fatherStateId.getText().toString().trim();
+        fatherDistrictId = textView_fatherDistrictId.getText().toString().trim();
+        fatherTalukaId = textView_fatherTalukaId.getText().toString().trim();
+
+        final String mother_isAlive = switchButton_haveMother.isChecked()? "1" : "0";
+        motherName = editText_motherName.getText().toString().trim();
+        motherMobileNo = editText_motherMobileNo.getText().toString().trim();
+        motherQualificationId = textView_motherQualificationId.getText().toString().trim();
+        motherOccupation = textView_motherOccupationId.getText().toString().trim();
+        motherAnnualIncome= editText_motherAnnualIncome.getText().toString().trim();
+
+        relative1= editText_relative1.getText().toString().trim();
+
+        final int noOfBrothers = sqLiteSiblingDetails.getNoOfSibling("Brother");
+        final int noOfSisters = sqLiteSiblingDetails.getNoOfSibling("Sister");
+        final int noOfMama = sqLiteMamaDetails.getNoOfMama();
+
+
+        // Sibling XML
+        stringBuilder_sibling.append("<?xml version=\"1.0\" ?>");
+
+        stringBuilder_sibling.append("<Assign>");
+
+        Cursor cursor_sibling = sqLiteSiblingDetails.getAllData();
+
+
+
+        if(cursor_sibling!=null)
+        {
+
+            for (boolean hasItem = cursor_sibling.moveToFirst(); hasItem; hasItem = cursor_sibling.moveToNext()) {
+
+                stringBuilder_sibling.append("<Functions>");
+
+                //stringBuilder_sibling.append("<UserId>"+userModel.getUserId()+"</UserId>");
+                stringBuilder_sibling.append("<SiblingListId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.RELATION_ID)) + "</SiblingListId>");
+                stringBuilder_sibling.append("<SiblingFullname>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)) + "</SiblingFullname>");
+                stringBuilder_sibling.append("<SiblingMobileNo>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MOBILE_NO)) + "</SiblingMobileNo>");
+                stringBuilder_sibling.append("<SiblingQualificationId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.EDUCATION_ID)) + "</SiblingQualificationId>");
+                stringBuilder_sibling.append("<SiblingOccupationId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.OCCUPATION_ID)) + "</SiblingOccupationId>");
+                stringBuilder_sibling.append("<SiblingMaritalStatus>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MARITAL_STATUS)) + "</SiblingMaritalStatus>");
+                stringBuilder_sibling.append("<InLawsFullName>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_NAME)) + "</InLawsFullName>");
+                stringBuilder_sibling.append("<InLawsMobileNo>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_MOBILE_NO)) + "</InLawsMobileNo>");
+                stringBuilder_sibling.append("<InLawsAddress>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsAddress>");
+                stringBuilder_sibling.append("<SiblingLanguageType>" + userModel.getLanguage() + "</SiblingLanguageType>");
+
+
+                stringBuilder_sibling.append("</Functions>");
+
+            }
+
+            stringBuilder_sibling.append("</Assign>");
+
+
+        }
+
+
+
+        // Property XML
+
+        stringBuilder_property.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_property.append("<Assign>");
+
+        Cursor cursor_property = sqLitePropertyDetails.getAllData();
+
+
+        if(cursor_property!=null)
+        {
+
+            for (boolean hasItem = cursor_property.moveToFirst(); hasItem; hasItem = cursor_property.moveToNext()) {
+
+                stringBuilder_property.append("<Functions>");
+
+                stringBuilder_property.append("<PropertyArea>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.AREA))+"</PropertyArea>");
+                stringBuilder_property.append("<PropertyAddress>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))+"</PropertyAddress>");
+                stringBuilder_property.append("<PropertyStatesID>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStatesID>");
+                stringBuilder_property.append("<PropertyDistrictId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID))+"</PropertyDistrictId>");
+                stringBuilder_property.append("<PropertyTalukasId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.TALUKA_ID))+"</PropertyTalukasId>");
+                stringBuilder_property.append("<PropertyLanguageType>"+userModel.getLanguage()+"</PropertyLanguageType>");
+
+                stringBuilder_property.append("</Functions>");
+
+            }
+
+            stringBuilder_property.append("</Assign>");
+
+        }
+
+
+
+
+
+        //Mama XML
+        stringBuilder_mama.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_mama.append("<Assign>");
+
+        Cursor cursor_mama = sqLiteMamaDetails.getAllData();
+
+        if(cursor_mama!=null)
+        {
+
+            for (boolean hasItem = cursor_mama.moveToFirst(); hasItem; hasItem = cursor_mama.moveToNext()) {
+
+                stringBuilder_mama.append("<Functions>");
+
+                stringBuilder_mama.append("<MamaIsAlive>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.IS_ALIVE))+"</MamaIsAlive>");
+                stringBuilder_mama.append("<MamaFullname>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.NAME))+"</MamaFullname>");
+                stringBuilder_mama.append("<MamaMobileNo>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.MOBILE_NO))+"</MamaMobileNo>");
+                stringBuilder_mama.append("<MamaAddress>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.ADDRESS))+"</MamaAddress>");
+                stringBuilder_mama.append("<MamaStatesId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStatesId>");
+                stringBuilder_mama.append("<MamaDistrictId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.DISTRICT_ID))+"</MamaDistrictId>");
+                stringBuilder_mama.append("<MamaTalukasId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.TALUKA_ID))+"</MamaTalukasId>");
+                stringBuilder_mama.append("<MamaOccupationId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID))+"</MamaOccupationId>");
+                stringBuilder_mama.append("<MamaLanguageType>"+userModel.getLanguage()+"</MamaLanguageType>");
+
+                stringBuilder_mama.append("</Functions>");
+
+            }
+
+
+            stringBuilder_mama.append("</Assign>");
+
+        }
+
+
+        //Farm XML
+        stringBuilder_farm.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_farm.append("<Assign>");
+
+        Cursor cursor_farm = sqLiteFarmDetails.getAllData();
+
+        if(cursor_farm!=null)
+        {
+
+            for (boolean hasItem = cursor_farm.moveToFirst(); hasItem; hasItem = cursor_farm.moveToNext()) {
+
+                stringBuilder_farm.append("<Functions>");
+
+                stringBuilder_farm.append("<FarmLandArea>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA))+"</FarmLandArea>");
+                stringBuilder_farm.append("<FarmFullOrPart>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TYPE))+"</FarmFullOrPart>");
+                stringBuilder_farm.append("<FarmCropTaken>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS))+"</FarmCropTaken>");
+                stringBuilder_farm.append("<FarmLanguageType>"+userModel.getLanguage()+"</FarmLanguageType>");
+
+                stringBuilder_farm.append("</Functions>");
+
+            }
+
+            stringBuilder_farm.append("</Assign>");
+
+        }
+
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_FAMILYDETAILS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if(jsonObject.getString("message").equals("Success") &&
+                                    !jsonObject.getBoolean("error"))
+                            {
+                                //getDetails();
+
+                                Toast.makeText(context,"Family details saved successfully!", Toast.LENGTH_SHORT).show();
+
+/*                                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
+                                //qualificationDetailsFragment.setArguments(bundle);
+
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
+                                fragmentTransaction.commit();
+*/
+
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("FamilyDetailsId",String.valueOf(familyDetailsId));
+                params.put("UserId",userModel.getUserId());
+                params.put("FatherDetailsId",String.valueOf(fatherDetailsId));
+                params.put("FatherIsAlive",father_isAlive);
+                params.put("FatherFullname",fatherName);
+                params.put("FatherMobileNo",fatherMobileNo);
+                params.put("FatherAddress",fatherAddress);
+                params.put("FatherStatesID",fatherStateId);
+                params.put("FatherDistrictId",fatherDistrictId);
+                params.put("FatherTalukasId",fatherTalukaId);
+                params.put("FatherQualificationId",fatherQualificationId);
+                params.put("FatherOccupationId",fatherOccupationId);
+                params.put("FatherAnnualIncome",fatherAnnualIncome);
+                params.put("FatherLanguageType",userModel.getLanguage());
+                params.put("MotherDetailsId",String.valueOf(motherDetailsId));
+                params.put("MotherIsAlive",mother_isAlive);
+                params.put("MotherFullname",motherName);
+                params.put("MotherMobileNo",motherMobileNo);
+                params.put("MotherQualificationId",motherQualificationId);
+                params.put("MotherOccupationId",motherOccupation);
+                params.put("MotherAnnualIncome",motherAnnualIncome);
+                params.put("MotherLanguageType",userModel.getLanguage());
+                params.put("NoOfBrothers",String.valueOf(noOfBrothers));
+                params.put("NoOfSisters",String.valueOf(noOfSisters));
+                params.put("NoOfMama",String.valueOf(noOfMama));
+                params.put("HousePropertyDetailsAPI",stringBuilder_property.toString());
+                params.put("FarmPropertyDetailsAPI",stringBuilder_farm.toString());
+                params.put("SiblingsDetailsAPI",stringBuilder_sibling.toString());
+                params.put("MamaDetailsAPI",stringBuilder_mama.toString());
+                params.put("LanguageType",userModel.getLanguage());
+
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+
+    }
+
+
+
+    void getDetails()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_FAMILYDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            customDialogLoadingProgressBar.dismiss();
+
+                            //converting response to json object
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            if(jsonArray.length()>0)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                                if(!jsonObject.getBoolean("error"))
+                                {
+                                    familyDetailsId = jsonObject.getInt("FamilyDetailsId");
+                                    fatherDetailsId = jsonObject.getInt("FatherStatesIDAPI");
+                                    motherDetailsId = jsonObject.getInt("MotherDetailsIdAPI");
+
+
+                                    switchButton_haveFather.setChecked(jsonObject.getString("IsAliveFather").equals("1"));
+
+                                    editText_fatherName.setText(jsonObject.getString("FullnameFather"));
+                                    editText_fatherMobileNo.setText(jsonObject.getString("MobileNoFather"));
+                                    editText_fatherAddress.setText(jsonObject.getString("AddressFather"));
+
+                                    editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
+
+                                    textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
+                                    textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
+                                    textView_fatherTalukaId.setText(jsonObject.getString("FatherTalukasIdAPI"));
+
+                                    editText_fatherState.setText(jsonObject.getString("StatesNameFather"));
+                                    editText_fatherDistrict.setText(jsonObject.getString("DistrictNameFather"));
+                                    editText_fatherTaluka.setText(jsonObject.getString("TalukaNameFather"));
+
+                                    textView_fatherQualificationId.setText(jsonObject.getString("FatherQualificationIdAPI"));
+                                    textView_fatherOccupationId.setText(jsonObject.getString("FatherOccupationIdAPI"));
+
+                                    editText_fatherQualification.setText(jsonObject.getString("QualificationFather"));
+                                    editText_fatherOccupation.setText(jsonObject.getString("OccupationNameFather"));
+
+
+                                    switchButton_haveMother.setChecked(jsonObject.getString("IsAliveMother").equals("1"));
+
+
+                                    editText_motherName.setText(jsonObject.getString("FullnameMother"));
+                                    editText_motherMobileNo.setText(jsonObject.getString("MobileNoMother"));
+                                    editText_motherQualification.setText(jsonObject.getString("QualificationMother"));
+                                    editText_motherOccupation.setText(jsonObject.getString("OccupationNameMother"));
+
+                                    textView_motherQualificationId.setText(jsonObject.getString("MotherQualificationIdAPI"));
+                                    textView_motherOccupationId.setText(jsonObject.getString("MotherOccupationIdAPI"));
+
+                                    editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
+
+
+
+                                    JSONArray jsonArray_mamaDetails = jsonObject.getJSONArray("MamaDetailsLST");
+
+
+                                    for(int j=0; j< jsonArray_mamaDetails.length(); j++)
+                                    {
+
+
+
+
+                                    }
+
+
+
+                                    JSONArray jsonArray_siblingDetails = jsonObject.getJSONArray("SiblingsDetailsLST");
+
+                                    for(int j=0; j< jsonArray_siblingDetails.length(); j++)
+                                    {
+
+
+
+
+                                    }
+
+
+                                    JSONArray jsonArray_propertyDetails = jsonObject.getJSONArray("HousePropertyDetailsLST");
+
+                                    for(int j=0; j< jsonArray_propertyDetails.length(); j++)
+                                    {
+
+
+
+
+                                    }
+
+
+                                    JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("MamaDetailsLST");
+
+
+                                    for(int j=0; j< jsonArray_farmDetails.length(); j++)
+                                    {
+
+
+
+
+                                    }
+
+
+
+
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                familyDetailsId = 0;
+                                fatherDetailsId = 0;
+                                motherDetailsId = 0;
+                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+
+
+    }
+
+
+
+
+    public class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
         private String resp;
 
@@ -374,7 +1028,59 @@ public class FamilyDetailsFragment extends Fragment {
             try {
 
 
-                if(params[0].toString()=="Father")
+                if(params[0].equals("getDetails"))
+                {
+                    getDetails();
+
+                }
+                else if(params[0].equals("insertDetails"))
+                {
+                    //insertDetails();
+                }
+
+                if(params[0].equals("FatherState"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
+                            "StatesName", editText_fatherState, textView_fatherStateId,getContext(), customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].equals("FatherDistrict"))
+                {
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
+                            "DistrictId", "DistrictName", editText_fatherDistrict, textView_fatherDistrictId,
+                            getContext(), customDialogLoadingProgressBar);
+
+                }
+                else if(params[0].equals("FatherTaluka"))
+                {
+
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
+                            "TalukasId", "TalukaName", editText_fatherTaluka, textView_fatherTalukaId,
+                            getContext(), customDialogLoadingProgressBar);
+                }
+
+                if(params[0].equals("FatherQualification"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_ALL_QUALIFICATIONNAME+"Language="+userModel.getLanguage(),
+                            "QualificationId", "Qualification", editText_fatherQualification,
+                            textView_fatherQualificationId,getContext(), customDialogLoadingProgressBar);
+
+
+                }
+
+                if(params[0].equals("MotherQualification"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_ALL_QUALIFICATIONNAME+"Language="+userModel.getLanguage(),
+                            "QualificationId", "Qualification", editText_motherQualification,
+                            textView_motherQualificationId,getContext(), customDialogLoadingProgressBar);
+
+
+                }
+
+                if(params[0].equals("FatherOccupation"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_OCCUPATION+"Language="+userModel.getLanguage(),
                             "OccupationId", "OccupationName", editText_fatherOccupation,
@@ -382,7 +1088,8 @@ public class FamilyDetailsFragment extends Fragment {
 
 
                 }
-                if(params[0].toString()=="Mother")
+
+                else if(params[0].equals("MotherOccupation"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_OCCUPATION+"Language="+userModel.getLanguage(),
                             "OccupationId", "OccupationName", editText_motherOccupation,
@@ -390,27 +1097,7 @@ public class FamilyDetailsFragment extends Fragment {
 
 
                 }
-                if(params[0].toString()=="Sibling")
-                {
-                    dataFetcher.loadList(URLs.URL_GET_RELIGION+"Language="+userModel.getLanguage(),
-                            "OccupationId", "OccupationName", editText_fatherOccupation,
-                            textView_siblingOccupationId,getContext(), customDialogLoadingProgressBar);
-
-
-                }
-                if(params[0].toString()=="Mama")
-                {
-                    dataFetcher.loadList(URLs.URL_GET_RELIGION+"Language="+userModel.getLanguage(),
-                            "OccupationId", "OccupationName", editText_fatherOccupation,
-                            textView_mamaOccupationId,getContext(), customDialogLoadingProgressBar);
-
-
-                }
-
-
-
-
-            } catch (Exception e) {
+                        } catch (Exception e) {
                 e.printStackTrace();
                 resp = e.getMessage();
             }

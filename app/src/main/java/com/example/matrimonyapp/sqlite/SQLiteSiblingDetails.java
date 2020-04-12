@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "Matrimony.db";
+    public static final String DATABASE_NAME = "MatrimonySibling.db";
     public static final String TABLE_NAME = "sibling";
     public static final String  ID = "id";
     //public static final String  SIBLING_ID = "sibling_id";
@@ -34,7 +34,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     public SQLiteSiblingDetails(Context context)
     {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
 
@@ -84,6 +84,15 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     }
 
+    public int getNoOfSibling(String relation_name)
+    {
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        int res = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+RELATION+" = '"+relation_name+"'", null).getCount();
+        return res;
+
+    }
+
     // fetch all data
     public Cursor getAllData()
     {
@@ -113,7 +122,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
         contentValues.put(OCCUPATION_ID, occupationId);
         contentValues.put(OCCUPATION_NAME, occupationName);
         contentValues.put(MARITAL_STATUS, maritalStatus);
-        contentValues.put(RELATION_ID, relation);
+        contentValues.put(RELATION_ID, relationId);
         contentValues.put(RELATION, relation);
         contentValues.put(FATHER_IN_LAW_NAME, fil_name);
         contentValues.put(FATHER_IN_LAW_MOBILE_NO, fil_mobileNo);

@@ -16,6 +16,8 @@ public class FieldValidation {
         this.context = context;
     }
 
+
+    // returns value of checked button
     public static String radioGroupValidation(RadioGroup radioGroup)
     {
         //RadioButton rb1 = (RadioButton)((Activity)context).findViewById(radioGroup.getCheckedRadioButtonId());
@@ -58,7 +60,10 @@ public class FieldValidation {
             {
                 rb.setChecked(true);
             }
-            rb.setChecked(false);
+            else
+            {
+                rb.setChecked(false);
+            }
 
         }
 

@@ -28,13 +28,14 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
     private int pos;
     private LayoutInflater layoutInflater;
     ArrayList<AddPersonModel> list;
+    String relation;
 
 
-
-    public AddPersonAdapter(Context context, ArrayList<AddPersonModel> list)
+    public AddPersonAdapter(Context context, ArrayList<AddPersonModel> list, String relation)
     {
         this.context = context;
         this.list = list;
+        this.relation = relation;
     }
 
     @NonNull
@@ -46,7 +47,6 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
         AddPersonAdapter.ViewHolder viewHolder = new AddPersonAdapter.ViewHolder(listItem);
         return viewHolder;
 
-
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
 
         holder.textView_id.setText(model.getId());
         holder.textView_name.setText(model.getName());
-        holder.textView_mobileNo.setText(model.getMobileNo());
+        holder.textView_address.setText(model.getAddress());
         //holder.textView_qualification.setText(model.getQualification());
 
 
@@ -66,7 +66,8 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
             public void onClick(View view) {
 
                 CustomDialogDotMenuEditDelete customDialogDotMenuEditDelete =
-                        new CustomDialogDotMenuEditDelete(context, model.getId(), AddPersonAdapter.this, list, position);
+                        new CustomDialogDotMenuEditDelete(context, model.getId(), AddPersonAdapter.this,
+                                list, position, relation);
                 customDialogDotMenuEditDelete.show();
 
                 /*Context wrapper = new ContextThemeWrapper(context, R.style.popupDotMenu);
@@ -118,7 +119,7 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        public  TextView textView_id, textView_name, textView_mobileNo, textView_dotMenu;
+        public  TextView textView_id, textView_name, textView_address, textView_dotMenu;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -126,7 +127,7 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
 
             this.textView_id = itemView.findViewById(R.id.textView_id);
             this.textView_name = itemView.findViewById(R.id.textView_name);
-            this.textView_mobileNo = itemView.findViewById(R.id.textView_mobileNo);
+            this.textView_address= itemView.findViewById(R.id.textView_address);
             //this.textView_qualification = itemView.findViewById(R.id.textView_qualification);
             this.textView_dotMenu= itemView.findViewById(R.id.textView_dotMenu);
 
