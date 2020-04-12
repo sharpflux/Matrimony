@@ -112,7 +112,6 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, ID+" = ?", new String[]{id});
         //insert returns rowId of newly inserted row or -1 if an errror occured
-
     }
 
 
