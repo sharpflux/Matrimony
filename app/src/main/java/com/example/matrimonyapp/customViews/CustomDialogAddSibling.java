@@ -21,6 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -74,6 +76,7 @@ public class CustomDialogAddSibling extends Dialog {
     private AddPersonAdapter addPersonAdapter;
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
+    CardView cardView_sibling_relation;
 
     public CustomDialogAddSibling(Context context, String id, AddPersonAdapter addPersonAdapter,
                                   ArrayList<AddPersonModel> addPersonModelArrayList, int position)
@@ -134,6 +137,7 @@ public class CustomDialogAddSibling extends Dialog {
         textView_stateId = findViewById(R.id.textView_stateId);
         textView_districtId= findViewById(R.id.textView_districtId);
         textView_talukaId = findViewById(R.id.textView_talukaId);
+        cardView_sibling_relation = findViewById(R.id.cardView_sibling_relation);
 
 
 

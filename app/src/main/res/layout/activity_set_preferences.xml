@@ -103,7 +103,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/female"
+                                android:text="Girls"
                                 android:textSize="13sp"
                                 android:textColor="@color/text_black"
                                 android:layout_gravity="center_vertical"
@@ -112,7 +112,7 @@
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/male"
+                                android:text="Boys"
                                 android:textSize="13sp"
                                 android:layout_marginStart="15dp"
                                 android:textColor="@color/text_black"
@@ -426,106 +426,6 @@
 
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical"
-                    android:padding="5dp"
-                    android:background="@color/white"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="5dp"
-                        >
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="@string/occupation_"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_black"
-                            />
-
-                    </LinearLayout>
-
-
-
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        app:cardElevation="1.1dp"
-                        app:cardCornerRadius="5dp"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp"
-                            >
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/editText_occupation"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="10dp"
-                                android:layout_gravity="center"
-                                android:background="@null"
-                                android:paddingLeft="15dp"
-                                android:textColor="@color/text_black"
-                                android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp"
-                                android:text=""
-                                android:hint=""
-                                android:clickable="false"
-                                android:focusable="false"
-                                />
-
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-
-                                android:src="@drawable/ic_action_right_arrow"
-                                android:padding="2dp"
-                                android:layout_marginEnd="15dp"
-                                android:tint="@color/text_gray"
-                                android:rotation="90"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView_occupationId"
-                                android:text="@string/_0"
-                                android:visibility="gone"
-                                />
-
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-
-
-                </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -762,14 +662,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="@string/salary_should_be_between"
+                            android:text=""
                             android:textSize="13sp"
                             android:layout_weight="1"
                             android:textColor="@color/text_black"
                             />
-
-
-
 
                         <TextView
                             android:layout_width="match_parent"

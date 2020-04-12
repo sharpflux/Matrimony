@@ -6,7 +6,7 @@
         android:name="org.apache.http.legacy"
         android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="androis.permission.INTERNET" />
 
     <application

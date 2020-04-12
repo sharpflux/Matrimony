@@ -72,7 +72,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cardView_maritalStatus"
+                        android:id="@+id/cardView_sibling_relation"
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginTop="8dp"
