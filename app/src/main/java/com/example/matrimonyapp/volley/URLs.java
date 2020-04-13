@@ -36,7 +36,6 @@ public class URLs {
 
     public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/Registration/GetUserFamilyDetailsAPI?";
     public static final String URL_POST_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
-
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";
     public static final String URL_POST_QUALIFICATIONDETAILS    = MainURL+"api/QualificationDetailsAPI/QualificationDetailsInsertUpdate";
 
