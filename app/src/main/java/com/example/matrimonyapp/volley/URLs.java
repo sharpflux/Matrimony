@@ -24,7 +24,6 @@ public class URLs {
     public static final String URL_GET_SIBLINGSLIST             = MainURL+"api/SiblingListApi/Get_SiblingListAPI?";
     public static final String URL_GET_QUALIFICATIONNAME        = MainURL+"api/OccupationAPI/GETQualificationAPI?";
     public static final String URL_GET_QUALIFICATIONLEVEL       = MainURL+"api/QualificationLevelApi/Get_QualificationLevelAPI?";
-    public static final String URL_GET_ALL_QUALIFICATIONLEVEL       = MainURL+"api/OccupationAPI/GETAllQualificationAPI?";
     public static final String URL_GET_DESIGNATION              = MainURL+"api/DesignationApi/Get_DesignationAPI?";
 
     public static final String URL_GET_REGISTEREDUSER           = MainURL+"api/Registration/GetRegisterUserAPI?";
@@ -35,8 +34,8 @@ public class URLs {
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";
 
-    //public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/Registration/GetRegisterUserAPI?";
-
+    public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/Registration/GetUserFamilyDetailsAPI?";
+    public static final String URL_POST_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";
     public static final String URL_POST_QUALIFICATIONDETAILS    = MainURL+"api/QualificationDetailsAPI/QualificationDetailsInsertUpdate";
 
@@ -46,6 +45,8 @@ public class URLs {
     public static final String URL_GET_PERSONALDETAILS          = MainURL+"api/PersonalDetailsAPI/GetUserPersonalDetailsAPI?";
     public static final String URL_POST_PERSONALDETAILS         = MainURL+"api/PersonalDetailsAPI/PersonalDetailsInsertUpdate";
 
+
+    public static final String URL_GET_ALL_QUALIFICATIONNAME    = MainURL+"api/OccupationAPI/GETAllQualificationAPI?";
 
 
 }
