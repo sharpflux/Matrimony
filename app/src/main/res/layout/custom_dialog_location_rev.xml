@@ -5,12 +5,12 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-  <!--  <TextView
-        android:id="@+id/tv_tittle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="@dimen/_12sdp"></TextView>-->
+    <!--  <TextView
+          android:id="@+id/tv_tittle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Title"
+          android:textSize="@dimen/_12sdp"></TextView>-->
     <SearchView
         android:id="@+id/searchView_customDialog"
         android:layout_width="match_parent"
@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchView_customDialog"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_above="@+id/footer">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,17 +50,50 @@
         android:layout_alignParentBottom="true"
         android:gravity="center">
 
-        <Button
-            android:id="@+id/btn_next"
+        <!-- <Button
+             android:id="@+id/btn_next"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:height="60dp"
+             android:background="@drawable/gradient_place_order"
+             android:text="Next"
+             android:textAllCaps="true"
+             android:textColor="@android:color/white"
+             android:textSize="20dp"
+             android:textStyle="bold" />-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:height="60dp"
-            android:background="@drawable/gradient_place_order"
-            android:text="Next"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/btn_clearall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:text="clear All"
+                android:textColor="#cb2470"/>
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:text="Cancel"
+                android:textColor="#cb2470"/>
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:text="Ok"
+                android:textColor="#cb2470"/>
+        </LinearLayout>
 
 
     </RelativeLayout>

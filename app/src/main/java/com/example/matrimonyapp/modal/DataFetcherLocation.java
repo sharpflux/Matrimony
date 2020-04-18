@@ -49,8 +49,8 @@ public class DataFetcherLocation {
 
 
 
-    public void loadList(final String ColumnName, final EditText editText, final  String URL, final String id, final TextView hiddenText,
-                         final String ParameterName, final String ParameterValue) {
+    public void loadList(final String ColumnName, final TextView textView, final  String URL, final String id, final TextView hiddenText,
+                         final String ParameterName, final String ParameterValue,final String filterBy) {
         list.clear();
 
 
@@ -72,7 +72,7 @@ public class DataFetcherLocation {
 
                                     lOcationModal = new AddLOcationModal(
                                             userJson.getString(ColumnName),
-                                            userJson.getString(id)
+                                            userJson.getString(id),filterBy
 
                                     );
 
@@ -82,21 +82,18 @@ public class DataFetcherLocation {
                                     Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
                                 }
                             }
-                            dataAdapter = new AddLocationAdapter(list, new AddLocationAdapter.RecyclerViewItemClickListener() {
+                            dataAdapter = new AddLocationAdapter(context,list);
+                            /*{
                                 @Override
                                 public void clickOnItem(AddLOcationModal data) {
-                                    editText.setText(data.getName());
-
-
+                                    textView.setText(data.getName());
                                     hiddenText.setText(data.getId());
 
-
-
-                                   /* if (customDialogLocationRec != null) {
+                                    if (customDialogLocationRec != null) {
                                         customDialogLocationRec.dismiss();
-                                    }*/
+                                    }
                                 }
-                            });
+                            });*/
                             customDialogLocationRec = new CustomDialogLocationRec(context, dataAdapter);
                             customDialogLocationRec.show();
                             customDialogLocationRec.setCanceledOnTouchOutside(false);

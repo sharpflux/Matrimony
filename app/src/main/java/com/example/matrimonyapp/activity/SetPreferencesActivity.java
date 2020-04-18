@@ -1,8 +1,10 @@
 package com.example.matrimonyapp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import com.example.matrimonyapp.fragment.ProfessionalDetailsFragment;
 import com.example.matrimonyapp.modal.AddLOcationModal;
 import com.example.matrimonyapp.modal.DataFetcherLocation;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteSetpreference;
+import com.example.matrimonyapp.utils.Constant;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.suke.widget.SwitchButton;
@@ -45,10 +49,10 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
     private TextView textView_toolbarHeader, textView_ageRange, textView_salaryRange, textView_heightRange,
             textView_qualificationId, textView_maritalStatusId, textView_familyTypeId, textView_familyValuesId,
-            textView_colorId, textView_occupationId, textView_religonId, textView_addStateId, textView_cityId;
+            textView_colorId, textView_occupationId, textView_religonId, textView_addStateId, textView_cityId,txt_state;
 
     private EditText editText_qualification, editText_maritalStatus, editText_familyType, editText_familyValues,
-            editText_color, editText_occupation, editText_religon, edt_state, editText_city;
+            editText_color, editText_occupation, editText_religon, editText_city;
 
     private RadioGroup radioGroup_diet;
 
@@ -68,6 +72,9 @@ public class SetPreferencesActivity extends AppCompatActivity {
     AddLOcationModal lOcationModal;
     ArrayList<AddLOcationModal> list;
     SwitchButton switchButton_otherCaste;
+    SQLiteSetpreference sqLiteSetpreference;
+    StringBuilder state_builder_id;
+    String StateId="";
 
 
     @Override
@@ -77,7 +84,8 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
         //Initializations
         context = getApplicationContext();
-        list = new ArrayList<AddLOcationModal>();
+      //  list = new ArrayList<AddLOcationModal>();
+        list = new ArrayList<>();
         dataFetcherLocation = new DataFetcherLocation(lOcationModal, customDialogLocationRec, list, SetPreferencesActivity.this);
 
 
@@ -88,6 +96,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         userModel = CustomSharedPreference.getInstance(context).getUser();
 
         gender = userModel.getGender();
+        sqLiteSetpreference = new SQLiteSetpreference(getApplicationContext());
 
         // Toolbar views initialization
         include_toolbar = findViewById(R.id.include_toolbar);
@@ -109,10 +118,10 @@ public class SetPreferencesActivity extends AppCompatActivity {
         textView_heightRange = findViewById(R.id.textView_heightRange);
 
         cardView_maritalStatus = findViewById(R.id.cardView_maritalStatus);
-        cardView_family_type = findViewById(R.id.cardView_family_type);
+        /*cardView_family_type = findViewById(R.id.cardView_family_type);
         cardView_familyValues = findViewById(R.id.cardView_familyValues);
         cardView_color = findViewById(R.id.cardView_color);
-
+*/
         textView_qualificationId = findViewById(R.id.textView_qualificationId);
         textView_maritalStatusId = findViewById(R.id.textView_maritalStatusId);
         textView_familyTypeId = findViewById(R.id.textView_familyTypeId);
@@ -124,7 +133,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         textView_religonId = findViewById(R.id.textView_religonId);
         lr_state = findViewById(R.id.lr_state);
         lr_city = findViewById(R.id.lr_city);
-        edt_state = findViewById(R.id.edt_state);
+        txt_state = findViewById(R.id.txt_state);
         textView_addStateId = findViewById(R.id.textView_addStateId);
         editText_city = findViewById(R.id.editText_city);
         textView_cityId = findViewById(R.id.textView_cityId);
@@ -133,6 +142,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
         include_toolbar.setBackgroundColor(Color.WHITE);
         textView_toolbarHeader.setText("Set Preferences");
+        state_builder_id = new StringBuilder();
 
         rangeBarChangeListener("Age", rangeBar_ageRange, textView_ageRange);
         rangeBarChangeListener("Salary ", rangeBar_salaryRange, textView_salaryRange);
@@ -187,7 +197,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
                 /*customDialogLocationRec = new CustomDialogLocationRec(SetPreferencesActivity.this);
                 customDialogLocationRec.show();*/
-
+                //sqLiteSetpreference.FilterGetByFilterName("STATE");
                 AsyncTaskRunner runner = new AsyncTaskRunner();
                 String sleepTime = "state";
                 runner.execute(sleepTime);
@@ -196,10 +206,12 @@ public class SetPreferencesActivity extends AppCompatActivity {
             }
         });
 
+
+
         lr_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+             // sqLiteSetpreference.FilterGetByFilterName("DISTRICT");
                 AsyncTaskRunner runner = new AsyncTaskRunner();
                 String sleepTime = "district";
                 runner.execute(sleepTime);
@@ -325,15 +337,15 @@ public class SetPreferencesActivity extends AppCompatActivity {
                             textView_religonId, context, R.style.MyCustomPopupMenu, id);
                 } else if (params[0] == "Qualification") {
                     int id = Integer.parseInt(params[1].toString());
-                    popupFetcher.loadList(URLs.URL_GET_ALL_QUALIFICATIONLEVEL + "Language=" + userModel.getLanguage(),
-                            "QualificationId", "Qualification", editText_qualification,
+                    popupFetcher.loadList(URLs.URL_GET_QUALIFICATIONLEVEL + "Language=" + userModel.getLanguage(),
+                            "QualificationLevelId", "QualificationLevelName", editText_qualification,
                             textView_qualificationId, context, R.style.MyCustomPopupMenu, id);
-                } else if (params[0] == "State") {
+                } /*else if (params[0] == "State") {
                     int id = Integer.parseInt(params[1].toString());
                     popupFetcher.loadList(URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(),
                             "StatesID", "StatesName", edt_state,
                             textView_addStateId, context, R.style.MyCustomPopupMenu, id);
-                }
+                }*/
                /* else if(params[0]=="City")
                 {
                     int id = Integer.parseInt(params[1].toString());
@@ -375,15 +387,17 @@ public class SetPreferencesActivity extends AppCompatActivity {
         private String resp;
         ProgressDialog progressDialog;
 
+        @SuppressLint("WrongThread")
         @Override
         protected String doInBackground(String... params) {
             publishProgress("Sleeping..."); // Calls onProgressUpdate()
             try {
 
                 if (params[0].toString() == "state")
-                    dataFetcherLocation.loadList("StatesName", edt_state, URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(), "StatesID", textView_addStateId,"","");
+
+                    dataFetcherLocation.loadList("StatesName", txt_state, URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(), "StatesID", textView_addStateId,"","", Constant.STATE);
                 else if (params[0].toString() == "district")
-                    dataFetcherLocation.loadList("DistrictName", editText_city, URLs.URL_GET_DISTRICT + textView_addStateId.getText() + ",&Language=" + userModel.getLanguage(), "DistrictId", textView_cityId,"","");
+                    dataFetcherLocation.loadList("DistrictName", editText_city, URLs.URL_GET_DISTRICT +"StatesID="+ StateId + ",&Language=" + userModel.getLanguage(), "DistrictId", textView_cityId,"","",Constant.DISTRICT);
 
 
                 Thread.sleep(1000);

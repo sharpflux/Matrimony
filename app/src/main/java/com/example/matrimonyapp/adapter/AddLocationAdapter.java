@@ -1,5 +1,8 @@
 package com.example.matrimonyapp.adapter;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.modal.AddLOcationModal;
+import com.example.matrimonyapp.sqlite.SQLiteSetpreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +28,18 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
     private ArrayList<AddLOcationModal> mDataset;
     private List<AddLOcationModal> exampleListFull;
     RecyclerViewItemClickListener recyclerViewItemClickListener;
-
-    public AddLocationAdapter(ArrayList<AddLOcationModal>  myDataset, RecyclerViewItemClickListener listener) {
+    String selectedItem;
+    SQLiteSetpreference sqLiteSetpreference;
+    Context context;
+//, RecyclerViewItemClickListener listener
+    public AddLocationAdapter(Context context,ArrayList<AddLOcationModal>  myDataset) {
+        this.context = context;
         mDataset = myDataset;
-        this.recyclerViewItemClickListener = listener;
+       // this.recyclerViewItemClickListener = listener;
         exampleListFull = new ArrayList<>(mDataset);
+        sqLiteSetpreference = new SQLiteSetpreference(context);
+
+
     }
 
     @NonNull
@@ -43,8 +54,49 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FruitViewHolder fruitViewHolder, int i) {
-        fruitViewHolder.mTextView.setText(mDataset.get(i).getName());
+    public void onBindViewHolder(@NonNull FruitViewHolder holder, int i) {
+        holder.mTextView.setText(mDataset.get(i).getName());
+        holder.FilterBy=mDataset.get(i).getFilterBy();
+        holder.ItemId=mDataset.get(i).getId();
+        holder.sqLiteSetpreference=sqLiteSetpreference;
+
+        holder.sqLiteSetpreference = sqLiteSetpreference;
+        if (holder.FilterBy != null) {
+            switch (holder.FilterBy) {
+                case "STATE":
+                    /*Cursor StateCursor = sqLiteSetpreference.FilterGetByFilterName("STATE");
+                    while (StateCursor.moveToNext()) {
+
+                        if (StateCursor.getString(0).equals(holder.ItemId)) {
+                            holder.mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_black_24dp);
+                            holder.mTextView.setChecked(true);
+                        }else
+                            {
+                                holder.mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_outline_blank_black_24dp);
+                                holder.mTextView.setChecked(false);
+                            }
+                    }*/
+                    if(holder.mTextView.isChecked()){
+                        holder.mTextView.setChecked(true);
+                    }
+                    else {
+                        holder.mTextView.setChecked(false);
+                    }
+                    break;
+
+                case "DISTRICT":
+                    Cursor DISTRICTCursor = sqLiteSetpreference.FilterGetByFilterName("DISTRICT");
+                    while (DISTRICTCursor.moveToNext()) {
+                        if (DISTRICTCursor.getString(0).equals(holder.ItemId)) {
+                            holder.mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_black_24dp);
+                            holder.mTextView.setChecked(true);
+                        }
+                    }
+                    break;
+            }
+            }
+
+
     }
 
     @Override
@@ -93,26 +145,44 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
     public  class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public AppCompatCheckedTextView mTextView;
+        String  FilterBy = "",ItemId="",childName = "";
+        SQLiteSetpreference sqLiteSetpreference;
+        int position = 0;
 
         public FruitViewHolder(View v) {
             super(v);
             mTextView = (AppCompatCheckedTextView) v.findViewById(R.id.tv_name);
 
-            mDataset.size();
+          //  mDataset.size();
             v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if(mTextView.isChecked()){
+           Boolean value=mTextView.isSelected();
+           String pid="",n="";
+            if (value) {
+
+                sqLiteSetpreference.DeleteRecord(FilterBy, ItemId);
+                mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_outline_blank_black_24dp);
                 mTextView.setChecked(false);
-                mTextView.setText("Not Checked");
+                AddLOcationModal filter = mDataset.get(position);
+                filter.setChecked(false);
+                //Toast.makeText(c, pid, Toast.LENGTH_LONG).show();
+            } else {
+
+                pid = ItemId;
+                n = childName;
+                Log.e(pid, n);
+                AddLOcationModal filter = mDataset.get(position);
+                filter.setChecked(true);
+                sqLiteSetpreference.FilterInsert(FilterBy, ItemId);
+                // set check mark drawable and set checked property to true
+                mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_black_24dp);
+                mTextView.setChecked(true);
             }
-            else mTextView.setChecked(true);
-            {
-                mTextView.setText("Checked");
-            }
-            recyclerViewItemClickListener.clickOnItem(mDataset.get(this.getAdapterPosition()));
+
+           // recyclerViewItemClickListener.clickOnItem(mDataset.get(this.getAdapterPosition()));
 
         }
     }
