@@ -97,7 +97,7 @@ public class DataFetcherLocation {
                             customDialogLocationRec = new CustomDialogLocationRec(context, dataAdapter);
                             customDialogLocationRec.show();
                             customDialogLocationRec.setCanceledOnTouchOutside(false);
-
+//
 
 
                             searchView =customDialogLocationRec.findViewById(R.id.searchView_customDialog);
