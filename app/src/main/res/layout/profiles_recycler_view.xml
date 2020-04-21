@@ -142,6 +142,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:id="@+id/imageView_reject"
                         android:src="@drawable/close1"
                         android:tint="@color/text_black"
                         android:padding="14dp"

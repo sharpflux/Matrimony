@@ -61,6 +61,8 @@ public class MultipleSelectionDataFetcher {
                         try {
 
 
+
+
                             JSONArray obj = new JSONArray(response);
 
                             if (obj.length() != 0) {
@@ -79,6 +81,18 @@ public class MultipleSelectionDataFetcher {
                                     mil[i]=mi;
                                     list.add(mi);
                                 }
+
+                                for(int i=0; i<arrayList_id.size(); i++)
+                                {
+                                    for (int j=0; j<list.size(); j++) {
+
+                                        if((int)arrayList_id.get(i)==list.get(j).getId())
+                                        {
+                                            list.get(j).setChecked(true);
+                                        }
+                                    }
+                                }
+
 
 
                                 final MultipleSelectionAdapter adapter = new MultipleSelectionAdapter(list, edit_text, new MultipleSelectionAdapter.RecyclerViewCheckedChangekListener() {
@@ -109,6 +123,10 @@ public class MultipleSelectionDataFetcher {
                                 customDialogMultipleSelection = new CustomDialogMultipleSelection(context,adapter);
                                 customDialogMultipleSelection.show();
 
+                                if(arrayList_id.size()==list.size())
+                                {
+                                    customDialogMultipleSelection.checkBox_selectAll.setChecked(true);
+                                }
 
                                 customDialogMultipleSelection.checkBox_selectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                     @Override
@@ -139,7 +157,7 @@ public class MultipleSelectionDataFetcher {
                                             {
                                                 arrayList_id.add(list.get(i).getId());
 
-                                                names = names + list.get(i).getName()+", ";
+                                                names = names + list.get(i).getName().trim()+", ";
                                             }
 
 

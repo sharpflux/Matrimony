@@ -105,7 +105,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="15dp"
-                                android:text="male"
+                                android:text="@string/male"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -134,25 +134,26 @@
                         android:padding="5dp"
                         android:layout_marginTop="5dp"
                         android:weightSum="2">
+
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ic_action_location"
-                            android:tint="@color/text_gray"/>
+                            android:tint="@color/text_gray"
+                            android:contentDescription="@string/image"/>
+
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_weight="1"
-
                             android:text="@string/location"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
 
-
-
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -183,7 +184,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
-
                             android:layout_marginEnd="15dp"
                             android:layout_marginBottom="10dp"
                             app:cardCornerRadius="5dp"
@@ -212,7 +212,7 @@
                                     android:clickable="false"
                                     android:focusable="false"
                                     android:paddingStart="15dp"
-                                    android:paddingEnd="15dp"
+                                    android:paddingEnd="0dp"
                                     android:textColor="@color/text_black"
                                     android:textColorHint="@color/light_weight_gray"
                                     android:textSize="13sp"
@@ -223,12 +223,12 @@
                                 <ImageView
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
-
                                     android:layout_marginEnd="15dp"
                                     android:padding="2dp"
                                     android:rotation="90"
                                     android:src="@drawable/ic_action_right_arrow"
-                                    android:tint="@color/text_gray" />
+                                    android:tint="@color/text_gray"
+                                    android:contentDescription="@string/image"/>
 
                                 <TextView
                                     android:id="@+id/textView_stateId"
@@ -295,7 +295,7 @@
 
                                 <EditText
                                     android:id="@+id/editText_district"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginEnd="10dp"
@@ -303,9 +303,8 @@
                                     android:background="@null"
                                     android:clickable="false"
                                     android:focusable="false"
-                                    android:hint=""
-                                    android:paddingLeft="15dp"
-                                    android:text=""
+                                    android:paddingStart="15dp"
+                                    android:paddingEnd="0dp"
                                     android:textColor="@color/text_black"
                                     android:textColorHint="@color/light_weight_gray"
                                     android:textSize="13sp"
@@ -316,12 +315,12 @@
                                 <ImageView
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
-
                                     android:layout_marginEnd="15dp"
                                     android:padding="2dp"
                                     android:rotation="90"
                                     android:src="@drawable/ic_action_right_arrow"
-                                    android:tint="@color/text_gray" />
+                                    android:tint="@color/text_gray"
+                                    android:contentDescription="@string/image"/>
 
                                 <TextView
                                     android:id="@+id/textView_cityId"
@@ -362,7 +361,8 @@
                             android:layout_height="20dp"
                             android:padding="1dp"
                             android:src="@drawable/age2"
-                            android:tint="@color/text_gray" />
+                            android:tint="@color/text_gray"
+                            android:contentDescription="@string/image"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -566,7 +566,7 @@
 
                             <EditText
                                 android:id="@+id/editText_religon"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -574,9 +574,8 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:hint=""
-                                android:paddingLeft="15dp"
-                                android:text=""
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
@@ -587,12 +586,12 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_religonId"
@@ -647,7 +646,7 @@
 
                             <EditText
                                 android:id="@+id/editText_caste"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -655,9 +654,8 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:hint=""
-                                android:paddingLeft="15dp"
-                                android:text=""
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
@@ -668,12 +666,12 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_casteId"
@@ -739,7 +737,7 @@
 
                             <EditText
                                 android:id="@+id/editText_qualification"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -747,23 +745,24 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:hint=""
-                                android:paddingLeft="15dp"
-                                android:text=""
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2" />
 
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_qualificationId"
@@ -830,7 +829,7 @@
 
                             <EditText
                                 android:id="@+id/editText_maritalStatus"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -838,20 +837,23 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:paddingLeft="15dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_maritalStatusId"
@@ -889,7 +891,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_weight="1"
 
-                            android:text="Diet"
+                            android:text="@string/diet"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -1025,7 +1027,7 @@
 
                             <EditText
                                 android:id="@+id/editText_occupation"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -1033,23 +1035,24 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:hint=""
-                                android:paddingLeft="15dp"
-                                android:text=""
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2" />
 
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_occupationId"
@@ -1087,7 +1090,8 @@
                             android:layout_height="20dp"
                             android:padding="1dp"
                             android:src="@drawable/ic_action_work"
-                            android:tint="@color/text_gray" />
+                            android:tint="@color/text_gray"
+                            android:contentDescription="@string/image"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1204,7 +1208,7 @@
 
                             <EditText
                                 android:id="@+id/editText_familyType"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -1212,10 +1216,13 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:paddingLeft="08dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2" />
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -1224,7 +1231,8 @@
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_familyTypeId"
@@ -1289,7 +1297,7 @@
 
                             <EditText
                                 android:id="@+id/editText_familyValues"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -1297,20 +1305,23 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:paddingStart="08dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2"/>
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_familyValuesId"
@@ -1467,7 +1478,7 @@
 
                             <EditText
                                 android:id="@+id/editText_color"
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="10dp"
@@ -1475,20 +1486,23 @@
                                 android:background="@null"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:paddingLeft="08dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2" />
 
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-
                                 android:layout_marginEnd="15dp"
                                 android:padding="2dp"
                                 android:rotation="90"
                                 android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray" />
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
 
                             <TextView
                                 android:id="@+id/textView_colorId"

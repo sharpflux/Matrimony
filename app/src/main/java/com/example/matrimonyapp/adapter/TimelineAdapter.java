@@ -71,19 +71,41 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 display.getSize(size);
 
 
-                holder.relativeLayout.animate().alpha(0.2f).setDuration(200).translationX(-size.x+100);
+                holder.relativeLayout.animate().alpha(0.2f).setDuration(400).translationX(-size.x+10);
                 holder.relativeLayout.postOnAnimationDelayed(new Runnable() {
                     @Override
                     public void run() {
                         list.remove(position);
                         notifyDataSetChanged();
                     }
-                },100);
+                },400);
 
 
                /* list.remove(position);
                 notifyDataSetChanged();
 */
+            }
+        });
+
+
+        holder.imageView_reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Point size = new Point();
+                display.getSize(size);
+
+
+                holder.relativeLayout.animate().alpha(0.2f).setDuration(400).translationX(-size.x+10);
+                holder.relativeLayout.postOnAnimationDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        list.remove(position);
+                        notifyDataSetChanged();
+                    }
+                },400);
+
+
             }
         });
 
@@ -167,6 +189,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public ImageView imageView_profilePic;
         public ImageView imageView_like;
         public ImageView imageView_favorite;
+        public ImageView imageView_reject;
         public RelativeLayout relativeLayout;
 
 
@@ -180,8 +203,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             //this.textView_userQualification = itemView.findViewById(R.id.textView_userQualification);
             this.textView_userBio = itemView.findViewById(R.id.textView_userBio);
             this.imageView_profilePic = itemView.findViewById(R.id.imageView_profilePic);
+            this.imageView_reject = itemView.findViewById(R.id.imageView_reject);
             this.imageView_like = itemView.findViewById(R.id.imageView_like);
             this.imageView_favorite = itemView.findViewById(R.id.imageView_favorite);
+
+            setIsRecyclable(false);
+
         }
     }
 }

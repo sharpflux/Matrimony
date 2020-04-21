@@ -62,7 +62,7 @@ public class MultipleSelectionAdapter extends RecyclerView.Adapter<MultipleSelec
 
         final MyItem myItem = listData.get(position);
 
-        holder.checkbox_itemName.setText(listData.get(position).getName());
+        holder.checkbox_itemName.setText(listData.get(position).getName().trim());
         holder.textView_stateId.setText(String.valueOf(listData.get(position).getId()));
 
 

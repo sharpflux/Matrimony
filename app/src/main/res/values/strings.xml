@@ -160,6 +160,7 @@
 
     <!-- Content descriptions -->
     <string name="descr_image">Image</string>
+    <string name="image">Image</string>
 
 
     <string name="height">Height *</string>
