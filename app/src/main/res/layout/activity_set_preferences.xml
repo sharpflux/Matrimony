@@ -96,7 +96,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="10dp"
-                                android:text="Girls"
+                                android:text="@string/female"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -105,7 +105,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="15dp"
-                                android:text="Boys"
+                                android:text="male"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -123,6 +123,7 @@
                     android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:orientation="vertical"
+                    android:padding="5dp"
                    >
 
                     <LinearLayout
@@ -131,6 +132,7 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:padding="5dp"
+                        android:layout_marginTop="5dp"
                         android:weightSum="2">
                         <ImageView
                             android:layout_width="20dp"
@@ -170,7 +172,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="Add State"
+                                android:text="@string/_state"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -199,9 +201,9 @@
                                 android:paddingTop="8dp"
                                 android:paddingBottom="8dp">
 
-                                <TextView
-                                    android:id="@+id/txt_state"
-                                    android:layout_width="match_parent"
+                                <EditText
+                                    android:id="@+id/editText_stateNames"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginEnd="10dp"
@@ -209,12 +211,13 @@
                                     android:background="@null"
                                     android:clickable="false"
                                     android:focusable="false"
-                                    android:hint=""
-                                    android:paddingLeft="15dp"
-                                    android:text=""
+                                    android:paddingStart="15dp"
+                                    android:paddingEnd="15dp"
                                     android:textColor="@color/text_black"
                                     android:textColorHint="@color/light_weight_gray"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:lineSpacingMultiplier="1.2"
+                                    android:maxLines="2"/>
 
 
                                 <ImageView
@@ -228,7 +231,7 @@
                                     android:tint="@color/text_gray" />
 
                                 <TextView
-                                    android:id="@+id/textView_addStateId"
+                                    android:id="@+id/textView_stateId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -261,7 +264,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="Add City"
+                                android:text="@string/_district"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -281,7 +284,7 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_city"
+                                android:id="@+id/lr_district"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -291,7 +294,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/editText_city"
+                                    android:id="@+id/editText_district"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -305,7 +308,9 @@
                                     android:text=""
                                     android:textColor="@color/text_black"
                                     android:textColorHint="@color/light_weight_gray"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:lineSpacingMultiplier="1.2"
+                                    android:maxLines="2"/>
 
 
                                 <ImageView
@@ -406,17 +411,18 @@
 
                         app:mrb_selectorBoundarySize="10dp"
                         app:mrb_temporaryPins="true"
-                        app:mrb_tickEnd="48"
+                        app:mrb_tickEnd="50"
 
                         app:mrb_tickHeight="0dp"
 
-                        app:mrb_tickInterval="3"
+                        app:mrb_tickInterval="1"
 
                         app:mrb_tickLabelColor="@color/text_gray"
                         app:mrb_tickLabelSelectedColor="@color/project_color"
                         app:mrb_tickLabelSize="5sp"
                         app:mrb_tickStart="21"
-                        app:mrb_tickTopLabels="@array/tickLabels_age"
+
+
 
 
                         />
@@ -539,6 +545,7 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/cardView_religion"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
@@ -572,7 +579,9 @@
                                 android:text=""
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2"/>
 
 
                             <ImageView
@@ -612,9 +621,12 @@
                             android:textSize="13sp" />
 
                     </LinearLayout>
+
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/cardView_caste"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="15dp"
@@ -648,7 +660,9 @@
                                 android:text=""
                                 android:textColor="@color/text_black"
                                 android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="2"/>
 
 
                             <ImageView

@@ -4,10 +4,13 @@ package com.example.matrimonyapp.volley;
 public class URLs {
 
     public static final String MainURL                          = "http://matrimonial.sharpflux.com/";
+
     public static final String URL_POST_REGISTRATION            = MainURL+"api/Registration/RegisterUser";
     public static final String URL_POST_LOGIN                   = MainURL+"api/Users/Login";
     public static final String URL_GET_LOGIN                    = MainURL+"api/Users/Login?";
     public static final String URL_POST_UPDATEPASSWORD          = MainURL+"api/UserUdatePasswordAPI/UpdatePasswordApi";
+
+
     public static final String URL_GET_STATE                    = MainURL+"api/States/GETSTATE?";
     public static final String URL_GET_DISTRICT                 = MainURL+"api/District/Get_DistrictAPI?";
     public static final String URL_GET_TALUKA                   = MainURL+"api/Talukas/Get_TalukaAPI?";
@@ -36,6 +39,7 @@ public class URLs {
 
     public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/Registration/GetUserFamilyDetailsAPI?";
     public static final String URL_POST_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
+
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";
     public static final String URL_POST_QUALIFICATIONDETAILS    = MainURL+"api/QualificationDetailsAPI/QualificationDetailsInsertUpdate";
 
@@ -45,8 +49,8 @@ public class URLs {
     public static final String URL_GET_PERSONALDETAILS          = MainURL+"api/PersonalDetailsAPI/GetUserPersonalDetailsAPI?";
     public static final String URL_POST_PERSONALDETAILS         = MainURL+"api/PersonalDetailsAPI/PersonalDetailsInsertUpdate";
 
-
     public static final String URL_GET_ALL_QUALIFICATIONNAME    = MainURL+"api/OccupationAPI/GETAllQualificationAPI?";
 
+    public static final String URL_GET_MULTIPLE_DISTRICT        = MainURL+"api/DistrictMultipleApi/Get_DistrictMultipleAPI?";
 
 }

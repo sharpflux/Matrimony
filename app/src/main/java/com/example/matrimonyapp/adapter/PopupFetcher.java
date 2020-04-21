@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.activity.LoginActivity;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -44,7 +45,8 @@ public class PopupFetcher {
     }
 
     public void loadList(final String url, final String columnId, final String columnName,
-                         final EditText editText, final TextView textViewId, final Context context, int customStyle, int id)
+                         final EditText editText, final TextView textViewId, final Context context,
+                         int customStyle, int id)
     {
 
         if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
@@ -114,6 +116,7 @@ public class PopupFetcher {
                     public void onResponse(String response) {
 
                         try {
+
 
 
                             JSONArray jsonArray = new JSONArray(response);
