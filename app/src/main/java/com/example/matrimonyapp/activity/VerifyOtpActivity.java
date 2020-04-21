@@ -183,7 +183,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
 
-                                        Intent intent = new Intent(VerifyOtpActivity.this, LoginActivity.class);
+                                        Intent intent = new Intent(VerifyOtpActivity.this, HomeActivity.class);
                                         startActivity(intent);
 
                                 }
