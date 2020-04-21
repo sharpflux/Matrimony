@@ -316,7 +316,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
         }
 
-
         @Override
         protected void onPreExecute() {
 
