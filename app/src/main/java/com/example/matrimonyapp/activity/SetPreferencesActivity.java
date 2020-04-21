@@ -53,7 +53,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
             textView_colorId, textView_occupationId, textView_religonId, textView_stateId, textView_cityId;
 
     private EditText editText_qualification, editText_maritalStatus, editText_familyType, editText_familyValues,
-            editText_color, editText_occupation, editText_religon, editText_district, editText_stateNames;
+            editText_color, editText_occupation, editText_religon, editText_district, editText_stateNames,editText_caste;
 
     private RadioGroup radioGroup_diet;
 
@@ -125,6 +125,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         rangeBar_salaryRange = findViewById(R.id.rangeBar_salaryRange);
         rangeBar_heightRange = findViewById(R.id.rangeBar_heightRange);
         textView_ageRange = findViewById(R.id.textView_ageRange);
+        editText_caste = findViewById(R.id.editText_caste);
 
         textView_heightRange = findViewById(R.id.textView_heightRange);
 
@@ -214,6 +215,14 @@ public class SetPreferencesActivity extends AppCompatActivity {
             }
         });
 
+
+        cardView_caste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                runner.execute("Caste");
+            }
+        });
 
     }
 
@@ -345,6 +354,21 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
             }
+
+            else if (params[0].equals("Caste")) {
+
+                String religionId = arrayList_religion.toString().substring(1,arrayList_religion.toString().length()-1).replaceAll(" ","");
+
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_CASTE+"ReligionId="+religionId+"&Language="
+                                +userModel.getLanguage(), "CasteId", "CasteName", editText_caste,
+                        arrayList_caste, SetPreferencesActivity.this, customDialogLoadingProgressBar);
+
+            }
+
+
+
+
             else if (params[0].equals("State")) {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(),

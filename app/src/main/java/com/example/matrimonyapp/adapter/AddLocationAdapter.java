@@ -76,6 +76,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
                                 holder.mTextView.setChecked(false);
                             }
                     }*/
+
                     if(holder.mTextView.isChecked()){
                         holder.mTextView.setChecked(true);
                     }

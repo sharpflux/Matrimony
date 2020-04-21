@@ -53,4 +53,9 @@ public class URLs {
 
     public static final String URL_GET_MULTIPLE_DISTRICT        = MainURL+"api/DistrictMultipleApi/Get_DistrictMultipleAPI?";
 
+
+    public static final String URL_GET_MULTIPLE_CASTE       = MainURL+"api/CasteApi/Get_CasteMultipleAPI?";
+
+
+
 }
