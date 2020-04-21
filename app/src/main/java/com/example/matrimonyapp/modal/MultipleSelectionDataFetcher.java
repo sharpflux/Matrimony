@@ -161,7 +161,6 @@ public class MultipleSelectionDataFetcher {
                                             }
 
 
-
                                         }
                                         if(names.length()>1) {
                                             names = names.substring(0, names.length() - 2);
