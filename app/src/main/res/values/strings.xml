@@ -63,7 +63,7 @@
     <string name="set_preferences">Set Preferences</string>
     <string name="reset_preferences">Reset Preferences</string>
     <string name="who_are_you_looking_for">Who are you looking for?</string>
-    <string name="location">Location</string>
+    <string name="location">Permanent Location</string>
     <string name="add_location">Add Location</string>
     <string name="age_should_be_between">Age should be between</string>
     <string name="salary_should_be_between">Salary should be between</string>

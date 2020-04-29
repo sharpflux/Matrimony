@@ -55,6 +55,10 @@ public class URLs {
 
 
     public static final String URL_GET_MULTIPLE_CASTE       = MainURL+"api/CasteApi/Get_CasteMultipleAPI?";
+    public static final String URL_GET_SUBCASSTE       = MainURL+"api/CasteApi/Get_SubCasteAPI?CasteId=1&Language=en";
+    public static final String URL_GET_MULTIPLE_SUBCASSTE       = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
+
+
 
 
 

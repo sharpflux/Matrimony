@@ -53,11 +53,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
             textView_colorId, textView_occupationId, textView_religonId, textView_stateId, textView_cityId;
 
     private EditText editText_qualification, editText_maritalStatus, editText_familyType, editText_familyValues,
-            editText_color, editText_occupation, editText_religon, editText_district, editText_stateNames,editText_caste;
+            editText_color, editText_occupation, editText_religon, editText_district, editText_stateNames,editText_caste,edt_subcaste;
 
     private RadioGroup radioGroup_diet;
 
-    private CardView cardView_religion, cardView_caste;
+    private CardView cardView_religion, cardView_caste,cardView_subcaste;
 
     private ImageView imageView_back;
 
@@ -80,7 +80,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
     StringBuilder state_builder_id;
     String StateId="";
 
-    ArrayList arrayList_stateId, arrayList_districtId, arrayList_talukaId, arrayList_religion, arrayList_caste;
+    ArrayList arrayList_stateId, arrayList_districtId, arrayList_talukaId, arrayList_religion, arrayList_caste, arrayList_SubCaste;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +97,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         arrayList_districtId = new ArrayList();
         arrayList_religion = new ArrayList();
         arrayList_caste = new ArrayList();
+        arrayList_SubCaste = new ArrayList();
 
         if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
             context.startActivity(new Intent(context, LoginActivity.class));
@@ -111,7 +112,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         include_toolbar = findViewById(R.id.include_toolbar);
         textView_toolbarHeader = findViewById(R.id.textView_toolbarHeader);
         imageView_back = findViewById(R.id.imageView_back);
-        textView_salaryRange = findViewById(R.id.textView_salaryRange);
+      //  textView_salaryRange = findViewById(R.id.textView_salaryRange);
 
         textView_stateId = findViewById(R.id.textView_stateId);
         editText_stateNames = findViewById(R.id.editText_stateNames);
@@ -122,12 +123,13 @@ public class SetPreferencesActivity extends AppCompatActivity {
         editText_familyValues = findViewById(R.id.editText_familyValues);
         editText_color = findViewById(R.id.editText_color);
         rangeBar_ageRange = findViewById(R.id.rangeBar_ageRange);
-        rangeBar_salaryRange = findViewById(R.id.rangeBar_salaryRange);
+      //  rangeBar_salaryRange = findViewById(R.id.rangeBar_salaryRange);
         rangeBar_heightRange = findViewById(R.id.rangeBar_heightRange);
         textView_ageRange = findViewById(R.id.textView_ageRange);
         editText_caste = findViewById(R.id.editText_caste);
 
         textView_heightRange = findViewById(R.id.textView_heightRange);
+        edt_subcaste = findViewById(R.id.edt_subcaste);
 
 
 
@@ -144,6 +146,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         lr_district = findViewById(R.id.lr_district);
         cardView_religion = findViewById(R.id.cardView_religion);
         cardView_caste = findViewById(R.id.cardView_caste);
+        cardView_subcaste = findViewById(R.id.cardView_subcaste);
         //txt_state = findViewById(R.id.txt_state);
         //textView_addStateId = findViewById(R.id.textView_addStateId);
         editText_district = findViewById(R.id.editText_district);
@@ -156,7 +159,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         state_builder_id = new StringBuilder();
 
         rangeBarChangeListener("Age", rangeBar_ageRange, textView_ageRange);
-        rangeBarChangeListener("Salary ", rangeBar_salaryRange, textView_salaryRange);
+      //  rangeBarChangeListener("Salary ", rangeBar_salaryRange, textView_salaryRange);
         rangeBarChangeListener("Height", rangeBar_heightRange, textView_heightRange);
 
 
@@ -224,6 +227,14 @@ public class SetPreferencesActivity extends AppCompatActivity {
             }
         });
 
+        cardView_subcaste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                runner.execute("SubCaste");
+            }
+        });
+
     }
 
     public void rangeBarChangeListener(final String bar, RangeBar rangeBar, final TextView textView) {
@@ -234,9 +245,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
             public void onRangeChangeListener(RangeBar rangeBar, int leftPinIndex, int rightPinIndex, String leftPinValue, String rightPinValue) {
                 if (bar.equalsIgnoreCase("Age")) {
                     textView.setText(leftPinValue + " - " + rightPinValue);
-                } else if (bar.equalsIgnoreCase("Salary")) {
-                    textView.setText(leftPinValue + "L - " + rightPinValue + "L");
-                } else if (bar.equals("Height")) {
+                }  else if (bar.equals("Height")) {
                     textView.setText(leftPinValue + "ft - " + rightPinValue + "ft");
                 }
             }
@@ -363,6 +372,18 @@ public class SetPreferencesActivity extends AppCompatActivity {
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_CASTE+"ReligionId="+religionId+"&Language="
                                 +userModel.getLanguage(), "CasteId", "CasteName", editText_caste,
                         arrayList_caste, SetPreferencesActivity.this, customDialogLoadingProgressBar);
+
+            }
+
+
+            else if (params[0].equals("SubCaste")) {
+
+                String casteId = arrayList_caste.toString().substring(1,arrayList_caste.toString().length()-1).replaceAll(" ","");
+
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_SUBCASSTE+"CasteId="+casteId+"&Language="
+                                +userModel.getLanguage(), "SubCasteId", "SubCasteName",edt_subcaste,
+                        arrayList_SubCaste, SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
             }
 
