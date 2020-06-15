@@ -48,9 +48,11 @@ public class ReligiousDetailsFragment extends Fragment {
 
 
     View view;
-    private TextView textView_saveAndContinue, textView_religionId, textView_caste;
+    private TextView textView_saveAndContinue, textView_religionId, textView_casteId, textView_subCasteId,
+    textView_motherTongueId;
 
-    private EditText editText_caste, editText_subCaste, editText_religion, editText_gothram, editText_dosh;
+    private EditText editText_caste, editText_subCaste, editText_religion, editText_gothram, editText_dosh,
+    editText_motherTongue;
 
     private ImageView imageView_back;
 
@@ -110,9 +112,12 @@ public class ReligiousDetailsFragment extends Fragment {
         editText_religion = view.findViewById(R.id.editText_religion);
         editText_gothram = view.findViewById(R.id.editText_gothram);
         editText_dosh = view.findViewById(R.id.editText_dosh);
+        editText_motherTongue = view.findViewById(R.id.editText_motherTongue);
 
         textView_religionId = view.findViewById(R.id.textView_religionId);
-        textView_caste = view.findViewById(R.id.textView_caste);
+        textView_casteId = view.findViewById(R.id.textView_casteId);
+        textView_subCasteId = view.findViewById(R.id.textView_subCasteId);
+        textView_motherTongueId = view.findViewById(R.id.textView_motherTongueId);
 
 
         switchButton_otherCaste = view.findViewById(R.id.switchButton_otherCaste);
@@ -152,26 +157,18 @@ public class ReligiousDetailsFragment extends Fragment {
         onClickListener();
 
 
-
-
-
         return view;
     }
 
     void onClickListener()
     {
 
-        showPopUp(editText_religion,"Religion","0");
-        //showPopUp(editText_caste,"Caster",textView_religionId.getText().toString());
+        showPopUp(editText_religion,"Religion",null);
+        showPopUp(editText_caste,"Caste",textView_religionId);
+        showPopUp(editText_subCaste,"SubCaste",textView_casteId);
+        showPopUp(editText_motherTongue,"MotherTongue",null);
 
-        editText_caste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute("Caste", textView_religionId.getText().toString());
 
-            }
-        });
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,45 +177,27 @@ public class ReligiousDetailsFragment extends Fragment {
                 AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
 
-/*                caste = editText_caste.getText().toString();
-                subCaste = editText_subCaste.getText().toString();
-                religion = editText_religion.getText().toString();
-                //otherCaste = switchButton_otherCaste.getT;
-                gothram = editText_gothram.getText().toString();
-                dosh = editText_dosh.getText().toString();
 
-                if(bundle!=null){
-                    bundle.putString("caste",caste);
-                    bundle.putString("subCaste",subCaste);
-                    bundle.putString("religion",religion);
-                    //bundle.putString("otherCaste",otherCaste);
-                    bundle.putString("gothram",gothram);
-                    bundle.putString("dosh",dosh);
-                }
-
-
-
-                */
             }
         });
 
 
     }
 
-    void showPopUp(EditText editText, final String urlFor, final String id)
+    void showPopUp(EditText editText, final String urlFor, final TextView textView_id)
     {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 AsyncTaskLoad runner = new AsyncTaskLoad();
-                if(id.equals("0"))
+                if(textView_id==null)
                 {
                     runner.execute(urlFor);
                 }
                 else
                 {
-                    runner.execute(urlFor,id);
+                    runner.execute(urlFor,textView_id.getText().toString());
                 }
 
             }
@@ -287,11 +266,12 @@ public class ReligiousDetailsFragment extends Fragment {
                 params.put("ReligiousDetailsId",String.valueOf(religionDetailsId));
                 params.put("UserId",userModel.getUserId());
                 params.put("ReligionId",textView_religionId.getText().toString());
-                params.put("CasteId",textView_caste.getText().toString());
-                params.put("SubCasteName",editText_subCaste.getText().toString());
+                params.put("CasteId",textView_casteId.getText().toString());
+                params.put("SubCasteId",textView_subCasteId.getText().toString());
                 params.put("OtherCommunity",String.valueOf(switchButton_otherCaste.isChecked()));
                 params.put("Gothram",editText_gothram.getText().toString());
                 params.put("Dosh",editText_dosh.getText().toString());
+                params.put("MotherTongueId",textView_motherTongueId.getText().toString());
                 params.put("LanguageType",userModel.getLanguage());
 
 
@@ -330,9 +310,10 @@ public class ReligiousDetailsFragment extends Fragment {
                                 {
                                     religionDetailsId = jsonObject.getInt("ReligiousDetailsId");
 
-
                                     textView_religionId.setText(jsonObject.getString("ReligionId"));
-                                    textView_caste.setText(jsonObject.getString("CasteId"));
+                                    textView_casteId.setText(jsonObject.getString("CasteId"));
+                                    textView_subCasteId.setText(jsonObject.getString("SubCasteId"));
+                                    textView_motherTongueId.setText(jsonObject.getString("MotherTongueId"));
 
                                     editText_religion.setText(jsonObject.getString("ReligionName"));
                                     editText_caste.setText(jsonObject.getString("CasteName"));
@@ -340,6 +321,7 @@ public class ReligiousDetailsFragment extends Fragment {
                                     switchButton_otherCaste.setChecked(jsonObject.getBoolean("OtherCommunity"));
                                     editText_gothram.setText(jsonObject.getString("Gothram"));
                                     editText_dosh.setText(jsonObject.getString("Dosh"));
+                                    editText_motherTongue.setText(jsonObject.getString("MotherTongueName"));
 
 
 
@@ -415,7 +397,24 @@ public class ReligiousDetailsFragment extends Fragment {
                 {
                     String religionId = params[1];
                     dataFetcher.loadList(URLs.URL_GET_CASTE+"ReligionId="+religionId+"&Language="+userModel.getLanguage(),
-                            "CasteId","CasteName", editText_caste, textView_caste,
+                            "CasteId","CasteName", editText_caste, textView_casteId,
+                            getContext(), customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].toString()=="SubCaste")
+                {
+                    String casteId = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_SUBCASTE+"CasteId="+casteId+"&Language="+userModel.getLanguage(),
+                            "SubCasteId","SubCasteName", editText_subCaste, textView_subCasteId,
+                            getContext(), customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].toString()=="MotherTongue")
+                {
+                    dataFetcher.loadList(URLs.URL_GET_MOTHERTONGUE+"Language="+userModel.getLanguage(),
+                            "MotherTongueId","MotherTongueName", editText_motherTongue, textView_motherTongueId,
                             getContext(), customDialogLoadingProgressBar);
 
 

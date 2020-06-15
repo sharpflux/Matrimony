@@ -66,7 +66,7 @@ public class CustomDialogAddSibling extends Dialog {
 
     DataFetcher dataFetcher;
 
-    String id;
+    String id, sibling_details_id;
 
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
@@ -78,12 +78,13 @@ public class CustomDialogAddSibling extends Dialog {
     private int position;
     CardView cardView_sibling_relation;
 
-    public CustomDialogAddSibling(Context context, String id, AddPersonAdapter addPersonAdapter,
+    public CustomDialogAddSibling(Context context, String id, String sibling_details_id, AddPersonAdapter addPersonAdapter,
                                   ArrayList<AddPersonModel> addPersonModelArrayList, int position)
     {
         super(context);
         this.context = context;
         this.id = id;
+        this.sibling_details_id = sibling_details_id;
         this.addPersonAdapter = addPersonAdapter;
         this.addPersonModelArrayList = addPersonModelArrayList;
         this.position = position;
@@ -233,7 +234,7 @@ public class CustomDialogAddSibling extends Dialog {
 
             }
 
-
+            cursor.close();
 
         }
 
@@ -289,7 +290,7 @@ public class CustomDialogAddSibling extends Dialog {
 
 
                 if(id.equals("0")) {
-                    long res = sqLiteSiblingDetails.insertSibling(name, mobileNo, qualificationId, qualificationName,
+                    long res = sqLiteSiblingDetails.insertSibling("0", name, mobileNo, qualificationId, qualificationName,
                             occupationId, occupationName, maritalStatus,
                             relationId, relation, fil_name, fil_mobileNo, fil_village,
                             fil_state_id, fil_district_id, fil_taluka_id,
@@ -297,7 +298,7 @@ public class CustomDialogAddSibling extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),name, qualificationName));
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res), "0", name, qualificationName));
                         addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
@@ -306,7 +307,7 @@ public class CustomDialogAddSibling extends Dialog {
                 }
                 else
                 {
-                    int res = sqLiteSiblingDetails.updateSibling(id, name, mobileNo, qualificationId, qualificationName,
+                    int res = sqLiteSiblingDetails.updateSibling(id, sibling_details_id, name, mobileNo, qualificationId, qualificationName,
                         occupationId, occupationName, maritalStatus,
                         relationId, relation, fil_name, fil_mobileNo, fil_village,
                         fil_state_id, fil_district_id, fil_taluka_id,
@@ -314,7 +315,7 @@ public class CustomDialogAddSibling extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), name, qualificationName));
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), sibling_details_id, name, qualificationName));
                         addPersonAdapter.notifyDataSetChanged();
 
                     } else {
@@ -516,7 +517,7 @@ public class CustomDialogAddSibling extends Dialog {
 
                 }
 
-                else if(params[0].toString()=="State")
+               /* else if(params[0].toString()=="State")
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
                             "StatesName", editText_state, textView_stateId,context, customDialogLoadingProgressBar);
@@ -538,7 +539,7 @@ public class CustomDialogAddSibling extends Dialog {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_taluka, textView_talukaId,
                             context, customDialogLoadingProgressBar);
-                }
+                }*/
 
             } catch (Exception e) {
                 e.printStackTrace();

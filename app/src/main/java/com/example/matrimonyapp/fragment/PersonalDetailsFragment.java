@@ -19,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -60,22 +61,21 @@ public class PersonalDetailsFragment extends Fragment {
 
     ImageView imageView_back;
 
-    EditText editText_height, editText_weight, editText_colour, editText_maritalStatus, editText_familyStatus,
-            editText_familyType, editText_familyValues, editText_disabilityType;
+    EditText editText_colour, editText_maritalStatus, editText_familyStatus,
+            editText_familyType, editText_familyValues, editText_disabilityType, editText_diet;
 
     SwitchButton switchButton_disability, switchButton_livesWithFamily;
 
-    RadioGroup radioGroup_diet;
+    //RadioGroup radioGroup_diet;
 
     com.kevalpatel2106.rulerpicker.RulerValuePicker rulerValuePicker_height, rulerValuePicker_weight;
 
     NumberPicker numberPicker_heightFt, numberPicker_heightInch, numberPicker_weight;
 
     TextView textView_heightValue, textView_weightValue, textView_skinColor, textView_maritalStatus,
-            textView_familyStatus, textView_familyType, textView_familyValues;
+            textView_familyStatus, textView_familyType, textView_familyValues, textView_dietId;
 
-    String  height, weight, colour, maritalStatus, familyStatus, familyType, familyValues,
-            disability, disabilityType, diet, livesWithFamily;
+    String  disabilityType, diet;
 
     Bundle bundle;
     DataFetcher dataFetcher;
@@ -98,7 +98,7 @@ public class PersonalDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_personal_details, container, false);
 
-        bundle = getArguments();
+        //bundle = getArguments();
 
 
         if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
@@ -129,7 +129,8 @@ public class PersonalDetailsFragment extends Fragment {
         //numberPicker_heightInch= view.findViewById(R.id.numberPicker_heightInch);
         //numberPicker_weight= view.findViewById(R.id.numberPicker_weight);
 
-        radioGroup_diet = view.findViewById(R.id.radioGroup_diet);
+        editText_diet = view.findViewById(R.id.editText_diet);
+        textView_dietId = view.findViewById(R.id.textView_dietId);
 
         switchButton_disability = view.findViewById(R.id.switchButton_disability);
         switchButton_livesWithFamily = view.findViewById(R.id.switchButton_livesWithFamily);
@@ -140,8 +141,7 @@ public class PersonalDetailsFragment extends Fragment {
 
         dataFetcher = new DataFetcher("PopUp",getContext());
 
-        diet = FieldValidation.radioGroupValidation(radioGroup_diet);
-
+        //diet = FieldValidation.radioGroupValidation(radioGroup_diet);
 
 /*        radioGroup_diet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -187,6 +187,7 @@ public class PersonalDetailsFragment extends Fragment {
         onClickListener();
 
 
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
 
         AsyncTaskLoad getTask = new AsyncTaskLoad();
         getTask.execute("getDetails");
@@ -236,6 +237,7 @@ public class PersonalDetailsFragment extends Fragment {
         showPopUp(editText_familyStatus,"FamilyStatus");
         showPopUp(editText_familyType,"FamilyType");
         showPopUp(editText_familyValues,"FamilyValues");
+        showPopUp(editText_diet,"Diet");
 
 
 
@@ -336,9 +338,9 @@ public class PersonalDetailsFragment extends Fragment {
 
     void insertDetails()
     {
-        final String diet = ((RadioButton)view.findViewById(radioGroup_diet.getCheckedRadioButtonId()))
+        /*final String diet = ((RadioButton)view.findViewById(radioGroup_diet.getCheckedRadioButtonId()))
                 .getText().toString();
-
+*/
         disabilityType = editText_disabilityType.getText().toString();
 
         if(editText_disabilityType.getText().toString().equals(""))
@@ -365,16 +367,24 @@ public class PersonalDetailsFragment extends Fragment {
                                 getDetails();
 
                                 Toast.makeText(getContext(),"Personal details saved successfully!", Toast.LENGTH_SHORT).show();
-/*
-                                UploadImageFragment uploadImageFragment = new UploadImageFragment();
-                                uploadImageFragment.setArguments(bundle);
+
+                                /*UploadImageFragment uploadImageFragment = new UploadImageFragment();
+                                //uploadImageFragment.setArguments(bundle);
 
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
-                                fragmentTransaction.commit();
-                                */
-                                getActivity().finish();
+                                fragmentTransaction.commit();*/
+
+                                UploadImageFragment uploadImageFragment= new UploadImageFragment();
+                                // personalDetailsFragment.setArguments(bundle);
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
+                                fragmentTransaction.commit() ;
+
+
+                                //getActivity().finish();
                             }
                             else
                             {
@@ -409,7 +419,7 @@ public class PersonalDetailsFragment extends Fragment {
                 params.put("FamilyValuesId",textView_familyValues.getText().toString());
                 params.put("Disability",String.valueOf(switchButton_disability.isChecked()));
                 params.put("DisabilityType", disabilityType);
-                params.put("Diet",diet);
+                params.put("Diet",textView_dietId.getText().toString());
                 params.put("LivesWithFamily",String.valueOf(switchButton_livesWithFamily.isChecked()));
                 params.put("LanguageType",userModel.getLanguage());
 
@@ -472,13 +482,13 @@ public class PersonalDetailsFragment extends Fragment {
                                     editText_familyValues.setText(jsonObject.getString("FamilyValuesName"));
 
 
-                                    String diet = jsonObject.getString("Diet");
+/*                                    String diet = jsonObject.getString("Diet");
                                     if(diet.toLowerCase().contains("non".toLowerCase()))
                                         diet = getResources().getString(R.string.non_veg);
                                     else
                                         diet = getResources().getString(R.string.veg);
                                     FieldValidation.setRadioButtonAccToValue(radioGroup_diet,
-                                            diet);
+                                            diet);*/
 
                                 }
 
@@ -579,7 +589,12 @@ public class PersonalDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_FAMILYVALUES+"Language="+userModel.getLanguage(),"FamilyValuesId",
                             "FamilyValuesName", editText_familyValues, textView_familyValues,getContext(), customDialogLoadingProgressBar);
                 }
+                else if(params[0].equals("Diet"))
+                {
 
+                    dataFetcher.loadList(URLs.URL_GET_DIET+"Language="+userModel.getLanguage(),"DietId",
+                            "DietName", editText_diet, textView_dietId, getContext(), customDialogLoadingProgressBar);
+                }
 
 
             } catch (Exception e) {
@@ -599,7 +614,7 @@ public class PersonalDetailsFragment extends Fragment {
         @Override
         protected void onPreExecute() {
 
-            customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+            //customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
             customDialogLoadingProgressBar.show();
 
         }

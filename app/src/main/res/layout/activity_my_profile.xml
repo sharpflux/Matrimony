@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    tools:context=".activity.MyProfileActivity"
+    >
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -345,6 +353,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/textView_addBio"
                                     android:layout_marginTop="20dp"
                                     android:layout_marginBottom="20dp"
                                     android:background="@drawable/gradient_rounded_corners"
@@ -409,6 +418,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/textView_editProfile2"
                                     android:layout_marginTop="20dp"
                                     android:layout_marginBottom="20dp"
                                     android:background="@drawable/gradient_rounded_corners"
@@ -473,6 +483,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/textView_setPreferences"
                                     android:layout_marginTop="20dp"
                                     android:layout_marginBottom="20dp"
                                     android:background="@drawable/gradient_rounded_corners"
@@ -538,10 +549,10 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:id="@+id/textView_changeProfilePhoto"
                                     android:layout_marginTop="20dp"
                                     android:layout_marginBottom="20dp"
                                     android:background="@drawable/gradient_rounded_corners"
-                                    android:inputType="text"
                                     android:paddingStart="15dp"
                                     android:paddingTop="5dp"
                                     android:paddingEnd="15dp"
@@ -678,3 +689,7 @@
 
 
 </RelativeLayout>
+
+    <include layout="@layout/activity_drawer"
+        />
+</androidx.drawerlayout.widget.DrawerLayout>

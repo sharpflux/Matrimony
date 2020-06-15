@@ -2,9 +2,14 @@ package com.example.matrimonyapp.fragment;
 
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,10 +17,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,7 +31,10 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.GalleryAdapter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.Console;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +81,7 @@ public class UploadImageFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_upload_image, container, false);
 
-        bundle = getArguments();
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         imageView_back = ((MainActivity) getActivity()).findViewById(R.id.imageView_back);
         TextView tv = ((MainActivity) getActivity()).findViewById(R.id.textView_toolbar);
@@ -113,6 +123,25 @@ public class UploadImageFragment extends Fragment {
                 String[] mimeTypes = {"image/jpeg", "image/png"};
                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
                 startActivityForResult(intent, RESULT_SELECT_IMAGE);
+
+
+
+/*
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.putExtra("crop","true");
+            intent.putExtra("aspectX",0);
+            intent.putExtra("aspectY",0);
+            try{
+                intent.putExtra("return-data",true);
+                startActivityForResult(Intent.createChooser(intent,"Complete action using"),RESULT_SELECT_IMAGE);
+            }
+            catch (ActivityNotFoundException e)
+            {}
+*/
+
+
             }
         });
 
@@ -126,8 +155,10 @@ public class UploadImageFragment extends Fragment {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
 
-               /* Intent intent = new Intent(getContext(), MultiPhotoSelectActivity.class);
-                startActivity(intent);*/
+               /*
+                Intent intent = new Intent(getContext(), MultiPhotoSelectActivity.class);
+                startActivity(intent);
+               */
 
 
             }
@@ -210,6 +241,8 @@ public class UploadImageFragment extends Fragment {
 
         }
     }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -221,11 +254,21 @@ public class UploadImageFragment extends Fragment {
 
                     selectedImage = data.getData();
                     imageView_upload.setImageURI(selectedImage);
+
+/*                    Bundle extras = data.getExtras();
+                    if(extras!=null)
+                    {
+                        Bitmap photo = extras.getParcelable("data");
+                        imageView_upload.setImageBitmap(photo);
+                    }*/
+
+
                     break;
                 case PICK_IMAGE_MULTIPLE:
 
                     String[] filePathColumn = { MediaStore.Images.Media.DATA };
                     imagesEncodedList = new ArrayList<String>();
+
                     if(data.getData()!=null){
 
                         Uri mImageUri=data.getData();
@@ -240,7 +283,7 @@ public class UploadImageFragment extends Fragment {
                         imageEncoded  = cursor.getString(columnIndex);
                         cursor.close();
                         if(mArrayUri==null)
-
+                        {}
 
                         mArrayUri.add(mImageUri);
                         galleryAdapter = new GalleryAdapter(getContext(),mArrayUri,getActivity(),getResources());
@@ -258,6 +301,20 @@ public class UploadImageFragment extends Fragment {
 
                                 ClipData.Item item = mClipData.getItemAt(i);
                                 Uri uri = item.getUri();
+
+
+                                try {
+
+                                    InputStream imageStream = getContext().getContentResolver().openInputStream(uri);
+                                    Bitmap bitmapImage = BitmapFactory.decodeStream(imageStream);
+                                    bitmapImage = getResizedBitmap(bitmapImage,400);
+                                    uri = getImageUri(getContext(),bitmapImage);
+
+                                }
+                                catch (Exception exception)
+                                {
+                                    Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                                 mArrayUri.add(uri);
                                 // Get the cursor
                                 Cursor cursor = getContext().getContentResolver().query(uri, filePathColumn, null, null, null);
@@ -295,4 +352,33 @@ public class UploadImageFragment extends Fragment {
 
 
     }
+
+    public Uri getImageUri(Context context, Bitmap bitmap)
+    {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize)
+    {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width/(float)height;
+        if(bitmapRatio>1)
+        {
+            width = maxSize;
+            height = (int)(width/bitmapRatio);
+        }
+        else{
+            height = maxSize;
+            width = (int)(height*bitmapRatio);
+
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+
 }

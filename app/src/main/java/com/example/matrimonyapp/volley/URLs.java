@@ -16,14 +16,17 @@ public class URLs {
     public static final String URL_GET_TALUKA                   = MainURL+"api/Talukas/Get_TalukaAPI?";
     public static final String URL_GET_RELIGION                 = MainURL+"api/ReligionAPI/GETReligion?";
     public static final String URL_GET_CASTE                    = MainURL+"api/CasteApi/Get_CasteAPI?";
+    public static final String URL_GET_MOTHERTONGUE             = MainURL+"api/MotherTongueApi/MotherTongueGetAPI?";
     public static final String URL_GET_OCCUPATION               = MainURL+"api/OccupationAPI/GETOccupation?";
     public static final String URL_POST_VERIFYMOBILE            = MainURL+"/User_Authentication/GetUserFromMobileNo";
     public static final String URL_GET_OTP                      = MainURL+"User_Authentication/GetOTP?";
+    public static final String URL_GET_SALARY                   = MainURL+"api/SalaryPackageApi/SalaryPackageGetAPI?";
     public static final String URL_GET_SKINCOLOR                = MainURL+"api/SkinColourApi/Get_SkinColourAPI?";
     public static final String URL_GET_MARITALSTATUS            = MainURL+"api/MaritalStatusApi/Get_MaritalStatusAPI?";
     public static final String URL_GET_FAMILYSTATUS             = MainURL+"api/FamilyStatusApi/Get_FamilyStatusAPI?";
     public static final String URL_GET_FAMILYTYPE               = MainURL+"api/FamilyTypeApi/Get_FamilyTypeAPI?";
     public static final String URL_GET_FAMILYVALUES             = MainURL+"api/FamilyValuesApi/Get_FamilyValuesAPI?";
+    public static final String URL_GET_DIET                     = MainURL+"api/DietMasterApi/DietMasterGetAPI?";
     public static final String URL_GET_SIBLINGSLIST             = MainURL+"api/SiblingListApi/Get_SiblingListAPI?";
     public static final String URL_GET_QUALIFICATIONNAME        = MainURL+"api/OccupationAPI/GETQualificationAPI?";
     public static final String URL_GET_QUALIFICATIONLEVEL       = MainURL+"api/QualificationLevelApi/Get_QualificationLevelAPI?";
@@ -37,8 +40,8 @@ public class URLs {
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";
 
-    public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/Registration/GetUserFamilyDetailsAPI?";
-    public static final String URL_POST_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
+    public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
+    public static final String URL_POST_FAMILYDETAILS           = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
 
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";
     public static final String URL_POST_QUALIFICATIONDETAILS    = MainURL+"api/QualificationDetailsAPI/QualificationDetailsInsertUpdate";
@@ -53,13 +56,9 @@ public class URLs {
 
     public static final String URL_GET_MULTIPLE_DISTRICT        = MainURL+"api/DistrictMultipleApi/Get_DistrictMultipleAPI?";
 
-
-    public static final String URL_GET_MULTIPLE_CASTE       = MainURL+"api/CasteApi/Get_CasteMultipleAPI?";
-    public static final String URL_GET_SUBCASSTE       = MainURL+"api/CasteApi/Get_SubCasteAPI?CasteId=1&Language=en";
-    public static final String URL_GET_MULTIPLE_SUBCASSTE       = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
-
-
-
+    public static final String URL_GET_MULTIPLE_CASTE           = MainURL+"api/CasteApi/Get_CasteMultipleAPI?";
+    public static final String URL_GET_SUBCASTE                = MainURL+"api/CasteApi/Get_SubCasteAPI?";
+    public static final String URL_GET_MULTIPLE_SUBCASTE       = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
 
 
 }

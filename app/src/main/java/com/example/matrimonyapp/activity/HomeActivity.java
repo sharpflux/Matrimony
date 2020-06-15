@@ -43,17 +43,17 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
             R.drawable.offer, R.drawable.notification, R.drawable.start1,  R.drawable.my_acc};
 
     private String[] TEXT = {"My Cart", "My Orders", "My Account",  "Offer Zone", "Notification", "Rate App","Logout"};
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    NavigationView navigationView;
+
+
+    private Toolbar toolbar;
+    private UserModel userModel;
 
     private DrawerLayout drawer;
-    private Toolbar toolbar;
-
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+    NavigationView navigationView;
     private RecyclerView drawerrecyview;
     private NavigationDrawerAdapter navigationDrawerAdapter;
     private ArrayList<NavigationItemListModel> activityListModelArrayList;
-
-    UserModel userModel;
 
     private SimpleGestureFilter detector;
 

@@ -12,7 +12,8 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "MatrimonyMama.db";
     public static final String TABLE_NAME = "mama";
-    public static final String  ID = "id";
+    public static final String  ID = "id"; // 1
+    public static final String  MAMA_DETAILS_ID = "mama_details_id";
     public static final String  NAME = "name";
     public static final String  MOBILE_NO = "mobileno";
     public static final String  OCCUPATION_ID = "occupation_id";
@@ -40,6 +41,7 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
 
             sqLiteDatabase.execSQL("create table " + TABLE_NAME + " ( "
                     + ID + " INTEGER PRIMARY KEY autoincrement, "
+                    + MAMA_DETAILS_ID + " int, "
                     + NAME + " text, "
                     + MOBILE_NO + " text, "
                     + OCCUPATION_ID + " int, "
@@ -98,7 +100,7 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
         return res;
     }
 
-    public long insertMamaDetails(String name, String mobileNo, String occupationId, String occupationName,
+    public long insertMamaDetails(String mama_details_id, String name, String mobileNo, String occupationId, String occupationName,
                               String address, String state_id, String district_id, String taluka_id,
                               String state_name, String district_name, String taluka_name, String is_alive)
     {
@@ -108,6 +110,7 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         //contentValues.put(ID, null);
+        contentValues.put(MAMA_DETAILS_ID, mama_details_id);
         contentValues.put(NAME, name);
         contentValues.put(MOBILE_NO, mobileNo);
         contentValues.put(OCCUPATION_ID, occupationId);
@@ -129,7 +132,7 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updateMamaDetails(String id, String name, String mobileNo, String occupationId, String occupationName,
+    public int updateMamaDetails(String id, String mama_details_id, String name, String mobileNo, String occupationId, String occupationName,
                              String address, String state_id, String district_id, String taluka_id,
                              String state_name, String district_name, String taluka_name, String is_alive)
     {
@@ -152,7 +155,8 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
         contentValues.put(IS_ALIVE, is_alive);
 
 
-        return sqLiteDatabase.update(TABLE_NAME, contentValues, ID+" = ?", new String[]{id});
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, MAMA_DETAILS_ID+" = ? and "+ID+" = ? ",
+                new String[]{mama_details_id, id});
         //insert returns rowId of newly inserted row or -1 if an errror occured
 
 
@@ -174,8 +178,15 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
         //delete method returns no. of rows deleted or 0 otherwise
         return sqLiteDatabase.delete(TABLE_NAME,SQLiteMamaDetails.ID+" = ?", new String[]{Integer.toString(id)});
 
-
     }
 
+
+    public int deleteAll()
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        return sqLiteDatabase.delete(TABLE_NAME,"1",null);
+
+    }
 
 }

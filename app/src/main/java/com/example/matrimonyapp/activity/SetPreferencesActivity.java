@@ -118,7 +118,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         editText_stateNames = findViewById(R.id.editText_stateNames);
         editText_qualification = findViewById(R.id.editText_qualification);
         editText_maritalStatus = findViewById(R.id.editText_maritalStatus);
-        radioGroup_diet = findViewById(R.id.radioGroup_diet);
+        //radioGroup_diet = findViewById(R.id.radioGroup_diet);
         editText_familyType = findViewById(R.id.editText_familyType);
         editText_familyValues = findViewById(R.id.editText_familyValues);
         editText_color = findViewById(R.id.editText_color);
@@ -381,7 +381,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
                 String casteId = arrayList_caste.toString().substring(1,arrayList_caste.toString().length()-1).replaceAll(" ","");
 
 
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_SUBCASSTE+"CasteId="+casteId+"&Language="
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_SUBCASTE+"CasteId="+casteId+"&Language="
                                 +userModel.getLanguage(), "SubCasteId", "SubCasteName",edt_subcaste,
                         arrayList_SubCaste, SetPreferencesActivity.this, customDialogLoadingProgressBar);
 

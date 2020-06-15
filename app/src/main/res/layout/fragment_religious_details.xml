@@ -56,13 +56,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_religionId"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_black"
-                    android:layout_marginTop="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:background="@drawable/prompt_separator"
                     android:visibility="gone"
+                    android:text="@string/_0"
                     />
 
 
@@ -87,20 +82,13 @@
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_caste"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_black"
-                    android:layout_marginTop="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:background="@drawable/prompt_separator"
+                    android:id="@+id/textView_casteId"
                     android:visibility="gone"
                     />
-
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -117,43 +105,20 @@
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:singleLine="true"
+                        android:clickable="false"
+                        android:focusable="false"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
 
 
-
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_weight="1"
-                        android:text="Willing to marry in other communities ?"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
-
-                    <com.suke.widget.SwitchButton
-                        android:layout_width="45dp"
-                        android:layout_height="27dp"
-                        android:id="@+id/switchButton_otherCaste"
-                        android:layout_marginEnd="03dp"
-                        app:sb_button_color="#8f329b"
-                        app:sb_checked="false"
-                        app:sb_checked_color="#8f329b"
-                        app:sb_checkline_color="@color/transparent"
-                        app:sb_checkline_width="0dp"
-                        app:sb_uncheck_color="#ebebeb"
-                        app:sb_uncheckcircle_radius="0dp" />
-
-                </LinearLayout>
+                    android:id="@+id/textView_subCasteId"
+                    android:visibility="gone"
+                    />
 
 
 
@@ -203,6 +168,66 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_motherTongue"
+                        android:hint="@string/mother_tongue"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:singleLine="true"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_motherTongueId"
+                    android:visibility="gone"
+                    android:text="@string/_0"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_weight="1"
+                        android:text="Willing to marry in other communities ?"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp" />
+
+                    <com.suke.widget.SwitchButton
+                        android:layout_width="45dp"
+                        android:layout_height="27dp"
+                        android:id="@+id/switchButton_otherCaste"
+                        android:layout_marginEnd="03dp"
+                        app:sb_button_color="#8f329b"
+                        app:sb_checked="false"
+                        app:sb_checked_color="#8f329b"
+                        app:sb_checkline_color="@color/transparent"
+                        app:sb_checkline_width="0dp"
+                        app:sb_uncheck_color="#ebebeb"
+                        app:sb_uncheckcircle_radius="0dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

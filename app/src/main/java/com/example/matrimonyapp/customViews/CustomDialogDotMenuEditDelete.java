@@ -26,18 +26,19 @@ import java.util.ArrayList;
 public class CustomDialogDotMenuEditDelete extends Dialog {
 
     public Context context;
-    String id;
+    String id, details_id;
     public TextView textView_edit, textView_delete;
     private AddPersonAdapter addPersonAdapter;
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
     String relation ;
 
-    public CustomDialogDotMenuEditDelete(Context context, String id, AddPersonAdapter addPersonAdapter,
+    public CustomDialogDotMenuEditDelete(Context context, String id, String details_id, AddPersonAdapter addPersonAdapter,
                                          ArrayList<AddPersonModel> addPersonModelArrayList, int position, String relation) {
         super(context);
         this.context = context;
         this.id = id;
+        this.details_id = details_id;
         this.addPersonAdapter = addPersonAdapter;
         this.addPersonModelArrayList = addPersonModelArrayList;
         this.position = position;
@@ -65,24 +66,24 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
 
                 if(relation.equalsIgnoreCase("Mama"))
                 {
-                    CustomDialogAddMama customDialogAddMama = new CustomDialogAddMama(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    CustomDialogAddMama customDialogAddMama = new CustomDialogAddMama(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
                     customDialogAddMama.show();
 
                 }
                 else if(relation.equalsIgnoreCase("Sibling"))
                 {
-                    CustomDialogAddSibling customDialogAddSibling = new CustomDialogAddSibling(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    CustomDialogAddSibling customDialogAddSibling = new CustomDialogAddSibling(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
                     customDialogAddSibling.show();
 
                 }
                 else if(relation.equalsIgnoreCase("Property"))
                 {
-                    CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
                     customDialogAddProperty.show();
                 }
                 else if(relation.equalsIgnoreCase("Farm"))
                 {
-                    CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(context, id, addPersonAdapter, addPersonModelArrayList, position);
+                    CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
                     customDialogAddFarm.show();
                 }
 

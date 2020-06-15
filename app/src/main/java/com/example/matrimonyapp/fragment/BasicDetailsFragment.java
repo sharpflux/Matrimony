@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -113,6 +114,8 @@ public class BasicDetailsFragment extends Fragment {
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         editText_firstName = (EditText) view.findViewById(R.id.editText_firstName);
         editText_altMobileNo = view.findViewById(R.id.editText_altMobileNo);
@@ -327,194 +330,51 @@ public class BasicDetailsFragment extends Fragment {
 
         dataFetcher = new DataFetcher("State",getContext());
 
+        showPopupSDT(editText_state, "State", null);
+        showPopupSDT(editText_district, "District", textView_stateId);
+        showPopupSDT(editText_taluka, "Taluka", textView_districtId);
+        FieldValidation.textChangedListenerForSDT(editText_state, editText_district, editText_taluka,
+                textView_stateId, textView_districtId, textView_talukaId);
 
 
-        editText_state.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "State";
-                runner.execute(control);
-               /* dataFetcher.loadList(URLs.URL_GETSTATE+"Language=en","StatesID",
-                        "StatesName", editText_state, textView_stateId,getContext());*/
-
-
-            }
-        });
-
-        editText_district.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "District";
-                String id = textView_stateId.getText().toString();
-                runner.execute(control,id);
-                /*
-
-
-                 */
-
-            }
-        });
-
-        editText_taluka.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                String control = "Taluka";
-                String id = textView_districtId.getText().toString();
-                runner.execute(control,id);
-
-            }
-        });
-
-
-        showPopUp(editText_birthState, "BirthState");
-        showPopUp(editText_birthDistrict, "BirthDistrict");
-        showPopUp(editText_birthTaluka, "BirthTaluka");
-
+        showPopupSDT(editText_birthState, "BirthState", null);
+        showPopupSDT(editText_birthDistrict, "BirthDistrict", textView_birthStateId);
+        showPopupSDT(editText_birthTaluka, "BirthTaluka", textView_birthDistrictId);
+        FieldValidation.textChangedListenerForSDT(editText_birthState, editText_birthDistrict, editText_birthTaluka,
+                textView_birthStateId, textView_birthDistrictId, textView_birthTalukaId);
 
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
-
-/*                Bundle bundle = new Bundle();
-                bundle.putString("fullName",fullName);
-                bundle.putString("gender",gender);
-                bundle.putString("birthdate",birthdate);
-                bundle.putString("birthTime",birthTime);
-                bundle.putString("birthTimeType",birthTimeType);
-                bundle.putString("birthPlace",birthPlace);
-                bundle.putString("birthTaluka",birthTaluka);
-                bundle.putString("birthDistrict",birthDistrict);
-                bundle.putString("mobileNo",mobileNo);
-                bundle.putString("emailId",emailId);
-                bundle.putString("address",address);
-                bundle.putString("state",state);
-                bundle.putString("pincode",pincode);
-                bundle.putString("taluka",taluka);
-                bundle.putString("district",district);
-
-
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.addToBackStack(null);
-
-                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
-                religiousDetailsFragment.setArguments(bundle);
-
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
-                fragmentTransaction.commit() ;*/
 
 
 
             }
         });
-
-
-        //textChangedListener();
-
 
         return view;
 
     }
 
+    public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id) {
 
-
-
-    private void textChangedListener()
-    {
-
-        editText_state.addTextChangedListener(new TextWatcher() {
+        editText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View view) {
 
-            }
+                String id = FieldValidation.onClickListenerForSDT(urlFor, textView_id, getContext());
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_district.setText("");
-                textView_districtId.setText("0");
-                editText_taluka.setText("");
-                textView_talukaId.setText("0");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute(urlFor, id);
 
             }
         });
-
-        editText_district.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_taluka.setText("");
-                textView_talukaId.setText("0");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        editText_birthState.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_birthDistrict.setText("");
-                textView_birthDistrictId.setText("0");
-                editText_birthTaluka.setText("");
-                textView_birthTalukaId.setText("0");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        editText_birthDistrict.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_birthTaluka.setText("");
-                textView_birthTalukaId.setText("0");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-
     }
 
 
-    void insertDetails()
+        void insertDetails()
     {
 
         fullName = editText_firstName.getText().toString().trim();
@@ -864,8 +724,6 @@ public class BasicDetailsFragment extends Fragment {
     }
 
 
-
-
     String getAge(int year, int month, int day)
     {
 
@@ -888,35 +746,6 @@ public class BasicDetailsFragment extends Fragment {
 
 
     }
-
-
-    private void showPopUp(EditText editText, final String urlFor)
-    {
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-
-                String id="";
-
-                if(urlFor.equals("BirthDistrict"))
-                {
-                    id =  textView_birthStateId.getText().toString();
-                }
-
-                if(urlFor.equals("BirthTaluka"))
-                {
-                    id = textView_birthDistrictId.getText().toString();
-                }
-
-                runner.execute(urlFor, id);
-            }
-        });
-
-
-    }
-
 
     @Override
     public void onResume() {

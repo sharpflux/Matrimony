@@ -55,7 +55,7 @@ public class CustomDialogAddFarm extends Dialog {
     private SQLiteFarmDetails sqLiteFarmDetails;
     private DataFetcher dataFetcher;
 
-    private String id;
+    private String id, farm_details_id;
 
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
@@ -66,12 +66,13 @@ public class CustomDialogAddFarm extends Dialog {
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
 
-    public CustomDialogAddFarm(Context context, String id, AddPersonAdapter addPersonAdapter,
+    public CustomDialogAddFarm(Context context, String id, String farm_details_id,  AddPersonAdapter addPersonAdapter,
                                    ArrayList<AddPersonModel> addPersonModelArrayList, int position)
     {
         super(context);
         this.context = context;
         this.id = id;
+        this.farm_details_id = farm_details_id;
         this.addPersonAdapter = addPersonAdapter;
         this.addPersonModelArrayList = addPersonModelArrayList;
         this.position = position;
@@ -127,7 +128,7 @@ public class CustomDialogAddFarm extends Dialog {
             }
 
 
-
+            cursor.close();
         }
 
         textView_addFarm.setOnClickListener(new View.OnClickListener() {
@@ -141,11 +142,11 @@ public class CustomDialogAddFarm extends Dialog {
 
 
                 if(id.equals("0")) {
-                    long res = sqLiteFarmDetails.insertFarmDetails(area, type, crops);
+                    long res = sqLiteFarmDetails.insertFarmDetails("0", area, type, crops);
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res), area, crops));
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),"0", area, crops));
                         addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
@@ -154,10 +155,10 @@ public class CustomDialogAddFarm extends Dialog {
                 }
                 else
                 {
-                    int res = sqLiteFarmDetails.updateFarmDetails(id,area, type, crops);
+                    int res = sqLiteFarmDetails.updateFarmDetails(id, farm_details_id,area, type, crops);
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), area, crops));
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), farm_details_id, area, crops));
                         addPersonAdapter.notifyDataSetChanged();
 
                     } else {

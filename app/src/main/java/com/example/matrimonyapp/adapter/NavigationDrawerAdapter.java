@@ -12,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
+import com.example.matrimonyapp.volley.CustomSharedPreference;
 
 import java.util.List;
 
@@ -71,7 +73,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
         @Override
         public void onClick(View view) {
-            Context context=view.getContext();
+            //Context context=view.getContext();
 
             final Intent intent;
             switch (getAdapterPosition()) {
@@ -98,6 +100,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
                     break;*/
+                case 6:
+                    CustomSharedPreference.getInstance(context).logout();
+                    break;
             }
 
 

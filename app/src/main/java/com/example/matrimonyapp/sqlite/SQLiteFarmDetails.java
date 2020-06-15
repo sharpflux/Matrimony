@@ -13,6 +13,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MatrimonyFarm.db";
     public static final String TABLE_NAME = "farm";
     public static final String  ID = "id";
+    public static final String  FARM_DETAILS_ID = "farm_details_id";
     public static final String  AREA = "area";
     public static final String  TYPE = "type";
     public static final String  CROPS = "crops";
@@ -36,6 +37,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
 
             sqLiteDatabase.execSQL("create table " + TABLE_NAME + " ( "
                     + ID + " INTEGER PRIMARY KEY autoincrement, "
+                    + FARM_DETAILS_ID + " int, "
                     + AREA + " text, "
                     + TYPE + " text, "
                     + CROPS + " text "
@@ -78,7 +80,28 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
 
     }
 
-    public long insertFarmDetails(String area, String type, String crops)
+    public String containsDetails(String farm_details_id)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+FARM_DETAILS_ID+" = "+farm_details_id, null);
+
+        if(res.getCount()<1)
+        {
+            res.close();
+            return "0";
+        }
+        else
+        {
+            res.moveToFirst();
+            String id = res.getString(res.getColumnIndex(SQLiteMamaDetails.ID));
+            res.close();
+
+            return id;
+        }
+
+    }
+
+    public long insertFarmDetails(String farm_details_id, String area, String type, String crops)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -86,6 +109,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         //contentValues.put(ID, null);
+        contentValues.put(FARM_DETAILS_ID, farm_details_id);
         contentValues.put(AREA, area);
         contentValues.put(TYPE, type);
         contentValues.put(CROPS, crops);
@@ -99,7 +123,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updateFarmDetails(String id, String area, String type, String crops)
+    public int updateFarmDetails( String id, String farm_details_id, String area, String type, String crops)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -110,7 +134,8 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         contentValues.put(TYPE, type);
         contentValues.put(CROPS, crops);
 
-        return sqLiteDatabase.update(TABLE_NAME, contentValues, ID+" = ?", new String[]{id});
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, FARM_DETAILS_ID+" = ? and "+ID+" = ?",
+                new String[]{farm_details_id, id});
         //insert returns rowId of newly inserted row or -1 if an errror occured
     }
 
@@ -130,6 +155,15 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         //delete method returns no. of rows deleted or 0 otherwise
         return sqLiteDatabase.delete(TABLE_NAME,SQLiteFarmDetails.ID+" = ?", new String[]{Integer.toString(id)});
 
+
+    }
+
+
+    public int deleteAll()
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        return sqLiteDatabase.delete(TABLE_NAME,"1",null);
 
     }
 

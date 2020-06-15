@@ -78,7 +78,8 @@ public class QualificationDetailsFragment extends Fragment {
     int qualificationDetailsId=0;
 
     CustomDialogAddPercentage customDialogAddPercentage;
-    CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+
     public QualificationDetailsFragment() {
         // Required empty public constructor
     }
@@ -92,7 +93,7 @@ public class QualificationDetailsFragment extends Fragment {
 
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Qualification");
+        tv.setText("Qualification Details");
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,17 +114,7 @@ public class QualificationDetailsFragment extends Fragment {
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
-/*        editText_sscNameOfInstitute=view.findViewById(R.id.editText_sscNameOfInstitute);
-        editText_sscPer=view.findViewById(R.id.editText_sscPer);
-        editText_hscNameOfInstitute=view.findViewById(R.id.editText_hscNameOfInstitute);
-        editText_hscPer=view.findViewById(R.id.editText_hscPer);
-        editText_gradCourse=view.findViewById(R.id.editText_gradCourse);
-        editText_gradNameOfInstitute=view.findViewById(R.id.editText_gradNameOfInstitute);
-        editText_gradPer=view.findViewById(R.id.editText_gradPer);
-        editText_pgCourse=view.findViewById(R.id.editText_pgCourse);
-        editText_pgNameOfInstitute=view.findViewById(R.id.editText_pgNameOfInstitute);
-        editText_pgPer=view.findViewById(R.id.editText_pgPer);
-        */
+
         editText_highestQualificationLevel=view.findViewById(R.id.editText_highestQualificationLevel);
         editText_qualification=view.findViewById(R.id.editText_qualification);
         editText_institue=view.findViewById(R.id.editText_institue);
@@ -140,135 +131,22 @@ public class QualificationDetailsFragment extends Fragment {
 
         dataFetcher = new DataFetcher("Qualification",getContext());
 
-        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
 
         editText_percentage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 customDialogAddPercentage = new CustomDialogAddPercentage(getContext(),editText_percentage);
                 customDialogAddPercentage.show();
-
             }
         });
 
-       /* editText_passingYear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                final Calendar c = Calendar.getInstance();
-
-                mYear = c.get(Calendar.YEAR);
-                //mMonth = c.get(Calendar.MONTH);
-
-
-                 datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-
-                        mYear = year;
-                        mMonth = monthOfYear;
-                        mDay = dayOfMonth;
-
-
-                        int localMonth = (mMonth)+1;
-                        String monthString = localMonth<10?"0"+localMonth:Integer.toString(localMonth);
-
-                        String localYear = Integer.toString(mYear);
-
-                        editText_passingYear.setText(new StringBuilder().append(localYear));
-
-
-
-
-                    }
-                },mYear,mMonth,mDay);
-
-
-
-                try{
-
-
-
-
-                    Field[] datePickerDialogFields = datePickerDialog.getClass().getDeclaredFields();
-
-                    for(Field datePickerDialogField : datePickerDialogFields)
-                    {
-                        if(datePickerDialogField.getName().equals("mDatePicker"))
-                        {
-                            datePickerDialogField.setAccessible(true);
-
-                            DatePicker datePicker1 = (DatePicker)datePickerDialogField.get(datePickerDialog);
-
-                            DatePicker monthPicker = (DatePicker)datePickerDialogField.get(datePickerDialog);
-
-                            Field datePickerFields[] = datePickerDialogField.getType().getDeclaredFields();
-
-                            for(Field datePickerField : datePickerFields)
-                            {
-
-                                if("mDelegate".equals(datePickerField.getName()))
-                                {
-                                    if(Modifier.isPrivate(datePickerField.getModifiers()))
-                                    {
-                                        datePickerField.setAccessible(true);
-                                        Object o = datePickerField.get(datePicker1);
-
-                                        Field[] df = o.getClass().getDeclaredFields();
-                                        for(Field newdf : df)
-                                        {
-                                            if(Modifier.isPrivate(newdf.getModifiers()))
-                                            {
-                                                newdf.setAccessible(true);
-                                                if(newdf.getName().equals("mDayPickerView") )
-                                                {
-                                                    Object dayPicker = newdf.get(o);
-                                                    ((View)dayPicker).setVisibility(View.GONE);
-
-                                                }
-                                            }
-                                        }
-
-                                    }
-
-
-
-                                }
-
-                            }
-                            datePicker1.setCalendarViewShown(false);
-
-                        }
-
-
-                    }
-
-                    datePickerDialog.show();
-
-
-                }
-                catch (Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-
-
-
-
-
-            }
-        });
-*/
 
         editText_passingYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 CustomDialogAddYear customDialogAddYear = new CustomDialogAddYear(getContext(),editText_passingYear);
                 customDialogAddYear.show();
-
             }
         });
 
@@ -291,40 +169,12 @@ public class QualificationDetailsFragment extends Fragment {
         });
 
 
+
+
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+
         AsyncTaskLoad getTask = new AsyncTaskLoad();
         getTask.execute("getDetails");
-
-
-        /*editText_sscPer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-
-                if(b==true)
-                    editText_sscPer.setHint("--.--");
-                else
-                    editText_sscPer.setHint("");
-            }
-        });
-
-        editText_sscPer.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-
-            }
-        });*/
 
 
         textView_saveAndContinue = ((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
@@ -336,41 +186,8 @@ public class QualificationDetailsFragment extends Fragment {
                 insertTask.execute("insertDetails");
 
 
-
-
-/*                sscNameOfInstitute = editText_sscNameOfInstitute.getText().toString();
-                sscPer= editText_sscPer.getText().toString();
-                hscNameOfInstitute= editText_hscNameOfInstitute.getText().toString();
-                hscPer= editText_hscPer.getText().toString();
-                gradCourse= editText_gradCourse.getText().toString();
-                gradNameOfInstitute= editText_gradNameOfInstitute.getText().toString();
-                gradPer= editText_gradPer.getText().toString();
-                pgCourse= editText_pgCourse.getText().toString();
-                pgNameOfInstitute= editText_pgNameOfInstitute.getText().toString();
-                pgPer= editText_pgPer.getText().toString();
-
-                hobby= editText_hobby.getText().toString();
-                socialContributions= editText_socialContributions.getText().toString();
-                *//*= .getText().toString();*/
-
-                if (bundle!=null)
-                {
-/*                    bundle.putString("sscNameOfInstitute",sscNameOfInstitute);
-                    bundle.putString("sscPer",sscPer);
-                    bundle.putString("hscNameOfInstitute",hscNameOfInstitute);
-                    bundle.putString("hscPer",hscPer);
-                    bundle.putString("gradCourse",gradCourse);
-                    bundle.putString("gradNameOfInstitute",gradNameOfInstitute);
-                    bundle.putString("gradPer",gradPer);
-                    bundle.putString("pgCourse",pgCourse);
-                    bundle.putString("pgNameOfInstitute",pgNameOfInstitute);
-                    bundle.putString("pgPer",pgPer);
-                    */
-                    bundle.putString("hobby",hobby);
-                    bundle.putString("socialContributions",socialContributions);
-                }
                 ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
-                professionalDetailsFragment.setArguments(bundle);
+                //professionalDetailsFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
@@ -507,19 +324,6 @@ public class QualificationDetailsFragment extends Fragment {
 
                                     //editText_.setText(jsonObject.getString(""));
 
-                                    try {
-
-                                        String myFormat = "yyyy";
-                                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-                                        String passingYear = sdf.format(jsonObject.getString("PassingYear"));
-                                        editText_passingYear.setText(passingYear);
-
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-
                                 }
 
 
@@ -568,12 +372,11 @@ public class QualificationDetailsFragment extends Fragment {
 
                 //customDialogLoadingProgressBar.dismiss();
 
-                if(params[0].toString().equals("getDetails"))
+                if(params[0].equals("getDetails"))
                 {
                     getDetails();
-
                 }
-                else if(params[0].toString().equals("insertDetails"))
+                else if(params[0].equals("insertDetails"))
                 {
                     insertDetails();
                 }
@@ -617,7 +420,6 @@ public class QualificationDetailsFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-
 
             customDialogLoadingProgressBar.show();
 

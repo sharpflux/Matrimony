@@ -61,6 +61,45 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         holder.relativeLayout.setOnTouchListener(new OnSwipeTouchListener(context){
 
+            @Override
+            public void onSwipeRight() {
+                super.onSwipeRight();
+
+                Point size = new Point();
+                display.getSize(size);
+
+
+                holder.relativeLayout.animate().alpha(0.2f).setDuration(400).translationX(size.x+10);
+                holder.relativeLayout.postOnAnimationDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        /*list.remove(position);
+                        notifyDataSetChanged();*/
+                        holder.relativeLayout.animate().alpha(1f).setDuration(400).translationX(0);
+                    }
+                },400);
+
+
+                if(bool_favorite==false)
+                {
+
+                    holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
+
+                    //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
+                    bool_favorite= true;
+                }
+                else
+                {
+                    holder.imageView_favorite.setImageResource(R.drawable.start1);
+                    bool_favorite = false;
+                }
+
+
+                /*
+                    contains Code to Add profile to Favorites
+                */
+
+            }
 
             @Override
             public void onSwipeLeft() {
@@ -79,7 +118,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                         notifyDataSetChanged();
                     }
                 },400);
-
 
                /* list.remove(position);
                 notifyDataSetChanged();

@@ -72,20 +72,20 @@ public class FamilyDetailsFragment extends Fragment {
     private Context context;
     private TextView textView_fatherQualificationId, textView_fatherOccupationId, textView_fatherStateId,
             textView_fatherDistrictId, textView_fatherTalukaId, textView_saveAndContinue,
-            textView_motherQualificationId, textView_motherOccupationId, textView_noOfSiblings;
+            textView_motherQualificationId, textView_motherOccupationId, textView_familyIncome;
 
     private EditText editText_fatherName, editText_fatherMobileNo, editText_fatherQualification,
             editText_fatherOccupation, editText_fatherState, editText_fatherDistrict, editText_fatherTaluka,
-            editText_fatherAnnualIncome, editText_fatherAddress,
-            editText_motherName, editText_motherMobileNo, editText_motherQualification, editText_motherOccupation,
-            editText_motherAnnualIncome, editText_relative1;
+            editText_fatherAddress, editText_motherName, editText_motherMobileNo, editText_motherQualification,
+            editText_motherOccupation, editText_relative1, editText_relative2, editText_relative3, editText_relative4,
+            editText_familyIncome;
 
 
     private ImageView imageView_back, imageView_addProperty,  imageView_addSibling, imageView_addMama, imageView_addFarm;
 
     private String fatherName, fatherMobileNo, fatherOccupationId, fatherQualificationId, fatherAnnualIncome,
             fatherStateId, fatherDistrictId, fatherTalukaId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
-            motherOccupation, motherAnnualIncome, relative1;
+            motherOccupation, familyIncome, relative1, relative2, relative3, relative4;
 
     SwitchButton switchButton_haveFather, switchButton_haveMother;
 
@@ -158,7 +158,8 @@ public class FamilyDetailsFragment extends Fragment {
 
 
 
-        editText_fatherAnnualIncome = view.findViewById(R.id.editText_fatherAnnualIncome);
+        editText_familyIncome = view.findViewById(R.id.editText_familyIncome);
+        textView_familyIncome = view.findViewById(R.id.textView_familyIncome);
         //editText_fatherProperty = view.findViewById(R.id.editText_fatherProperty);
         editText_fatherAddress = view.findViewById(R.id.editText_fatherAddress);
 
@@ -168,14 +169,14 @@ public class FamilyDetailsFragment extends Fragment {
         editText_motherQualification = view.findViewById(R.id.editText_motherQualification);
         textView_motherQualificationId = view.findViewById(R.id.textView_motherQualificationId);
         editText_motherOccupation = view.findViewById(R.id.editText_motherOccupation);
-        editText_motherAnnualIncome = view.findViewById(R.id.editText_motherAnnualIncome);
+        //editText_motherAnnualIncome = view.findViewById(R.id.editText_motherAnnualIncome);
 
         editText_relative1 = view.findViewById(R.id.editText_relative1);
-/*        editText_relative2 = view.findViewById(R.id.editText_relative2);
+        editText_relative2 = view.findViewById(R.id.editText_relative2);
         editText_relative3 = view.findViewById(R.id.editText_relative3);
-        editText_relative4 = view.findViewById(R.id.editText_relative4);*/
+        editText_relative4 = view.findViewById(R.id.editText_relative4);
 
-        textView_noOfSiblings = view.findViewById(R.id.textView_noOfSiblings);
+        //textView_noOfSiblings = view.findViewById(R.id.textView_noOfSiblings);
         //imageView_add = view.findViewById(R.id.imageView_add);
         imageView_addSibling = view.findViewById(R.id.imageView_addSibling);
         imageView_addMama = view.findViewById(R.id.imageView_addMama);
@@ -224,30 +225,14 @@ public class FamilyDetailsFragment extends Fragment {
 
         sqLiteSiblingDetails = new SQLiteSiblingDetails(getContext());
 
-        Cursor cursor_sibling = sqLiteSiblingDetails.getAllData();
 
-        if(cursor_sibling!=null) {
-            for (boolean hasItem = cursor_sibling.moveToFirst(); hasItem; hasItem = cursor_sibling.moveToNext()) {
-                AddPersonModel addPersonModel = new AddPersonModel(
-                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.ID)),
-                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)),
-                        cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.EDUCATION_NAME))
-                );
+        addPersonAdapter_sibling = new AddPersonAdapter(getContext(), addPersonModelArrayList_sibling, "Sibling");
+        recyclerView_addSibling.setAdapter(addPersonAdapter_sibling);
+        recyclerView_addSibling.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_sibling = new LinearLayoutManager(getContext());
+        recyclerView_addSibling.setLayoutManager(linearLayoutManager_sibling);
 
-                addPersonModelArrayList_sibling.add(addPersonModel);
-
-            }
-
-            addPersonAdapter_sibling = new AddPersonAdapter(getContext(), addPersonModelArrayList_sibling, "Sibling");
-            recyclerView_addSibling.setAdapter(addPersonAdapter_sibling);
-            recyclerView_addSibling.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            recyclerView_addSibling.setLayoutManager(mLayoutManager);
-
-        }
-
-
-        textView_noOfSiblings.setText(String.valueOf(sqLiteSiblingDetails.numberOfRows()));
+        //textView_noOfSiblings.setText(String.valueOf(sqLiteSiblingDetails.numberOfRows()));
 
 
 
@@ -257,29 +242,12 @@ public class FamilyDetailsFragment extends Fragment {
 
         sqLiteMamaDetails = new SQLiteMamaDetails(getContext());
 
-        Cursor cursor_mama = sqLiteMamaDetails.getAllData();
 
-        if(cursor_mama!=null) {
-            for (boolean hasItem = cursor_mama.moveToFirst(); hasItem; hasItem = cursor_mama.moveToNext()) {
-                AddPersonModel addPersonModel = new AddPersonModel(
-                        cursor_mama.getString(cursor_sibling.getColumnIndex(SQLiteMamaDetails.ID)),
-                        cursor_mama.getString(cursor_sibling.getColumnIndex(SQLiteMamaDetails.NAME)),
-                        cursor_mama.getString(5)
-                );
-
-                addPersonModelArrayList_mama.add(addPersonModel);
-
-            }
-
-            addPersonAdapter_mama = new AddPersonAdapter(getContext(), addPersonModelArrayList_mama, "Mama");
-            recyclerView_addMama.setAdapter(addPersonAdapter_mama);
-            recyclerView_addMama.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            recyclerView_addMama.setLayoutManager(mLayoutManager);
-
-
-        }
-
+        addPersonAdapter_mama = new AddPersonAdapter(getContext(), addPersonModelArrayList_mama, "Mama");
+        recyclerView_addMama.setAdapter(addPersonAdapter_mama);
+        recyclerView_addMama.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_mama= new LinearLayoutManager(getContext());
+        recyclerView_addMama.setLayoutManager(linearLayoutManager_mama);
 
 
         // Property recyclerView
@@ -287,65 +255,29 @@ public class FamilyDetailsFragment extends Fragment {
 
         sqLitePropertyDetails = new SQLitePropertyDetails(getContext());
 
-        Cursor cursor_property = sqLitePropertyDetails.getAllData();
 
-        if(cursor_property!=null) {
-            for (boolean hasItem = cursor_property.moveToFirst(); hasItem; hasItem = cursor_property.moveToNext()) {
-                AddPersonModel addPersonModel = new AddPersonModel(
-                        cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ID)),
-                        cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.AREA)),
-                        cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))
-                );
-
-                addPersonModelArrayList_property.add(addPersonModel);
-
-            }
-
-            addPersonAdapter_property = new AddPersonAdapter(getContext(), addPersonModelArrayList_property,
-                    "Property");
-            recyclerView_addProperty.setAdapter(addPersonAdapter_property);
-            recyclerView_addProperty.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            recyclerView_addProperty.setLayoutManager(mLayoutManager);
-
-
-        }
+        addPersonAdapter_property = new AddPersonAdapter(getContext(), addPersonModelArrayList_property,
+                "Property");
+        recyclerView_addProperty.setAdapter(addPersonAdapter_property);
+        recyclerView_addProperty.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_property = new LinearLayoutManager(getContext());
+        recyclerView_addProperty.setLayoutManager(linearLayoutManager_property);
 
 
 
-
-
+        //farmRecyclerView();
         // Farm recyclerView
-        addPersonModelArrayList_farm= new ArrayList<>();
+        addPersonModelArrayList_farm = new ArrayList<>();
 
         sqLiteFarmDetails = new SQLiteFarmDetails(getContext());
 
-        Cursor cursor_farm= sqLiteFarmDetails.getAllData();
 
-        if(cursor_farm!=null) {
-            for (boolean hasItem = cursor_farm.moveToFirst(); hasItem; hasItem = cursor_farm.moveToNext()) {
-                AddPersonModel addPersonModel = new AddPersonModel(
-                        cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.ID)),
-                        cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA)),
-                        cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS))
-                );
-
-                addPersonModelArrayList_farm.add(addPersonModel);
-
-            }
-
-            addPersonAdapter_farm= new AddPersonAdapter(getContext(), addPersonModelArrayList_farm,
-                    "Farm");
-            recyclerView_addFarm.setAdapter(addPersonAdapter_farm);
-            recyclerView_addFarm.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-            recyclerView_addFarm.setLayoutManager(mLayoutManager);
-
-
-        }
-
-
-
+        addPersonAdapter_farm = new AddPersonAdapter(getContext(), addPersonModelArrayList_farm,
+                "Farm");
+        recyclerView_addFarm.setAdapter(addPersonAdapter_farm);
+        recyclerView_addFarm.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_farm = new LinearLayoutManager(getContext());
+        recyclerView_addFarm.setLayoutManager(linearLayoutManager_farm);
 
 
 
@@ -355,6 +287,7 @@ public class FamilyDetailsFragment extends Fragment {
         showPopup(editText_fatherQualification,"FatherQualification");
         showPopup(editText_fatherOccupation,"FatherOccupation");
         showPopup(editText_motherOccupation,"MotherOccupation");
+        showPopup(editText_familyIncome,"FamilyIncome");
 
 
 
@@ -369,6 +302,8 @@ public class FamilyDetailsFragment extends Fragment {
 
         return view;
     }
+
+
 
     public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
     {
@@ -464,7 +399,7 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(getContext(), "0",
+                CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(getContext(), "0", "0",
                         addPersonAdapter_property, addPersonModelArrayList_property, 0);
                 customDialogAddProperty.show();
 
@@ -475,7 +410,7 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), "0",
+                CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), "0", "0",
                         addPersonAdapter_farm, addPersonModelArrayList_farm, 0);
                 customDialogAddFarm.show();
 
@@ -501,7 +436,7 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0",
+                customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0", "0",
                         addPersonAdapter_sibling, addPersonModelArrayList_sibling, 0);
                 customDialogAddSibling.show();
 
@@ -513,7 +448,7 @@ public class FamilyDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                customDialogAddMama = new CustomDialogAddMama(getContext(), "0",
+                customDialogAddMama = new CustomDialogAddMama(getContext(), "0", "0",
                         addPersonAdapter_mama, addPersonModelArrayList_mama, 0);
                 customDialogAddMama.show();
 
@@ -565,14 +500,13 @@ public class FamilyDetailsFragment extends Fragment {
 /*                bundle.putString("",);
                 bundle.putString("",);*/
 
-/*
                 QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
-                qualificationDetailsFragment.setArguments(bundle);
+                //qualificationDetailsFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                fragmentTransaction.commit() ;*/
+                fragmentTransaction.commit() ;
             }
         });
 
@@ -606,7 +540,7 @@ public class FamilyDetailsFragment extends Fragment {
         fatherMobileNo = editText_fatherMobileNo.getText().toString().trim();
         fatherQualificationId = textView_fatherQualificationId.getText().toString().trim();
         fatherOccupationId = textView_fatherOccupationId.getText().toString().trim();
-        fatherAnnualIncome = editText_fatherAnnualIncome.getText().toString().trim();
+        //fatherAnnualIncome = editText_fatherAnnualIncome.getText().toString().trim();
         //fatherProperty= editText_fatherProperty.getText().toString();
         fatherAddress = editText_fatherAddress.getText().toString().trim();
         fatherStateId = textView_fatherStateId.getText().toString().trim();
@@ -618,9 +552,13 @@ public class FamilyDetailsFragment extends Fragment {
         motherMobileNo = editText_motherMobileNo.getText().toString().trim();
         motherQualificationId = textView_motherQualificationId.getText().toString().trim();
         motherOccupation = textView_motherOccupationId.getText().toString().trim();
-        motherAnnualIncome= editText_motherAnnualIncome.getText().toString().trim();
+        familyIncome = textView_familyIncome.getText().toString().trim();
+        //motherAnnualIncome= editText_motherAnnualIncome.getText().toString().trim();
 
-        relative1= editText_relative1.getText().toString().trim();
+        relative1 = editText_relative1.getText().toString().trim();
+        relative2 = editText_relative2.getText().toString().trim();
+        relative3 = editText_relative3.getText().toString().trim();
+        relative4 = editText_relative4.getText().toString().trim();
 
         final int noOfBrothers = sqLiteSiblingDetails.getNoOfSibling("Brother");
         final int noOfSisters = sqLiteSiblingDetails.getNoOfSibling("Sister");
@@ -760,7 +698,10 @@ public class FamilyDetailsFragment extends Fragment {
 
         }
 
-
+        cursor_farm.close();
+        cursor_mama.close();
+        cursor_property.close();
+        cursor_sibling.close();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URLs.URL_POST_FAMILYDETAILS,
@@ -826,7 +767,7 @@ public class FamilyDetailsFragment extends Fragment {
                 params.put("FatherTalukasId",fatherTalukaId);
                 params.put("FatherQualificationId",fatherQualificationId);
                 params.put("FatherOccupationId",fatherOccupationId);
-                params.put("FatherAnnualIncome",fatherAnnualIncome);
+                //params.put("FatherAnnualIncome",fatherAnnualIncome);
                 params.put("FatherLanguageType",userModel.getLanguage());
                 params.put("MotherDetailsId",String.valueOf(motherDetailsId));
                 params.put("MotherIsAlive",mother_isAlive);
@@ -834,11 +775,16 @@ public class FamilyDetailsFragment extends Fragment {
                 params.put("MotherMobileNo",motherMobileNo);
                 params.put("MotherQualificationId",motherQualificationId);
                 params.put("MotherOccupationId",motherOccupation);
-                params.put("MotherAnnualIncome",motherAnnualIncome);
+                //params.put("MotherAnnualIncome",motherAnnualIncome);
                 params.put("MotherLanguageType",userModel.getLanguage());
                 params.put("NoOfBrothers",String.valueOf(noOfBrothers));
                 params.put("NoOfSisters",String.valueOf(noOfSisters));
                 params.put("NoOfMama",String.valueOf(noOfMama));
+                params.put("SalaryPackageId",textView_familyIncome.getText().toString());
+                params.put("Surname1", relative1);
+                params.put("Surname2", relative2);
+                params.put("Surname3", relative3);
+                params.put("Surname4", relative4);
                 params.put("HousePropertyDetailsAPI",stringBuilder_property.toString());
                 params.put("FarmPropertyDetailsAPI",stringBuilder_farm.toString());
                 params.put("SiblingsDetailsAPI",stringBuilder_sibling.toString());
@@ -890,7 +836,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     editText_fatherMobileNo.setText(jsonObject.getString("MobileNoFather"));
                                     editText_fatherAddress.setText(jsonObject.getString("AddressFather"));
 
-                                    editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
+                                    //editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
 
                                     textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
                                     textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
@@ -918,38 +864,128 @@ public class FamilyDetailsFragment extends Fragment {
                                     textView_motherQualificationId.setText(jsonObject.getString("MotherQualificationIdAPI"));
                                     textView_motherOccupationId.setText(jsonObject.getString("MotherOccupationIdAPI"));
 
-                                    editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
+                                    //editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
+                                    editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
+                                    textView_familyIncome.setText(jsonObject.getString("SalaryPackageId"));
+
+                                    editText_relative1.setText(jsonObject.getString("Surname1"));
+                                    editText_relative2.setText(jsonObject.getString("Surname2"));
+                                    editText_relative3.setText(jsonObject.getString("Surname3"));
+                                    editText_relative4.setText(jsonObject.getString("Surname4"));
 
 
-
+                                    sqLiteMamaDetails.deleteAll();
+                                    addPersonModelArrayList_mama.clear();
+                                    addPersonAdapter_mama.notifyDataSetChanged();
                                     JSONArray jsonArray_mamaDetails = jsonObject.getJSONArray("MamaDetailsLST");
 
 
                                     for(int j=0; j< jsonArray_mamaDetails.length(); j++)
                                     {
 
+                                        JSONObject jsonObject_details = jsonArray_mamaDetails.getJSONObject(j);
+
+
+                                        long id = sqLiteMamaDetails.insertMamaDetails(
+                                                jsonObject_details.getString("MamaDetailsId"),
+                                                jsonObject_details.getString("MamaFullnameAPI"),
+                                                jsonObject_details.getString("MamaMobileNoAPI"),
+                                                jsonObject_details.getString("OccupationIdMama"),
+                                                jsonObject_details.getString("OccupationNameMama"),
+                                                jsonObject_details.getString("MamaAddressAPI"),
+                                                jsonObject_details.getString("StatesIdMama"),
+                                                jsonObject_details.getString("DistrictIdMama"),
+                                                jsonObject_details.getString("TalukasIdMama"),
+                                                jsonObject_details.getString("StatesNameMama"),
+                                                jsonObject_details.getString("DistrictNameMama"),
+                                                jsonObject_details.getString("TalukaNameMama"),
+                                                jsonObject_details.getString("IsAliveMama"));
+
+
+                                        addPersonModelArrayList_mama.add(new AddPersonModel(String.valueOf(id),
+                                                jsonObject_details.getString("MamaDetailsId"),
+                                                jsonObject_details.getString("MamaFullnameAPI"),
+                                                jsonObject_details.getString("MamaAddressAPI")));
+
 
 
 
                                     }
 
 
+                                    sqLiteSiblingDetails.deleteAll();
+                                    addPersonModelArrayList_sibling.clear();
+                                    addPersonAdapter_sibling.notifyDataSetChanged();
 
                                     JSONArray jsonArray_siblingDetails = jsonObject.getJSONArray("SiblingsDetailsLST");
 
                                     for(int j=0; j< jsonArray_siblingDetails.length(); j++)
                                     {
+                                        JSONObject jsonObject_details = jsonArray_siblingDetails.getJSONObject(j);
+
+
+                                        long id = sqLiteSiblingDetails.insertSibling(
+                                                jsonObject_details.getString("SiblingsDetailsId"),
+                                                jsonObject_details.getString("SiblingsFullname"),
+                                                jsonObject_details.getString("MobileNoSiblings"),
+                                                jsonObject_details.getString("QualificationIdSiblings"),
+                                                jsonObject_details.getString("QualificationSiblings"),
+                                                jsonObject_details.getString("OccupationIdSiblings"),
+                                                jsonObject_details.getString("OccupationNameSiblings"),
+                                                jsonObject_details.getString("MaritalStatus"),
+                                                jsonObject_details.getString("SiblingListIdAPI"),
+                                                jsonObject_details.getString("ReltionName"),
+                                                jsonObject_details.getString("InLawsFullNameAPI"),
+                                                jsonObject_details.getString("InLawsMobileNoAPI"),
+                                                jsonObject_details.getString("InLawsAddressAPI"),
+                                                jsonObject_details.getString("SiblingListIdAPI"),
+                                                jsonObject_details.getString("SiblingListIdAPI"),
+                                                jsonObject_details.getString("SiblingListIdAPI"),
+                                                jsonObject_details.getString("SiblingListIdAPI"),
+                                                jsonObject_details.getString("SiblingListIdAPI"),
+                                                jsonObject_details.getString("SiblingListIdAPI"));
+
+
+                                        addPersonModelArrayList_sibling.add(new AddPersonModel(String.valueOf(id),
+                                                jsonObject_details.getString("SiblingsDetailsId"),
+                                                jsonObject_details.getString("SiblingsFullname"),
+                                                jsonObject_details.getString("QualificationSiblings")));
+
 
 
 
 
                                     }
+
+
+                                    sqLitePropertyDetails.deleteAll();
+                                    addPersonModelArrayList_property.clear();
+                                    addPersonAdapter_property.notifyDataSetChanged();
 
 
                                     JSONArray jsonArray_propertyDetails = jsonObject.getJSONArray("HousePropertyDetailsLST");
 
                                     for(int j=0; j< jsonArray_propertyDetails.length(); j++)
                                     {
+                                        JSONObject jsonObject_details = jsonArray_propertyDetails.getJSONObject(j);
+
+
+                                        long id = sqLitePropertyDetails.insertPropertyDetails(
+                                                jsonObject_details.getString("HousePropertyDetailsId"),
+                                                jsonObject_details.getString("Area"),
+                                                jsonObject_details.getString("HouseAddress"),
+                                                jsonObject_details.getString("StatesIDHouse"),
+                                                jsonObject_details.getString("DistrictIdHouse"),
+                                                jsonObject_details.getString("TalukasIdHouse"),
+                                                jsonObject_details.getString("StatesNameHouse"),
+                                                jsonObject_details.getString("DistrictNameHouse"),
+                                                jsonObject_details.getString("TalukaNameHouse"));
+
+
+                                        addPersonModelArrayList_property.add(new AddPersonModel(String.valueOf(id),
+                                                jsonObject_details.getString("HousePropertyDetailsId"),
+                                                jsonObject_details.getString("Area"),
+                                                jsonObject_details.getString("HouseAddress")));
 
 
 
@@ -957,19 +993,35 @@ public class FamilyDetailsFragment extends Fragment {
                                     }
 
 
-                                    JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("MamaDetailsLST");
+
+                                    sqLiteFarmDetails.deleteAll();
+                                    addPersonModelArrayList_farm.clear();
+                                    addPersonAdapter_farm.notifyDataSetChanged();
+
+                                    JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("FarmDetailsLST");
 
 
-                                    for(int j=0; j< jsonArray_farmDetails.length(); j++)
-                                    {
+                                    for(int j=0; j< jsonArray_farmDetails.length(); j++) {
+                                        JSONObject jsonObject_details = jsonArray_farmDetails.getJSONObject(j);
 
+
+                                        long id = sqLiteFarmDetails.insertFarmDetails(
+                                                jsonObject_details.getString("FarmPropertyDetailsId"),
+                                                jsonObject_details.getString("LandArea"),
+                                                jsonObject_details.getString("FullOrPart"),
+                                                jsonObject_details.getString("CropTaken"));
+
+
+                                        addPersonModelArrayList_farm.add(new AddPersonModel(String.valueOf(id),
+                                                jsonObject_details.getString("FarmPropertyDetailsId"),
+                                                jsonObject_details.getString("LandArea"),
+                                                jsonObject_details.getString("CropTaken")));
 
 
 
                                     }
 
-
-
+                                    //farmRecyclerView();
 
 
                                 }
@@ -1036,6 +1088,7 @@ public class FamilyDetailsFragment extends Fragment {
                 else if(params[0].equals("insertDetails"))
                 {
                     //insertDetails();
+                    customDialogLoadingProgressBar.dismiss(); //after uncommenting above line remove this line
                 }
 
                 if(params[0].equals("FatherState"))
@@ -1097,6 +1150,16 @@ public class FamilyDetailsFragment extends Fragment {
 
 
                 }
+
+                else if(params[0].equals("FamilyIncome"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
+                            "SalaryPackageId", "SalaryPackageName", editText_familyIncome,
+                            textView_familyIncome, getContext(), customDialogLoadingProgressBar);
+
+
+                }
+
                         } catch (Exception e) {
                 e.printStackTrace();
                 resp = e.getMessage();

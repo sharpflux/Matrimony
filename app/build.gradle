@@ -71,6 +71,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation "com.airbnb.android:lottie:2.5.1"
 
+    implementation "com.android.support:exifinterface:29.0.0"
+
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 

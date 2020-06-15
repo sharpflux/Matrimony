@@ -144,15 +144,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_income"
-                        android:hint="@string/monthly_income"
+                        android:hint="@string/annual_income"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
-                        android:inputType="number"
-                        android:maxLength="7"
+                        android:clickable="false"
+                        android:focusable="false"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_income"
+                    android:visibility="gone"
+                    android:text="@string/_0"
+                    />
 
 
 
@@ -175,6 +181,140 @@
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/text_black"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_companyCountry"
+                        android:hint="@string/country"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/text_gray"
+
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:nextFocusRight="@id/editText_district"
+                        android:singleLine="true"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_companyCountryId"
+                    android:visibility="gone"
+                    android:text="@string/_0"
+                    />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/text_black"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_companyState"
+                        android:hint="@string/_state"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/text_gray"
+
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:nextFocusRight="@id/editText_district"
+                        android:singleLine="true"
+                        android:focusable="false"
+                        android:clickable="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_companyStateId"
+                    android:visibility="gone"
+                    android:text="@string/_0"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_companyDistrict"
+                            android:hint="@string/_district"
+                            android:drawableEnd="@drawable/ic_action_arrow_down"
+                            android:drawableTint="#ADADAD"
+
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:singleLine="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_companyDistrictId"
+                        android:visibility="gone"
+                        android:text="@string/_0"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_companyTaluka"
+                            android:hint="@string/_taluka"
+                            android:drawableEnd="@drawable/ic_action_arrow_down"
+                            android:drawableTint="#ADADAD"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:singleLine="true"
+                            android:focusable="false"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_companyTalukaId"
+                        android:visibility="gone"
+                        android:text="@string/_0"
+                        />
+
+                </LinearLayout>
 
 
 

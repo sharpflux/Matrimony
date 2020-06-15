@@ -362,7 +362,9 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/text_black"
                         android:theme="@style/TextLabel"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="15dp"
+                        android:visibility="gone"
+                        >
 
                         <EditText
                             android:layout_width="match_parent"
@@ -395,7 +397,8 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="30dp"
                         android:baselineAligned="false"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
 
                         <com.google.android.material.textfield.TextInputLayout

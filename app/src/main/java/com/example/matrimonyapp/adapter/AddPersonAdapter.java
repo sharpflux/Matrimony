@@ -66,7 +66,7 @@ public class AddPersonAdapter extends RecyclerView.Adapter<AddPersonAdapter.View
             public void onClick(View view) {
 
                 CustomDialogDotMenuEditDelete customDialogDotMenuEditDelete =
-                        new CustomDialogDotMenuEditDelete(context, model.getId(), AddPersonAdapter.this,
+                        new CustomDialogDotMenuEditDelete(context, model.getId(), model.getDetails_id(), AddPersonAdapter.this,
                                 list, position, relation);
                 customDialogDotMenuEditDelete.show();
 

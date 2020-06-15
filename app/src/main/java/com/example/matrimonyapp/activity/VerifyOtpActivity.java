@@ -183,6 +183,9 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
 
+
+
+
                                         Intent intent = new Intent(VerifyOtpActivity.this, HomeActivity.class);
                                         startActivity(intent);
 
@@ -216,9 +219,10 @@ public class VerifyOtpActivity extends AppCompatActivity {
                     params.put("Gender", gender);
                     params.put("DateOfBirth", birthdate);
                     params.put("Age", age);
-                    params.put("AgentId", String.valueOf("1"));
-                    params.put("MembershipId", "1");
-                    params.put("ProfileImage", "1");
+                    params.put("AgentId", String.valueOf("0"));
+                    params.put("RegisterBy", "Self");
+                    //params.put("MembershipId", "1");
+                    params.put("ProfileImage", "0");
                     params.put("Password", password);
                     params.put("LanguageType", language);
                     return params;

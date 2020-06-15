@@ -33,12 +33,12 @@
     <string name="approx">Approx</string>
     <string name="city">City *</string>
     <string name="state">State *</string>
+    <string name="country">Country</string>
     <string name="_state">State</string>
     <string name="district">District *</string>
     <string name="_district">District</string>
     <string name="taluka">Taluka *</string>
     <string name="_taluka">Taluka</string>
-    <string name="country">Country</string>
     <string name="pincode">Pincode *</string>
     <string name="address_type">Address Type</string>
     <string name="email">Email Id *</string>
@@ -71,7 +71,7 @@
     <string name="willing_to_marry_in_other_communities">Willing to marry in other communities ?</string>
     <string name="qualification">Qualification</string>
     <string name="qualification_level">Highest Qualification Level</string>
-    <string name="occupation">Occupation *</string>
+    <string name="occupation">Occupation</string>
     <string name="occupation_">Occupation</string>
     <string name="occupation1">Occupation</string>
     <string name="father_information">Father\'s Information</string>
@@ -81,6 +81,7 @@
     <string name="mother_information">Mother\'s Information</string>
     <string name="occupation_father">Father\'s Occupation *</string>
     <string name="occupation_mother">Mother\'s Occupation *</string>
+    <string name="family_income">Family Annual Income</string>
     <string name="annual_income">Annual Income</string>
     <string name="annual_income_father">Father\'s Annual Income</string>
     <string name="annual_income_mother">Mother\'s Annual Income</string>
@@ -94,11 +95,12 @@
     <string name="relation">Relation</string>
     <string name="married">Married</string>
     <string name="unmarried">Unmarried</string>
-    <string name="caste">Caste *</string>
+    <string name="caste">Caste </string>
     <string name="sub_caste">Sub Caste </string>
-    <string name="religion">Religion *</string>
+    <string name="religion">Religion </string>
     <string name="gothram">Gothram </string>
     <string name="dosh">Dosh </string>
+    <string name="mother_tongue">Mother Tongue</string>
 
 
     <string name="institue_university">Name of Institute / University</string>
@@ -115,10 +117,11 @@
     <string name="course">Course</string>
     <string name="hobby">Hobby</string>
     <string name="social_contributions">Social Contributions</string>
-    <string name="company_name">Company Name *</string>
+    <string name="company_name">Company Name</string>
     <string name="works_in">Works in *</string>
-    <string name="designation">Designation *</string>
-    <string name="monthly_income">Monthly Income *</string>
+    <string name="designation">Designation</string>
+    <string name="monthly_income">Monthly Income</string>
+    <string name="salary_package">Package</string>
     <string name="experience">Experience (in years) </string>
     <string name="company_address">Company Address </string>
     <string name="bio">Bio</string>
@@ -163,12 +166,12 @@
     <string name="image">Image</string>
 
 
-    <string name="height">Height *</string>
+    <string name="height">Height </string>
     <string name="ft">ft.</string>
     <string name="inch">inch</string>
-    <string name="weight">Weight *</string>
+    <string name="weight">Weight</string>
     <string name="kgs">kgs. </string>
-    <string name="colour">Colour *</string>
+    <string name="colour">Colour</string>
     <string name="marital_status">Marital Status *</string>
     <string name="marital_status_">Marital Status </string>
     <string name="family_status">Family Status</string>

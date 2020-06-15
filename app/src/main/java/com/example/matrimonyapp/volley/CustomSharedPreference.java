@@ -30,7 +30,8 @@ public class CustomSharedPreference {
 
     }
 
-    public static synchronized CustomSharedPreference getInstance(Context context) {
+    public static synchronized CustomSharedPreference getInstance(Context t_context) {
+        context =  t_context;
         if (instance == null) {
             instance = new CustomSharedPreference(context);
         }
@@ -86,7 +87,8 @@ public class CustomSharedPreference {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        context.startActivity(new Intent(context, LoginActivity.class));
+        context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).
+                setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
 

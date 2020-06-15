@@ -199,6 +199,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/recyclerView_addFarm"
                     android:layout_marginTop="15dp"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     />
 
 
@@ -258,11 +260,13 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/recyclerView_addProperty"
                     android:layout_marginTop="15dp"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     />
 
 
 
-                <com.google.android.material.textfield.TextInputLayout
+                <!--<com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/TextLabel"
@@ -278,7 +282,7 @@
                         android:textSize="15sp"
                         android:inputType="number"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>-->
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -552,14 +556,22 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_motherAnnualIncome"
-                        android:hint="@string/annual_income"
+                        android:id="@+id/editText_familyIncome"
+                        android:hint="@string/family_income"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
-                        android:inputType="number"/>
+                        android:focusable="false"
+                        android:clickable="false"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_familyIncome"
+                    android:text="@string/_0"
+                    android:visibility="gone"
+                    />
 
 
                 <TextView
@@ -567,7 +579,58 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_black"
                     android:textSize="15sp"
-                    android:text="Mama's Information"
+                    android:text="@string/siblings_information"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_sibling"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:layout_weight="1"
+                        />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/imageView_addSibling"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/add11"
+                        android:tint="@color/project_color"
+                        android:contentDescription="@string/add_sibling"
+                        />
+
+                </LinearLayout>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerView_addSibling"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/white"
+                    android:padding="5dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:text="@string/mama_information"
                     android:textStyle="bold"
                     android:layout_marginTop="20dp"
                     />
@@ -607,81 +670,11 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/recyclerView_addMama"
                     android:layout_marginTop="15dp"
+                    android:background="@color/white"
+                    android:padding="5dp"
                     />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_sibling"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:layout_weight="1"
-                        />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/imageView_addSibling"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/add11"
-                        android:tint="@color/project_color"
-                        android:contentDescription="@string/add_sibling"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    android:visibility="gone"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/no_of_siblings"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
-
-
-                    <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/textView_noOfSiblings"
-                        android:text="@string/_0"
-                        android:layout_marginStart="8dp"
-
-                        android:gravity="center_horizontal"
-                        android:inputType="number"
-                        android:textColor="@color/text_black"
-                        android:textStyle="bold"
-                        />
-
-
-                </LinearLayout>
-
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recyclerView_addSibling"
-                    android:layout_marginTop="15dp"
-                    />
 
 
 
@@ -706,7 +699,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_relative1"
-                        android:hint="@string/relative_surname"
+                        android:hint="@string/relative1"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:digits="@string/only_text_with_space"/>
@@ -714,7 +707,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-<!--
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -770,7 +762,7 @@
                         android:textSize="15sp"
                         android:digits="@string/only_text"/>
 
-                </com.google.android.material.textfield.TextInputLayout>-->
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 

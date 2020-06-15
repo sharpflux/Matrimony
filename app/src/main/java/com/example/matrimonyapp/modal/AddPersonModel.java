@@ -2,7 +2,7 @@ package com.example.matrimonyapp.modal;
 
 public class AddPersonModel {
 
-    String id, name, mobileNo, address;
+    String id, details_id,  name, mobileNo, address;
 
     public AddPersonModel() {
     }
@@ -15,10 +15,10 @@ public class AddPersonModel {
     }
 */
 
-    public AddPersonModel(String id, String name, String address) {
+    public AddPersonModel(String id, String details_id, String name, String address) {
         this.id = id;
         this.name = name;
-        //this.mobileNo = mobileNo;
+        this.details_id = details_id;
         this.address = address;
     }
 
@@ -28,6 +28,14 @@ public class AddPersonModel {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDetails_id() {
+        return details_id;
+    }
+
+    public void setDetails_id(String details_id) {
+        this.details_id = details_id;
     }
 
     public String getName() {

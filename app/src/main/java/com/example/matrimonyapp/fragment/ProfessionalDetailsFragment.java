@@ -27,6 +27,7 @@ import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -44,10 +45,12 @@ import java.util.Map;
 public class ProfessionalDetailsFragment extends Fragment {
 
     View view;
-    private TextView textView_saveAndContinue, textView_occupationId, textView_designationId;
+    private TextView textView_saveAndContinue, textView_occupationId, textView_designationId, textView_companyCountryId,
+            textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId, textView_income;
 
     private EditText editText_companyName, editText_occupation, editText_designation, editText_experience,
-            editText_income, editText_companyAddress;
+            editText_income, editText_companyAddress, editText_companyCountry, editText_companyState,
+            editText_companyDistrict, editText_companyTaluka;
 
     private ImageView imageView_back;
 
@@ -110,7 +113,17 @@ public class ProfessionalDetailsFragment extends Fragment {
         editText_designation = view.findViewById(R.id.editText_designation);
         editText_experience = view.findViewById(R.id.editText_experience);
         editText_income = view.findViewById(R.id.editText_income);
+        textView_income = view.findViewById(R.id.textView_income);
         editText_companyAddress = view.findViewById(R.id.editText_companyAddress);
+        editText_companyCountry = view.findViewById(R.id.editText_companyCountry);
+        editText_companyState = view.findViewById(R.id.editText_companyState);
+        editText_companyDistrict = view.findViewById(R.id.editText_companyDistrict);
+        editText_companyTaluka = view.findViewById(R.id.editText_companyTaluka);
+        textView_companyCountryId = view.findViewById(R.id.textView_companyCountryId);
+        textView_companyStateId = view.findViewById(R.id.textView_companyStateId);
+        textView_companyDistrictId = view.findViewById(R.id.textView_companyDistrictId);
+        textView_companyTalukaId = view.findViewById(R.id.textView_companyTalukaId);
+
 
         editText_occupation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,9 +175,52 @@ public class ProfessionalDetailsFragment extends Fragment {
         AsyncTaskLoad getTask = new AsyncTaskLoad();
         getTask.execute("getDetails");
 
+        showPopup(editText_income, "Income");
+
+        showPopupSDT(editText_companyState, "State", null);
+        showPopupSDT(editText_companyDistrict, "District", textView_companyStateId);
+        showPopupSDT(editText_companyTaluka, "Taluka", textView_companyDistrictId);
+        FieldValidation.textChangedListenerForSDT(editText_companyState, editText_companyDistrict, editText_companyTaluka,
+                textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId);
 
         return view;
     }
+
+
+    public void showPopup(EditText editText, final String urlFor)
+    {
+
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute(urlFor);
+
+            }
+        });
+
+    }
+
+    public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
+    {
+
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String id = FieldValidation.onClickListenerForSDT(urlFor, textView_id, getContext());
+
+                AsyncTaskLoad runner =  new AsyncTaskLoad();
+                runner.execute(urlFor, id);
+
+            }
+        });
+
+
+
+    }
+
 
     private void insertDetails()
     {
@@ -352,8 +408,46 @@ public class ProfessionalDetailsFragment extends Fragment {
                             textView_designationId, getContext(), customDialogLoadingProgressBar);
 
                 }
+                else if(params[0].equals("Income"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
+                            "SalaryPackageId", "SalaryPackageName", editText_income,
+                            textView_income, getContext(), customDialogLoadingProgressBar);
 
 
+                }
+
+                else if(params[0].equals("State"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
+                            "StatesName", editText_companyState, textView_companyStateId,getContext(), customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].equals("District"))
+                {
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
+                            "DistrictId", "DistrictName", editText_companyDistrict, textView_companyDistrictId,
+                            getContext(), customDialogLoadingProgressBar);
+
+                }
+                else if(params[0].equals("Taluka"))
+                {
+
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
+                            "TalukasId", "TalukaName", editText_companyTaluka, textView_companyTalukaId,
+                            getContext(), customDialogLoadingProgressBar);
+                }
+                else if(params[0].equals("Salary"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
+                            "SalaryPackageId", "SalaryPackageName", editText_income,
+                            textView_income, getContext(), customDialogLoadingProgressBar);
+
+
+                }
 
 
             } catch (Exception e) {

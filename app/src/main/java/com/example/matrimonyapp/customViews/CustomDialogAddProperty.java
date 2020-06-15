@@ -55,7 +55,7 @@ public class CustomDialogAddProperty extends Dialog {
     private SQLitePropertyDetails sqLitePropertyDetails;
     private DataFetcher dataFetcher;
 
-    private String id;
+    private String id, property_details_id;
 
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
@@ -66,12 +66,13 @@ public class CustomDialogAddProperty extends Dialog {
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
 
-    public CustomDialogAddProperty(Context context, String id, AddPersonAdapter addPersonAdapter,
+    public CustomDialogAddProperty(Context context, String id, String property_details_id, AddPersonAdapter addPersonAdapter,
                                ArrayList<AddPersonModel> addPersonModelArrayList, int position)
     {
         super(context);
         this.context = context;
         this.id = id;
+        this.property_details_id = property_details_id;
         this.addPersonAdapter = addPersonAdapter;
         this.addPersonModelArrayList = addPersonModelArrayList;
         this.position = position;
@@ -141,7 +142,7 @@ public class CustomDialogAddProperty extends Dialog {
 
             }
 
-
+            cursor.close();
 
         }
 
@@ -169,12 +170,12 @@ public class CustomDialogAddProperty extends Dialog {
 
 
                 if(id.equals("0")) {
-                    long res = sqLitePropertyDetails.insertPropertyDetails(area, address,
+                    long res = sqLitePropertyDetails.insertPropertyDetails( "0",area, address,
                             state_id, district_id, taluka_id, state_name, district_name, taluka_name);
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res), area, address));
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res), "0", area, address));
                         addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
@@ -183,11 +184,11 @@ public class CustomDialogAddProperty extends Dialog {
                 }
                 else
                 {
-                    int res = sqLitePropertyDetails.updatePropertyDetails(id,area, address,
+                    int res = sqLitePropertyDetails.updatePropertyDetails(id, property_details_id, area, address,
                             state_id, district_id, taluka_id, state_name, district_name, taluka_name);
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), area, address));
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), property_details_id, area, address));
                         addPersonAdapter.notifyDataSetChanged();
 
                     } else {

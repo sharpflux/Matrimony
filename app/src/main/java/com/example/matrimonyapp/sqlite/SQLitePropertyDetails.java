@@ -13,6 +13,7 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MatrimonyProperty.db";
     public static final String TABLE_NAME = "property";
     public static final String  ID = "id";
+    public static final String  PROPERTY_DETAILS_ID = "property_details_id";
     public static final String  AREA = "name";
     public static final String  ADDRESS = "address";
     public static final String  STATE_ID = "state_id";
@@ -36,6 +37,7 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
 
             sqLiteDatabase.execSQL("create table " + TABLE_NAME + " ( "
                     + ID + " INTEGER PRIMARY KEY autoincrement, "
+                    + PROPERTY_DETAILS_ID + " int, "
                     + AREA + " text, "
                     + ADDRESS + " text, "
                     + STATE_ID + " int, "
@@ -83,8 +85,9 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
 
     }
 
-    public long insertPropertyDetails(String area, String address, String state_id, String district_id, String taluka_id,
-                                  String state_name, String district_name, String taluka_name)
+    public long insertPropertyDetails(String property_details_id, String area, String address,
+                                      String state_id, String district_id, String taluka_id,
+                                      String state_name, String district_name, String taluka_name)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -92,6 +95,7 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         //contentValues.put(ID, null);
+        contentValues.put(PROPERTY_DETAILS_ID, property_details_id);
         contentValues.put(AREA, area);
         contentValues.put(ADDRESS, address);
         contentValues.put(STATE_ID, state_id);
@@ -109,7 +113,7 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updatePropertyDetails(String id, String area, String address, String state_id, String district_id, String taluka_id,
+    public int updatePropertyDetails(String id, String property_details_id, String area, String address, String state_id, String district_id, String taluka_id,
                                  String state_name, String district_name, String taluka_name)
     {
 
@@ -126,7 +130,8 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
         contentValues.put(TALUKA_ID, taluka_id);
         contentValues.put(TALUKA_NAME, taluka_name);
 
-        return sqLiteDatabase.update(TABLE_NAME, contentValues, ID+" = ?", new String[]{id});
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, PROPERTY_DETAILS_ID+" = ? and "+ID+" = ?",
+                new String[]{property_details_id, id});
         //insert returns rowId of newly inserted row or -1 if an errror occured
 
 
@@ -151,5 +156,13 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
 
     }
 
+
+    public int deleteAll()
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        return sqLiteDatabase.delete(TABLE_NAME,"1",null);
+
+    }
 
 }

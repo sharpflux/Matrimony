@@ -12,7 +12,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "MatrimonySibling.db";
     public static final String TABLE_NAME = "sibling";
     public static final String  ID = "id";
-    //public static final String  SIBLING_ID = "sibling_id";
+    public static final String  SIBLING_DETAILS_ID = "sibling_details_id";
     public static final String  NAME = "name";
     public static final String  MOBILE_NO = "mobileno";
     public static final String  EDUCATION_ID = "education_id";
@@ -44,6 +44,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL("create table "+TABLE_NAME+" ( "
                 + ID +" INTEGER PRIMARY KEY autoincrement, "
+                + SIBLING_DETAILS_ID +" int, "
                 + NAME +" text, "
                 + MOBILE_NO +" text, "
                 + EDUCATION_ID +" int, "
@@ -103,7 +104,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     }
 
-    public long insertSibling(String name, String mobileNo, String educationId, String educationName,
+    public long insertSibling(String sibling_details_id, String name, String mobileNo, String educationId, String educationName,
                               String occupationId, String occupationName, String maritalStatus,
                               String relationId, String relation, String fil_name, String fil_mobileNo, String fil_village,
                               String fil_state_id, String fil_district_id, String fil_taluka_id,
@@ -114,7 +115,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        //contentValues.put(ID, null);
+        contentValues.put(SIBLING_DETAILS_ID, sibling_details_id);
         contentValues.put(NAME, name);
         contentValues.put(MOBILE_NO, mobileNo);
         contentValues.put(EDUCATION_ID, educationId);
@@ -142,7 +143,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updateSibling(String id, String name, String mobileNo, String educationId, String educationName,
+    public int updateSibling(String id, String sibling_details_id, String name, String mobileNo, String educationId, String educationName,
                              String occupationId, String occupationName, String maritalStatus,
                              String relationId, String relation, String fil_name, String fil_mobileNo, String fil_village,
                              String fil_state_id, String fil_district_id, String fil_taluka_id,
@@ -173,7 +174,8 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
         contentValues.put(FATHER_IN_LAW_TALUKA_NAME, fil_taluka_name);
         //contentValues.put(, );
 
-        return sqLiteDatabase.update(TABLE_NAME, contentValues, ID+" = ?", new String[]{id});
+        return sqLiteDatabase.update(TABLE_NAME, contentValues, SIBLING_DETAILS_ID+" = ? and "+ID+" = ?",
+                new String[]{sibling_details_id, id});
         //insert returns rowId of newly inserted row or -1 if an errror occured
 
 
@@ -198,5 +200,12 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     }
 
+    public int deleteAll()
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        return sqLiteDatabase.delete(TABLE_NAME,"1",null);
+
+    }
 
 }
