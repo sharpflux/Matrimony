@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F5F5F5"
@@ -21,12 +19,8 @@
             android:orientation="vertical">
 
 
-<!--            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+            <!-- About -->
 
-                >-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,14 +86,7 @@
 
                 </LinearLayout>
 
-           <!-- </androidx.cardview.widget.CardView>-->
-
-<!--
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                >-->
+            <!-- Profile Info -->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -163,7 +150,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Name"
+                            android:text="@string/name"
 
 
                             />
@@ -171,14 +158,12 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_name"
                             android:layout_weight="1"
-                            android:text="User Name here"
+                            android:text="@string/name"
                             style="@style/NormalRight_TextView"
                             />
                     </LinearLayout>
-
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -192,19 +177,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Gender"
+                            android:text="@string/gender"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_gender"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Female"/>
+                            android:text="@string/gender"/>
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -214,23 +199,22 @@
                         >
 
                         <TextView
+                            style="@style/NormalLeft_TextView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Birthday"
-                            style="@style/NormalLeft_TextView"
-                            />
+                            android:text="@string/birthdate" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthdate"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Jan 01 1991"
+                            android:text="@string/birthdate"
 
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -240,23 +224,22 @@
                         >
 
                         <TextView
+                            style="@style/NormalLeft_TextView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-                            android:text="Location"
-
-                            />
+                            android:text="@string/age" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_age"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Mumbai, India"
+                            android:text="@string/age"
+
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -270,19 +253,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Preferred Language"
+                            android:text="@string/location"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_location"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Marathi"
+                            android:text="@string/location"
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -297,227 +280,554 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Relationship Status"
-                            />
+                            android:text="@string/mother_tongue"
 
+                            />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherTongue"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Single"
+                            android:text="@string/language"
                             />
                     </LinearLayout>
 
 
-
-
-
-
                 </LinearLayout>
 
-           <!-- </androidx.cardview.widget.CardView>-->
 
-<!--            <androidx.cardview.widget.CardView
+            <!-- Personal Info -->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                >-->
+                android:background="@color/white"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="10dp"
-                    android:layout_gravity="center"
+                    android:orientation="horizontal"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/white"
                     >
 
-                    <LinearLayout
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        >
+                        style="@style/Bold_TextView"
+                        android:text="@string/personal_information"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:padding="10dp"
-                            android:background="@drawable/circle_image_border"
-                            android:layout_marginStart="10dp"
-                            android:src="@drawable/quote1"
-                            android:tint="@color/text_gray"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
 
-                            />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            style="@style/Bold_TextView"
-                            android:text="@string/religious_information"
-                            android:textSize="15sp"
-                            />
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal"
-                        android:background="@drawable/shadow_down"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/height"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_height"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/height"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/weight"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_weight"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/weight"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/colour"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_colour"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/colour"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/marital_status"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_maritalStatus"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/marital_status"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/family_status"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_familyStatus"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/family_status"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/family_type"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_familyType"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/family_type"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/family_values"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_familyValues"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/family_values"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/disability"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_disability"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/disability"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/disability_type"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_disabilityType"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/disability_type"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/diet"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_diet"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/diet"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/lives_with_family"
                         />
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-                            android:text="Religion"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalRight_TextView"
-                            android:text="yourReligion"
-
-                            />
-                    </LinearLayout>
-
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-                            android:text="Caste"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalRight_TextView"
-                            android:text="yourCaste"
-
-                            />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-
-                            android:text="Sub Caste"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalRight_TextView"
-                            android:text="yourSubCaste"
-
-                            />
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-                            android:text="Gothram"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalRight_TextView"
-                            android:text="yourGothram"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="5dp"
-                        >
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-                            android:text="Dosh"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalRight_TextView"
-                            android:text="yourDosh"
-                            />
-                    </LinearLayout>
-
-
-
+                        android:id="@+id/textView_livesWithFamily"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/yes"
+                        />
                 </LinearLayout>
 
-            <!--</androidx.cardview.widget.CardView>-->
 
 
+            </LinearLayout>
+
+
+            <!-- Religious Info -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Bold_TextView"
+                        android:text="@string/religious_information"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/religion"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_religion"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/religion"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/caste"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_caste"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="caste"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/sub_caste"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_subCaste"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/sub_caste"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/gothram"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_gothram"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/gothram"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/dosh"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_dosh"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dosh"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </RelativeLayout>

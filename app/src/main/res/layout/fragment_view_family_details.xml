@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="#F5F5F5"
     >
 
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="none">
 
 
@@ -21,14 +19,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
-<!--            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-
-                >-->
 
 
                 <!-- Father's Info -->
@@ -93,19 +83,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Is Father Alive ?"
+                            android:text="@string/is_alive"
                             />
 
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_isFatherAlive"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Yes"
+                            android:text="@string/yes"
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,7 +109,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Name"
+                            android:text="@string/name"
 
 
                             />
@@ -127,14 +117,12 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherName"
                             android:layout_weight="1"
-                            android:text="father'sNameHere"
+                            android:text="name"
                             style="@style/NormalRight_TextView"
                             />
                     </LinearLayout>
-
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -148,19 +136,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Mobile No."
+                            android:text="@string/mobile_"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherMobileNo"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="9999999999"/>
+                            android:text="@string/mobile_"/>
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -180,13 +168,13 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherOccupation"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="occupationHere"
+                            android:text="@string/occupation_"
 
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -200,16 +188,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Annual Income"
+                            android:text="@string/annual_income"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherAnnualIncome"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Rs. 5,00,000/-"
+                            android:text="@string/annual_income"
                             />
                     </LinearLayout>
 
@@ -348,19 +337,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Is Mother Alive ?"
+                            android:text="@string/is_alive"
                             />
 
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_isMotherAlive"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Yes"
+                            android:text="@string/yes"
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -374,22 +363,18 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Name"
-
-
+                            android:text="@string/name"
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherName"
                             android:layout_weight="1"
-                            android:text="mother'sNameHere"
+                            android:text="@string/name"
                             style="@style/NormalRight_TextView"
                             />
                     </LinearLayout>
-
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -403,19 +388,19 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Mobile No."
+                            android:text="@string/mobile_"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherMobileNo"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="9999999999"/>
+                            android:text="@string/mobile_"/>
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -435,13 +420,13 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherOccupation"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="occupationHere"
+                            android:text="@string/occupation_"
 
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -455,19 +440,18 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Annual Income"
-
+                            android:text="@string/annual_income"
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherAnnualIncome"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Rs. 5,00,000/-"
+                            android:text="@string/annual_income"
                             />
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -482,38 +466,23 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Property"
+                            android:text="@string/property"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="propertyDetailsHere"
+                            android:text="@string/property"
                             />
                     </LinearLayout>
 
-
-
-
-
-
-
-
-
                 </LinearLayout>
 
-            <!--</androidx.cardview.widget.CardView>-->
 
-
-
- <!--           <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                >-->
 
                 <!-- No of sibling -->
                 <LinearLayout
@@ -556,13 +525,6 @@
 
                 </LinearLayout>
 
-            <!--</androidx.cardview.widget.CardView>-->
-
-<!--            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                >-->
 
                 <!-- Siblings Info -->
                 <LinearLayout
@@ -734,7 +696,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="@string/marital_status_"
+                            android:text="@string/marital_status"
                             />
 
                         <TextView

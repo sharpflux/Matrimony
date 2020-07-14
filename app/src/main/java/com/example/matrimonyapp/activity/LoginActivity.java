@@ -83,10 +83,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                view.setEnabled(false);
+                view.setClickable(false);
+
                 verifyLogin();
                 /*Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);*/
-
+                view.setEnabled(true);
+                view.setClickable(true);
             }
         });
 

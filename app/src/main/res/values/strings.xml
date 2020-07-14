@@ -22,7 +22,7 @@
     <string name="female">Female</string>
     <string name="date">Date</string>
     <string name="birthdate">Birthdate </string>
-    <string name="age">Age *</string>
+    <string name="age">Age</string>
     <string name="time">Birth Time</string>
     <string name="birth_place">Birth Place </string>
     <string name="birth_state">Birth State </string>
@@ -52,6 +52,8 @@
     <string name="direct">Messages</string>
     <string name="Name">User Name</string>
     <string name="vertical_ellipses">&#8942;</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 
     <string name="mobile_no_on_another_account">This mobile no. is on another account</string>
@@ -101,6 +103,7 @@
     <string name="gothram">Gothram </string>
     <string name="dosh">Dosh </string>
     <string name="mother_tongue">Mother Tongue</string>
+    <string name="language">language</string>
 
 
     <string name="institue_university">Name of Institute / University</string>
@@ -172,8 +175,8 @@
     <string name="weight">Weight</string>
     <string name="kgs">kgs. </string>
     <string name="colour">Colour</string>
-    <string name="marital_status">Marital Status *</string>
-    <string name="marital_status_">Marital Status </string>
+    <string name="marital_status">Marital Status</string>
+
     <string name="family_status">Family Status</string>
     <string name="family_type">Family Type</string>
     <string name="family_values">Family Values</string>

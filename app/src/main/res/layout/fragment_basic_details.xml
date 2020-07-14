@@ -49,7 +49,7 @@
                         android:digits="@string/only_text_with_space"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
-                        android:inputType=""
+                        android:enabled="false"
                         android:maxLines="1"
                         android:singleLine="true"
                         />
@@ -113,6 +113,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="15dp"
                     android:theme="@style/RadioButtonTheme"
+                    android:clickable="false"
                     >
 
                     <RadioButton
@@ -122,7 +123,9 @@
                         android:text="Male"
                         android:textColor="@color/text_black"
                         android:textSize="13sp"
-                        android:checked="true"/>
+                        android:checked="true"
+                        android:clickable="false"
+                        />
 
                     <RadioButton
                         android:layout_width="wrap_content"
@@ -131,7 +134,8 @@
                         android:text="Female"
                         android:textSize="13sp"
                         android:layout_marginStart="25dp"
-                        android:textColor="@color/text_black"/>
+                        android:textColor="@color/text_black"
+                        android:clickable="false"/>
 
                 </RadioGroup>
 
@@ -160,6 +164,7 @@
                         android:editable="false"
                         android:focusable="false"
                         android:clickable="false"
+                        android:enabled="false"
                         android:inputType="none"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
@@ -184,6 +189,7 @@
                         android:clickable="false"
                         android:editable="false"
                         android:focusable="false"
+                        android:enabled="false"
                         android:hint="@string/age"
                         android:singleLine="true"
                         android:textColor="@color/text_black"
