@@ -177,13 +177,13 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                             birthdate,
                                             age,
                                             gender,
-                                            "",
+                                            "0",
                                             language);
 
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
 
-
+                                    Toast.makeText(getApplicationContext(), "You have successfully registered!", Toast.LENGTH_SHORT).show();
 
 
                                         Intent intent = new Intent(VerifyOtpActivity.this, HomeActivity.class);
@@ -191,7 +191,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                                 }
                                 else{
-                                    Toast.makeText(getApplicationContext(),"Invalid User",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Sorry for the inconvenience \n Please try again!",Toast.LENGTH_SHORT).show();
 
                                 }
                             } catch (JSONException e) {

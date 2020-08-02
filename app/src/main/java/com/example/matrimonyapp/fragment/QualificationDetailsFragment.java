@@ -332,7 +332,8 @@ public class QualificationDetailsFragment extends Fragment {
                             else
                             {
                                 qualificationDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

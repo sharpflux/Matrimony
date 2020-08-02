@@ -161,6 +161,9 @@
     <string name="add_your_basic_details">Add your basic details</string>
     <string name="tell_basic_details">Tell your friends a little bit about yourself.</string>
     <string name="tell_about_yourself">Tell your friends a little bit about yourself.</string>
+    <string name="share_photo_desc">When you share photos, they\'ll appear on your profile</string>
+    <string name="share_first_photo_desc">Share your first photo</string>
+    <string name="profile">Profile</string>
 
     <string name="only_text">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="only_text_with_space">a bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>

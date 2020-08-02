@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.customViews.CustomDialogAccountExists;
+import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 
@@ -69,13 +70,16 @@ public class SignUp extends AppCompatActivity {
         editText_password = findViewById(R.id.editText_password);
         textView_signUp = findViewById(R.id.textView_signUp);
         textView_backToSignIn = findViewById(R.id.textView_backToSignIn);
+        FieldValidation.validateRadioGroup(radioGroup_gender);
+
 
         textView_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                verifyMobileNo();
-
+                if(checkRequiredFields(editText_fullName, editText_mobileNo, editText_emailId, editText_birthdate, editText_password)) {
+                    verifyMobileNo();
+                }
 
             }
         });
@@ -135,6 +139,23 @@ public class SignUp extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private boolean checkRequiredFields(EditText ...editText) {
+        boolean flag = true;
+        for (EditText temp_editText: editText
+             ) {
+
+            if(temp_editText.getText().toString().equals(""))
+            {
+                temp_editText.setError("This is required field", getResources().getDrawable(R.drawable.ic_error_outline_black_24dp));
+                flag = false;
+
+            }
+
+        }
+        return flag;
 
     }
 
@@ -246,6 +267,9 @@ public class SignUp extends AppCompatActivity {
                                 birthdate = editText_birthdate.getText().toString().trim();
                                 age = editText_age.getText().toString().trim();
                                 password = editText_password.getText().toString().trim();
+                                gender = ((RadioButton)findViewById(radioGroup_gender.getCheckedRadioButtonId()))
+                                        .getText().toString();
+
 
                                 Intent intent = new Intent(getApplicationContext(), VerifyOtpActivity.class);
                                 intent.putExtra("OTP",obj.getString("OTP"));

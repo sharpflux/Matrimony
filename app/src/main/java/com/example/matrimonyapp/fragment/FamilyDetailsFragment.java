@@ -1034,7 +1034,8 @@ public class FamilyDetailsFragment extends Fragment {
                                 familyDetailsId = 0;
                                 fatherDetailsId = 0;
                                 motherDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(getContext()," Please enter your details! ",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -1087,8 +1088,8 @@ public class FamilyDetailsFragment extends Fragment {
                 }
                 else if(params[0].equals("insertDetails"))
                 {
-                    //insertDetails();
-                    customDialogLoadingProgressBar.dismiss(); //after uncommenting above line remove this line
+                    insertDetails();
+                    //customDialogLoadingProgressBar.dismiss(); //after uncommenting above line remove this line
                 }
 
                 if(params[0].equals("FatherState"))

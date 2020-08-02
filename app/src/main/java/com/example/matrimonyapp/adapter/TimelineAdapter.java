@@ -167,7 +167,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         });
 
 
-        holder.textView_userId.setText(list.get(position).getUserName() + list.get(position).getUserId());
+        holder.textView_userId.setText(list.get(position).getUserName());
         //holder.textView_userName.setText(list.get(position).getUserName());
         //holder.textView_userAge.setText(list.get(position).getUserAge());
         //holder.textView_userQualification.setText(list.get(position).getUserQualification());

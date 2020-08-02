@@ -78,6 +78,8 @@ public class GalleryAdapter extends BaseAdapter {
 
         ivGallery.setImageURI(mArrayUri.get(position));
 
+
+
         /*ivGallery.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -136,6 +138,7 @@ public class GalleryAdapter extends BaseAdapter {
 
         customDialogImagePreview.getWindow().setBackgroundDrawable(draw);
 */
+
 
 
                 ivGallery.setOnClickListener(new View.OnClickListener() {

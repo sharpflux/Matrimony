@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -97,11 +98,11 @@ public class MyProfileActivity extends AppCompatActivity {
 
     public static final int REQUEST_CAMERA = 1, SELECT_FILE = 0, ACTIVITY_CONSTANT = 2;
     ImageView imageView_home, imageView_search, imageView_addPhoto, imageView_like, imageView_myProfile, imageView_addNew;
-    TextView textView_editProfile, textView_editProfile2, textView_addBio, textView_setPreferences,
+    TextView textView_welcomeUserName, textView_profileName, textView_editProfile, textView_editProfile2, textView_addBio, textView_setPreferences,
             textView_changeProfilePhoto;
 
     RelativeLayout relativeLayout_changeProfilePic;
-
+    LinearLayout linearlayout_sharePhoto;
     CustomDialogChangeProfilePic customDialogChangeProfilePic;
 
     public String selfieString;
@@ -161,7 +162,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
         EnableRuntimePermission();
 
-        userModel = CustomSharedPreference.getInstance(MyProfileActivity.this).getUser();
+
 
 
         //uri = Uri.parse(getResources().getDrawable(R.drawable.noimage).toString());
@@ -213,7 +214,14 @@ public class MyProfileActivity extends AppCompatActivity {
                 .getLayoutParams();
         mlp.setMargins(0, 5, 0, 0);//2nd para gvGallery.getHorizontalSpacing()
 
-
+        if(mArrayUri.size()>0)
+        {
+            linearlayout_sharePhoto.setVisibility(View.GONE);
+        }
+        else
+        {
+            linearlayout_sharePhoto.setVisibility(View.VISIBLE);
+        }
         setGridViewHeight(gvGallery,3);
 
 
@@ -233,6 +241,7 @@ public class MyProfileActivity extends AppCompatActivity {
         imageView_like = findViewById(R.id.imageView_like);
         imageView_myProfile = findViewById(R.id.imageView_myProfile);
 
+        textView_profileName = findViewById(R.id.textView_profileName);
         textView_editProfile = findViewById(R.id.textView_editProfile);
         textView_editProfile2 = findViewById(R.id.textView_editProfile2);
         textView_addBio = findViewById(R.id.textView_addBio);
@@ -242,9 +251,14 @@ public class MyProfileActivity extends AppCompatActivity {
         circleImageView_profilePic = findViewById(R.id.circleImageView_profilePic);
         viewPager2_singleImage= findViewById(R.id.viewPager2_singleImage);
         imageView_addNew= findViewById(R.id.imageView_addNew);
+        linearlayout_sharePhoto= findViewById(R.id.linearlayout_sharePhoto);
         mArrayUri = new ArrayList<Uri>();
         selectedImageList = new ArrayList<String>();
 
+        userModel = CustomSharedPreference.getInstance(MyProfileActivity.this).getUser();
+
+
+        textView_profileName.setText(userModel.getFullName());
 /*        Bundle bundle = getIntent().getExtras();
 
         if(bundle!=null)
@@ -475,6 +489,14 @@ public class MyProfileActivity extends AppCompatActivity {
                 Uri t_uri = Uri.fromFile(new File(images[i]));//FileProvider.getUriForFile(MyProfileActivity.this, "com.example.matrimonyapp", new File(images[i]));
                 mArrayUri.add(t_uri);
             }
+            if(mArrayUri.size()>0)
+        {
+            linearlayout_sharePhoto.setVisibility(View.GONE);
+        }
+        else
+        {
+            linearlayout_sharePhoto.setVisibility(View.VISIBLE);
+        }
             galleryAdapter.notifyDataSetChanged();
             setGridViewHeight(gvGallery,3);
 
@@ -591,6 +613,8 @@ public class MyProfileActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+        textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
+        textView_welcomeUserName.setText(userModel.getFullName());
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
@@ -836,7 +860,11 @@ public class MyProfileActivity extends AppCompatActivity {
                                         //to clear cache
                                         Picasso.get().invalidate(URLs.MainURL + jsonObject.getString("ImageUrl"));
                                         Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
-                                                .networkPolicy(NetworkPolicy.NO_CACHE).memoryPolicy(MemoryPolicy.NO_CACHE).into(circleImageView_profilePic);
+                                                .networkPolicy(NetworkPolicy.NO_CACHE)
+                                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                                .error(R.drawable.no_photo1)
+                                                .placeholder(R.drawable.no_photo1)
+                                                .into(circleImageView_profilePic);
 
                                         userModel.setProfilePic(URLs.MainURL+jsonObject.getString("ImageUrl"));
 

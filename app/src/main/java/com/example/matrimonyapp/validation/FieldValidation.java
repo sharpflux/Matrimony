@@ -22,6 +22,34 @@ public class FieldValidation {
         this.context = context;
     }
 
+    public static void validateRadioGroup(RadioGroup radioGroup)
+    {
+
+        for(int i=0; i<radioGroup.getChildCount(); i++)
+        {
+            RadioButton rb = (RadioButton) radioGroup.getChildAt(i);
+/*
+            rb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(((RadioButton)v).isChecked())
+                    {
+                        se
+                    }
+                }
+            });*/
+            if(rb.isChecked())
+            {
+                rb.setChecked(false);
+            }
+            else
+            {
+                rb.setChecked(true);
+                radioButton_value = rb.getText().toString();
+            }
+        }
+    }
+
 
     // returns value of checked button
     public static String radioGroupValidation(RadioGroup radioGroup)
@@ -97,9 +125,9 @@ public class FieldValidation {
         return id;
     }
 
-    public static void textChangedListenerForSDT(EditText editText_state, final EditText editText_district,
-                                     final EditText editText_taluka, TextView textView_stateId,
-                                     final TextView textView_districtId, final TextView textView_talukaId)
+    public static void textChangedListenerForSDT(final EditText editText_state, final EditText editText_district,
+                                                 final EditText editText_taluka, TextView textView_stateId,
+                                                 final TextView textView_districtId, final TextView textView_talukaId)
     {
 
         editText_state.addTextChangedListener(new TextWatcher() {
@@ -110,10 +138,12 @@ public class FieldValidation {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_district.setText("");
-                textView_districtId.setText("0");
-                editText_taluka.setText("");
-                textView_talukaId.setText("0");
+                if(editText_state.hasFocus()) {
+                    editText_district.setText("");
+                    textView_districtId.setText("0");
+                    editText_taluka.setText("");
+                    textView_talukaId.setText("0");
+                }
             }
 
             @Override
@@ -130,8 +160,10 @@ public class FieldValidation {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_taluka.setText("");
-                textView_talukaId.setText("0");
+                if(editText_district.hasFocus()) {
+                    editText_taluka.setText("");
+                    textView_talukaId.setText("0");
+                }
             }
 
             @Override

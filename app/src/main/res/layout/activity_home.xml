@@ -70,7 +70,12 @@
                                     android:paddingStart="15dp"
                                     android:paddingTop="10dp"
                                     android:paddingEnd="15dp">
-
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:layout_width="85dp"
+                                        android:layout_height="85dp"
+                                        android:layout_marginTop="10dp"
+                                        android:src="@drawable/flower3"
+                                        android:tint="@color/text_gray" />
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -108,12 +113,7 @@
                                         android:textColor="@color/white"
                                         android:textSize="13sp" />
 
-                                    <de.hdodenhof.circleimageview.CircleImageView
-                                        android:layout_width="85dp"
-                                        android:layout_height="85dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/flower3"
-                                        android:tint="@color/text_gray" />
+
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -130,6 +130,12 @@
                                     android:paddingEnd="15dp">
 
 
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:layout_width="85dp"
+                                        android:layout_height="85dp"
+                                        android:layout_marginTop="10dp"
+                                        android:src="@drawable/flower3"
+                                        android:tint="@color/text_gray" />
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -166,12 +172,6 @@
                                         android:textColor="@color/white"
                                         android:textSize="13sp" />
 
-                                    <de.hdodenhof.circleimageview.CircleImageView
-                                        android:layout_width="85dp"
-                                        android:layout_height="85dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/flower3"
-                                        android:tint="@color/text_gray" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -186,7 +186,12 @@
                                     android:paddingStart="15dp"
                                     android:paddingTop="10dp"
                                     android:paddingEnd="15dp">
-
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:layout_width="85dp"
+                                        android:layout_height="85dp"
+                                        android:layout_marginTop="10dp"
+                                        android:src="@drawable/flower3"
+                                        android:tint="@color/text_gray" />
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -224,12 +229,7 @@
                                         android:textColor="@color/white"
                                         android:textSize="13sp" />
 
-                                    <de.hdodenhof.circleimageview.CircleImageView
-                                        android:layout_width="85dp"
-                                        android:layout_height="85dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/flower3"
-                                        android:tint="@color/text_gray" />
+
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -244,7 +244,12 @@
                                     android:paddingStart="15dp"
                                     android:paddingTop="10dp"
                                     android:paddingEnd="15dp">
-
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:layout_width="85dp"
+                                        android:layout_height="85dp"
+                                        android:layout_marginTop="10dp"
+                                        android:src="@drawable/flower3"
+                                        android:tint="@color/text_gray" />
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -282,12 +287,7 @@
                                         android:textColor="@color/white"
                                         android:textSize="13sp" />
 
-                                    <de.hdodenhof.circleimageview.CircleImageView
-                                        android:layout_width="85dp"
-                                        android:layout_height="85dp"
-                                        android:layout_marginTop="10dp"
-                                        android:src="@drawable/flower3"
-                                        android:tint="@color/text_gray" />
+
                                 </LinearLayout>
 
 

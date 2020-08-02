@@ -376,12 +376,14 @@ public class PersonalDetailsFragment extends Fragment {
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
                                 fragmentTransaction.commit();*/
 
-                                UploadImageFragment uploadImageFragment= new UploadImageFragment();
+/*                                UploadImageFragment uploadImageFragment= new UploadImageFragment();
                                 // personalDetailsFragment.setArguments(bundle);
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
-                                fragmentTransaction.commit() ;
+                                fragmentTransaction.commit() ;*/
+
+                                getActivity().finish();
 
 
                                 //getActivity().finish();
@@ -498,7 +500,8 @@ public class PersonalDetailsFragment extends Fragment {
                             else
                             {
                                 personalDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!" ,Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

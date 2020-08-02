@@ -181,6 +181,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
+        textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
+        textView_welcomeUserName.setText(userModel.getFullName());
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
@@ -252,7 +254,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         recyclerView_timeline.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView_timeline.setLayoutManager(mLayoutManager);
-
+        //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
 
 
         detector = new SimpleGestureFilter(this,this);

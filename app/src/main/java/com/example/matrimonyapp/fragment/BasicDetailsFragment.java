@@ -181,6 +181,8 @@ public class BasicDetailsFragment extends Fragment {
 
         FieldValidation fieldValidation = new FieldValidation(context);
 
+
+        FieldValidation.setRadioButtonAccToValue(radioGroup_gender,userModel.getGender());
         gender = FieldValidation.radioGroupValidation(radioGroup_gender);
         birthTimeType = FieldValidation.radioGroupValidation(radioGroup_birthTimeType);
 
@@ -366,7 +368,16 @@ public class BasicDetailsFragment extends Fragment {
             public void onClick(View view) {
 
                 String id = FieldValidation.onClickListenerForSDT(urlFor, textView_id, getContext());
+                /*String id = "0";
+                if (textView_id != null) {
+                    id = textView_id.getText().toString();
 
+                    if (!id.equals("0")) {
+                        AsyncTaskLoad runner = new AsyncTaskLoad();
+                        runner.execute(urlFor, id);
+
+                    }
+                }*/
                 AsyncTaskLoad runner = new AsyncTaskLoad();
                 runner.execute(urlFor, id);
 
@@ -432,7 +443,8 @@ public class BasicDetailsFragment extends Fragment {
                             }
                             else
                             {
-                                Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -589,7 +601,7 @@ public class BasicDetailsFragment extends Fragment {
                             else
                             {
                                 basicDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Please enter your details! ",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
