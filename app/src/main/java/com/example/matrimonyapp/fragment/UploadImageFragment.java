@@ -2,11 +2,13 @@ package com.example.matrimonyapp.fragment;
 
 
 import android.app.Activity;
+import android.app.Notification;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.drm.DrmStore;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.MainActivity;
@@ -155,6 +158,7 @@ public class UploadImageFragment extends Fragment {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
 
+
                /*
                 Intent intent = new Intent(getContext(), MultiPhotoSelectActivity.class);
                 startActivity(intent);
@@ -167,10 +171,12 @@ public class UploadImageFragment extends Fragment {
         /*textView_uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-*//*                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+*/
+        /*                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 //intent.setType("image/*");
                 //intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,RESULT_SELECT_IMAGE);*//*
+                startActivityForResult(intent,RESULT_SELECT_IMAGE);*/
+        /*
                 //startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST);
 
                 //Create an Intent with action as ACTION_PICK
@@ -252,15 +258,15 @@ public class UploadImageFragment extends Fragment {
                 case RESULT_SELECT_IMAGE:
                     //data.getData returns the content URI for the selected Image
 
-                    selectedImage = data.getData();
-                    imageView_upload.setImageURI(selectedImage);
+                    /*selectedImage = data.getData();
+                    imageView_upload.setImageURI(selectedImage);*/
 
-/*                    Bundle extras = data.getExtras();
+                    Bundle extras = data.getExtras();
                     if(extras!=null)
                     {
                         Bitmap photo = extras.getParcelable("data");
                         imageView_upload.setImageBitmap(photo);
-                    }*/
+                    }
 
 
                     break;
@@ -293,10 +299,13 @@ public class UploadImageFragment extends Fragment {
                                 .getLayoutParams();
                         mlp.setMargins(0, 5, 0, 1);
 
-                    } else {
+                    }
+                    else
+                    {
                         if (data.getClipData() != null) {
                             ClipData mClipData = data.getClipData();
-                            // mArrayUri = new ArrayList<Uri>();
+
+
                             for (int i = 0; i < mClipData.getItemCount(); i++) {
 
                                 ClipData.Item item = mClipData.getItemAt(i);

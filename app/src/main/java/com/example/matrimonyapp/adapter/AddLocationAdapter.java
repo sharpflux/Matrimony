@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.modal.AddLOcationModal;
-import com.example.matrimonyapp.sqlite.SQLiteSetpreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
     private List<AddLOcationModal> exampleListFull;
     RecyclerViewItemClickListener recyclerViewItemClickListener;
     String selectedItem;
-    SQLiteSetpreference sqLiteSetpreference;
+  //  SQLiteSetpreference sqLiteSetpreference;
     Context context;
 //, RecyclerViewItemClickListener listener
     public AddLocationAdapter(Context context,ArrayList<AddLOcationModal>  myDataset) {
@@ -37,7 +36,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
         mDataset = myDataset;
        // this.recyclerViewItemClickListener = listener;
         exampleListFull = new ArrayList<>(mDataset);
-        sqLiteSetpreference = new SQLiteSetpreference(context);
+       // sqLiteSetpreference = new SQLiteSetpreference(context);
 
 
     }
@@ -55,7 +54,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull FruitViewHolder holder, int i) {
-        holder.mTextView.setText(mDataset.get(i).getName());
+     /*   holder.mTextView.setText(mDataset.get(i).getName());
         holder.FilterBy=mDataset.get(i).getFilterBy();
         holder.ItemId=mDataset.get(i).getId();
         holder.sqLiteSetpreference=sqLiteSetpreference;
@@ -64,7 +63,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
         if (holder.FilterBy != null) {
             switch (holder.FilterBy) {
                 case "STATE":
-                    /*Cursor StateCursor = sqLiteSetpreference.FilterGetByFilterName("STATE");
+                    *//*Cursor StateCursor = sqLiteSetpreference.FilterGetByFilterName("STATE");
                     while (StateCursor.moveToNext()) {
 
                         if (StateCursor.getString(0).equals(holder.ItemId)) {
@@ -75,7 +74,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
                                 holder.mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_outline_blank_black_24dp);
                                 holder.mTextView.setChecked(false);
                             }
-                    }*/
+                    }*//*
 
                     if(holder.mTextView.isChecked()){
                         holder.mTextView.setChecked(true);
@@ -97,7 +96,7 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
             }
             }
 
-
+*/
     }
 
     @Override
@@ -146,24 +145,25 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
     public  class FruitViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public AppCompatCheckedTextView mTextView;
-        String  FilterBy = "",ItemId="",childName = "";
-        SQLiteSetpreference sqLiteSetpreference;
+        String FilterBy = "", ItemId = "", childName = "";
+        //SQLiteSetpreference sqLiteSetpreference;
         int position = 0;
 
         public FruitViewHolder(View v) {
             super(v);
             mTextView = (AppCompatCheckedTextView) v.findViewById(R.id.tv_name);
 
-          //  mDataset.size();
+            //  mDataset.size();
             v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-           Boolean value=mTextView.isSelected();
-           String pid="",n="";
+            Boolean value = mTextView.isSelected();
+            String pid = "", n = "";
             if (value) {
 
+/*
                 sqLiteSetpreference.DeleteRecord(FilterBy, ItemId);
                 mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_outline_blank_black_24dp);
                 mTextView.setChecked(false);
@@ -182,14 +182,17 @@ public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.
                 mTextView.setCheckMarkDrawable(R.drawable.ic_check_box_black_24dp);
                 mTextView.setChecked(true);
             }
+*/
 
-           // recyclerViewItemClickListener.clickOnItem(mDataset.get(this.getAdapterPosition()));
+                // recyclerViewItemClickListener.clickOnItem(mDataset.get(this.getAdapterPosition()));
 
+            }
         }
-    }
 
-    public interface RecyclerViewItemClickListener {
+/*    public interface RecyclerViewItemClickListener {
         void clickOnItem(AddLOcationModal data);
+    }*/
+
     }
 
 }

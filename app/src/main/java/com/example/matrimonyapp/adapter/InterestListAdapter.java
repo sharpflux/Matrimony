@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
 import com.example.matrimonyapp.modal.TimelineModel;
@@ -54,8 +56,13 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
         holder.textView_userId.setText(list.get(position).getUserId());
         holder.textView_userName.setText(list.get(position).getUserName());
         //holder.textView_send.setText(list.get(position).getUserAge());
-
-        holder.circleImage_profilePic.setImageURI(list.get(position).getProfilePic());
+        Glide.with(context)
+                .load(list.get(position).getProfilePic())
+                .placeholder(R.color.codeGray)
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade(500))
+                .into(holder.circleImage_profilePic);
+        //holder.circleImage_profilePic.setImageURI(list.get(position).getProfilePic());
 
         holder.textView_userId.setOnClickListener(new View.OnClickListener() {
             @Override

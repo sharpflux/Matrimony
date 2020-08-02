@@ -15,10 +15,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
 import com.example.matrimonyapp.listener.OnSwipeTouchListener;
 import com.example.matrimonyapp.modal.TimelineModel;
+import com.example.matrimonyapp.volley.URLs;
 
 import java.util.ArrayList;
 
@@ -59,7 +63,22 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         final TimelineModel item = list.get(position);
 
+
         holder.relativeLayout.setOnTouchListener(new OnSwipeTouchListener(context){
+            @Override
+            public void onDoubleTaps() {
+                super.onDoubleTaps();
+
+                holder.imageView_doubleTapFav.setVisibility(View.VISIBLE);
+
+                holder.imageView_doubleTapFav.postOnAnimationDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.imageView_doubleTapFav.setVisibility(View.INVISIBLE);
+                    }
+                },400);
+
+            }
 
             @Override
             public void onSwipeRight() {
@@ -148,13 +167,31 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         });
 
 
-        holder.textView_userId.setText(list.get(position).getUserId());
+        holder.textView_userId.setText(list.get(position).getUserName() + list.get(position).getUserId());
         //holder.textView_userName.setText(list.get(position).getUserName());
         //holder.textView_userAge.setText(list.get(position).getUserAge());
         //holder.textView_userQualification.setText(list.get(position).getUserQualification());
         holder.textView_userBio.setText(Html.fromHtml("<b>"+list.get(position).getUserName()+"</b>  "
-                +list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()));
-        holder.imageView_profilePic.setImageURI(list.get(position).getProfilePic());
+                +" "+list.get(position).getUserEmail()+" "));
+
+        //list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()
+        //holder.imageView_profilePic.setImageURI(list.get(position).getProfilePic());
+        Glide.with(context)
+                .load(URLs.MainURL+list.get(position).getProfilePic())
+                .circleCrop()
+                .placeholder(R.drawable.noimage2)
+                .into(holder.circleImage_profilePic);
+
+        Glide.with(context)
+                .load(URLs.MainURL+list.get(position).getProfilePic())
+                .placeholder(R.drawable.noimage2)
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade(500))
+                .into(holder.imageView_profilePic);
+
+        //holder.circleImage_profilePic.setImageDrawable(holder.imageView_profilePic.getDrawable());
+
+        holder.textView_userQualification.setText(list.get(position).getUserQualification());
 
         holder.textView_userId.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +264,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public ImageView imageView_profilePic;
         public ImageView imageView_like;
         public ImageView imageView_favorite;
+        public ImageView imageView_doubleTapFav;
         public ImageView imageView_reject;
+        public de.hdodenhof.circleimageview.CircleImageView circleImage_profilePic;
         public RelativeLayout relativeLayout;
 
 
@@ -237,13 +276,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             this.relativeLayout = itemView.findViewById(R.id.relativeLayout);
             this.textView_userId = itemView.findViewById(R.id.textView_userId);
             //this.textView_userName = itemView.findViewById(R.id.textView_userName);
-            //this.textView_userAge = itemView.findViewById(R.id.textView_userAge);
-            //this.textView_userQualification = itemView.findViewById(R.id.textView_userQualification);
+            this.circleImage_profilePic = itemView.findViewById(R.id.circleImage_profilePic);
+            this.textView_userQualification = itemView.findViewById(R.id.textView_userQualification);
             this.textView_userBio = itemView.findViewById(R.id.textView_userBio);
             this.imageView_profilePic = itemView.findViewById(R.id.imageView_profilePic);
             this.imageView_reject = itemView.findViewById(R.id.imageView_reject);
             this.imageView_like = itemView.findViewById(R.id.imageView_like);
             this.imageView_favorite = itemView.findViewById(R.id.imageView_favorite);
+            this.imageView_doubleTapFav = itemView.findViewById(R.id.imageView_doubleTapFav);
 
             setIsRecyclable(false);
 

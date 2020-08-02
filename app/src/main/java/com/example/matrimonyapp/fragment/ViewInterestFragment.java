@@ -55,7 +55,7 @@ public class ViewInterestFragment extends Fragment {
 
         for(int i=0; i<15; i++)
         {
-            TimelineModel timelineModel = new TimelineModel("#yourUserId", "User Name", "25 Yrs", "MBA - Marketing, Chennai, India","Bio loading!...",uri, context);
+            TimelineModel timelineModel = new TimelineModel();
             timelineModelList.add(timelineModel);
 
         }

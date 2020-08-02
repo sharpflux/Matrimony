@@ -25,5 +25,6 @@
     <color name="yellow_favorite">#FFE333</color>
     <color name="default_background">#F5F5F5</color>
     <color name="pink">#cb2470</color>
+    <color name="codeGray">#e7e7e7</color>
 
 </resources>

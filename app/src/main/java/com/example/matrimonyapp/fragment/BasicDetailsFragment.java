@@ -61,7 +61,7 @@ import java.util.Map;
 
 public class BasicDetailsFragment extends Fragment {
 
-    EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName, editText_altMobileNo, editText_altEmailId,
+    private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName, editText_altMobileNo, editText_altEmailId,
             editText_mobileNo, editText_address, editText_emailId, editText_birthState, editText_birthTaluka, editText_birthPlace,
             editText_birthDistrict, editText_state, editText_pincode, editText_taluka, editText_district;
 
@@ -82,19 +82,19 @@ public class BasicDetailsFragment extends Fragment {
     private int mHour, mMinute;
 
     private String timeHrs="00:00:00", timeMin;
-    AlertDialog.Builder builder;
-    ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
+    private ProgressDialog progressDialog;
     Context context;
 
     private String fullName, gender, birthdate, birthTime, birthTimeType, birthPlace, birthState, birthTaluka,
             birthDistrict, mobileNo, altMobileNo, altEmailId, emailId, address, state, pincode, taluka, district,
             birthStateId, birthTalukaId, birthDistrictId, stateId, talukaId, districtId;
 
-    ArrayList<MyItem> list;
+    private ArrayList<MyItem> list;
 
-    DataFetcher dataFetcher;
+    private DataFetcher dataFetcher;
 
-    UserModel userModel;
+    private UserModel userModel;
 
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 

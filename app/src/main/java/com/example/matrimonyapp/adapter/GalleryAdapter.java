@@ -104,10 +104,12 @@ public class GalleryAdapter extends BaseAdapter {
                     customDialogImagePreview.getWindow().setBackgroundDrawable(draw);
 
 
-                    *//*WindowManager.LayoutParams lp = customDialogImagePreview.getWindow().getAttributes();
+                    */
+        /*WindowManager.LayoutParams lp = customDialogImagePreview.getWindow().getAttributes();
                     lp.dimAmount = 0.5f;
                     customDialogImagePreview.getWindow().setAttributes(lp);
-                    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);*//*
+                    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);*/
+        /*
                     customDialogImagePreview.getWindow().setDimAmount(0.5f);
                     customDialogImagePreview.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 

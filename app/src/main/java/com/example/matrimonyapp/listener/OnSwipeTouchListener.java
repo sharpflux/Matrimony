@@ -12,6 +12,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
     public OnSwipeTouchListener(Context context)
     {
         gestureDetector = new GestureDetector(context, new GestureListener());
+
     }
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -22,6 +23,14 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
     {
         private static final int SWIPE_THRESHOLD = 100;
         private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            // super.onDoubleTap(e);
+            onDoubleTaps();
+            return false;
+        }
 
         @Override
         public boolean onDown(MotionEvent e) {
@@ -73,7 +82,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
     public void onSwipeLeft(){}
     public void onSwipeTop(){}
     public void onSwipeBottom(){}
-
+    public void onDoubleTaps(){}
 
 
 

@@ -19,6 +19,14 @@
         <item name="android:width">150dp</item>
 
     </style>
+    <style name="MySpinner">
+        <item name="android:divider">#A7A7A7</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:dropDownWidth">200dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
 
 
 

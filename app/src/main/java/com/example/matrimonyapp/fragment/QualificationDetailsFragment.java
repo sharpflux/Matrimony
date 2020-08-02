@@ -393,7 +393,7 @@ public class QualificationDetailsFragment extends Fragment {
 
                 else if(params[0].toString().equals("QualificationName"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId="
+                        dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId="
                                     +params[1].toString()+
                                     "&Language="+userModel.getLanguage(),"QualificationId",
                             "Qualification", editText_qualification, textView_qualificationId,getContext(),

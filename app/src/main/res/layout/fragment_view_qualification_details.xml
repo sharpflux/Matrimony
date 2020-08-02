@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 <!--
@@ -94,16 +94,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Company Name"
+                            android:text="@string/company_name"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_companyName"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="companyName"
+                            android:text="@string/company_name"
                             />
                     </LinearLayout>
 
@@ -122,15 +123,16 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Designation"
+                            android:text="@string/designation"
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_designation"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="designation"
+                            android:text="@string/designation"
                             />
                     </LinearLayout>
 
@@ -154,6 +156,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_experience"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
                             android:text="5 yrs"
@@ -208,9 +211,10 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_companyAddress"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="companyAddress"
+                            android:text="@string/company_address"
                             android:lineSpacingMultiplier="1.2"
                             />
                     </LinearLayout>
@@ -304,9 +308,10 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:id="@+id/textView_qualificationLevel"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="highestQualificationDetails"
+                        android:text="@string/qualification_level"
                         />
                 </LinearLayout>
 
@@ -329,9 +334,10 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:id="@+id/textView_qualification"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="qualification"
+                        android:text="@string/qualification"
                         />
                 </LinearLayout>
 
@@ -355,8 +361,9 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_nameOfInstitute"
                             android:layout_weight="1"
-                            android:text="nameOfInstitute"
+                            android:text="@string/name_of_institute"
                             style="@style/NormalRight_TextView"
                             />
                     </LinearLayout>
@@ -376,13 +383,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Percentage"
+                            android:text="@string/percentage"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_percentage"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
                             android:text="85.90%"/>
@@ -406,13 +414,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="Passing Year"
+                            android:text="@string/passing_year"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:id="@+id/textView_passingYear"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
                             android:text="2010"
@@ -424,7 +433,139 @@
 
           <!--  </androidx.cardview.widget.CardView>-->
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Bold_TextView"
+                        android:text="@string/other"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/hobby"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_hobby"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/hobby"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/social_contributions"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_socialContribution"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/social_contributions"
+                        />
+                </LinearLayout>
+
+          <!--      <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/social_contributions"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_socialContribution"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/social_contributions"
+                        />
+                </LinearLayout>-->
+
+
+            </LinearLayout>
+
+<!--
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -948,6 +1089,7 @@
 
 
 
+-->
 
         </LinearLayout>
 

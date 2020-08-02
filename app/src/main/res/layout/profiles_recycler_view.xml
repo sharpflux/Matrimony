@@ -33,28 +33,29 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:weightSum="10"
             android:orientation="horizontal">
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circleImage_profilePic"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/flower2"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_userId"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="0dp"
                 android:textColor="@color/text_black"
-                android:textSize="13sp"
+                android:textSize="15sp"
                 android:text="\#USER445101"
                 android:textStyle="bold"
                 android:layout_weight="8"
@@ -65,7 +66,7 @@
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:text="@string/vertical_ellipses"
                 android:textColor="@color/text_black"
                 android:textSize="20dp"
@@ -98,13 +99,21 @@
             <ImageView
 
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:minHeight="300dp"
+                android:layout_height="wrap_content"
+
                 android:id="@+id/imageView_profilePic"
                 android:src="@drawable/flower3"
-                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
                 />
-
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageView_doubleTapFav"
+                android:src="@drawable/filled_star"
+                android:layout_centerInParent="true"
+                android:visibility="invisible"
+                />
         </RelativeLayout>
 
 
@@ -231,8 +240,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 >
 
 <!--                <TextView
@@ -252,6 +261,7 @@
                     android:text="dcnj jjf js skjn  ioqw w ijwc ckjdcn cdklcm \n hjxnasj cdja cs jdsc  sjd ow wi2 ic eiwc sk idus is"
                     android:paddingStart="5dp"
                     android:layout_marginBottom="5dp"
+
                     android:textColor="@color/text_black"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.2"

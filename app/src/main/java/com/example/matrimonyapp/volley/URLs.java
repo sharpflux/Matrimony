@@ -40,7 +40,7 @@ public class URLs {
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";
 
-    public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
+        public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
     public static final String URL_POST_FAMILYDETAILS           = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
 
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";
@@ -53,12 +53,26 @@ public class URLs {
     public static final String URL_POST_PERSONALDETAILS         = MainURL+"api/PersonalDetailsAPI/PersonalDetailsInsertUpdate";
 
     public static final String URL_GET_ALL_QUALIFICATIONNAME    = MainURL+"api/OccupationAPI/GETAllQualificationAPI?";
+    public static final String URL_GET_MULTIPLE_QUALIFICATION   = MainURL+"api/QualificationDetailsAPI/GetQualificationsMultipleAPI?";
 
     public static final String URL_GET_MULTIPLE_DISTRICT        = MainURL+"api/DistrictMultipleApi/Get_DistrictMultipleAPI?";
+    public static final String URL_GET_MULTIPLE_TALUKA          = MainURL+"api/Talukas/GetTalukaMultipleAPI?";
 
     public static final String URL_GET_MULTIPLE_CASTE           = MainURL+"api/CasteApi/Get_CasteMultipleAPI?";
-    public static final String URL_GET_SUBCASTE                = MainURL+"api/CasteApi/Get_SubCasteAPI?";
-    public static final String URL_GET_MULTIPLE_SUBCASTE       = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
+    public static final String URL_GET_SUBCASTE                 = MainURL+"api/CasteApi/Get_SubCasteAPI?";
+    public static final String URL_GET_MULTIPLE_SUBCASTE        = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
+
+
+
+    public static final String URL_POST_PROFILEPIC              = MainURL+"api/Registration/ImageUploader";
+    public static final String URL_GET_PROFILEPIC               = MainURL+"api/Registration/fetchUserProfile?";
+
+    public static final String URL_POST_MULTIPLEIMAGES          = MainURL+"api/Registration/MultipleImageUploader";
+    public static final String URL_GET_MULTIPLEIMAGES           = MainURL+"api/Registration/fetchUserProfile?";
+
+
+    public static final String URL_POST_FILTER                  = MainURL+"api/RegistrationAPINew/SETPreferenceFilter";
+    public static final String URL_GET_FILTER                   = MainURL+"api/Registration/fetchUserProfile?";
 
 
 }

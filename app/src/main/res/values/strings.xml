@@ -56,6 +56,9 @@
     <string name="no">No</string>
 
 
+    <string name="change_profile_photo">Change Profile Photo</string>
+    <string name="remove_profile_photo">Remove Profile Photo</string>
+    <string name="camera">Camera</string>
     <string name="mobile_no_on_another_account">This mobile no. is on another account</string>
     <string name="login_to_existing_account">Log in to existing account</string>
     <string name="create_new_account">Create New Account</string>
@@ -72,10 +75,12 @@
     <string name="height_should_be_between">Height should be between</string>
     <string name="willing_to_marry_in_other_communities">Willing to marry in other communities ?</string>
     <string name="qualification">Qualification</string>
+    <string name="highest_qualification">Highest Qualification</string>
     <string name="qualification_level">Highest Qualification Level</string>
     <string name="occupation">Occupation</string>
     <string name="occupation_">Occupation</string>
     <string name="occupation1">Occupation</string>
+    <string name="other">Other</string>
     <string name="father_information">Father\'s Information</string>
     <string name="is_alive">Is alive ?</string>
     <string name="father_name">Father\'s Name</string>
@@ -144,7 +149,9 @@
     <string name="educational_information">Educational Information</string>
     <string name="add_to_favorite">Add to favorites</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="add_profile_photo">Add Profile photo</string>
+    <string name="add_profile_photo">Add Profile Photo</string>
+    <string name="add_from_gallery">Add from Gallery </string>
+    <string name="add_from_camera">Add from Camera </string>
     <string name="add_profile_photo_desc">Change your profile photo to represent yourself on MatrimonyApp.</string>
     <string name="change_photo">Change photo</string>
     <string name="edit_profile_desc">Edit Profile so that others will know you better.</string>
@@ -167,6 +174,7 @@
     <!-- Content descriptions -->
     <string name="descr_image">Image</string>
     <string name="image">Image</string>
+    <string name="no_image_selected">No image Selected</string>
 
 
     <string name="height">Height </string>
@@ -240,6 +248,7 @@
     <string name="sun_22nd">Sun 22nd April, 2018</string>
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
+    <string name="done">Done</string>
     <string name="select_all">Select All</string>
     <string name="need_help">NEED HELP?</string>
     <string name="email_invoice">Email Invoice</string>

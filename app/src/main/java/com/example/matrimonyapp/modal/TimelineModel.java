@@ -13,23 +13,30 @@ public class TimelineModel {
     String userQualification;
     String userAge;
     String userBio;
-    Uri profilePic;
+    String userBirthday;
+    String userMobileNo;
+    String userOccupation;
+    String userEmail;
+    //Uri profilePic;
+    String profilePic;
     Context context;
 
+    public TimelineModel()
+    {}
 
     public TimelineModel(Context context) {
-        this.context = context;
+        //this.context = context;
         this.userId = "";
         this.userName = "";
         this.userAge = "";
         this.userQualification = "";
         this.userBio = "";
-        this.profilePic = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+context.getResources().getResourcePackageName(R.drawable.flower2)
-                +"/"+context.getResources().getResourceTypeName(R.drawable.flower2)
-                +"/"+context.getResources().getResourceEntryName(R.drawable.flower2));
+        //this.profilePic = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+context.getResources().getResourcePackageName(R.drawable.flower2)
+        //        +"/"+context.getResources().getResourceTypeName(R.drawable.flower2)
+        //        +"/"+context.getResources().getResourceEntryName(R.drawable.flower2));
     }
 
-    public TimelineModel(String userId, String userName, String userAge, String userQualification, String userBio, Uri profilePic, Context context) {
+    public TimelineModel(String userId, String userName, String userAge, String userQualification, String userBio, String profilePic, Context context) {
         this.userId = userId;
         this.userName = userName;
         this.userAge = userAge;
@@ -79,11 +86,43 @@ public class TimelineModel {
         this.userBio = userBio;
     }
 
-    public Uri getProfilePic() {
+    public String getUserBirthday() {
+        return userBirthday;
+    }
+
+    public void setUserBirthday(String userBirthday) {
+        this.userBirthday = userBirthday;
+    }
+
+    public String getUserMobileNo() {
+        return userMobileNo;
+    }
+
+    public void setUserMobileNo(String userMobileNo) {
+        this.userMobileNo = userMobileNo;
+    }
+
+    public String getUserOccupation() {
+        return userOccupation;
+    }
+
+    public void setUserOccupation(String userOccupation) {
+        this.userOccupation = userOccupation;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(Uri profilePic) {
+    public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
 }

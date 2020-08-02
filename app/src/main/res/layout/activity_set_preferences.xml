@@ -82,7 +82,7 @@
 
 
                         <RadioGroup
-                            android:id="@+id/radioGroup_lookingFor"
+                            android:id="@+id/radioGroup_gender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -433,7 +433,7 @@
                 </LinearLayout>
 
 
-                <LinearLayout
+            <!--    <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -746,7 +746,7 @@
                     </LinearLayout>
 
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
 
@@ -1138,7 +1138,7 @@
                             android:paddingBottom="8dp">
 
                             <EditText
-                                android:id="@+id/edt_subcaste"
+                                android:id="@+id/editText_subCaste"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -1200,7 +1200,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="@string/qualification"
+                            android:text="@string/qualification_level"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -1229,7 +1229,7 @@
                             android:paddingBottom="8dp">
 
                             <EditText
-                                android:id="@+id/editText_qualification"
+                                android:id="@+id/editText_highestQualificationLevel"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -1292,7 +1292,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Qualfication In"
+                            android:text="@string/highest_qualification"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -1321,7 +1321,7 @@
                             android:paddingBottom="8dp">
 
                             <EditText
-                                android:id="@+id/edt_qualificationIn"
+                                android:id="@+id/editText_qualification"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -1504,7 +1504,7 @@
                             android:paddingBottom="8dp">
 
                             <EditText
-                                android:id="@+id/edt_diet"
+                                android:id="@+id/editText_diet"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -1775,7 +1775,7 @@
                             android:paddingBottom="8dp">
 
                             <EditText
-                                android:id="@+id/edt_personalIncome"
+                                android:id="@+id/editText_individualIncome"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -1868,7 +1868,7 @@
                             android:paddingBottom="8dp">
 
                             <EditText
-                                android:id="@+id/edt_familyIncome"
+                                android:id="@+id/editText_familyIncome"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -2296,7 +2296,7 @@
             android:textColor="@color/text_black" />
 
         <TextView
-            android:id="@+id/textView_search"
+            android:id="@+id/textView_setPreferences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

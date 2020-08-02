@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Sagar Hatikat on 10 September 2019
  */
-public class SQLiteSetpreference extends SQLiteOpenHelper {
+public class SQLiteFilter extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Matrimony.db";
     public static final String TABLE_NAME = "Filter";
     private static final String TABLE_CATEGORY= "CategoryTable";
@@ -21,7 +21,7 @@ public class SQLiteSetpreference extends SQLiteOpenHelper {
     public static final String ITEMTYPEID = "ItemTypeId";
 
 
-    public SQLiteSetpreference(Context context) {
+    public SQLiteFilter(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
