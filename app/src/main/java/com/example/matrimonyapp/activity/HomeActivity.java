@@ -28,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -91,7 +92,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     static String gender, stateIds, districtsIds, talukaIds, maritalStatusIds, familyTypeIds, familyValueIds,
             familyIncomeIds, individualIncomeIds, qualificationLevelIds, qualificationIds, dietIds, colorIds,
             occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,16 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         imageView_profilePic = findViewById(R.id.imageView_profilePic);
         // timelineAdapter = new TimelineAdapter(this,)
 
+
+     /*   mSwipeRefreshLayout=findViewById(R.id.swiperefresh);
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchValues();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });*/
 
         if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
             finish();

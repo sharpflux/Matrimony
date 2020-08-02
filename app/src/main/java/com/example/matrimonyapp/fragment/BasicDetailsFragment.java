@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -402,8 +403,7 @@ public class BasicDetailsFragment extends Fragment {
 
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_BASICDETAILS,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  URLs.URL_POST_BASICDETAILS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -474,8 +474,8 @@ public class BasicDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
 
 
     }
@@ -612,11 +612,8 @@ public class BasicDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
-
-
     }
 
 
@@ -720,6 +717,7 @@ public class BasicDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
