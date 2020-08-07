@@ -439,7 +439,7 @@ onClickListener();
 
         editText_currentAddress= view.findViewById(R.id.editText_currentAddress);
         editText_currentVillage= view.findViewById(R.id.editText_currentVillage);
-        editText_country= view.findViewById(R.id.editText_country);
+        editText_currentCountry = view.findViewById(R.id.editText_currentCountry);
         editText_currentState= view.findViewById(R.id.editText_currentState);
         editText_currentPostalCode = view.findViewById(R.id.editText_currentPostalCode);
         editText_currentTaluka = view.findViewById(R.id.editText_currentTaluka);
