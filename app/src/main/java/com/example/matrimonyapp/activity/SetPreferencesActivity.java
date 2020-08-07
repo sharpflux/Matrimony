@@ -193,7 +193,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         editText_district = findViewById(R.id.editText_district);
         editText_taluka = findViewById(R.id.editText_taluka);
         textView_cityId = findViewById(R.id.textView_cityId);
-        switchButton_otherCaste = findViewById(R.id.switchButton_otherCaste);
+        //switchButton_otherCaste = findViewById(R.id.switchButton_otherCaste);
         textView_setPreferences = findViewById(R.id.textView_setPreferences);
 
 

@@ -68,11 +68,11 @@ public class URLs {
     public static final String URL_GET_PROFILEPIC               = MainURL+"api/Registration/fetchUserProfile?";
 
     public static final String URL_POST_MULTIPLEIMAGES          = MainURL+"api/Registration/MultipleImageUploader";
-    public static final String URL_GET_MULTIPLEIMAGES           = MainURL+"api/Registration/fetchUserProfile?";
+    public static final String URL_GET_MULTIPLEIMAGES           = MainURL+"";
 
 
     public static final String URL_POST_FILTER                  = MainURL+"api/RegistrationAPINew/SETPreferenceFilter";
-    public static final String URL_GET_FILTER                   = MainURL+"api/Registration/fetchUserProfile?";
+    public static final String URL_GET_FILTER                   = MainURL+"";
 
 
 }

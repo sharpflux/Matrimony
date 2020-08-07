@@ -102,6 +102,8 @@
 
 
 
+
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -125,7 +127,35 @@
 
 
 
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup_irrigation"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:theme="@style/RadioButtonTheme"
+                    >
 
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_irrigated"
+                        android:text="@string/irrigated"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_black"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton_nonIrrigated"
+                        android:text="@string/non_irrigated"
+                        android:textSize="13sp"
+                        android:layout_marginStart="25dp"
+                        android:textColor="@color/text_black"
+                        android:checked="true"
+                        />
+
+                </RadioGroup>
 
 
             </LinearLayout>

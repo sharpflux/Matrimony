@@ -186,7 +186,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "You have successfully registered!", Toast.LENGTH_SHORT).show();
 
 
-                                        Intent intent = new Intent(VerifyOtpActivity.this, HomeActivity.class);
+                                        Intent intent = new Intent(VerifyOtpActivity.this, MainActivity.class);
                                         startActivity(intent);
 
                                 }

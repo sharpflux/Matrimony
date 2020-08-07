@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +33,7 @@ import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
-import com.suke.widget.SwitchButton;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -57,7 +58,7 @@ public class ReligiousDetailsFragment extends Fragment {
     private ImageView imageView_back;
 
     String caste, subCaste, religion, otherCaste, gothram, dosh;
-    SwitchButton switchButton_otherCaste;
+    CheckBox checkBox_otherCaste;
     Bundle bundle;
 
     DataFetcher dataFetcher;
@@ -120,7 +121,7 @@ public class ReligiousDetailsFragment extends Fragment {
         textView_motherTongueId = view.findViewById(R.id.textView_motherTongueId);
 
 
-        switchButton_otherCaste = view.findViewById(R.id.switchButton_otherCaste);
+        checkBox_otherCaste = view.findViewById(R.id.checkBox_otherCaste);
 
         bundle=getArguments();
 
@@ -268,7 +269,7 @@ public class ReligiousDetailsFragment extends Fragment {
                 params.put("ReligionId",textView_religionId.getText().toString());
                 params.put("CasteId",textView_casteId.getText().toString());
                 params.put("SubCasteId",textView_subCasteId.getText().toString());
-                params.put("OtherCommunity",String.valueOf(switchButton_otherCaste.isChecked()));
+                params.put("OtherCommunity",String.valueOf(checkBox_otherCaste.isChecked()));
                 params.put("Gothram",editText_gothram.getText().toString());
                 params.put("Dosh",editText_dosh.getText().toString());
                 params.put("MotherTongueId",textView_motherTongueId.getText().toString());
@@ -318,7 +319,7 @@ public class ReligiousDetailsFragment extends Fragment {
                                     editText_religion.setText(jsonObject.getString("ReligionName"));
                                     editText_caste.setText(jsonObject.getString("CasteName"));
                                     editText_subCaste.setText(jsonObject.getString("SubCasteName"));
-                                    switchButton_otherCaste.setChecked(jsonObject.getBoolean("OtherCommunity"));
+                                    checkBox_otherCaste.setChecked(jsonObject.getBoolean("OtherCommunity"));
                                     editText_gothram.setText(jsonObject.getString("Gothram"));
                                     editText_dosh.setText(jsonObject.getString("Dosh"));
                                     editText_motherTongue.setText(jsonObject.getString("MotherTongueName"));

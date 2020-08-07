@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -87,7 +88,8 @@ public class FamilyDetailsFragment extends Fragment {
             fatherStateId, fatherDistrictId, fatherTalukaId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
             motherOccupation, familyIncome, relative1, relative2, relative3, relative4;
 
-    SwitchButton switchButton_haveFather, switchButton_haveMother;
+    //SwitchButton switchButton_haveFather, switchButton_haveMother;
+    CheckBox checkBox_fatherIsAlive, checkBox_motherIsAlive;
 
     Bundle bundle;
 
@@ -142,7 +144,7 @@ public class FamilyDetailsFragment extends Fragment {
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
 
-        switchButton_haveFather = view.findViewById(R.id.switchButton_fatherIsAlive);
+        checkBox_fatherIsAlive = view.findViewById(R.id.checkBox_fatherIsAlive);
         editText_fatherName = view.findViewById(R.id.editText_fatherName);
         editText_fatherMobileNo = view.findViewById(R.id.editText_fatherMobileNo);
         editText_fatherQualification = view.findViewById(R.id.editText_fatherQualification);
@@ -163,7 +165,7 @@ public class FamilyDetailsFragment extends Fragment {
         //editText_fatherProperty = view.findViewById(R.id.editText_fatherProperty);
         editText_fatherAddress = view.findViewById(R.id.editText_fatherAddress);
 
-        switchButton_haveMother = view.findViewById(R.id.switchButton_motherIsAlive);
+        checkBox_motherIsAlive = view.findViewById(R.id.checkBox_motherIsAlive);
         editText_motherName = view.findViewById(R.id.editText_motherName);
         editText_motherMobileNo = view.findViewById(R.id.editText_motherMobileNo);
         editText_motherQualification = view.findViewById(R.id.editText_motherQualification);
@@ -412,6 +414,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                 CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), "0", "0",
                         addPersonAdapter_farm, addPersonModelArrayList_farm, 0);
+
                 customDialogAddFarm.show();
 
             }
@@ -535,7 +538,7 @@ public class FamilyDetailsFragment extends Fragment {
 
     void insertDetails()
     {
-        final String father_isAlive = switchButton_haveFather.isChecked()? "1" : "0";
+        final String father_isAlive = checkBox_fatherIsAlive.isChecked()? "1" : "0";
         fatherName = editText_fatherName.getText().toString().trim();
         fatherMobileNo = editText_fatherMobileNo.getText().toString().trim();
         fatherQualificationId = textView_fatherQualificationId.getText().toString().trim();
@@ -547,7 +550,7 @@ public class FamilyDetailsFragment extends Fragment {
         fatherDistrictId = textView_fatherDistrictId.getText().toString().trim();
         fatherTalukaId = textView_fatherTalukaId.getText().toString().trim();
 
-        final String mother_isAlive = switchButton_haveMother.isChecked()? "1" : "0";
+        final String mother_isAlive = checkBox_motherIsAlive.isChecked()? "1" : "0";
         motherName = editText_motherName.getText().toString().trim();
         motherMobileNo = editText_motherMobileNo.getText().toString().trim();
         motherQualificationId = textView_motherQualificationId.getText().toString().trim();
@@ -830,7 +833,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     motherDetailsId = jsonObject.getInt("MotherDetailsIdAPI");
 
 
-                                    switchButton_haveFather.setChecked(jsonObject.getString("IsAliveFather").equals("1"));
+                                    checkBox_fatherIsAlive.setChecked(jsonObject.getString("IsAliveFather").equals("1"));
 
                                     editText_fatherName.setText(jsonObject.getString("FullnameFather"));
                                     editText_fatherMobileNo.setText(jsonObject.getString("MobileNoFather"));
@@ -853,7 +856,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     editText_fatherOccupation.setText(jsonObject.getString("OccupationNameFather"));
 
 
-                                    switchButton_haveMother.setChecked(jsonObject.getString("IsAliveMother").equals("1"));
+                                    checkBox_motherIsAlive.setChecked(jsonObject.getString("IsAliveMother").equals("1"));
 
 
                                     editText_motherName.setText(jsonObject.getString("FullnameMother"));

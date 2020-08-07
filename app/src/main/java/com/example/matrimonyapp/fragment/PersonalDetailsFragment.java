@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
@@ -64,8 +66,9 @@ public class PersonalDetailsFragment extends Fragment {
     EditText editText_colour, editText_maritalStatus, editText_familyStatus,
             editText_familyType, editText_familyValues, editText_disabilityType, editText_diet;
 
-    SwitchButton switchButton_disability, switchButton_livesWithFamily;
+    //SwitchButton switchButton_disability, switchButton_livesWithFamily;
 
+    CheckBox checkBox_disability, checkBox_livesWithFamily;
     //RadioGroup radioGroup_diet;
 
     com.kevalpatel2106.rulerpicker.RulerValuePicker rulerValuePicker_height, rulerValuePicker_weight;
@@ -132,8 +135,8 @@ public class PersonalDetailsFragment extends Fragment {
         editText_diet = view.findViewById(R.id.editText_diet);
         textView_dietId = view.findViewById(R.id.textView_dietId);
 
-        switchButton_disability = view.findViewById(R.id.switchButton_disability);
-        switchButton_livesWithFamily = view.findViewById(R.id.switchButton_livesWithFamily);
+        checkBox_disability = view.findViewById(R.id.checkBox_disability);
+        checkBox_livesWithFamily = view.findViewById(R.id.checkBox_livesWithFamily);
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
 
@@ -241,7 +244,21 @@ public class PersonalDetailsFragment extends Fragment {
 
 
 
-        switchButton_disability.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        checkBox_disability.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!isChecked)
+                {
+                    editText_disabilityType.setText("NA");
+                    editText_disabilityType.setEnabled(false);
+                }
+                else{
+                    editText_disabilityType.setText("");
+                    editText_disabilityType.setEnabled(true);
+                }
+            }
+        });
+        /*checkBox_disability.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if(!isChecked)
@@ -254,7 +271,7 @@ public class PersonalDetailsFragment extends Fragment {
                     editText_disabilityType.setEnabled(true);
                 }
             }
-        });
+        });*/
 
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
@@ -419,10 +436,10 @@ public class PersonalDetailsFragment extends Fragment {
                 params.put("FamilyStatusId",textView_familyStatus.getText().toString());
                 params.put("FamilyTypeId",textView_familyType.getText().toString());
                 params.put("FamilyValuesId",textView_familyValues.getText().toString());
-                params.put("Disability",String.valueOf(switchButton_disability.isChecked()));
+                params.put("Disability",String.valueOf(checkBox_disability.isChecked()));
                 params.put("DisabilityType", disabilityType);
                 params.put("Diet",textView_dietId.getText().toString());
-                params.put("LivesWithFamily",String.valueOf(switchButton_livesWithFamily.isChecked()));
+                params.put("LivesWithFamily",String.valueOf(checkBox_livesWithFamily.isChecked()));
                 params.put("LanguageType",userModel.getLanguage());
 
 
@@ -474,9 +491,9 @@ public class PersonalDetailsFragment extends Fragment {
                                     textView_familyValues.setText(jsonObject.getString("FamilyValuesId"));
 
 
-                                    switchButton_disability.setChecked(jsonObject.getBoolean("Disability"));
+                                    checkBox_disability.setChecked(jsonObject.getBoolean("Disability"));
                                     editText_disabilityType.setText(jsonObject.getString("DisabilityType"));
-                                    switchButton_livesWithFamily.setChecked(jsonObject.getBoolean("LivesWithFamily"));
+                                    checkBox_livesWithFamily.setChecked(jsonObject.getBoolean("LivesWithFamily"));
                                     editText_colour.setText(jsonObject.getString("SkinColourName"));
                                     editText_maritalStatus.setText(jsonObject.getString("MaritalStatusName"));
                                     editText_familyStatus.setText(jsonObject.getString("FamilyStatusName"));

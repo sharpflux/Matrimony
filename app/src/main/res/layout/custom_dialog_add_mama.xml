@@ -54,19 +54,22 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/is_alive"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
 
-                    <com.suke.widget.SwitchButton
-                        android:layout_width="45dp"
-                        android:layout_height="27dp"
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_alive"
+                        android:id="@+id/checkBox_mamaIsAlive"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_black"
+                        android:layoutDirection="rtl"
+                        android:button="@drawable/custom_checkbox"
+                        android:gravity="left"
+                        />
+                   <!-- <com.suke.widget.SwitchButton
                         android:id="@+id/switchButton_mamaIsAlive"
+                        android:layout_width="45dp"
+                        android:layout_height="17dp"
                         android:layout_marginEnd="03dp"
                         app:sb_button_color="#8f329b"
                         app:sb_checked="true"
@@ -74,7 +77,7 @@
                         app:sb_checkline_color="@color/transparent"
                         app:sb_checkline_width="0dp"
                         app:sb_uncheck_color="#ebebeb"
-                        app:sb_uncheckcircle_radius="0dp" />
+                        app:sb_uncheckcircle_radius="0dp" />-->
 
                 </LinearLayout>
 

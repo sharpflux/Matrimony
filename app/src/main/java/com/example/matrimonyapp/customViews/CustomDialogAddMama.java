@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -54,7 +55,8 @@ public class CustomDialogAddMama extends Dialog {
 
     private TextView textView_mamaStateId, textView_mamaDistrictId, textView_mamaTalukaId, textView_addMama;
     private EditText editText_mamaState, editText_mamaTaluka, editText_mamaDistrict;
-    private SwitchButton switchButton_mamaIsAlive;
+    private CheckBox checkBox_mamaIsAlive;
+    //private SwitchButton switchButton_mamaIsAlive;
 
     private SQLiteMamaDetails sqLiteMamaDetails;
     DataFetcher dataFetcher;
@@ -105,7 +107,7 @@ public class CustomDialogAddMama extends Dialog {
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
-        switchButton_mamaIsAlive = findViewById(R.id.switchButton_mamaIsAlive);
+        checkBox_mamaIsAlive = findViewById(R.id.checkBox_mamaIsAlive);
         editText_mamaName = findViewById(R.id.editText_mamaName);
         editText_mamaMobileNo = findViewById(R.id.editText_mamaMobileNo);
         editText_mamaOccupation = findViewById(R.id.editText_mamaOccupation);
@@ -150,7 +152,7 @@ public class CustomDialogAddMama extends Dialog {
                 editText_mamaDistrict.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.DISTRICT_NAME)));
                 textView_mamaTalukaId.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.TALUKA_ID)));
                 editText_mamaTaluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.TALUKA_NAME)));
-                switchButton_mamaIsAlive.setChecked(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.IS_ALIVE)).equals("1"));
+                checkBox_mamaIsAlive.setChecked(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.IS_ALIVE)).equals("1"));
 
 
             }
@@ -179,7 +181,7 @@ public class CustomDialogAddMama extends Dialog {
             @Override
             public void onClick(View view) {
 
-                String isAlive = switchButton_mamaIsAlive.isChecked()? "1" : "0";
+                String isAlive = checkBox_mamaIsAlive.isChecked()? "1" : "0";
                 String name = editText_mamaName.getText().toString().trim();
                 String mobileNo = editText_mamaMobileNo.getText().toString().trim();
                 String occupationId = textView_mamaOccupationId.getText().toString().trim();

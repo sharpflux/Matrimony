@@ -21,6 +21,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="date">Date</string>
+    <string name="birth_details">Birth Details</string>
     <string name="birthdate">Birthdate </string>
     <string name="age">Age</string>
     <string name="time">Birth Time</string>
@@ -32,6 +33,7 @@
     <string name="approximate">Approximate</string>
     <string name="approx">Approx</string>
     <string name="city">City *</string>
+    <string name="village">Village</string>
     <string name="state">State *</string>
     <string name="country">Country</string>
     <string name="_state">State</string>
@@ -40,6 +42,7 @@
     <string name="taluka">Taluka *</string>
     <string name="_taluka">Taluka</string>
     <string name="pincode">Pincode *</string>
+    <string name="postal_code">Postal code *</string>
     <string name="address_type">Address Type</string>
     <string name="email">Email Id *</string>
     <string name="alt_email">Alternate Email Id</string>
@@ -97,7 +100,7 @@
     <string name="add_sibling">Add sibling</string>
     <string name="add_mama">Add Mama</string>
     <string name="name">Name</string>
-    <string name="village">Village</string>
+
     <string name="father_in_law_information">Father-in-law\'s Information</string>
     <string name="relation">Relation</string>
     <string name="married">Married</string>
@@ -123,6 +126,8 @@
     <string name="ssc">SSC</string>
     <string name="hsc">HSC</string>
     <string name="course">Course</string>
+    <string name="acamedics">Academics</string>
+    <string name="extra_activities">Extra Activities</string>
     <string name="hobby">Hobby</string>
     <string name="social_contributions">Social Contributions</string>
     <string name="company_name">Company Name</string>
@@ -199,6 +204,7 @@
     <string name="lives_with_family">Lives with family ?</string>
 
 
+    <string name="add_more">Add more</string>
     <string name="add_property">Add Property Details</string>
     <string name="add_farm">Add Farm Details</string>
     <string name="property_details">Property Details</string>
@@ -206,6 +212,8 @@
     <string name="crops_taken">Crops Taken</string>
     <string name="full">Full</string>
     <string name="partly">Partly</string>
+    <string name="irrigated">Irrigated</string>
+    <string name="non_irrigated">Non-Irrigated</string>
     <string name="property">Property</string>
     <string name="siblings_name">Siblings Name</string>
     <string name="siblings_information">Sibling\'s Information</string>
@@ -301,6 +309,9 @@
     <string name="contact_mobile_no">Contact Mobile Number</string>
     <string name="address">Address *</string>
     <string name="address_">Address</string>
+    <string name="permanent_address">Permanent Address</string>
+    <string name="current_address">Current Address</string>
+    <string name="is_address_same">Is Current Address same as Permanent Address </string>
     <string name="area">Area</string>
 
 

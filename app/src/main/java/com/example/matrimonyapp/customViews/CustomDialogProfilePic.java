@@ -39,7 +39,7 @@ import com.example.matrimonyapp.volley.URLs;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class CustomDialogAddFarm extends Dialog {
+public class CustomDialogProfilePic extends Dialog {
 
 
 
@@ -66,8 +66,8 @@ public class CustomDialogAddFarm extends Dialog {
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
 
-    public CustomDialogAddFarm(Context context, String id, String farm_details_id,  AddPersonAdapter addPersonAdapter,
-                                   ArrayList<AddPersonModel> addPersonModelArrayList, int position)
+    public CustomDialogProfilePic(Context context, String id, String farm_details_id,  AddPersonAdapter addPersonAdapter,
+                               ArrayList<AddPersonModel> addPersonModelArrayList, int position)
     {
         super(context);
         this.context = context;
@@ -86,7 +86,7 @@ public class CustomDialogAddFarm extends Dialog {
 
 
 
-        setContentView(R.layout.custom_dialog_add_farm);
+        setContentView(R.layout.custom_dialog_profile_pic);
 
         if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
             context.startActivity(new Intent(context, LoginActivity.class));
@@ -160,7 +160,6 @@ public class CustomDialogAddFarm extends Dialog {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
                         addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), farm_details_id, area, crops));
                         addPersonAdapter.notifyDataSetChanged();
-
 
                     } else {
                         Toast.makeText(context, "Error in sqlite updation", Toast.LENGTH_SHORT).show();

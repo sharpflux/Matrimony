@@ -16,9 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -64,7 +66,9 @@ public class BasicDetailsFragment extends Fragment {
 
     private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName, editText_altMobileNo, editText_altEmailId,
             editText_mobileNo, editText_address, editText_emailId, editText_birthState, editText_birthTaluka, editText_birthPlace,
-            editText_birthDistrict, editText_state, editText_pincode, editText_taluka, editText_district;
+            editText_birthDistrict, editText_state, editText_postalCode, editText_taluka, editText_district,
+            editText_currentState, editText_currentDistrict, editText_currentTaluka, editText_currentPostalCode,
+            editText_currentAddress, editText_currentVillage, editText_village, editText_currentCountry, editText_country;
 
     private ImageView imageView_back;
 
@@ -72,10 +76,12 @@ public class BasicDetailsFragment extends Fragment {
 
     private TextView textView_saveAndContinue;
     private TextView textView_stateId, textView_districtId, textView_talukaId, textView_birthStateId,
-            textView_birthDistrictId, textView_birthTalukaId;
+            textView_birthDistrictId, textView_birthTalukaId, textView_currentStateId, textView_currentDistrictId,
+            textView_currentTalukaId, textView_countryId, textView_currentCountryId;
 
     private View view;
 
+    private CheckBox checkBox_isAddressSame;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     protected int basicDetailsId=0;
@@ -88,7 +94,7 @@ public class BasicDetailsFragment extends Fragment {
     Context context;
 
     private String fullName, gender, birthdate, birthTime, birthTimeType, birthPlace, birthState, birthTaluka,
-            birthDistrict, mobileNo, altMobileNo, altEmailId, emailId, address, state, pincode, taluka, district,
+            birthDistrict, mobileNo, altMobileNo, altEmailId, emailId, address, state, postalCode, taluka, district,
             birthStateId, birthTalukaId, birthDistrictId, stateId, talukaId, districtId;
 
     private ArrayList<MyItem> list;
@@ -108,49 +114,7 @@ public class BasicDetailsFragment extends Fragment {
 
         context = getContext();
 
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
-
-        userModel = CustomSharedPreference.getInstance(getContext()).getUser();
-
-        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
-
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-        editText_firstName = (EditText) view.findViewById(R.id.editText_firstName);
-        editText_altMobileNo = view.findViewById(R.id.editText_altMobileNo);
-        editText_altEmailId = view.findViewById(R.id.editText_altEmailId);
-
-        radioGroup_gender = (RadioGroup) view.findViewById(R.id.radioGroup_gender);
-
-        editText_birthdate=view.findViewById(R.id.editText_birthdate);
-        editText_birthTime=view.findViewById(R.id.editText_time);
-        editText_age=view.findViewById(R.id.editText_age);
-
-        radioGroup_birthTimeType= view.findViewById(R.id.radioGroup_birthTimeType);
-
-        editText_birthPlace = view.findViewById(R.id.editText_birthPlace);
-        editText_birthState = view.findViewById(R.id.editText_birthState);
-        editText_birthTaluka = view.findViewById(R.id.editText_birthTaluka);
-        editText_birthDistrict = view.findViewById(R.id.editText_birthDistrict);
-        editText_mobileNo = view.findViewById(R.id.editText_mobileNo);
-        editText_emailId= view.findViewById(R.id.editText_emailId);
-        editText_address = view.findViewById(R.id.editText_address);
-
-        editText_state= view.findViewById(R.id.editText_state);
-        editText_pincode = view.findViewById(R.id.editText_pincode);
-        editText_taluka = view.findViewById(R.id.editText_taluka);
-        editText_district = view.findViewById(R.id.editText_district);
-
-
-        textView_stateId = view.findViewById(R.id.textView_stateId);
-        textView_districtId= view.findViewById(R.id.textView_districtId);
-        textView_talukaId = view.findViewById(R.id.textView_talukaId);
-
-        textView_birthStateId= view.findViewById(R.id.textView_birthStateId);
-        textView_birthDistrictId = view.findViewById(R.id.textView_birthDistrictId);
-        textView_birthTalukaId = view.findViewById(R.id.textView_birthTalukaId);
+        init();
 
 
         if(userModel!=null)
@@ -159,6 +123,7 @@ public class BasicDetailsFragment extends Fragment {
             //editText_birthdate.setText(userModel.getBirthdate());
             editText_age.setText(userModel.getAge());
             editText_mobileNo.setText(userModel.getMobileNo());
+            FieldValidation.setRadioButtonAccToValue(radioGroup_gender,userModel.getGender());
             editText_emailId.setText(userModel.getEmailId());
 
             final Calendar calendar = Calendar.getInstance();
@@ -187,146 +152,83 @@ public class BasicDetailsFragment extends Fragment {
         birthTimeType = FieldValidation.radioGroupValidation(radioGroup_birthTimeType);
 
 
-        editText_birthdate.setOnClickListener(new View.OnClickListener() {
+
+        checkBox_isAddressSame.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-
-                final Calendar calendar = Calendar.getInstance();
-                //DatePickerDialog d = new DatePickerDialog()
-                DatePickerDialog dialog = new DatePickerDialog(getActivity(),R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker arg0, int year, int month, int day_of_month) {
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, (month));
-                        calendar.set(Calendar.DAY_OF_MONTH, day_of_month);
-                        String myFormat = "yyyy-MM-dd";
-                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-                        editText_birthdate.setText(sdf.format(calendar.getTime()));
-                        String age = getAge(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                        editText_age.setText(age);
-                    }
-                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                // dialog.getDatePicker().setMinDate(calendar.getTimeInMillis());// TODO: used to hide previous date,month and year
-                calendar.add(Calendar.YEAR, -20);
-
-                dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());// TODO: used to hide future date,month and year
-                dialog.show();
-
-
-
-
-            }
-        });
-
-
-        editText_birthTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar c = Calendar.getInstance();
-                mHour = c.get(Calendar.HOUR_OF_DAY);
-                mMinute = c.get(Calendar.MINUTE);
-
-                // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),R.style.DialogTheme,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                int hrs;
-                                String time="";
-                                timeHrs = hourOfDay+":"+minute+":00";
-                                if(hourOfDay>12)
-                                {
-                                    hourOfDay = hourOfDay%12;
-
-                                    time =  String.format("%02d",hourOfDay)+":"+String.format("%02d",minute)+"pm";
-                                }
-                                else if(hourOfDay==12)
-                                {
-                                    time =  String.format("%02d",hourOfDay)+":"+String.format("%02d",minute)+"pm";
-                                }
-                                else
-                                {
-                                    time = String.format("%02d",hourOfDay)+":"+String.format("%02d",minute)+"am";
-                                }
-
-                                editText_birthTime.setText(time);
-                            }
-                        }, mHour, mMinute, false);
-                timePickerDialog.show();
-            }
-        });
-
-/*    radioGroup_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-            int id = radioGroup.getCheckedRadioButtonId();
-
-            RadioButton rb = view.findViewById(id);
-
-            gender= rb.getText().toString();
-            //Toast.makeText(getContext(),gender,Toast.LENGTH_LONG).show();
-        }
-    });*/
-
-/*
-    radioGroup_birthTimeType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int id = radioGroup.getCheckedRadioButtonId();
-
-                RadioButton rb = view.findViewById(id);
-
-                birthTimeType = rb.getText().toString();
-                //Toast.makeText(getContext(),gender,Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-/*
-
-        radioGroup_birthTimeType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int id = radioGroup.getCheckedRadioButtonId();
-
-                RadioButton rb = view.findViewById(id);
-
-                birthTimeType= rb.getText().toString();
-                //Toast.makeText(getContext(),birthTimeType,Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
-
-        imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
-        TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Basic Details");
-        textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
-
-        imageView_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fragmentManager = getFragmentManager();
-
-                if(fragmentManager.getBackStackEntryCount()>0)
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
                 {
-                    fragmentManager.popBackStack();
+                    editText_currentAddress.setText(editText_address.getText().toString());
+                    editText_currentVillage.setText(editText_village.getText().toString());
+
+                    editText_currentTaluka.setText(editText_taluka.getText().toString());
+                    editText_currentDistrict.setText(editText_district.getText().toString());
+                    editText_currentState.setText(editText_state.getText());
+                    editText_currentCountry.setText(editText_country.getText());
+                    editText_currentPostalCode.setText(editText_postalCode.getText().toString());
+
+                    textView_currentTalukaId.setText(textView_talukaId.getText().toString());
+                    textView_currentDistrictId.setText(textView_districtId.getText().toString());
+                    textView_currentStateId.setText(textView_stateId.getText().toString());
+                    textView_currentCountryId.setText(textView_countryId.getText().toString());
+
+                    textView_currentTalukaId.setEnabled(false);
+                    textView_currentDistrictId.setEnabled(false);
+                    textView_currentStateId.setEnabled(false);
+                    textView_currentCountryId.setEnabled(false);
+
+                    editText_currentAddress.setEnabled(false);
+                    editText_currentVillage.setEnabled(false);
+
+                    editText_currentTaluka.setEnabled(false);
+                    editText_currentDistrict.setEnabled(false);
+                    editText_currentState.setEnabled(false);
+                    editText_currentCountry.setEnabled(false);
+                    editText_currentPostalCode.setEnabled(false);
+
                 }
                 else
-                    getActivity().finish();
+                {
+
+                    editText_currentAddress.setText("");
+                    editText_currentVillage.setText("");
+
+                    editText_currentTaluka.setText("");
+                    editText_currentDistrict.setText("");
+                    editText_currentState.setText("");
+                    editText_currentCountry.setText("");
+                    editText_currentPostalCode.setText("");
+
+                    textView_currentTalukaId.setText("0");
+                    textView_currentDistrictId.setText("0");
+                    textView_currentStateId.setText("0");
+                    textView_currentCountryId.setText("0");
+
+                    textView_currentTalukaId.setEnabled(true);
+                    textView_currentDistrictId.setEnabled(true);
+                    textView_currentStateId.setEnabled(true);
+                    textView_currentCountryId.setEnabled(true);
+
+                    editText_currentAddress.setEnabled(true);
+                    editText_currentVillage.setEnabled(true);
+
+                    editText_currentTaluka.setEnabled(true);
+                    editText_currentDistrict.setEnabled(true);
+                    editText_currentState.setEnabled(true);
+                    editText_currentCountry.setEnabled(true);
+                    editText_currentPostalCode.setEnabled(true);
+
+                }
             }
         });
 
-/*        editText_birthPlace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
 
+        textChangeListener();
 
-            }
-        });*/
+onClickListener();
+
+
 
         list = new ArrayList<MyItem>();
 
@@ -358,6 +260,204 @@ public class BasicDetailsFragment extends Fragment {
         });
 
         return view;
+
+    }
+
+    private void textChangeListener() {
+
+        sameAddressListener(editText_address, editText_currentAddress);
+        sameAddressListener(editText_village, editText_currentVillage);
+        sameAddressListener(editText_taluka, editText_currentTaluka);
+        sameAddressListener(editText_district, editText_currentDistrict);
+        sameAddressListener(editText_state, editText_currentState);
+        sameAddressListener(editText_postalCode, editText_currentPostalCode);
+
+    }
+
+    private void onClickListener() {
+
+
+        editText_birthdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar calendar = Calendar.getInstance();
+                //DatePickerDialog d = new DatePickerDialog()
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(),R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker arg0, int year, int month, int day_of_month) {
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, (month));
+                        calendar.set(Calendar.DAY_OF_MONTH, day_of_month);
+                        String myFormat = "yyyy-MM-dd";
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+                        editText_birthdate.setText(sdf.format(calendar.getTime()));
+                        String age = getAge(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                        editText_age.setText(age);
+                    }
+                },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                // dialog.getDatePicker().setMinDate(calendar.getTimeInMillis());// TODO: used to hide previous date,month and year
+                calendar.add(Calendar.YEAR, -20);
+
+                dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());// TODO: used to hide future date,month and year
+                dialog.show();
+
+            }
+        });
+
+        editText_birthTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),R.style.DialogTheme,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                int hrs;
+                                String time="";
+                                timeHrs = hourOfDay+":"+minute+":00";
+
+                                if(hourOfDay>12)
+                                {
+                                    hourOfDay = hourOfDay%12;
+
+                                    time =  String.format("%02d",hourOfDay)+":"+String.format("%02d",minute)+"pm";
+                                }
+                                else if(hourOfDay==12)
+                                {
+                                    time =  String.format("%02d",hourOfDay)+":"+String.format("%02d",minute)+"pm";
+                                }
+                                else
+                                {
+                                    time = String.format("%02d",hourOfDay)+":"+String.format("%02d",minute)+"am";
+                                }
+
+                                editText_birthTime.setText(time);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
+            }
+        });
+
+
+
+        imageView_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentManager fragmentManager = getFragmentManager();
+
+                if(fragmentManager.getBackStackEntryCount()>0)
+                {
+                    fragmentManager.popBackStack();
+                }
+                else
+                    getActivity().finish();
+            }
+        });
+    }
+
+    private void sameAddressListener(final EditText editText, final EditText editText_current)
+    {
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                //if(editText.hasFocus())
+                {
+                    if(checkBox_isAddressSame.isChecked())
+                    {
+                        editText_current.setText(editText.getText().toString());
+                    }
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private void init()
+    {
+
+        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        }
+
+        userModel = CustomSharedPreference.getInstance(getContext()).getUser();
+
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        editText_firstName = (EditText) view.findViewById(R.id.editText_firstName);
+        editText_altMobileNo = view.findViewById(R.id.editText_altMobileNo);
+        editText_altEmailId = view.findViewById(R.id.editText_altEmailId);
+
+        radioGroup_gender = (RadioGroup) view.findViewById(R.id.radioGroup_gender);
+
+        editText_birthdate=view.findViewById(R.id.editText_birthdate);
+        editText_birthTime=view.findViewById(R.id.editText_time);
+        editText_age=view.findViewById(R.id.editText_age);
+
+        radioGroup_birthTimeType= view.findViewById(R.id.radioGroup_birthTimeType);
+
+        editText_birthPlace = view.findViewById(R.id.editText_birthPlace);
+        editText_birthState = view.findViewById(R.id.editText_birthState);
+        editText_birthTaluka = view.findViewById(R.id.editText_birthTaluka);
+        editText_birthDistrict = view.findViewById(R.id.editText_birthDistrict);
+        editText_mobileNo = view.findViewById(R.id.editText_mobileNo);
+        editText_emailId= view.findViewById(R.id.editText_emailId);
+        editText_address = view.findViewById(R.id.editText_address);
+        editText_village = view.findViewById(R.id.editText_village);
+
+        editText_country = view.findViewById(R.id.editText_country);
+        editText_state= view.findViewById(R.id.editText_state);
+        editText_postalCode = view.findViewById(R.id.editText_postalCode);
+        editText_taluka = view.findViewById(R.id.editText_taluka);
+        editText_district = view.findViewById(R.id.editText_district);
+        textView_countryId = view.findViewById(R.id.textView_countryId);
+        textView_stateId = view.findViewById(R.id.textView_stateId);
+        textView_districtId= view.findViewById(R.id.textView_districtId);
+        textView_talukaId = view.findViewById(R.id.textView_talukaId);
+
+        checkBox_isAddressSame = view.findViewById(R.id.checkBox_isAddressSame);
+
+        editText_currentAddress= view.findViewById(R.id.editText_currentAddress);
+        editText_currentVillage= view.findViewById(R.id.editText_currentVillage);
+        editText_country= view.findViewById(R.id.editText_country);
+        editText_currentState= view.findViewById(R.id.editText_currentState);
+        editText_currentPostalCode = view.findViewById(R.id.editText_currentPostalCode);
+        editText_currentTaluka = view.findViewById(R.id.editText_currentTaluka);
+        editText_currentDistrict = view.findViewById(R.id.editText_currentDistrict);
+        textView_currentCountryId = view.findViewById(R.id.textView_currentCountryId);
+        textView_currentStateId = view.findViewById(R.id.textView_currentStateId);
+        textView_currentDistrictId = view.findViewById(R.id.textView_currentDistrictId);
+        textView_currentTalukaId = view.findViewById(R.id.textView_currentTalukaId);
+
+        textView_birthStateId= view.findViewById(R.id.textView_birthStateId);
+        textView_birthDistrictId = view.findViewById(R.id.textView_birthDistrictId);
+        textView_birthTalukaId = view.findViewById(R.id.textView_birthTalukaId);
+
+
+        imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
+        TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
+        tv.setText("Basic Details");
+        textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
     }
 
@@ -408,7 +508,7 @@ public class BasicDetailsFragment extends Fragment {
         altMobileNo = editText_altMobileNo.getText().toString().trim();
 
         stateId = textView_stateId.getText().toString().trim();
-        pincode = editText_pincode.getText().toString().trim();
+        postalCode = editText_postalCode.getText().toString().trim();
         talukaId = textView_talukaId.getText().toString().trim();
         districtId = textView_districtId.getText().toString().trim();
 
@@ -479,7 +579,7 @@ public class BasicDetailsFragment extends Fragment {
                 params.put("DistrictId",districtId);
                 params.put("TalukasId",talukaId);
                 params.put("Address",address);
-                params.put("Pincode",pincode);
+                params.put("Pincode",postalCode);
                 params.put("LanguageType",userModel.getLanguage());
 
                 return params;
@@ -558,7 +658,7 @@ public class BasicDetailsFragment extends Fragment {
                                     editText_state.setText(jsonObject.getString("StatesName"));
                                     editText_district.setText(jsonObject.getString("DistrictName"));
                                     editText_taluka.setText(jsonObject.getString("TalukaName"));
-                                    editText_pincode.setText(jsonObject.getString("Pincode"));
+                                    editText_postalCode.setText(jsonObject.getString("Pincode"));
                                     //editText_.setText(jsonObject.getString(""));
 
                                     FieldValidation.setRadioButtonAccToValue(radioGroup_birthTimeType,
