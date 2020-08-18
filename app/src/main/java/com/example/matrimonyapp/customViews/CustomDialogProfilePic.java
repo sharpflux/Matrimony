@@ -100,7 +100,7 @@ public class CustomDialogProfilePic extends Dialog {
         setCanceledOnTouchOutside(true);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-
+/*
         editText_farmArea = findViewById(R.id.editText_farmArea);
         radioGroup_type = findViewById(R.id.radioGroup_type);
         editText_crops = findViewById(R.id.editText_crops);
@@ -129,9 +129,9 @@ public class CustomDialogProfilePic extends Dialog {
 
 
             cursor.close();
-        }
+        }*/
 
-        textView_addFarm.setOnClickListener(new View.OnClickListener() {
+       /* textView_addFarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -139,6 +139,7 @@ public class CustomDialogProfilePic extends Dialog {
                 String area = editText_farmArea.getText().toString().trim();
                 String crops = editText_crops.getText().toString().trim();
                 String type = ((RadioButton)findViewById(radioGroup_type.getCheckedRadioButtonId())).getText().toString();
+                String irrigation = ((RadioButton)findViewById(radioGroup_type.getCheckedRadioButtonId())).getText().toString();
 
 
                 if(id.equals("0")) {
@@ -172,7 +173,7 @@ public class CustomDialogProfilePic extends Dialog {
 
             }
         });
-
+*/
 
         onClickListener();
 

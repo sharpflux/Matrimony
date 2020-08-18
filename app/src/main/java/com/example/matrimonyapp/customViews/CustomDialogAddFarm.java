@@ -48,7 +48,7 @@ public class CustomDialogAddFarm extends Dialog {
     private EditText editText_farmArea, editText_crops;
     private TextView textView_addFarm;
 
-    private RadioGroup radioGroup_type;
+    private RadioGroup radioGroup_type, radioGroup_irrigationType;
 
     private Map<String, Integer> list;
 
@@ -103,6 +103,7 @@ public class CustomDialogAddFarm extends Dialog {
 
         editText_farmArea = findViewById(R.id.editText_farmArea);
         radioGroup_type = findViewById(R.id.radioGroup_type);
+        radioGroup_irrigationType = findViewById(R.id.radioGroup_irrigationType);
         editText_crops = findViewById(R.id.editText_crops);
         textView_addFarm = findViewById(R.id.textView_addFarm);
 
@@ -122,6 +123,8 @@ public class CustomDialogAddFarm extends Dialog {
                 editText_crops.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.CROPS)));
                 FieldValidation.setRadioButtonAccToValue(radioGroup_type,
                         cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE)));
+                FieldValidation.setRadioButtonAccToValue(radioGroup_irrigationType,
+                        cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE)));
                 Toast.makeText(context, cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE))+"---",Toast.LENGTH_SHORT).show();
 
 
@@ -139,10 +142,11 @@ public class CustomDialogAddFarm extends Dialog {
                 String area = editText_farmArea.getText().toString().trim();
                 String crops = editText_crops.getText().toString().trim();
                 String type = ((RadioButton)findViewById(radioGroup_type.getCheckedRadioButtonId())).getText().toString();
+                String irrigationType = ((RadioButton)findViewById(radioGroup_irrigationType.getCheckedRadioButtonId())).getText().toString();
 
 
                 if(id.equals("0")) {
-                    long res = sqLiteFarmDetails.insertFarmDetails("0", area, type, crops);
+                    long res = sqLiteFarmDetails.insertFarmDetails("0", area, type, crops, irrigationType);
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
@@ -155,7 +159,7 @@ public class CustomDialogAddFarm extends Dialog {
                 }
                 else
                 {
-                    int res = sqLiteFarmDetails.updateFarmDetails(id, farm_details_id,area, type, crops);
+                    int res = sqLiteFarmDetails.updateFarmDetails(id, farm_details_id, area, type, crops, irrigationType);
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
                         addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), farm_details_id, area, crops));

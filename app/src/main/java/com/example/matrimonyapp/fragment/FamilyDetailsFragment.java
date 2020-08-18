@@ -1012,7 +1012,7 @@ public class FamilyDetailsFragment extends Fragment {
                                                 jsonObject_details.getString("FarmPropertyDetailsId"),
                                                 jsonObject_details.getString("LandArea"),
                                                 jsonObject_details.getString("FullOrPart"),
-                                                jsonObject_details.getString("CropTaken"));
+                                                jsonObject_details.getString("CropTaken"),"Irrigated");
 
 
                                         addPersonModelArrayList_farm.add(new AddPersonModel(String.valueOf(id),

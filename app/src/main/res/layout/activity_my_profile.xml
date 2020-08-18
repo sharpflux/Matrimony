@@ -13,31 +13,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <include layout="@layout/main_toolbar"
+        android:id="@+id/main_toolbar"/>
 
 
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
-
-        <include layout="@layout/main_toolbar"
-            android:id="@+id/main_toolbar"/>
+-->
 
 
-        <LinearLayout
-            android:id="@+id/shadow"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:orientation="horizontal"
-            android:background="@drawable/shadow_down"
-            android:layout_alignBottom="@+id/main_toolbar"
-            />
+
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@id/main_toolbar"
+            >
 
 
 
@@ -827,11 +823,27 @@ android:visibility="gone"
 
         </ScrollView>
 
+        <LinearLayout
+            android:id="@+id/shadow_down"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:orientation="horizontal"
+            android:background="@drawable/shadow_down"
+            android:layout_below="@id/main_toolbar"
+            />
 
 
+    <LinearLayout
+        android:id="@+id/shadow_up"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/shadow_up"
+        android:layout_above="@id/main_footer"
+        android:orientation="horizontal"
+        />
 
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 
 
@@ -842,14 +854,14 @@ android:visibility="gone"
         android:layout_height="50dp"
         android:id="@+id/main_footer"/>
 
-
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
         android:background="@drawable/shadow_up"
         android:layout_alignTop="@+id/main_footer"
-        />
+        />-->
 
 
 

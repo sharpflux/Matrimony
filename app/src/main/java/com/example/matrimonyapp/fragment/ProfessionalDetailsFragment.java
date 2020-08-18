@@ -45,12 +45,12 @@ import java.util.Map;
 public class ProfessionalDetailsFragment extends Fragment {
 
     View view;
-    private TextView textView_saveAndContinue, textView_occupationId, textView_designationId, /*textView_companyCountryId,
-            textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId,*/ textView_income;
+    private TextView textView_saveAndContinue, textView_occupationId, textView_designationId, textView_companyCountryId,
+            textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId, textView_income;
 
     private EditText editText_companyName, editText_occupation, editText_designation, editText_experience,
-            editText_income, editText_companyAddress /*editText_companyCountry, editText_companyState,
-            editText_companyDistrict, editText_companyTaluka*/;
+            editText_income, editText_companyAddress, editText_companyCountry, editText_companyState,
+            editText_companyDistrict, editText_companyTaluka;
 
     private ImageView imageView_back;
 
@@ -114,15 +114,16 @@ public class ProfessionalDetailsFragment extends Fragment {
         editText_experience = view.findViewById(R.id.editText_experience);
         editText_income = view.findViewById(R.id.editText_income);
         textView_income = view.findViewById(R.id.textView_income);
+
         editText_companyAddress = view.findViewById(R.id.editText_companyAddress);
-/*        editText_companyCountry = view.findViewById(R.id.editText_companyCountry);
+        editText_companyCountry = view.findViewById(R.id.editText_companyCountry);
         editText_companyState = view.findViewById(R.id.editText_companyState);
         editText_companyDistrict = view.findViewById(R.id.editText_companyDistrict);
         editText_companyTaluka = view.findViewById(R.id.editText_companyTaluka);
         textView_companyCountryId = view.findViewById(R.id.textView_companyCountryId);
         textView_companyStateId = view.findViewById(R.id.textView_companyStateId);
         textView_companyDistrictId = view.findViewById(R.id.textView_companyDistrictId);
-        textView_companyTalukaId = view.findViewById(R.id.textView_companyTalukaId);*/
+        textView_companyTalukaId = view.findViewById(R.id.textView_companyTalukaId);
 
 
         editText_occupation.setOnClickListener(new View.OnClickListener() {
@@ -177,12 +178,11 @@ public class ProfessionalDetailsFragment extends Fragment {
 
         showPopup(editText_income, "Income");
 
-       /* showPopupSDT(editText_companyState, "State", null);
+        showPopupSDT(editText_companyState, "State", null);
         showPopupSDT(editText_companyDistrict, "District", textView_companyStateId);
         showPopupSDT(editText_companyTaluka, "Taluka", textView_companyDistrictId);
         FieldValidation.textChangedListenerForSDT(editText_companyState, editText_companyDistrict, editText_companyTaluka,
                 textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId);
-*/
         return view;
     }
 
@@ -418,7 +418,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                 }
 
-               /* else if(params[0].equals("State"))
+                else if(params[0].equals("State"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
                             "StatesName", editText_companyState, textView_companyStateId,getContext(), customDialogLoadingProgressBar);
@@ -440,7 +440,7 @@ public class ProfessionalDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_companyTaluka, textView_companyTalukaId,
                             getContext(), customDialogLoadingProgressBar);
-                }*/
+                }
                 else if(params[0].equals("Salary"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),

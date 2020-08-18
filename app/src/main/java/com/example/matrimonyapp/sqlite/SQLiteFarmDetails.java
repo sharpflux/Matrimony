@@ -17,6 +17,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
     public static final String  AREA = "area";
     public static final String  TYPE = "type";
     public static final String  CROPS = "crops";
+    public static final String  IRRIGATION_TYPE = "irrigation_type";
 /*    public static final String  DISTRICT_ID = "district_id";
     public static final String  TALUKA_ID =  "taluka_id";
     public static final String  STATE_NAME = "state_name";
@@ -40,7 +41,8 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
                     + FARM_DETAILS_ID + " int, "
                     + AREA + " text, "
                     + TYPE + " text, "
-                    + CROPS + " text "
+                    + CROPS + " text, "
+                    + IRRIGATION_TYPE + " text "
                     + " )");
         }
         catch (SQLException e)
@@ -101,7 +103,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
 
     }
 
-    public long insertFarmDetails(String farm_details_id, String area, String type, String crops)
+    public long insertFarmDetails(String farm_details_id, String area, String type, String crops, String irrigation_type)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -113,6 +115,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         contentValues.put(AREA, area);
         contentValues.put(TYPE, type);
         contentValues.put(CROPS, crops);
+        contentValues.put(IRRIGATION_TYPE, irrigation_type);
 
         //contentValues.put(, );
 
@@ -123,7 +126,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updateFarmDetails( String id, String farm_details_id, String area, String type, String crops)
+    public int updateFarmDetails( String id, String farm_details_id, String area, String type, String crops, String irrigation_type)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -133,6 +136,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         contentValues.put(AREA, area);
         contentValues.put(TYPE, type);
         contentValues.put(CROPS, crops);
+        contentValues.put(IRRIGATION_TYPE, irrigation_type);
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, FARM_DETAILS_ID+" = ? and "+ID+" = ?",
                 new String[]{farm_details_id, id});

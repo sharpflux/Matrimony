@@ -7,110 +7,123 @@
     >
 
 
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
         android:layout_marginBottom="50dp"
         android:orientation="vertical">
+-->
 
 
         <include layout="@layout/main_toolbar"
             android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             />
 
 
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:orientation="vertical"
+            android:layout_below="@id/main_toolbar"
+            android:layout_marginBottom="50dp"
+        >
 
 
 
-            <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            >
+
+            <com.google.android.material.tabs.TabLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:id="@+id/tabLayout_interest"
+                app:tabIndicatorColor="@color/project_color"
+                app:tabIndicatorHeight="2dp"
+                android:minHeight="40dp"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
+                app:tabTextAppearance="@style/MyCustomTextAppearance"
+                app:tabTextColor="@color/text_black"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:tabSelectedTextColor="@color/project_color"
+                android:foregroundGravity="center_horizontal"
+
                 >
 
-                <com.google.android.material.tabs.TabLayout
-
+                <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tabLayout_interest"
-                    app:tabIndicatorColor="@color/project_color"
-                    app:tabIndicatorHeight="2dp"
-                    android:minHeight="40dp"
-                    app:tabMode="fixed"
-                    app:tabGravity="fill"
-                    app:tabTextAppearance="@style/MyCustomTextAppearance"
-                    app:tabTextColor="@color/text_black"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                    app:tabSelectedTextColor="@color/project_color"
-                    android:foregroundGravity="center_horizontal"
-
-                    >
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="15 Received"
-
-                        />
-
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="10 Sent"
-                        />
-
-
-
-                </com.google.android.material.tabs.TabLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:id="@+id/shadow"
-                    android:layout_height="1dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/shadow_down"
+                    android:text="15 Received"
 
                     />
 
-            </com.google.android.material.appbar.AppBarLayout>
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 Sent"
+                    />
 
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollIndicators="none"
-                        >
 
-            <com.example.matrimonyapp.customViews.CustomViewPager
+            </com.google.android.material.tabs.TabLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/viewPager_interest"
-
+                android:id="@+id/shadow"
+                android:layout_height="1dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shadow_down"
 
                 />
 
-
-                    </ScrollView>
-
-                </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollIndicators="none"
+                >
+
+                <com.example.matrimonyapp.customViews.CustomViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/viewPager_interest"
+                    />
+
+
+            </ScrollView>
+
+        </LinearLayout>
 
 
 
-    </LinearLayout>
 
 
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_up"
+        android:layout_above="@id/main_footer"
+        />
 
     <include layout="@layout/main_footer"
 
@@ -121,13 +134,7 @@
         />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal"
-        android:background="@drawable/shadow_up"
-        android:layout_alignTop="@+id/main_footer"
-        />
+
 
 
 

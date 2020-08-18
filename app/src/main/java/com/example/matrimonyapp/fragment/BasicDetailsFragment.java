@@ -42,7 +42,6 @@ import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
-import com.example.matrimonyapp.modal.MyItem;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
@@ -55,7 +54,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -84,20 +82,20 @@ public class BasicDetailsFragment extends Fragment {
     private CheckBox checkBox_isAddressSame;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    protected int basicDetailsId=0;
+    private int basicDetailsId=0;
 
     private int mHour, mMinute;
 
     private String timeHrs="00:00:00", timeMin;
     private AlertDialog.Builder builder;
     private ProgressDialog progressDialog;
-    Context context;
+    private Context context;
 
     private String fullName, gender, birthdate, birthTime, birthTimeType, birthPlace, birthState, birthTaluka,
             birthDistrict, mobileNo, altMobileNo, altEmailId, emailId, address, state, postalCode, taluka, district,
             birthStateId, birthTalukaId, birthDistrictId, stateId, talukaId, districtId;
 
-    private ArrayList<MyItem> list;
+    //private ArrayList<MyItem> list;
 
     private DataFetcher dataFetcher;
 
@@ -226,11 +224,11 @@ public class BasicDetailsFragment extends Fragment {
 
         textChangeListener();
 
-onClickListener();
+        onClickListener();
 
 
 
-        list = new ArrayList<MyItem>();
+       // list = new ArrayList<MyItem>();
 
 
         dataFetcher = new DataFetcher("State",getContext());
@@ -240,6 +238,13 @@ onClickListener();
         showPopupSDT(editText_taluka, "Taluka", textView_districtId);
         FieldValidation.textChangedListenerForSDT(editText_state, editText_district, editText_taluka,
                 textView_stateId, textView_districtId, textView_talukaId);
+
+
+        showPopupSDT(editText_currentState, "CurrentState", null);
+        showPopupSDT(editText_currentDistrict, "CurrentDistrict", textView_stateId);
+        showPopupSDT(editText_currentTaluka, "CurrentTaluka", textView_districtId);
+        FieldValidation.textChangedListenerForSDT(editText_currentState, editText_currentDistrict, editText_currentTaluka,
+                textView_currentStateId, textView_currentDistrictId, textView_currentTalukaId);
 
 
         showPopupSDT(editText_birthState, "BirthState", null);
@@ -834,7 +839,7 @@ onClickListener();
     }
 
 
-    String getAge(int year, int month, int day)
+    private String getAge(int year, int month, int day)
     {
 
         Calendar dob = Calendar.getInstance();
@@ -880,17 +885,17 @@ onClickListener();
 
                 //customDialogLoadingProgressBar.dismiss();
 
-                if(params[0].toString().equals("getDetails"))
+                if(params[0].equals("getDetails"))
                 {
                     getDetails();
 
                 }
-                else if(params[0].toString().equals("insertDetails"))
+                else if(params[0].equals("insertDetails"))
                 {
                     insertDetails();
                 }
 
-                if(params[0].toString().equals("State"))
+                if(params[0].equals("State"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
                             "StatesName", editText_state, textView_stateId,getContext(),
@@ -898,7 +903,7 @@ onClickListener();
 
 
                 }
-                else if(params[0].toString()=="District")
+                else if(params[0].equals("District"))
                 {
                     String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
@@ -906,7 +911,7 @@ onClickListener();
                             textView_districtId,getContext() ,customDialogLoadingProgressBar);
 
                 }
-                else if(params[0].toString()=="Taluka")
+                else if(params[0].equals("Taluka"))
                 {
 
                     String id = params[1];
@@ -914,7 +919,34 @@ onClickListener();
                             "TalukasId", "TalukaName", editText_taluka,
                             textView_talukaId,getContext() ,customDialogLoadingProgressBar);
                 }
-                else if(params[0].toString()=="BirthState")
+
+
+                if(params[0].equals("CurrentState"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
+                            "StatesName", editText_currentState, textView_currentStateId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].equals("CurrentDistrict"))
+                {
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
+                            "DistrictId", "DistrictName", editText_currentDistrict,
+                            textView_currentDistrictId,getContext() ,customDialogLoadingProgressBar);
+
+                }
+                else if(params[0].equals("CurrentTaluka"))
+                {
+
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
+                            "TalukasId", "TalukaName", editText_currentTaluka,
+                            textView_currentTalukaId,getContext() ,customDialogLoadingProgressBar);
+                }
+
+                else if(params[0].equals("BirthState"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),
                             "StatesID", "StatesName", editText_birthState,
@@ -922,7 +954,7 @@ onClickListener();
 
 
                 }
-                else if(params[0].toString()=="BirthDistrict")
+                else if(params[0].equals("BirthDistrict"))
                 {
                     String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
@@ -930,7 +962,7 @@ onClickListener();
                             textView_birthDistrictId,getContext() ,customDialogLoadingProgressBar);
 
                 }
-                else if(params[0].toString()=="BirthTaluka")
+                else if(params[0].equals("BirthTaluka"))
                 {
 
                     String id = params[1];

@@ -1,13 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:rsb="http://schemas.android.com/apk/res-auto"
-    tools:context=".activity.SetPreferencesActivity"
-    android:background="#F8F8F8"
-    android:orientation="vertical"
-    >-->
+<?xml version="1.0" encoding="utf-8"?>
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:rsb="http://schemas.android.com/apk/res-auto"
@@ -17,15 +10,19 @@
     android:background="#F8F8F8"
     tools:context=".activity.SetPreferencesActivity">
 
-    <LinearLayout
+<!--    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:orientation="vertical">
+        android:orientation="vertical">-->
 
         <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/include_toolbar"
-            layout="@layout/direct_messages_toolbar" />
+            layout="@layout/direct_messages_toolbar"
+            android:layout_alignParentTop="true"/>
+
 
 
         <!-- <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
@@ -47,7 +44,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_below="@id/include_toolbar"
+            android:layout_marginBottom="50dp"
             >
 
             <LinearLayout
@@ -118,6 +116,18 @@
                 </LinearLayout>
 
                 //Religious
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/religious_details"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -182,7 +192,10 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2"/>
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false"
+                                />
 
 
                             <ImageView
@@ -262,7 +275,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2"/>
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false"/>
 
 
                             <ImageView
@@ -344,7 +359,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2"/>
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false"/>
 
 
                             <ImageView
@@ -438,7 +455,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -466,6 +485,18 @@
 
 
                 //Residential Location
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/residential_location"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -475,7 +506,7 @@
                     android:padding="5dp"
                    >
 
-                    <LinearLayout
+                  <!--  <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -501,7 +532,7 @@
                             android:textSize="13sp" />
 
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -566,7 +597,9 @@
                                     android:textColorHint="@color/light_weight_gray"
                                     android:textSize="13sp"
                                     android:lineSpacingMultiplier="1.2"
-                                    android:maxLines="2"/>
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:editable="false"/>
 
 
                                 <ImageView
@@ -658,7 +691,9 @@
                                     android:textColorHint="@color/light_weight_gray"
                                     android:textSize="13sp"
                                     android:lineSpacingMultiplier="1.2"
-                                    android:maxLines="2"/>
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:editable="false"/>
 
 
                                 <ImageView
@@ -750,7 +785,9 @@
                                     android:textColorHint="@color/light_weight_gray"
                                     android:textSize="13sp"
                                     android:lineSpacingMultiplier="1.2"
-                                    android:maxLines="2"/>
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:editable="false"/>
 
 
                                 <ImageView
@@ -782,9 +819,19 @@
                 </LinearLayout>
 
 
-            <!--
 
-            //Office Location
+                //Office Location
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/working_location"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -794,7 +841,7 @@
                     android:padding="5dp"
                     >
 
-                    <LinearLayout
+                <!--    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -820,7 +867,7 @@
                             android:textSize="13sp" />
 
 
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1098,7 +1145,7 @@
                     </LinearLayout>
 
 
-                </LinearLayout>-->
+                </LinearLayout>
 
 
 
@@ -1280,6 +1327,17 @@
                 </LinearLayout>-->
 
 
+                <!--Highest Qualification Details-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/highest_qualification_details"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1289,6 +1347,8 @@
                     android:orientation="vertical"
                     android:padding="5dp">
 
+
+                    <!--Qualification Level-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1305,7 +1365,6 @@
                             android:textSize="13sp" />
 
                     </LinearLayout>
-
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -1344,7 +1403,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
 
                             <ImageView
@@ -1370,17 +1431,7 @@
                     </androidx.cardview.widget.CardView>
 
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
+                    <!--Qualification-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1392,12 +1443,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="@string/highest_qualification"
+                            android:text="@string/qualification"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
                     </LinearLayout>
-
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -1436,7 +1486,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
 
                             <ImageView
@@ -1462,7 +1514,22 @@
                     </androidx.cardview.widget.CardView>
 
 
+
                 </LinearLayout>
+
+
+<!--                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+
+
+
+                </LinearLayout>-->
 
 
 
@@ -1531,7 +1598,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -1621,7 +1690,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
 
                             <ImageView
@@ -1802,7 +1873,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
 
                             <ImageView
@@ -1895,7 +1968,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
 
                             <ImageView
@@ -1921,9 +1996,13 @@
                     </androidx.cardview.widget.CardView>
 
 
+
+
+
+
                 </LinearLayout>
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -1986,7 +2065,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -2010,8 +2091,20 @@
 
                     </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
+
+                <!--Family Background-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/family_background"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -2019,6 +2112,89 @@
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:padding="5dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/family_type"
+
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="1.1dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:orientation="horizontal"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp">
+
+                            <EditText
+                                android:id="@+id/editText_familyType"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
+                                android:textColor="@color/text_black"
+                                android:textColorHint="@color/light_weight_gray"
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="15dp"
+                                android:padding="2dp"
+                                android:rotation="90"
+                                android:src="@drawable/ic_action_right_arrow"
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
+
+                            <TextView
+                                android:id="@+id/textView_familyTypeId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/_0"
+                                android:visibility="gone" />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -2075,7 +2251,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2"/>
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false"/>
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -2256,7 +2434,9 @@
                                 android:textColorHint="@color/light_weight_gray"
                                 android:textSize="13sp"
                                 android:lineSpacingMultiplier="1.2"
-                                android:maxLines="2" />
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
 
                             <ImageView
                                 android:layout_width="20dp"
@@ -2286,7 +2466,18 @@
 
         </ScrollView>
 
-    </LinearLayout>
+   <!-- </LinearLayout>-->
+
+
+    <LinearLayout
+        android:id="@+id/shadow_down"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_below="@id/include_toolbar"
+        />
+
 
     <LinearLayout
         android:layout_width="match_parent"

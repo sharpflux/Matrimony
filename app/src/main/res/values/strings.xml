@@ -79,7 +79,8 @@
     <string name="willing_to_marry_in_other_communities">Willing to marry in other communities ?</string>
     <string name="qualification">Qualification</string>
     <string name="highest_qualification">Highest Qualification</string>
-    <string name="qualification_level">Highest Qualification Level</string>
+    <string name="highest_qualification_level">Highest Qualification Level</string>
+    <string name="qualification_level">Qualification Level</string>
     <string name="occupation">Occupation</string>
     <string name="occupation_">Occupation</string>
     <string name="occupation1">Occupation</string>
@@ -108,6 +109,7 @@
     <string name="caste">Caste </string>
     <string name="sub_caste">Sub Caste </string>
     <string name="religion">Religion </string>
+    <string name="religious_details">Religious Details </string>
     <string name="gothram">Gothram </string>
     <string name="dosh">Dosh </string>
     <string name="mother_tongue">Mother Tongue</string>
@@ -196,6 +198,7 @@
     <string name="family_status">Family Status</string>
     <string name="family_type">Family Type</string>
     <string name="family_values">Family Values</string>
+    <string name="family_background">Family Background</string>
     <string name="disability">Disability</string>
     <string name="disability_type">Disability Type</string>
     <string name="diet">Diet</string>
@@ -309,6 +312,8 @@
     <string name="contact_mobile_no">Contact Mobile Number</string>
     <string name="address">Address *</string>
     <string name="address_">Address</string>
+    <string name="residential_location">Residential Location</string>
+    <string name="working_location">Working Location</string>
     <string name="permanent_address">Permanent Address</string>
     <string name="current_address">Current Address</string>
     <string name="is_address_same">Is Current Address same as Permanent Address </string>

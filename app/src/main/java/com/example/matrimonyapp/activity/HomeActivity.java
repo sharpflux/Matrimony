@@ -65,6 +65,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     private String[] TEXT = {"My Cart", "My Orders", "My Account",  "Offer Zone", "Notification", "Rate App","Logout"};
 
 
+    private SwipeRefreshLayout swipeRefresLayout;
+
     private Toolbar toolbar;
     private UserModel userModel;
 
@@ -92,7 +94,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     static String gender, stateIds, districtsIds, talukaIds, maritalStatusIds, familyTypeIds, familyValueIds,
             familyIncomeIds, individualIncomeIds, qualificationLevelIds, qualificationIds, dietIds, colorIds,
             occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax;
-    SwipeRefreshLayout mSwipeRefreshLayout;
+    //SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,16 +103,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
         init();
 
-        imageView_home = findViewById(R.id.imageView_home);
-        imageView_search = findViewById(R.id.imageView_search);
-        imageView_addPhoto= findViewById(R.id.imageView_addPhoto);
-        imageView_like = findViewById(R.id.imageView_like);
-        imageView_myProfile = findViewById(R.id.imageView_myProfile);
-        imageView_home.setColorFilter(ContextCompat.getColor(this,R.color.project_color));
-        recyclerView_timeline = (RecyclerView) findViewById(R.id.recyclerView_timeline);
-        toolbar = findViewById(R.id.toolbar1);
-        textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
-        imageView_profilePic = findViewById(R.id.imageView_profilePic);
+
+
         // timelineAdapter = new TimelineAdapter(this,)
 
 
@@ -124,17 +118,6 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
             }
         });*/
 
-        if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
-            finish();
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-        }
-
-        userModel = CustomSharedPreference.getInstance(this).getUser();
-        textView_welcomeUserName.setText(userModel.getFullName());
-        if( userModel!=null && !userModel.getProfilePic().equals("1"))
-        {
-            //imageView_profilePic.setImageURI();
-        }
 
         imageView_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +128,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
             }
         });
+
 
         imageView_addPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,9 +214,6 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
 
 
-
-
-
         timelineModelList = new ArrayList<TimelineModel>();
 
 
@@ -258,10 +239,45 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
 
         detector = new SimpleGestureFilter(this,this);
+
+
+        swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                insertDetails();
+                swipeRefresLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void init()
     {
+        swipeRefresLayout = findViewById(R.id.swipeRefresLayout);
+        imageView_home = findViewById(R.id.imageView_home);
+        imageView_search = findViewById(R.id.imageView_search);
+        imageView_addPhoto= findViewById(R.id.imageView_addPhoto);
+        imageView_like = findViewById(R.id.imageView_like);
+        imageView_myProfile = findViewById(R.id.imageView_myProfile);
+        imageView_home.setColorFilter(ContextCompat.getColor(this,R.color.project_color));
+        recyclerView_timeline = (RecyclerView) findViewById(R.id.recyclerView_timeline);
+        toolbar = findViewById(R.id.toolbar1);
+        textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
+        imageView_profilePic = findViewById(R.id.imageView_profilePic);
+
+        if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }
+
+        userModel = CustomSharedPreference.getInstance(this).getUser();
+        textView_welcomeUserName.setText(userModel.getFullName());
+        if( userModel!=null && !userModel.getProfilePic().equals("1"))
+        {
+            //imageView_profilePic.setImageURI();
+        }
+
+
+        swipeRefresLayout.setColorSchemeResources(R.color.project_color);
 
     }
 
@@ -435,12 +451,18 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
     private void setToolbar() {
 
-/*        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
+        setSupportActionBar(toolbar);
+/*        ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(false);
        // actionBar.setTitle("");*/
+
+
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+            actionBar.setCustomView(R.layout.main_toolbar);
+        }
         findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -477,6 +499,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
                         try {
 
+
                             Log.d("RESPONSE",response);
                             //converting response to json object
                             JSONObject jsonObject = new JSONObject(response);
@@ -507,7 +530,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
                                 timelineAdapter.notifyDataSetChanged();
                                 customDialogLoadingProgressBar.dismiss();
 
-                                Toast.makeText(HomeActivity.this,"Received successfully!", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(HomeActivity.this,"Received successfully!", Toast.LENGTH_SHORT).show();
 
                             }
                             else

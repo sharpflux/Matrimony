@@ -11,39 +11,66 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignTop="@+id/main_footer"
-            android:background="@color/text_gray" />
 
+        <include
+            android:id="@+id/main_toolbar"
+            layout="@layout/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentTop="true"
+            />
+
+<!--
+        <LinearLayout
+            android:id="@+id/shadow"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/shadow_down"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="55dp"
+            />
+-->
+
+<!--
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_below="@id/shadow">
+-->
 
-            <LinearLayout
-                android:id="@+id/shadow"
+
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/swipeRefresLayout"
+            android:layout_below="@id/main_toolbar"
+            android:layout_marginBottom="50dp"
+
+            >
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@drawable/shadow_down"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-
-                />
+                android:layout_height="match_parent"
+                >
 
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/main_toolbar">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                >
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_alignParentTop="true">
+
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="15dp"
@@ -311,13 +338,12 @@
 
 
 
-
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerView_timeline"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="20dp"
-                            android:layout_marginBottom="60dp"
+                            android:layout_marginBottom="10dp"
                             android:scrollbars="vertical">
 
                         </androidx.recyclerview.widget.RecyclerView>
@@ -325,15 +351,38 @@
 
                     </LinearLayout>
 
+
             </androidx.core.widget.NestedScrollView>
 
+                <LinearLayout
+                    android:id="@+id/shadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/shadow_down"
+                    android:orientation="horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    />
 
-            <include
-                android:id="@+id/main_toolbar"
-                layout="@layout/main_toolbar"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/shadow_up"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    />
 
+            </RelativeLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+       <!-- </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignTop="@+id/main_footer"
+            android:background="@color/text_gray" />-->
 
         <include
             android:id="@+id/main_footer"
