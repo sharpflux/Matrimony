@@ -1534,112 +1534,143 @@
 
 
 
+
+                <!--Occupation Details-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/occupation_details"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    >
 
-                    <LinearLayout
+                    <!--Service Type : Service / Non - Service-->
+                    <RadioGroup
+                        android:id="@+id/radioGroup_serviceType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:gravity="end|center_vertical"
                         android:orientation="horizontal"
-                        android:padding="5dp">
+                        android:paddingEnd="10dp"
+                        android:theme="@style/RadioButtonTheme">
 
-                        <TextView
+                        <RadioButton
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/radioButton_service"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
-                            android:text="Diet"
+                            android:text="@string/service"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
-                    </LinearLayout>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:id="@+id/radioButton_nonService"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="15dp"
+                            android:text="@string/non_service"
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
 
+                    </RadioGroup>
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView_diet"
+                    <!--Working Location : Abroad / India-->
+                    <RadioGroup
+                        android:id="@+id/radioGroup_workingLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="1.3dp"
-
+                        android:layout_marginTop="15dp"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingEnd="10dp"
+                        android:theme="@style/RadioButtonTheme"
+                        android:visibility="gone"
                         >
 
-                        <LinearLayout
+                        <RadioButton
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="3dp"
-                            android:orientation="horizontal"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp">
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton_workingInAbroad"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/working_in_abroad"
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
 
-                            <EditText
-                                android:id="@+id/editText_diet"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="10dp"
-                                android:layout_weight="1"
-                                android:background="@null"
-                                android:clickable="false"
-                                android:focusable="false"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="0dp"
-                                android:textColor="@color/text_black"
-                                android:textColorHint="@color/light_weight_gray"
-                                android:textSize="13sp"
-                                android:lineSpacingMultiplier="1.2"
-                                android:singleLine="true"
-                                android:ellipsize="end"
-                                android:editable="false" />
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton_workingInIndia"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="15dp"
+                            android:text="@string/working_in_india"
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
 
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_marginEnd="15dp"
-                                android:padding="2dp"
-                                android:rotation="90"
-                                android:src="@drawable/ic_action_right_arrow"
-                                android:tint="@color/text_gray"
-                                android:contentDescription="@string/image"/>
+                    </RadioGroup>
 
-                            <TextView
-                                android:id="@+id/txt_dietsId"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/_0"
-                                android:visibility="gone" />
+                    <!--Job Type : Government / Private-->
+                    <RadioGroup
+                        android:id="@+id/radioGroup_jobType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingEnd="10dp"
+                        android:theme="@style/RadioButtonTheme"
+                        android:visibility="gone">
 
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton_govtJob"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/govt_job"
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
 
-                        </LinearLayout>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioButton_privateJob"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="15dp"
+                            android:text="@string/private_job"
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
 
-                    </androidx.cardview.widget.CardView>
+                    </RadioGroup>
 
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
                         android:padding="5dp">
 
                         <TextView
@@ -1716,6 +1747,7 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
 
 
                 </LinearLayout>
@@ -2371,6 +2403,101 @@
 
                 </LinearLayout>
 
+                <!--Diet-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="Diet"
+                            android:textColor="@color/text_black"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView_diet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="1.3dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:orientation="horizontal"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp">
+
+                            <EditText
+                                android:id="@+id/editText_diet"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="0dp"
+                                android:textColor="@color/text_black"
+                                android:textColorHint="@color/light_weight_gray"
+                                android:textSize="13sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:singleLine="true"
+                                android:ellipsize="end"
+                                android:editable="false" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="15dp"
+                                android:padding="2dp"
+                                android:rotation="90"
+                                android:src="@drawable/ic_action_right_arrow"
+                                android:tint="@color/text_gray"
+                                android:contentDescription="@string/image"/>
+
+                            <TextView
+                                android:id="@+id/txt_dietsId"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/_0"
+                                android:visibility="gone" />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <!--Color-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

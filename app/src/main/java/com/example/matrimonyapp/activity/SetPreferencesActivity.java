@@ -77,7 +77,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
             editText_color, editText_occupation, editText_religon, editText_taluka, editText_district, editText_stateNames,
             editText_caste, editText_subCaste, editText_diet, editText_individualIncome, editText_familyIncome;
 
-    private RadioGroup radioGroup_gender;
+    private RadioGroup radioGroup_gender, radioGroup_serviceType, radioGroup_workingLocation, radioGroup_jobType;
 
     private CardView cardView_religion, cardView_caste,cardView_subcaste;
 
@@ -112,94 +112,44 @@ public class SetPreferencesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_preferences);
 
+
         //Initializations
-        context = getApplicationContext();
-      //  list = new ArrayList<AddLOcationModal>();
-        list = new ArrayList<>();
-        dataFetcherLocation = new DataFetcherLocation(lOcationModal, customDialogLocationRec, list, SetPreferencesActivity.this);
-        multipleSelectionDataFetcher = new MultipleSelectionDataFetcher("", context);
-        arrayList_stateId = new ArrayList();
-        arrayList_districtId = new ArrayList();
-        arrayList_talukaId = new ArrayList();
-        arrayList_religion = new ArrayList();
-        arrayList_caste = new ArrayList();
-        arrayList_SubCaste = new ArrayList();
-        arrayList_maritalStatus = new ArrayList();
-        arrayList_diet = new ArrayList();
-        arrayList_individualIncome = new ArrayList();
-        arrayList_familyIncome = new ArrayList();
-        arrayList_familyType = new ArrayList();
-        arrayList_familyValues = new ArrayList();
-        arrayList_color = new ArrayList();
-        arrayList_occupation = new ArrayList();
-        arrayList_highestQualificationLevel = new ArrayList();
-        arrayList_qualification = new ArrayList();
 
-        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
-            context.startActivity(new Intent(context, LoginActivity.class));
-        }
-
-        userModel = CustomSharedPreference.getInstance(context).getUser();
-
-        gender = userModel.getGender();
-        sqLiteSetPreference = new SQLiteSetPreference(getApplicationContext());
-
-        // Toolbar views initialization
-        include_toolbar = findViewById(R.id.include_toolbar);
-        textView_toolbarHeader = findViewById(R.id.textView_toolbarHeader);
-        imageView_back = findViewById(R.id.imageView_back);
-      //  textView_salaryRange = findViewById(R.id.textView_salaryRange);
-
-        radioGroup_gender = findViewById(R.id.radioGroup_gender);
-        textView_stateId = findViewById(R.id.textView_stateId);
-        editText_stateNames = findViewById(R.id.editText_stateNames);
-        editText_highestQualificationLevel = findViewById(R.id.editText_highestQualificationLevel);
-        editText_qualification = findViewById(R.id.editText_qualification);
-        editText_maritalStatus = findViewById(R.id.editText_maritalStatus);
-        editText_diet = findViewById(R.id.editText_diet);
-        editText_familyType = findViewById(R.id.editText_familyType);
-        editText_familyValues = findViewById(R.id.editText_familyValues);
-        editText_color = findViewById(R.id.editText_color);
-        rangeBar_ageRange = findViewById(R.id.rangeBar_ageRange);
-        editText_individualIncome = findViewById(R.id.editText_individualIncome);
-        editText_familyIncome = findViewById(R.id.editText_familyIncome);
-      //  rangeBar_salaryRange = findViewById(R.id.rangeBar_salaryRange);
-        rangeBar_heightRange = findViewById(R.id.rangeBar_heightRange);
-        textView_ageRange = findViewById(R.id.textView_ageRange);
-        editText_caste = findViewById(R.id.editText_caste);
-
-        textView_heightRange = findViewById(R.id.textView_heightRange);
-        editText_subCaste = findViewById(R.id.editText_subCaste);
+        init();
 
 
+        radioGroup_serviceType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId==R.id.radioButton_service)
+                {
+                    radioGroup_workingLocation.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    radioGroup_jobType.setVisibility(View.GONE);
+                    radioGroup_workingLocation.setVisibility(View.GONE);
+                    radioGroup_workingLocation.clearCheck();
+                    radioGroup_jobType.clearCheck();
+                }
+            }
+        });
 
-        textView_qualificationId = findViewById(R.id.textView_qualificationId);
-        textView_maritalStatusId = findViewById(R.id.textView_maritalStatusId);
-        textView_familyTypeId = findViewById(R.id.textView_familyTypeId);
-        textView_familyValuesId = findViewById(R.id.textView_familyValuesId);
-        textView_colorId = findViewById(R.id.textView_colorId);
-        editText_occupation = findViewById(R.id.editText_occupation);
-        textView_occupationId = findViewById(R.id.textView_occupationId);
-        editText_religon = findViewById(R.id.editText_religon);
-        textView_religonId = findViewById(R.id.textView_religonId);
-        lr_state = findViewById(R.id.lr_state);
-        lr_district = findViewById(R.id.lr_district);
-        lr_taluka = findViewById(R.id.lr_taluka);
-        cardView_religion = findViewById(R.id.cardView_religion);
-        cardView_caste = findViewById(R.id.cardView_caste);
-        cardView_subcaste = findViewById(R.id.cardView_subcaste);
-        //txt_state = findViewById(R.id.txt_state);
-        //textView_addStateId = findViewById(R.id.textView_addStateId);
-        editText_district = findViewById(R.id.editText_district);
-        editText_taluka = findViewById(R.id.editText_taluka);
-        textView_cityId = findViewById(R.id.textView_cityId);
-        //switchButton_otherCaste = findViewById(R.id.switchButton_otherCaste);
-        textView_setPreferences = findViewById(R.id.textView_setPreferences);
+        radioGroup_workingLocation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId==R.id.radioButton_workingInIndia)
+                {
+                    radioGroup_jobType.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    radioGroup_jobType.setVisibility(View.GONE);
+                    radioGroup_jobType.clearCheck();
+                }
+            }
+        });
 
-
-        include_toolbar.setBackgroundColor(Color.WHITE);
-        textView_toolbarHeader.setText("Set Preferences");
-        state_builder_id = new StringBuilder();
 
         rangeBarChangeListener("Age", rangeBar_ageRange, textView_ageRange);
       //  rangeBarChangeListener("Salary ", rangeBar_salaryRange, textView_salaryRange);
@@ -233,6 +183,102 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
 
+
+
+    }
+
+    private void init() {
+
+
+        context = getApplicationContext();
+        //  list = new ArrayList<AddLOcationModal>();
+        list = new ArrayList<>();
+        dataFetcherLocation = new DataFetcherLocation(lOcationModal, customDialogLocationRec, list, SetPreferencesActivity.this);
+        multipleSelectionDataFetcher = new MultipleSelectionDataFetcher("", context);
+        arrayList_stateId = new ArrayList();
+        arrayList_districtId = new ArrayList();
+        arrayList_talukaId = new ArrayList();
+        arrayList_religion = new ArrayList();
+        arrayList_caste = new ArrayList();
+        arrayList_SubCaste = new ArrayList();
+        arrayList_maritalStatus = new ArrayList();
+        arrayList_diet = new ArrayList();
+        arrayList_individualIncome = new ArrayList();
+        arrayList_familyIncome = new ArrayList();
+        arrayList_familyType = new ArrayList();
+        arrayList_familyValues = new ArrayList();
+        arrayList_color = new ArrayList();
+        arrayList_occupation = new ArrayList();
+        arrayList_highestQualificationLevel = new ArrayList();
+        arrayList_qualification = new ArrayList();
+
+        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
+            context.startActivity(new Intent(context, LoginActivity.class));
+        }
+
+        userModel = CustomSharedPreference.getInstance(context).getUser();
+
+        gender = userModel.getGender();
+        sqLiteSetPreference = new SQLiteSetPreference(getApplicationContext());
+
+        // Toolbar views initialization
+        include_toolbar = findViewById(R.id.include_toolbar);
+        textView_toolbarHeader = findViewById(R.id.textView_toolbarHeader);
+        imageView_back = findViewById(R.id.imageView_back);
+        //  textView_salaryRange = findViewById(R.id.textView_salaryRange);
+
+        radioGroup_gender = findViewById(R.id.radioGroup_gender);
+        textView_stateId = findViewById(R.id.textView_stateId);
+        editText_stateNames = findViewById(R.id.editText_stateNames);
+        editText_highestQualificationLevel = findViewById(R.id.editText_highestQualificationLevel);
+        editText_qualification = findViewById(R.id.editText_qualification);
+        editText_maritalStatus = findViewById(R.id.editText_maritalStatus);
+        editText_diet = findViewById(R.id.editText_diet);
+        editText_familyType = findViewById(R.id.editText_familyType);
+        editText_familyValues = findViewById(R.id.editText_familyValues);
+        editText_color = findViewById(R.id.editText_color);
+        rangeBar_ageRange = findViewById(R.id.rangeBar_ageRange);
+        editText_individualIncome = findViewById(R.id.editText_individualIncome);
+        editText_familyIncome = findViewById(R.id.editText_familyIncome);
+        //  rangeBar_salaryRange = findViewById(R.id.rangeBar_salaryRange);
+        rangeBar_heightRange = findViewById(R.id.rangeBar_heightRange);
+        textView_ageRange = findViewById(R.id.textView_ageRange);
+        editText_caste = findViewById(R.id.editText_caste);
+
+        textView_heightRange = findViewById(R.id.textView_heightRange);
+        editText_subCaste = findViewById(R.id.editText_subCaste);
+
+
+
+        textView_qualificationId = findViewById(R.id.textView_qualificationId);
+        textView_maritalStatusId = findViewById(R.id.textView_maritalStatusId);
+        textView_familyTypeId = findViewById(R.id.textView_familyTypeId);
+        textView_familyValuesId = findViewById(R.id.textView_familyValuesId);
+        textView_colorId = findViewById(R.id.textView_colorId);
+        editText_occupation = findViewById(R.id.editText_occupation);
+        textView_occupationId = findViewById(R.id.textView_occupationId);
+        editText_religon = findViewById(R.id.editText_religon);
+        textView_religonId = findViewById(R.id.textView_religonId);
+        lr_state = findViewById(R.id.lr_state);
+        lr_district = findViewById(R.id.lr_district);
+        lr_taluka = findViewById(R.id.lr_taluka);
+        cardView_religion = findViewById(R.id.cardView_religion);
+        cardView_caste = findViewById(R.id.cardView_caste);
+        cardView_subcaste = findViewById(R.id.cardView_subcaste);
+
+        editText_district = findViewById(R.id.editText_district);
+        editText_taluka = findViewById(R.id.editText_taluka);
+        textView_cityId = findViewById(R.id.textView_cityId);
+
+        textView_setPreferences = findViewById(R.id.textView_setPreferences);
+        radioGroup_serviceType = findViewById(R.id.radioGroup_serviceType);
+        radioGroup_workingLocation = findViewById(R.id.radioGroup_workingLocation);
+        radioGroup_jobType = findViewById(R.id.radioGroup_jobType);
+
+
+        include_toolbar.setBackgroundColor(Color.WHITE);
+        textView_toolbarHeader.setText("Set Preferences");
+        state_builder_id = new StringBuilder();
 
 
     }

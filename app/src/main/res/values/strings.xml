@@ -84,6 +84,13 @@
     <string name="occupation">Occupation</string>
     <string name="occupation_">Occupation</string>
     <string name="occupation1">Occupation</string>
+    <string name="occupation_details">Occupation Details</string>
+    <string name="service">Service </string>
+    <string name="non_service">Non - Service </string>
+    <string name="govt_job">Government Job </string>
+    <string name="private_job">Private Job </string>
+    <string name="working_in_abroad">Working in Abroad </string>
+    <string name="working_in_india">Working in India </string>
     <string name="other">Other</string>
     <string name="father_information">Father\'s Information</string>
     <string name="is_alive">Is alive ?</string>
