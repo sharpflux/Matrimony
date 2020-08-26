@@ -136,7 +136,18 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (!jsonObject.getBoolean("error")) {
 
-                                    UserModel userModel = new UserModel(jsonObject.getString("UserId"),
+                                    UserModel userModel = new UserModel();
+
+                                    userModel.setUserId(jsonObject.getString("UserId"));
+                                    userModel.setFullName(jsonObject.getString("FullName"));
+                                    userModel.setAge(jsonObject.getString("Age"));
+                                    userModel.setMobileNo(jsonObject.getString("MobileNo"));
+                                    userModel.setEmailId(jsonObject.getString("EmailId"));
+                                    userModel.setBirthdate(jsonObject.getString("DateOfBirth"));
+                                    userModel.setGender(jsonObject.getString("Gender"));
+                                    userModel.setProfilePic(jsonObject.getString("ProfileImage"));
+                                    userModel.setLanguage(jsonObject.getString("LanguageType"));
+                                            /* new UserModel(jsonObject.getString("UserId"),
                                             jsonObject.getString("FullName"),
                                             jsonObject.getString("MobileNo"),
                                             jsonObject.getString("EmailId"),
@@ -146,6 +157,9 @@ public class LoginActivity extends AppCompatActivity {
                                             jsonObject.getString("ProfileImage"),
                                             jsonObject.getString("LanguageType")
                                     );
+
+*/
+
 
                                     textView_login.setEnabled(false);
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);

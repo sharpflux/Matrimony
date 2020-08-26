@@ -4,56 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_rounded_corners"
-    android:layout_marginTop="40dp"
-    android:layout_marginBottom="40dp"
-    android:layout_marginStart="10dp"
+    android:background="@drawable/dialog_rounded_corners_gray_background"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="50dp"
+    android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp"
 
     >
 
-    <LinearLayout
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/top_rounded_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:layout_marginBottom="50dp"
-        android:orientation="vertical">
+        android:layout_below="@id/include_toolbar"
+        >
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:textSize="15sp"
-            android:text="@string/mama_details"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
 
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            >
 
-            <LinearLayout
+            <!--Is Alive-->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="5dp"
+                app:cardElevation="0.5dp"
                 >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
-
+                    android:paddingTop="10dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                >
 
                     <CheckBox
                         android:layout_width="match_parent"
@@ -65,113 +68,155 @@
                         android:layoutDirection="rtl"
                         android:button="@drawable/custom_checkbox"
                         android:gravity="left"
-                        />
-                   <!-- <com.suke.widget.SwitchButton
-                        android:id="@+id/switchButton_mamaIsAlive"
-                        android:layout_width="45dp"
-                        android:layout_height="17dp"
-                        android:layout_marginEnd="03dp"
-                        app:sb_button_color="#8f329b"
-                        app:sb_checked="true"
-                        app:sb_checked_color="#8f329b"
-                        app:sb_checkline_color="@color/transparent"
-                        app:sb_checkline_width="0dp"
-                        app:sb_uncheck_color="#ebebeb"
-                        app:sb_uncheckcircle_radius="0dp" />-->
-
-                </LinearLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="20dp"
-                    >
-
-                    <EditText
-                        android:id="@+id/editText_mamaName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="@string/only_text_with_space"
-                        android:hint="@string/name"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:singleLine="true"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_mamaMobileNo"
-                        android:hint="Mobile No."
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_mamaOccupation"
-                        android:hint="@string/occupation1"
-                        android:inputType=""
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:clickable="false"
-                        android:focusable="false"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_mamaOccupationId"
-                    android:visibility="gone"
                     />
 
 
+                </LinearLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
+            </androidx.cardview.widget.CardView>
+
+
+            <!--Name, Mobile No, Occupation-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardElevation="0.5dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
                     android:layout_marginTop="15dp"
-                    >
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp">
 
-                    <EditText
+                    <!--Name-->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_mamaAddress"
-                        android:hint="@string/address_"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:lineSpacingMultiplier="1.2"
-                        android:maxLines="5"
-                        android:nextFocusDown="@id/editText_mamaState"
-                        />
+                        android:theme="@style/TextLabel">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <EditText
+                            android:id="@+id/editText_mamaName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="@string/only_text_with_space"
+                            android:hint="@string/name"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:singleLine="true"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--Mobile No.-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_mamaMobileNo"
+                            android:hint="Mobile No."
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--Occupation-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_mamaOccupation"
+                            android:hint="@string/occupation1"
+                            android:inputType=""
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:clickable="false"
+                            android:focusable="false"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_mamaOccupationId"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
+
+            <!--Address-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/address_"
+                android:textSize="13sp"
+                android:textColor="@color/grey_4a"
+                android:layout_marginStart="15dp"
+                android:textAllCaps="true"
+                />
+            <!--Address-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:cardElevation="0.5dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <!--Address-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_mamaAddress"
+                            android:hint="@string/address_"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:lineSpacingMultiplier="1.2"
+                            android:maxLines="5"
+                            android:nextFocusDown="@id/editText_mamaState"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!--State-->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -197,6 +242,7 @@
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
+                    <!--State Id-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -205,99 +251,97 @@
                         android:text="@string/_0"
                         />
 
-                    <LinearLayout
+                    <!--District-->
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:layout_marginBottom="20dp"
-                        android:baselineAligned="false"
-                        android:orientation="horizontal">
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
 
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
+                        <EditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel">
+                            android:id="@+id/editText_mamaDistrict"
+                            android:hint="@string/_district"
+                            android:drawableEnd="@drawable/ic_action_arrow_down"
+                            android:drawableTint="#ADADAD"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:clickable="false"
+                            android:focusable="false"
+                            android:singleLine="true" />
 
-                            <EditText
-                                android:layout_width="match_parent"
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <!--District Id-->
+                    <TextView
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/editText_mamaDistrict"
-                                android:hint="@string/_district"
-                                android:drawableEnd="@drawable/ic_action_arrow_down"
-                                android:drawableTint="#ADADAD"
-                                android:textColor="@color/text_black"
-                                android:textSize="15sp"
-                                android:clickable="false"
-                                android:focusable="false"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView_mamaDistrictId"
-                            android:visibility="gone"
-                            android:text="@string/_0"
-                            />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel">
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/editText_mamaTaluka"
-                                android:hint="@string/_taluka"
-                                android:drawableEnd="@drawable/ic_action_arrow_down"
-                                android:drawableTint="#ADADAD"
-                                android:textColor="@color/text_black"
-                                android:textSize="15sp"
-                                android:singleLine="true"
-                                android:focusable="false"
-
+                                android:id="@+id/textView_mamaDistrictId"
+                                android:visibility="gone"
+                                android:text="@string/_0"
                                 />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                    <!--Taluka-->
+                    <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:textColorHint="@color/text_black"
+                                android:theme="@style/TextLabel">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView_mamaTalukaId"
-                            android:visibility="gone"
-                            android:text="@string/_0"
-                            />
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText_mamaTaluka"
+                                    android:hint="@string/_taluka"
+                                    android:drawableEnd="@drawable/ic_action_arrow_down"
+                                    android:drawableTint="#ADADAD"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="15sp"
+                                    android:singleLine="true"
+                                    android:focusable="false"
+
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+                    <!--Taluka Id-->
+                    <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_mamaTalukaId"
+                                android:visibility="gone"
+                                android:text="@string/_0"
+                                />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
-                    </LinearLayout>
+        </LinearLayout>
 
 
-            </LinearLayout>
+    </ScrollView>
 
 
-        </ScrollView>
+    <LinearLayout
+        android:id="@+id/shadow_down"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_below="@id/include_toolbar"
+        />
 
 
-    </LinearLayout>
-
-    <!--"alignParentBottom" property is used to stitch the textview
-    at the bottom pf the screen...-->
-
+    <!--Add Mama-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
-
-        >
+        android:layout_alignParentBottom="true">
 
         <TextView
             android:id="@+id/textView_addMama"
@@ -310,8 +354,7 @@
             android:paddingBottom="17.3dp"
             android:paddingTop="17.3dp"
             android:textColor="@color/white"
-            android:duplicateParentState="true"
-            />
+            android:duplicateParentState="true" />
 
 
     </LinearLayout>

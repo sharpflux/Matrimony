@@ -5,36 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_place_order"
     tools:context=".activity.SplashActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
         >
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageViewLogo2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <ImageView
+            android:id="@+id/imageView_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@mipmap/icon1"
+            android:src="@mipmap/white_icon3"
             />
 
         <TextView
-            android:id="@+id/loginTitle"
+            android:id="@+id/textView_appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_alignParentTop="true"
             android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/arima_madurai_medium"
             android:gravity="center"
-            android:text="Matrimony"
-            android:textColor="@color/quantum_black_100"
-            android:textSize="30dp"
-            android:fontFamily="serif"/>
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/textView_tagLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/paprika"
+            android:gravity="center"
+
+            android:textColor="@color/white"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

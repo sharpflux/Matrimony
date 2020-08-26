@@ -1,12 +1,16 @@
 package com.example.matrimonyapp.customViews;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -38,6 +43,9 @@ import com.example.matrimonyapp.volley.URLs;
 import java.util.ArrayList;
 import java.util.Map;
 
+import jp.wasabeef.blurry.internal.Blur;
+import jp.wasabeef.blurry.internal.BlurFactor;
+
 public class CustomDialogAddProperty extends Dialog {
 
 
@@ -47,7 +55,7 @@ public class CustomDialogAddProperty extends Dialog {
     private EditText editText_propertyArea, editText_propertyAddress, editText_state, editText_district,
                 editText_taluka;
 
-    private TextView textView_addProperty, textView_stateId, textView_districtId, textView_talukaId;
+    private TextView textView_title, textView_addProperty, textView_stateId, textView_districtId, textView_talukaId;
 
 
     private Map<String, Integer> list;
@@ -84,6 +92,23 @@ public class CustomDialogAddProperty extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        //take Screenshot
+        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
+
+        //set blurring factor and heighth width of screenshot
+        BlurFactor blurFactor = new BlurFactor();
+        blurFactor.height = bitmap.getHeight();
+        blurFactor.width = bitmap.getWidth();
+        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
+
+        //blurred image
+        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
+        //convert blurred image into drawable
+        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
+
+        //set blurred screenshot to background
+        getWindow().setBackgroundDrawable(drawable);
+
 
 
         setContentView(R.layout.custom_dialog_add_property);
@@ -98,9 +123,10 @@ public class CustomDialogAddProperty extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
+        textView_title = findViewById(R.id.textView_title);
         editText_propertyArea = findViewById(R.id.editText_propertyArea);
         editText_propertyAddress = findViewById(R.id.editText_propertyAddress);
 
@@ -113,6 +139,8 @@ public class CustomDialogAddProperty extends Dialog {
         textView_addProperty = findViewById(R.id.textView_addProperty);
 
         dataFetcher = new DataFetcher("Address",context);
+
+        textView_title.setText("Property Details");
 
         showPopUp(editText_state, "State");
         showPopUp(editText_district, "District");

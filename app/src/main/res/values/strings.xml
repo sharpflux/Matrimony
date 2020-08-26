@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Matrimony</string>
+    <string name="tag_line">Your search for perfect partner ends here...</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="azubaa">Mr. E Commerce</string>
     <string name="provide_your">Provide your Mobile Number \n for Verification</string>
@@ -222,7 +223,9 @@
     <string name="crops_taken">Crops Taken</string>
     <string name="full">Full</string>
     <string name="partly">Partly</string>
+    <string name="farm_type">Farm Type</string>
     <string name="irrigated">Irrigated</string>
+    <string name="area_farmed">Area Farmed</string>
     <string name="non_irrigated">Non-Irrigated</string>
     <string name="property">Property</string>
     <string name="siblings_name">Siblings Name</string>
@@ -325,6 +328,15 @@
     <string name="current_address">Current Address</string>
     <string name="is_address_same">Is Current Address same as Permanent Address </string>
     <string name="area">Area</string>
+    <string name="farming_area">Farming Area</string>
+    <string name="carpet_area">Carpet Area</string>
+    <string name="sq_ft">sq. ft.</string>
+    <string name="property_type">Property Type</string>
+    <string name="bhk_type">BHK Type</string>
+    <string name="ownership_type">Ownership Type</string>
+    <string name="own">Own</string>
+    <string name="rental">Rental</string>
+    <string name="title">Title</string>
 
 
     <string name="home">Home</string>

@@ -46,6 +46,7 @@ public class DataFetcher {
                          final EditText edit_text, final TextView textViewId, final Context context,
                          final CustomDialogLoadingProgressBar customDialogLoadingProgressBar)
     {
+        edit_text.setClickable(false);
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -118,7 +119,7 @@ public class DataFetcher {
                                // editText_search.listener
 
 
-
+                                edit_text.setClickable(true);
 
                             } else {
 

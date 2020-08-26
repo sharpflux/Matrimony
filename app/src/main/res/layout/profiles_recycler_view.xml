@@ -91,30 +91,36 @@
             android:layout_height="1dp"
             android:background="@drawable/shadow_down" />
 
+<!--
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
         >
+-->
+
             <ImageView
 
+                android:id="@+id/imageView_profilePic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxHeight="400dp"
 
-                android:id="@+id/imageView_profilePic"
-                android:src="@drawable/flower3"
+                android:scaleX="1"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                />
+                android:contentDescription="@string/profile"
+                 />
+
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/imageView_doubleTapFav"
                 android:src="@drawable/filled_star"
                 android:layout_centerInParent="true"
-                android:visibility="invisible"
+                android:visibility="gone"
                 />
-        </RelativeLayout>
+  <!--      </RelativeLayout>-->
 
 
         <LinearLayout
@@ -333,19 +339,19 @@
                     android:src="@drawable/ic_action_school"
                     android:tint="@color/text_black"
                     android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView_userQualification"
-                android:layout_weight="1"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:inputType="textMultiLine"
-                android:text="MBA - Marketing, Chennai, India"
-                android:textColor="@color/text_black"
-                android:textSize="14sp"
-                />
+
+                <TextView
+                    android:id="@+id/textView_userQualification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:inputType="textMultiLine"
+                    android:text="MBA - Marketing, Chennai, India"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

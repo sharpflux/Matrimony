@@ -4,69 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/dialog_rounded_corners"
+    android:background="@drawable/dialog_rounded_corners_gray_background"
     android:layout_marginTop="40dp"
     android:layout_marginBottom="40dp"
     android:layout_marginStart="10dp"
-    android:layout_marginEnd="20dp"
+    android:layout_marginEnd="10dp"
 
     >
 
-    <LinearLayout
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/top_rounded_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:textSize="15sp"
-            android:text="@string/siblings_details"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            />
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
+            android:layout_below="@id/include_toolbar"
+            android:layout_marginBottom="50dp"
             >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp"
-
-                >
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical"
-                    android:background="@color/white"
                     >
 
+
+                    <!--Sibling Relation-->
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:text="@string/relation"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
+                        android:textColor="@color/grey_4a"
+                        android:layout_marginStart="15dp"
+                        android:textAllCaps="true"
                         />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:cardElevation="0.5dp"
+                        >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
 
 
                     <androidx.cardview.widget.CardView
@@ -130,16 +130,35 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-
+                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
 
 
 
 
 
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardElevation="0.5dp"
+                >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                >
+
+
+                <!--Name-->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,6 +178,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!--Mobile No.-->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,7 +199,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
+                <!--Qualification-->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -206,7 +226,7 @@
                     android:visibility="gone"
                     />
 
-
+                <!--Occupation-->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,7 +254,43 @@
                     />
 
 
-                <RadioGroup
+            </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+            <!--Marital Status-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/marital_status"
+                android:textSize="13sp"
+                android:textColor="@color/grey_4a"
+                android:layout_marginStart="15dp"
+                android:textAllCaps="true"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:cardElevation="0.5dp"
+                >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+            <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/radioGroup_marriageStatus"
@@ -264,24 +320,26 @@
                 </RadioGroup>
 
 
+            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/linearLayout_fatherInLaw"
-
-
                     >
-                    <View
+
+
+<!--                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="20dp"
                         android:background="@color/quantum_grey300"
-                        />
+                        />-->
 
 
-                    <TextView
+<!--                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_black"
@@ -290,9 +348,38 @@
                         android:paddingStart="5dp"
                         android:textStyle="bold"
                         android:layout_marginTop="20dp"
+                        />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/father_in_law_information"
+                        android:textSize="13sp"
+                        android:textColor="@color/grey_4a"
+                        android:layout_marginStart="15dp"
+                        android:textAllCaps="true"
                         />
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:cardElevation="0.5dp"
+                        android:layout_marginBottom="10dp"
+                        >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="2dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:paddingTop="5dp"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        >
 
+                        <!--FIL Name-->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -314,7 +401,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-
+                        <!--FIL Mobile No.-->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -335,6 +422,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                        <!--FIL Address-->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -356,6 +444,9 @@
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -482,8 +573,16 @@
 
         </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/shadow_down"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_below="@id/include_toolbar"
+        />
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
     <!--"alignParentBottom" property is used to stitch the textview
     at the bottom pf the screen...-->

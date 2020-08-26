@@ -13,16 +13,6 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/shadow"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:orientation="horizontal"
-        android:background="@drawable/shadow_down"
-        android:layout_alignBottom="@+id/toolbar"/>
-
-
-
 
 
     <RelativeLayout
@@ -30,9 +20,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_alignTop="@+id/shadow"
+        android:layout_below="@id/toolbar"
         android:layout_marginTop="1dp"
         />
+
+    <LinearLayout
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_alignBottom="@+id/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/shadowUp"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_up"
+        android:layout_above="@id/txt_saveAndContinue"/>
+
+
 
     <TextView
         android:id="@+id/txt_saveAndContinue"

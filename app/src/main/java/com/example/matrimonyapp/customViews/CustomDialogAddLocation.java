@@ -23,6 +23,8 @@ public class CustomDialogAddLocation extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         setContentView(R.layout.custom_dialog_add_location);
         lr_city = findViewById(R.id.lr_city);
         lr_state = findViewById(R.id.lr_state);

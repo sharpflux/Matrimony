@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.activity;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -80,7 +81,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     private SimpleGestureFilter detector;
 
     TimelineAdapter timelineAdapter;
-    private ImageView imageView_home, imageView_search, imageView_addPhoto, imageView_like ,imageView_myProfile;
+    private ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile;
 
     private TextView textView_welcomeUserName;
     private ImageView imageView_profilePic;
@@ -108,18 +109,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         // timelineAdapter = new TimelineAdapter(this,)
 
 
-     /*   mSwipeRefreshLayout=findViewById(R.id.swiperefresh);
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                fetchValues();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });*/
-
-
-        imageView_search.setOnClickListener(new View.OnClickListener() {
+       /* imageView_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -130,7 +121,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         });
 
 
-        imageView_addPhoto.setOnClickListener(new View.OnClickListener() {
+        imageView_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -160,7 +151,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
                 startActivity(intent);
 
             }
-        });
+        });*/
 
 
         drawer = findViewById(R.id.drawer_layout);
@@ -248,17 +239,25 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
                 swipeRefresLayout.setRefreshing(false);
             }
         });
+
+        onClickListener();
+
     }
+
+
 
     private void init()
     {
         swipeRefresLayout = findViewById(R.id.swipeRefresLayout);
         imageView_home = findViewById(R.id.imageView_home);
         imageView_search = findViewById(R.id.imageView_search);
-        imageView_addPhoto= findViewById(R.id.imageView_addPhoto);
+        imageView_message = findViewById(R.id.imageView_message);
         imageView_like = findViewById(R.id.imageView_like);
         imageView_myProfile = findViewById(R.id.imageView_myProfile);
-        imageView_home.setColorFilter(ContextCompat.getColor(this,R.color.project_color));
+/*        imageView_home.setColorFilter(ContextCompat.getColor(this,R.color.white)); //home Activity highlight
+        imageView_home.setBackgroundResource(R.drawable.gradient_place_order); //home Activity highlight*/
+
+        imageView_home.setImageResource(R.drawable.filled_home);
         recyclerView_timeline = (RecyclerView) findViewById(R.id.recyclerView_timeline);
         toolbar = findViewById(R.id.toolbar1);
         textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
@@ -278,6 +277,32 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
 
         swipeRefresLayout.setColorSchemeResources(R.color.project_color);
+
+    }
+
+    private void onClickListener() {
+
+
+        //onClickNewActivity(imageView_home, HomeActivity.this, HomeActivity.class);
+        onClickNewActivity(imageView_search, HomeActivity.this, SetPreferencesActivity.class);
+        onClickNewActivity(imageView_message, HomeActivity.this, DirectMessagesActivity.class);
+        onClickNewActivity(imageView_myProfile, HomeActivity.this, MyProfileActivity.class);
+        onClickNewActivity(imageView_like, HomeActivity.this, InterestActivity.class);
+    }
+
+    private void onClickNewActivity(View view, final Context context, final Class goToClass) {
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, goToClass);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 

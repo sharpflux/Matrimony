@@ -16,32 +16,32 @@
         android:layout_marginBottom="50dp"
         android:orientation="vertical">-->
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/include_toolbar"
-            layout="@layout/direct_messages_toolbar"
-            android:layout_alignParentTop="true"/>
+
+    <!-- <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="20dp"
+         android:layout_marginBottom="20dp"
+         app:bar_color="@color/white"
+         app:bar_highlight_color="@color/project_color"
+         app:corner_radius="10"
+         app:data_type="_integer"
+         app:max_value="10"
+         app:min_value="1"
+         app:steps="1"
+         android:tooltipText="0"
+         />-->
 
 
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/direct_messages_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
 
-        <!-- <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="20dp"
-             android:layout_marginBottom="20dp"
-             app:bar_color="@color/white"
-             app:bar_highlight_color="@color/project_color"
-             app:corner_radius="10"
-             app:data_type="_integer"
-             app:max_value="10"
-             app:min_value="1"
-             app:steps="1"
-             android:tooltipText="0"
-             />-->
-
-
-        <ScrollView
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/include_toolbar"

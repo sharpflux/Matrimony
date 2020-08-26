@@ -68,6 +68,7 @@ import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.SingleImage;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.validation.BlurBackground;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -93,11 +94,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import jp.wasabeef.blurry.internal.Blur;
 
 public class MyProfileActivity extends AppCompatActivity {
 
     public static final int REQUEST_CAMERA = 1, SELECT_FILE = 0, ACTIVITY_CONSTANT = 2;
-    ImageView imageView_home, imageView_search, imageView_addPhoto, imageView_like, imageView_myProfile, imageView_addNew;
+    ImageView imageView_home, imageView_search, imageView_message, imageView_like, imageView_myProfile, imageView_addNew;
     TextView textView_welcomeUserName, textView_profileName, textView_editProfile, textView_editProfile2, textView_addBio, textView_setPreferences,
             textView_changeProfilePhoto;
 
@@ -171,8 +173,12 @@ public class MyProfileActivity extends AppCompatActivity {
         +"/"+this.getResources().getResourceTypeName(R.drawable.flower3)
         +"/"+this.getResources().getResourceEntryName(R.drawable.flower3));
 
-        imageView_myProfile.setColorFilter(ContextCompat.getColor(this,R.color.project_color));
+/*
+        imageView_myProfile.setColorFilter(ContextCompat.getColor(this,R.color.white));
+        imageView_myProfile.setBackgroundResource(R.drawable.gradient_place_order);
+*/
 
+        imageView_myProfile.setImageResource(R.drawable.filled_profile); // highlight MyProfile Tab
 
         arrayList_singleImage = new ArrayList<SingleImage>();
 
@@ -237,7 +243,7 @@ public class MyProfileActivity extends AppCompatActivity {
         gvGallery = findViewById(R.id.gridView_gallery);
         imageView_home = findViewById(R.id.imageView_home);
         imageView_search = findViewById(R.id.imageView_search);
-        imageView_addPhoto= findViewById(R.id.imageView_addPhoto);
+        imageView_message= findViewById(R.id.imageView_message);
         imageView_like = findViewById(R.id.imageView_like);
         imageView_myProfile = findViewById(R.id.imageView_myProfile);
 
@@ -404,7 +410,8 @@ public class MyProfileActivity extends AppCompatActivity {
     private void onClickListener() {
 
         onClickNewActivity(imageView_home, MyProfileActivity.this, HomeActivity.class);
-        onClickNewActivity(imageView_addPhoto, MyProfileActivity.this, DirectMessagesActivity.class);
+        onClickNewActivity(imageView_search, MyProfileActivity.this, SetPreferencesActivity.class);
+        onClickNewActivity(imageView_message, MyProfileActivity.this, DirectMessagesActivity.class);
         onClickNewActivity(imageView_like, MyProfileActivity.this, InterestActivity.class);
         onClickNewActivity(textView_editProfile, MyProfileActivity.this, MainActivity.class);
         onClickNewActivity(textView_editProfile2, MyProfileActivity.this, MainActivity.class);

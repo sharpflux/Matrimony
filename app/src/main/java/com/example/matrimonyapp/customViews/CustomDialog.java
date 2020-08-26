@@ -1,10 +1,14 @@
 package com.example.matrimonyapp.customViews;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,8 +22,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.PromptAdapter;
+
+import jp.wasabeef.blurry.internal.Blur;
+import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialog extends Dialog implements View.OnClickListener {
 
@@ -67,6 +75,22 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
         //recyclerView = findViewById(R.id.recyclerView_prompt);
 
 
+        //take Screenshot
+        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
+
+        //set blurring factor and heighth width of screenshot
+        BlurFactor blurFactor = new BlurFactor();
+        blurFactor.height = bitmap.getHeight();
+        blurFactor.width = bitmap.getWidth();
+        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
+
+        //blurred image
+        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
+        //convert blurred image into drawable
+        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
+
+        //set blurred screenshot to background
+        getWindow().setBackgroundDrawable(drawable);
 
 
 
@@ -82,7 +106,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
         recyclerView.setLayoutManager(mLayoutManager);
 
         setCanceledOnTouchOutside(true);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 

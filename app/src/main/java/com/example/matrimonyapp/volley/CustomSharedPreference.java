@@ -1,11 +1,15 @@
 package com.example.matrimonyapp.volley;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.style.AlignmentSpan;
 
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.UserModel;
+
+import java.io.File;
 
 public class CustomSharedPreference {
 
@@ -50,7 +54,7 @@ public class CustomSharedPreference {
         editor.putString(KEY_EMAIL,userModel.getEmailId());
         editor.putString(KEY_BIRTHDATE,userModel.getBirthdate());
         editor.putString(KEY_AGE,userModel.getAge());
-        editor.putString(KEY_GENDER,userModel.getAge());
+        editor.putString(KEY_GENDER,userModel.getGender());
         editor.putString(KEY_PROFILEPIC,userModel.getProfilePic());
         editor.putString(KEY_LANGUAGE,userModel.getLanguage());
 
@@ -88,8 +92,56 @@ public class CustomSharedPreference {
         editor.clear();
         //editor.apply();
         editor.commit();
-        context.startActivity(new Intent(context, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).
-                setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+        deleteCache(context);
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        ((Activity)context).finish();
+    }
+
+
+    public static void deleteCache(Context context)
+    {
+
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean deleteDir(File dir)
+    {
+        if(dir!=null && dir.isDirectory())
+        {
+            String []children = dir.list();
+
+            for (int i=0; i< children.length; i++)
+            {
+                boolean success = deleteDir(new File(dir, children[i]));
+
+                if(!success)
+                {
+                    return false;
+                }
+            }
+            return dir.delete();
+        }
+        else if (dir!=null && dir.isFile())
+        {
+
+            return dir.delete();
+        }
+        else
+        {
+            return false;
+        }
     }
 
 

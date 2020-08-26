@@ -1,36 +1,55 @@
 package com.example.matrimonyapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.text.Html;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
 import com.example.matrimonyapp.listener.OnSwipeTouchListener;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.volley.URLs;
 
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
 
 
     Context context;
-    private int pos;
+    private static int pos;
     private LayoutInflater layoutInflater;
     ArrayList<TimelineModel> list;
 
@@ -38,6 +57,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     boolean bool_like=false;
     boolean bool_favorite=false;
     Display display;
+    //private Bitmap bitmap;
+    //private LinearLayout.LayoutParams params;//= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);;
 
     public TimelineAdapter(Context context, ArrayList<TimelineModel> list, Display display)
     {
@@ -178,16 +199,98 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         //holder.imageView_profilePic.setImageURI(list.get(position).getProfilePic());
         Glide.with(context)
                 .load(URLs.MainURL+list.get(position).getProfilePic())
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
                 .placeholder(R.drawable.noimage2)
                 .into(holder.circleImage_profilePic);
 
+
+
+    RequestBuilder thubnail = Glide.with(context).load(URLs.MainURL+list.get(position).getProfilePic());
         Glide.with(context)
                 .load(URLs.MainURL+list.get(position).getProfilePic())
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.drawable.noimage2)
-                .centerCrop()
-                .transition(DrawableTransitionOptions.withCrossFade(500))
-                .into(holder.imageView_profilePic);
+                .override(Target.SIZE_ORIGINAL,LinearLayout.LayoutParams.MATCH_PARENT)
+              //  .centerCrop()
+                //.transition(DrawableTransitionOptions.withCrossFade(500))
+
+                .into(holder.imageView_profilePic)
+                ;
+/*
+        new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+
+                Bitmap res = ((BitmapDrawable)resource).getBitmap();
+
+                int width = holder.imageView_profilePic.getMeasuredWidth();
+                int diw = res.getWidth();
+                if(diw>0)
+                {
+                    int height = 0;
+                    height = width * res.getHeight() / diw;
+                    //res = Bitmap.createScaledBitmap(res, width, height, false);h
+
+                    if(height>holder.imageView_profilePic.getMaxHeight())
+                    {
+                        int dih = res.getHeight();
+                        if(dih>0)
+                        {
+                            width = height * res.getWidth() / dih;
+                            res = Bitmap.createScaledBitmap(res, width, height, false);
+                        }
+                    }
+
+                }
+
+                holder.imageView_profilePic.setImageBitmap(res);
+            }
+        }*/
+
+
+     /*   if(!list.get(position).getProfilePic().equals("0")) {
+            Thread thread = new Thread() {
+                @Override
+                public void run() {
+                    super.run();
+
+                    try {
+                        URL url = new URL(URLs.MainURL + list.get(position).getProfilePic());
+
+                        final Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        //params[0] = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, bitmap.getHeight());
+
+                        float density = context.getResources().getDisplayMetrics().density;
+                        float width = holder.imageView_profilePic.getWidth()*density;
+                        float height = bitmap.getHeight()*density;
+
+                        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Math.round(width),Math.round(height));
+                        params.setMargins(0,0,0,0);
+
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                holder.imageView_profilePic.setLayoutParams(params);
+                                holder.imageView_profilePic.setMaxHeight(bitmap.getHeight());
+                            }
+                        });
+
+                    } catch (MalformedURLException e) {
+                        Log.d("MalformedURLException", "-----------ERROR-----------");
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            };
+
+            thread.start();
+        }*/
 
         //holder.circleImage_profilePic.setImageDrawable(holder.imageView_profilePic.getDrawable());
 
@@ -289,4 +392,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         }
     }
+
+
 }

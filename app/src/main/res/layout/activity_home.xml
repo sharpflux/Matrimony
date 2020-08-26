@@ -5,7 +5,8 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.HomeActivity">
+    tools:context=".activity.HomeActivity"
+    android:background="@color/quantum_grey100">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:id="@+id/main_toolbar"
             layout="@layout/main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="48dp"
             android:layout_alignParentTop="true"
             />
 

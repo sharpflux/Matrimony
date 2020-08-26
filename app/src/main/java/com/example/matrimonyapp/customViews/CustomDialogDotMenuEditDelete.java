@@ -1,17 +1,22 @@
 package com.example.matrimonyapp.customViews;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -22,6 +27,9 @@ import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.blurry.internal.Blur;
+import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialogDotMenuEditDelete extends Dialog {
 
@@ -50,11 +58,28 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //take Screenshot
+        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
+
+        //set blurring factor and heighth width of screenshot
+        BlurFactor blurFactor = new BlurFactor();
+        blurFactor.height = bitmap.getHeight();
+        blurFactor.width = bitmap.getWidth();
+        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
+
+        //blurred image
+        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
+        //convert blurred image into drawable
+        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
+
+        //set blurred screenshot to background
+        getWindow().setBackgroundDrawable(drawable);
+
 
         setContentView(R.layout.custom_dialog_dot_menu_edit_delete);
 
         setCanceledOnTouchOutside(true);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         textView_edit= findViewById(R.id.textView_edit);
         textView_delete = findViewById(R.id.textView_delete);
