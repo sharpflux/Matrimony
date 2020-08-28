@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.modal;
 
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.CompoundButton;
@@ -52,6 +53,7 @@ public class MultipleSelectionDataFetcher {
     {
 
 
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 url,
                 new Response.Listener<String>() {
@@ -64,8 +66,13 @@ public class MultipleSelectionDataFetcher {
 
 
                             JSONArray obj = new JSONArray(response);
+                            if(obj.length()==0)
+                            {
+                                customDialogLoadingProgressBar.dismiss();
 
-                            if (obj.length() != 0) {
+                            }
+                            if (obj.length() != 0)
+                            {
 
                                 customDialogLoadingProgressBar.dismiss();
 

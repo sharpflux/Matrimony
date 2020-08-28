@@ -42,9 +42,12 @@ import com.example.matrimonyapp.fragment.ProfessionalDetailsFragment;
 import com.example.matrimonyapp.modal.AddLOcationModal;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.DataFetcherLocation;
+import com.example.matrimonyapp.modal.MultipleHierarchyModel;
 import com.example.matrimonyapp.modal.MultipleSelectionDataFetcher;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSetPreference;
+import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -57,6 +60,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,11 +75,12 @@ public class SetPreferencesActivity extends AppCompatActivity {
     private TextView textView_toolbarHeader, textView_ageRange, textView_salaryRange, textView_heightRange,
             textView_qualificationId, textView_maritalStatusId, textView_familyTypeId, textView_familyValuesId,
             textView_colorId, textView_occupationId, textView_religonId, textView_stateId, textView_cityId,
-            textView_setPreferences;
+            textView_setPreferences, textView_resetPreference;// textView_workingStateId, textView_workingDistrictId, textView_workingTalukaId;
 
     private EditText editText_highestQualificationLevel, editText_qualification, editText_maritalStatus, editText_familyType, editText_familyValues,
             editText_color, editText_occupation, editText_religon, editText_taluka, editText_district, editText_stateNames,
-            editText_caste, editText_subCaste, editText_diet, editText_individualIncome, editText_familyIncome;
+            editText_caste, editText_subCaste, editText_diet, editText_individualIncome, editText_familyIncome,
+            editText_workingState, editText_workingDistrict, editText_workingTaluka;
 
     private RadioGroup radioGroup_gender, radioGroup_serviceType, radioGroup_workingLocation, radioGroup_jobType;
 
@@ -91,7 +96,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
     MultipleSelectionDataFetcher multipleSelectionDataFetcher;
     PopupFetcher popupFetcher;
-    String gender;
+    String gender, serviceType, workingLocation, jobType;
     LinearLayout lr_state, lr_district, lr_taluka;
     CustomDialogLocationRec customDialogLocationRec;
     DataFetcherLocation dataFetcherLocation;
@@ -105,7 +110,12 @@ public class SetPreferencesActivity extends AppCompatActivity {
     ArrayList arrayList_stateId, arrayList_districtId, arrayList_talukaId, arrayList_religion,
             arrayList_caste, arrayList_SubCaste, arrayList_maritalStatus, arrayList_familyType,
             arrayList_diet, arrayList_occupation, arrayList_individualIncome, arrayList_familyIncome,
-            arrayList_familyValues, arrayList_color, arrayList_highestQualificationLevel, arrayList_qualification;
+            arrayList_familyValues, arrayList_color, arrayList_highestQualificationLevel, arrayList_qualification,
+            arrayList_workingStateId, arrayList_workingDistrictId, arrayList_workingTalukaId;
+
+
+    ArrayList<MultipleHierarchyModel> arrayList_religionHierarchy, arrayList_locationHierarchy;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +192,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
 
-
+        getSQLitedetails();
 
 
     }
@@ -198,6 +208,10 @@ public class SetPreferencesActivity extends AppCompatActivity {
         arrayList_stateId = new ArrayList();
         arrayList_districtId = new ArrayList();
         arrayList_talukaId = new ArrayList();
+        arrayList_workingStateId = new ArrayList();
+        arrayList_workingDistrictId = new ArrayList();
+        arrayList_workingTalukaId = new ArrayList();
+
         arrayList_religion = new ArrayList();
         arrayList_caste = new ArrayList();
         arrayList_SubCaste = new ArrayList();
@@ -211,6 +225,10 @@ public class SetPreferencesActivity extends AppCompatActivity {
         arrayList_occupation = new ArrayList();
         arrayList_highestQualificationLevel = new ArrayList();
         arrayList_qualification = new ArrayList();
+
+
+        arrayList_religionHierarchy = new ArrayList<MultipleHierarchyModel>();
+        arrayList_locationHierarchy = new ArrayList<MultipleHierarchyModel>();
 
         if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
             context.startActivity(new Intent(context, LoginActivity.class));
@@ -270,7 +288,14 @@ public class SetPreferencesActivity extends AppCompatActivity {
         editText_taluka = findViewById(R.id.editText_taluka);
         textView_cityId = findViewById(R.id.textView_cityId);
 
+        editText_workingState = findViewById(R.id.editText_workingState);
+        editText_workingDistrict = findViewById(R.id.editText_workingDistrict);
+        editText_workingTaluka = findViewById(R.id.editText_workingTaluka);
+
+
         textView_setPreferences = findViewById(R.id.textView_setPreferences);
+        textView_resetPreference = findViewById(R.id.textView_resetPreference);
+
         radioGroup_serviceType = findViewById(R.id.radioGroup_serviceType);
         radioGroup_workingLocation = findViewById(R.id.radioGroup_workingLocation);
         radioGroup_jobType = findViewById(R.id.radioGroup_jobType);
@@ -311,6 +336,14 @@ public class SetPreferencesActivity extends AppCompatActivity {
     private void onClickListener()
     {
 
+        textView_resetPreference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                resetPreferences();
+            }
+        });
+
         textView_setPreferences.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -318,7 +351,6 @@ public class SetPreferencesActivity extends AppCompatActivity {
                /* AsyncTaskRunner runner = new AsyncTaskRunner();
                 runner.execute("insertDetails");
 */
-
                insertDetails();
             }
         });
@@ -329,51 +361,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
                 finish();
             }
         });
-       /* lr_state.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("State");
-
-            }
-        });
-
-
-
-        lr_district.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("District");
-            }
-        });*/
-
-/*        .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("");
-            }
-        });
-
-
-        .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("");
-            }
-        });
-
-        .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("");
-            }
-        });
-*/
         multipleSelecttionMenu(editText_maritalStatus, "MaritalStatus","0");
         multipleSelecttionMenu(editText_color, "Color", "0");
         multipleSelecttionMenu(editText_familyValues, "FamilyValues", "0");
@@ -394,6 +382,13 @@ public class SetPreferencesActivity extends AppCompatActivity {
         multipleSelecttionMenu(editText_district, "District", "0");
         multipleSelecttionMenu(editText_taluka, "Taluka", "0");
 
+
+        multipleSelecttionMenu(editText_workingState, "WorkingState", "0");
+        multipleSelecttionMenu(editText_workingDistrict, "WorkingDistrict", "0");
+        multipleSelecttionMenu(editText_workingTaluka, "WorkingTaluka", "0");
+
+
+
     }
 
     public void multipleSelecttionMenu(final View view, final String urlFor, final String id)
@@ -401,6 +396,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AsyncTaskRunner runner = new AsyncTaskRunner();
                 runner.execute(urlFor, id);
 
@@ -568,6 +564,35 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
             }
 
+            else if (params[0].equals("WorkingState")) {
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(),
+                        "StatesID", "StatesName",editText_workingState, arrayList_workingStateId,
+                        SetPreferencesActivity.this, customDialogLoadingProgressBar);
+
+            }
+            else if (params[0].equals("WorkingDistrict")) {
+
+                String statesId = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
+
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_DISTRICT+"StatesId="+statesId+"&Language="
+                                +userModel.getLanguage(), "DistrictId", "DistrictName", editText_workingDistrict,
+                        arrayList_workingDistrictId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
+
+            }
+            else if (params[0].equals("WorkingTaluka")) {
+
+                String districtsId = arrayList_workingDistrictId.toString().substring(1,arrayList_workingDistrictId.toString().length()-1).replaceAll(" ","");
+
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_TALUKA+"DistrictId="+districtsId+",&Language="
+                                +userModel.getLanguage(), "TalukasId", "TalukaName", editText_workingTaluka,
+                        arrayList_workingTalukaId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
+
+            }
+
+
             else if (params[0].equals("MaritalStatus")) {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MARITALSTATUS + "Language=" +userModel.getLanguage(),
@@ -678,23 +703,70 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
     private void insertDetails()
     {
-        final String gender = ((RadioButton)findViewById(radioGroup_gender.getCheckedRadioButtonId())).getText().toString();
+        RadioButton radioButton_gender, radioButton_serviceType, radioButton_workingLocation, radioButton_jobType;
 
+        radioButton_gender = (RadioButton)findViewById(radioGroup_gender.getCheckedRadioButtonId());
+        radioButton_serviceType = (RadioButton)findViewById(radioGroup_serviceType.getCheckedRadioButtonId());
+        radioButton_workingLocation = (RadioButton)findViewById(radioGroup_workingLocation.getCheckedRadioButtonId());
+        radioButton_jobType = (RadioButton)findViewById(radioGroup_jobType.getCheckedRadioButtonId());
+
+        if(radioButton_gender!=null)
+        {
+            gender = radioButton_gender.getText().toString();
+        }
+
+        if(radioButton_serviceType!=null)
+        {
+            serviceType = radioButton_serviceType.getText().toString();
+        }
+
+        if(radioButton_workingLocation!=null)
+        {
+            workingLocation = radioButton_workingLocation.getText().toString();
+        }
+
+        if(radioButton_jobType!=null)
+        {
+            jobType = radioButton_jobType.getText().toString();
+        }
+
+        final String state = editText_stateNames.getText().toString();
+        final String districts = editText_district.getText().toString();
+        final String taluka = editText_taluka.getText().toString();
         final String stateIds = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
         final String districtsIds = arrayList_districtId.toString().substring(1,arrayList_districtId.toString().length()-1).replaceAll(" ","");
         final String talukaIds = arrayList_talukaId.toString().substring(1,arrayList_talukaId.toString().length()-1).replaceAll(" ","");
+        final String workingState = editText_workingState.getText().toString();
+        final String workingDistricts = editText_workingDistrict.getText().toString();
+        final String workingTaluka = editText_workingTaluka.getText().toString();
+        final String workingStateIds = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
+        final String workingDistrictsIds = arrayList_workingDistrictId.toString().substring(1,arrayList_workingDistrictId.toString().length()-1).replaceAll(" ","");
+        final String workingTalukaIds = arrayList_workingTalukaId.toString().substring(1,arrayList_workingTalukaId.toString().length()-1).replaceAll(" ","");
+        final String maritalStatus = editText_maritalStatus.getText().toString();
         final String maritalStatusIds = arrayList_maritalStatus.toString().substring(1,arrayList_maritalStatus.toString().length()-1).replaceAll(" ","");
+        final String familyType = editText_familyType.getText().toString();
         final String familyTypeIds = arrayList_familyType.toString().substring(1,arrayList_familyType.toString().length()-1).replaceAll(" ","");
+        final String familyValue= editText_familyValues.getText().toString();
         final String familyValueIds= arrayList_familyValues.toString().substring(1,arrayList_familyValues.toString().length()-1).replaceAll(" ","");
+        final String familyIncome = editText_familyIncome.getText().toString();;
         final String familyIncomeIds = arrayList_familyIncome.toString().substring(1,arrayList_familyIncome.toString().length()-1).replaceAll(" ","");
+        final String individualIncome = editText_individualIncome.getText().toString();
         final String individualIncomeIds = arrayList_individualIncome.toString().substring(1,arrayList_individualIncome.toString().length()-1).replaceAll(" ","");
+        final String qualificationLevel = editText_highestQualificationLevel.getText().toString();
         final String qualificationLevelIds = arrayList_highestQualificationLevel.toString().substring(1,arrayList_highestQualificationLevel.toString().length()-1).replaceAll(" ","");
+        final String qualification = editText_qualification.getText().toString();
         final String qualificationIds = arrayList_qualification.toString().substring(1,arrayList_qualification.toString().length()-1).replaceAll(" ","");
+        final String diet = editText_diet.getText().toString();
         final String dietIds = arrayList_diet.toString().substring(1,arrayList_diet.toString().length()-1).replaceAll(" ","");
+        final String color = editText_color.getText().toString();
         final String colorIds = arrayList_color.toString().substring(1,arrayList_color.toString().length()-1).replaceAll(" ","");
+        final String occupation = editText_occupation.getText().toString();
         final String occupationIds = arrayList_occupation.toString().substring(1,arrayList_occupation.toString().length()-1).replaceAll(" ","");
+        final String religion = editText_religon.getText().toString();
         final String religionIds = arrayList_religion.toString().substring(1,arrayList_religion.toString().length()-1).replaceAll(" ","");
+        final String caste = editText_caste.getText().toString();
         final String casteIds = arrayList_caste.toString().substring(1,arrayList_caste.toString().length()-1).replaceAll(" ","");
+        final String subCaste = editText_subCaste.getText().toString();
         final String subCasteIds = arrayList_SubCaste.toString().substring(1,arrayList_SubCaste.toString().length()-1).replaceAll(" ","");
 
         String ageMin = rangeBar_ageRange.getLeftPinValue();
@@ -706,14 +778,24 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
         if(sqLiteSetPreference.isPreferenceExistByUserId(userModel.getUserId()))
         {
-            res = sqLiteSetPreference.updateSetPreference(userModel.getUserId(), gender, stateIds, districtsIds, talukaIds, ageMin, ageMax,
-                    religionIds, casteIds, subCasteIds, qualificationLevelIds, qualificationIds, maritalStatusIds, dietIds, occupationIds,
-                    individualIncomeIds, familyIncomeIds, familyTypeIds, familyValueIds, heightMin, heightMax, colorIds);
+            res = sqLiteSetPreference.updateSetPreference(userModel.getUserId(), gender, state, districts,
+                    taluka, stateIds, districtsIds, talukaIds, workingState, workingDistricts, workingTaluka,
+                    workingStateIds, workingDistrictsIds, workingTalukaIds, ageMin, ageMax, religion,
+                    religionIds, caste, casteIds, subCaste,subCasteIds, qualificationLevel,qualificationLevelIds,
+                    qualification,qualificationIds, maritalStatus, maritalStatusIds, diet, dietIds,
+                    serviceType, workingLocation, jobType, occupation, occupationIds, individualIncome,
+                    individualIncomeIds, familyIncome, familyIncomeIds, familyType,familyTypeIds,
+                    familyValue,familyValueIds, heightMin, heightMax, color,colorIds);
         }
         else {
-            res = sqLiteSetPreference.insertSetPreference(userModel.getUserId(), gender, stateIds, districtsIds, talukaIds, ageMin, ageMax,
-                    religionIds, casteIds, subCasteIds, qualificationLevelIds, qualificationIds, maritalStatusIds, dietIds, occupationIds,
-                    individualIncomeIds, familyIncomeIds, familyTypeIds, familyValueIds, heightMin, heightMax, colorIds);
+            res = sqLiteSetPreference.insertSetPreference(userModel.getUserId(), gender, state, districts,
+                    taluka, stateIds, districtsIds, talukaIds, workingState, workingDistricts, workingTaluka,
+                    workingStateIds, workingDistrictsIds, workingTalukaIds, ageMin, ageMax, religion,
+                    religionIds, caste, casteIds, subCaste,subCasteIds, qualificationLevel,qualificationLevelIds,
+                    qualification,qualificationIds, maritalStatus, maritalStatusIds, diet, dietIds,
+                    serviceType, workingLocation, jobType, occupation, occupationIds, individualIncome,
+                    individualIncomeIds, familyIncome, familyIncomeIds, familyType,familyTypeIds,
+                    familyValue,familyValueIds, heightMin, heightMax, color,colorIds);
         }
         if (res != -1) {
             Toast.makeText(SetPreferencesActivity.this, "Value added/updated & id is " + res, Toast.LENGTH_SHORT).show();
@@ -809,7 +891,162 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
         }
 
+    private void getSQLitedetails(){
 
+
+        Cursor cursor = sqLiteSetPreference.getDataByUserId(userModel.getUserId());
+        if(cursor!=null)
+        {
+            for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext())
+            {
+                arrayList_religion = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.RELIGION_ID)).split(","))));
+                editText_religon.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.RELIGION)));
+
+                arrayList_caste = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.CASTE_ID)).split(","))));
+                editText_caste.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.CASTE)));
+
+                arrayList_SubCaste =stringToInt( new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.SUB_CASTE_ID)).split(","))));
+                editText_subCaste.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.SUB_CASTE)));
+
+                arrayList_stateId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.STATE_ID)).split(","))));
+                editText_stateNames.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.STATE)));
+
+                arrayList_districtId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.DISTRICT_ID)).split(","))));
+                editText_district.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.DISTRICT)));
+
+                arrayList_talukaId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.TALUKA_ID)).split(","))));
+                editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.TALUKA)));
+
+                arrayList_workingStateId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_STATE_ID)).split(","))));
+                editText_workingState.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_STATE)));
+
+                arrayList_workingDistrictId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_DISTRICT_ID)).split(","))));
+                editText_workingDistrict.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_DISTRICT)));
+
+                arrayList_workingTalukaId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_TALUKA_ID)).split(","))));
+                editText_workingTaluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_TALUKA)));
+
+                arrayList_maritalStatus = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.MARITAL_STATUS_ID)).split(","))));
+                editText_maritalStatus.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.MARITAL_STATUS)));
+
+                arrayList_highestQualificationLevel = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.HIGHEST_QUALIFICATION_LEVEL_ID)).split(","))));
+                editText_highestQualificationLevel.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.HIGHEST_QUALIFICATION_LEVEL)));
+
+                arrayList_qualification = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.HIGHEST_QUALIFICATION_ID)).split(","))));
+                editText_qualification.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.HIGHEST_QUALIFICATION)));
+
+                arrayList_occupation = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.OCCUPATION_ID)).split(","))));
+                editText_occupation.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.OCCUPATION)));
+
+                arrayList_individualIncome =stringToInt( new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.EXPECTED_INDIVIDUAL_INCOME_ID)).split(","))));
+                editText_individualIncome.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.EXPECTED_INDIVIDUAL_INCOME)));
+
+                arrayList_familyIncome = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.EXPECTED_FAMILY_INCOME_ID)).split(","))));
+                editText_familyIncome.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.EXPECTED_FAMILY_INCOME)));
+
+                arrayList_familyType = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.FAMILY_TYPE_ID)).split(","))));
+                editText_familyType.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.FAMILY_TYPE)));
+
+                arrayList_familyValues = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.FAMILY_VALUE_ID)).split(","))));
+                editText_familyValues.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.FAMILY_VALUE)));
+
+                arrayList_diet = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.DIET_ID)).split(","))));
+                editText_diet.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.DIET)));
+
+                arrayList_color = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.SKIN_COLOR_ID)).split(","))));
+                editText_color.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.SKIN_COLOR)));
+
+
+
+                rangeBar_ageRange.setRangePinsByValue(Float.parseFloat(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.AGE_MIN))),
+                        Float.parseFloat(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.AGE_MAX))));
+
+                rangeBar_heightRange.setRangePinsByValue(Float.parseFloat(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.HEIGHT_MIN))),
+                        Float.parseFloat(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.HEIGHT_MAX))));
+
+                FieldValidation.setRadioButtonAccToValue(radioGroup_gender, cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.GENDER)));
+                FieldValidation.setRadioButtonAccToValue(radioGroup_serviceType, cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.SERVICE_TYPE)));
+                FieldValidation.setRadioButtonAccToValue(radioGroup_workingLocation, cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_LOCATION)));
+                FieldValidation.setRadioButtonAccToValue(radioGroup_jobType, cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.JOB_TYPE)));
+
+
+
+            }
+        }
+        cursor.close();
+
+    }
+
+
+    private ArrayList stringToInt(ArrayList arrayList)
+    {
+        ArrayList intArrayList = new ArrayList();
+        for(int i=0; i<arrayList.size(); i++)
+        {
+            intArrayList.add(Integer.parseInt((String) arrayList.get(i)));
+
+        }
+        return intArrayList;
+
+    }
+
+
+    private void resetPreferences()
+    {
+        radioGroup_gender.clearCheck();
+        radioGroup_serviceType.clearCheck();
+        radioGroup_workingLocation.clearCheck();
+        radioGroup_jobType.clearCheck();
+
+        arrayList_religion.clear();
+        editText_religon.setText("");
+        arrayList_caste.clear();
+        editText_caste.setText("");
+        arrayList_SubCaste.clear();
+        editText_subCaste.setText("");
+
+
+        arrayList_stateId.clear();
+        editText_stateNames.setText("");
+        arrayList_districtId.clear();
+        editText_district.setText("");
+        arrayList_talukaId.clear();
+        editText_taluka.setText("");
+
+        arrayList_workingStateId.clear();
+        editText_workingState.setText("");
+        arrayList_workingDistrictId.clear();
+        editText_workingDistrict.setText("");
+        arrayList_workingTalukaId.clear();
+        editText_workingTaluka.setText("");
+
+        arrayList_maritalStatus.clear();
+        editText_maritalStatus.setText("");
+        arrayList_highestQualificationLevel.clear();
+        editText_highestQualificationLevel.setText("");
+        arrayList_qualification.clear();
+        editText_qualification.setText("");
+        arrayList_occupation.clear();
+        editText_occupation.setText("");
+        arrayList_individualIncome.clear();
+        editText_individualIncome.setText("");
+        arrayList_familyIncome.clear();
+        editText_familyIncome.setText("");
+        arrayList_diet.clear();
+        editText_diet.setText("");
+        arrayList_color.clear();
+        editText_color.setText("");
+        arrayList_familyType.clear();
+        editText_familyType.setText("");
+        arrayList_familyValues.clear();
+        editText_familyValues.setText("");
+
+        rangeBar_heightRange.setRangePinsByValue(rangeBar_heightRange.getTickStart(),rangeBar_heightRange.getTickEnd());
+        rangeBar_ageRange.setRangePinsByValue(rangeBar_ageRange.getTickStart(),rangeBar_ageRange.getTickEnd());
+
+
+
+    }
 
 
 }

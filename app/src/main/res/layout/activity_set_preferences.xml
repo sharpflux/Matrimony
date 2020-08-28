@@ -917,7 +917,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/edt_working_stateNames"
+                                    android:id="@+id/editText_workingState"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -946,7 +946,7 @@
                                     android:contentDescription="@string/image"/>
 
                                 <TextView
-                                    android:id="@+id/txt_working_stateId"
+                                    android:id="@+id/textView_workingStateId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -1009,7 +1009,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/edt_working_district"
+                                    android:id="@+id/editText_workingDistrict"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1038,7 +1038,7 @@
                                     android:contentDescription="@string/image"/>
 
                                 <TextView
-                                    android:id="@+id/txt_working_cityId"
+                                    android:id="@+id/textView_workingDistrictId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -1101,7 +1101,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/edt_working_taluka"
+                                    android:id="@+id/editText_workingTaluka"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1130,7 +1130,7 @@
                                     android:contentDescription="@string/image"/>
 
                                 <TextView
-                                    android:id="@+id/txt_working_talukaId"
+                                    android:id="@+id/textView_workingTalukaId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -1607,22 +1607,22 @@
                         <RadioButton
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_workingInAbroad"
+                            android:id="@+id/radioButton_workingInIndia"
                             android:layout_weight="1"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
-                            android:text="@string/working_in_abroad"
+                            android:text="@string/working_in_india"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
                         <RadioButton
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_workingInIndia"
+                            android:id="@+id/radioButton_workingInAbroad"
+                            android:text="@string/working_in_abroad"
                             android:layout_weight="1"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
-                            android:text="@string/working_in_india"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -2614,7 +2614,7 @@
         android:weightSum="2">
 
         <TextView
-            android:id="@+id/textView_reset"
+            android:id="@+id/textView_resetPreference"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
