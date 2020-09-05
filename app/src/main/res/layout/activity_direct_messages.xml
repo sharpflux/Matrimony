@@ -7,14 +7,20 @@
     >
 
 
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+-->
 
 
-        <include layout="@layout/direct_messages_toolbar"
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            layout="@layout/direct_messages_toolbar"
             android:id="@+id/include_direct_messages_toolbar"
+            android:layout_alignParentTop="true"
             />
 
 <!--        <LinearLayout
@@ -25,16 +31,12 @@
         android:layout_alignBottom="@+id/include_direct_messages_toolbar"
         />-->
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/text_gray"
-        />
+
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:layout_below="@id/include_direct_messages_toolbar"
             >
 
 
@@ -54,11 +56,16 @@
             </LinearLayout>
 
 
-
         </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/shadow_down"
+        android:layout_below="@id/include_direct_messages_toolbar"
+        />
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 
 

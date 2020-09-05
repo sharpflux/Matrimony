@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -121,8 +122,10 @@ public class DataFetcher {
 
                                 edit_text.setClickable(true);
 
-                            } else {
-
+                            }
+                            else {
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(context, "No Items", Toast.LENGTH_SHORT).show();
                             }
                         }catch (JSONException e) {
                             e.printStackTrace();
@@ -144,22 +147,6 @@ public class DataFetcher {
         };
 
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

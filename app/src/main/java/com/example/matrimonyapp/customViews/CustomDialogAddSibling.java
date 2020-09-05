@@ -187,11 +187,13 @@ public class CustomDialogAddSibling extends Dialog {
                 if(id==R.id.radioButton_married){
                     //radioButton_unmarried.setChecked(false);
                     linearLayout_fatherInLaw.setVisibility(View.VISIBLE);
+                    editText_fatherInLawName.requestFocus();
                 }
                 else{
                     //radioButton_married.setChecked(false);
                     linearLayout_fatherInLaw.setVisibility(View.GONE);
                     editText_fatherInLawName.setText("");
+                    editText_fatherInLawName.clearFocus();
                     editText_fatherInLawMobileNo.setText("");
                     editText_fatherInLawVillage.setText("");
                     editText_state.setText("");

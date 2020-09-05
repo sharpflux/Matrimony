@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
@@ -46,6 +47,8 @@ import java.util.Map;
 
 import jp.wasabeef.blurry.internal.Blur;
 import jp.wasabeef.blurry.internal.BlurFactor;
+import me.abhinay.input.CurrencyEditText;
+import me.abhinay.input.CurrencySymbols;
 
 public class CustomDialogAddFarm extends Dialog {
 
@@ -53,8 +56,12 @@ public class CustomDialogAddFarm extends Dialog {
 
     public Context context;
 
-    private EditText editText_farmArea, editText_crops;
+    private EditText editText_crops;
     private TextView textView_title, textView_addFarm;
+
+    private CurrencyEditText editText_farmArea;
+
+    private ImageView imageView_back;
 
     private RadioGroup radioGroup_type, radioGroup_irrigationType;
 
@@ -126,6 +133,7 @@ public class CustomDialogAddFarm extends Dialog {
         //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
+        imageView_back = findViewById(R.id.imageView_back);
         textView_title = findViewById(R.id.textView_title);
         editText_farmArea = findViewById(R.id.editText_farmArea);
         radioGroup_type = findViewById(R.id.radioGroup_type);
@@ -137,6 +145,10 @@ public class CustomDialogAddFarm extends Dialog {
 
 
         textView_title.setText("Farm Details");
+        imageView_back.setVisibility(View.GONE);
+
+        editText_farmArea.setCurrency(CurrencySymbols.NONE);
+        editText_farmArea.setDecimals(false);
 
         if(!id.equals("0"))
         {
@@ -152,7 +164,7 @@ public class CustomDialogAddFarm extends Dialog {
                         cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE)));
                 FieldValidation.setRadioButtonAccToValue(radioGroup_irrigationType,
                         cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE)));
-                Toast.makeText(context, cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE))+"---",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE))+"---",Toast.LENGTH_SHORT).show();
 
 
             }
@@ -177,7 +189,7 @@ public class CustomDialogAddFarm extends Dialog {
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),"0", area, crops));
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res),"0", area+" sq. ft.", crops));
                         addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
@@ -189,7 +201,7 @@ public class CustomDialogAddFarm extends Dialog {
                     int res = sqLiteFarmDetails.updateFarmDetails(id, farm_details_id, area, type, crops, irrigationType);
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), farm_details_id, area, crops));
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), farm_details_id, area+" sq. ft.", crops));
                         addPersonAdapter.notifyDataSetChanged();
 
 

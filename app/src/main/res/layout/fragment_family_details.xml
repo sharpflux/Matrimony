@@ -332,7 +332,87 @@
                 </androidx.cardview.widget.CardView>
 
 
-            <!-- Family Income Details-->
+                <!-- Add Vehicle -->
+                <!-- Vehicle Details-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/vehicle_details"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
+                <!-- Vehicle Details-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:cardElevation="0.5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recyclerView_addVehicle"
+
+                            android:background="@color/white"
+
+                            />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearlayout_addMoreVehicle"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/add_more"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+
+                                />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/imageView_addVehicle"
+                                android:layout_marginStart="10dp"
+                                android:src="@drawable/add11"
+                                android:tint="@color/project_color"
+                                android:contentDescription="@string/add_farm"
+                                />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+                <!-- Family Income Details-->
 <!--            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

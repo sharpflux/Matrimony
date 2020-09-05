@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RadioButton;
@@ -45,6 +46,8 @@ import java.util.Map;
 
 import jp.wasabeef.blurry.internal.Blur;
 import jp.wasabeef.blurry.internal.BlurFactor;
+import me.abhinay.input.CurrencyEditText;
+import me.abhinay.input.CurrencySymbols;
 
 public class CustomDialogAddProperty extends Dialog {
 
@@ -52,11 +55,17 @@ public class CustomDialogAddProperty extends Dialog {
 
     public Context context;
 
-    private EditText editText_propertyArea, editText_propertyAddress, editText_state, editText_district,
-                editText_taluka;
+    private EditText editText_propertyType, editText_bhkType, editText_propertyAddress,
+            editText_state, editText_district, editText_taluka;
 
-    private TextView textView_title, textView_addProperty, textView_stateId, textView_districtId, textView_talukaId;
+    private CurrencyEditText editText_propertyArea;
 
+    private TextView textView_title, textView_propertyTypeId, textView_bhkTypeId, textView_addProperty,
+            textView_stateId, textView_districtId, textView_talukaId;
+
+    private ImageView imageView_back;
+
+    private RadioGroup radioGroup_ownershipType;
 
     private Map<String, Integer> list;
 
@@ -126,7 +135,13 @@ public class CustomDialogAddProperty extends Dialog {
         //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
+        imageView_back = findViewById(R.id.imageView_back);
         textView_title = findViewById(R.id.textView_title);
+        editText_propertyType = findViewById(R.id.editText_propertyType);
+        textView_propertyTypeId = findViewById(R.id.textView_propertyTypeId);
+        radioGroup_ownershipType = findViewById(R.id.radioGroup_ownershipType);
+        editText_bhkType = findViewById(R.id.editText_bhkType);
+        textView_bhkTypeId = findViewById(R.id.textView_bhkTypeId);
         editText_propertyArea = findViewById(R.id.editText_propertyArea);
         editText_propertyAddress = findViewById(R.id.editText_propertyAddress);
 
@@ -151,6 +166,9 @@ public class CustomDialogAddProperty extends Dialog {
 
         onClickListener();
 
+        editText_propertyArea.setCurrency(CurrencySymbols.NONE);
+        editText_propertyArea.setDecimals(false);
+
         if(!id.equals("0"))
         {
 
@@ -159,7 +177,13 @@ public class CustomDialogAddProperty extends Dialog {
             for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext())
             {
 
-                editText_propertyArea.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.AREA)));
+                FieldValidation.setRadioButtonAccToValue(radioGroup_ownershipType, cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE)));
+
+                editText_propertyType.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE)));
+                textView_propertyTypeId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID)));
+                editText_bhkType.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.BHK_TYPE)));
+                textView_bhkTypeId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID)));
+                editText_propertyArea.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CARPET_AREA)));
                 editText_propertyAddress.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.ADDRESS)));
                 textView_stateId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_ID)));
                 editText_state.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_NAME)));
@@ -180,14 +204,41 @@ public class CustomDialogAddProperty extends Dialog {
     private void onClickListener()
     {
 
+        imageView_back.setVisibility(View.GONE);
 
+        editText_bhkType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("BHKType");
+            }
+        });
+
+        editText_propertyType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("PropertyType");
+            }
+        });
 
         textView_addProperty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                String ownershipType="";
+                RadioButton radioButton_ownershipType =(RadioButton)findViewById(radioGroup_ownershipType.getCheckedRadioButtonId());
+                if(radioButton_ownershipType!=null)
+                {
+                    ownershipType = radioButton_ownershipType.getText().toString();
+                }
 
-                String area = editText_propertyArea.getText().toString().trim();
+                String propertyType = editText_propertyType.getText().toString().trim();
+                String propertyTypeId = textView_propertyTypeId.getText().toString().trim();
+                String bhkType = editText_bhkType.getText().toString().trim();
+                String bhkTypeId = textView_bhkTypeId.getText().toString().trim();
+
+                String carpetArea = editText_propertyArea.getText().toString().trim();
                 String address = editText_propertyAddress.getText().toString().trim();
                 String state_id = textView_stateId.getText().toString().trim();
                 String district_id = textView_districtId.getText().toString().trim();
@@ -198,12 +249,14 @@ public class CustomDialogAddProperty extends Dialog {
 
 
                 if(id.equals("0")) {
-                    long res = sqLitePropertyDetails.insertPropertyDetails( "0",area, address,
-                            state_id, district_id, taluka_id, state_name, district_name, taluka_name);
+                    long res = sqLitePropertyDetails.insertPropertyDetails( "0", propertyType,
+                            propertyTypeId, ownershipType, bhkType, bhkTypeId, carpetArea, address,
+                            state_name, state_id, district_name, district_id, taluka_name, taluka_id);
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res), "0", area, address));
+                        addPersonModelArrayList.add(new AddPersonModel(String.valueOf(res), "0",
+                                carpetArea+" sq. ft. "+propertyType, "in "+address));
                         addPersonAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(context, "Error in sqlite insertion", Toast.LENGTH_SHORT).show();
@@ -212,11 +265,13 @@ public class CustomDialogAddProperty extends Dialog {
                 }
                 else
                 {
-                    int res = sqLitePropertyDetails.updatePropertyDetails(id, property_details_id, area, address,
-                            state_id, district_id, taluka_id, state_name, district_name, taluka_name);
+                    int res = sqLitePropertyDetails.updatePropertyDetails(id, property_details_id, propertyType,
+                            propertyTypeId, ownershipType, bhkType, bhkTypeId, carpetArea, address,
+                            state_name, state_id, district_name, district_id, taluka_name, taluka_id);
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
-                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), property_details_id, area, address));
+                        addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), property_details_id,
+                                carpetArea+" sq. ft. "+propertyType, "in "+address));
                         addPersonAdapter.notifyDataSetChanged();
 
                     } else {
@@ -325,9 +380,22 @@ public class CustomDialogAddProperty extends Dialog {
 
             try {
 
+                if(params[0].toString()=="PropertyType")
+                {
+                    dataFetcher.loadList(URLs.URL_GET_PROPERTYTYPE+"Language="+userModel.getLanguage(),"ProertyTypeId",
+                            "PropertyName", editText_propertyType, textView_propertyTypeId, context, customDialogLoadingProgressBar);
 
 
-                if(params[0].toString()=="State")
+                }
+                else if(params[0].toString()=="BHKType")
+                {
+                    dataFetcher.loadList(URLs.URL_GET_PROPERTYTYPE+"Language="+userModel.getLanguage(),"ProertyTypeId",
+                            "PropertyName", editText_bhkType, textView_bhkTypeId, context, customDialogLoadingProgressBar);
+
+
+                }
+
+                else if(params[0].toString()=="State")
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
                             "StatesName", editText_state, textView_stateId, context, customDialogLoadingProgressBar);

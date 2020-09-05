@@ -14,7 +14,12 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "property";
     public static final String  ID = "id";
     public static final String  PROPERTY_DETAILS_ID = "property_details_id";
-    public static final String  AREA = "name";
+    public static final String  PROPERTY_TYPE = "property_type";
+    public static final String  PROPERTY_TYPE_ID = "property_type_id";
+    public static final String  OWNERSHIP_TYPE = "ownership_type";
+    public static final String  BHK_TYPE = "bhk_type";
+    public static final String  BHK_TYPE_ID = "bhk_type_id";
+    public static final String  CARPET_AREA = "carpet_area";
     public static final String  ADDRESS = "address";
     public static final String  STATE_ID = "state_id";
     public static final String  DISTRICT_ID = "district_id";
@@ -38,7 +43,12 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("create table " + TABLE_NAME + " ( "
                     + ID + " INTEGER PRIMARY KEY autoincrement, "
                     + PROPERTY_DETAILS_ID + " int, "
-                    + AREA + " text, "
+                    + PROPERTY_TYPE + " text, "
+                    + PROPERTY_TYPE_ID + " text, "
+                    + OWNERSHIP_TYPE + " text, "
+                    + BHK_TYPE + " text, "
+                    + BHK_TYPE_ID + " text, "
+                    + CARPET_AREA + " text, "
                     + ADDRESS + " text, "
                     + STATE_ID + " int, "
                     + STATE_NAME + " text, "
@@ -85,9 +95,11 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
 
     }
 
-    public long insertPropertyDetails(String property_details_id, String area, String address,
-                                      String state_id, String district_id, String taluka_id,
-                                      String state_name, String district_name, String taluka_name)
+    public long insertPropertyDetails(String property_details_id, String propertyType, String propertyTypeId,
+                                      String ownershipType, String bhkType, String bhkTypeId,
+                                      String carpetArea, String address, String stateName, String stateId,
+                                      String districtName, String districtId, String talukaName,
+                                      String talukaId)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -96,14 +108,19 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
 
         //contentValues.put(ID, null);
         contentValues.put(PROPERTY_DETAILS_ID, property_details_id);
-        contentValues.put(AREA, area);
+        contentValues.put(PROPERTY_TYPE, propertyType);
+        contentValues.put(PROPERTY_TYPE_ID, propertyTypeId);
+        contentValues.put(OWNERSHIP_TYPE, ownershipType);
+        contentValues.put(BHK_TYPE, bhkType);
+        contentValues.put(BHK_TYPE_ID, bhkTypeId);
+        contentValues.put(CARPET_AREA, carpetArea);
         contentValues.put(ADDRESS, address);
-        contentValues.put(STATE_ID, state_id);
-        contentValues.put(STATE_NAME, state_name);
-        contentValues.put(DISTRICT_ID, district_id);
-        contentValues.put(DISTRICT_NAME, district_name);
-        contentValues.put(TALUKA_ID, taluka_id);
-        contentValues.put(TALUKA_NAME, taluka_name);
+        contentValues.put(STATE_ID, stateId);
+        contentValues.put(STATE_NAME, stateName);
+        contentValues.put(DISTRICT_ID, districtId);
+        contentValues.put(DISTRICT_NAME, districtName);
+        contentValues.put(TALUKA_ID, talukaId);
+        contentValues.put(TALUKA_NAME, talukaName);
         //contentValues.put(, );
 
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
@@ -113,22 +130,33 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updatePropertyDetails(String id, String property_details_id, String area, String address, String state_id, String district_id, String taluka_id,
-                                 String state_name, String district_name, String taluka_name)
+    public int updatePropertyDetails(String id, String property_details_id,
+                                     String propertyType, String propertyTypeId,
+                                     String ownershipType, String bhkType, String bhkTypeId,
+                                     String carpetArea, String address, String stateName, String stateId,
+                                     String districtName, String districtId, String talukaName,
+                                     String talukaId)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(AREA, area);
+        //contentValues.put(ID, null);
+        contentValues.put(PROPERTY_DETAILS_ID, property_details_id);
+        contentValues.put(PROPERTY_TYPE, propertyType);
+        contentValues.put(PROPERTY_TYPE_ID, propertyTypeId);
+        contentValues.put(OWNERSHIP_TYPE, ownershipType);
+        contentValues.put(BHK_TYPE, bhkType);
+        contentValues.put(BHK_TYPE_ID, bhkTypeId);
+        contentValues.put(CARPET_AREA, carpetArea);
         contentValues.put(ADDRESS, address);
-        contentValues.put(STATE_ID, state_id);
-        contentValues.put(STATE_NAME, state_name);
-        contentValues.put(DISTRICT_ID, district_id);
-        contentValues.put(DISTRICT_NAME, district_name);
-        contentValues.put(TALUKA_ID, taluka_id);
-        contentValues.put(TALUKA_NAME, taluka_name);
+        contentValues.put(STATE_ID, stateId);
+        contentValues.put(STATE_NAME, stateName);
+        contentValues.put(DISTRICT_ID, districtId);
+        contentValues.put(DISTRICT_NAME, districtName);
+        contentValues.put(TALUKA_ID, talukaId);
+        contentValues.put(TALUKA_NAME, talukaName);
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, PROPERTY_DETAILS_ID+" = ? and "+ID+" = ?",
                 new String[]{property_details_id, id});

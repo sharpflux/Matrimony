@@ -7,8 +7,8 @@
     android:background="@drawable/dialog_rounded_corners_gray_background"
     android:layout_marginTop="40dp"
     android:layout_marginBottom="40dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
 
     >
     <include
@@ -144,6 +144,7 @@
                                 android:focusable="false"
                                 />
 
+
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
@@ -272,6 +273,7 @@
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp"
                                 android:layout_weight="1"
+                                android:checked="true"
                                 />
 
                             <RadioButton
@@ -500,8 +502,8 @@
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingTop="5dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 >
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -511,7 +513,7 @@
                     android:layout_weight="1"
                     >
 
-                    <EditText
+                    <me.abhinay.input.CurrencyEditText
                         android:id="@+id/editText_propertyArea"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -520,7 +522,7 @@
                         android:textSize="15sp"
                         android:singleLine="true"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="number"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -563,8 +565,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="2dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:paddingBottom="5dp"
                 android:background="@color/white"
                 android:orientation="vertical"

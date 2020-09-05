@@ -75,4 +75,9 @@ public class URLs {
     public static final String URL_GET_FILTER                   = MainURL+"";
 
 
+    public static final String URL_GET_PROPERTYTYPE             = MainURL+"api/PersonalDetailsAPI/PropertyType?";
+    public static final String URL_GET_VEHICLETYPE              = MainURL+"api/PersonalDetailsAPI/VehicleTypesGetApi?";
+    public static final String URL_GET_VEHICLEBRANDNAME         = MainURL+"api/PersonalDetailsAPI/VehicalMakeGetApi?";
+
+
 }

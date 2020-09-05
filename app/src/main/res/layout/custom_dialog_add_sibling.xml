@@ -7,8 +7,8 @@
     android:background="@drawable/dialog_rounded_corners_gray_background"
     android:layout_marginTop="40dp"
     android:layout_marginBottom="40dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
 
     >
 
@@ -153,8 +153,8 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingTop="5dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 >
 
 
@@ -163,7 +163,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
                     >
 
                     <EditText
@@ -276,6 +275,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
                 app:cardElevation="0.5dp"
                 >
             <LinearLayout
@@ -295,7 +295,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radioGroup_marriageStatus"
                     android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
+
                     android:theme="@style/RadioButtonTheme"
                     >
 
@@ -326,33 +326,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
                     android:orientation="vertical"
                     android:id="@+id/linearLayout_fatherInLaw"
+                    android:visibility="gone"
+                    android:layout_marginBottom="20dp"
                     >
 
-
-<!--                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@color/quantum_grey300"
-                        />-->
-
-
-<!--                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:text="@string/father_in_law_information"
-                        android:paddingStart="5dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="20dp"
-                        />-->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:text="@string/father_in_law_information"
                         android:textSize="13sp"
                         android:textColor="@color/grey_4a"
@@ -375,8 +359,8 @@
                         android:background="@color/white"
                         android:orientation="vertical"
                         android:paddingTop="5dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
                         >
 
                         <!--FIL Name-->
@@ -384,10 +368,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/TextLabel"
-                        android:layout_marginTop="15dp"
                         >
-
-
 
                         <EditText
                             android:layout_width="match_parent"

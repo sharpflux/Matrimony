@@ -218,11 +218,17 @@
     <string name="add_more">Add more</string>
     <string name="add_property">Add Property Details</string>
     <string name="add_farm">Add Farm Details</string>
+    <string name="add_vehicle">Add Vehicle Details</string>
     <string name="property_details">Property Details</string>
+    <string name="vehicle_details">Vehicle Details</string>
     <string name="farm_details">Farm Details</string>
     <string name="crops_taken">Crops Taken</string>
     <string name="full">Full</string>
     <string name="partly">Partly</string>
+    <string name="vehicle_type">Vehicle Type</string>
+    <string name="cost">Cost</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="model_name">Model Name</string>
     <string name="farm_type">Farm Type</string>
     <string name="irrigated">Irrigated</string>
     <string name="area_farmed">Area Farmed</string>
@@ -331,6 +337,7 @@
     <string name="farming_area">Farming Area</string>
     <string name="carpet_area">Carpet Area</string>
     <string name="sq_ft">sq. ft.</string>
+    <string name="rs">\u20B9</string>
     <string name="property_type">Property Type</string>
     <string name="bhk_type">BHK Type</string>
     <string name="ownership_type">Ownership Type</string>

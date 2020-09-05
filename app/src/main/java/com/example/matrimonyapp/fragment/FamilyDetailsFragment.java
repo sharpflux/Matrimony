@@ -40,6 +40,7 @@ import com.example.matrimonyapp.customViews.CustomDialogAddFarm;
 import com.example.matrimonyapp.customViews.CustomDialogAddMama;
 import com.example.matrimonyapp.customViews.CustomDialogAddProperty;
 import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
+import com.example.matrimonyapp.customViews.CustomDialogAddVehicle;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.ChatModel;
@@ -48,6 +49,7 @@ import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
 import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
 import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
+import com.example.matrimonyapp.sqlite.SQLiteVehicleDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.validation.StateDistrictTalukaValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
@@ -82,7 +84,7 @@ public class FamilyDetailsFragment extends Fragment {
             editText_familyIncome;
 
 
-    private ImageView imageView_back, imageView_addProperty,  imageView_addSibling, imageView_addMama, imageView_addFarm;
+    private ImageView imageView_back, imageView_addProperty, imageView_addVehicle, imageView_addSibling, imageView_addMama, imageView_addFarm;
 
     private String fatherName, fatherMobileNo, fatherOccupationId, fatherQualificationId, fatherAnnualIncome,
             fatherStateId, fatherDistrictId, fatherTalukaId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
@@ -100,22 +102,25 @@ public class FamilyDetailsFragment extends Fragment {
     private UserModel userModel;
 
     private ArrayList<AddPersonModel> addPersonModelArrayList_sibling, addPersonModelArrayList_mama,
-            addPersonModelArrayList_property, addPersonModelArrayList_farm;
+            addPersonModelArrayList_property, addPersonModelArrayList_farm, addPersonModelArrayList_vehicle;
 
 
-    private RecyclerView recyclerView_addSibling, recyclerView_addMama, recyclerView_addProperty, recyclerView_addFarm;
+    private RecyclerView recyclerView_addSibling, recyclerView_addMama, recyclerView_addProperty,
+            recyclerView_addFarm, recyclerView_addVehicle;
 
     private AddPersonAdapter addPersonAdapter_sibling, addPersonAdapter_mama, addPersonAdapter_property,
-            addPersonAdapter_farm;
+            addPersonAdapter_farm, addPersonAdapter_vehicle;
 
     private SQLiteSiblingDetails sqLiteSiblingDetails;
     private SQLiteMamaDetails sqLiteMamaDetails;
     private SQLitePropertyDetails sqLitePropertyDetails;
     private SQLiteFarmDetails sqLiteFarmDetails;
+    private SQLiteVehicleDetails sqLiteVehicleDetails;
 
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     private CustomDialogAddSibling customDialogAddSibling;
     private CustomDialogAddMama customDialogAddMama;
+    //private CustomDialogAddVehicle customDialogAddVehicle;
 
     protected int familyDetailsId=0;
     protected int fatherDetailsId=0;
@@ -183,12 +188,14 @@ public class FamilyDetailsFragment extends Fragment {
         imageView_addSibling = view.findViewById(R.id.imageView_addSibling);
         imageView_addMama = view.findViewById(R.id.imageView_addMama);
         imageView_addProperty = view.findViewById(R.id.imageView_addProperty);
+        imageView_addVehicle = view.findViewById(R.id.imageView_addVehicle);
         imageView_addFarm = view.findViewById(R.id.imageView_addFarm);
 
         recyclerView_addSibling = view.findViewById(R.id.recyclerView_addSibling);
         recyclerView_addMama = view.findViewById(R.id.recyclerView_addMama);
         recyclerView_addProperty = view.findViewById(R.id.recyclerView_addProperty);
         recyclerView_addFarm = view.findViewById(R.id.recyclerView_addFarm);
+        recyclerView_addVehicle = view.findViewById(R.id.recyclerView_addVehicle);
 
 
 
@@ -266,6 +273,20 @@ public class FamilyDetailsFragment extends Fragment {
         recyclerView_addProperty.setLayoutManager(linearLayoutManager_property);
 
 
+
+        //VehicleRecyclerView();
+        // Vehicle recyclerView
+        addPersonModelArrayList_vehicle = new ArrayList<>();
+
+        sqLiteVehicleDetails = new SQLiteVehicleDetails(getContext());
+
+
+        addPersonAdapter_vehicle = new AddPersonAdapter(getContext(), addPersonModelArrayList_vehicle,
+                "Vehicle");
+        recyclerView_addVehicle.setAdapter(addPersonAdapter_vehicle);
+        recyclerView_addVehicle.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_vehicle = new LinearLayoutManager(getContext());
+        recyclerView_addVehicle.setLayoutManager(linearLayoutManager_vehicle);
 
         //farmRecyclerView();
         // Farm recyclerView
@@ -396,6 +417,18 @@ public class FamilyDetailsFragment extends Fragment {
 
     public void onClickListener()
     {
+
+        imageView_addVehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CustomDialogAddVehicle customDialogAddVehicle = new CustomDialogAddVehicle(getContext(), "0", "0",
+                        addPersonAdapter_vehicle, addPersonModelArrayList_vehicle, 0);
+                customDialogAddVehicle.show();
+
+            }
+        });
+
 
         imageView_addProperty.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -623,7 +656,13 @@ public class FamilyDetailsFragment extends Fragment {
 
                 stringBuilder_property.append("<Functions>");
 
-                stringBuilder_property.append("<PropertyArea>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.AREA))+"</PropertyArea>");
+                 /*
+                stringBuilder_property.append("<PropertyType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID))+"</PropertyType>");
+                stringBuilder_property.append("<PropertyBhkType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID))+"</PropertyBhkType>");
+                stringBuilder_property.append("<PropertyOwnershipType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE))+"</PropertyOwnershipType>");
+                */
+
+                stringBuilder_property.append("<PropertyArea>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CARPET_AREA))+"</PropertyArea>");
                 stringBuilder_property.append("<PropertyAddress>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))+"</PropertyAddress>");
                 stringBuilder_property.append("<PropertyStatesID>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStatesID>");
                 stringBuilder_property.append("<PropertyDistrictId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID))+"</PropertyDistrictId>");
@@ -975,14 +1014,20 @@ public class FamilyDetailsFragment extends Fragment {
 
                                         long id = sqLitePropertyDetails.insertPropertyDetails(
                                                 jsonObject_details.getString("HousePropertyDetailsId"),
+                                               "1","1","Own","1","1",
+                                               /* jsonObject_details.getString("PropertyType"),
+                                                jsonObject_details.getString("PropertyTypeId"),
+                                                jsonObject_details.getString("OwnershipType"),
+                                                jsonObject_details.getString("BhkType"),
+                                                jsonObject_details.getString("BhkTypeId"),*/
                                                 jsonObject_details.getString("Area"),
                                                 jsonObject_details.getString("HouseAddress"),
-                                                jsonObject_details.getString("StatesIDHouse"),
-                                                jsonObject_details.getString("DistrictIdHouse"),
-                                                jsonObject_details.getString("TalukasIdHouse"),
                                                 jsonObject_details.getString("StatesNameHouse"),
+                                                jsonObject_details.getString("StatesIDHouse"),
                                                 jsonObject_details.getString("DistrictNameHouse"),
-                                                jsonObject_details.getString("TalukaNameHouse"));
+                                                jsonObject_details.getString("DistrictIdHouse"),
+                                                jsonObject_details.getString("TalukaNameHouse"),
+                                                jsonObject_details.getString("TalukasIdHouse"));
 
 
                                         addPersonModelArrayList_property.add(new AddPersonModel(String.valueOf(id),
