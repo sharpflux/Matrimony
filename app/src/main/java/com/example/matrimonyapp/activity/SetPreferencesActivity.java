@@ -115,6 +115,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
     ArrayList<MultipleHierarchyModel> arrayList_religionHierarchy, arrayList_locationHierarchy;
+    private String currentLanguage;
 
 
     @Override
@@ -197,8 +198,20 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
     private void init() {
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         context = getApplicationContext();
         //  list = new ArrayList<AddLOcationModal>();

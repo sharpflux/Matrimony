@@ -18,6 +18,8 @@ import com.example.matrimonyapp.modal.MyItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.matrimonyapp.R.id.textView_name;
+
 public class PromptAdapter extends RecyclerView.Adapter<PromptAdapter.ViewHolder> implements Filterable {
 
     public ArrayList<MyItem> listData,newlist;
@@ -133,7 +135,7 @@ public class PromptAdapter extends RecyclerView.Adapter<PromptAdapter.ViewHolder
             super(itemView);
 
             this.textView_stateId = (TextView) itemView.findViewById(R.id.textView_Id);
-            this.textView_stateName = (TextView) itemView.findViewById(R.id.textView_Name);
+            this.textView_stateName = (TextView) itemView.findViewById(textView_name);
             relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relativeLayout);
             itemView.setOnClickListener(this);
         }

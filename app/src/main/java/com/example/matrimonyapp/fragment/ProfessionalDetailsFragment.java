@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,11 +54,13 @@ public class ProfessionalDetailsFragment extends Fragment {
 
     private EditText editText_companyName, editText_occupation, editText_designation, editText_experience,
             editText_income, editText_companyAddress, editText_companyCountry, editText_companyState,
-            editText_companyDistrict, editText_companyTaluka;
+            editText_companyDistrict, editText_companyTaluka, editText_departmentName;
 
+    public Context context;
     private ImageView imageView_back;
 
-    String companyName, occupation, designation, experience, income, companyAddress;
+    private RadioGroup radioGroup_currentService;
+    private CardView cardView_governmentService, cardView_privateService;
 
     Bundle bundle;
     UserModel userModel;
@@ -62,6 +68,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 
     int professionalDetailsId=0;
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+    private String currentService;
 
     public ProfessionalDetailsFragment() {
         // Required empty public constructor
@@ -77,7 +84,7 @@ public class ProfessionalDetailsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_professional_details, container, false);
 
         bundle = getArguments();
-
+        context = getContext();
 
 
         if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
@@ -90,7 +97,8 @@ public class ProfessionalDetailsFragment extends Fragment {
 
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Professional Details");
+        //tv.setText("Professional Details");
+        tv.setText(context.getResources().getString(R.string.professional_details));
 
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +114,10 @@ public class ProfessionalDetailsFragment extends Fragment {
             }
         });
 
+        radioGroup_currentService = view.findViewById(R.id.radioGroup_currentService);
+        cardView_governmentService = view.findViewById(R.id.cardView_governmentService);
+        cardView_privateService = view.findViewById(R.id.cardView_privateService);
+        editText_departmentName = view.findViewById(R.id.editText_departmentName);
         editText_companyName = view.findViewById(R.id.editText_companyName);
         editText_occupation = view.findViewById(R.id.editText_occupation);
         textView_occupationId = view.findViewById(R.id.textView_occupationId);
@@ -124,6 +136,27 @@ public class ProfessionalDetailsFragment extends Fragment {
         textView_companyStateId = view.findViewById(R.id.textView_companyStateId);
         textView_companyDistrictId = view.findViewById(R.id.textView_companyDistrictId);
         textView_companyTalukaId = view.findViewById(R.id.textView_companyTalukaId);
+
+
+
+
+        radioGroup_currentService.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
+                if(checkedId==R.id.radioButton_govermentService)
+                {
+                    cardView_governmentService.setVisibility(View.VISIBLE);
+                    cardView_privateService.setVisibility(View.GONE);
+
+                }
+                else
+                {
+                    cardView_governmentService.setVisibility(View.GONE);
+                    cardView_privateService.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
         editText_occupation.setOnClickListener(new View.OnClickListener() {
@@ -149,23 +182,6 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                 AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
-
-
-                /*companyName = editText_companyName.getText().toString();
-                occupation = editText_occupation.getText().toString();
-                designation = editText_designation.getText().toString();
-                experience = editText_experience.getText().toString();
-                income = editText_income.getText().toString();
-                companyAddress = editText_companyAddress.getText().toString();
-
-                bundle.putString("companyName",companyName);
-                bundle.putString("occupation",occupation);
-                bundle.putString("designation",designation);
-                bundle.putString("experience",experience);
-                bundle.putString("income",income);
-                bundle.putString("companyAddress",companyAddress);*/
-
-
 
             }
         });
@@ -225,6 +241,13 @@ public class ProfessionalDetailsFragment extends Fragment {
     private void insertDetails()
     {
 
+        RadioButton radioButton_currentService = (RadioButton)view.findViewById(radioGroup_currentService.getCheckedRadioButtonId());
+
+        if(radioButton_currentService!=null)
+        {
+            currentService = radioButton_currentService.getText().toString();
+        }
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URLs.URL_POST_PROFESSIONALDETAILS,
                 new Response.Listener<String>() {
@@ -278,6 +301,9 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                 params.put("ProfessionalDetailsId",String.valueOf(professionalDetailsId));
                 params.put("UserId",userModel.getUserId());
+                //change -> add in API
+/*                params.put("CurrentService",currentService);
+                params.put("DepartmentName",editText_departmentName.getText().toString());*/
                 params.put("CompanyName",editText_companyName.getText().toString());
                 params.put("CompanyAddress",editText_companyAddress.getText().toString());
                 params.put("OccupationId",textView_occupationId.getText().toString());

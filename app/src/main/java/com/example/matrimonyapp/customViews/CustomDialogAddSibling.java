@@ -54,8 +54,8 @@ public class CustomDialogAddSibling extends Dialog {
     public Context context;
 
     public EditText editText_siblingRelation, editText_occupation, editText_qualification,
-            editText_siblingName, editText_siblingMobileNo, editText_fatherInLawName, editText_fatherInLawMobileNo,
-            editText_fatherInLawVillage;
+            editText_siblingName, editText_siblingMobileNo, editText_spouseName, editText_fatherInLawName,
+            editText_fatherInLawMobileNo, editText_fatherInLawVillage;
 
     public TextView textView_title, textView_login, textView_createNew, textView_relationId, textView_occupationId, textView_qualificationId;
     public RadioGroup radioGroup_marriageStatus;
@@ -154,6 +154,7 @@ public class CustomDialogAddSibling extends Dialog {
         radioButton_married = findViewById(R.id.radioButton_married);
         radioButton_unmarried = findViewById(R.id.radioButton_unmarried);
         linearLayout_fatherInLaw = findViewById(R.id.linearLayout_fatherInLaw);
+        editText_spouseName = findViewById(R.id.editText_spouseName);
         editText_fatherInLawName = findViewById(R.id.editText_fatherInLawName);
         editText_fatherInLawMobileNo = findViewById(R.id.editText_fatherInLawMobileNo);
         editText_fatherInLawVillage = findViewById(R.id.editText_fatherInLawVillage);
@@ -187,7 +188,7 @@ public class CustomDialogAddSibling extends Dialog {
                 if(id==R.id.radioButton_married){
                     //radioButton_unmarried.setChecked(false);
                     linearLayout_fatherInLaw.setVisibility(View.VISIBLE);
-                    editText_fatherInLawName.requestFocus();
+                    editText_spouseName.requestFocus();
                 }
                 else{
                     //radioButton_married.setChecked(false);
@@ -196,6 +197,7 @@ public class CustomDialogAddSibling extends Dialog {
                     editText_fatherInLawName.clearFocus();
                     editText_fatherInLawMobileNo.setText("");
                     editText_fatherInLawVillage.setText("");
+                    editText_spouseName.setText("");
                     editText_state.setText("");
                     textView_stateId.setText("");
                     editText_district.setText("");
@@ -242,6 +244,7 @@ public class CustomDialogAddSibling extends Dialog {
                 editText_qualification.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.EDUCATION_NAME)));
                 textView_occupationId.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.OCCUPATION_ID)));
                 editText_occupation.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.OCCUPATION_NAME)));
+                editText_spouseName.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.SPOUSE_NAME)));
                 editText_fatherInLawName.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_NAME)));
                 editText_fatherInLawMobileNo.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_MOBILE_NO)));
                 editText_fatherInLawVillage.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)));
@@ -311,6 +314,7 @@ public class CustomDialogAddSibling extends Dialog {
                 String maritalStatus = ((RadioButton)findViewById(radioGroup_marriageStatus.getCheckedRadioButtonId())).getText().toString();;//getText().toString().trim();
                 String relationId = textView_relationId.getText().toString().trim();
                 String relation = editText_siblingRelation.getText().toString().trim();
+                String spouseName = editText_spouseName.getText().toString().trim();
                 String fil_name = editText_fatherInLawName.getText().toString().trim();
                 String fil_mobileNo = editText_fatherInLawMobileNo.getText().toString().trim();
                 String fil_village = editText_fatherInLawVillage.getText().toString().trim();
@@ -327,7 +331,7 @@ public class CustomDialogAddSibling extends Dialog {
                 if(id.equals("0")) {
                     long res = sqLiteSiblingDetails.insertSibling("0", name, mobileNo, qualificationId, qualificationName,
                             occupationId, occupationName, maritalStatus,
-                            relationId, relation, fil_name, fil_mobileNo, fil_village,
+                            relationId, relation, spouseName, fil_name, fil_mobileNo, fil_village,
                             fil_state_id, fil_district_id, fil_taluka_id,
                             fil_state_name, fil_district_name, fil_taluka_name);
 
@@ -344,7 +348,7 @@ public class CustomDialogAddSibling extends Dialog {
                 {
                     int res = sqLiteSiblingDetails.updateSibling(id, sibling_details_id, name, mobileNo, qualificationId, qualificationName,
                         occupationId, occupationName, maritalStatus,
-                        relationId, relation, fil_name, fil_mobileNo, fil_village,
+                        relationId, relation, spouseName, fil_name, fil_mobileNo, fil_village,
                         fil_state_id, fil_district_id, fil_taluka_id,
                         fil_state_name, fil_district_name, fil_taluka_name);
 

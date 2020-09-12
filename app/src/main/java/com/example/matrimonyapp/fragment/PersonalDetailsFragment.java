@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -59,7 +60,7 @@ public class PersonalDetailsFragment extends Fragment {
     View view;
     private TextView textView_saveAndContinue;
     int PICK_IMAGE_REQUEST=1;
-
+    public Context context;
 
     ImageView imageView_back;
 
@@ -102,7 +103,7 @@ public class PersonalDetailsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_personal_details, container, false);
 
         //bundle = getArguments();
-
+        context = getContext();
 
         if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
@@ -140,7 +141,8 @@ public class PersonalDetailsFragment extends Fragment {
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
 
-        tv.setText("Personal Details");
+        //tv.setText("Personal Details");
+        tv.setText(context.getResources().getString(R.string.personalDetails));
 
         dataFetcher = new DataFetcher("PopUp",getContext());
 

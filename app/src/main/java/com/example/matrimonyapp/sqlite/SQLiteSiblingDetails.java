@@ -22,6 +22,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     public static final String  RELATION_ID = "relation_id";
     public static final String  RELATION = "relation";
     public static final String  MARITAL_STATUS = "marital_status";
+    public static final String  SPOUSE_NAME = "spouse_name";
     public static final String  FATHER_IN_LAW_NAME = "father_in_law_name";
     public static final String  FATHER_IN_LAW_MOBILE_NO = "father_in_law_mobile_no";
     public static final String  FATHER_IN_LAW_VILLAGE = "father_in_law_village";
@@ -54,6 +55,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
                 + RELATION_ID +" int, "
                 + RELATION +" text, "
                 + MARITAL_STATUS +" text, "
+                + SPOUSE_NAME +" text, "
                 + FATHER_IN_LAW_NAME +" text, "
                 + FATHER_IN_LAW_MOBILE_NO +" text, "
                 + FATHER_IN_LAW_VILLAGE +" text, "
@@ -106,7 +108,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     public long insertSibling(String sibling_details_id, String name, String mobileNo, String educationId, String educationName,
                               String occupationId, String occupationName, String maritalStatus,
-                              String relationId, String relation, String fil_name, String fil_mobileNo, String fil_village,
+                              String relationId, String relation, String spouseName, String fil_name, String fil_mobileNo, String fil_village,
                               String fil_state_id, String fil_district_id, String fil_taluka_id,
                               String fil_state_name, String fil_district_name, String fil_taluka_name)
     {
@@ -125,6 +127,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
         contentValues.put(MARITAL_STATUS, maritalStatus);
         contentValues.put(RELATION_ID, relationId);
         contentValues.put(RELATION, relation);
+        contentValues.put(SPOUSE_NAME, spouseName);
         contentValues.put(FATHER_IN_LAW_NAME, fil_name);
         contentValues.put(FATHER_IN_LAW_MOBILE_NO, fil_mobileNo);
         contentValues.put(FATHER_IN_LAW_VILLAGE, fil_village);
@@ -145,7 +148,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
 
     public int updateSibling(String id, String sibling_details_id, String name, String mobileNo, String educationId, String educationName,
                              String occupationId, String occupationName, String maritalStatus,
-                             String relationId, String relation, String fil_name, String fil_mobileNo, String fil_village,
+                             String relationId, String relation, String spouseName, String fil_name, String fil_mobileNo, String fil_village,
                              String fil_state_id, String fil_district_id, String fil_taluka_id,
                              String fil_state_name, String fil_district_name, String fil_taluka_name)
     {
@@ -163,6 +166,7 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
         contentValues.put(MARITAL_STATUS, maritalStatus);
         contentValues.put(RELATION_ID, relationId);
         contentValues.put(RELATION, relation);
+        contentValues.put(SPOUSE_NAME, spouseName);
         contentValues.put(FATHER_IN_LAW_NAME, fil_name);
         contentValues.put(FATHER_IN_LAW_MOBILE_NO, fil_mobileNo);
         contentValues.put(FATHER_IN_LAW_VILLAGE, fil_village);

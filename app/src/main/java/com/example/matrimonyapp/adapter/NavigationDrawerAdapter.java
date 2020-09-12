@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
+import com.example.matrimonyapp.customViews.CustomDialogChangeLanguage;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 
@@ -100,8 +101,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
                     break;*/
-                case 6:
+                case 7:
                     CustomSharedPreference.getInstance(context).logout();
+                    break;
+
+                case 3:
+                    CustomDialogChangeLanguage customDialogChangeLanguage = new CustomDialogChangeLanguage(context);
+                    customDialogChangeLanguage.show();
                     break;
             }
 

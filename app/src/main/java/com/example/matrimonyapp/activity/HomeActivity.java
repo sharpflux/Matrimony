@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.NavigationDrawerAdapter;
 import com.example.matrimonyapp.adapter.TimelineAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.customViews.CustomNavigationView;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserModel;
@@ -63,13 +65,8 @@ import java.util.Map;
 
 
 public class HomeActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
-
-    private Integer[] IMAGES = {R.drawable.shopping_bag, R.drawable.order, R.drawable.my_acc,
-            R.drawable.offer, R.drawable.notification, R.drawable.start1,  R.drawable.my_acc};
-
-    private String[] TEXT = {"My Cart", "My Orders", "My Account",  "Offer Zone", "Notification", "Rate App","Logout"};
-
-
+    
+    private String currentLanguage;
     private SwipeRefreshLayout swipeRefresLayout;
 
     private Toolbar toolbar;
@@ -99,7 +96,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     static String gender, stateIds, districtsIds, talukaIds, maritalStatusIds, familyTypeIds, familyValueIds,
             familyIncomeIds, individualIncomeIds, qualificationLevelIds, qualificationIds, dietIds, colorIds,
             occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax;
-    //SwipeRefreshLayout mSwipeRefreshLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,54 +113,46 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         }
         String IMEINumber = telephonyManager.getDeviceId();
         //textView.setText(IMEINumber);
-        Toast.makeText(this, IMEINumber, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, " ln : "+userModel.getLanguage()+"\nIMEI : "+IMEINumber, Toast.LENGTH_SHORT).show();
         // timelineAdapter = new TimelineAdapter(this,)
 
 
+        //navigation();
 
-       /* imageView_search.setOnClickListener(new View.OnClickListener() {
+
+        setToolbar();
+
+
+
+
+        timelineModelList = new ArrayList<TimelineModel>();
+
+        fetchValues();
+        timelineAdapter = new TimelineAdapter(this,timelineModelList, getWindowManager().getDefaultDisplay());
+        recyclerView_timeline.setAdapter(timelineAdapter);
+        recyclerView_timeline.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView_timeline.setLayoutManager(mLayoutManager);
+        //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
+
+
+        detector = new SimpleGestureFilter(this,this);
+
+
+        swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(),SetPreferencesActivity.class);
-                startActivity(intent);
-
+            public void onRefresh() {
+                insertDetails();
+                swipeRefresLayout.setRefreshing(false);
             }
         });
 
+        onClickListener();
 
-        imageView_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(),DirectMessagesActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-
-            }
-        });
+    }
 
 
-        imageView_like.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, InterestActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-            }
-        });
-
-        imageView_myProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(),MyProfileActivity.class);
-
-                startActivity(intent);
-
-            }
-        });*/
-
+   /* private void navigation() {
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.navigation_view);
@@ -207,57 +197,24 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
             activityListModelArrayList.add(activityListModel);
         }
 
+
+
         navigationDrawerAdapter = new NavigationDrawerAdapter(HomeActivity.this, activityListModelArrayList);
         drawerrecyview.setAdapter(navigationDrawerAdapter);
 
-        setToolbar();
 
 
-
-
-        timelineModelList = new ArrayList<TimelineModel>();
-
-
-/*        Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+
-                this.getResources().getResourcePackageName(R.drawable.flower3)
-                +"/"+this.getResources().getResourceTypeName(R.drawable.flower3)
-                +"/"+this.getResources().getResourceEntryName(R.drawable.flower3));
-        for(int i=0; i<5; i++)
-        {
-            //TimelineModel timelineModel = new TimelineModel("@yourUserId"+(i+1), "User Name", "25 Yrs", "MBA - Marketing, Chennai, India","Bio loading!...",uri, getApplicationContext());
-            TimelineModel timelineModel = new TimelineModel();
-            timelineModelList.add(timelineModel);
-
-        }*/
-
-        fetchValues();
-        timelineAdapter = new TimelineAdapter(this,timelineModelList, getWindowManager().getDefaultDisplay());
-        recyclerView_timeline.setAdapter(timelineAdapter);
-        recyclerView_timeline.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView_timeline.setLayoutManager(mLayoutManager);
-        //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
-
-
-        detector = new SimpleGestureFilter(this,this);
-
-
-        swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                insertDetails();
-                swipeRefresLayout.setRefreshing(false);
-            }
-        });
-
-        onClickListener();
-
-    }
-
+    }*/
+   
+   
+   
 
 
     private void init()
     {
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
+
         swipeRefresLayout = findViewById(R.id.swipeRefresLayout);
         imageView_home = findViewById(R.id.imageView_home);
         imageView_search = findViewById(R.id.imageView_search);
@@ -279,7 +236,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         }
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
-        textView_welcomeUserName.setText(userModel.getFullName());
+//        textView_welcomeUserName.setText(userModel.getFullName());
         if( userModel!=null && !userModel.getProfilePic().equals("1"))
         {
             //imageView_profilePic.setImageURI();
@@ -313,6 +270,17 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
             }
         });
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
 
     }
 
@@ -445,14 +413,14 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
 
 
-    @Override
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // toggle nav drawer on selecting action bar app icon/title
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     /**
      * When using the ActionBarDrawerToggle, you must call it during
@@ -463,17 +431,17 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        actionBarDrawerToggle.syncState();
+       /* actionBarDrawerToggle.syncState();*/
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
-        actionBarDrawerToggle.onConfigurationChanged(newConfig);
+        /*actionBarDrawerToggle.onConfigurationChanged(newConfig);*/
     }
 
-    @Override
+/*    @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.END)) {
 
@@ -481,7 +449,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         } else {
             finish();
         }
-    }
+    }*/
 
 
     private void setToolbar() {
@@ -498,7 +466,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             actionBar.setCustomView(R.layout.main_toolbar);
         }
-        findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -510,18 +478,20 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
                     drawer.openDrawer(navigationView);
                 }
             }
-        });
+        });*/
+
+        findViewById(R.id.imageView_menu).setVisibility(View.GONE);
 
     }
 
 
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+   /* public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.END);
         return true;
 
 
-    }
+    }*/
 
     private void insertDetails() {
 

@@ -11,6 +11,8 @@ import com.example.matrimonyapp.fragment.BasicDetailsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String currentLanguage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,21 @@ public class MainActivity extends AppCompatActivity {
         //fragmentTransaction.addToBackStack(getClas);
         fragmentTransaction.commit();
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
+
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
+
 }

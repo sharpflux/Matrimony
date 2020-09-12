@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class ReligiousDetailsFragment extends Fragment {
 
     private EditText editText_caste, editText_subCaste, editText_religion, editText_gothram, editText_dosh,
     editText_motherTongue;
-
+    public Context context;
     private ImageView imageView_back;
 
     String caste, subCaste, religion, otherCaste, gothram, dosh;
@@ -78,7 +79,7 @@ public class ReligiousDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_religious_details, container, false);
 
-
+        context = getContext();
 
         if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
@@ -89,7 +90,7 @@ public class ReligiousDetailsFragment extends Fragment {
 
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Religious Details");
+        tv.setText(context.getResources().getString(R.string.religious_details));
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override

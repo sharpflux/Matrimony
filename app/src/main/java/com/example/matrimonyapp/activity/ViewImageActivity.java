@@ -37,11 +37,15 @@ public class ViewImageActivity extends AppCompatActivity {
     int progressBarWidth=0;
     int progressStatus=0;
     int i=0;
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_image);
+
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         //progressBar = findViewById(R.id.progressBar);
         imageView_galleryImage = findViewById(R.id.imageView_galleryImage);
@@ -70,7 +74,16 @@ public class ViewImageActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
 
     public class AsyncTaskProgressBar extends AsyncTask{
 

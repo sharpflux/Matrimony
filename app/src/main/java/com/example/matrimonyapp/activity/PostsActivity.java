@@ -23,15 +23,20 @@ public class PostsActivity extends AppCompatActivity {
     ArrayList<PostsModel> postsModelArrayList;
     PostsAdapter postsAdapter;
 
+
+
+
     View include_toolbar;
     TextView textView_toolbarHeader;
     ImageView imageView_back;
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_posts);
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         include_toolbar = findViewById(R.id.include_toolbar);
         textView_toolbarHeader = findViewById(R.id.textView_toolbarHeader);
@@ -77,6 +82,17 @@ public class PostsActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
 
     }
 }

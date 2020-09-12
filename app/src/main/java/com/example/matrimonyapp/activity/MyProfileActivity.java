@@ -21,9 +21,11 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,12 +59,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.adapter.ExpandableListAdapter;
 import com.example.matrimonyapp.adapter.GalleryAdapter;
 import com.example.matrimonyapp.adapter.ImageSliderAdapter;
 import com.example.matrimonyapp.adapter.NavigationDrawerAdapter;
 import com.example.matrimonyapp.adapter.TimelineAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogChangeProfilePic;
+import com.example.matrimonyapp.customViews.CustomNavigationView;
 import com.example.matrimonyapp.fragment.ReligiousDetailsFragment;
+import com.example.matrimonyapp.modal.ExpandedMenuModel;
 import com.example.matrimonyapp.modal.NavigationDrawer;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.SingleImage;
@@ -91,6 +96,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -122,26 +128,30 @@ public class MyProfileActivity extends AppCompatActivity {
 
     Intent intent_camera;
     ArrayList<String> selectedImageList;
-    private DrawerLayout drawer;
+
+    ExpandableListAdapter mMenuAdapter;
+    ExpandableListView expandableList;
+    List<ExpandedMenuModel> listDataHeader;
+    HashMap<ExpandedMenuModel, List<String>> listDataChild;
 
 
-    private Integer[] IMAGES = {R.drawable.shopping_bag, R.drawable.order, R.drawable.my_acc,
-            R.drawable.offer, R.drawable.notification, R.drawable.start1,  R.drawable.my_acc};
+    ArrayList<ExpandedMenuModel> arrayList_expandedMenuModel;
 
-    private String[] TEXT = {"My Cart", "My Orders", "My Account",  "Offer Zone", "Notification", "Rate App","Logout"};
 
     private Toolbar toolbar;
     private RecyclerView drawerrecyview;
-    private NavigationDrawerAdapter navigationDrawerAdapter;
-    private ArrayList<NavigationItemListModel> activityListModelArrayList;
+
+
+    //Navigation
     private ActionBarDrawerToggle actionBarDrawerToggle;
-    NavigationView navigationView;
+    private CustomNavigationView customNavigationView;
+    private DrawerLayout drawerLayout;
+
     private SimpleGestureFilter detector;
     UserModel userModel;
     ViewPager2 viewPager2_singleImage;
     ArrayList<SingleImage>  arrayList_singleImage;
     Handler sliderHandler = new Handler();
-
 
 
     @Override
@@ -167,32 +177,15 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
 
-        //uri = Uri.parse(getResources().getDrawable(R.drawable.noimage).toString());
-
         uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower3)
         +"/"+this.getResources().getResourceTypeName(R.drawable.flower3)
         +"/"+this.getResources().getResourceEntryName(R.drawable.flower3));
 
-/*
-        imageView_myProfile.setColorFilter(ContextCompat.getColor(this,R.color.white));
-        imageView_myProfile.setBackgroundResource(R.drawable.gradient_place_order);
-*/
+
 
         imageView_myProfile.setImageResource(R.drawable.filled_profile); // highlight MyProfile Tab
 
         arrayList_singleImage = new ArrayList<SingleImage>();
-
-/*
-        for(int i=0; i<9; i++) {
-            mArrayUri.add(uri);
-            SingleImage singleImage = new SingleImage(uri.toString());
-            arrayList_singleImage.add(singleImage);
-
-        }
-        viewPager2_singleImage.setAdapter(new ImageSliderAdapter(arrayList_singleImage,viewPager2_singleImage));
-
-        viewPager2_settings();
-*/
 
 
         navigation();
@@ -205,11 +198,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
 
-
-
-/*        for(int i=0; i<7; i++) {
-            mArrayUri.add(uri);
-        }*/
 
         gestureDetector = new GestureDetector(this,new Gesture());
 
@@ -265,36 +253,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
         textView_profileName.setText(userModel.getFullName());
-/*        Bundle bundle = getIntent().getExtras();
 
-        if(bundle!=null)
-        {
-        selectedImageList = (ArrayList<String>)bundle.getSerializable("selectedImageList");;
-        if(selectedImageList!=null)
-        {
-            mArrayUri.clear();
-            for(int i=0; i<selectedImageList.size(); i++)
-            {
-                Bitmap t_bitmap = BitmapFactory.decodeFile(selectedImageList.get(i));
-                Bitmap newBitmap = Bitmap.createBitmap(t_bitmap.getWidth(), t_bitmap.getHeight(), t_bitmap.getConfig());
-                Canvas canvas = new Canvas(newBitmap);
-                canvas.drawColor(Color.WHITE);
-                canvas.drawBitmap(t_bitmap, 0, 0, null);
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
-
-                // selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
-
-                mArrayUri.add(Uri.parse(selectedImageList.get(i)));
-
-
-            }
-
-            galleryAdapter.notifyDataSetChanged();
-
-
-        }
-        }*/
     }
 
 
@@ -353,37 +312,6 @@ public class MyProfileActivity extends AppCompatActivity {
 
         sliderHandler.postDelayed(sliderRunnable,3000);
 
-
-
-       /* if(bundle!=null)
-        {
-            selectedImageList = (ArrayList<String>)bundle.getSerializable("selectedImageList");;
-            if(selectedImageList!=null)
-            {
-                mArrayUri.clear();
-                for(int i=0; i<selectedImageList.size(); i++)
-                {
-                    Bitmap t_bitmap = BitmapFactory.decodeFile(selectedImageList.get(i));
-                    Bitmap newBitmap = Bitmap.createBitmap(t_bitmap.getWidth(), t_bitmap.getHeight(), t_bitmap.getConfig());
-                    Canvas canvas = new Canvas(newBitmap);
-                    canvas.drawColor(Color.WHITE);
-                    canvas.drawBitmap(t_bitmap, 0, 0, null);
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                    newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
-
-                    // selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
-
-                    mArrayUri.add(Uri.parse(selectedImageList.get(i)));
-
-
-                }
-
-                galleryAdapter.notifyDataSetChanged();
-
-
-            }
-        }
-*/
     }
 
 
@@ -396,12 +324,12 @@ public class MyProfileActivity extends AppCompatActivity {
 
                 if (PResult.length > 0 && PResult[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Toast.makeText(MyProfileActivity.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(MyProfileActivity.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
 
-                } else {
-
+                }
+                else
+                {
                     Toast.makeText(MyProfileActivity.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
-
                 }
                 break;
         }
@@ -615,61 +543,56 @@ public class MyProfileActivity extends AppCompatActivity {
 
     }
 
-    private void navigation() {
+
+  private void navigation()
+  {
+      drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+      expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
+      NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+      //arrayList_expandedMenuModel = new ArrayList<>();
+
+      CustomNavigationView customNavigationView = new CustomNavigationView(MyProfileActivity.this,
+              drawerLayout, expandableList, navigationView);
+
+      customNavigationView.createNavigation();
+      //prepareListData();
 
 
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
-        textView_welcomeUserName.setText(userModel.getFullName());
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+      // setting list adapter
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-                super.onDrawerOpened(drawerView);
-            }
-        };
-
-        //Setting the actionbarToggle to drawer layout
-        drawer.addDrawerListener(actionBarDrawerToggle);
-
-        //calling sync state is necessary or else your hamburger icon wont show up
-        actionBarDrawerToggle.syncState();
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
-
-        invalidateOptionsMenu();
-
-
-        drawerrecyview = findViewById(R.id.drawerrecyview);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MyProfileActivity.this);
-        drawerrecyview.setLayoutManager(layoutManager);
-        drawerrecyview.setItemAnimator(new DefaultItemAnimator());
-
-
-        activityListModelArrayList = new ArrayList<>();
-        for (int i = 0; i < IMAGES.length; i++) {
-            NavigationItemListModel activityListModel = new NavigationItemListModel();
-            activityListModel.setTxt(TEXT[i]);
-            activityListModel.setImage(IMAGES[i]);
-            activityListModelArrayList.add(activityListModel);
-        }
-
-        navigationDrawerAdapter = new NavigationDrawerAdapter(MyProfileActivity.this, activityListModelArrayList);
-        drawerrecyview.setAdapter(navigationDrawerAdapter);
+/*
+      expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+          @Override
+          public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+              //Log.d("DEBUG", "submenu item clicked");
+              return false;
+          }
+      });
+      expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+          @Override
+          public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+              //Log.d("DEBUG", "heading clicked");
+              return false;
+          }
+      });*/
+  }
+    /*private void setupDrawerContent(NavigationView navigationView) {
+        //revision: this don't works, use setOnChildClickListener() and setOnGroupClickListener() above instead
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
 
 
 
-        setToolbar();
 
-    }
-
+    }*/
     private void setToolbar() {
 
 /*        setSupportActionBar(toolbar);
@@ -678,7 +601,7 @@ public class MyProfileActivity extends AppCompatActivity {
        // actionBar.setTitle("");*/
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
-        findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -690,7 +613,47 @@ public class MyProfileActivity extends AppCompatActivity {
                     drawer.openDrawer(navigationView);
                 }
             }
-        });
+        });*/
+
+    }
+
+
+    private void prepareListData() {
+       /* listDataHeader = new ArrayList<ExpandedMenuModel>();
+        listDataChild = new HashMap<ExpandedMenuModel, List<String>>();
+
+
+
+        ExpandedMenuModel item1 = new ExpandedMenuModel();
+        item1.setIconName("heading1");
+        item1.setIconImg(R.drawable.my_acc);
+        // Adding data header
+        listDataHeader.add(item1);
+
+        ExpandedMenuModel item2 = new ExpandedMenuModel();
+        item2.setIconName("heading2");
+        item2.setIconImg(android.R.drawable.ic_delete);
+        listDataHeader.add(item2);
+
+        ExpandedMenuModel item3 = new ExpandedMenuModel();
+        item3.setIconName("heading3");
+        item3.setIconImg(android.R.drawable.ic_delete);
+        listDataHeader.add(item3);
+
+        // Adding child data
+        List<String> heading1 = new ArrayList<String>();
+        heading1.add("Submenu of item 1");
+
+        List<String> heading2 = new ArrayList<String>();
+        heading2.add("Submenu of item 2");
+        heading2.add("Submenu of item 2");
+        heading2.add("Submenu of item 2");
+
+        listDataChild.put(listDataHeader.get(0), heading1);// Header, Child data
+        listDataChild.put(listDataHeader.get(1), heading2);
+*/
+
+
 
     }
 

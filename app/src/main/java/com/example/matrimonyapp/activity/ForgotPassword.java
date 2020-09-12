@@ -29,7 +29,7 @@ public class ForgotPassword extends AppCompatActivity {
     Bundle bundle;
 
     private EditText editText_password, editText_confirmPassword;
-
+    private String currentLanguage;
     private TextView textView_updatePassword, textView_backToSignIn, textView_signUp;
     private String userId, password, confirmPassword;
 
@@ -37,6 +37,9 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
+
 
         editText_password = findViewById(R.id.editText_newPassword);
         editText_confirmPassword = findViewById(R.id.editText_confirmPassword);
@@ -87,6 +90,17 @@ public class ForgotPassword extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
 
     }
 

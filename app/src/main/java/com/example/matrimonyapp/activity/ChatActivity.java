@@ -23,7 +23,7 @@ public class ChatActivity extends AppCompatActivity {
     ImageView imageView_back, imageView_sendMessage;
     EditText editText_message;
     String message;
-
+    private String currentLanguage;
     ArrayList<ChatModel> chatModelsList;
     RecyclerView recyclerView_chat;
     ChatAdapter chatAdapter;
@@ -34,6 +34,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
         linearLayout_message = findViewById(R.id.linearLayout_message);
         recyclerView_chat = findViewById(R.id.recyclerView_chat);
         editText_message = findViewById(R.id.editText_message);
@@ -84,4 +86,17 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
+
 }

@@ -39,12 +39,14 @@ public class LoginActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
 
     String password, mobileNo;
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
 
         editText_mobileNo = findViewById(R.id.editText_mobileNo);
@@ -104,7 +106,15 @@ public class LoginActivity extends AppCompatActivity {
         textView_login.setEnabled(true);
         textView_signUp.setEnabled(true);
         textView_forgotPassword.setEnabled(true);
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
     }
+
+
 
     void verifyLogin()
     {

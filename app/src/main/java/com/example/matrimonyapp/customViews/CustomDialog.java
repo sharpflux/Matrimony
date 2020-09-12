@@ -167,8 +167,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
 
         recyclerView.setAdapter(adapter);
 
-        /*yes.setOnClickListener(this);*/
-        //no.setOnClickListener(this);
+
 
     }
 

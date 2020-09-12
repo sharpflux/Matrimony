@@ -332,7 +332,45 @@
                     android:visibility="gone"
                     android:layout_marginBottom="20dp"
                     >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:cardElevation="0.5dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingStart="20dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="10dp"
+                            android:background="@color/white"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            >
 
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/TextLabel"
+
+                                >
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText_spouseName"
+                                    android:hint="@string/spouse_name"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="15sp"
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

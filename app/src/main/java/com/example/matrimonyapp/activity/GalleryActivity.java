@@ -67,6 +67,8 @@ public class GalleryActivity extends AppCompatActivity {
     public static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int STORAGE_PERMISSION = 100;
 
+    private String currentLanguage;
+
     // Views
     RecyclerView imageRecyclerView, selectedImageRecyclerView;
     Spinner spinner_folderNames;
@@ -112,6 +114,21 @@ public class GalleryActivity extends AppCompatActivity {
             onSpinnerClick();
 
 
+        }
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
+
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
         }
 
     }

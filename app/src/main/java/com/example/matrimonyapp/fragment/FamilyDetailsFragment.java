@@ -212,7 +212,8 @@ public class FamilyDetailsFragment extends Fragment {
         textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Family Details");
+        //tv.setText("Family Details");
+        tv.setText(context.getResources().getString(R.string.family_details));
 
 
         dataFetcher = new DataFetcher("State",getContext());
@@ -977,6 +978,7 @@ public class FamilyDetailsFragment extends Fragment {
                                                 jsonObject_details.getString("MaritalStatus"),
                                                 jsonObject_details.getString("SiblingListIdAPI"),
                                                 jsonObject_details.getString("ReltionName"),
+                                                jsonObject_details.getString("InLawsFullNameAPI"), //change-> should be replaced with spouse Name
                                                 jsonObject_details.getString("InLawsFullNameAPI"),
                                                 jsonObject_details.getString("InLawsMobileNoAPI"),
                                                 jsonObject_details.getString("InLawsAddressAPI"),

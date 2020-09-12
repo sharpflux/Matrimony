@@ -51,12 +51,14 @@ public class SignUp extends AppCompatActivity {
             emailId, age, password;
 
     AlertDialog.Builder builder;
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         editText_fullName = findViewById(R.id.editText_fullName);
 
@@ -141,6 +143,19 @@ public class SignUp extends AppCompatActivity {
         });
 
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
 
     private boolean checkRequiredFields(EditText ...editText) {
         boolean flag = true;

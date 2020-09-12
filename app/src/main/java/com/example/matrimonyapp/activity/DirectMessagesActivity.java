@@ -21,6 +21,8 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
     ImageView imageView_back;
 
+    private String currentLanguage;
+
     ArrayList<DirectMessagesModel> directMessagesModelList;
     RecyclerView recyclerView_directMessage;
     DirectMessagesAdapter directMessagesAdapter;
@@ -31,7 +33,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direct_messages);
 
-
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
         imageView_back = findViewById(R.id.imageView_back);
 
 
@@ -73,4 +75,16 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
 }

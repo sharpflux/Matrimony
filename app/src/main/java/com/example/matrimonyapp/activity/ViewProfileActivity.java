@@ -66,6 +66,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     Handler sliderHandler = new Handler();
 
     private int BLUR_PRECENTAGE = 50;
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,9 +233,13 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     }
 
+
+
+
     private void init() {
         mArrayUri = new ArrayList<Uri>();
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         textView_follow = findViewById(R.id.textView_follow);
         textView_following = findViewById(R.id.textView_following);
@@ -313,6 +318,11 @@ public class ViewProfileActivity extends AppCompatActivity {
         super.onResume();
 
         sliderHandler.postDelayed(sliderRunnable,3000);
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
 
     }
 }

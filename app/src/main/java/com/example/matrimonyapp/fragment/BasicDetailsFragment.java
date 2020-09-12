@@ -461,7 +461,7 @@ public class BasicDetailsFragment extends Fragment {
 
         imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Basic Details");
+        tv.setText(context.getResources().getString(R.string.basic_details));
         textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
     }

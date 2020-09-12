@@ -2,6 +2,7 @@ package com.example.matrimonyapp.fragment;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -25,11 +28,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
+import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
+import com.example.matrimonyapp.customViews.CustomDialogAddEducation;
 import com.example.matrimonyapp.customViews.CustomDialogAddPercentage;
+import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
 import com.example.matrimonyapp.customViews.CustomDialogAddYear;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
+import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -39,6 +48,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -59,17 +69,19 @@ public class QualificationDetailsFragment extends Fragment {
             editText_pgCourse, editText_pgNameOfInstitute, editText_pgPer,*/ editText_hobby,
             editText_socialContributions ;
 
-    private ImageView imageView_back;
+    private ImageView imageView_back,imageView_addEducation;
 
-    String sscNameOfInstitute, sscPer,hscNameOfInstitute, hscPer,
+/*    String sscNameOfInstitute, sscPer,hscNameOfInstitute, hscPer,
             gradCourse, gradNameOfInstitute, gradPer,
             pgCourse, pgNameOfInstitute, pgPer, hobby, percentage,
             socialContributions ;
 
-
     int mYear, mMonth, mDay;
-
     DatePickerDialog datePickerDialog;
+
+            */
+
+    public Context context;
 
     DataFetcher dataFetcher;
     Bundle bundle;
@@ -79,6 +91,12 @@ public class QualificationDetailsFragment extends Fragment {
 
     CustomDialogAddPercentage customDialogAddPercentage;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+
+    private CustomDialogAddEducation customDialogAddEducation;
+    private RecyclerView recyclerView_addEducation;
+    private AddPersonAdapter addPersonAdapter_education;
+    private ArrayList<AddPersonModel> addPersonModelArrayList_education;
+    private SQLiteEducationDetails sqLiteEducationDetails;
 
     public QualificationDetailsFragment() {
         // Required empty public constructor
@@ -91,9 +109,12 @@ public class QualificationDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_qualification_details, container, false);
 
+        context = getContext();
+
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText("Qualification Details");
+        tv.setText(context.getResources().getString(R.string.qualification_details));
+
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +145,8 @@ public class QualificationDetailsFragment extends Fragment {
         editText_socialContributions=view.findViewById(R.id.editText_socialContributions);
         textView_highestQualificationLevelId=view.findViewById(R.id.textView_highestQualificationLevelId);
         textView_qualificationId=view.findViewById(R.id.textView_qualificationId);
-
+        recyclerView_addEducation = view.findViewById(R.id.recyclerView_addEducation);
+        imageView_addEducation = view.findViewById(R.id.imageView_addEducation);
 
         bundle = getArguments();
 
@@ -169,7 +191,30 @@ public class QualificationDetailsFragment extends Fragment {
         });
 
 
+        addPersonModelArrayList_education = new ArrayList<>();
 
+        sqLiteEducationDetails = new SQLiteEducationDetails(getContext());
+
+
+        addPersonAdapter_education = new AddPersonAdapter(getContext(), addPersonModelArrayList_education, "Sibling");
+        recyclerView_addEducation.setAdapter(addPersonAdapter_education);
+        recyclerView_addEducation.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
+        recyclerView_addEducation.setLayoutManager(linearLayoutManager_education);
+
+
+
+
+        imageView_addEducation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                customDialogAddEducation = new CustomDialogAddEducation(getContext(), "0", "0",
+                        addPersonAdapter_education, addPersonModelArrayList_education, 0);
+                customDialogAddEducation.show();
+
+            }
+        });
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
 

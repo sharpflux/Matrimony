@@ -21,6 +21,8 @@ public class InterestActivity extends AppCompatActivity {
     CustomViewPager viewPager_interest;
     ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile, imageView_menu;
 
+    private String currentLanguage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +118,17 @@ public class InterestActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
     private void onClickListener() {
 
 
@@ -127,6 +140,8 @@ public class InterestActivity extends AppCompatActivity {
     }
 
     private void init() {
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         viewPager_interest = findViewById(R.id.viewPager_interest);
         tabLayout_interest= findViewById(R.id.tabLayout_interest);

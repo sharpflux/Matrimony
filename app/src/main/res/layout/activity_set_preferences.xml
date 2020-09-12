@@ -147,7 +147,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Religion"
+                            android:text="@string/religion"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -230,7 +230,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Caste"
+                            android:text="@string/caste"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -314,7 +314,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Subcaste"
+                            android:text="@string/sub_caste"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -740,7 +740,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="Taluka"
+                                android:text="@string/_taluka"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -1071,7 +1071,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="Taluka"
+                                android:text="@string/_taluka"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -1677,7 +1677,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Occupation"
+                            android:text="@string/occupation"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -1861,7 +1861,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Expected Individual Income"
+                            android:text="@string/expected_individual_income"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -1956,7 +1956,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Expected Family Income"
+                            android:text="@string/expected_family_income"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 
@@ -2423,7 +2423,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="Diet"
+                            android:text="@string/diet"
                             android:textColor="@color/text_black"
                             android:textSize="13sp" />
 

@@ -402,6 +402,31 @@
     -->
     </RelativeLayout>
 
-    <include layout="@layout/activity_drawer" />
+    <!--<include layout="@layout/activity_drawer" />-->
+
+
+<!--    <com.google.android.material.navigation.NavigationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/navigation_header"
+        android:id="@+id/navigationView"
+        android:background="@color/white"
+        >
+
+
+        <ExpandableListView
+            android:id="@+id/navigationmenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:background="@android:color/white"
+            android:divider="@null"
+            android:textDirection="ltr"
+            android:groupIndicator="@null"
+
+            />
+    </com.google.android.material.navigation.NavigationView>
+    -->
 
 </androidx.drawerlayout.widget.DrawerLayout>

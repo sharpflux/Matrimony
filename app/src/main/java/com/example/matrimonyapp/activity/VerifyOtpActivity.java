@@ -51,6 +51,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
     private TextView textView_timeOut, textView_verifyOtp;
     private EditText editText_num1, editText_num2, editText_num3, editText_num4;
+    private String currentLanguage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,6 +63,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         editText_num1 = findViewById(R.id.editText_num1);
         editText_num2 = findViewById(R.id.editText_num2);
@@ -138,7 +141,16 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
 
     public void registerUser()
     {

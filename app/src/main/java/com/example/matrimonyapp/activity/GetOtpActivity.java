@@ -29,6 +29,7 @@ public class GetOtpActivity extends AppCompatActivity {
     EditText editText_mobileNo;
     TextView textView_getOtp, textView_signIn, textView_signUp;
 
+    private String currentLanguage;
     String mobileNo;
 
     @Override
@@ -36,6 +37,7 @@ public class GetOtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_otp);
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
         editText_mobileNo = findViewById(R.id.editText_mobileNo);
         textView_getOtp = findViewById(R.id.textView_getOtp);
         textView_signUp = findViewById(R.id.textView_signUp);
@@ -75,6 +77,19 @@ public class GetOtpActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
+
     void verifyMobileNo()
     {
 

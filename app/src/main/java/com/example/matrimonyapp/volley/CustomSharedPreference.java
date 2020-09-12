@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.text.style.AlignmentSpan;
+import android.util.DisplayMetrics;
 
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.UserModel;
 
 import java.io.File;
+import java.util.Locale;
 
 public class CustomSharedPreference {
 
@@ -38,11 +42,28 @@ public class CustomSharedPreference {
         context =  t_context;
         if (instance == null) {
             instance = new CustomSharedPreference(context);
+            instance.getUser().setLanguage("en"); //default Language
         }
+
+        if(instance.getUser().getLanguage()==null)
+        {
+            UserModel userModel = instance.getUser();
+            userModel.setLanguage("en");//default Language
+            instance.saveUser(userModel);
+        }
+        setLocale(instance.getUser().getLanguage());
         return instance;
     }
 
+    public static void setLocale(String localeName) {
 
+        Locale locale = new Locale(localeName);
+        Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+        res.updateConfiguration(conf, dm);
+    }
     public void saveUser(UserModel userModel)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -100,6 +121,8 @@ public class CustomSharedPreference {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         ((Activity)context).finish();
+        CustomSharedPreference cs =getInstance(context);
+        cs=null;
     }
 
 

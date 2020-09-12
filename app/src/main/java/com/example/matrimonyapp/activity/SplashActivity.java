@@ -25,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     ImageView imageView_logo;
     TextView textView_appName;
     TypeWriterView textView_tagLine;
+    private String currentLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
         animation_top = AnimationUtils.loadAnimation(this, R.anim.anim_slide_from_top);
         animation_bottom = AnimationUtils.loadAnimation(this, R.anim.anim_slide_from_bottom);
@@ -137,7 +139,16 @@ public class SplashActivity extends AppCompatActivity {
 */
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
     @Override
     protected void onDestroy() {
 

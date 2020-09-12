@@ -16,6 +16,7 @@ import com.example.matrimonyapp.R;
 public class FullImageActivity extends AppCompatActivity {
 
     ImageView myImage, back;
+    private String currentLanguage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,5 +36,24 @@ public class FullImageActivity extends AppCompatActivity {
                 overridePendingTransition(0,0);
             }
         });
+
+
+        currentLanguage = getResources().getConfiguration().locale.getLanguage();
+
+
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
+            currentLanguage = getResources().getConfiguration().locale.getLanguage();
+            recreate();
+        }
+
+    }
+
+
 }

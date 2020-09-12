@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">Matrimony</string>
+    <string name="app_name">Jodidar Maza</string>
     <string name="tag_line">Your search for perfect partner ends here...</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="azubaa">Mr. E Commerce</string>
+    <string name="my_profile" >My Account</string>
+    <string name="rate_app" >Rate App</string>
+    <string name="subscription_plan" >Subscription Plan</string>
+
     <string name="provide_your">Provide your Mobile Number \n for Verification</string>
     <string name="mobile">Mobile No. *</string>
     <string name="mobile_">Mobile No. </string>
@@ -79,6 +82,7 @@
     <string name="height_should_be_between">Height should be between</string>
     <string name="willing_to_marry_in_other_communities">Willing to marry in other communities ?</string>
     <string name="qualification">Qualification</string>
+    <string name="qualification_details">Qualification Details</string>
     <string name="highest_qualification">Highest Qualification</string>
     <string name="highest_qualification_level">Highest Qualification Level</string>
     <string name="qualification_level">Qualification Level</string>
@@ -86,10 +90,13 @@
     <string name="occupation_">Occupation</string>
     <string name="occupation1">Occupation</string>
     <string name="occupation_details">Occupation Details</string>
+    <string name="current_service">Current Service</string>
+    <string name="name_of_department">Name of Department</string>
+
     <string name="service">Service </string>
     <string name="non_service">Non - Service </string>
-    <string name="govt_job">Government Job </string>
-    <string name="private_job">Private Job </string>
+    <string name="govt_job">Government Service </string>
+    <string name="private_job">Private Service </string>
     <string name="working_in_abroad">Working in Abroad </string>
     <string name="working_in_india">Working in India </string>
     <string name="other">Other</string>
@@ -104,6 +111,8 @@
     <string name="annual_income">Annual Income</string>
     <string name="annual_income_father">Father\'s Annual Income</string>
     <string name="annual_income_mother">Mother\'s Annual Income</string>
+    <string name="expected_individual_income">Expected Individual Income</string>
+    <string name="expected_family_income">Expected Family Income</string>
     <string name="no_of_siblings">No. of siblings</string>
     <string name="no_of_mama">No. of mamas</string>
     <string name="add_sibling">Add sibling</string>
@@ -118,10 +127,16 @@
     <string name="sub_caste">Sub Caste </string>
     <string name="religion">Religion </string>
     <string name="religious_details">Religious Details </string>
+    <string name="basic_details">Basic Details </string>
+    <string name="family_details">Family Details </string>
     <string name="gothram">Gothram </string>
     <string name="dosh">Dosh </string>
     <string name="mother_tongue">Mother Tongue</string>
-    <string name="language">language</string>
+    <string name="language">Language</string>
+    <string name="change_language">Change Language</string>
+    <string name="english">English (Default)</string>
+    <string name="marathi">Marathi</string>
+    <string name="hindi">Hindi</string>
 
 
     <string name="institue_university">Name of Institute / University</string>
@@ -159,9 +174,11 @@
     <string name="profile_information">Profile Information</string>
     <string name="religious_information">Religious Information</string>
     <string name="professional_information">Professional Information</string>
+    <string name="professional_details">Professional Details</string>
     <string name="family_information">Family Information</string>
     <string name="personal_information">Personal Information</string>
     <string name="educational_information">Educational Information</string>
+    <string name="favorite">Favorites</string>
     <string name="add_to_favorite">Add to favorites</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="add_profile_photo">Add Profile Photo</string>
@@ -263,68 +280,26 @@
     <string name="_60">60 sec</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="search">Search</string>
-    <string name="apply">Apply</string>
-    <string name="order_id">Order Id:</string>
-    <string name="_6342">63423412112131</string>
-    <string name="us_polo">U.S Polo Assnt. Blue Casuals\nBlazer</string>
-    <string name="sub_order_id">Suborder Id:</string>
-    <string name="_2342">2342321321</string>
-    <string name="seller">Seller: Extreme Fashion</string>
-    <string name="size_small">Size: Small</string>
-    <string name="qty_1">Qty: 1</string>
-    <string name="rs_449">Rs. 449</string>
-    <string name="_10_off">10% off</string>
-    <string name="packed">Packed</string>
-    <string name="sun_22nd">Sun 22nd April, 2018</string>
+
+
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
     <string name="done">Done</string>
-    <string name="select_all">Select All</string>
+
     <string name="need_help">NEED HELP?</string>
     <string name="email_invoice">Email Invoice</string>
-    <string name="shipping">Shipping Address</string>
-    <string name="john_doe">John Doe</string>
-    <string name="neminath">Neminath bldg Flat no.1002 shimpoli Opp.salute hotel,
-        \nBorivali (w), Mumbai, \nMaharashtra - 400092 \n9887873817</string>
+
     <string name="payment_info">Payment Information</string>
-    <string name="cod">Cash on Delivery</string>
-    <string name="payment_summary">Payment Summary</string>
-    <string name="product_price">Product Price</string>
-    <string name="promocode_disc">Promocode Discount</string>
-    <string name="delivery_charges">Delivery Charges</string>
-    <string name="total_amount">Total Amount</string>
-    <string name="rs_439">Rs. 439</string>
-    <string name="free">Free</string>
-    <string name="rs_49">Rs. 49</string>
-    <string name="rs_479">Rs. 479</string>
-    <string name="login_fb">Login with Facebook</string>
-    <string name="login_gmail">Login with Gmail</string>
-    <string name="indias_leading">INDIA\'s Leading Ecommerce Platform</string>
-    <string name="johnemail">john@doe.com</string>
-    <string name="_98912">9891239110</string>
-    <string name="delivery_add">Delivery Address</string>
-    <string name="neminath2">Neminath bldg Flat no.1002 shimpoli Opp.salute hotel,
-        \nBorivali (w), Mumbai, Maharashtra - 400092 \n9887873817</string>
-    <string name="change_pass">Change passoword</string>
-    <string name="my_order">My Order</string>
+
     <string name="notifications">Notifications</string>
     <string name="logout">Logout</string>
-    <string name="cart_items">Cart Items</string>
-    <string name="size">Size</string>
-    <string name="xl">XL</string>
-    <string name="qty">Qty</string>
-    <string name="_1">1</string>
-    <string name="place_order">PLACE ORDER</string>
-    <string name="sub_total">Sub Total (2 items)</string>
-    <string name="delivery">Devlivery</string>
+
     <string name="net_pay">Net Pay</string>
     <string name="payment_method">Payment Method</string>
-    <string name="online">Online</string>
-    <string name="apply_promo">Apply Promocode/Offers</string>
-    <string name="subtotal">Sub Total</string>
-    <string name="cart_total">Cart Total</string>
+
     <string name="save_cont">SAVE &amp; CONTINUE</string>
     <string name="full_name">Full name *</string>
+    <string name="_full_name">Full name </string>
     <string name="contact_mobile_no">Contact Mobile Number</string>
     <string name="address">Address *</string>
     <string name="address_">Address</string>
@@ -348,120 +323,25 @@
 
     <string name="home">Home</string>
     <string name="office">Office</string>
-    <string name="best_deals">Best Deals Near by You</string>
-    <string name="find_best_pro">Find Best Products Near by You</string>
-    <string name="categories">Categories</string>
-    <string name="view_all">View All</string>
-    <string name="mens_wear">Men’s wear</string>
-    <string name="womens_wear">Women’s wear</string>
-    <string name="kids_wear">Kids wear</string>
-    <string name="near_by_shops">Near by Shops</string>
-    <string name="shop_by">Shop by Brands</string>
-    <string name="best_selling">Best Selling</string>
-    <string name="view_full">View Full Collection</string>
-    <string name="international_watches">International Watches</string>
-    <string name="sort">Sort</string>
-    <string name="filter">Filter</string>
-    <string name="_new">NEW</string>
-    <string name="xtreme">Xtreme Fashion</string>
-    <string name="_56">56 | 32 Reviews</string>
-    <string name="_450">450 Orders Delivered</string>
-    <string name="top_products">Top Products</string>
-    <string name="about_seller">About Seller</string>
-    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing\ntypesetting industry.
-        Lorem Ipsum has been the\nindustry standard dummy text.</string>
-    <string name="_35">3.5</string>
-    <string name="casual_men">Casual Men\'s Blazer\nblack and white</string>
-    <string name="_10">10% off</string>
-    <string name="_0">0</string>
-    <string name="ratings_rev">Ratings &amp; Review</string>
-    <string name="_45">4.5</string>
-    <string name="_56_reviews">56 Ratings &amp;\n32 Reviews</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="r_2">(2)</string>
-    <string name="r_7">(7)</string>
-    <string name="r_10">(10)</string>
-    <string name="r_18">(18)</string>
-    <string name="r_23">(23)</string>
-    <string name="mens_fashion">Men’s Fashion</string>
-    <string name="over_135">Over 135 Brands</string>
-    <string name="upto_50">Upto 50% off</string>
-    <string name="upto_30">Upto 30% off</string>
-    <string name="nike_tshirt">Nike T-shirts</string>
-    <string name="jeans_trousers">Jeans &amp;  Trousers</string>
-    <string name="new_in">NEW IN</string>
-    <string name="clothing">CLOTHING</string>
-    <string name="footwear">FOOTWEAR</string>
-    <string name="watches">WATCHES</string>
-    <string name="bags">BAGS</string>
-    <string name="ethnic">ETHNIC</string>
-    <string name="belts">BELTS</string>
-    <string name="grooming">GROOMING</string>
-    <string name="offers_for_you">Offers for You</string>
-    <string name="new_arrivals">New Arrivals</string>
-    <string name="shop_now">Shop Now</string>
+
+
     <string name="login_reg">Login / Register</string>
-    <string name="welcome_guest">Welcome Guest</string>
+
     <string name="welcome">Welcome</string>
-    <string name="mens_product">Men Products</string>
-    <string name="womens_product">Women Products</string>
-    <string name="kids_product">Kids Products</string>
-    <string name="home_product">Home Products</string>
+
+
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
-    <string name="inclusive_all_taxes">Inclusive of all taxes</string>
-    <string name="add_cart">ADD TO CART</string>
-    <string name="buy_now">BUY NOW</string>
-    <string name="available_sizes">Available Sizes</string>
-    <string name="size_chart">Size Chart</string>
+    <string name="_0">0</string>
+    <string name="select_all">Select All</string>
 
-    <string name="blue">Blue</string>
-    <string name="s">S</string>
-    <string name="m">M</string>
-    <string name="l">L</string>
-    <string name="xxl">XXL</string>
-    <string name="enter_pincode">Enter pincode here</string>
-    <string name="shipping_charges">Shipping charges</string>
-    <string name="check_del">Check Delivery</string>
-    <string name="dollar_5">$5</string>
-    <string name="cod_available">COD available on this product</string>
-    <string name="delivery_by">Delivery by 23 Jan 2018</string>
-    <string name="specifications">Specifications</string>
-    <string name="brand">Brand</string>
-    <string name="fabric_type">Fabric type</string>
-    <string name="_colour">Colour</string>
-    <string name="view_more">View more</string>
-    <string name="nike">Nike</string>
-    <string name="cotton">Cotton</string>
-    <string name="light_blue">Light blue</string>
-    <string name="description">Description</string>
-    <string name="sold_by">Sold by :</string>
-    <string name="xtreme_fashion">Xtreme Fashion</string>
-    <string name="all_32">All 32 Reviews</string>
-    <string name="explore_more">Explore more Shirts</string>
-    <string name="from_plus">From Plus Creation</string>
-    <string name="in_same">In Same Price</string>
-    <string name="similar_pro">Similar Products</string>
-    <string name="clear">CLEAR</string>
-    <string name="cap_apply">APPLY</string>
-    <string name="brands">Brands</string>
-    <string name="category">Category</string>
-    <string name="price">Price</string>
-    <string name="discount">Discount</string>
-    <string name="ratings">Ratings</string>
-    <string name="verified_seller">Verified Sellers</string>
-    <string name="puma">Puma</string>
-    <string name="yuki">Yuki</string>
-    <string name="bata">Bata</string>
-    <string name="action">Action</string>
-    <string name="lee">Lee</string>
-    <string name="authentic">Authentic Items</string>
-    <string name="_7_days">7 Days Easy Return</string>
-    <string name="_100_pay">100% Payment\nProtection</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help_and_feedback">Help &amp; feedback</string>
+    <string name="spouse_name">Spouse\'s Name</string>
+    <string name="education_details">Education Details</string>
+    <string name="education_level">Education Level</string>
+    <string name="add_education">Add Education</string>
 </resources>
