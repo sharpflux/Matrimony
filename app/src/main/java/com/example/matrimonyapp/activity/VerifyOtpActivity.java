@@ -200,6 +200,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                                         Intent intent = new Intent(VerifyOtpActivity.this, MainActivity.class);
                                         startActivity(intent);
+                                        //
 
                                 }
                                 else{
