@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.matrimonyapp">
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon1"
@@ -14,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.FullImageActivity"></activity>
+        <activity android:name=".activity.SubscriptionActivity"></activity>
+        <activity android:name=".activity.ServiceProviderSignUpActivity" />
+        <activity android:name=".activity.FullImageActivity" />
         <activity android:name=".activity.GalleryActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
@@ -80,8 +81,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
 </manifest>

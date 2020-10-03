@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +87,9 @@ public class FamilyDetailsFragment extends Fragment {
 
     private ImageView imageView_back, imageView_addProperty, imageView_addVehicle, imageView_addSibling, imageView_addMama, imageView_addFarm;
 
+    private RadioGroup radioGroup_motherServiceType;
+    private RadioButton radioButton_serviceWoman, radioButton_housewife;
+
     private String fatherName, fatherMobileNo, fatherOccupationId, fatherQualificationId, fatherAnnualIncome,
             fatherStateId, fatherDistrictId, fatherTalukaId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
             motherOccupation, familyIncome, relative1, relative2, relative3, relative4;
@@ -125,6 +129,7 @@ public class FamilyDetailsFragment extends Fragment {
     protected int familyDetailsId=0;
     protected int fatherDetailsId=0;
     protected int motherDetailsId=0;
+    private TextInputLayout textInputLayout_motherOccupation;
 
     public FamilyDetailsFragment() {
         // Required empty public constructor
@@ -175,6 +180,9 @@ public class FamilyDetailsFragment extends Fragment {
         editText_motherMobileNo = view.findViewById(R.id.editText_motherMobileNo);
         editText_motherQualification = view.findViewById(R.id.editText_motherQualification);
         textView_motherQualificationId = view.findViewById(R.id.textView_motherQualificationId);
+        radioGroup_motherServiceType = view.findViewById(R.id.radioGroup_motherServiceType);
+        radioButton_serviceWoman = view.findViewById(R.id.radioButton_serviceWoman);
+        radioButton_housewife = view.findViewById(R.id.radioButton_housewife);
         editText_motherOccupation = view.findViewById(R.id.editText_motherOccupation);
         //editText_motherAnnualIncome = view.findViewById(R.id.editText_motherAnnualIncome);
 
@@ -201,6 +209,7 @@ public class FamilyDetailsFragment extends Fragment {
 
         textView_fatherOccupationId = view.findViewById(R.id.textView_fatherOccupationId);
         textView_motherOccupationId = view.findViewById(R.id.textView_motherOccupationId);
+        textInputLayout_motherOccupation = view.findViewById(R.id.textInputLayout_motherOccupation);
 
 
 /*        textField_mamaName = view.findViewById(R.id.textField_mamaName);
@@ -418,6 +427,29 @@ public class FamilyDetailsFragment extends Fragment {
 
     public void onClickListener()
     {
+
+        radioGroup_motherServiceType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+
+                if(id==R.id.radioButton_serviceWoman){
+
+                    textInputLayout_motherOccupation.setVisibility(View.VISIBLE);
+                    textInputLayout_motherOccupation.requestFocus();
+                }
+                else if(id==R.id.radioButton_housewife){
+
+                    textInputLayout_motherOccupation.setVisibility(View.GONE);
+                    editText_motherOccupation.setText("");
+                    editText_motherOccupation.clearFocus();
+                    textView_motherOccupationId.setText("0");
+
+                }
+
+            }
+        });
+
+
 
         imageView_addVehicle.setOnClickListener(new View.OnClickListener() {
             @Override

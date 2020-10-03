@@ -62,9 +62,10 @@ import java.util.Map;
 
 public class BasicDetailsFragment extends Fragment {
 
-    private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName, editText_altMobileNo, editText_altEmailId,
-            editText_mobileNo, editText_address, editText_emailId, editText_birthState, editText_birthTaluka, editText_birthPlace,
-            editText_birthDistrict, editText_state, editText_postalCode, editText_taluka, editText_district,
+    private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName,
+            editText_altMobileNo, editText_altEmailId, editText_mobileNo, editText_address, editText_emailId,
+            editText_birthState, editText_birthTaluka, editText_birthPlace, editText_birthDistrict,
+            editText_bloodGroup, editText_state, editText_postalCode, editText_taluka, editText_district,
             editText_currentState, editText_currentDistrict, editText_currentTaluka, editText_currentPostalCode,
             editText_currentAddress, editText_currentVillage, editText_village, editText_currentCountry, editText_country;
 
@@ -74,8 +75,8 @@ public class BasicDetailsFragment extends Fragment {
 
     private TextView textView_saveAndContinue;
     private TextView textView_stateId, textView_districtId, textView_talukaId, textView_birthStateId,
-            textView_birthDistrictId, textView_birthTalukaId, textView_currentStateId, textView_currentDistrictId,
-            textView_currentTalukaId, textView_countryId, textView_currentCountryId;
+            textView_birthDistrictId, textView_birthTalukaId, textView_bloodGroupId, textView_currentStateId,
+            textView_currentDistrictId, textView_currentTalukaId, textView_countryId, textView_currentCountryId;
 
     private View view;
 
@@ -282,6 +283,15 @@ public class BasicDetailsFragment extends Fragment {
     private void onClickListener() {
 
 
+        editText_bloodGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("BloodGroup");
+            }
+        });
+
         editText_birthdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -425,6 +435,7 @@ public class BasicDetailsFragment extends Fragment {
         editText_birthState = view.findViewById(R.id.editText_birthState);
         editText_birthTaluka = view.findViewById(R.id.editText_birthTaluka);
         editText_birthDistrict = view.findViewById(R.id.editText_birthDistrict);
+        editText_bloodGroup = view.findViewById(R.id.editText_bloodGroup);
         editText_mobileNo = view.findViewById(R.id.editText_mobileNo);
         editText_emailId= view.findViewById(R.id.editText_emailId);
         editText_address = view.findViewById(R.id.editText_address);
@@ -457,6 +468,7 @@ public class BasicDetailsFragment extends Fragment {
         textView_birthStateId= view.findViewById(R.id.textView_birthStateId);
         textView_birthDistrictId = view.findViewById(R.id.textView_birthDistrictId);
         textView_birthTalukaId = view.findViewById(R.id.textView_birthTalukaId);
+        textView_bloodGroupId = view.findViewById(R.id.textView_bloodGroupId);
 
 
         imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
@@ -893,6 +905,15 @@ public class BasicDetailsFragment extends Fragment {
                 else if(params[0].equals("insertDetails"))
                 {
                     insertDetails();
+                }
+
+                else if(params[0].equals("BloodGroup"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_BLOODGROUP+"Language="+userModel.getLanguage(),"BloodTypeId",
+                            "BloodType", editText_bloodGroup, textView_bloodGroupId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
                 }
 
                 if(params[0].equals("State"))

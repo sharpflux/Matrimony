@@ -301,6 +301,12 @@
     <string name="save_cont">सहेजें और जारी रखें</string>
     <string name="full_name">पूरा नाम *</string>
     <string name="_full_name">पूरा नाम </string>
+
+    <string name="owner_name">मालिक का नाम </string>
+    <string name="service_name">सेवा का नाम</string>
+    <string name="service_description">सेवा विवरण</string>
+
+
     <string name="contact_mobile_no">मोबाइल नंबर पर संपर्क करें</string>
     <string name="address">पता *</string>
     <string name="address_">पता</string>
@@ -344,4 +350,19 @@
     <string name="education_details">Education Details</string>
     <string name="education_level">Education Level</string>
     <string name="add_education">Add Education</string>
+    <string name="service_woman">सेवा महिला</string>
+    <string name="housewife">गृहिणी</string>
+    <string name="blood_group">रक्त समूह</string>
+    <string name="fluency">Fluency</string>
+    <string name="fluent">Fluent</string>
+    <string name="non_fluent">Non - Fluent</string>
+    <string name="add_language_details">Add Language Details</string>
+    <string name="language_known">Language Known</string>
+    <string name="account_is_private">This account is private</string>
+    <string name="follow_account_to_see_information"> Follow this account to see their photos and other information</string>
+    <string name="interest_accepted">Interest Accepted</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="select_this_plan">Select this plan</string>
+
+
 </resources>

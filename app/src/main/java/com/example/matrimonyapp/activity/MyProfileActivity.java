@@ -58,6 +58,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ExpandableListAdapter;
 import com.example.matrimonyapp.adapter.GalleryAdapter;
@@ -123,7 +125,7 @@ public class MyProfileActivity extends AppCompatActivity {
     GestureDetector gestureDetector;
     GestureDetectorCompat gestureDetector_gridView;
 
-    CircleImageView circleImageView_profilePic;
+    CircleImageView circleImageView_profilePic, circleImageView_headerProfilePic;
     public static final int RequestPermissionCode = 1;
 
     Intent intent_camera;
@@ -243,6 +245,7 @@ public class MyProfileActivity extends AppCompatActivity {
         textView_changeProfilePhoto = findViewById(R.id.textView_changeProfilePhoto);
         relativeLayout_changeProfilePic = findViewById(R.id.relativeLayout_changeProfilePic);
         circleImageView_profilePic = findViewById(R.id.circleImageView_profilePic);
+
         viewPager2_singleImage= findViewById(R.id.viewPager2_singleImage);
         imageView_addNew= findViewById(R.id.imageView_addNew);
         linearlayout_sharePhoto= findViewById(R.id.linearlayout_sharePhoto);
@@ -546,16 +549,48 @@ public class MyProfileActivity extends AppCompatActivity {
 
   private void navigation()
   {
-      drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+      drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
       expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
-      NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+      final NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
 
       //arrayList_expandedMenuModel = new ArrayList<>();
+        View view_header = navigationView.getHeaderView(0);
+
+        circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
+        textView_welcomeUserName = view_header.findViewById(R.id.textView_welcomeUserName);
+        TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
+
+
+        Glide.with(MyProfileActivity.this)
+              .load(URLs.MainURL+userModel.getProfilePic())
+              .placeholder(R.drawable.default_profile)
+              .into(circleImageView_headerProfilePic);
+
+      textView_welcomeUserName.setText(userModel.getFullName());
+      textView_emailId.setText(userModel.getEmailId());
 
       CustomNavigationView customNavigationView = new CustomNavigationView(MyProfileActivity.this,
               drawerLayout, expandableList, navigationView);
 
       customNavigationView.createNavigation();
+
+
+      findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+
+
+              if(drawerLayout.isDrawerOpen(navigationView))
+              {
+                  drawerLayout.closeDrawers();
+              }
+              else {
+                  drawerLayout.openDrawer(navigationView);
+              }
+
+          }
+      });
+
       //prepareListData();
 
 
@@ -618,44 +653,7 @@ public class MyProfileActivity extends AppCompatActivity {
     }
 
 
-    private void prepareListData() {
-       /* listDataHeader = new ArrayList<ExpandedMenuModel>();
-        listDataChild = new HashMap<ExpandedMenuModel, List<String>>();
 
-
-
-        ExpandedMenuModel item1 = new ExpandedMenuModel();
-        item1.setIconName("heading1");
-        item1.setIconImg(R.drawable.my_acc);
-        // Adding data header
-        listDataHeader.add(item1);
-
-        ExpandedMenuModel item2 = new ExpandedMenuModel();
-        item2.setIconName("heading2");
-        item2.setIconImg(android.R.drawable.ic_delete);
-        listDataHeader.add(item2);
-
-        ExpandedMenuModel item3 = new ExpandedMenuModel();
-        item3.setIconName("heading3");
-        item3.setIconImg(android.R.drawable.ic_delete);
-        listDataHeader.add(item3);
-
-        // Adding child data
-        List<String> heading1 = new ArrayList<String>();
-        heading1.add("Submenu of item 1");
-
-        List<String> heading2 = new ArrayList<String>();
-        heading2.add("Submenu of item 2");
-        heading2.add("Submenu of item 2");
-        heading2.add("Submenu of item 2");
-
-        listDataChild.put(listDataHeader.get(0), heading1);// Header, Child data
-        listDataChild.put(listDataHeader.get(1), heading2);
-*/
-
-
-
-    }
 
     void setGridViewHeight(GridView gridView, int noOfColumns)
     {
@@ -832,8 +830,8 @@ public class MyProfileActivity extends AppCompatActivity {
                                         Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
                                                 .networkPolicy(NetworkPolicy.NO_CACHE)
                                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
-                                                .error(R.drawable.no_photo1)
-                                                .placeholder(R.drawable.no_photo1)
+                                                .error(R.drawable.default_profile)
+                                                .placeholder(R.drawable.default_profile)
                                                 .into(circleImageView_profilePic);
 
                                         userModel.setProfilePic(URLs.MainURL+jsonObject.getString("ImageUrl"));

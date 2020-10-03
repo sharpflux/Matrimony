@@ -14,6 +14,7 @@ public class URLs {
     public static final String URL_GET_STATE                    = MainURL+"api/States/GETSTATE?";
     public static final String URL_GET_DISTRICT                 = MainURL+"api/District/Get_DistrictAPI?";
     public static final String URL_GET_TALUKA                   = MainURL+"api/Talukas/Get_TalukaAPI?";
+    public static final String URL_GET_BLOODGROUP               = MainURL+"api/PersonalDetailsAPI/BloodTypesGET?";
     public static final String URL_GET_RELIGION                 = MainURL+"api/ReligionAPI/GETReligion?";
     public static final String URL_GET_CASTE                    = MainURL+"api/CasteApi/Get_CasteAPI?";
     public static final String URL_GET_MOTHERTONGUE             = MainURL+"api/MotherTongueApi/MotherTongueGetAPI?";

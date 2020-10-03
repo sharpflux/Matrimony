@@ -740,7 +740,7 @@
                         android:id="@+id/textView_caste"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="caste"
+                        android:text="@string/caste"
 
                         />
                 </LinearLayout>

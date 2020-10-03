@@ -102,7 +102,7 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
         else
         {
             res.moveToFirst();
-            String id = res.getString(res.getColumnIndex(SQLiteMamaDetails.ID));
+            String id = res.getString(res.getColumnIndex(ID));
             res.close();
 
             return id;
@@ -111,7 +111,7 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
     }
 
 
-    public long insertFarmDetails(String education_details_id, String qualificationLevel, String qualificationLevelId,
+    public long insertEducationDetails(String education_details_id, String qualificationLevel, String qualificationLevelId,
                                   String instituteName, String instituteAddress,
                                   String stateName, String stateId, String districtName, String districtId,
                                   String talukaName, String talukaId)
@@ -141,7 +141,7 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updateFarmDetails( String id, String education_details_id, String qualificationLevel, String qualificationLevelId,
+    public int updateEducationDetails( String id, String education_details_id, String qualificationLevel, String qualificationLevelId,
                                   String instituteName, String instituteAddress,
                                   String stateName, String stateId, String districtName, String districtId,
                                   String talukaName, String talukaId)
@@ -180,12 +180,12 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
     }
 
 
-    public int deleteFarmDetails(Integer id)
+    public int deleteEducationDetails(Integer id)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         //delete method returns no. of rows deleted or 0 otherwise
-        return sqLiteDatabase.delete(TABLE_NAME,SQLiteFarmDetails.ID+" = ?", new String[]{Integer.toString(id)});
+        return sqLiteDatabase.delete(TABLE_NAME,ID+" = ?", new String[]{Integer.toString(id)});
 
 
     }

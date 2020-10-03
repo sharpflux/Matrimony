@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,6 +24,8 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,9 +35,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
+import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
+import com.example.matrimonyapp.customViews.CustomDialogAddLanguageKnown;
+import com.example.matrimonyapp.customViews.CustomDialogAddProperty;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
+import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -48,6 +57,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +72,7 @@ public class PersonalDetailsFragment extends Fragment {
     int PICK_IMAGE_REQUEST=1;
     public Context context;
 
-    ImageView imageView_back;
+    ImageView imageView_back, imageView_addLanguageKnown;
 
     EditText editText_colour, editText_maritalStatus, editText_familyStatus,
             editText_familyType, editText_familyValues, editText_disabilityType, editText_diet;
@@ -90,6 +100,10 @@ public class PersonalDetailsFragment extends Fragment {
     int personalDetailsId = 0;
 
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+    private RecyclerView recyclerView_addLanguageKnown;
+    private AddPersonAdapter addPersonAdapter_languageKnown;
+    private ArrayList<AddPersonModel> addPersonModelArrayList_languageKnown;
+    private SQLiteLanguageKnownDetails sqLiteLanguageKnownDetails;
 
     public PersonalDetailsFragment() {
         // Required empty public constructor
@@ -129,6 +143,8 @@ public class PersonalDetailsFragment extends Fragment {
         textView_familyValues= view.findViewById(R.id.textView_familyValues);
         rulerValuePicker_height= view.findViewById(R.id.rulerValuePicker_height);
         rulerValuePicker_weight= view.findViewById(R.id.rulerValuePicker_weight);
+        imageView_addLanguageKnown= view.findViewById(R.id.imageView_addLanguageKnown);
+        recyclerView_addLanguageKnown= view.findViewById(R.id.recyclerView_addLanguageKnown);
         //numberPicker_heightFt= view.findViewById(R.id.numberPicker_heightFt);
         //numberPicker_heightInch= view.findViewById(R.id.numberPicker_heightInch);
         //numberPicker_weight= view.findViewById(R.id.numberPicker_weight);
@@ -191,6 +207,15 @@ public class PersonalDetailsFragment extends Fragment {
 
         onClickListener();
 
+        addPersonModelArrayList_languageKnown = new ArrayList<>();
+        sqLiteLanguageKnownDetails= new SQLiteLanguageKnownDetails(getContext());
+        addPersonAdapter_languageKnown = new AddPersonAdapter(getContext(), addPersonModelArrayList_languageKnown, "Language");
+        recyclerView_addLanguageKnown.setAdapter(addPersonAdapter_languageKnown);
+        recyclerView_addLanguageKnown.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
+        recyclerView_addLanguageKnown.setLayoutManager(linearLayoutManager_education);
+
+
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
 
@@ -237,6 +262,19 @@ public class PersonalDetailsFragment extends Fragment {
     void onClickListener()
     {
 
+        imageView_addLanguageKnown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CustomDialogAddLanguageKnown customDialogAddLanguageKnown = new CustomDialogAddLanguageKnown(
+                        getContext(), "0", "0", addPersonAdapter_languageKnown,
+                        addPersonModelArrayList_languageKnown, 0);
+                customDialogAddLanguageKnown.show();
+
+            }
+        });
+        
+        
         showPopUp(editText_colour,"Colour");
         showPopUp(editText_maritalStatus,"MaritalStatus");
         showPopUp(editText_familyStatus,"FamilyStatus");

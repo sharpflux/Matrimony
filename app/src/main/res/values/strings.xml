@@ -2,9 +2,9 @@
     <string name="app_name">Jodidar Maza</string>
     <string name="tag_line">Your search for perfect partner ends here...</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="my_profile" >My Account</string>
-    <string name="rate_app" >Rate App</string>
-    <string name="subscription_plan" >Subscription Plan</string>
+    <string name="my_profile">My Account</string>
+    <string name="rate_app">Rate App</string>
+    <string name="subscription_plan">Subscription Plan</string>
 
     <string name="provide_your">Provide your Mobile Number \n for Verification</string>
     <string name="mobile">Mobile No. *</string>
@@ -300,6 +300,11 @@
     <string name="save_cont">SAVE &amp; CONTINUE</string>
     <string name="full_name">Full name *</string>
     <string name="_full_name">Full name </string>
+    <string name="owner_name">Owner name </string>
+    <string name="service_name">Service name </string>
+    <string name="service_description">Service Description</string>
+
+
     <string name="contact_mobile_no">Contact Mobile Number</string>
     <string name="address">Address *</string>
     <string name="address_">Address</string>
@@ -327,14 +332,13 @@
 
     <string name="login_reg">Login / Register</string>
 
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Welcome to JodidarMaza </string>
 
 
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
     <string name="_0">0</string>
     <string name="select_all">Select All</string>
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -344,4 +348,19 @@
     <string name="education_details">Education Details</string>
     <string name="education_level">Education Level</string>
     <string name="add_education">Add Education</string>
+    <string name="service_woman">Service Woman</string>
+    <string name="housewife">Housewife</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="fluency">Fluency</string>
+    <string name="fluent">Fluent</string>
+    <string name="non_fluent">Non - Fluent</string>
+    <string name="add_language_details">Add Language Details</string>
+    <string name="language_known">Language Known</string>
+    <string name="account_is_private">This account is private</string>
+    <string name="follow_account_to_see_information"> Follow this account to see their photos and other information</string>
+    <string name="interest_accepted">Interest Accepted</string>
+    <string name="buy_now">Buy Now</string>
+    <string name="select_this_plan">Select this plan</string>
+
+
 </resources>

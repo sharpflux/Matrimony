@@ -95,7 +95,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         else
         {
             res.moveToFirst();
-            String id = res.getString(res.getColumnIndex(SQLiteMamaDetails.ID));
+            String id = res.getString(res.getColumnIndex(ID));
             res.close();
 
             return id;
@@ -158,7 +158,7 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         //delete method returns no. of rows deleted or 0 otherwise
-        return sqLiteDatabase.delete(TABLE_NAME,SQLiteFarmDetails.ID+" = ?", new String[]{Integer.toString(id)});
+        return sqLiteDatabase.delete(TABLE_NAME,ID+" = ?", new String[]{Integer.toString(id)});
 
 
     }

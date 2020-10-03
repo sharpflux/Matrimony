@@ -21,7 +21,9 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.modal.AddPersonModel;
+import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
 import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
+import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
 import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
 import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
@@ -102,6 +104,16 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
                     CustomDialogAddVehicle customDialogAddVehicle = new CustomDialogAddVehicle(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
                     customDialogAddVehicle.show();
                 }
+                else if(relation.equalsIgnoreCase("Education"))
+                {
+                    CustomDialogAddEducation customDialogAddEducation= new CustomDialogAddEducation(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogAddEducation.show();
+                }
+                else if(relation.equalsIgnoreCase("Language"))
+                {
+                    CustomDialogAddLanguageKnown customDialogAddLanguageKnown= new CustomDialogAddLanguageKnown(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogAddLanguageKnown.show();
+                }
 
                 dismiss();
                 //Intent intent = new Intent(context, LoginActivity.class);
@@ -175,6 +187,34 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
 
                     SQLiteVehicleDetails sqLiteVehicleDetails = new SQLiteVehicleDetails(context);
                     int deletedCount = sqLiteVehicleDetails.deleteVehicleDetails(Integer.parseInt(id));
+                    if (deletedCount > 0) {
+
+                        addPersonModelArrayList.remove(position);
+                        addPersonAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(context, deletedCount + " values deleted ", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
+                }
+                else if(relation.equalsIgnoreCase("Language")) {
+
+                    SQLiteLanguageKnownDetails sqLiteLanguageKnownDetails= new SQLiteLanguageKnownDetails(context);
+                    int deletedCount = sqLiteLanguageKnownDetails.deleteLanguageKnownDetails(Integer.parseInt(id));
+                    if (deletedCount > 0) {
+
+                        addPersonModelArrayList.remove(position);
+                        addPersonAdapter.notifyDataSetChanged();
+
+                        Toast.makeText(context, deletedCount + " values deleted ", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+
+                }
+                else if(relation.equalsIgnoreCase("Education")) {
+
+                    SQLiteEducationDetails sqLiteEducationDetails= new SQLiteEducationDetails(context);
+                    int deletedCount = sqLiteEducationDetails.deleteEducationDetails(Integer.parseInt(id));
                     if (deletedCount > 0) {
 
                         addPersonModelArrayList.remove(position);

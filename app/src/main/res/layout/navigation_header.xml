@@ -4,33 +4,81 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="93.7dp"
-        android:background="@drawable/button_gradient_without_radius"
-        android:orientation="horizontal" />
-
-
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_gradient_without_radius"
+        android:orientation="horizontal" />
+-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
         android:layout_gravity="center"
-        android:layout_marginStart="15dp"
-        android:orientation="horizontal">
+        android:paddingStart="20dp"
+        android:paddingTop="15dp"
+        android:orientation="horizontal"
+
+        android:background="@drawable/button_gradient_without_radius"
+        android:paddingBottom="10dp"
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:id="@+id/imageView_profilePic"
-            android:layout_gravity="center"
-            android:src="@drawable/no_photo1"
-            app:civ_border_color="@color/text_gray"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/circleImageView_profilePic"
+
+            android:src="@drawable/default_profile"
+            app:civ_border_color="@color/text_gray"
+            app:civ_circle_background_color="@color/text_white"
+
+            />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+        <TextView
+            android:id="@+id/textView_welcomeUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="0dp"
+            android:text="@string/login_reg"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:fontFamily="@font/arima_madurai_medium"
+
+            />
+
+        <TextView
+            android:id="@+id/textView_emailId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginStart="0dp"
+            android:text="@string/login_reg"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:singleLine="true"
+
+            />
+
+        </LinearLayout>
+
+        <!--<LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="10dp"
             android:orientation="vertical"
             android:layout_weight="1">
 
@@ -40,20 +88,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
                 android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/arima_madurai_medium"/>
 
             <TextView
                 android:id="@+id/textView_welcomeUserName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="9.7dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="10dp"
                 android:text="@string/login_reg"
                 android:textColor="@color/white"
                 android:textSize="13sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:fontFamily="@font/arima_madurai_medium"
+                />
 
-        </LinearLayout>
+        </LinearLayout>-->
+
+
 
     </LinearLayout>
 

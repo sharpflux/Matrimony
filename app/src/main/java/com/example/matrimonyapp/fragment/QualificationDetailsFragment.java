@@ -196,7 +196,7 @@ public class QualificationDetailsFragment extends Fragment {
         sqLiteEducationDetails = new SQLiteEducationDetails(getContext());
 
 
-        addPersonAdapter_education = new AddPersonAdapter(getContext(), addPersonModelArrayList_education, "Sibling");
+        addPersonAdapter_education = new AddPersonAdapter(getContext(), addPersonModelArrayList_education, "Education");
         recyclerView_addEducation.setAdapter(addPersonAdapter_education);
         recyclerView_addEducation.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());

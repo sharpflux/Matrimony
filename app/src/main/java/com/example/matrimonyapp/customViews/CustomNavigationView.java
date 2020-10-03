@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.SubscriptionActivity;
 import com.example.matrimonyapp.adapter.ExpandableListAdapter;
 import com.example.matrimonyapp.modal.ExpandedMenuModel;
 import com.example.matrimonyapp.modal.UserModel;
@@ -76,27 +77,32 @@ public class CustomNavigationView
 
 
                     case 0:
-
+                        drawerLayout.closeDrawers();
                         break;
 
 
                     case 1:
-
+                        drawerLayout.closeDrawers();
                         break;
 
 
                     case 2:
-
+                        drawerLayout.closeDrawers();
                         break;
 
 
                     case 3:
+                        drawerLayout.closeDrawers();
+
+                        Intent intent = new Intent(context, SubscriptionActivity.class);
+                        context.startActivity(intent);
+
 
                         break;
 
 
                     case 5:
-
+                        drawerLayout.closeDrawers();
                         break;
 
 
@@ -105,6 +111,7 @@ public class CustomNavigationView
                         break;
 
                 }
+
 
                 return false; // when returns true -> doesn't show submenu
             }
@@ -141,7 +148,7 @@ public class CustomNavigationView
                 }
 
 
-//                drawerLayout.closeDrawers();
+                drawerLayout.closeDrawers();
                 //Toast.makeText(context, "Select : "+arrayList_expandedMenuModel.get(groupPosition).getMenuName(),Toast.LENGTH_SHORT).show();
 
                 return true;
@@ -228,7 +235,7 @@ public class CustomNavigationView
         //4
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.change_language));
-        expandedMenuModel.setMenuIconId(R.drawable.language);
+        expandedMenuModel.setMenuIconId(R.drawable.language1);
         ArrayList<String> arrayList_submenu = new ArrayList<>();
         arrayList_submenu.add(context.getResources().getString(R.string.english));
         arrayList_submenu.add(context.getResources().getString(R.string.marathi));

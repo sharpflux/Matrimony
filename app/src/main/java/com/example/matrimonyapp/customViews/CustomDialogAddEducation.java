@@ -31,15 +31,10 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
-import com.example.matrimonyapp.adapter.PopupFetcher;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
-import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
-import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
-import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
-import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
-import com.example.matrimonyapp.validation.FieldValidation;
+
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 
@@ -48,8 +43,7 @@ import java.util.Map;
 
 import jp.wasabeef.blurry.internal.Blur;
 import jp.wasabeef.blurry.internal.BlurFactor;
-import me.abhinay.input.CurrencyEditText;
-import me.abhinay.input.CurrencySymbols;
+
 
 public class CustomDialogAddEducation extends Dialog {
 
@@ -177,9 +171,6 @@ public class CustomDialogAddEducation extends Dialog {
                 editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.TALUKA_NAME)));
                 textView_talukaId.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.TALUKA_ID)));
 
-                //Toast.makeText(context, cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE))+"---",Toast.LENGTH_SHORT).show();
-
-
             }
 
 
@@ -204,7 +195,7 @@ public class CustomDialogAddEducation extends Dialog {
 
 
                 if(id.equals("0")) {
-                    long res = sqLiteEducationDetails.insertFarmDetails("0",
+                    long res = sqLiteEducationDetails.insertEducationDetails("0",
                             educationLevel, educationLevelId, instituteName, address, stateName, stateNameId,
                             districtName, districtNameId, talukaName, talukaNameId);
 
@@ -219,7 +210,7 @@ public class CustomDialogAddEducation extends Dialog {
                 }
                 else
                 {
-                    int res = sqLiteEducationDetails.updateFarmDetails(id, education_details_id,
+                    int res = sqLiteEducationDetails.updateEducationDetails(id, education_details_id,
                             educationLevel, educationLevelId, instituteName, address, stateName, stateNameId,
                             districtName, districtNameId, talukaName, talukaNameId);
                     if (res != -1) {
@@ -250,10 +241,61 @@ public class CustomDialogAddEducation extends Dialog {
     private void onClickListener()
     {
 
+        editText_educationLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("EducationLevel");
+
+            }
+        });
+
+
+        showPopUp(editText_state, "State");
+        showPopUp(editText_district, "District");
+        showPopUp(editText_taluka, "Taluka");
 
 
     }
+
+    private void showPopUp(EditText editText, final String urlFor)
+    {
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+
+                String id="";
+
+                if(urlFor.equals("District"))
+                {
+                    id =  textView_stateId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                if(urlFor.equals("Taluka"))
+                {
+                    id = textView_districtId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select District first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                runner.execute(urlFor, id);
+            }
+        });
+
+
+    }
+
 
     private class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
@@ -266,30 +308,37 @@ public class CustomDialogAddEducation extends Dialog {
             try {
 
 
-              /*  if(params[0].equals("EducationLevel"))
+                if(params[0].equals("EducationLevel"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONLEVEL+"Language="+userModel.getLanguage(),"VehicleTypeId",
-                            "VehicleType", editText_vehicleType, textView_vehicleTypeId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONLEVEL+"Language="+userModel.getLanguage(),"QualificationLevelId",
+                            "QualificationLevelName", editText_educationLevel, textView_educationLevelId, context, customDialogLoadingProgressBar);
 
                 }
 
-                else if(params[0].equals("BrandName"))
+                if(params[0].equals("State"))
                 {
-                    String id = textView_vehicleTypeId.getText().toString();
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLEBRANDNAME+"Language="+userModel.getLanguage()
-                                    +"&VehicleTypeId="+id,"VehicalMakeId",
-                            "VehicalMake", editText_brandName, textView_brandNameId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
+                            "StatesName", editText_state, textView_stateId, context,
+                            customDialogLoadingProgressBar);
+
 
                 }
-
-                else if(params[0].equals("ModelName"))
+                else if(params[0].equals("District"))
                 {
                     String id = params[1];
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Language="+userModel.getLanguage(),"VehicleTypeId",
-                            "VehicleType", editText_modelName, textView_modelNameId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
+                            "DistrictId", "DistrictName", editText_district,
+                            textView_districtId, context,customDialogLoadingProgressBar);
 
-                }*/
+                }
+                else if(params[0].equals("Taluka"))
+                {
 
+                    String id = params[1];
+                    dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
+                            "TalukasId", "TalukaName", editText_taluka,
+                            textView_talukaId, context,customDialogLoadingProgressBar);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 resp = e.getMessage();

@@ -183,7 +183,8 @@
                             android:hint="@string/address_"
                             android:textColor="@color/text_black"
                             android:textSize="15sp"
-                            android:inputType="textMultiLine"
+                            android:inputType="textMultiLine|textCapWords"
+                            android:lineSpacingMultiplier="1.2"
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -276,7 +277,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_stateId"
-                        android:text="State Id"
+                        android:text="@string/_0"
                         android:visibility="gone"
                         />
 
@@ -309,7 +310,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_districtId"
-                        android:text="District Id"
+                        android:text="@string/_0"
                         android:visibility="gone"
                         />
 
@@ -340,7 +341,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_talukaId"
-                        android:text="Taluka Id"
+                        android:text="@string/_0"
                         android:visibility="gone"
                         />
 
