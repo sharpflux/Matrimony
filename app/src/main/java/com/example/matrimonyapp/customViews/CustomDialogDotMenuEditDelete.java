@@ -16,7 +16,7 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abdallahalaraby.blink.Screenshot;
+
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -233,7 +233,7 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
 
     private void blurBackground()
     {
-
+/*
         //take Screenshot
         Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
 
@@ -249,7 +249,7 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
         Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
 
         //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);
+        getWindow().setBackgroundDrawable(drawable);*/
 
     }
 

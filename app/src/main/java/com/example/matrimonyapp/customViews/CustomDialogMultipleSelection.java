@@ -23,7 +23,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.MultipleSelectionAdapter;
 import com.example.matrimonyapp.adapter.PromptAdapter;
@@ -66,22 +65,6 @@ public class CustomDialogMultipleSelection extends Dialog implements View.OnClic
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 
-        //take Screenshot
-        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
-
-        //set blurring factor and heighth width of screenshot
-        BlurFactor blurFactor = new BlurFactor();
-        blurFactor.height = bitmap.getHeight();
-        blurFactor.width = bitmap.getWidth();
-        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
-
-        //blurred image
-        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
-        //convert blurred image into drawable
-        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
-
-        //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);
 
         setContentView(R.layout.custom_dialog_multiple_selection);
         setTitle("Search ... ");
@@ -94,7 +77,7 @@ public class CustomDialogMultipleSelection extends Dialog implements View.OnClic
         recyclerView.setLayoutManager(mLayoutManager);
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 

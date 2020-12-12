@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 
@@ -23,15 +22,6 @@ import jp.wasabeef.blurry.internal.Blur;
 import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialogAccountExists extends Dialog {
-
-/*
-    public CustomRecyclerViewDialog(Context context, int themeResId) {
-        super(context, themeResId);
-    }
-
-    public CustomRecyclerViewDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
-    }*/
 
 
     public Context context;
@@ -50,23 +40,6 @@ public class CustomDialogAccountExists extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //take Screenshot
-        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
-
-        //set blurring factor and heighth width of screenshot
-        BlurFactor blurFactor = new BlurFactor();
-        blurFactor.height = bitmap.getHeight();
-        blurFactor.width = bitmap.getWidth();
-        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
-
-        //blurred image
-        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
-        //convert blurred image into drawable
-        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
-
-        //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);
 
 
 
@@ -90,16 +63,29 @@ public class CustomDialogAccountExists extends Dialog {
         });
 
 
-        /*textView_createNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, SignUp.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                context.startActivity(intent);
 
-            }
-        });*/
 
+    }
+
+    private void blurBackground()
+    {
+/*
+        //take Screenshot
+        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
+
+        //set blurring factor and heighth width of screenshot
+        BlurFactor blurFactor = new BlurFactor();
+        blurFactor.height = bitmap.getHeight();
+        blurFactor.width = bitmap.getWidth();
+        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
+
+        //blurred image
+        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
+        //convert blurred image into drawable
+        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
+
+        //set blurred screenshot to background
+        getWindow().setBackgroundDrawable(drawable);*/
 
     }
 

@@ -22,7 +22,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.PromptAdapter;
 
@@ -68,34 +67,16 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //setContentView(R.layout.prompts);
-        //yes = (Button) findViewById(R.id.yes);
-        //no = (Button) findViewById(R.id.no);
-        //title = findViewById(R.id.title);
-        //recyclerView = findViewById(R.id.recyclerView_prompt);
 
-
-        //take Screenshot
-        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
-
-        //set blurring factor and heighth width of screenshot
-        BlurFactor blurFactor = new BlurFactor();
-        blurFactor.height = bitmap.getHeight();
-        blurFactor.width = bitmap.getWidth();
-        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
-
-        //blurred image
-        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
-        //convert blurred image into drawable
-        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
-
-        //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);
+        setCanceledOnTouchOutside(true);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 
-        //final Dialog dialog = new Dialog(context);
         setContentView(R.layout.prompts);
+
+
+
         setTitle("Search ... ");
 
         relativeLayout_progressBar = findViewById(R.id.relativeLayout_progressBar);
@@ -104,9 +85,6 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
-
-        setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
 
@@ -163,7 +141,7 @@ public class CustomDialog extends Dialog implements View.OnClickListener {
         });
 
 
-        //recyclerView.setNestedScrollingEnabled(false);
+
 
         recyclerView.setAdapter(adapter);
 

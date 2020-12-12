@@ -16,7 +16,6 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.UserModel;
@@ -108,7 +107,7 @@ public class CustomDialogAddPercentage extends Dialog {
     private void blurBackground()
     {
 
-        //take Screenshot
+       /* //take Screenshot
         Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
 
         //set blurring factor and heighth width of screenshot
@@ -124,7 +123,7 @@ public class CustomDialogAddPercentage extends Dialog {
 
         //set blurred screenshot to background
         getWindow().setBackgroundDrawable(drawable);
-
+*/
 
 
     }

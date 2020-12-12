@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
@@ -25,7 +26,7 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import afu.org.checkerframework.checker.nullness.qual.NonNull;
+//import afu.org.checkerframework.checker.nullness.qual.NonNull;
 
 public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.SingleViewHolder>{
 

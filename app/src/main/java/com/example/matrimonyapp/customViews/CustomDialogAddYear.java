@@ -17,7 +17,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.abdallahalaraby.blink.Screenshot;
+
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.UserModel;
@@ -127,26 +127,6 @@ public class CustomDialogAddYear extends Dialog {
 
     }
 
-    private void blurBackground() {
-        //take Screenshot
-        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
 
-        //set blurring factor and heighth width of screenshot
-        BlurFactor blurFactor = new BlurFactor();
-        blurFactor.height = bitmap.getHeight();
-        blurFactor.width = bitmap.getWidth();
-        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
-
-        //blurred image
-        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
-        //convert blurred image into drawable
-        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
-
-        //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);
-        getWindow().setGravity(Gravity.CENTER_VERTICAL);
-
-
-    }
 
 }

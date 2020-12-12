@@ -22,7 +22,6 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.LanguageAdapter;

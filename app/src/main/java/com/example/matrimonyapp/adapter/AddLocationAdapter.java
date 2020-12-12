@@ -11,6 +11,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,7 @@ import com.example.matrimonyapp.modal.AddLOcationModal;
 import java.util.ArrayList;
 import java.util.List;
 
-import afu.org.checkerframework.checker.nullness.qual.NonNull;
+//import afu.org.checkerframework.checker.nullness.qual.NonNull;
 
 public class AddLocationAdapter extends RecyclerView.Adapter<AddLocationAdapter.FruitViewHolder> implements Filterable {
 

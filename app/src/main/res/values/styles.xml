@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"> <!--Theme.AppCompat.Light.DarkActionBar-->
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -122,7 +122,7 @@
         <item name="colorAccent">#9e2e90</item>
     </style>
 
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
+    <style name="TextLabel">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/text_black</item>
         <item name="android:textSize">15sp</item>
@@ -132,6 +132,7 @@
         <item name="colorControlNormal">#ebebeb</item>
         <item name="colorControlActivated">#9e2e90</item>
         <item name="android:layout_marginTop">10dp</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">

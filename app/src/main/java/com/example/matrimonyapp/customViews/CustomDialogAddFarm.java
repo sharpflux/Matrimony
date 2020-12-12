@@ -26,7 +26,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.abdallahalaraby.blink.Screenshot;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -99,22 +98,6 @@ public class CustomDialogAddFarm extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        //take Screenshot
-        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
-
-        //set blurring factor and heighth width of screenshot
-        BlurFactor blurFactor = new BlurFactor();
-        blurFactor.height = bitmap.getHeight();
-        blurFactor.width = bitmap.getWidth();
-        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
-
-        //blurred image
-        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
-        //convert blurred image into drawable
-        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
-
-        //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);
 
 
 
@@ -220,6 +203,28 @@ public class CustomDialogAddFarm extends Dialog {
 
         onClickListener();
 
+
+    }
+
+    private void blurBackground()
+    {
+/*
+        //take Screenshot
+        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
+
+        //set blurring factor and heighth width of screenshot
+        BlurFactor blurFactor = new BlurFactor();
+        blurFactor.height = bitmap.getHeight();
+        blurFactor.width = bitmap.getWidth();
+        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
+
+        //blurred image
+        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
+        //convert blurred image into drawable
+        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
+
+        //set blurred screenshot to background
+        getWindow().setBackgroundDrawable(drawable);*/
 
     }
 
