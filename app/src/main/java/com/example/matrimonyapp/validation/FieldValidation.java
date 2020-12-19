@@ -115,10 +115,10 @@ public class FieldValidation {
             id = textView_id.getText().toString();
 
             if (id.equals("0")) {
-                if (urlFor.contains("District")) {
+                if (urlFor.contains("State")) {
+                    Toast.makeText(ctx, "Select Country first", Toast.LENGTH_SHORT).show();
+                } else if (urlFor.contains("City")) {
                     Toast.makeText(ctx, "Select State first", Toast.LENGTH_SHORT).show();
-                } else if (urlFor.contains("Taluka")) {
-                    Toast.makeText(ctx, "Select District first", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -127,9 +127,9 @@ public class FieldValidation {
         return id;
     }
 
-    public static void textChangedListenerForSDT(final EditText editText_state, final EditText editText_district,
-                                                 final EditText editText_taluka, TextView textView_stateId,
-                                                 final TextView textView_districtId, final TextView textView_talukaId)
+    public static void textChangedListenerForSDT(final EditText editText_country, final EditText editText_state,
+                                                 final EditText editText_city, TextView textView_countryId,
+                                                 final TextView textView_stateId, final TextView textView_cityId)
     {
 
 
@@ -142,10 +142,10 @@ public class FieldValidation {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(editText_state.hasFocus()) {
-                    editText_district.setText("");
-                    textView_districtId.setText("0");
-                    editText_taluka.setText("");
-                    textView_talukaId.setText("0");
+                    editText_state.setText("");
+                    textView_stateId.setText("0");
+                    editText_city.setText("");
+                    textView_cityId.setText("0");
                 }
             }
 
@@ -155,7 +155,7 @@ public class FieldValidation {
             }
         });
 
-        editText_district.addTextChangedListener(new TextWatcher() {
+        editText_state.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -163,9 +163,9 @@ public class FieldValidation {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(editText_district.hasFocus()) {
-                    editText_taluka.setText("");
-                    textView_talukaId.setText("0");
+                if(editText_state.hasFocus()) {
+                    editText_city.setText("");
+                    textView_cityId.setText("0");
                 }
             }
 

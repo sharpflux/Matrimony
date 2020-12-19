@@ -50,8 +50,7 @@ public class CustomDialogAddEducation extends Dialog {
 
     public Context context;
 
-    private EditText editText_educationLevel, editText_institue, editText_address, editText_state,
-                     editText_district, editText_taluka;
+    private EditText editText_educationLevel, editText_institue, editText_passingYear, editText_percentage;// editText_address, editText_state, editText_district, editText_taluka;
 
     private TextView textView_title, textView_educationLevelId, textView_addEducation, textView_stateId,
                      textView_districtId, textView_talukaId;
@@ -75,6 +74,8 @@ public class CustomDialogAddEducation extends Dialog {
     private AddPersonAdapter addPersonAdapter;
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
+    private CustomDialogAddPercentage customDialogAddPercentage;
+
 
     public CustomDialogAddEducation(Context context, String id, String education_details_id,  AddPersonAdapter addPersonAdapter,
                                ArrayList<AddPersonModel> addPersonModelArrayList, int position)
@@ -108,7 +109,7 @@ public class CustomDialogAddEducation extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         imageView_back = findViewById(R.id.imageView_back);
@@ -116,14 +117,18 @@ public class CustomDialogAddEducation extends Dialog {
         editText_educationLevel = findViewById(R.id.editText_educationLevel);
         textView_educationLevelId = findViewById(R.id.textView_educationLevelId);
         editText_institue = findViewById(R.id.editText_institue);
-        editText_address = findViewById(R.id.editText_address);
+        editText_percentage = findViewById(R.id.editText_percentage);
+        editText_passingYear = findViewById(R.id.editText_passingYear);
+
+
+        /*editText_address = findViewById(R.id.editText_address);
         editText_state = findViewById(R.id.editText_state);
         textView_stateId = findViewById(R.id.textView_stateId);
         editText_district = findViewById(R.id.editText_district);
         textView_districtId = findViewById(R.id.textView_districtId);
         editText_taluka = findViewById(R.id.editText_taluka);
         textView_talukaId = findViewById(R.id.textView_talukaId);
-
+*/
 
         textView_addEducation = findViewById(R.id.textView_addEducation);
 
@@ -145,6 +150,11 @@ public class CustomDialogAddEducation extends Dialog {
                 editText_educationLevel.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL)));
                 textView_educationLevelId.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL_ID)));
                 editText_institue.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.INSTITUTE_NAME)));
+                editText_percentage.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.PERCENTAGE)));
+                editText_passingYear.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.PASSING_YEAR)));
+
+
+/*
                 editText_address.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.ADDRESS)));
                 editText_state.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.STATE_NAME)));
                 textView_stateId.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.STATE_ID)));
@@ -152,6 +162,7 @@ public class CustomDialogAddEducation extends Dialog {
                 textView_districtId.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.DISTRICT_ID)));
                 editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.TALUKA_NAME)));
                 textView_talukaId.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.TALUKA_ID)));
+*/
 
             }
 
@@ -167,6 +178,12 @@ public class CustomDialogAddEducation extends Dialog {
                 String educationLevel = editText_educationLevel.getText().toString().trim();
                 String educationLevelId = textView_educationLevelId.getText().toString().trim();
                 String instituteName = editText_institue.getText().toString().trim();
+                String percentage = editText_percentage.getText().toString().trim();
+                String passingYear = editText_passingYear.getText().toString().trim();
+
+
+
+/*
                 String address = editText_address.getText().toString().trim();
                 String stateName = editText_state.getText().toString().trim();
                 String stateNameId = textView_stateId.getText().toString().trim();
@@ -174,12 +191,12 @@ public class CustomDialogAddEducation extends Dialog {
                 String districtNameId = textView_districtId.getText().toString().trim();
                 String talukaName = editText_taluka.getText().toString().trim();
                 String talukaNameId = textView_talukaId.getText().toString().trim();
+*/
 
 
                 if(id.equals("0")) {
                     long res = sqLiteEducationDetails.insertEducationDetails("0",
-                            educationLevel, educationLevelId, instituteName, address, stateName, stateNameId,
-                            districtName, districtNameId, talukaName, talukaNameId);
+                            educationLevel, educationLevelId, instituteName, percentage, passingYear); //address, stateName, stateNameId, districtName, districtNameId, talukaName, talukaNameId
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
@@ -193,8 +210,7 @@ public class CustomDialogAddEducation extends Dialog {
                 else
                 {
                     int res = sqLiteEducationDetails.updateEducationDetails(id, education_details_id,
-                            educationLevel, educationLevelId, instituteName, address, stateName, stateNameId,
-                            districtName, districtNameId, talukaName, talukaNameId);
+                            educationLevel, educationLevelId, instituteName, percentage, passingYear); // address, stateName, stateNameId, districtName, districtNameId, talukaName, talukaNameId
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
                         addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), education_details_id, educationLevel, instituteName));
@@ -233,10 +249,28 @@ public class CustomDialogAddEducation extends Dialog {
             }
         });
 
+        editText_passingYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialogAddYear customDialogAddYear = new CustomDialogAddYear(getContext(),editText_passingYear);
+                customDialogAddYear.show();
+            }
+        });
 
-        showPopUp(editText_state, "State");
+
+        editText_percentage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customDialogAddPercentage = new CustomDialogAddPercentage(getContext(),editText_percentage);
+                customDialogAddPercentage.show();
+            }
+        });
+
+
+
+/*        showPopUp(editText_state, "State");
         showPopUp(editText_district, "District");
-        showPopUp(editText_taluka, "Taluka");
+        showPopUp(editText_taluka, "Taluka");*/
 
 
     }
@@ -297,6 +331,7 @@ public class CustomDialogAddEducation extends Dialog {
 
                 }
 
+/*
                 if(params[0].equals("State"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
@@ -321,6 +356,8 @@ public class CustomDialogAddEducation extends Dialog {
                             "TalukasId", "TalukaName", editText_taluka,
                             textView_talukaId, context,customDialogLoadingProgressBar);
                 }
+*/
+
             } catch (Exception e) {
                 e.printStackTrace();
                 resp = e.getMessage();

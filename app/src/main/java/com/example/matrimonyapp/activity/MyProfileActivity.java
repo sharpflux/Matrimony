@@ -464,10 +464,12 @@ public class MyProfileActivity extends AppCompatActivity {
             selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
 
         }
-        //circleImageView_profilePic.setImageBitmap(bm);
+        circleImageView_profilePic.setImageBitmap(bm);
+/*
 
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute("InsertProfilePic");
+*/
 
     }
 
@@ -523,9 +525,9 @@ public class MyProfileActivity extends AppCompatActivity {
 
         Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
         //circleImageView_profilePic.setImageBitmap(imageBitmap);
-
+/*
         AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute("InsertProfilePic");
+        runner.execute("InsertProfilePic");*/
 
 
     }

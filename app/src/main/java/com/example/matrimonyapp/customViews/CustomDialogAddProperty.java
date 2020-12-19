@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -55,12 +56,14 @@ public class CustomDialogAddProperty extends Dialog {
     public Context context;
 
     private EditText editText_propertyType, editText_bhkType, editText_propertyAddress,
-            editText_state, editText_district, editText_taluka;
+            editText_country, editText_state, editText_city;
+    //editText_district, editText_taluka
 
     private CurrencyEditText editText_propertyArea;
 
     private TextView textView_title, textView_propertyTypeId, textView_bhkTypeId, textView_addProperty,
-            textView_stateId, textView_districtId, textView_talukaId;
+            textView_countryId, textView_stateId, textView_cityId;
+    //textView_districtId, textView_talukaId
 
     private ImageView imageView_back;
 
@@ -74,7 +77,7 @@ public class CustomDialogAddProperty extends Dialog {
     private String id, property_details_id;
 
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
-
+    private int currentCountryId =0, currentStateId=0, newCountryId=0, newStateId=0;
 
     private UserModel userModel;
 
@@ -113,7 +116,7 @@ public class CustomDialogAddProperty extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         imageView_back = findViewById(R.id.imageView_back);
@@ -126,21 +129,27 @@ public class CustomDialogAddProperty extends Dialog {
         editText_propertyArea = findViewById(R.id.editText_propertyArea);
         editText_propertyAddress = findViewById(R.id.editText_propertyAddress);
 
+        editText_country = findViewById(R.id.editText_country);
+        textView_countryId = findViewById(R.id.textView_countryId);
         editText_state = findViewById(R.id.editText_state);
         textView_stateId = findViewById(R.id.textView_stateId);
-        editText_district = findViewById(R.id.editText_district);
+        editText_city = findViewById(R.id.editText_city);
+        textView_cityId = findViewById(R.id.textView_cityId);
+/*        editText_district = findViewById(R.id.editText_district);
         textView_districtId = findViewById(R.id.textView_districtId);
         editText_taluka = findViewById(R.id.editText_taluka);
-        textView_talukaId = findViewById(R.id.textView_talukaId);
+        textView_talukaId = findViewById(R.id.textView_talukaId);*/
         textView_addProperty = findViewById(R.id.textView_addProperty);
 
         dataFetcher = new DataFetcher("Address",context);
 
         textView_title.setText("Property Details");
 
+        showPopUp(editText_country, "Country");
         showPopUp(editText_state, "State");
-        showPopUp(editText_district, "District");
-        showPopUp(editText_taluka, "Taluka");
+        showPopUp(editText_city, "City");
+/*        showPopUp(editText_district, "District");
+        showPopUp(editText_taluka, "Taluka");*/
 
 
         textChangedListener();
@@ -166,12 +175,16 @@ public class CustomDialogAddProperty extends Dialog {
                 textView_bhkTypeId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID)));
                 editText_propertyArea.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CARPET_AREA)));
                 editText_propertyAddress.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.ADDRESS)));
+                textView_countryId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.COUNTRY_ID)));
+                editText_country.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.COUNTRY_NAME)));
                 textView_stateId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_ID)));
                 editText_state.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_NAME)));
-                textView_districtId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID)));
+                textView_cityId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CITY_ID)));
+                editText_city.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CITY_NAME)));
+/*                textView_districtId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID)));
                 editText_district.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.DISTRICT_NAME)));
                 textView_talukaId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.TALUKA_ID)));
-                editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.TALUKA_NAME)));
+                editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.TALUKA_NAME)));*/
 
             }
 
@@ -221,18 +234,25 @@ public class CustomDialogAddProperty extends Dialog {
 
                 String carpetArea = editText_propertyArea.getText().toString().trim();
                 String address = editText_propertyAddress.getText().toString().trim();
+                String country_id = textView_countryId.getText().toString().trim();
+                String country_name = editText_country.getText().toString().trim();
                 String state_id = textView_stateId.getText().toString().trim();
-                String district_id = textView_districtId.getText().toString().trim();
-                String taluka_id = textView_talukaId.getText().toString().trim();
                 String state_name = editText_state.getText().toString().trim();
-                String district_name = editText_district.getText().toString().trim();
-                String taluka_name = editText_taluka.getText().toString().trim();
+                String city_id = textView_cityId.getText().toString().trim();
+                String city_name = editText_city.getText().toString().trim();
 
+
+               /* String district_id = textView_districtId.getText().toString().trim();
+                String taluka_id = textView_talukaId.getText().toString().trim();*/
+
+                /*String district_name = editText_district.getText().toString().trim();
+                String taluka_name = editText_taluka.getText().toString().trim();
+*/
 
                 if(id.equals("0")) {
                     long res = sqLitePropertyDetails.insertPropertyDetails( "0", propertyType,
                             propertyTypeId, ownershipType, bhkType, bhkTypeId, carpetArea, address,
-                            state_name, state_id, district_name, district_id, taluka_name, taluka_id);
+                            country_name, country_id, state_name, state_id, city_name, city_id); //district_name, district_id, taluka_name, taluka_id
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
@@ -248,7 +268,7 @@ public class CustomDialogAddProperty extends Dialog {
                 {
                     int res = sqLitePropertyDetails.updatePropertyDetails(id, property_details_id, propertyType,
                             propertyTypeId, ownershipType, bhkType, bhkTypeId, carpetArea, address,
-                            state_name, state_id, district_name, district_id, taluka_name, taluka_id);
+                            country_name, country_id, state_name, state_id, city_name, city_id);
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
                         addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), property_details_id,
@@ -272,7 +292,7 @@ public class CustomDialogAddProperty extends Dialog {
     private void textChangedListener()
     {
 
-        editText_state.addTextChangedListener(new TextWatcher() {
+        editText_country.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -280,10 +300,14 @@ public class CustomDialogAddProperty extends Dialog {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_district.setText("");
-                textView_districtId.setText("0");
-                editText_taluka.setText("");
-                textView_talukaId.setText("0");
+                if(editText_country.hasFocus())
+                {
+
+                    editText_state.setText("");
+                    textView_stateId.setText("0");
+                    editText_city.setText("");
+                    textView_cityId.setText("0");
+                }
             }
 
             @Override
@@ -292,7 +316,7 @@ public class CustomDialogAddProperty extends Dialog {
             }
         });
 
-        editText_district.addTextChangedListener(new TextWatcher() {
+        editText_state.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -300,8 +324,11 @@ public class CustomDialogAddProperty extends Dialog {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_taluka.setText("");
-                textView_talukaId.setText("0");
+                if(editText_state.isHovered())
+                {
+                    editText_city.setText("");
+                    textView_cityId.setText("0");
+                }
             }
 
             @Override
@@ -313,7 +340,7 @@ public class CustomDialogAddProperty extends Dialog {
 
     }
 
-    private void showPopUp(EditText editText, final String urlFor)
+    private void showPopUp(final EditText editText, final String urlFor)
     {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,9 +350,24 @@ public class CustomDialogAddProperty extends Dialog {
 
                 String id="";
 
-                if(urlFor.equals("District"))
+                if(urlFor.equals("Country"))
                 {
-                    id =  textView_stateId.getText().toString();
+
+                }
+                else if(urlFor.equals("State"))
+                {
+                    id =  textView_countryId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select Country first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+
+                else if(urlFor.equals("City"))
+                {
+                    id = textView_stateId.getText().toString();
                     if(id.equals("0"))
                     {
                         Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
@@ -333,17 +375,10 @@ public class CustomDialogAddProperty extends Dialog {
                     }
                 }
 
-                if(urlFor.equals("Taluka"))
-                {
-                    id = textView_districtId.getText().toString();
-                    if(id.equals("0"))
-                    {
-                        Toast.makeText(context, "Please select District first", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
-
                 runner.execute(urlFor, id);
+
+
+
             }
         });
 
@@ -376,29 +411,42 @@ public class CustomDialogAddProperty extends Dialog {
 
                 }
 
-                else if(params[0].toString()=="State")
+                if(params[0].equals("Country"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
-                            "StatesName", editText_state, textView_stateId, context, customDialogLoadingProgressBar);
+
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_country, textView_countryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                    return "Country";
+
+                }
+                else if(params[0].equals("State"))
+                {
+                    String id = textView_countryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                    + "&CountryID="+id,"StatesID", "StatesName",
+                    editText_state, textView_stateId,getContext(),
+                    customDialogLoadingProgressBar);
+
 
 
                 }
-                else if(params[0].toString()=="District")
+                else if(params[0].equals("City"))
                 {
-                    String id = params[1];
-                    dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
-                            "DistrictId", "DistrictName", editText_district, textView_districtId,
-                            context, customDialogLoadingProgressBar);
+                    String id = textView_stateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_city, textView_cityId,getContext(),
+                            customDialogLoadingProgressBar);
+
 
                 }
-                else if(params[0].toString()=="Taluka")
-                {
 
-                    String id = params[1];
-                    dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
-                            "TalukasId", "TalukaName", editText_taluka, textView_talukaId,
-                            context, customDialogLoadingProgressBar);
-                }
+                return params[0];
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -410,6 +458,41 @@ public class CustomDialogAddProperty extends Dialog {
 
         @Override
         protected void onPostExecute(String result) {
+
+            if(result.equals("Country"))
+            {
+                newCountryId = Integer.parseInt(textView_countryId.getText().toString());
+                if (currentCountryId != newCountryId) {
+                    currentCountryId = newCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_stateId.setText("0");
+                            editText_state.setText("");
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
+
+                }
+            }
+            else if(result.equals("State"))
+            {
+                newStateId = Integer.parseInt(textView_stateId.getText().toString());
+                if (currentStateId != newStateId) {
+                    currentStateId = newStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
+
+                }
+            }
 
         }
 
@@ -429,6 +512,8 @@ public class CustomDialogAddProperty extends Dialog {
         }
 
     }
+
+
 
 
 }

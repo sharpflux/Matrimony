@@ -21,12 +21,17 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
     public static final String  BHK_TYPE_ID = "bhk_type_id";
     public static final String  CARPET_AREA = "carpet_area";
     public static final String  ADDRESS = "address";
+    public static final String  COUNTRY_ID = "country_id";
+    public static final String  COUNTRY_NAME = "country_name";
     public static final String  STATE_ID = "state_id";
-    public static final String  DISTRICT_ID = "district_id";
-    public static final String  TALUKA_ID =  "taluka_id";
     public static final String  STATE_NAME = "state_name";
+    public static final String  CITY_ID = "city_id";
+    public static final String  CITY_NAME = "city_name";
+
+    /*    public static final String  DISTRICT_ID = "district_id";
+    public static final String  TALUKA_ID =  "taluka_id";
     public static final String  DISTRICT_NAME = "district_name";
-    public static final String  TALUKA_NAME =  "taluka_name";
+    public static final String  TALUKA_NAME =  "taluka_name";*/
 
     public SQLitePropertyDetails(Context context)
     {
@@ -50,12 +55,16 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
                     + BHK_TYPE_ID + " text, "
                     + CARPET_AREA + " text, "
                     + ADDRESS + " text, "
+                    + COUNTRY_ID + " int, "
+                    + COUNTRY_NAME + " text, "
                     + STATE_ID + " int, "
                     + STATE_NAME + " text, "
-                    + DISTRICT_ID + " int, "
+                    + CITY_ID + " int, "
+                    + CITY_NAME + " text"
+/*                    + DISTRICT_ID + " int, "
                     + DISTRICT_NAME + " text, "
                     + TALUKA_ID + " int, "
-                    + TALUKA_NAME + " text"
+                    + TALUKA_NAME + " text"*/
                     + " )");
         }
         catch (SQLException e)
@@ -97,9 +106,8 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
 
     public long insertPropertyDetails(String property_details_id, String propertyType, String propertyTypeId,
                                       String ownershipType, String bhkType, String bhkTypeId,
-                                      String carpetArea, String address, String stateName, String stateId,
-                                      String districtName, String districtId, String talukaName,
-                                      String talukaId)
+                                      String carpetArea, String address,  String countryName, String countryId,
+                                      String stateName, String stateId, String cityName, String cityId)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -115,12 +123,17 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
         contentValues.put(BHK_TYPE_ID, bhkTypeId);
         contentValues.put(CARPET_AREA, carpetArea);
         contentValues.put(ADDRESS, address);
+        contentValues.put(COUNTRY_ID, countryId);
+        contentValues.put(COUNTRY_NAME, countryName);
         contentValues.put(STATE_ID, stateId);
         contentValues.put(STATE_NAME, stateName);
-        contentValues.put(DISTRICT_ID, districtId);
+        contentValues.put(CITY_ID, cityId);
+        contentValues.put(CITY_NAME, cityName);
+
+/*        contentValues.put(DISTRICT_ID, districtId);
         contentValues.put(DISTRICT_NAME, districtName);
         contentValues.put(TALUKA_ID, talukaId);
-        contentValues.put(TALUKA_NAME, talukaName);
+        contentValues.put(TALUKA_NAME, talukaName);*/
         //contentValues.put(, );
 
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
@@ -133,9 +146,8 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
     public int updatePropertyDetails(String id, String property_details_id,
                                      String propertyType, String propertyTypeId,
                                      String ownershipType, String bhkType, String bhkTypeId,
-                                     String carpetArea, String address, String stateName, String stateId,
-                                     String districtName, String districtId, String talukaName,
-                                     String talukaId)
+                                     String carpetArea, String address, String countryName, String countryId,
+                                     String stateName, String stateId, String cityName, String cityId) //String districtName, String districtId, String talukaName,String talukaId
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -151,12 +163,16 @@ public class SQLitePropertyDetails extends SQLiteOpenHelper {
         contentValues.put(BHK_TYPE_ID, bhkTypeId);
         contentValues.put(CARPET_AREA, carpetArea);
         contentValues.put(ADDRESS, address);
+        contentValues.put(COUNTRY_ID, countryId);
+        contentValues.put(COUNTRY_NAME, countryName);
         contentValues.put(STATE_ID, stateId);
         contentValues.put(STATE_NAME, stateName);
-        contentValues.put(DISTRICT_ID, districtId);
+        contentValues.put(CITY_ID, cityId);
+        contentValues.put(CITY_NAME, cityName);
+/*        contentValues.put(DISTRICT_ID, districtId);
         contentValues.put(DISTRICT_NAME, districtName);
         contentValues.put(TALUKA_ID, talukaId);
-        contentValues.put(TALUKA_NAME, talukaName);
+        contentValues.put(TALUKA_NAME, talukaName);*/
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, PROPERTY_DETAILS_ID+" = ? and "+ID+" = ?",
                 new String[]{property_details_id, id});

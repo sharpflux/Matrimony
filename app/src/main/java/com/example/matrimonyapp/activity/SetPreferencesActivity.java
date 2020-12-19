@@ -78,9 +78,9 @@ public class SetPreferencesActivity extends AppCompatActivity {
             textView_setPreferences, textView_resetPreference;// textView_workingStateId, textView_workingDistrictId, textView_workingTalukaId;
 
     private EditText editText_highestQualificationLevel, editText_qualification, editText_maritalStatus, editText_familyType, editText_familyValues,
-            editText_color, editText_occupation, editText_religon, editText_taluka, editText_district, editText_stateNames,
+            editText_color, editText_occupation, editText_religon, editText_city, editText_country, editText_state,
             editText_caste, editText_subCaste, editText_diet, editText_individualIncome, editText_familyIncome,
-            editText_workingState, editText_workingDistrict, editText_workingTaluka;
+            editText_workingState, editText_workingCountry, editText_workingCity;
 
     private RadioGroup radioGroup_gender, radioGroup_serviceType, radioGroup_workingLocation, radioGroup_jobType;
 
@@ -97,7 +97,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
     MultipleSelectionDataFetcher multipleSelectionDataFetcher;
     PopupFetcher popupFetcher;
     String gender, serviceType, workingLocation, jobType;
-    LinearLayout lr_state, lr_district, lr_taluka;
+    LinearLayout lr_state, lr_country, lr_city;
     CustomDialogLocationRec customDialogLocationRec;
     DataFetcherLocation dataFetcherLocation;
     AddLOcationModal lOcationModal;
@@ -107,11 +107,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
     StringBuilder state_builder_id;
     String StateId="";
 
-    ArrayList arrayList_stateId, arrayList_districtId, arrayList_talukaId, arrayList_religion,
+    ArrayList arrayList_stateId, arrayList_countryId, arrayList_cityId, arrayList_religion,
             arrayList_caste, arrayList_SubCaste, arrayList_maritalStatus, arrayList_familyType,
             arrayList_diet, arrayList_occupation, arrayList_individualIncome, arrayList_familyIncome,
             arrayList_familyValues, arrayList_color, arrayList_highestQualificationLevel, arrayList_qualification,
-            arrayList_workingStateId, arrayList_workingDistrictId, arrayList_workingTalukaId;
+            arrayList_workingStateId, arrayList_workingCountryId, arrayList_workingCityId;
 
 
     ArrayList<MultipleHierarchyModel> arrayList_religionHierarchy, arrayList_locationHierarchy;
@@ -219,11 +219,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
         dataFetcherLocation = new DataFetcherLocation(lOcationModal, customDialogLocationRec, list, SetPreferencesActivity.this);
         multipleSelectionDataFetcher = new MultipleSelectionDataFetcher("", context);
         arrayList_stateId = new ArrayList();
-        arrayList_districtId = new ArrayList();
-        arrayList_talukaId = new ArrayList();
+        arrayList_countryId = new ArrayList();
+        arrayList_cityId = new ArrayList();
         arrayList_workingStateId = new ArrayList();
-        arrayList_workingDistrictId = new ArrayList();
-        arrayList_workingTalukaId = new ArrayList();
+        arrayList_workingCountryId = new ArrayList();
+        arrayList_workingCityId = new ArrayList();
 
         arrayList_religion = new ArrayList();
         arrayList_caste = new ArrayList();
@@ -259,8 +259,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         //  textView_salaryRange = findViewById(R.id.textView_salaryRange);
 
         radioGroup_gender = findViewById(R.id.radioGroup_gender);
-        textView_stateId = findViewById(R.id.textView_stateId);
-        editText_stateNames = findViewById(R.id.editText_stateNames);
+
         editText_highestQualificationLevel = findViewById(R.id.editText_highestQualificationLevel);
         editText_qualification = findViewById(R.id.editText_qualification);
         editText_maritalStatus = findViewById(R.id.editText_maritalStatus);
@@ -291,19 +290,22 @@ public class SetPreferencesActivity extends AppCompatActivity {
         editText_religon = findViewById(R.id.editText_religon);
         textView_religonId = findViewById(R.id.textView_religonId);
         lr_state = findViewById(R.id.lr_state);
-        lr_district = findViewById(R.id.lr_district);
-        lr_taluka = findViewById(R.id.lr_taluka);
+        lr_country = findViewById(R.id.lr_country);
+        lr_city = findViewById(R.id.lr_city);
         cardView_religion = findViewById(R.id.cardView_religion);
         cardView_caste = findViewById(R.id.cardView_caste);
         cardView_subcaste = findViewById(R.id.cardView_subcaste);
 
-        editText_district = findViewById(R.id.editText_district);
-        editText_taluka = findViewById(R.id.editText_taluka);
+        editText_country = findViewById(R.id.editText_district);
+        editText_city = findViewById(R.id.editText_taluka);
+        editText_state = findViewById(R.id.editText_state);
+
+        textView_stateId = findViewById(R.id.textView_stateId);
         textView_cityId = findViewById(R.id.textView_cityId);
 
         editText_workingState = findViewById(R.id.editText_workingState);
-        editText_workingDistrict = findViewById(R.id.editText_workingDistrict);
-        editText_workingTaluka = findViewById(R.id.editText_workingTaluka);
+        editText_workingCountry = findViewById(R.id.editText_workingCountry);
+        editText_workingCity = findViewById(R.id.editText_workingCity);
 
 
         textView_setPreferences = findViewById(R.id.textView_setPreferences);
@@ -391,14 +393,14 @@ public class SetPreferencesActivity extends AppCompatActivity {
         multipleSelecttionMenu(editText_caste, "Caste", "0");
         multipleSelecttionMenu(editText_religon, "Religion", "0");
 
-        multipleSelecttionMenu(editText_stateNames, "State", "0");
-        multipleSelecttionMenu(editText_district, "District", "0");
-        multipleSelecttionMenu(editText_taluka, "Taluka", "0");
+        multipleSelecttionMenu(editText_state, "State", "0");
+        multipleSelecttionMenu(editText_country, "Country", "0");
+        multipleSelecttionMenu(editText_city, "City", "0");
 
 
         multipleSelecttionMenu(editText_workingState, "WorkingState", "0");
-        multipleSelecttionMenu(editText_workingDistrict, "WorkingDistrict", "0");
-        multipleSelecttionMenu(editText_workingTaluka, "WorkingTaluka", "0");
+        multipleSelecttionMenu(editText_workingCountry, "WorkingCountry", "0");
+        multipleSelecttionMenu(editText_workingCity, "WorkingCity", "0");
 
 
 
@@ -547,16 +549,54 @@ public class SetPreferencesActivity extends AppCompatActivity {
             }
 
 
+            if(params[0].equals("Country"))
+            {
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                        "Name", editText_country, arrayList_countryId, SetPreferencesActivity.this,
+                        customDialogLoadingProgressBar);
+
+
+            }
+            else if(params[0].equals("State"))
+            {
+                //String id = textView_countryId.getText().toString();
+/*
+                String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                + "&CountryID="+id,"StatesID",
+                        "StatesName", editText_state, arrayList_stateId, SetPreferencesActivity.this,
+                        customDialogLoadingProgressBar);
+*/
+
+
+            }
+            else if(params[0].equals("City"))
+            {
+                //String id = textView_stateId.getText().toString();
+/*
+                String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
+
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                + "&StateID="+statesId,"ID",
+                        "Name", editText_city, arrayList_cityId, SetPreferencesActivity.this,
+                        customDialogLoadingProgressBar);
+
+*/
+
+            }
+
 
 
             else if (params[0].equals("State")) {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(),
-                        "StatesID", "StatesName",editText_stateNames, arrayList_stateId,
+                        "StatesID", "StatesName",editText_state, arrayList_stateId,
                         SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
             }
-            else if (params[0].equals("District")) {
+/*            else if (params[0].equals("District")) {
 
                 String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
 
@@ -575,7 +615,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
                         +userModel.getLanguage(), "TalukasId", "TalukaName", editText_taluka,
                         arrayList_talukaId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
-            }
+            }*/
 
             else if (params[0].equals("WorkingState")) {
 
@@ -584,7 +624,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
                         SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
             }
-            else if (params[0].equals("WorkingDistrict")) {
+           /* else if (params[0].equals("WorkingDistrict")) {
 
                 String statesId = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
 
@@ -605,7 +645,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
             }
 
-
+*/
             else if (params[0].equals("MaritalStatus")) {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MARITALSTATUS + "Language=" +userModel.getLanguage(),
@@ -743,18 +783,18 @@ public class SetPreferencesActivity extends AppCompatActivity {
             jobType = radioButton_jobType.getText().toString();
         }
 
-        final String state = editText_stateNames.getText().toString();
-        final String districts = editText_district.getText().toString();
-        final String taluka = editText_taluka.getText().toString();
+        final String state = editText_state.getText().toString();
+        final String country = editText_country.getText().toString();
+        final String city = editText_city.getText().toString();
         final String stateIds = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
-        final String districtsIds = arrayList_districtId.toString().substring(1,arrayList_districtId.toString().length()-1).replaceAll(" ","");
-        final String talukaIds = arrayList_talukaId.toString().substring(1,arrayList_talukaId.toString().length()-1).replaceAll(" ","");
+        final String countryIds = arrayList_countryId.toString().substring(1,arrayList_countryId.toString().length()-1).replaceAll(" ","");
+        final String cityIds = arrayList_cityId.toString().substring(1,arrayList_cityId.toString().length()-1).replaceAll(" ","");
         final String workingState = editText_workingState.getText().toString();
-        final String workingDistricts = editText_workingDistrict.getText().toString();
-        final String workingTaluka = editText_workingTaluka.getText().toString();
+        final String workingCountry = editText_workingCountry.getText().toString();
+        final String workingCity = editText_workingCity.getText().toString();
         final String workingStateIds = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
-        final String workingDistrictsIds = arrayList_workingDistrictId.toString().substring(1,arrayList_workingDistrictId.toString().length()-1).replaceAll(" ","");
-        final String workingTalukaIds = arrayList_workingTalukaId.toString().substring(1,arrayList_workingTalukaId.toString().length()-1).replaceAll(" ","");
+        final String workingCountryIds = arrayList_workingCountryId.toString().substring(1,arrayList_workingCountryId.toString().length()-1).replaceAll(" ","");
+        final String workingCityIds = arrayList_workingCityId.toString().substring(1,arrayList_workingCityId.toString().length()-1).replaceAll(" ","");
         final String maritalStatus = editText_maritalStatus.getText().toString();
         final String maritalStatusIds = arrayList_maritalStatus.toString().substring(1,arrayList_maritalStatus.toString().length()-1).replaceAll(" ","");
         final String familyType = editText_familyType.getText().toString();
@@ -791,9 +831,9 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
         if(sqLiteSetPreference.isPreferenceExistByUserId(userModel.getUserId()))
         {
-            res = sqLiteSetPreference.updateSetPreference(userModel.getUserId(), gender, state, districts,
-                    taluka, stateIds, districtsIds, talukaIds, workingState, workingDistricts, workingTaluka,
-                    workingStateIds, workingDistrictsIds, workingTalukaIds, ageMin, ageMax, religion,
+            res = sqLiteSetPreference.updateSetPreference(userModel.getUserId(), gender, country, state, city,
+                    countryIds, stateIds, cityIds, workingCountry, workingState, workingCity,
+                    workingCountryIds, workingStateIds, workingCityIds, ageMin, ageMax, religion,
                     religionIds, caste, casteIds, subCaste,subCasteIds, qualificationLevel,qualificationLevelIds,
                     qualification,qualificationIds, maritalStatus, maritalStatusIds, diet, dietIds,
                     serviceType, workingLocation, jobType, occupation, occupationIds, individualIncome,
@@ -801,9 +841,9 @@ public class SetPreferencesActivity extends AppCompatActivity {
                     familyValue,familyValueIds, heightMin, heightMax, color,colorIds);
         }
         else {
-            res = sqLiteSetPreference.insertSetPreference(userModel.getUserId(), gender, state, districts,
-                    taluka, stateIds, districtsIds, talukaIds, workingState, workingDistricts, workingTaluka,
-                    workingStateIds, workingDistrictsIds, workingTalukaIds, ageMin, ageMax, religion,
+            res = sqLiteSetPreference.insertSetPreference(userModel.getUserId(), gender, country, state, city,
+                    countryIds, stateIds, cityIds, workingCountry, workingState, workingCity,
+                    workingCountryIds, workingStateIds, workingCityIds, ageMin, ageMax, religion,
                     religionIds, caste, casteIds, subCaste,subCasteIds, qualificationLevel,qualificationLevelIds,
                     qualification,qualificationIds, maritalStatus, maritalStatusIds, diet, dietIds,
                     serviceType, workingLocation, jobType, occupation, occupationIds, individualIncome,
@@ -922,22 +962,22 @@ public class SetPreferencesActivity extends AppCompatActivity {
                 editText_subCaste.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.SUB_CASTE)));
 
                 arrayList_stateId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.STATE_ID)).split(","))));
-                editText_stateNames.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.STATE)));
+                editText_state.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.STATE)));
 
-                arrayList_districtId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.DISTRICT_ID)).split(","))));
-                editText_district.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.DISTRICT)));
+                arrayList_countryId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.COUNTRY_ID)).split(","))));
+                editText_country.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.COUNTRY)));
 
-                arrayList_talukaId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.TALUKA_ID)).split(","))));
-                editText_taluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.TALUKA)));
+                arrayList_cityId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.CITY_ID)).split(","))));
+                editText_city.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.CITY)));
 
                 arrayList_workingStateId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_STATE_ID)).split(","))));
                 editText_workingState.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_STATE)));
 
-                arrayList_workingDistrictId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_DISTRICT_ID)).split(","))));
-                editText_workingDistrict.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_DISTRICT)));
+                arrayList_workingCountryId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_COUNTRY_ID)).split(","))));
+                editText_workingCountry.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_COUNTRY)));
 
-                arrayList_workingTalukaId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_TALUKA_ID)).split(","))));
-                editText_workingTaluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_TALUKA)));
+                arrayList_workingCityId = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_CITY_ID)).split(","))));
+                editText_workingCity.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.WORKING_CITY)));
 
                 arrayList_maritalStatus = stringToInt(new ArrayList<>(Arrays.asList(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.MARITAL_STATUS_ID)).split(","))));
                 editText_maritalStatus.setText(cursor.getString(cursor.getColumnIndex(SQLiteSetPreference.MARITAL_STATUS)));
@@ -1020,18 +1060,18 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
         arrayList_stateId.clear();
-        editText_stateNames.setText("");
-        arrayList_districtId.clear();
-        editText_district.setText("");
-        arrayList_talukaId.clear();
-        editText_taluka.setText("");
+        editText_state.setText("");
+        arrayList_countryId.clear();
+        editText_country.setText("");
+        arrayList_cityId.clear();
+        editText_city.setText("");
 
         arrayList_workingStateId.clear();
         editText_workingState.setText("");
-        arrayList_workingDistrictId.clear();
-        editText_workingDistrict.setText("");
-        arrayList_workingTalukaId.clear();
-        editText_workingTaluka.setText("");
+        arrayList_workingCountryId.clear();
+        editText_workingCountry.setText("");
+        arrayList_workingCityId.clear();
+        editText_workingCity.setText("");
 
         arrayList_maritalStatus.clear();
         editText_maritalStatus.setText("");

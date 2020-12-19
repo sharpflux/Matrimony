@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -64,20 +65,20 @@ public class BasicDetailsFragment extends Fragment {
 
     private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName,
             editText_altMobileNo, editText_altEmailId, editText_mobileNo, editText_address, editText_emailId,
-            editText_birthState, editText_birthTaluka, editText_birthPlace, editText_birthDistrict,
-            editText_bloodGroup, editText_state, editText_postalCode, editText_taluka, editText_district,
-            editText_currentState, editText_currentDistrict, editText_currentTaluka, editText_currentPostalCode,
-            editText_currentAddress, editText_currentVillage, editText_village, editText_currentCountry, editText_country;
-
+            editText_birthState, editText_birthCity, editText_birthPlace, editText_bloodGroup, editText_state, editText_postalCode,
+            editText_currentState,  editText_currentPostalCode, editText_birthCountry,
+            editText_currentAddress, editText_currentVillage, editText_village, editText_currentCountry, editText_country,
+            editText_city, editText_currentCity;
+// editText_taluka, editText_district,editText_currentDistrict, editText_currentTaluka,editText_birthDistrict,editText_birthTaluka,
     private ImageView imageView_back;
 
     private RadioGroup radioGroup_gender, radioGroup_birthTimeType;
 
     private TextView textView_saveAndContinue;
-    private TextView textView_stateId, textView_districtId, textView_talukaId, textView_birthStateId,
-            textView_birthDistrictId, textView_birthTalukaId, textView_bloodGroupId, textView_currentStateId,
-            textView_currentDistrictId, textView_currentTalukaId, textView_countryId, textView_currentCountryId;
-
+    private TextView textView_stateId,  textView_birthStateId, textView_bloodGroupId, textView_currentStateId,
+            textView_birthCityId, textView_countryId, textView_currentCountryId, textView_birthCountryId,
+            textView_cityId, textView_currentCityId;
+//textView_districtId, textView_talukaId, textView_currentDistrictId, textView_currentTalukaId,textView_birthDistrictId, textView_birthTalukaId,
     private View view;
 
     private CheckBox checkBox_isAddressSame;
@@ -86,16 +87,20 @@ public class BasicDetailsFragment extends Fragment {
     private int basicDetailsId=0;
 
     private int mHour, mMinute;
+    private int intCurrentCountryId =0, intCurrentStateId=0, newCountryId=0, newStateId=0,
+            currentBirthCountryId=0, currentBirthStateId=0, newBirthCountryId=0, newBirthStateId=0,
+            currentCurrentCountryId=0, currentCurrentStateId=0, newCurrentCountryId=0, newCurrentStateId=0;
 
     private String timeHrs="00:00:00", timeMin;
     private AlertDialog.Builder builder;
     private ProgressDialog progressDialog;
     private Context context;
 
-    private String fullName, gender, birthdate, birthTime, birthTimeType, birthPlace, birthState, birthTaluka,
-            birthDistrict, mobileNo, altMobileNo, altEmailId, emailId, address, state, postalCode, taluka, district,
-            birthStateId, birthTalukaId, birthDistrictId, stateId, talukaId, districtId;
-
+    private String fullName, gender, birthdate, birthTime, birthTimeType, birthPlace, mobileNo, altMobileNo,
+            altEmailId, emailId, address, village, currentAddress, currentVillage, state, postalCode, birthCountryId,
+            birthStateId, birthCityId, countryId, stateId, cityId, currentCountryId, currentStateId, currentCityId,
+            currentPostalCode, bloodGroupId;
+    // birthState, birthTaluka,birthDistrict,birthTalukaId, birthDistrictId,talukaId, districtId,taluka, district,
     //private ArrayList<MyItem> list;
 
     private DataFetcher dataFetcher;
@@ -160,30 +165,40 @@ public class BasicDetailsFragment extends Fragment {
                     editText_currentAddress.setText(editText_address.getText().toString());
                     editText_currentVillage.setText(editText_village.getText().toString());
 
-                    editText_currentTaluka.setText(editText_taluka.getText().toString());
-                    editText_currentDistrict.setText(editText_district.getText().toString());
+
                     editText_currentState.setText(editText_state.getText());
                     editText_currentCountry.setText(editText_country.getText());
+                    editText_currentCity.setText(editText_city.getText());
                     editText_currentPostalCode.setText(editText_postalCode.getText().toString());
 
-                    textView_currentTalukaId.setText(textView_talukaId.getText().toString());
-                    textView_currentDistrictId.setText(textView_districtId.getText().toString());
+
                     textView_currentStateId.setText(textView_stateId.getText().toString());
                     textView_currentCountryId.setText(textView_countryId.getText().toString());
+                    textView_currentCityId.setText(textView_cityId.getText().toString());
 
-                    textView_currentTalukaId.setEnabled(false);
-                    textView_currentDistrictId.setEnabled(false);
+
                     textView_currentStateId.setEnabled(false);
                     textView_currentCountryId.setEnabled(false);
+                    textView_currentCityId.setEnabled(false);
 
                     editText_currentAddress.setEnabled(false);
                     editText_currentVillage.setEnabled(false);
 
-                    editText_currentTaluka.setEnabled(false);
-                    editText_currentDistrict.setEnabled(false);
+
                     editText_currentState.setEnabled(false);
                     editText_currentCountry.setEnabled(false);
                     editText_currentPostalCode.setEnabled(false);
+                    editText_currentCity.setEnabled(false);
+
+
+/*                    textView_currentTalukaId.setText(textView_talukaId.getText().toString());
+                    textView_currentDistrictId.setText(textView_districtId.getText().toString());
+                    textView_currentTalukaId.setEnabled(false);
+                    textView_currentDistrictId.setEnabled(false);
+                    editText_currentTaluka.setEnabled(false);
+                    editText_currentDistrict.setEnabled(false);
+                    editText_currentTaluka.setText(editText_taluka.getText().toString());
+                    editText_currentDistrict.setText(editText_district.getText().toString());*/
 
                 }
                 else
@@ -192,30 +207,39 @@ public class BasicDetailsFragment extends Fragment {
                     editText_currentAddress.setText("");
                     editText_currentVillage.setText("");
 
-                    editText_currentTaluka.setText("");
-                    editText_currentDistrict.setText("");
+
                     editText_currentState.setText("");
                     editText_currentCountry.setText("");
+                    editText_currentCity.setText("");
                     editText_currentPostalCode.setText("");
 
-                    textView_currentTalukaId.setText("0");
-                    textView_currentDistrictId.setText("0");
                     textView_currentStateId.setText("0");
                     textView_currentCountryId.setText("0");
+                    textView_currentCityId.setText("0");
 
-                    textView_currentTalukaId.setEnabled(true);
-                    textView_currentDistrictId.setEnabled(true);
+
                     textView_currentStateId.setEnabled(true);
                     textView_currentCountryId.setEnabled(true);
+                    textView_currentCityId.setEnabled(true);
 
                     editText_currentAddress.setEnabled(true);
                     editText_currentVillage.setEnabled(true);
 
-                    editText_currentTaluka.setEnabled(true);
-                    editText_currentDistrict.setEnabled(true);
+
                     editText_currentState.setEnabled(true);
                     editText_currentCountry.setEnabled(true);
+                    editText_currentCity.setEnabled(true);
                     editText_currentPostalCode.setEnabled(true);
+
+/*                    editText_currentTaluka.setText("");
+                    editText_currentDistrict.setText("");
+                    textView_currentTalukaId.setText("0");
+                    textView_currentDistrictId.setText("0");
+                    textView_currentTalukaId.setEnabled(true);
+                    textView_currentDistrictId.setEnabled(true);
+                    editText_currentTaluka.setEnabled(true);
+                    editText_currentDistrict.setEnabled(true);
+*/
 
                 }
             }
@@ -234,25 +258,42 @@ public class BasicDetailsFragment extends Fragment {
 
         dataFetcher = new DataFetcher("State",getContext());
 
-        showPopupSDT(editText_state, "State", null);
-        showPopupSDT(editText_district, "District", textView_stateId);
+        showPopupSDT(editText_country, "Country", null);
+        showPopupSDT(editText_state, "State", textView_countryId);
+        showPopupSDT(editText_city, "City", textView_stateId);
+
+/*        showPopupSDT(editText_district, "District", textView_stateId);
         showPopupSDT(editText_taluka, "Taluka", textView_districtId);
         FieldValidation.textChangedListenerForSDT(editText_state, editText_district, editText_taluka,
                 textView_stateId, textView_districtId, textView_talukaId);
+*/
 
 
-        showPopupSDT(editText_currentState, "CurrentState", null);
+        showPopupSDT(editText_currentCountry, "CurrentCountry", null);
+        showPopupSDT(editText_currentState, "CurrentState", textView_currentCountryId);
+        showPopupSDT(editText_currentCity, "CurrentCity", textView_currentStateId);
+        /*FieldValidation.textChangedListenerForSDT(editText_currentState, editText_currentDistrict, editText_currentTaluka,
+                textView_currentStateId, textView_currentDistrictId, textView_currentTalukaId);
+*/
+/*
         showPopupSDT(editText_currentDistrict, "CurrentDistrict", textView_stateId);
         showPopupSDT(editText_currentTaluka, "CurrentTaluka", textView_districtId);
         FieldValidation.textChangedListenerForSDT(editText_currentState, editText_currentDistrict, editText_currentTaluka,
                 textView_currentStateId, textView_currentDistrictId, textView_currentTalukaId);
+*/
 
 
-        showPopupSDT(editText_birthState, "BirthState", null);
-        showPopupSDT(editText_birthDistrict, "BirthDistrict", textView_birthStateId);
+        showPopupSDT(editText_birthCountry, "BirthCountry", null);
+        showPopupSDT(editText_birthState, "BirthState", textView_birthCountryId);
+        showPopupSDT(editText_birthCity, "BirthCity", textView_birthStateId);
+        FieldValidation.textChangedListenerForSDT(editText_birthCountry, editText_birthState, editText_birthCity,
+                textView_birthCountryId, textView_birthStateId, textView_birthCityId);
+
+/*      showPopupSDT(editText_birthDistrict, "BirthDistrict", textView_birthStateId);
         showPopupSDT(editText_birthTaluka, "BirthTaluka", textView_birthDistrictId);
         FieldValidation.textChangedListenerForSDT(editText_birthState, editText_birthDistrict, editText_birthTaluka,
                 textView_birthStateId, textView_birthDistrictId, textView_birthTalukaId);
+*/
 
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,9 +314,11 @@ public class BasicDetailsFragment extends Fragment {
 
         sameAddressListener(editText_address, editText_currentAddress);
         sameAddressListener(editText_village, editText_currentVillage);
-        sameAddressListener(editText_taluka, editText_currentTaluka);
-        sameAddressListener(editText_district, editText_currentDistrict);
+/*        sameAddressListener(editText_taluka, editText_currentTaluka);
+        sameAddressListener(editText_district, editText_currentDistrict);*/
         sameAddressListener(editText_state, editText_currentState);
+        sameAddressListener(editText_country, editText_currentCountry);
+        sameAddressListener(editText_city, editText_currentCity);
         sameAddressListener(editText_postalCode, editText_currentPostalCode);
 
     }
@@ -432,43 +475,62 @@ public class BasicDetailsFragment extends Fragment {
         radioGroup_birthTimeType= view.findViewById(R.id.radioGroup_birthTimeType);
 
         editText_birthPlace = view.findViewById(R.id.editText_birthPlace);
+        editText_birthCountry = view.findViewById(R.id.editText_birthCountry);
         editText_birthState = view.findViewById(R.id.editText_birthState);
-        editText_birthTaluka = view.findViewById(R.id.editText_birthTaluka);
-        editText_birthDistrict = view.findViewById(R.id.editText_birthDistrict);
+        editText_birthCity = view.findViewById(R.id.editText_birthCity);
+        /*editText_birthTaluka = view.findViewById(R.id.editText_birthTaluka);
+        editText_birthDistrict = view.findViewById(R.id.editText_birthDistrict);*/
         editText_bloodGroup = view.findViewById(R.id.editText_bloodGroup);
         editText_mobileNo = view.findViewById(R.id.editText_mobileNo);
         editText_emailId= view.findViewById(R.id.editText_emailId);
         editText_address = view.findViewById(R.id.editText_address);
         editText_village = view.findViewById(R.id.editText_village);
 
+        textView_birthCountryId = view.findViewById(R.id.textView_birthCountryId);
+        textView_birthStateId = view.findViewById(R.id.textView_birthStateId);
+        textView_birthCityId = view.findViewById(R.id.textView_birthCityId);
+       /* textView_birthDistrictId = view.findViewById(R.id.textView_birthDistrictId);
+        textView_birthTalukaId = view.findViewById(R.id.textView_birthTalukaId);*/
+        textView_bloodGroupId = view.findViewById(R.id.textView_bloodGroupId);
+
+
         editText_country = view.findViewById(R.id.editText_country);
-        editText_state= view.findViewById(R.id.editText_state);
+        editText_state = view.findViewById(R.id.editText_state);
+        editText_city = view.findViewById(R.id.editText_city);
         editText_postalCode = view.findViewById(R.id.editText_postalCode);
-        editText_taluka = view.findViewById(R.id.editText_taluka);
-        editText_district = view.findViewById(R.id.editText_district);
+
         textView_countryId = view.findViewById(R.id.textView_countryId);
         textView_stateId = view.findViewById(R.id.textView_stateId);
-        textView_districtId= view.findViewById(R.id.textView_districtId);
+        textView_cityId = view.findViewById(R.id.textView_cityId);
+
+
+
+        /*textView_districtId= view.findViewById(R.id.textView_districtId);
         textView_talukaId = view.findViewById(R.id.textView_talukaId);
+        editText_taluka = view.findViewById(R.id.editText_taluka);
+        editText_district = view.findViewById(R.id.editText_district);*/
 
         checkBox_isAddressSame = view.findViewById(R.id.checkBox_isAddressSame);
 
-        editText_currentAddress= view.findViewById(R.id.editText_currentAddress);
-        editText_currentVillage= view.findViewById(R.id.editText_currentVillage);
+        editText_currentAddress = view.findViewById(R.id.editText_currentAddress);
+        editText_currentVillage = view.findViewById(R.id.editText_currentVillage);
         editText_currentCountry = view.findViewById(R.id.editText_currentCountry);
-        editText_currentState= view.findViewById(R.id.editText_currentState);
+        editText_currentState = view.findViewById(R.id.editText_currentState);
+        editText_currentCity = view.findViewById(R.id.editText_currentCity);
         editText_currentPostalCode = view.findViewById(R.id.editText_currentPostalCode);
-        editText_currentTaluka = view.findViewById(R.id.editText_currentTaluka);
-        editText_currentDistrict = view.findViewById(R.id.editText_currentDistrict);
+
         textView_currentCountryId = view.findViewById(R.id.textView_currentCountryId);
         textView_currentStateId = view.findViewById(R.id.textView_currentStateId);
+        textView_currentCityId = view.findViewById(R.id.textView_currentCityId);
+
+/*
+        editText_currentTaluka = view.findViewById(R.id.editText_currentTaluka);
+        editText_currentDistrict = view.findViewById(R.id.editText_currentDistrict);
         textView_currentDistrictId = view.findViewById(R.id.textView_currentDistrictId);
         textView_currentTalukaId = view.findViewById(R.id.textView_currentTalukaId);
+*/
 
-        textView_birthStateId= view.findViewById(R.id.textView_birthStateId);
-        textView_birthDistrictId = view.findViewById(R.id.textView_birthDistrictId);
-        textView_birthTalukaId = view.findViewById(R.id.textView_birthTalukaId);
-        textView_bloodGroupId = view.findViewById(R.id.textView_bloodGroupId);
+
 
 
         imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
@@ -477,6 +539,8 @@ public class BasicDetailsFragment extends Fragment {
         textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
     }
+
+
 
     public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id) {
 
@@ -514,20 +578,36 @@ public class BasicDetailsFragment extends Fragment {
                 .getText().toString();
 
         birthPlace = editText_birthPlace.getText().toString().trim();
-        birthTalukaId = textView_birthTalukaId.getText().toString().trim();
-        birthDistrictId = textView_birthDistrictId.getText().toString().trim();
+/*        birthTalukaId = textView_birthTalukaId.getText().toString().trim();
+        birthDistrictId = textView_birthDistrictId.getText().toString().trim();*/
+        birthCountryId = textView_birthCountryId.getText().toString().trim();
         birthStateId = textView_birthStateId.getText().toString().trim();
+        birthCityId = textView_birthCityId.getText().toString().trim();
 
-        address = editText_address.getText().toString().trim();
+        bloodGroupId = textView_bloodGroupId.getText().toString().trim();
+
+
         emailId = editText_emailId.getText().toString().trim();
         altEmailId = editText_altEmailId.getText().toString().trim();
         mobileNo = editText_mobileNo.getText().toString().trim();
         altMobileNo = editText_altMobileNo.getText().toString().trim();
 
-        stateId = textView_stateId.getText().toString().trim();
+        address = editText_address.getText().toString().trim();
+        village = editText_village.getText().toString().trim();
         postalCode = editText_postalCode.getText().toString().trim();
-        talukaId = textView_talukaId.getText().toString().trim();
-        districtId = textView_districtId.getText().toString().trim();
+        countryId = textView_countryId.getText().toString().trim();
+        stateId = textView_stateId.getText().toString().trim();
+        cityId = textView_cityId.getText().toString().trim();
+
+
+        currentAddress = editText_currentAddress.getText().toString().trim();
+        currentVillage = editText_currentVillage.getText().toString().trim();
+        currentCountryId = textView_currentCountryId.getText().toString().trim();
+        currentStateId = textView_currentStateId.getText().toString().trim();
+        currentCityId = textView_currentCityId.getText().toString().trim();
+        currentPostalCode = editText_currentPostalCode.getText().toString().trim();
+/*        talukaId = textView_talukaId.getText().toString().trim();
+        districtId = textView_districtId.getText().toString().trim();*/
 
 
 
@@ -545,7 +625,7 @@ public class BasicDetailsFragment extends Fragment {
                             if(jsonObject.getString("message").equals("Success") &&
                                     !jsonObject.getBoolean("error"))
                             {
-                                getDetails();
+                               getDetails();
 
                                 Toast.makeText(context,"Basic details saved successfully!", Toast.LENGTH_SHORT).show();
 
@@ -593,14 +673,27 @@ public class BasicDetailsFragment extends Fragment {
                 params.put("BirthTime",birthTime);
                 params.put("AccuracyOfTime",birthTimeType);
                 params.put("BirthPlace",birthPlace);
-                params.put("BirthTalukaId",birthTalukaId);
-                params.put("BirthDistrictId",birthDistrictId);
-                params.put("BirthStatesID",birthStateId);
+                params.put("BirthCountryId",birthCountryId);
+                //params.put("BirthDistrictId",birthDistrictId);
+                params.put("BirthStateId",birthStateId);
+                params.put("BirthCityId", birthCityId);
+                params.put("BloodGroupId", bloodGroupId);
                 params.put("StatesID",stateId);
-                params.put("DistrictId",districtId);
-                params.put("TalukasId",talukaId);
-                params.put("Address",address);
-                params.put("Pincode",postalCode);
+                //params.put("DistrictId",districtId);
+                //params.put("TalukasId",talukaId);
+                params.put("PermanantAddress",address);
+                params.put("PermanantVillage", village);
+                params.put("PermanantPostCode",postalCode);
+                params.put("PermanantCountryId", countryId);
+                params.put("PermanantStateId", stateId);
+                params.put("PermanantCityId", cityId);
+                params.put("CurrentAddress", currentAddress);
+                params.put("CurrentVillage", currentVillage);
+                params.put("CurrentPostCode", currentPostalCode);
+                params.put("CurrentCountryId", currentCountryId);
+                params.put("CurrentStateId", currentStateId);
+                params.put("CurrentCityId", currentCityId);
+
                 params.put("LanguageType",userModel.getLanguage());
 
                 return params;
@@ -637,50 +730,53 @@ public class BasicDetailsFragment extends Fragment {
                                 {
                                     basicDetailsId = jsonObject.getInt("BasicDetailsId");
 
-/*
-                                    address = jsonObject.getString("Address");
-                                    birthTimeType = jsonObject.getString("BirthTimeString");
-                                    birthPlace = jsonObject.getString("BirthPlace");
-                                    birthState= jsonObject.getString("StatesNameBirth");
-                                    birthDistrict = jsonObject.getString("DistrictNameBirth");
-                                    birthTaluka = jsonObject.getString("TalukaNameBirth");
-                                    altMobileNo = jsonObject.getString("AlternateNo");
-                                    altEmailId = jsonObject.getString("AlternateEmail");
-                                    state = jsonObject.getString("StatesName");
-                                    district = jsonObject.getString("DistrictName");
-                                    taluka = jsonObject.getString("TalukaName");
-                                    stateId = jsonObject.getString("StatesID");
-                                    districtId = jsonObject.getString("DistrictId");
-                                    talukaId = jsonObject.getString("TalukasId");
-                                    birthStateId = jsonObject.getString("TalukasId");
-                                    birthDistrictId = jsonObject.getString("BirthDistrictId");
-                                    birthTalukaId = jsonObject.getString("BirthTalukaId");
-
-
-                                    pincode = jsonObject.getString("Pincode");*/
-
-
-                                    textView_birthStateId.setText(jsonObject.getString("BirthStatesID"));
-                                    textView_birthDistrictId.setText(jsonObject.getString("BirthDistrictId"));
-                                    textView_birthTalukaId.setText(jsonObject.getString("BirthTalukaId"));
-
-                                    textView_stateId.setText(jsonObject.getString("StatesID"));
-                                    textView_districtId.setText(jsonObject.getString("DistrictId"));
-                                    textView_talukaId.setText(jsonObject.getString("TalukasId"));
-
                                     editText_address.setText(jsonObject.getString("Address"));
                                     //editText_birthTime.setText(jsonObject.getString("BirthTimeString"));
                                     editText_birthPlace.setText(jsonObject.getString("BirthPlace"));
-                                    editText_birthState.setText(jsonObject.getString("StatesNameBirth"));
-                                    editText_birthDistrict.setText(jsonObject.getString("DistrictNameBirth"));
-                                    editText_birthTaluka.setText(jsonObject.getString("TalukaNameBirth"));
+                                    //editText_birthState.setText(jsonObject.getString("StatesNameBirth"));
+
+                                    editText_bloodGroup.setText(jsonObject.getString("BloodGroupName"));
+                                    textView_bloodGroupId.setText(jsonObject.getString("BloodGroupId"));
+
                                     editText_altMobileNo.setText(jsonObject.getString("AlternateNo"));
                                     editText_altEmailId.setText(jsonObject.getString("AlternateEmail"));
-                                    editText_state.setText(jsonObject.getString("StatesName"));
+
+                                    editText_country.setText(jsonObject.getString("PermanantCountryName"));
+                                    editText_state.setText(jsonObject.getString("PermanantState"));
+                                    editText_city.setText(jsonObject.getString("PermanantCity"));
+
+                                    editText_currentCountry.setText(jsonObject.getString("CurrentCountryName"));
+                                    editText_currentState.setText(jsonObject.getString("CurrentStateName"));
+                                    editText_currentCity.setText(jsonObject.getString("CurrentCityName"));
+
+                                    textView_countryId.setText(jsonObject.getString("PermanantCountryId"));
+                                    textView_stateId.setText(jsonObject.getString("PermanantStateId"));
+                                    textView_countryId.setText(jsonObject.getString("PermanantCityId"));
+
+                                    textView_currentCountryId.setText(jsonObject.getString("CurrentCountryId"));
+                                    textView_currentStateId.setText(jsonObject.getString("CurrentStateId"));
+                                    textView_currentCityId.setText(jsonObject.getString("CurrentCityId"));
+
+                                    editText_birthCountry.setText(jsonObject.getString("BirthCountryName"));
+                                    editText_birthState.setText(jsonObject.getString("BirthStateName"));
+                                    editText_birthCity.setText(jsonObject.getString("BirthCityName"));
+
+                                    textView_birthCountryId.setText(jsonObject.getString("BirthCountryId"));
+                                    textView_birthStateId.setText(jsonObject.getString("BirthStateId"));
+                                    textView_birthCityId.setText(jsonObject.getString("BirthCityId"));
+/*
+                                    textView_birthDistrictId.setText(jsonObject.getString("BirthDistrictId"));
+                                    textView_birthTalukaId.setText(jsonObject.getString("BirthTalukaId"));
+                                    textView_districtId.setText(jsonObject.getString("DistrictId"));
+                                    textView_talukaId.setText(jsonObject.getString("TalukasId"));
+                                    editText_birthDistrict.setText(jsonObject.getString("DistrictNameBirth"));
+                                    editText_birthTaluka.setText(jsonObject.getString("TalukaNameBirth"));
                                     editText_district.setText(jsonObject.getString("DistrictName"));
                                     editText_taluka.setText(jsonObject.getString("TalukaName"));
-                                    editText_postalCode.setText(jsonObject.getString("Pincode"));
-                                    //editText_.setText(jsonObject.getString(""));
+*/
+
+                                    editText_postalCode.setText(jsonObject.getString("PermanantPostCode"));
+                                    editText_currentPostalCode.setText(jsonObject.getString("CurrentPostCode"));
 
                                     FieldValidation.setRadioButtonAccToValue(radioGroup_birthTimeType,
                                             jsonObject.getString("AccuracyOfTime"));
@@ -909,6 +1005,13 @@ public class BasicDetailsFragment extends Fragment {
                 else if(params[0].equals("insertDetails"))
                 {
                     insertDetails();
+/*                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+
+                    UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
+
+                    fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadDocumentsFragment);
+                    fragmentTransaction.commit();*/
                 }
 
                 else if(params[0].equals("BloodGroup"))
@@ -920,15 +1023,40 @@ public class BasicDetailsFragment extends Fragment {
 
                 }
 
-                if(params[0].equals("State"))
+                if(params[0].equals("Country"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
+
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_country, textView_countryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].equals("State"))
+                {
+                    String id = textView_countryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                            + "&CountryID="+id,"StatesID",
                             "StatesName", editText_state, textView_stateId,getContext(),
                             customDialogLoadingProgressBar);
 
 
                 }
-                else if(params[0].equals("District"))
+                else if(params[0].equals("City"))
+                {
+                    String id = textView_stateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_city, textView_cityId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+
+
+/*                else if(params[0].equals("District"))
                 {
                     String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
@@ -943,18 +1071,44 @@ public class BasicDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_taluka,
                             textView_talukaId,getContext() ,customDialogLoadingProgressBar);
-                }
+                }*/
 
 
-                if(params[0].equals("CurrentState"))
+                if(params[0].equals("CurrentCountry"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
+
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_currentCountry, textView_currentCountryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+                else if(params[0].equals("CurrentState"))
+                {
+                    String id = textView_currentCountryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                    + "&CountryID="+id,"StatesID",
                             "StatesName", editText_currentState, textView_currentStateId,getContext(),
                             customDialogLoadingProgressBar);
 
 
                 }
-                else if(params[0].equals("CurrentDistrict"))
+                else if(params[0].equals("CurrentCity"))
+                {
+                    String id = textView_currentStateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_currentCity, textView_currentCityId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+
+
+
+/*                else if(params[0].equals("CurrentDistrict"))
                 {
                     String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
@@ -969,17 +1123,43 @@ public class BasicDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_currentTaluka,
                             textView_currentTalukaId,getContext() ,customDialogLoadingProgressBar);
-                }
+                }*/
 
+                if(params[0].equals("BirthCountry"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_birthCountry, textView_birthCountryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+
+                }
                 else if(params[0].equals("BirthState"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),
-                            "StatesID", "StatesName", editText_birthState,
-                            textView_birthStateId,getContext() ,customDialogLoadingProgressBar);
+                    String id = textView_birthCountryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                    + "&CountryID="+id,"StatesID",
+                            "StatesName", editText_birthState, textView_birthStateId,getContext(),
+                            customDialogLoadingProgressBar);
 
 
                 }
-                else if(params[0].equals("BirthDistrict"))
+                else if(params[0].equals("BirthCity"))
+                {
+                    String id = textView_birthStateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_birthCity, textView_birthCityId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+
+                return params[0];
+
+/*                else if(params[0].equals("BirthDistrict"))
                 {
                     String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
@@ -994,7 +1174,7 @@ public class BasicDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_birthTaluka,
                             textView_birthTalukaId,getContext() ,customDialogLoadingProgressBar);
-                }
+                }*/
 
 
 
@@ -1008,7 +1188,108 @@ public class BasicDetailsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+            if(result.equals("Country"))
+            {
+                newCountryId = Integer.parseInt(textView_countryId.getText().toString());
+                if (intCurrentCountryId != newCountryId) {
+                    intCurrentCountryId = newCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_stateId.setText("0");
+                            editText_state.setText("");
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
 
+                }
+            }
+            else if(result.equals("State"))
+            {
+                newStateId = Integer.parseInt(textView_stateId.getText().toString());
+                if (intCurrentStateId != newStateId) {
+                    intCurrentStateId = newStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
+
+                }
+            }
+            if(result.equals("BirthCountry"))
+            {
+                newBirthCountryId = Integer.parseInt(textView_birthCountryId.getText().toString());
+                if (currentBirthCountryId != newBirthCountryId) {
+                    currentBirthCountryId = newBirthCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_birthStateId.setText("0");
+                            editText_birthState.setText("");
+                            textView_birthCityId.setText("0");
+                            editText_birthCity.setText("");
+                        }
+                    });
+
+                }
+            }
+            else if(result.equals("BirthState"))
+            {
+                newBirthStateId = Integer.parseInt(textView_birthStateId.getText().toString());
+                if (currentBirthStateId != newBirthStateId) {
+                    currentBirthStateId = newBirthStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_birthCityId.setText("0");
+                            editText_birthCity.setText("");
+                        }
+                    });
+
+                }
+            }
+            if(result.equals("CurrentCountry"))
+            {
+                currentCurrentCountryId = Integer.parseInt(textView_currentCountryId.getText().toString());
+                if (currentCurrentCountryId != newCurrentCountryId) {
+                    currentCurrentCountryId = newCurrentCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_currentStateId.setText("0");
+                            editText_currentState.setText("");
+                            textView_currentCityId.setText("0");
+                            editText_currentCity.setText("");
+                        }
+                    });
+
+                }
+            }
+            else if(result.equals("CurrentState"))
+            {
+                newCurrentStateId = Integer.parseInt(textView_currentStateId.getText().toString());
+                if (currentCurrentStateId != newCurrentStateId) {
+                    currentCurrentStateId = newCurrentStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_currentCityId.setText("0");
+                            editText_currentCity.setText("");
+                        }
+                    });
+
+                }
+            }
 
         }
 

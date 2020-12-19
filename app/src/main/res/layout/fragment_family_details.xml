@@ -532,14 +532,14 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText_fatherState"
-                    android:hint="@string/_state"
+                    android:id="@+id/editText_fatherCountry"
+                    android:hint="@string/country"
                     android:drawableEnd="@drawable/ic_action_arrow_down"
                     android:drawableTint="@color/text_gray"
 
                     android:textColor="@color/text_black"
                     android:textSize="15sp"
-                    android:nextFocusRight="@id/editText_district"
+                    android:nextFocusRight="@id/editText_country"
                     android:singleLine="true"
                     android:focusable="false"
                     android:clickable="false"
@@ -549,7 +549,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView_fatherStateId"
+                android:id="@+id/textView_fatherCountryId"
                 android:visibility="gone"
                 android:text="@string/_0"
                 />
@@ -567,8 +567,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherDistrict"
-                        android:hint="@string/_district"
+                        android:id="@+id/editText_fatherState"
+                        android:hint="@string/_state"
                         android:drawableEnd="@drawable/ic_action_arrow_down"
                         android:drawableTint="#ADADAD"
 
@@ -583,7 +583,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_fatherDistrictId"
+                    android:id="@+id/textView_fatherStateId"
                     android:visibility="gone"
                     android:text="@string/_0"
                     />
@@ -598,8 +598,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherTaluka"
-                        android:hint="@string/_taluka"
+                        android:id="@+id/editText_fatherCity"
+                        android:hint="@string/_city"
                         android:drawableEnd="@drawable/ic_action_arrow_down"
                         android:drawableTint="#ADADAD"
                         android:textColor="@color/text_black"
@@ -613,7 +613,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_fatherTalukaId"
+                    android:id="@+id/textView_fatherCityId"
                     android:visibility="gone"
                     android:text="@string/_0"
                     />

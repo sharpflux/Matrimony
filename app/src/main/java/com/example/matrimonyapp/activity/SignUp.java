@@ -1,18 +1,30 @@
 package com.example.matrimonyapp.activity;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -21,6 +33,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.customViews.CustomDialogAccountExists;
+import com.example.matrimonyapp.customViews.CustomDialogChangeProfilePic;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -28,11 +42,19 @@ import com.example.matrimonyapp.volley.VolleySingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignUp extends AppCompatActivity {
 
@@ -52,6 +74,14 @@ public class SignUp extends AppCompatActivity {
 
     AlertDialog.Builder builder;
     private String currentLanguage;
+    private CustomDialogChangeProfilePic customDialogChangeProfilePic;
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+    Intent intent_camera;
+    public static final int REQUEST_CAMERA = 1, SELECT_FILE = 0, ACTIVITY_CONSTANT = 2;
+    public String selfieString="0";
+    RelativeLayout relativeLayout_changeProfilePic;
+    CircleImageView circleImageView_profilePic;
+    public static final int RequestPermissionCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +103,31 @@ public class SignUp extends AppCompatActivity {
         textView_signUp = findViewById(R.id.textView_signUp);
         textView_backToSignIn = findViewById(R.id.textView_backToSignIn);
         FieldValidation.validateRadioGroup(radioGroup_gender);
+        customDialogChangeProfilePic = new CustomDialogChangeProfilePic(SignUp.this);
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(SignUp.this);
+        relativeLayout_changeProfilePic = findViewById(R.id.relativeLayout_changeProfilePic);
+        circleImageView_profilePic = findViewById(R.id.circleImageView_profilePic);
 
+
+
+
+
+
+        relativeLayout_changeProfilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeProfilepicDialog();
+            }
+        });
 
         textView_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(checkRequiredFields(editText_fullName, editText_mobileNo, editText_emailId, editText_birthdate, editText_password)) {
-                    verifyMobileNo();
+                if(checkProfilePic() && checkRequiredFields(editText_fullName, editText_mobileNo, editText_emailId, editText_birthdate, editText_password)) {
+                   // verifyMobileNo();
+                    AsyncTaskRunner runner = new AsyncTaskRunner();
+                    runner.execute("verifyMobileNo");
                 }
 
             }
@@ -142,7 +189,144 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+        EnableRuntimePermission();
+
     }
+
+
+
+    private void changeProfilepicDialog() {
+        customDialogChangeProfilePic.show();
+
+        customDialogChangeProfilePic.textView_addFromCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customDialogChangeProfilePic.dismiss();
+                intent_camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent_camera, REQUEST_CAMERA);
+            }
+        });
+
+
+        customDialogChangeProfilePic.textView_addFromGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDialogChangeProfilePic.dismiss();
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);//
+                startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+            }
+        });
+
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, requestCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode)
+            {
+                case SELECT_FILE:
+                    onSelectFromGalleryResult(data);
+                    break;
+                case REQUEST_CAMERA:
+                    onCaptureImageResult(data);
+                    break;
+            }
+
+
+        }
+
+    }
+
+    public void EnableRuntimePermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(SignUp.this,
+                Manifest.permission.CAMERA)) {
+
+            Toast.makeText(SignUp.this, "CAMERA permission allows us to Access CAMERA app", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            ActivityCompat.requestPermissions(SignUp.this, new String[]{
+                    Manifest.permission.CAMERA}, RequestPermissionCode);
+
+        }
+    }
+
+    private void onSelectFromGalleryResult(Intent data)
+    {
+        Bitmap bm = null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Bitmap newBitmap = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), bm.getConfig());
+            Canvas canvas = new Canvas(newBitmap);
+            canvas.drawColor(Color.WHITE);
+            canvas.drawBitmap(bm, 0, 0, null);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+
+            selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
+
+        }
+        circleImageView_profilePic.setImageBitmap(bm);
+/*
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("InsertProfilePic");*/
+
+    }
+
+
+    private void onCaptureImageResult(Intent data) {
+
+
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
+
+        Bitmap newBitmap = Bitmap.createBitmap(thumbnail.getWidth(), thumbnail.getHeight(), thumbnail.getConfig());
+        Canvas canvas = new Canvas(newBitmap);
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(thumbnail, 0, 0, null);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+        selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
+
+
+        /*thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        ImageUrl= Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);*/
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // img_banner_profile_placeholder.setImageBitmap(thumbnail);
+
+        Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
+        circleImageView_profilePic.setImageBitmap(imageBitmap);
+/*
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("InsertProfilePic");*/
+
+
+    }
+
 
 
     @Override
@@ -174,6 +358,16 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    boolean checkProfilePic()
+    {
+        boolean flag = true;
+        if(selfieString.equals("0"))
+        {
+            Toast.makeText(SignUp.this, "Please select Profile Picture", Toast.LENGTH_SHORT).show();
+            flag = false;
+        }
+        return flag;
+    }
 
     void verifyMobileNo()
     {
@@ -252,6 +446,13 @@ public class SignUp extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
+
 
 
     void getOtp()
@@ -407,4 +608,61 @@ public class SignUp extends AppCompatActivity {
 
 
     }
+
+    class AsyncTaskRunner extends AsyncTask<String , String, String>
+    {
+        public AsyncTaskRunner() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            customDialogLoadingProgressBar.show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            if(params[0].equals("verifyMobileNo"))
+            {
+                verifyMobileNo();
+
+            }
+            else if(params[0].equals("getOTP"))
+            {
+                getOtp();
+            }
+
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            customDialogLoadingProgressBar.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            super.onCancelled(s);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
+
+    }
+
+
 }

@@ -127,15 +127,56 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextLabel"
+                android:layout_marginTop="8dp"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_percentage"
+                    android:hint="@string/percentage"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:focusable="false"
+                    android:clickable="false"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextLabel"
+                android:layout_marginTop="8dp"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_passingYear"
+                    android:hint="@string/passing_year"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
         </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
+<!--
 
 
 
-
-            <!--Permanent Address-->
+            &lt;!&ndash;Permanent Address&ndash;&gt;
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,7 +209,7 @@
                     android:layout_gravity="center"
                     >
 
-                    <!--Address-->
+                    &lt;!&ndash;Address&ndash;&gt;
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -191,7 +232,7 @@
 
 
 
-<!--                    &lt;!&ndash;Postal Code&ndash;&gt;
+&lt;!&ndash;                    &lt;!&ndash;Postal Code&ndash;&gt;
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -211,9 +252,9 @@
                             android:singleLine="true"
                             />
 
-                    </com.google.android.material.textfield.TextInputLayout>-->
+                    </com.google.android.material.textfield.TextInputLayout>&ndash;&gt;
 
-<!--                    &lt;!&ndash;Country&ndash;&gt;
+&lt;!&ndash;                    &lt;!&ndash;Country&ndash;&gt;
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -245,9 +286,9 @@
                         android:id="@+id/textView_countryId"
                         android:visibility="gone"
                         android:text="@string/_0"
-                        />-->
+                        />&ndash;&gt;
 
-                    <!--State-->
+                    &lt;!&ndash;State&ndash;&gt;
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -272,7 +313,7 @@
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    <!--StateId-->
+                    &lt;!&ndash;StateId&ndash;&gt;
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -282,7 +323,7 @@
                         />
 
 
-                    <!--District-->
+                    &lt;!&ndash;District&ndash;&gt;
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -305,7 +346,7 @@
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    <!--DistrictId-->
+                    &lt;!&ndash;DistrictId&ndash;&gt;
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -314,7 +355,7 @@
                         android:visibility="gone"
                         />
 
-                    <!--Taluka-->
+                    &lt;!&ndash;Taluka&ndash;&gt;
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -336,7 +377,7 @@
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    <!--TalukaId-->
+                    &lt;!&ndash;TalukaId&ndash;&gt;
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -348,7 +389,7 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>-->
 
         </LinearLayout>
 

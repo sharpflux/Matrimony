@@ -94,9 +94,6 @@ public class CustomDialogProfilePic extends Dialog {
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
-        sqLiteFarmDetails = new SQLiteFarmDetails(context);
-
-
         setCanceledOnTouchOutside(true);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 

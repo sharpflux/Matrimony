@@ -3,6 +3,7 @@ package com.example.matrimonyapp.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -37,9 +39,16 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     AlertDialog.Builder builder;
+    CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     String password, mobileNo;
     private String currentLanguage;
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +65,11 @@ public class LoginActivity extends AppCompatActivity {
         textView_signUp = findViewById(R.id.textView_signUp);
 
 
+
         if (CustomSharedPreference.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            finish();
         }
 
         textView_signUp.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 textView_signUp.setEnabled(false);
                 Intent intent = new Intent(LoginActivity.this, SignUp.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -77,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 textView_forgotPassword.setEnabled(false);
                 Intent intent = new Intent(LoginActivity.this, GetOtpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,7 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                 view.setEnabled(false);
                 view.setClickable(false);
 
-                verifyLogin();
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                runner.execute("login");
                 /*Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);*/
                 view.setEnabled(true);
@@ -103,9 +117,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        textView_login.setEnabled(true);
+/*        textView_login.setEnabled(true);
         textView_signUp.setEnabled(true);
-        textView_forgotPassword.setEnabled(true);
+        textView_forgotPassword.setEnabled(true);*/
 
         if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
             currentLanguage = getResources().getConfiguration().locale.getLanguage();
@@ -176,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                                     //CustomSharedPreference customSharedPreference = new CustomSharedPreference(getApplicationContext());
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
-
+                                    finish();
 
                                 }
                             }
@@ -232,6 +246,58 @@ public class LoginActivity extends AppCompatActivity {
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
 
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String>
+    {
+
+
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            if(params[0].equals("login"))
+            {
+                verifyLogin();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(LoginActivity.this);
+            customDialogLoadingProgressBar.show();
+        }
+
+        public AsyncTaskRunner() {
+            super();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            customDialogLoadingProgressBar.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            super.onCancelled(s);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
     }
 
 }

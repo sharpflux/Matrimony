@@ -185,7 +185,7 @@
     <string name="add_profile_photo">प्रोफ़ाइल फ़ोटो जोड़ें</string>
     <string name="add_from_gallery">गैलरी से जोड़ें </string>
     <string name="add_from_camera">कैमरा से जोड़ेंकैमरा से जोड़ें</string>
-    <string name="add_profile_photo_desc">MatrimonyApp पर अपना प्रतिनिधित्व करने के लिए अपनी प्रोफ़ाइल फ़ोटो बदलें.</string>
+    <string name="add_profile_photo_desc">जोड़ीदार माझा पर अपना प्रतिनिधित्व करने के लिए अपनी प्रोफ़ाइल फ़ोटो बदलें.</string>
     <string name="change_photo">तस्वीर बदलिये</string>
     <string name="edit_profile_desc">प्रोफ़ाइल संपादित करें ताकि अन्य लोग आपको बेहतर जान सकें.</string>
     <string name="set_preferences_desc">बेहतर खोज परिणामों के लिए अपनी प्राथमिकताएँ निर्धारित करें.</string>
@@ -363,6 +363,11 @@
     <string name="interest_accepted">Interest Accepted</string>
     <string name="buy_now">Buy Now</string>
     <string name="select_this_plan">Select this plan</string>
+    <string name="birth_city">Birth City</string>
+    <string name="birth_country">Birth Country</string>
+    <string name="_city">City</string>
+    <string name="login">Login</string>
+    <string name="verify_otp">Verify OTP</string>
 
 
 </resources>

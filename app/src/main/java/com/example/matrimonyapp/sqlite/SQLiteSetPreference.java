@@ -8,6 +8,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.google.android.material.shape.ShapeAppearanceModel;
+
 public class SQLiteSetPreference extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "MatrimonySetPreference.db";
@@ -16,17 +18,17 @@ public class SQLiteSetPreference extends SQLiteOpenHelper {
     public static final String  USER_ID = "farm_details_id";                                        //1
     public static final String  GENDER = "gender";                                                  //2
     public static final String  STATE = "state";                                                    //3
-    public static final String  DISTRICT = "district";                                              //4
-    public static final String  TALUKA = "taluka";                                                  //5
+    public static final String  COUNTRY = "country";                                              //4
+    public static final String  CITY = "city";                                                  //5
     public static final String  STATE_ID = "state_id";                                              //6
-    public static final String  DISTRICT_ID = "district_id";                                        //7
-    public static final String  TALUKA_ID = "taluka_id";                                            //8
+    public static final String  COUNTRY_ID = "country_id";                                        //7
+    public static final String  CITY_ID = "city_id";                                            //8
     public static final String  WORKING_STATE = "working_state";                                    //9
-    public static final String  WORKING_DISTRICT = "working_district";                              //10
-    public static final String  WORKING_TALUKA = "working_taluka";                                  //11
+    public static final String  WORKING_COUNTRY = "working_country";                              //10
+    public static final String  WORKING_CITY = "working_city";                                  //11
     public static final String  WORKING_STATE_ID = "working_state_id";                              //12
-    public static final String  WORKING_DISTRICT_ID = "working_district_id";                        //13
-    public static final String  WORKING_TALUKA_ID = "working_taluka_id";                            //14
+    public static final String  WORKING_COUNTRY_ID = "working_country_id";                        //13
+    public static final String  WORKING_CITY_ID = "working_city_id";                            //14
     public static final String  AGE_MIN = "age_min";                                                //15
     public static final String  AGE_MAX = "age_max";                                                //16
     public static final String  RELIGION = "religion";                                              //17
@@ -80,17 +82,17 @@ public class SQLiteSetPreference extends SQLiteOpenHelper {
                     + USER_ID + " int, "
                     + GENDER + " text, "
                     + STATE + " text, "
-                    + DISTRICT + " text, "
-                    + TALUKA + " text, "
+                    + COUNTRY + " text, "
+                    + CITY + " text, "
                     + STATE_ID + " text, "
-                    + DISTRICT_ID + " text, "
-                    + TALUKA_ID + " text, "
+                    + COUNTRY_ID + " text, "
+                    + CITY_ID + " text, "
                     + WORKING_STATE + " text, "
-                    + WORKING_DISTRICT + " text, "
-                    + WORKING_TALUKA + " text, "
+                    + WORKING_COUNTRY + " text, "
+                    + WORKING_CITY + " text, "
                     + WORKING_STATE_ID + " text, "
-                    + WORKING_DISTRICT_ID + " text, "
-                    + WORKING_TALUKA_ID + " text, "
+                    + WORKING_COUNTRY_ID + " text, "
+                    + WORKING_CITY_ID + " text, "
                     + AGE_MIN + " text, "
                     + AGE_MAX + " text, "
                     + RELIGION + " text, "
@@ -202,10 +204,10 @@ public class SQLiteSetPreference extends SQLiteOpenHelper {
 
     }
 
-    public long insertSetPreference(String user_id, String gender, String state, String district,
-                                    String taluka, String stateId, String districtId, String talukaId,
-                                    String workingState, String workingDistrict, String workingTaluka,
-                                    String workingStateId, String workingDistrictId, String workingTalukaId,
+    public long insertSetPreference(String user_id, String gender, String country, String state,
+                                    String city, String countryId, String stateId,  String cityId,
+                                    String workingCountry, String workingState, String workingCity,
+                                    String workingCountryId, String workingStateId,  String workingCityId,
                                     String ageMin, String ageMax, String religion, String religionId,
                                     String caste, String casteId, String subCaste,String subCasteId,
                                     String highestQualificationLevel, String highestQualificationLevelId,
@@ -227,17 +229,17 @@ public class SQLiteSetPreference extends SQLiteOpenHelper {
         contentValues.put(USER_ID, user_id);
         contentValues.put(GENDER, gender);
         contentValues.put(STATE, state);
-        contentValues.put(DISTRICT, district);
-        contentValues.put(TALUKA, taluka);
+        contentValues.put(COUNTRY, country);
+        contentValues.put(CITY, city);
         contentValues.put(STATE_ID, stateId);
-        contentValues.put(DISTRICT_ID, districtId);
-        contentValues.put(TALUKA_ID, talukaId);
+        contentValues.put(COUNTRY_ID, countryId);
+        contentValues.put(CITY_ID, cityId);
         contentValues.put(WORKING_STATE, workingState);
-        contentValues.put(WORKING_DISTRICT, workingDistrict);
-        contentValues.put(WORKING_TALUKA, workingTaluka);
+        contentValues.put(WORKING_COUNTRY, workingCountry);
+        contentValues.put(WORKING_CITY, workingCity);
         contentValues.put(WORKING_STATE_ID, workingStateId);
-        contentValues.put(WORKING_DISTRICT_ID, workingDistrictId);
-        contentValues.put(WORKING_TALUKA_ID, workingTalukaId);
+        contentValues.put(WORKING_COUNTRY_ID, workingCountryId);
+        contentValues.put(WORKING_CITY_ID, workingCityId);
         contentValues.put(AGE_MIN, ageMin);
         contentValues.put(AGE_MAX, ageMax);
         contentValues.put(RELIGION, religion);
@@ -282,10 +284,10 @@ public class SQLiteSetPreference extends SQLiteOpenHelper {
     }
 
 
-    public int updateSetPreference( String userId, String gender, String state, String district,
-                                    String taluka, String stateId, String districtId, String talukaId,
-                                    String workingState, String workingDistrict, String workingTaluka,
-                                    String workingStateId, String workingDistrictId, String workingTalukaId,
+    public int updateSetPreference( String userId, String gender, String country, String state,
+                                    String city, String countryId, String stateId,  String cityId,
+                                    String workingCountry, String workingState, String workingCity,
+                                    String workingCountryId, String workingStateId, String workingCityId,
                                     String ageMin, String ageMax, String religion, String religionId,
                                     String caste, String casteId, String subCaste,String subCasteId,
                                     String highestQualificationLevel, String highestQualificationLevelId,
@@ -306,17 +308,17 @@ public class SQLiteSetPreference extends SQLiteOpenHelper {
         contentValues.put(USER_ID, userId);
         contentValues.put(GENDER, gender);
         contentValues.put(STATE, state);
-        contentValues.put(DISTRICT, district);
-        contentValues.put(TALUKA, taluka);
+        contentValues.put(COUNTRY, country);
+        contentValues.put(CITY, city);
         contentValues.put(STATE_ID, stateId);
-        contentValues.put(DISTRICT_ID, districtId);
-        contentValues.put(TALUKA_ID, talukaId);
+        contentValues.put(COUNTRY_ID, countryId);
+        contentValues.put(CITY_ID, cityId);
         contentValues.put(WORKING_STATE, workingState);
-        contentValues.put(WORKING_DISTRICT, workingDistrict);
-        contentValues.put(WORKING_TALUKA, workingTaluka);
+        contentValues.put(WORKING_COUNTRY, workingCountry);
+        contentValues.put(WORKING_CITY, workingCity);
         contentValues.put(WORKING_STATE_ID, workingStateId);
-        contentValues.put(WORKING_DISTRICT_ID, workingDistrictId);
-        contentValues.put(WORKING_TALUKA_ID, workingTalukaId);
+        contentValues.put(WORKING_COUNTRY_ID, workingCountryId);
+        contentValues.put(WORKING_CITY_ID, workingCityId);
         contentValues.put(AGE_MIN, ageMin);
         contentValues.put(AGE_MAX, ageMax);
         contentValues.put(RELIGION, religion);

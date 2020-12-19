@@ -186,7 +186,7 @@
     <string name="add_profile_photo">प्रोफाइल फोटो जोडा</string>
     <string name="add_from_gallery">गॅलरीमधून जोडा </string>
     <string name="add_from_camera">कॅमेर्‍यामधून जोडा </string>
-    <string name="add_profile_photo_desc">मॅट्रीमोनीअॅपवर स्वत: चे प्रतिनिधित्व करण्यासाठी आपला प्रोफाइल फोटो बदला.</string>
+    <string name="add_profile_photo_desc">जोडीदार माझा स्वत: चे प्रतिनिधित्व करण्यासाठी आपला प्रोफाइल फोटो बदला.</string>
     <string name="change_photo">फोटो बदला</string>
     <string name="edit_profile_desc">प्रोफाइल संपादित करा जेणेकरून इतर आपल्याला चांगले ओळखतील.</string>
     <string name="set_preferences_desc">चांगल्या शोध निकालांसाठी आपली प्राधान्ये सेट करा.</string>
@@ -365,6 +365,11 @@
     <string name="interest_accepted">Interest Accepted</string>
     <string name="buy_now">Buy Now</string>
     <string name="select_this_plan">Select this plan</string>
+    <string name="birth_city">Birth City</string>
+    <string name="birth_country">Birth Country</string>
+    <string name="_city">City</string>
+    <string name="login">Login</string>
+    <string name="verify_otp">Verify OTP</string>
 
 
 </resources>

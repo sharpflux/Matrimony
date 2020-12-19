@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 
@@ -28,6 +30,8 @@ public class GetOtpActivity extends AppCompatActivity {
 
     EditText editText_mobileNo;
     TextView textView_getOtp, textView_signIn, textView_signUp;
+
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     private String currentLanguage;
     String mobileNo;
@@ -43,6 +47,8 @@ public class GetOtpActivity extends AppCompatActivity {
         textView_signUp = findViewById(R.id.textView_signUp);
         textView_signIn = findViewById(R.id.textView_signIn);
 
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(GetOtpActivity.this);
+
         textView_getOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +56,8 @@ public class GetOtpActivity extends AppCompatActivity {
                /* Intent intent = new Intent(GetOtpActivity.this, VerifyOtpActivity.class);
                 startActivity(intent);*/
                verifyMobileNo();
-
+                /*AsyncTaskRunner runner = new AsyncTaskRunner();
+                runner.execute("verifyMobileNo");*/
 
             }
         });
@@ -141,9 +148,59 @@ public class GetOtpActivity extends AppCompatActivity {
         };
 
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        
+    }
 
 
+    class AsyncTaskRunner extends AsyncTask<String, String, String>
+    {
 
+        @Override
+        protected String doInBackground(String... params) {
+
+            if(params[0].equals("verifyMobileNo"))
+            {
+                verifyMobileNo();
+            }
+            else if(params[0].equals(""))
+            {
+
+            }
+
+
+            return "";
+        }
+
+        public AsyncTaskRunner() {
+            super();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            customDialogLoadingProgressBar.show();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            customDialogLoadingProgressBar.dismiss();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            super.onCancelled(s);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
     }
 
 

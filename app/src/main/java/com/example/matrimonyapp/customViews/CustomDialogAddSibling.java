@@ -120,7 +120,7 @@ public class CustomDialogAddSibling extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         textView_title = findViewById(R.id.textView_title);
         imageView_back = findViewById(R.id.imageView_back);

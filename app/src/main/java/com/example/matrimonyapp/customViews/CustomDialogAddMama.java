@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.example.matrimonyapp.adapter.PopupFetcher;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
+import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
@@ -66,8 +68,10 @@ public class CustomDialogAddMama extends Dialog {
 
     Map<String, Integer> list;
 
-    private TextView textView_mamaStateId, textView_mamaDistrictId, textView_mamaTalukaId, textView_addMama;
-    private EditText editText_mamaState, editText_mamaTaluka, editText_mamaDistrict;
+    private TextView textView_countryId, textView_stateId, textView_cityId, textView_addMama;
+    // textView_mamaDistrictId, textView_mamaTalukaId,
+    private EditText  editText_country, editText_state, editText_city ;
+    //editText_mamaTaluka, editText_mamaDistrict
     private CheckBox checkBox_mamaIsAlive;
     //private SwitchButton switchButton_mamaIsAlive;
 
@@ -84,6 +88,7 @@ public class CustomDialogAddMama extends Dialog {
     private AddPersonAdapter addPersonAdapter;
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
+    private int currentCountryId =0, currentStateId=0, newCountryId=0, newStateId=0;
 
     public CustomDialogAddMama(Context context, String id, String mama_details_id,  AddPersonAdapter addPersonAdapter,
                                   ArrayList<AddPersonModel> addPersonModelArrayList, int position)
@@ -116,7 +121,7 @@ public class CustomDialogAddMama extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         textView_title = findViewById(R.id.textView_title);
@@ -127,12 +132,18 @@ public class CustomDialogAddMama extends Dialog {
         editText_mamaOccupation = findViewById(R.id.editText_mamaOccupation);
         textView_mamaOccupationId = findViewById(R.id.textView_mamaOccupationId);
         editText_mamaAddress = findViewById(R.id.editText_mamaAddress);
-        editText_mamaState = findViewById(R.id.editText_mamaState);
+        editText_country = findViewById(R.id.editText_country);
+        textView_countryId = findViewById(R.id.textView_countryId);
+        editText_state = findViewById(R.id.editText_state);
+        textView_stateId = findViewById(R.id.textView_stateId);
+        editText_city = findViewById(R.id.editText_city);
+        textView_cityId = findViewById(R.id.textView_cityId);
+        /*editText_mamaState = findViewById(R.id.editText_mamaState);
         textView_mamaStateId = findViewById(R.id.textView_mamaStateId);
         editText_mamaDistrict = findViewById(R.id.editText_mamaDistrict);
         textView_mamaDistrictId = findViewById(R.id.textView_mamaDistrictId);
         editText_mamaTaluka = findViewById(R.id.editText_mamaTaluka);
-        textView_mamaTalukaId = findViewById(R.id.textView_mamaTalukaId);
+        textView_mamaTalukaId = findViewById(R.id.textView_mamaTalukaId);*/
         textView_addMama = findViewById(R.id.textView_addMama);
 
         textView_title.setText("Mama Details");
@@ -140,9 +151,12 @@ public class CustomDialogAddMama extends Dialog {
 
         dataFetcher = new DataFetcher("Address",context);
 
-        showPopUp(editText_mamaState, "State");
+/*        showPopUp(editText_mamaState, "State");
         showPopUp(editText_mamaDistrict, "District");
-        showPopUp(editText_mamaTaluka, "Taluka");
+        showPopUp(editText_mamaTaluka, "Taluka");*/
+        showPopUp(editText_country, "Country");
+        showPopUp(editText_state, "State");
+        showPopUp(editText_city, "City");
 
 
         popupFetcher = new PopupFetcher(context);
@@ -163,12 +177,18 @@ public class CustomDialogAddMama extends Dialog {
                 textView_mamaOccupationId.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID)));
                 editText_mamaOccupation.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.OCCUPATION_NAME)));
                 editText_mamaAddress.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.ADDRESS)));
-                textView_mamaStateId.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.STATE_ID)));
+                textView_countryId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.COUNTRY_ID)));
+                editText_country.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.COUNTRY_NAME)));
+                textView_stateId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_ID)));
+                editText_state.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_NAME)));
+                textView_cityId.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CITY_ID)));
+                editText_city.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CITY_NAME)));
+                /*textView_mamaStateId.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.STATE_ID)));
                 editText_mamaState.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.STATE_NAME)));
                 textView_mamaDistrictId.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.DISTRICT_ID)));
                 editText_mamaDistrict.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.DISTRICT_NAME)));
                 textView_mamaTalukaId.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.TALUKA_ID)));
-                editText_mamaTaluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.TALUKA_NAME)));
+                editText_mamaTaluka.setText(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.TALUKA_NAME)));*/
                 checkBox_mamaIsAlive.setChecked(cursor.getString(cursor.getColumnIndex(SQLiteMamaDetails.IS_ALIVE)).equals("1"));
 
 
@@ -227,17 +247,23 @@ public class CustomDialogAddMama extends Dialog {
                 String occupationId = textView_mamaOccupationId.getText().toString().trim();
                 String occupationName = editText_mamaOccupation.getText().toString().trim();
                 String address = editText_mamaAddress.getText().toString().trim();
-                String state_id = textView_mamaStateId.getText().toString().trim();
+                String country_id = textView_countryId.getText().toString().trim();
+                String country_name = editText_country.getText().toString().trim();
+                String state_id = textView_stateId.getText().toString().trim();
+                String state_name = editText_state.getText().toString().trim();
+                String city_id = textView_cityId.getText().toString().trim();
+                String city_name = editText_city.getText().toString().trim();
+/*                String state_id = textView_mamaStateId.getText().toString().trim();
                 String district_id = textView_mamaDistrictId.getText().toString().trim();
                 String taluka_id = textView_mamaTalukaId.getText().toString().trim();
                 String state_name = editText_mamaState.getText().toString().trim();
                 String district_name = editText_mamaDistrict.getText().toString().trim();
-                String taluka_name = editText_mamaTaluka.getText().toString().trim();
+                String taluka_name = editText_mamaTaluka.getText().toString().trim();*/
 
 
                 if(id.equals("0")) {
                     long res = sqLiteMamaDetails.insertMamaDetails("0", name, mobileNo, occupationId, occupationName, address,
-                            state_id, district_id, taluka_id, state_name, district_name, taluka_name, isAlive);
+                            country_name, country_id, state_name, state_id, city_name, city_id, isAlive);
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
@@ -251,7 +277,7 @@ public class CustomDialogAddMama extends Dialog {
                 else
                 {
                     int res = sqLiteMamaDetails.updateMamaDetails(id, mama_details_id, name, mobileNo, occupationId, occupationName, address,
-                            state_id, district_id, taluka_id, state_name, district_name, taluka_name, isAlive);
+                            country_name, country_id, state_name, state_id, city_name, city_id, isAlive);
 
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
@@ -275,6 +301,7 @@ public class CustomDialogAddMama extends Dialog {
     private void textChangedListener()
     {
 
+/*
         editText_mamaState.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -312,11 +339,56 @@ public class CustomDialogAddMama extends Dialog {
 
             }
         });
+*/
 
 
     }
 
-    private void showPopUp(EditText editText, final String urlFor)
+    private void showPopUp(final EditText editText, final String urlFor)
+    {
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+
+                String id="";
+
+                if(urlFor.equals("Country"))
+                {
+
+                }
+                else if(urlFor.equals("State"))
+                {
+                    id =  textView_countryId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select Country first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+
+                else if(urlFor.equals("City"))
+                {
+                    id = textView_stateId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                runner.execute(urlFor, id);
+
+
+
+            }
+        });
+
+
+    }
+/*    private void showPopUp(EditText editText, final String urlFor)
     {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -351,7 +423,7 @@ public class CustomDialogAddMama extends Dialog {
         });
 
 
-    }
+    }*/
 /*
     protected void getSiblingsList()
     {
@@ -437,14 +509,41 @@ public class CustomDialogAddMama extends Dialog {
 
                 }
 
-                else if(params[0].toString()=="State")
+                if(params[0].equals("Country"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
-                            "StatesName", editText_mamaState, textView_mamaStateId, context, customDialogLoadingProgressBar);
+
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_country, textView_countryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                    return "Country";
+
+                }
+                else if(params[0].equals("State"))
+                {
+                    String id = textView_countryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                    + "&CountryID="+id,"StatesID", "StatesName",
+                            editText_state, textView_stateId,getContext(),
+                            customDialogLoadingProgressBar);
+
 
 
                 }
-                else if(params[0].toString()=="District")
+                else if(params[0].equals("City"))
+                {
+                    String id = textView_stateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_city, textView_cityId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+/*                else if(params[0].toString()=="District")
                 {
                     String id = params[1];
                     dataFetcher.loadList(URLs.URL_GET_DISTRICT+"StatesID="+id+"&Language="+userModel.getLanguage(),
@@ -459,7 +558,9 @@ public class CustomDialogAddMama extends Dialog {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_mamaTaluka, textView_mamaTalukaId,
                             context, customDialogLoadingProgressBar);
-                }
+                }*/
+
+                return params[0];
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -471,7 +572,40 @@ public class CustomDialogAddMama extends Dialog {
 
         @Override
         protected void onPostExecute(String result) {
+            if(result.equals("Country"))
+            {
+                newCountryId = Integer.parseInt(textView_countryId.getText().toString());
+                if (currentCountryId != newCountryId) {
+                    currentCountryId = newCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_stateId.setText("0");
+                            editText_state.setText("");
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
 
+                }
+            }
+            else if(result.equals("State"))
+            {
+                newStateId = Integer.parseInt(textView_stateId.getText().toString());
+                if (currentStateId != newStateId) {
+                    currentStateId = newStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
+
+                }
+            }
         }
 
 

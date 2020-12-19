@@ -162,9 +162,21 @@ public class UploadDocumentsFragment extends Fragment {
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+               /* AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
+*/
 
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+
+                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
+
+                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
+
+                /*UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
+
+                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadDocumentsFragment);*/
+                fragmentTransaction.commit();
 
 
             }
@@ -448,8 +460,8 @@ public class UploadDocumentsFragment extends Fragment {
                 .show();
     }
 
-    private void onClickListener() {
-
+    private void onClickListener()
+    {
 
         textView_upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -475,8 +487,6 @@ public class UploadDocumentsFragment extends Fragment {
         });
     }
 
-   
-
     private void init()
     {
 
@@ -497,16 +507,12 @@ public class UploadDocumentsFragment extends Fragment {
 
         textView_upload = view.findViewById(R.id.textView_upload);
 
-        
-
         imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
         tv.setText(context.getResources().getString(R.string.basic_details));
         textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
     }
-
- 
 
     private String getAge(int year, int month, int day)
     {
@@ -527,8 +533,6 @@ public class UploadDocumentsFragment extends Fragment {
 
         return String.valueOf(age);
 
-
-
     }
 
     @Override
@@ -543,8 +547,6 @@ public class UploadDocumentsFragment extends Fragment {
     private class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
         private String functionFor;
-
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -597,7 +599,5 @@ public class UploadDocumentsFragment extends Fragment {
         }
 
     }
-
-
 
 }

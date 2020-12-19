@@ -1,5 +1,6 @@
 package com.example.matrimonyapp.adapter;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.customViews.CustomDialog;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.fragment.BasicDetailsFragment;
 import com.example.matrimonyapp.modal.MyItem;
 import com.example.matrimonyapp.volley.VolleySingleton;
 
@@ -104,21 +106,15 @@ public class DataFetcher {
                                         if(customDialog!=null)
                                         {
                                             customDialog.dismiss();
+
                                         }
+
                                     }
                                 });
 
-                                //final PromptAdapter adapter = new PromptAdapter( list, edit_text,textViewId);//,dialog
-                                /*recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                                recyclerView.setAdapter(adapter);*/
+
                                 customDialog = new CustomDialog(context,adapter);
                                 customDialog.show();
-                               // customDialog.setCanceledOnTouchOutside(false);
-
-
-
-                               // editText_search.listener
-
 
                                 edit_text.setClickable(true);
 

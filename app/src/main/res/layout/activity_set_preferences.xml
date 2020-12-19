@@ -553,7 +553,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/_state"
+                                android:text="@string/country"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -572,6 +572,100 @@
                             >
 
                             <LinearLayout
+                                android:id="@+id/lr_country"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="horizontal"
+                                android:paddingTop="8dp"
+                                android:paddingBottom="8dp">
+
+                                <EditText
+                                    android:id="@+id/editText_country"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@null"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    android:paddingStart="15dp"
+                                    android:paddingEnd="0dp"
+                                    android:textColor="@color/text_black"
+                                    android:textColorHint="@color/light_weight_gray"
+                                    android:textSize="13sp"
+                                    android:lineSpacingMultiplier="1.2"
+                                    android:singleLine="true"
+                                    android:ellipsize="end"
+                                    android:editable="false"/>
+
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="15dp"
+                                    android:padding="2dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_action_right_arrow"
+                                    android:tint="@color/text_gray"
+                                    android:contentDescription="@string/image"/>
+
+                                <TextView
+                                    android:id="@+id/textView_countryId"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/_0"
+                                    android:visibility="gone" />
+
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:text="@string/_state"
+                                android:textColor="@color/text_black"
+                                android:textSize="13sp" />
+
+                        </LinearLayout>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="1.1dp"
+
+                            >
+
+                            <LinearLayout
                                 android:id="@+id/lr_state"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -582,7 +676,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/editText_stateNames"
+                                    android:id="@+id/editText_state"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -646,7 +740,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/_district"
+                                android:text="@string/_city"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -666,7 +760,7 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_district"
+                                android:id="@+id/lr_city"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -676,7 +770,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/editText_district"
+                                    android:id="@+id/editText_city"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -708,100 +802,6 @@
 
                                 <TextView
                                     android:id="@+id/textView_cityId"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/_0"
-                                    android:visibility="gone" />
-
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:background="@color/white"
-                        android:orientation="vertical"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:padding="5dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
-                                android:text="@string/_taluka"
-                                android:textColor="@color/text_black"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginBottom="10dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="1.1dp"
-
-                            >
-
-                            <LinearLayout
-                                android:id="@+id/lr_taluka"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="3dp"
-                                android:layout_marginBottom="3dp"
-                                android:orientation="horizontal"
-                                android:paddingTop="8dp"
-                                android:paddingBottom="8dp">
-
-                                <EditText
-                                    android:id="@+id/editText_taluka"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_weight="1"
-                                    android:background="@null"
-                                    android:clickable="false"
-                                    android:focusable="false"
-                                    android:paddingStart="15dp"
-                                    android:paddingEnd="0dp"
-                                    android:textColor="@color/text_black"
-                                    android:textColorHint="@color/light_weight_gray"
-                                    android:textSize="13sp"
-                                    android:lineSpacingMultiplier="1.2"
-                                    android:singleLine="true"
-                                    android:ellipsize="end"
-                                    android:editable="false"/>
-
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginEnd="15dp"
-                                    android:padding="2dp"
-                                    android:rotation="90"
-                                    android:src="@drawable/ic_action_right_arrow"
-                                    android:tint="@color/text_gray"
-                                    android:contentDescription="@string/image"/>
-
-                                <TextView
-                                    android:id="@+id/textView_talukaId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -888,7 +888,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/_state"
+                                android:text="@string/country"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -907,7 +907,7 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_working_state"
+                                android:id="@+id/lr_working_country"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -917,7 +917,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/editText_workingState"
+                                    android:id="@+id/editText_workingCountry"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -979,7 +979,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/_district"
+                                android:text="@string/_state"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -999,7 +999,7 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_working_district"
+                                android:id="@+id/lr_working_state"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -1009,7 +1009,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/editText_workingDistrict"
+                                    android:id="@+id/editText_workingState"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1071,7 +1071,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/_taluka"
+                                android:text="@string/_city"
                                 android:textColor="@color/text_black"
                                 android:textSize="13sp" />
 
@@ -1091,7 +1091,7 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_working_taluka"
+                                android:id="@+id/lr_working_city"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -1101,7 +1101,7 @@
                                 android:paddingBottom="8dp">
 
                                 <EditText
-                                    android:id="@+id/editText_workingTaluka"
+                                    android:id="@+id/editText_workingCity"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"

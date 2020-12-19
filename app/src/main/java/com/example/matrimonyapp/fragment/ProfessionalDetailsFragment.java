@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
+import com.example.matrimonyapp.customViews.CustomDialogAddProperty;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.validation.FieldValidation;
@@ -49,13 +51,13 @@ import java.util.Map;
 public class ProfessionalDetailsFragment extends Fragment {
 
     View view;
-    private TextView textView_saveAndContinue, textView_occupationId, textView_designationId, textView_companyCountryId,
-            textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId, textView_income;
+    private TextView textView_saveAndContinue, textView_occupationId, textView_designationId,
+            textView_countryId, textView_stateId, textView_cityId, textView_income;
 
     private EditText editText_companyName, editText_occupation, editText_designation, editText_experience,
-            editText_income, editText_companyAddress, editText_companyCountry, editText_companyState,
-            editText_companyDistrict, editText_companyTaluka, editText_departmentName;
-
+            editText_income, editText_companyAddress,  editText_departmentName, editText_country,
+            editText_state, editText_city;
+//editText_companyCountry, editText_companyState,editText_companyDistrict, editText_companyTaluka,
     public Context context;
     private ImageView imageView_back;
 
@@ -67,6 +69,7 @@ public class ProfessionalDetailsFragment extends Fragment {
     DataFetcher dataFetcher;
 
     int professionalDetailsId=0;
+    private int currentCountryId =0, currentStateId=0, newCountryId=0, newStateId=0;
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     private String currentService;
 
@@ -128,6 +131,13 @@ public class ProfessionalDetailsFragment extends Fragment {
         textView_income = view.findViewById(R.id.textView_income);
 
         editText_companyAddress = view.findViewById(R.id.editText_companyAddress);
+        editText_country = view.findViewById(R.id.editText_country);
+        textView_countryId = view.findViewById(R.id.textView_countryId);
+        editText_state = view.findViewById(R.id.editText_state);
+        textView_stateId = view.findViewById(R.id.textView_stateId);
+        editText_city = view.findViewById(R.id.editText_city);
+        textView_cityId = view.findViewById(R.id.textView_cityId);
+/*
         editText_companyCountry = view.findViewById(R.id.editText_companyCountry);
         editText_companyState = view.findViewById(R.id.editText_companyState);
         editText_companyDistrict = view.findViewById(R.id.editText_companyDistrict);
@@ -136,6 +146,7 @@ public class ProfessionalDetailsFragment extends Fragment {
         textView_companyStateId = view.findViewById(R.id.textView_companyStateId);
         textView_companyDistrictId = view.findViewById(R.id.textView_companyDistrictId);
         textView_companyTalukaId = view.findViewById(R.id.textView_companyTalukaId);
+*/
 
 
 
@@ -185,6 +196,15 @@ public class ProfessionalDetailsFragment extends Fragment {
 
             }
         });
+        editText_income.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("Income");
+
+            }
+        });
 
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
@@ -192,33 +212,75 @@ public class ProfessionalDetailsFragment extends Fragment {
         AsyncTaskLoad getTask = new AsyncTaskLoad();
         getTask.execute("getDetails");
 
-        showPopup(editText_income, "Income");
 
-        showPopupSDT(editText_companyState, "State", null);
+        showPopUp(editText_country, "Country");
+        showPopUp(editText_state, "State");
+        showPopUp(editText_city, "City");
+
+/*        showPopupSDT(editText_companyState, "State", null);
         showPopupSDT(editText_companyDistrict, "District", textView_companyStateId);
         showPopupSDT(editText_companyTaluka, "Taluka", textView_companyDistrictId);
         FieldValidation.textChangedListenerForSDT(editText_companyState, editText_companyDistrict, editText_companyTaluka,
-                textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId);
+                textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId);*/
+
+
+
         return view;
     }
 
-
+/*
     public void showPopup(EditText editText, final String urlFor)
     {
 
+
+
+    }*/
+    private void showPopUp(final EditText editText, final String urlFor)
+    {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
 
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute(urlFor);
+            AsyncTaskLoad runner = new AsyncTaskLoad();
+
+                String id="";
+
+                if(urlFor.equals("Country"))
+                {
+
+                }
+                else if(urlFor.equals("State"))
+                {
+                    id =  textView_countryId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select Country first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+
+                else if(urlFor.equals("City"))
+                {
+                    id = textView_stateId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                runner.execute(urlFor, id);
+
+
 
             }
         });
 
+
     }
 
-    public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
+   /* public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
     {
 
         editText.setOnClickListener(new View.OnClickListener() {
@@ -235,7 +297,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 
 
 
-    }
+    }*/
 
 
     private void insertDetails()
@@ -444,7 +506,41 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                 }
 
+                if(params[0].equals("Country"))
+                {
+
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_country, textView_countryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+
+                }
                 else if(params[0].equals("State"))
+                {
+                    String id = textView_countryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                    + "&CountryID="+id,"StatesID", "StatesName",
+                            editText_state, textView_stateId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+
+                }
+                else if(params[0].equals("City"))
+                {
+                    String id = textView_stateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_city, textView_cityId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+
+/*                else if(params[0].equals("State"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
                             "StatesName", editText_companyState, textView_companyStateId,getContext(), customDialogLoadingProgressBar);
@@ -466,7 +562,7 @@ public class ProfessionalDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_companyTaluka, textView_companyTalukaId,
                             getContext(), customDialogLoadingProgressBar);
-                }
+                }*/
                 else if(params[0].equals("Salary"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
@@ -476,6 +572,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                 }
 
+                return params[0];
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -488,7 +585,40 @@ public class ProfessionalDetailsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
+            if(result.equals("Country"))
+            {
+                newCountryId = Integer.parseInt(textView_countryId.getText().toString());
+                if (currentCountryId != newCountryId) {
+                    currentCountryId = newCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_stateId.setText("0");
+                            editText_state.setText("");
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
 
+                }
+            }
+            else if(result.equals("State"))
+            {
+                newStateId = Integer.parseInt(textView_stateId.getText().toString());
+                if (currentStateId != newStateId) {
+                    currentStateId = newStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_cityId.setText("0");
+                            editText_city.setText("");
+                        }
+                    });
+
+                }
+            }
         }
 
 

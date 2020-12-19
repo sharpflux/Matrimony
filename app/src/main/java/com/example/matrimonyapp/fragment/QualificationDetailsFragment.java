@@ -62,12 +62,12 @@ public class QualificationDetailsFragment extends Fragment {
     View view;
     private TextView textView_saveAndContinue, textView_qualificationId, textView_highestQualificationLevelId;
     private EditText editText_highestQualificationLevel, editText_qualification, editText_institue,
-            editText_percentage, editText_passingYear,
+            editText_percentage, editText_passingYear, editText_hobby, editText_socialContributions ;
     /*editText_sscNameOfInstitute, editText_sscPer,editText_hscNameOfInstitute,
             editText_hscPer,
             editText_gradCourse, editText_gradNameOfInstitute, editText_gradPer,
-            editText_pgCourse, editText_pgNameOfInstitute, editText_pgPer,*/ editText_hobby,
-            editText_socialContributions ;
+            editText_pgCourse, editText_pgNameOfInstitute, editText_pgPer,*/
+
 
     private ImageView imageView_back,imageView_addEducation;
 

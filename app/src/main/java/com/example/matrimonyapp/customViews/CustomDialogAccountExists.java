@@ -48,7 +48,7 @@ public class CustomDialogAccountExists extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         textView_login = findViewById(R.id.textView_login);
         textView_createNew = findViewById(R.id.textView_createNew);

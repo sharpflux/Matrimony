@@ -37,6 +37,7 @@
     <string name="approximate">Approximate</string>
     <string name="approx">Approx</string>
     <string name="city">City *</string>
+    <string name="_city">City</string>
     <string name="village">Village</string>
     <string name="state">State *</string>
     <string name="country">Country</string>
@@ -184,7 +185,7 @@
     <string name="add_profile_photo">Add Profile Photo</string>
     <string name="add_from_gallery">Add from Gallery </string>
     <string name="add_from_camera">Add from Camera </string>
-    <string name="add_profile_photo_desc">Change your profile photo to represent yourself on MatrimonyApp.</string>
+    <string name="add_profile_photo_desc">Change your profile photo to represent yourself on JodidarMaza.</string>
     <string name="change_photo">Change photo</string>
     <string name="edit_profile_desc">Edit Profile so that others will know you better.</string>
     <string name="set_preferences_desc">Set your Preferences for better search results.</string>
@@ -361,6 +362,10 @@
     <string name="interest_accepted">Interest Accepted</string>
     <string name="buy_now">Buy Now</string>
     <string name="select_this_plan">Select this plan</string>
+    <string name="birth_city">Birth City</string>
+    <string name="birth_country">Birth Country</string>
+    <string name="login">Login</string>
+    <string name="verify_otp">Verify OTP</string>
 
 
 </resources>

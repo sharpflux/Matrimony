@@ -210,7 +210,7 @@
                             android:textSize="15sp"
                             android:lineSpacingMultiplier="1.2"
                             android:maxLines="5"
-                            android:nextFocusDown="@id/editText_mamaState"
+                            android:nextFocusDown="@id/editText_country"
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -227,18 +227,18 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/editText_mamaState"
-                            android:hint="@string/_state"
+                            android:id="@+id/editText_country"
+                            android:hint="@string/country"
                             android:drawableEnd="@drawable/ic_action_arrow_down"
                             android:drawableTint="@color/text_gray"
 
                             android:textColor="@color/text_black"
                             android:textSize="15sp"
-                            android:nextFocusRight="@id/editText_mamaDistrict"
+                            android:nextFocusRight="@id/editText_state"
                             android:singleLine="true"
                             android:focusable="false"
                             android:clickable="false"
-                            android:nextFocusDown="@id/editText_mamaDistrict"
+                            android:nextFocusDown="@id/editText_state"
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -246,7 +246,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_mamaStateId"
+                        android:id="@+id/textView_countryId"
                         android:visibility="gone"
                         android:text="@string/_0"
                         />
@@ -262,8 +262,8 @@
                         <EditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/editText_mamaDistrict"
-                            android:hint="@string/_district"
+                            android:id="@+id/editText_state"
+                            android:hint="@string/_state"
                             android:drawableEnd="@drawable/ic_action_arrow_down"
                             android:drawableTint="#ADADAD"
                             android:textColor="@color/text_black"
@@ -277,7 +277,7 @@
                     <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/textView_mamaDistrictId"
+                                android:id="@+id/textView_stateId"
                                 android:visibility="gone"
                                 android:text="@string/_0"
                                 />
@@ -293,8 +293,8 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText_mamaTaluka"
-                                    android:hint="@string/_taluka"
+                                    android:id="@+id/editText_city"
+                                    android:hint="@string/_city"
                                     android:drawableEnd="@drawable/ic_action_arrow_down"
                                     android:drawableTint="#ADADAD"
                                     android:textColor="@color/text_black"
@@ -309,7 +309,7 @@
                     <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/textView_mamaTalukaId"
+                                android:id="@+id/textView_cityId"
                                 android:visibility="gone"
                                 android:text="@string/_0"
                                 />

@@ -11,9 +11,11 @@ public class URLs {
     public static final String URL_POST_UPDATEPASSWORD          = MainURL+"api/UserUdatePasswordAPI/UpdatePasswordApi";
 
 
+    public static final String URL_GET_COUNTRY                  = MainURL+"api/CountryApi/CountryMasterGet?";
     public static final String URL_GET_STATE                    = MainURL+"api/States/GETSTATE?";
     public static final String URL_GET_DISTRICT                 = MainURL+"api/District/Get_DistrictAPI?";
     public static final String URL_GET_TALUKA                   = MainURL+"api/Talukas/Get_TalukaAPI?";
+    public static final String URL_GET_CITY                     = MainURL+"api/Talukas/GetCity?";
     public static final String URL_GET_BLOODGROUP               = MainURL+"api/PersonalDetailsAPI/BloodTypesGET?";
     public static final String URL_GET_RELIGION                 = MainURL+"api/ReligionAPI/GETReligion?";
     public static final String URL_GET_CASTE                    = MainURL+"api/CasteApi/Get_CasteAPI?";
@@ -36,7 +38,7 @@ public class URLs {
     public static final String URL_GET_REGISTEREDUSER           = MainURL+"api/Registration/GetRegisterUserAPI?";
 
     public static final String URL_GET_BASICDETAILS             = MainURL+"api/Registration/GetUserBasicDetailsAPI?";
-    public static final String URL_POST_BASICDETAILS            = MainURL+"/api/BasicDetailsAPI/BasicDetailsInsertUpdate";
+    public static final String URL_POST_BASICDETAILS            = MainURL+"api/BasicDetailsAPI/BasicDetailsInsertUpdate"; //"/api/BasicDetailsAPI/BasicDetailsInsertUpdate";
 
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";
@@ -77,7 +79,7 @@ public class URLs {
 
 
     public static final String URL_GET_PROPERTYTYPE             = MainURL+"api/PersonalDetailsAPI/PropertyType?";
-    public static final String URL_GET_VEHICLETYPE              = MainURL+"api/PersonalDetailsAPI/VehicleTypesGetApi?";
+    public static final String URL_GET_VEHICLETYPE              = MainURL+"api/Vehicles/GETVehicles?";
     public static final String URL_GET_VEHICLEBRANDNAME         = MainURL+"api/PersonalDetailsAPI/VehicalMakeGetApi?";
 
 

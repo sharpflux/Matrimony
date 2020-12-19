@@ -113,7 +113,7 @@ public class CustomDialogAddFarm extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         imageView_back = findViewById(R.id.imageView_back);

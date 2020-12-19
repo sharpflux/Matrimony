@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context=".activity.LoginActivity">
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,12 +19,15 @@
         android:orientation="vertical"
         >
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:visibility="gone">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageViewLogo2"
@@ -53,10 +54,101 @@
 
         </LinearLayout>
 
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            android:background="@drawable/diagonal_cut_view_gradient"
+            >
+
+
+               </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/signUp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/arima_madurai_medium"/>
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:id="@+id/relativeLayout_changeProfilePic"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="2dp"
+
+            android:layout_centerHorizontal="true"
+            android:padding="1dp"
+
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageView_profilePic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/noimage2"
+                app:civ_border_color="@color/white"
+                android:elevation="5dp"
+
+                app:civ_border_width="0.2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@id/circleImageView_profilePic"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/add8"
+                app:civ_border_color="@color/white"
+                android:elevation="5dp"
+                app:civ_border_width="0.5dp"
+                app:civ_circle_background_color="@color/white" />
+
+            <!-- <de.hdodenhof.circleimageview.CircleImageView
+                 android:layout_width="40dp"
+                 android:layout_height="40dp"
+                 android:layout_marginTop="50dp"
+                 android:layout_marginStart="50dp"
+                 android:src="@drawable/add4"
+                 app:civ_border_color=""
+                 app:civ_border_width="1dp"
+                 />-->
+        </RelativeLayout>
+<!--        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Photo"
+            android:fontFamily="@font/arima_madurai_medium"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_below="@id/relativeLayout_changeProfilePic"
+            android:visibility="gone"
+            />-->
+</RelativeLayout>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             app:cardElevation="2dp"
@@ -108,7 +200,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             app:cardElevation="2dp"
@@ -171,7 +263,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
             app:cardElevation="2dp"
@@ -221,7 +313,7 @@ android:padding="2dp"
             android:orientation="horizontal"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="13dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:background="@null"
@@ -340,7 +432,7 @@ android:padding="2dp"
             android:layout_marginEnd="25dp"
             app:cardElevation="2dp"
             app:cardCornerRadius="5dp"
-            android:layout_marginTop="19dp"
+            android:layout_marginTop="13dp"
             >
 
         <RadioGroup
@@ -380,7 +472,7 @@ android:padding="2dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             app:cardElevation="2dp"
             app:cardCornerRadius="5dp"
             >
@@ -426,7 +518,7 @@ android:padding="2dp"
             android:layout_height="45dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/gradient_place_order"
             android:gravity="center"
             android:padding="08dp"
@@ -440,7 +532,7 @@ android:padding="2dp"
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
             android:orientation="horizontal"
             android:gravity="center">

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -75,11 +76,11 @@ public class FamilyDetailsFragment extends Fragment {
     View view;
     private Context context;
     private TextView textView_fatherQualificationId, textView_fatherOccupationId, textView_fatherStateId,
-            textView_fatherDistrictId, textView_fatherTalukaId, textView_saveAndContinue,
+            textView_fatherCountryId, textView_fatherCityId, textView_saveAndContinue,
             textView_motherQualificationId, textView_motherOccupationId, textView_familyIncome;
 
     private EditText editText_fatherName, editText_fatherMobileNo, editText_fatherQualification,
-            editText_fatherOccupation, editText_fatherState, editText_fatherDistrict, editText_fatherTaluka,
+            editText_fatherOccupation, editText_fatherState, editText_fatherCountry, editText_fatherCity,
             editText_fatherAddress, editText_motherName, editText_motherMobileNo, editText_motherQualification,
             editText_motherOccupation, editText_relative1, editText_relative2, editText_relative3, editText_relative4,
             editText_familyIncome;
@@ -91,7 +92,7 @@ public class FamilyDetailsFragment extends Fragment {
     private RadioButton radioButton_serviceWoman, radioButton_housewife;
 
     private String fatherName, fatherMobileNo, fatherOccupationId, fatherQualificationId, fatherAnnualIncome,
-            fatherStateId, fatherDistrictId, fatherTalukaId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
+            fatherStateId, fatherCountryId, fatherCityId, fatherAddress, motherName, motherMobileNo, motherQualificationId,
             motherOccupation, familyIncome, relative1, relative2, relative3, relative4;
 
     //SwitchButton switchButton_haveFather, switchButton_haveMother;
@@ -130,6 +131,7 @@ public class FamilyDetailsFragment extends Fragment {
     protected int fatherDetailsId=0;
     protected int motherDetailsId=0;
     private TextInputLayout textInputLayout_motherOccupation;
+    private int currentCountryId =0, currentStateId=0, newCountryId=0, newStateId=0;
 
     public FamilyDetailsFragment() {
         // Required empty public constructor
@@ -163,10 +165,10 @@ public class FamilyDetailsFragment extends Fragment {
 
         editText_fatherState = view.findViewById(R.id.editText_fatherState);
         textView_fatherStateId = view.findViewById(R.id.textView_fatherStateId);
-        editText_fatherDistrict = view.findViewById(R.id.editText_fatherDistrict);
-        textView_fatherDistrictId = view.findViewById(R.id.textView_fatherDistrictId);
-        editText_fatherTaluka = view.findViewById(R.id.editText_fatherTaluka);
-        textView_fatherTalukaId = view.findViewById(R.id.textView_fatherTalukaId);
+        editText_fatherCountry = view.findViewById(R.id.editText_fatherCountry);
+        textView_fatherCountryId = view.findViewById(R.id.textView_fatherCountryId);
+        editText_fatherCity = view.findViewById(R.id.editText_fatherCity);
+        textView_fatherCityId = view.findViewById(R.id.textView_fatherCityId);
 
 
 
@@ -326,16 +328,63 @@ public class FamilyDetailsFragment extends Fragment {
 
         onClickListener();
 
-        showPopupSDT(editText_fatherState, "FatherState", null);
+        showPopUpCSC(editText_fatherCountry, "FatherCountry");
+        showPopUpCSC(editText_fatherState, "FatherState");
+        showPopUpCSC(editText_fatherCity, "FatherCity");
+
+        /*showPopupSDT(editText_fatherState, "FatherState", null);
         showPopupSDT(editText_fatherDistrict, "FatherDistrict", textView_fatherStateId);
         showPopupSDT(editText_fatherTaluka, "FatherTaluka", textView_fatherDistrictId);
         textChangedListener(editText_fatherState, editText_fatherDistrict, editText_fatherTaluka,
                 textView_fatherStateId, textView_fatherDistrictId, textView_fatherTalukaId);
-
+*/
 
         return view;
     }
 
+
+    private void showPopUpCSC(final EditText editText, final String urlFor)
+    {
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+
+                String id="";
+
+                if(urlFor.equals("Country"))
+                {
+
+                }
+                else if(urlFor.equals("State"))
+                {
+                    id =  textView_fatherCountryId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select Country first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+
+                else if(urlFor.equals("City"))
+                {
+                    id = textView_fatherStateId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                runner.execute(urlFor, id);
+
+            }
+        });
+
+
+    }
 
 
     public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
@@ -613,8 +662,8 @@ public class FamilyDetailsFragment extends Fragment {
         //fatherProperty= editText_fatherProperty.getText().toString();
         fatherAddress = editText_fatherAddress.getText().toString().trim();
         fatherStateId = textView_fatherStateId.getText().toString().trim();
-        fatherDistrictId = textView_fatherDistrictId.getText().toString().trim();
-        fatherTalukaId = textView_fatherTalukaId.getText().toString().trim();
+        fatherCountryId = textView_fatherCountryId.getText().toString().trim();
+        fatherCityId = textView_fatherCityId.getText().toString().trim();
 
         final String mother_isAlive = checkBox_motherIsAlive.isChecked()? "1" : "0";
         motherName = editText_motherName.getText().toString().trim();
@@ -698,8 +747,8 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_property.append("<PropertyArea>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CARPET_AREA))+"</PropertyArea>");
                 stringBuilder_property.append("<PropertyAddress>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))+"</PropertyAddress>");
                 stringBuilder_property.append("<PropertyStatesID>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStatesID>");
-                stringBuilder_property.append("<PropertyDistrictId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID))+"</PropertyDistrictId>");
-                stringBuilder_property.append("<PropertyTalukasId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.TALUKA_ID))+"</PropertyTalukasId>");
+                //stringBuilder_property.append("<PropertyDistrictId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID))+"</PropertyDistrictId>");
+                //stringBuilder_property.append("<PropertyTalukasId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.TALUKA_ID))+"</PropertyTalukasId>");
                 stringBuilder_property.append("<PropertyLanguageType>"+userModel.getLanguage()+"</PropertyLanguageType>");
 
                 stringBuilder_property.append("</Functions>");
@@ -731,9 +780,9 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_mama.append("<MamaFullname>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.NAME))+"</MamaFullname>");
                 stringBuilder_mama.append("<MamaMobileNo>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.MOBILE_NO))+"</MamaMobileNo>");
                 stringBuilder_mama.append("<MamaAddress>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.ADDRESS))+"</MamaAddress>");
-                stringBuilder_mama.append("<MamaStatesId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStatesId>");
-                stringBuilder_mama.append("<MamaDistrictId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.DISTRICT_ID))+"</MamaDistrictId>");
-                stringBuilder_mama.append("<MamaTalukasId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.TALUKA_ID))+"</MamaTalukasId>");
+                stringBuilder_mama.append("<MamaCountryId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.COUNTRY_ID))+"</MamaCountryId>");
+                stringBuilder_mama.append("<MamaStateId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStateId>");
+                stringBuilder_mama.append("<MamaCityId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.CITY_ID))+"</MamaCityId>");
                 stringBuilder_mama.append("<MamaOccupationId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID))+"</MamaOccupationId>");
                 stringBuilder_mama.append("<MamaLanguageType>"+userModel.getLanguage()+"</MamaLanguageType>");
 
@@ -838,8 +887,8 @@ public class FamilyDetailsFragment extends Fragment {
                 params.put("FatherMobileNo",fatherMobileNo);
                 params.put("FatherAddress",fatherAddress);
                 params.put("FatherStatesID",fatherStateId);
-                params.put("FatherDistrictId",fatherDistrictId);
-                params.put("FatherTalukasId",fatherTalukaId);
+                params.put("FatherCountryId",fatherCountryId);
+                params.put("FatherCityId",fatherCityId);
                 params.put("FatherQualificationId",fatherQualificationId);
                 params.put("FatherOccupationId",fatherOccupationId);
                 //params.put("FatherAnnualIncome",fatherAnnualIncome);
@@ -914,12 +963,12 @@ public class FamilyDetailsFragment extends Fragment {
                                     //editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
 
                                     textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
-                                    textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
-                                    textView_fatherTalukaId.setText(jsonObject.getString("FatherTalukasIdAPI"));
+                                    //textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
+                                    //textView_fatherTalukaId.setText(jsonObject.getString("FatherTalukasIdAPI"));
 
                                     editText_fatherState.setText(jsonObject.getString("StatesNameFather"));
-                                    editText_fatherDistrict.setText(jsonObject.getString("DistrictNameFather"));
-                                    editText_fatherTaluka.setText(jsonObject.getString("TalukaNameFather"));
+                                    //editText_fatherDistrict.setText(jsonObject.getString("DistrictNameFather"));
+                                    //editText_fatherTaluka.setText(jsonObject.getString("TalukaNameFather"));
 
                                     textView_fatherQualificationId.setText(jsonObject.getString("FatherQualificationIdAPI"));
                                     textView_fatherOccupationId.setText(jsonObject.getString("FatherOccupationIdAPI"));
@@ -1174,7 +1223,43 @@ public class FamilyDetailsFragment extends Fragment {
                     //customDialogLoadingProgressBar.dismiss(); //after uncommenting above line remove this line
                 }
 
-                if(params[0].equals("FatherState"))
+
+
+                if(params[0].equals("FatherCountry"))
+                {
+
+                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                            "Name", editText_fatherCountry, textView_fatherCountryId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                    return "Country";
+
+                }
+                else if(params[0].equals("FatherState"))
+                {
+                    String id = textView_fatherCountryId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                    + "&CountryID="+id,"StatesID", "StatesName",
+                            editText_fatherState, textView_fatherStateId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+
+                }
+                else if(params[0].equals("FatherCity"))
+                {
+                    String id = textView_fatherStateId.getText().toString();
+
+                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                    + "&StateID="+id,"ID",
+                            "Name", editText_fatherCity, textView_fatherCityId,getContext(),
+                            customDialogLoadingProgressBar);
+
+
+                }
+/*                if(params[0].equals("FatherState"))
                 {
                     dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage(),"StatesID",
                             "StatesName", editText_fatherState, textView_fatherStateId,getContext(), customDialogLoadingProgressBar);
@@ -1196,7 +1281,7 @@ public class FamilyDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_TALUKA+"DistrictId="+id+"&Language="+userModel.getLanguage(),
                             "TalukasId", "TalukaName", editText_fatherTaluka, textView_fatherTalukaId,
                             getContext(), customDialogLoadingProgressBar);
-                }
+                }*/
 
                 if(params[0].equals("FatherQualification"))
                 {
@@ -1243,6 +1328,8 @@ public class FamilyDetailsFragment extends Fragment {
 
                 }
 
+                return params[0];
+
                         } catch (Exception e) {
                 e.printStackTrace();
                 resp = e.getMessage();
@@ -1253,6 +1340,41 @@ public class FamilyDetailsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+
+            if(result.equals("Country"))
+            {
+                newCountryId = Integer.parseInt(textView_fatherCountryId.getText().toString());
+                if (currentCountryId != newCountryId) {
+                    currentCountryId = newCountryId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_fatherStateId.setText("0");
+                            editText_fatherState.setText("");
+                            textView_fatherCityId.setText("0");
+                            editText_fatherCity.setText("");
+                        }
+                    });
+
+                }
+            }
+            else if(result.equals("State"))
+            {
+                newStateId = Integer.parseInt(textView_fatherStateId.getText().toString());
+                if (currentStateId != newStateId) {
+                    currentStateId = newStateId;
+                    Handler handler = new Handler();
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            textView_fatherCityId.setText("0");
+                            editText_fatherCity.setText("");
+                        }
+                    });
+
+                }
+            }
 
         }
 

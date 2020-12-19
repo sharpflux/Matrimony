@@ -17,13 +17,17 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
     public static final String  QUALIFICATION_LEVEL = "qualification_level";        //23
     public static final String  QUALIFICATION_LEVEL_ID = "qualification_level_id";  //24
     public static final String  INSTITUTE_NAME = "institute_name";
-    public static final String  ADDRESS = "address";
+    public static final String  PERCENTAGE = "percentage";
+    public static final String  PASSING_YEAR = "passing_year";
+
+
+/*    public static final String  ADDRESS = "address";
     public static final String  STATE_NAME = "state_name";
     public static final String  STATE_ID = "state_id";
     public static final String  DISTRICT_NAME = "district_name";
     public static final String  DISTRICT_ID = "district_id";
     public static final String  TALUKA_NAME =  "taluka_name";
-    public static final String  TALUKA_ID =  "taluka_id";
+    public static final String  TALUKA_ID =  "taluka_id";*/
 
     public SQLiteEducationDetails(Context context)
     {
@@ -43,14 +47,16 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
                     + QUALIFICATION_LEVEL + " text, "
                     + QUALIFICATION_LEVEL_ID + " text, "
                     + INSTITUTE_NAME + " text, "
-                    + ADDRESS + " text, "
-                    + STATE_NAME + " text, "
-                    + STATE_ID + " text, "
-                    + DISTRICT_NAME + " text, "
-                    + DISTRICT_ID + " text, "
-                    + TALUKA_NAME + " text, "
-                    + TALUKA_ID + " text "
+                    + PERCENTAGE + " text, "
+                    + PASSING_YEAR + " text "
                     + " )");
+
+/*            + STATE_ID + " text, "
+            + DISTRICT_NAME + " text, "
+            + DISTRICT_ID + " text, "
+            + TALUKA_NAME + " text, "
+            + TALUKA_ID + " text "
+            */
         }
         catch (SQLException e)
         {
@@ -112,9 +118,8 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
 
 
     public long insertEducationDetails(String education_details_id, String qualificationLevel, String qualificationLevelId,
-                                  String instituteName, String instituteAddress,
-                                  String stateName, String stateId, String districtName, String districtId,
-                                  String talukaName, String talukaId)
+                                  String instituteName,
+                                  String percentage, String passingYear) // String instituteAddress, String stateName, String stateId, String districtName, String districtId, String talukaName, String talukaId
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -126,6 +131,12 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
         contentValues.put(QUALIFICATION_LEVEL, qualificationLevel);
         contentValues.put(QUALIFICATION_LEVEL_ID, qualificationLevelId);
         contentValues.put(INSTITUTE_NAME, instituteName);
+        contentValues.put(PERCENTAGE, percentage);
+        contentValues.put(PASSING_YEAR, passingYear);
+
+
+
+/*
         contentValues.put(ADDRESS, instituteAddress);
         contentValues.put(STATE_NAME, stateName);
         contentValues.put(STATE_ID, stateId);
@@ -133,6 +144,9 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
         contentValues.put(DISTRICT_ID, districtId);
         contentValues.put(TALUKA_NAME, talukaName);
         contentValues.put(TALUKA_ID, talukaId);
+
+*/
+
 
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         //insert returns rowId of newly inserted row or -1 if an errror occured
@@ -142,9 +156,7 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
 
 
     public int updateEducationDetails( String id, String education_details_id, String qualificationLevel, String qualificationLevelId,
-                                  String instituteName, String instituteAddress,
-                                  String stateName, String stateId, String districtName, String districtId,
-                                  String talukaName, String talukaId)
+                                  String instituteName, String percentage, String passingYear) //, String instituteAddress, String stateName, String stateId, String districtName, String districtId, String talukaName, String talukaId
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -156,6 +168,11 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
         contentValues.put(QUALIFICATION_LEVEL, qualificationLevel);
         contentValues.put(QUALIFICATION_LEVEL_ID, qualificationLevelId);
         contentValues.put(INSTITUTE_NAME, instituteName);
+        contentValues.put(PERCENTAGE, percentage);
+        contentValues.put(PASSING_YEAR, passingYear);
+
+/*
+
         contentValues.put(ADDRESS, instituteAddress);
         contentValues.put(STATE_NAME, stateName);
         contentValues.put(STATE_ID, stateId);
@@ -163,6 +180,8 @@ public class SQLiteEducationDetails extends SQLiteOpenHelper {
         contentValues.put(DISTRICT_ID, districtId);
         contentValues.put(TALUKA_NAME, talukaName);
         contentValues.put(TALUKA_ID, talukaId);
+
+*/
 
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, EDUCATION_DETAILS_ID+" = ? and "+ID+" = ?",

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,10 +21,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,11 +50,15 @@ public class VerifyOtpActivity extends AppCompatActivity {
     private String fullName, gender, birthdate, mobileNo,
             emailId, age, password, language="en";
 
+
     AlertDialog.Builder builder;
 
-    private TextView textView_timeOut, textView_verifyOtp;
+    private CountDownTimer countDownTimer;
+
+    private TextView textView_timeOut, textView_verifyOtp, textView_resendOTP;
     private EditText editText_num1, editText_num2, editText_num3, editText_num4;
     private String currentLanguage;
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +78,16 @@ public class VerifyOtpActivity extends AppCompatActivity {
         editText_num4 = findViewById(R.id.editText_num4);
         textView_verifyOtp = findViewById(R.id.textView_verifyOtp);
         textView_timeOut = findViewById(R.id.textView_timeOut);
+        textView_resendOTP = findViewById(R.id.textView_resendOTP);
 
         handler = new Handler();
+
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(VerifyOtpActivity.this);
 
 /*        asynTaskTimer = new AsynTaskTimer();
         asynTaskTimer.execute();*/
 
-
+        startTimer(30, textView_timeOut);
         onNumClick(editText_num1, editText_num2);
         onNumClick(editText_num2, editText_num3);
         onNumClick(editText_num3, editText_num4);
@@ -86,7 +96,17 @@ public class VerifyOtpActivity extends AppCompatActivity {
         {
             otpSent = bundle.getString("OTP");
             parentActivity = bundle.getString("parentActivity");
+            mobileNo = bundle.getString("mobileNo");
         }
+
+
+        textView_resendOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsynTaskTimer runner = new AsynTaskTimer();
+                runner.execute("resendOTP");
+            }
+        });
 
         textView_verifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +161,117 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
     }
 
+
+    void getOtp() //final String userId
+    {
+
+
+        if(bundle!=null)
+        {
+            otpSent = bundle.getString("OTP");
+            parentActivity = bundle.getString("parentActivity");
+            mobileNo = bundle.getString("mobileNo");
+        }
+       // mobileNo = "+91"+editText_mobileNo.getText().toString().trim();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_OTP+"MobileNo="+mobileNo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+                            JSONObject obj = new JSONObject(response);
+
+
+                            if (!obj.getBoolean("error") && obj.getString("message").equals("Success")) {
+
+
+                               /* Intent intent = new Intent(getApplicationContext(), VerifyOtpActivity.class);
+                                intent.putExtra("OTP",obj.getString("OTP"));
+                                intent.putExtra("parentActivity","GetOtp");
+                                intent.putExtra("mobileNo",mobileNo);
+                                intent.putExtra("userId",userId);
+                                startActivity(intent);*/
+                                editText_num1.setText("");
+                                editText_num2.setText("");
+                                editText_num3.setText("");
+                                editText_num4.setText("");
+
+                                countDownTimer.cancel();
+                                startTimer(30, textView_timeOut);
+
+                            }
+                            else{
+
+                                Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                //params.put("OTPMobileNo", mobileNo);
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
+
+    }
+
+
+    public void startTimer(final int seconds, final TextView textView)
+    {
+        countDownTimer = new CountDownTimer(seconds * 1000 + 1000, 1000) {
+            int sec=0, minutes=0;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                sec = seconds;
+                sec = (int)(millisUntilFinished/1000);
+                minutes = sec/60;
+                sec = sec % 60;
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textView.setText(String.format("%02d",minutes) + ":" + String.format("%02d",sec));
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onFinish() {
+
+                AsynTaskTimer runner = new AsynTaskTimer();
+                runner.execute("timeUp");
+
+            }
+        };
+
+        countDownTimer.start();
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -151,6 +282,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     public void registerUser()
     {
@@ -299,16 +432,23 @@ public class VerifyOtpActivity extends AppCompatActivity {
     }
 
 
-    public  class AsynTaskTimer extends AsyncTask{
+    public  class AsynTaskTimer extends AsyncTask<String , String, String>{
 
         @Override
-        protected Object doInBackground(Object[] objects) {
+        protected String doInBackground(String[] params) {
 
             try{
 
+                if(params[0].equals("timeUp"))
+                {
+                    timeUp();
+                }
+                else if(params[0].equals("resendOTP"))
+                {
+                    getOtp();
+                }
 
-
-
+            return params[0];
             }
             catch (Exception e)
             {
@@ -325,22 +465,31 @@ public class VerifyOtpActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+            customDialogLoadingProgressBar.show();
+
         }
 
         @Override
-        protected void onPostExecute(Object o) {
+        protected void onPostExecute(String o) {
             super.onPostExecute(o);
+            customDialogLoadingProgressBar.dismiss();
 
-            finish();
+                if(o.equals("timeUp"))
+                {
+
+                }
+               // finish();
+
         }
 
         @Override
-        protected void onProgressUpdate(Object[] values) {
+        protected void onProgressUpdate(String[] values) {
             super.onProgressUpdate(values);
         }
 
         @Override
-        protected void onCancelled(Object o) {
+        protected void onCancelled(String o) {
             super.onCancelled(o);
         }
 
@@ -349,6 +498,36 @@ public class VerifyOtpActivity extends AppCompatActivity {
             super.onCancelled();
         }
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        countDownTimer.cancel();
+        finish();
+    }
+
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(countDownTimer!=null)
+        {
+            countDownTimer.cancel();
+        }
+
+    }
+
+    private void timeUp() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(VerifyOtpActivity.this, "OTP expired \nPlease try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 

@@ -19,12 +19,18 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
     public static final String  OCCUPATION_ID = "occupation_id";
     public static final String  OCCUPATION_NAME = "occupation_name";
     public static final String  ADDRESS = "address";
+    public static final String  COUNTRY_ID = "country_id";
+    public static final String  COUNTRY_NAME = "country_name";
     public static final String  STATE_ID = "state_id";
+    public static final String  STATE_NAME = "state_name";
+    public static final String  CITY_ID = "city_id";
+    public static final String  CITY_NAME = "city_name";
+/*    public static final String  STATE_ID = "state_id";
     public static final String  DISTRICT_ID = "district_id";
     public static final String  TALUKA_ID =  "taluka_id";
     public static final String  STATE_NAME = "state_name";
     public static final String  DISTRICT_NAME = "district_name";
-    public static final String  TALUKA_NAME =  "taluka_name";
+    public static final String  TALUKA_NAME =  "taluka_name";*/
     public static final String  IS_ALIVE =  "is_alive";
 
     public SQLiteMamaDetails(Context context)
@@ -47,12 +53,18 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
                     + OCCUPATION_ID + " int, "
                     + OCCUPATION_NAME + " text, "
                     + ADDRESS + " text, "
+                    + COUNTRY_ID + " int, "
+                    + COUNTRY_NAME + " text, "
                     + STATE_ID + " int, "
+                    + STATE_NAME + " text, "
+                    + CITY_ID + " int, "
+                    + CITY_NAME + " text,"
+/*                    + STATE_ID + " int, "
                     + STATE_NAME + " text, "
                     + DISTRICT_ID + " int, "
                     + DISTRICT_NAME + " text, "
                     + TALUKA_ID + " int, "
-                    + TALUKA_NAME + " text,"
+                    + TALUKA_NAME + " text,"*/
                     + IS_ALIVE+ " int"
                     + " )");
         }
@@ -101,8 +113,8 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
     }
 
     public long insertMamaDetails(String mama_details_id, String name, String mobileNo, String occupationId, String occupationName,
-                              String address, String state_id, String district_id, String taluka_id,
-                              String state_name, String district_name, String taluka_name, String is_alive)
+                              String address, String countryName, String countryId, String stateName,
+                              String stateId, String cityName, String cityId, String is_alive)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -116,12 +128,18 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
         contentValues.put(OCCUPATION_ID, occupationId);
         contentValues.put(OCCUPATION_NAME, occupationName);
         contentValues.put(ADDRESS, address);
-        contentValues.put(STATE_ID, state_id);
+        contentValues.put(COUNTRY_ID, countryId);
+        contentValues.put(COUNTRY_NAME, countryName);
+        contentValues.put(STATE_ID, stateId);
+        contentValues.put(STATE_NAME, stateName);
+        contentValues.put(CITY_ID, cityId);
+        contentValues.put(CITY_NAME, cityName);
+/*        contentValues.put(STATE_ID, state_id);
         contentValues.put(STATE_NAME, state_name);
         contentValues.put(DISTRICT_ID, district_id);
         contentValues.put(DISTRICT_NAME, district_name);
         contentValues.put(TALUKA_ID, taluka_id);
-        contentValues.put(TALUKA_NAME, taluka_name);
+        contentValues.put(TALUKA_NAME, taluka_name);*/
         contentValues.put(IS_ALIVE, is_alive);
         //contentValues.put(, );
 
@@ -133,8 +151,8 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
 
 
     public int updateMamaDetails(String id, String mama_details_id, String name, String mobileNo, String occupationId, String occupationName,
-                             String address, String state_id, String district_id, String taluka_id,
-                             String state_name, String district_name, String taluka_name, String is_alive)
+                             String address, String countryName, String countryId,
+                                 String stateName, String stateId, String cityName, String cityId, String is_alive)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -146,12 +164,19 @@ public class SQLiteMamaDetails extends SQLiteOpenHelper {
         contentValues.put(OCCUPATION_ID, occupationId);
         contentValues.put(OCCUPATION_NAME, occupationName);
         contentValues.put(ADDRESS, address);
+        contentValues.put(COUNTRY_ID, countryId);
+        contentValues.put(COUNTRY_NAME, countryName);
+        contentValues.put(STATE_ID, stateId);
+        contentValues.put(STATE_NAME, stateName);
+        contentValues.put(CITY_ID, cityId);
+        contentValues.put(CITY_NAME, cityName);
+        /*
         contentValues.put(STATE_ID, state_id);
         contentValues.put(STATE_NAME, state_name);
         contentValues.put(DISTRICT_ID, district_id);
         contentValues.put(DISTRICT_NAME, district_name);
         contentValues.put(TALUKA_ID, taluka_id);
-        contentValues.put(TALUKA_NAME, taluka_name);
+        contentValues.put(TALUKA_NAME, taluka_name);*/
         contentValues.put(IS_ALIVE, is_alive);
 
 

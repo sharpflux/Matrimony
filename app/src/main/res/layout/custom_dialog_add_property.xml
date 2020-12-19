@@ -604,6 +604,41 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/editText_country"
+                        android:hint="@string/country"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/text_gray"
+
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:nextFocusRight="@id/editText_district"
+                        android:singleLine="true"
+                        android:focusable="false"
+                        android:clickable="false"
+                        android:nextFocusDown="@id/editText_district"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_countryId"
+                    android:visibility="gone"
+                    android:text="@string/_0"
+                    />
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/text_black"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/editText_state"
                         android:hint="@string/_state"
                         android:drawableEnd="@drawable/ic_action_arrow_down"
@@ -629,7 +664,38 @@
 
 
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:textColorHint="@color/text_black"
+                    android:theme="@style/TextLabel">
 
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_city"
+                        android:hint="@string/_city"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="#ADADAD"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_cityId"
+                    android:visibility="gone"
+                    android:text="@string/_0"
+
+                    />
+
+<!--
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -690,7 +756,7 @@
                         android:id="@+id/textView_talukaId"
                         android:visibility="gone"
                         android:text="@string/_0"
-                        />
+                        />-->
 
             </LinearLayout>
             </androidx.cardview.widget.CardView>

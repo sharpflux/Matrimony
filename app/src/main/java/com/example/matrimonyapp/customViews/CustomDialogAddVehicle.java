@@ -112,7 +112,7 @@ public class CustomDialogAddVehicle extends Dialog {
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         imageView_back = findViewById(R.id.imageView_back);
@@ -265,7 +265,7 @@ public class CustomDialogAddVehicle extends Dialog {
 
                 if(params[0].equals("VehicleType"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Language="+userModel.getLanguage(),"VehicleTypeId",
+                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Type&CorrespondenceId=0&Language="+userModel.getLanguage(),"VehicleTypeId",
                             "VehicleType", editText_vehicleType, textView_vehicleTypeId, context, customDialogLoadingProgressBar);
 
                 }
@@ -273,16 +273,16 @@ public class CustomDialogAddVehicle extends Dialog {
                 else if(params[0].equals("BrandName"))
                 {
                     String id = textView_vehicleTypeId.getText().toString();
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLEBRANDNAME+"Language="+userModel.getLanguage()
-                                    +"&VehicleTypeId="+id,"VehicalMakeId",
-                            "VehicalMake", editText_brandName, textView_brandNameId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Make&CorrespondenceId="+id+"&Language="+userModel.getLanguage(),
+                            "VehicalMakeId", "VehicalMake",
+                            editText_brandName, textView_brandNameId, context, customDialogLoadingProgressBar);
 
                 }
 
                 else if(params[0].equals("ModelName"))
                 {
-                    String id = params[1];
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Language="+userModel.getLanguage(),"VehicleTypeId",
+                    String id = textView_brandNameId.getText().toString();
+                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Modal&CorrespondenceId="+id+"&Language="+userModel.getLanguage(),"VehicleTypeId",
                             "VehicleType", editText_modelName, textView_modelNameId, context, customDialogLoadingProgressBar);
 
                 }

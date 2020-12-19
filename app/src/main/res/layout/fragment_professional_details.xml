@@ -404,7 +404,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_companyCountry"
+                        android:id="@+id/editText_country"
                         android:hint="@string/country"
                         android:drawableEnd="@drawable/ic_action_arrow_down"
                         android:drawableTint="@color/text_gray"
@@ -421,7 +421,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_companyCountryId"
+                    android:id="@+id/textView_countryId"
                     android:visibility="gone"
                     android:text="@string/_0"
                     />
@@ -436,7 +436,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_companyState"
+                        android:id="@+id/editText_state"
                         android:hint="@string/_state"
                         android:drawableEnd="@drawable/ic_action_arrow_down"
                         android:drawableTint="@color/text_gray"
@@ -453,7 +453,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_companyStateId"
+                    android:id="@+id/textView_stateId"
                     android:visibility="gone"
                     android:text="@string/_0"
                     />
@@ -469,8 +469,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText_companyDistrict"
-                        android:hint="@string/_district"
+                        android:id="@+id/editText_city"
+                        android:hint="@string/_city"
                         android:drawableEnd="@drawable/ic_action_arrow_down"
                         android:drawableTint="#ADADAD"
 
@@ -485,12 +485,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_companyDistrictId"
+                    android:id="@+id/textView_cityId"
                     android:visibility="gone"
                     android:text="@string/_0"
                     />
 
-                <com.google.android.material.textfield.TextInputLayout
+<!--                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -518,7 +518,7 @@
                     android:id="@+id/textView_companyTalukaId"
                     android:visibility="gone"
                     android:text="@string/_0"
-                    />
+                    />-->
             </LinearLayout>
             </androidx.cardview.widget.CardView>
 <!--

@@ -64,7 +64,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class HomeActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
+public class HomeActivity extends AppCompatActivity  {//implements SimpleGestureFilter.SimpleGestureListener
     
     private String currentLanguage;
     private SwipeRefreshLayout swipeRefresLayout;
@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     private NavigationDrawerAdapter navigationDrawerAdapter;
     private ArrayList<NavigationItemListModel> activityListModelArrayList;
 
-    private SimpleGestureFilter detector;
+    //private SimpleGestureFilter detector;
 
     TimelineAdapter timelineAdapter;
     private ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile;
@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
     SQLiteSetPreference sqLiteSetPreference;
 
-    static String gender, stateIds, districtsIds, talukaIds, maritalStatusIds, familyTypeIds, familyValueIds,
+    static String gender, stateIds, countryIds, cityIds, maritalStatusIds, familyTypeIds, familyValueIds,
             familyIncomeIds, individualIncomeIds, qualificationLevelIds, qualificationIds, dietIds, colorIds,
             occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax;
 
@@ -136,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
 
 
-        detector = new SimpleGestureFilter(this,this);
+        //detector = new SimpleGestureFilter(this,this);
 
 
         swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -299,8 +299,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
                 {
                     gender = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.GENDER));
                     stateIds = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.STATE_ID));
-                    districtsIds = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.DISTRICT_ID));
-                    talukaIds  = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.TALUKA_ID));
+                    countryIds = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.COUNTRY_ID));
+                    cityIds  = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.CITY_ID));
                     ageMin  = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.AGE_MIN));
                     ageMax  = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.AGE_MAX));
                     religionIds  = cursor_setPreference.getString(cursor_setPreference.getColumnIndex(SQLiteSetPreference.RELIGION_ID));
@@ -340,8 +340,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     private void noValues() {
         gender = "0";
         stateIds = "0";
-        districtsIds = "0";
-        talukaIds  = "0";
+        countryIds = "0";
+        cityIds  = "0";
         ageMin  = "0";
         ageMax  = "0";
         religionIds  = "0";
@@ -366,6 +366,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
         return;
     }
 
+/*
     @Override
     public boolean dispatchTouchEvent(MotionEvent me){
         // Call onTouchEvent of SimpleGestureFilter class
@@ -380,8 +381,10 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
 
             case SimpleGestureFilter.SWIPE_RIGHT : str = "Swipe Right";
 
-                /*Intent i = new Intent(HomeActivity.this,LoginActivity.class);
-                startActivity(i);*/
+                */
+/*Intent i = new Intent(HomeActivity.this,LoginActivity.class);
+                startActivity(i);*//*
+
 
                 break;
             case SimpleGestureFilter.SWIPE_LEFT :  str = "Swipe Left";
@@ -410,6 +413,7 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+*/
 
 
 
@@ -566,8 +570,8 @@ public class HomeActivity extends AppCompatActivity implements SimpleGestureFilt
                 params.put("PageSize", "100");                              //3
                 params.put("Gender", gender);                               //4
                 params.put("StateId", stateIds);                            //5
-                params.put("DistrictId", districtsIds);                     //6
-                params.put("TalukasId", talukaIds);                         //7
+                params.put("DistrictId", countryIds);                     //6
+                params.put("TalukasId", cityIds);                         //7
                 params.put("AgeMin", ageMin);  //8
                 params.put("AgeMax", ageMax); //9
                 params.put("ReligionId", religionIds);                      //10
