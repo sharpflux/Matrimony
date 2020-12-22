@@ -60,6 +60,8 @@ public class URLs {
 
     public static final String URL_GET_MULTIPLE_DISTRICT        = MainURL+"api/DistrictMultipleApi/Get_DistrictMultipleAPI?";
     public static final String URL_GET_MULTIPLE_TALUKA          = MainURL+"api/Talukas/GetTalukaMultipleAPI?";
+    public static final String URL_GET_MULTIPLE_STATE           = MainURL+"api/States/GetMultipleState?";
+    public static final String URL_GET_MULTIPLE_CITY            = MainURL+"api/District/GetMultipleCities?";
 
     public static final String URL_GET_MULTIPLE_CASTE           = MainURL+"api/CasteApi/Get_CasteMultipleAPI?";
     public static final String URL_GET_SUBCASTE                 = MainURL+"api/CasteApi/Get_SubCasteAPI?";

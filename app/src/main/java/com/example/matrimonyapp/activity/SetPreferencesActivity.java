@@ -296,8 +296,8 @@ public class SetPreferencesActivity extends AppCompatActivity {
         cardView_caste = findViewById(R.id.cardView_caste);
         cardView_subcaste = findViewById(R.id.cardView_subcaste);
 
-        editText_country = findViewById(R.id.editText_district);
-        editText_city = findViewById(R.id.editText_taluka);
+        editText_country = findViewById(R.id.editText_country);
+        editText_city = findViewById(R.id.editText_city);
         editText_state = findViewById(R.id.editText_state);
 
         textView_stateId = findViewById(R.id.textView_stateId);
@@ -561,91 +561,64 @@ public class SetPreferencesActivity extends AppCompatActivity {
             else if(params[0].equals("State"))
             {
                 //String id = textView_countryId.getText().toString();
-/*
-                String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
+                String countryId = arrayList_countryId.toString().substring(1,arrayList_countryId.toString().length()-1).replaceAll(" ","");
 
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
-                                + "&CountryID="+id,"StatesID",
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_STATE+"CountryId="+countryId
+                                +",&Language="+userModel.getLanguage(),"StatesID",
                         "StatesName", editText_state, arrayList_stateId, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
-*/
 
 
             }
             else if(params[0].equals("City"))
             {
                 //String id = textView_stateId.getText().toString();
-/*
                 String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
 
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
-                                + "&StateID="+statesId,"ID",
-                        "Name", editText_city, arrayList_cityId, SetPreferencesActivity.this,
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_CITY +"StatesId="+statesId
+                                +",&Language="+userModel.getLanguage(),"DistrictId",
+                        "DistrictName", editText_city, arrayList_cityId, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
-*/
 
             }
 
 
+            else if(params[0].equals("WorkingCountry"))
+            {
 
-            else if (params[0].equals("State")) {
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                        "Name", editText_workingCountry, arrayList_workingCountryId, SetPreferencesActivity.this,
+                        customDialogLoadingProgressBar);
 
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(),
-                        "StatesID", "StatesName",editText_state, arrayList_stateId,
-                        SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
             }
-/*            else if (params[0].equals("District")) {
+            else if(params[0].equals("WorkingState"))
+            {
+                //String id = textView_countryId.getText().toString();
+                String countryId = arrayList_workingCountryId.toString().substring(1,arrayList_workingCountryId.toString().length()-1).replaceAll(" ","");
 
-                String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_STATE+"CountryId="+countryId
+                                +",&Language="+userModel.getLanguage(),"StatesID",
+                        "StatesName", editText_workingState, arrayList_workingStateId, SetPreferencesActivity.this,
+                        customDialogLoadingProgressBar);
 
-
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_DISTRICT+"StatesId="+statesId+"&Language="
-                        +userModel.getLanguage(), "DistrictId", "DistrictName", editText_district,
-                        arrayList_districtId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
             }
-            else if (params[0].equals("Taluka")) {
-
-                String districtsId = arrayList_districtId.toString().substring(1,arrayList_districtId.toString().length()-1).replaceAll(" ","");
-
-
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_TALUKA+"DistrictId="+districtsId+",&Language="
-                        +userModel.getLanguage(), "TalukasId", "TalukaName", editText_taluka,
-                        arrayList_talukaId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
-
-            }*/
-
-            else if (params[0].equals("WorkingState")) {
-
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_STATE + "Language=" + userModel.getLanguage(),
-                        "StatesID", "StatesName",editText_workingState, arrayList_workingStateId,
-                        SetPreferencesActivity.this, customDialogLoadingProgressBar);
-
-            }
-           /* else if (params[0].equals("WorkingDistrict")) {
-
+            else if(params[0].equals("WorkingCity"))
+            {
+                //String id = textView_stateId.getText().toString();
                 String statesId = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
 
+                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_CITY +"StatesId="+statesId
+                                +",&Language="+userModel.getLanguage(),"DistrictId",
+                        "DistrictName", editText_workingCity, arrayList_workingCityId, SetPreferencesActivity.this,
+                        customDialogLoadingProgressBar);
 
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_DISTRICT+"StatesId="+statesId+"&Language="
-                                +userModel.getLanguage(), "DistrictId", "DistrictName", editText_workingDistrict,
-                        arrayList_workingDistrictId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
-
-            }
-            else if (params[0].equals("WorkingTaluka")) {
-
-                String districtsId = arrayList_workingDistrictId.toString().substring(1,arrayList_workingDistrictId.toString().length()-1).replaceAll(" ","");
-
-
-                multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_TALUKA+"DistrictId="+districtsId+",&Language="
-                                +userModel.getLanguage(), "TalukasId", "TalukaName", editText_workingTaluka,
-                        arrayList_workingTalukaId, SetPreferencesActivity.this, customDialogLoadingProgressBar);
 
             }
 
-*/
+
             else if (params[0].equals("MaritalStatus")) {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MARITALSTATUS + "Language=" +userModel.getLanguage(),
@@ -666,7 +639,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_FAMILYVALUES+ "Language=" +userModel.getLanguage(),
                         "FamilyValuesId", "FamilyValuesName", editText_familyValues,
                         arrayList_familyValues, SetPreferencesActivity.this, customDialogLoadingProgressBar);
-
+    
             }
             else if (params[0].equals("Occupation")) {
 
