@@ -606,8 +606,10 @@ public class BasicDetailsFragment extends Fragment {
         currentStateId = textView_currentStateId.getText().toString().trim();
         currentCityId = textView_currentCityId.getText().toString().trim();
         currentPostalCode = editText_currentPostalCode.getText().toString().trim();
-/*        talukaId = textView_talukaId.getText().toString().trim();
-        districtId = textView_districtId.getText().toString().trim();*/
+/*
+        talukaId = textView_talukaId.getText().toString().trim();
+        districtId = textView_districtId.getText().toString().trim();
+*/
 
 
 
@@ -666,6 +668,8 @@ public class BasicDetailsFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+
+
                 params.put("BasicDetailsId",String.valueOf(basicDetailsId));
                 params.put("UserId",userModel.getUserId());
                 params.put("AlternateNo",altMobileNo);
@@ -678,7 +682,7 @@ public class BasicDetailsFragment extends Fragment {
                 params.put("BirthStateId",birthStateId);
                 params.put("BirthCityId", birthCityId);
                 params.put("BloodGroupId", bloodGroupId);
-                params.put("StatesID",stateId);
+                //params.put("StatesID",stateId);
                 //params.put("DistrictId",districtId);
                 //params.put("TalukasId",talukaId);
                 params.put("PermanantAddress",address);
@@ -730,32 +734,9 @@ public class BasicDetailsFragment extends Fragment {
                                 {
                                     basicDetailsId = jsonObject.getInt("BasicDetailsId");
 
-                                    editText_address.setText(jsonObject.getString("Address"));
+
                                     //editText_birthTime.setText(jsonObject.getString("BirthTimeString"));
                                     editText_birthPlace.setText(jsonObject.getString("BirthPlace"));
-                                    //editText_birthState.setText(jsonObject.getString("StatesNameBirth"));
-
-                                    editText_bloodGroup.setText(jsonObject.getString("BloodGroupName"));
-                                    textView_bloodGroupId.setText(jsonObject.getString("BloodGroupId"));
-
-                                    editText_altMobileNo.setText(jsonObject.getString("AlternateNo"));
-                                    editText_altEmailId.setText(jsonObject.getString("AlternateEmail"));
-
-                                    editText_country.setText(jsonObject.getString("PermanantCountryName"));
-                                    editText_state.setText(jsonObject.getString("PermanantState"));
-                                    editText_city.setText(jsonObject.getString("PermanantCity"));
-
-                                    editText_currentCountry.setText(jsonObject.getString("CurrentCountryName"));
-                                    editText_currentState.setText(jsonObject.getString("CurrentStateName"));
-                                    editText_currentCity.setText(jsonObject.getString("CurrentCityName"));
-
-                                    textView_countryId.setText(jsonObject.getString("PermanantCountryId"));
-                                    textView_stateId.setText(jsonObject.getString("PermanantStateId"));
-                                    textView_countryId.setText(jsonObject.getString("PermanantCityId"));
-
-                                    textView_currentCountryId.setText(jsonObject.getString("CurrentCountryId"));
-                                    textView_currentStateId.setText(jsonObject.getString("CurrentStateId"));
-                                    textView_currentCityId.setText(jsonObject.getString("CurrentCityId"));
 
                                     editText_birthCountry.setText(jsonObject.getString("BirthCountryName"));
                                     editText_birthState.setText(jsonObject.getString("BirthStateName"));
@@ -764,6 +745,39 @@ public class BasicDetailsFragment extends Fragment {
                                     textView_birthCountryId.setText(jsonObject.getString("BirthCountryId"));
                                     textView_birthStateId.setText(jsonObject.getString("BirthStateId"));
                                     textView_birthCityId.setText(jsonObject.getString("BirthCityId"));
+
+
+                                    editText_bloodGroup.setText(jsonObject.getString("BloodGroupName"));
+                                    textView_bloodGroupId.setText(jsonObject.getString("BloodGroupId"));
+
+                                    editText_altMobileNo.setText(jsonObject.getString("AlternateNo"));
+                                    editText_altEmailId.setText(jsonObject.getString("AlternateEmail"));
+
+                                    editText_address.setText(jsonObject.getString("PermanantAddress"));
+                                    editText_village.setText(jsonObject.getString("PermanantVillage"));
+
+                                    editText_country.setText(jsonObject.getString("PermanantCountryName"));
+                                    editText_state.setText(jsonObject.getString("PermanantState"));
+                                    editText_city.setText(jsonObject.getString("PermanantCity"));
+
+                                    textView_countryId.setText(jsonObject.getString("PermanantCountryId"));
+                                    textView_stateId.setText(jsonObject.getString("PermanantStateId"));
+                                    textView_countryId.setText(jsonObject.getString("PermanantCityId"));
+
+                                    editText_currentAddress.setText(jsonObject.getString("CurrentAddress"));
+                                    editText_currentVillage.setText(jsonObject.getString("CurrentVillage"));
+
+                                    editText_currentCountry.setText(jsonObject.getString("CurrentCountryName"));
+                                    editText_currentState.setText(jsonObject.getString("CurrentStateName"));
+                                    editText_currentCity.setText(jsonObject.getString("CurrentCityName"));
+
+
+                                    textView_currentCountryId.setText(jsonObject.getString("CurrentCountryId"));
+                                    textView_currentStateId.setText(jsonObject.getString("CurrentStateId"));
+                                    textView_currentCityId.setText(jsonObject.getString("CurrentCityId"));
+
+                                    //editText_address.setText(jsonObject.getString("CurrentAddress"));
+
 /*
                                     textView_birthDistrictId.setText(jsonObject.getString("BirthDistrictId"));
                                     textView_birthTalukaId.setText(jsonObject.getString("BirthTalukaId"));

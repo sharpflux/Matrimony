@@ -170,6 +170,30 @@ public class ProfessionalDetailsFragment extends Fragment {
         });
 
 
+/*        editText_country.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("Country");
+            }
+        });
+
+        editText_state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("State");
+            }
+        });
+
+        editText_city.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("Country");
+            }
+        });
+        */
         editText_occupation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -223,18 +247,10 @@ public class ProfessionalDetailsFragment extends Fragment {
         FieldValidation.textChangedListenerForSDT(editText_companyState, editText_companyDistrict, editText_companyTaluka,
                 textView_companyStateId, textView_companyDistrictId, textView_companyTalukaId);*/
 
-
-
         return view;
     }
 
-/*
-    public void showPopup(EditText editText, final String urlFor)
-    {
 
-
-
-    }*/
     private void showPopUp(final EditText editText, final String urlFor)
     {
         editText.setOnClickListener(new View.OnClickListener() {
@@ -364,24 +380,24 @@ public class ProfessionalDetailsFragment extends Fragment {
                 params.put("ProfessionalDetailsId",String.valueOf(professionalDetailsId));
                 params.put("UserId",userModel.getUserId());
                 //change -> add in API
-/*                params.put("CurrentService",currentService);
-                params.put("DepartmentName",editText_departmentName.getText().toString());*/
+                params.put("ServiceTypeId",currentService);
                 params.put("CompanyName",editText_companyName.getText().toString());
-                params.put("CompanyAddress",editText_companyAddress.getText().toString());
-                params.put("OccupationId",textView_occupationId.getText().toString());
                 params.put("DesignationId",textView_designationId.getText().toString());
-                params.put("Experience",editText_experience.getText().toString());
-                params.put("MonthlyIncome",editText_income.getText().toString());
+                //params.put("DepartmentName",editText_departmentName.getText().toString());
+                params.put("ExperienceInYears",editText_experience.getText().toString());
+                params.put("AnnualIncome",editText_income.getText().toString());
+                params.put("WorkAddress",editText_companyAddress.getText().toString());
+//              params.put("OccupationId",textView_occupationId.getText().toString());
+                params.put("CountryId",userModel.getLanguage());
+                params.put("StateId",userModel.getLanguage());
+                params.put("CityId",userModel.getLanguage());
                 params.put("LanguageType",userModel.getLanguage());
-
-
 
                 return params;
             }
         };
 
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
 
 
     }

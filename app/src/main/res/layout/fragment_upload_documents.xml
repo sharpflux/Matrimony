@@ -26,6 +26,18 @@
                 <!--android:layout_marginEnd="29.7dp"
                 android:layout_marginStart="29.7dp"-->
 
+                <!--Aadhar Card-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/aadhar_card"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,13 +65,13 @@
                             android:layout_marginBottom="0dp"
                             android:weightSum="2">
 
-                            <ImageView
+<!--                            <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxHeight="350dp"
                                 android:id="@+id/imageView_aadharCard"
                                 android:src="@drawable/edit"
-                                />
+                                />-->
 
 
                             <TextView
@@ -68,13 +80,19 @@
                                 android:id="@+id/textView_upload"
 
                                 android:layout_marginTop="10dp"
-                                android:text="Upload"
+                                android:text="@string/scan"
                                 android:background="@drawable/gradient_place_order"
                                 android:gravity="center"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
                             />
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:id="@+id/linearLayout_aadharCard"
+                                >
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -87,7 +105,6 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editText_uid"
                                     android:hint="UID"
-                                    android:digits="@string/only_text_with_space"
                                     android:textColor="@color/text_black"
                                     android:textSize="15sp"
                                     android:enabled="false"
@@ -111,7 +128,53 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/editText_name"
                                     android:hint="@string/name"
-                                    android:digits="@string/only_text_with_space"
+                                    android:textColor="@color/text_black"
+                                    android:textSize="15sp"
+                                    android:enabled="false"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:clickable="false"
+
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:theme="@style/TextLabel"
+                                    android:layout_marginTop="10dp"
+                                    >
+
+                                    <EditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/editText_fatherName"
+                                        android:hint="@string/father_name"
+                                        android:textColor="@color/text_black"
+                                        android:textSize="15sp"
+                                        android:enabled="false"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:clickable="false"
+
+                                        />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/TextLabel"
+                                android:layout_marginTop="10dp"
+                                >
+
+                                <EditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/editText_yob"
+                                    android:hint="@string/year_of_birth"
                                     android:textColor="@color/text_black"
                                     android:textSize="15sp"
                                     android:enabled="false"
@@ -134,9 +197,8 @@
                                 <EditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/editText_birthdate"
-                                    android:hint="@string/birthdate"
-                                    android:digits="@string/only_text_with_space"
+                                    android:id="@+id/editText_aadharCardAddress"
+                                    android:hint="@string/address_"
                                     android:textColor="@color/text_black"
                                     android:textSize="15sp"
                                     android:enabled="false"
@@ -149,7 +211,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
 
-
+                            </LinearLayout>
 
                         </LinearLayout>
 
