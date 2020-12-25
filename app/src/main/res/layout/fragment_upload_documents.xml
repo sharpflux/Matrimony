@@ -59,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:orientation="vertical"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginBottom="0dp"
@@ -85,6 +85,7 @@
                                 android:gravity="center"
                                 android:textColor="@color/white"
                                 android:textSize="15sp"
+                                android:layout_marginBottom="10dp"
                             />
 
                             <LinearLayout
@@ -92,6 +93,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
                                 android:id="@+id/linearLayout_aadharCard"
+                                android:visibility="gone"
                                 >
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
@@ -149,15 +151,14 @@
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/editText_fatherName"
-                                        android:hint="@string/father_name"
+                                        android:id="@+id/editText_careOf"
+                                        android:hint="@string/care_of"
                                         android:textColor="@color/text_black"
                                         android:textSize="15sp"
                                         android:enabled="false"
                                         android:maxLines="1"
                                         android:singleLine="true"
                                         android:clickable="false"
-
                                         />
 
                                 </com.google.android.material.textfield.TextInputLayout>
@@ -202,10 +203,9 @@
                                     android:textColor="@color/text_black"
                                     android:textSize="15sp"
                                     android:enabled="false"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
+                                    android:lineSpacingMultiplier="1.2"
                                     android:clickable="false"
-
+                                    android:inputType="textMultiLine"
                                     />
 
                             </com.google.android.material.textfield.TextInputLayout>

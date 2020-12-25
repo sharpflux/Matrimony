@@ -26,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -91,14 +92,15 @@ import java.util.regex.Pattern;
 
 public class UploadDocumentsFragment extends Fragment {
 
-    private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName,
-            editText_altMobileNo, editText_altEmailId, editText_mobileNo, editText_address, editText_emailId,
+    private EditText editText_yob, editText_careOf, editText_age, editText_birthTime, editText_firstName,
+            editText_altMobileNo, editText_altEmailId, editText_mobileNo, editText_aadharCardAddress, editText_emailId,
             editText_birthState, editText_birthTaluka, editText_birthPlace, editText_birthDistrict,
             editText_bloodGroup, editText_state, editText_postalCode, editText_taluka, editText_district,
             editText_currentState, editText_currentDistrict, editText_currentTaluka, editText_currentPostalCode,
             editText_currentAddress, editText_currentVillage, editText_village, editText_currentCountry, editText_country;
 
     private ImageView imageView_back;
+    private LinearLayout linearLayout_aadharCard;
 
     private RadioGroup radioGroup_gender, radioGroup_birthTimeType;
 
@@ -134,7 +136,7 @@ public class UploadDocumentsFragment extends Fragment {
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     private EditText editText_name;
     private TextView textView_upload;
-    private ImageView imageView_aadharCard;
+    //private ImageView imageView_aadharCard;
 
     Storage storage;
 
@@ -284,7 +286,15 @@ public class UploadDocumentsFragment extends Fragment {
             JSONObject jsonObject = new JSONObject(value);
             editText_uid.setText(jsonObject.getString("uid"));
             editText_name.setText(jsonObject.getString("name"));
-            editText_birthdate.setText(jsonObject.getString("loc"));
+            editText_yob.setText(jsonObject.getString("yob"));
+            editText_careOf.setText(jsonObject.getString("co"));
+            editText_aadharCardAddress.setText(jsonObject.getString("loc")+" \n"
+                    +jsonObject.getString("po")+" "
+                    +jsonObject.getString("vtc")+" \n"
+                    +jsonObject.getString("dist")+" "
+                    +jsonObject.getString("pc"));
+            linearLayout_aadharCard.setVisibility(View.VISIBLE);
+            textView_upload.setVisibility(View.GONE);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -392,7 +402,9 @@ public class UploadDocumentsFragment extends Fragment {
         // update UI Elements
         editText_uid.setText(aadharData.getUuid());
         editText_name.setText(aadharData.getName());
-        editText_birthdate.setText(aadharData.getDateOfBirth());
+        editText_yob.setText(aadharData.getDateOfBirth());
+        editText_careOf.setText(aadharData.getCareOf());
+        editText_aadharCardAddress.setText(aadharData.getLocation());
        /* tv_sd_yob.setText(aadharData.getDateOfBirth());
         tv_sd_co.setText(aadharData.getCareOf());
         tv_sd_vtc.setText(aadharData.getVtc());
@@ -463,6 +475,7 @@ public class UploadDocumentsFragment extends Fragment {
     private void onClickListener()
     {
 
+
         textView_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -502,14 +515,17 @@ public class UploadDocumentsFragment extends Fragment {
 
         editText_uid = (EditText) view.findViewById(R.id.editText_uid);
         editText_name = (EditText) view.findViewById(R.id.editText_name);
-        editText_birthdate = view.findViewById(R.id.editText_birthdate);
-        imageView_aadharCard = view.findViewById(R.id.imageView_aadharCard);
+        editText_yob = view.findViewById(R.id.editText_yob);
+        editText_careOf = view.findViewById(R.id.editText_careOf);
+        editText_aadharCardAddress = view.findViewById(R.id.editText_aadharCardAddress);
+        linearLayout_aadharCard = view.findViewById(R.id.linearLayout_aadharCard);
+       // imageView_aadharCard = view.findViewById(R.id.imageView_aadharCard);
 
         textView_upload = view.findViewById(R.id.textView_upload);
 
         imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
-        tv.setText(context.getResources().getString(R.string.basic_details));
+        tv.setText(context.getResources().getString(R.string.upload_documents));
         textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
     }

@@ -369,6 +369,8 @@
     <string name="scan">Scan</string>
     <string name="aadhar_card">Aadhar Card</string>
     <string name="year_of_birth">Year of Birth</string>
+    <string name="care_of">Care Of</string>
+    <string name="upload_documents">Upload Documents</string>
 
 
 </resources>

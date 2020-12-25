@@ -84,5 +84,11 @@ public class URLs {
     public static final String URL_GET_VEHICLETYPE              = MainURL+"api/Vehicles/GETVehicles?";
     public static final String URL_GET_VEHICLEBRANDNAME         = MainURL+"api/PersonalDetailsAPI/VehicalMakeGetApi?";
 
+/*
+  Client Id :  AVLYBwu--8UXYJoKseceJY6g0ML7jIKeHKAPGNVShsOHjphCJO4BjPAqS9YE1EF7uHHMZ71nkJtEed1z
+
+    */
+
+
 
 }

@@ -199,6 +199,7 @@
                         android:textSize="15sp"
                         android:inputType="textMultiLine|textCapWords"
                         android:maxLines="3"
+                        android:text=""
                         android:lineSpacingMultiplier="1.2"
                         />
 

@@ -159,41 +159,21 @@ public class ProfessionalDetailsFragment extends Fragment {
                 {
                     cardView_governmentService.setVisibility(View.VISIBLE);
                     cardView_privateService.setVisibility(View.GONE);
-
+                    editText_companyName.setText("");
+                    editText_occupation.setText("");
+                    textView_occupationId.setText("0");
                 }
                 else
                 {
                     cardView_governmentService.setVisibility(View.GONE);
                     cardView_privateService.setVisibility(View.VISIBLE);
+                    editText_departmentName.setText("");
                 }
             }
         });
 
 
-/*        editText_country.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute("Country");
-            }
-        });
 
-        editText_state.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute("State");
-            }
-        });
-
-        editText_city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute("Country");
-            }
-        });
-        */
         editText_occupation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,6 +209,8 @@ public class ProfessionalDetailsFragment extends Fragment {
 
             }
         });
+
+
 
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
@@ -320,11 +302,18 @@ public class ProfessionalDetailsFragment extends Fragment {
     {
 
         RadioButton radioButton_currentService = (RadioButton)view.findViewById(radioGroup_currentService.getCheckedRadioButtonId());
-
-        if(radioButton_currentService!=null)
+        if(radioButton_currentService==view.findViewById(R.id.radioButton_govermentService))
+        {
+            currentService = "1";
+        }
+        else
+        {
+            currentService = "2";
+        }
+/*        if(radioButton_currentService!=null)
         {
             currentService = radioButton_currentService.getText().toString();
-        }
+        }*/
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URLs.URL_POST_PROFESSIONALDETAILS,
@@ -385,12 +374,12 @@ public class ProfessionalDetailsFragment extends Fragment {
                 params.put("DesignationId",textView_designationId.getText().toString());
                 //params.put("DepartmentName",editText_departmentName.getText().toString());
                 params.put("ExperienceInYears",editText_experience.getText().toString());
-                params.put("AnnualIncome",editText_income.getText().toString());
+                params.put("AnnualIncome",textView_income.getText().toString());
                 params.put("WorkAddress",editText_companyAddress.getText().toString());
 //              params.put("OccupationId",textView_occupationId.getText().toString());
-                params.put("CountryId",userModel.getLanguage());
-                params.put("StateId",userModel.getLanguage());
-                params.put("CityId",userModel.getLanguage());
+                params.put("CountryId",textView_countryId.getText().toString());
+                params.put("StateId",textView_stateId.getText().toString());
+                params.put("CityId",textView_cityId.getText().toString());
                 params.put("LanguageType",userModel.getLanguage());
 
                 return params;
