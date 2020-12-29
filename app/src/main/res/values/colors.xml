@@ -8,7 +8,16 @@
     <color name="toolbar_text_black">#0f0d0e</color>
     <color name="text_black">#403f3f</color>
     <color name="text_white">#E5E5E5</color> <!--F0EDED-->
+    <color name="viewline">#cccccc</color>
+    <color name="blue">#2546b0</color>
+    <color name="green">#349d13</color>
+    <color name="smokegray">#bdc0c6</color>
+    <color name="green_dark">#60b244</color>
+    <color name="gray">#90959f</color>
 
+    <color name="silver">#777779</color>
+    <color name="lightsilver">#b6b6b6</color>
+    <color name="orange">#fa6c3c</color>
     <color name="transparent_bg">#80000000</color>
     <color name="transparent">#00000000</color>
     <color name="text_gray">#a09e9f</color>

@@ -18,8 +18,7 @@ import com.example.matrimonyapp.modal.MyItem;
 import com.example.matrimonyapp.modal.SingleImage;
 import com.example.matrimonyapp.modal.SubscriptionModel;
 import com.example.matrimonyapp.utils.PayPalClientIdConfiguration;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

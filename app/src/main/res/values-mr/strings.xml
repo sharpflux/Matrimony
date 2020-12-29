@@ -375,6 +375,28 @@
     <string name="year_of_birth">Year of Birth</string>
     <string name="care_of">Care Of</string>
     <string name="upload_documents">Upload Documents</string>
+    <string name="payments">Payments</string>
+    <string name="wallets">Wallets</string>
+    <string name="amazon_pay">Amazon pay</string>
+    <string name="linked">Linked</string>
+    <string name="get_flat_10_cashback_on_payment_above_99rs">Get flat 10% Cashback on payment above Rs. 99/-</string>
+    <string name="paypal">PayPal</string>
+    <string name="link_account">LINK ACCOUNT</string>
+    <string name="paytm">PayTM</string>
+    <string name="credit_debit_card">CREDIT/DEBIT CARD</string>
+    <string name="_3432_xxxxxxxx_1231">3432-XXXXXXXX-1231</string>
+    <string name="make_payment">MAKE PAYMENT</string>
+    <string name="pay_on_delivery">PAY ON DELIVERY</string>
+    <string name="please_keep_extra_change_when_delivery_boy_arrive_for_ndelivery">
+        Please keep extra change when delivery boy arrive for\ndelivery.</string>
+    <string name="pay_with_cash">PAY WITH CASH</string>
+    <string name="search_plate">Search Plate</string>
+    <string name="cvv">CVV</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="cash">Cash</string>
+    <string name="_1_item_to_pay_280">1 item, To pay : ₹ 280</string>
+    <string name="securely_save_card_details">Securely save card details</string>
+    <string name="apply">APPLY</string>
 
 
 </resources>

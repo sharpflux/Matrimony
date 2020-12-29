@@ -46,6 +46,12 @@
             android:name=".activity.HomeActivity"
             android:launchMode="singleInstance" />
         <activity
+            android:name=".activity.PaymentMethodsActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activity.AddNewCardActivity"
+            android:launchMode="singleInstance" />
+        <activity
             android:name=".activity.SignUp"
             android:launchMode="singleInstance" />
         <activity
@@ -66,6 +72,11 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_L1RM7ciJabgrxA"
+            />
+       <!-- <meta-data android:name="com.google.android.gms.wallet.api.enabled" android:value="true"/>-->
     </application>
     <uses-permission
         android:name="org.apache.http.legacy"
