@@ -1,9 +1,11 @@
 package com.example.matrimonyapp.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -98,6 +100,9 @@ public class ChatActivity extends AppCompatActivity {
                     chatAdapter.notifyDataSetChanged();
                     recyclerView_chat.scrollToPosition(chatModelsList.size());
                     editText_message.setText("");*/
+
+                    hideSoftKeyboard();
+
                     editText_message.setText("");
                 }
 
@@ -113,6 +118,14 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    private void hideSoftKeyboard() {
+        Activity activity = ((ChatActivity)context);
+        InputMethodManager inputMethodManager = (InputMethodManager)((ChatActivity)context)
+                .getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
 
     }
 

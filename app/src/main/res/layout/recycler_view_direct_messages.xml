@@ -81,6 +81,7 @@
                     android:textSize="13sp"
                     android:textStyle="bold"
                     android:layout_gravity="top"
+                    android:maxLines="1"
                     />
 
                 <LinearLayout
@@ -96,18 +97,20 @@
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_lastMessage"
-                    android:layout_weight="5"
+                    android:layout_weight="1"
                     android:layout_marginTop="0dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Last message"
+                    android:layout_marginBottom="3dp"
+                    android:text=""
                     android:paddingStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:textColor="@color/text_gray"
                     android:textSize="11sp"
+                    android:singleLine="true"
+                    android:maxLines="1"
                     />
 
 
@@ -123,6 +126,7 @@
                     android:layout_marginEnd="15dp"
                     android:textColor="@color/text_gray"
                     android:textSize="11sp"
+                    android:maxLines="1"
                     />
 
                 </LinearLayout>

@@ -69,8 +69,8 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
         holder.textView_userId.setText(list.get(position).getUserId());
         holder.textView_firebaseUserId.setText(list.get(position).getFirebaseUserId());
         holder.textView_userName.setText(list.get(position).getUserName());
-        holder.textView_lastMessage.setText(list.get(position).getLastMessage());
-        holder.textView_lastMessageTime.setText(list.get(position).getLastMessageTime());
+        //holder.textView_lastMessage.setText(list.get(position).getLastMessage());
+        //holder.textView_lastMessageTime.setText(list.get(position).getLastMessageTime());
         //holder.textView_send.setText(list.get(position).getUserAge());
 
         //holder.circleImage_profilePic.setImageURI(list.get(position).getProfilePic());
