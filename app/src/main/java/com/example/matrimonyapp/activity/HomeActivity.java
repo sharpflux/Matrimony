@@ -53,7 +53,14 @@ import com.example.matrimonyapp.sqlite.SQLiteSetPreference;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -97,6 +104,9 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             familyIncomeIds, individualIncomeIds, qualificationLevelIds, qualificationIds, dietIds, colorIds,
             occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax;
 
+
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
 
 
     @Override
@@ -243,9 +253,15 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         }
 
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseLogin(userModel.getEmailId(),"123456");
+
         swipeRefresLayout.setColorSchemeResources(R.color.project_color);
 
+       // register("","","");
+
     }
+
 
     private void onClickListener() {
 
@@ -272,6 +288,27 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
     }
+
+    private void firebaseLogin(String emailId, String password)
+    {
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        firebaseAuth.signInWithEmailAndPassword(emailId, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful())
+                {
+                   /* Intent intent = new Intent(Home.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();*/
+
+                }
+
+            }
+        });
+    }
+
 
     @Override
     protected void onResume() {

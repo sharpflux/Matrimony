@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -23,6 +24,13 @@ import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 
     String password, mobileNo;
     private String currentLanguage;
+
+    private FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
+
 
     @Override
     protected void onRestart() {
@@ -128,7 +140,23 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void firebaseLogin(String emailId, String password)
+    {
+        firebaseAuth = FirebaseAuth.getInstance();
 
+        firebaseAuth.signInWithEmailAndPassword(emailId, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(task.isSuccessful())
+                {
+
+
+                }
+
+            }
+        });
+    }
 
     void verifyLogin()
     {
@@ -159,7 +187,9 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
 
                                 if (!jsonObject.getBoolean("error")) {
-
+/*                                    registerFirebase(jsonObject.getString("FullName"),
+                                            jsonObject.getString("EmailId"), password,
+                                            jsonObject.getString("UserId"));*/
                                     UserModel userModel = new UserModel();
 
                                     userModel.setUserId(jsonObject.getString("UserId"));
@@ -183,15 +213,17 @@ public class LoginActivity extends AppCompatActivity {
                                     );
 
 */
+                                    //firebaseLogin(jsonObject.getString("EmailId"), "123456");
+
 
 
                                     textView_login.setEnabled(false);
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
                                     //CustomSharedPreference customSharedPreference = new CustomSharedPreference(getApplicationContext());
+
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
-
                                 }
                             }
                              else{
@@ -245,6 +277,54 @@ public class LoginActivity extends AppCompatActivity {
 
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
+
+    }
+
+
+    private void registerFirebase(final String username, String email, String password, final String userId)
+    {
+        firebaseAuth = FirebaseAuth.getInstance();
+        password="123456";
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful())
+                        {
+                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            String firebaseUserId = firebaseUser.getUid();
+
+                            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUserId);
+
+                            HashMap<String, String>  hashMap = new HashMap<>();
+                            hashMap.put("firebaseUserId", firebaseUserId);
+                            hashMap.put("userId", userId);
+                            hashMap.put("userName", username);
+                            hashMap.put("lastMessage", "Hi, "+username+" here...");
+                            hashMap.put("lastMessageTime", "10.00pm");
+                            hashMap.put("profilePic","default");
+
+                            databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                       // Toast.makeText(LoginActivity.this,"Firebase Successful",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(LoginActivity.this,"UnSuccessful Firebase",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                });
 
     }
 

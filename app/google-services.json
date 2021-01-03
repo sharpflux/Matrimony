@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "711632208988",
+    "project_id": "jodidar-maza",
+    "storage_bucket": "jodidar-maza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711632208988:android:4f878845b809d723171299",
+        "android_client_info": {
+          "package_name": "com.example.matrimonyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711632208988-7qka49b2go8b98vhe4nre3in70vbmv06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.matrimonyapp",
+            "certificate_hash": "d62534288a377e447759cb6f983753b4f5f5e892"
+          }
+        },
+        {
+          "client_id": "711632208988-to47ef6lcdu3di0k287fksfhpjj46h16.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChZ7CPz-KBH-7rb8B05vnakvD5fZLPb1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711632208988-to47ef6lcdu3di0k287fksfhpjj46h16.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

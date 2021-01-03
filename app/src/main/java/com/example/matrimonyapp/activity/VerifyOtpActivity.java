@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -27,6 +28,13 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +68,11 @@ public class VerifyOtpActivity extends AppCompatActivity {
     private String currentLanguage;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
+    FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -81,6 +94,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
         textView_resendOTP = findViewById(R.id.textView_resendOTP);
 
         handler = new Handler();
+
+        firebaseAuth = FirebaseAuth.getInstance();
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(VerifyOtpActivity.this);
 
@@ -327,8 +342,9 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
+                                    registerFirebaseUser(fullName, emailId, password, jsonObject.getString("UserId"));
 
-                                    Toast.makeText(getApplicationContext(), "You have successfully registered!", Toast.LENGTH_SHORT).show();
+                                  //  Toast.makeText(getApplicationContext(), "You have successfully registered!", Toast.LENGTH_SHORT).show();
 
 
                                         Intent intent = new Intent(VerifyOtpActivity.this, MainActivity.class);
@@ -385,7 +401,49 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
     }
 
+    private void registerFirebaseUser(final String username, String email, String password, final String userId)
+    {
 
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful())
+                        {
+                            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            String firebaseUserId = firebaseUser.getUid();
+
+                            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUserId);
+
+                            HashMap<String, String>  hashMap = new HashMap<>();
+                            hashMap.put("firebaseUserId", firebaseUserId);
+                            hashMap.put("userId", userId);
+                            hashMap.put("userName", username);
+                            hashMap.put("lastMessage", "I am also good");
+                            hashMap.put("lastMessageTime", "10.00pm");
+                            hashMap.put("profilePic","default");
+                            hashMap.put("activityStatus","offline");
+
+                            databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        Toast.makeText(VerifyOtpActivity.this,"You have successfully registered!",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(VerifyOtpActivity.this,"Sorry for inconvenience caused\n Please try again",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                });
+
+    }
 
     @Override
     public void onBackPressed() {

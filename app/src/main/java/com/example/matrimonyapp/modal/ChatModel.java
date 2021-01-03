@@ -2,22 +2,41 @@ package com.example.matrimonyapp.modal;
 
 public class ChatModel {
 
-    String messageSent, messageTime;
+    String senderId, receiverId, message, messageTime, messageStatus;
 
     public ChatModel() {
     }
 
-    public ChatModel(String messageSent, String messageTime) {
-        this.messageSent = messageSent;
+    public ChatModel(String message, String messageTime, String senderId, String receiverId, String messageStatus) {
+        this.message = message;
+        this.senderId = senderId;
+        this.receiverId = receiverId;
         this.messageTime = messageTime;
+        this.messageStatus = messageStatus;
     }
 
-    public String getMessageSent() {
-        return messageSent;
+    public String getSenderId() {
+        return senderId;
     }
 
-    public void setMessageSent(String messageSent) {
-        this.messageSent = messageSent;
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getMessageTime() {
@@ -27,4 +46,13 @@ public class ChatModel {
     public void setMessageTime(String messageTime) {
         this.messageTime = messageTime;
     }
+
+    public String getMessageStatus() {
+        return messageStatus;
+    }
+
+    public void setMessageStatus(String messageStatus) {
+        this.messageStatus = messageStatus;
+    }
+
 }

@@ -30,6 +30,11 @@
                 android:layout_marginBottom="0dp"
                 >
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    >
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/circleImage_profilePic"
                     android:layout_width="55dp"
@@ -38,7 +43,19 @@
                     android:src="@drawable/flower2"
 
                     />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleImage_activityStatus"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
 
+                        android:src="@drawable/ic_verified_green"
+                        android:layout_alignBottom="@id/circleImage_profilePic"
+                        android:layout_alignEnd="@id/circleImage_profilePic"
+                    />
+
+
+
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -54,7 +71,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_userId"
+                    android:id="@+id/textView_userName"
                     android:layout_weight="5"
                     android:layout_marginTop="5dp"
                     android:text="User Id"
@@ -117,6 +134,23 @@
 
 
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_userId"
+            android:visibility="gone"
+            android:text="@string/_0"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView_firebaseUserId"
+            android:visibility="gone"
+            android:text="@string/_0"
+
+            />
+
         <LinearLayout
             android:id="@+id/shadow"
             android:layout_width="match_parent"
