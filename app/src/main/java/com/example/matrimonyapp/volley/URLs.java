@@ -43,7 +43,7 @@ public class URLs {
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";
 
-        public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
+        public static final String URL_GET_FAMILYDETAILS        = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
     public static final String URL_POST_FAMILYDETAILS           = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
 
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";
@@ -67,8 +67,6 @@ public class URLs {
     public static final String URL_GET_SUBCASTE                 = MainURL+"api/CasteApi/Get_SubCasteAPI?";
     public static final String URL_GET_MULTIPLE_SUBCASTE        = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
 
-
-
     public static final String URL_POST_PROFILEPIC              = MainURL+"api/Registration/ImageUploader";
     public static final String URL_GET_PROFILEPIC               = MainURL+"api/Registration/fetchUserProfile?";
 
@@ -81,13 +79,13 @@ public class URLs {
 
 
     public static final String URL_GET_PROPERTYTYPE             = MainURL+"api/PersonalDetailsAPI/PropertyType?";
+    public static final String URL_GET_PROPERTYBHKTYPE          = MainURL+"api/ProertyTypeApi/BHK_TypeGetAPI?";
     public static final String URL_GET_VEHICLETYPE              = MainURL+"api/Vehicles/GETVehicles?";
     public static final String URL_GET_VEHICLEBRANDNAME         = MainURL+"api/PersonalDetailsAPI/VehicalMakeGetApi?";
 
 /*
-  Client Id :  AVLYBwu--8UXYJoKseceJY6g0ML7jIKeHKAPGNVShsOHjphCJO4BjPAqS9YE1EF7uHHMZ71nkJtEed1z
-
-    */
+   Client Id :  AVLYBwu--8UXYJoKseceJY6g0ML7jIKeHKAPGNVShsOHjphCJO4BjPAqS9YE1EF7uHHMZ71nkJtEed1z
+*/
 
 
 

@@ -50,10 +50,10 @@ public class CustomDialogAddEducation extends Dialog {
 
     public Context context;
 
-    private EditText editText_educationLevel, editText_institue, editText_passingYear, editText_percentage;// editText_address, editText_state, editText_district, editText_taluka;
+    private EditText editText_educationLevel, editText_educationName, editText_institue, editText_passingYear, editText_percentage;// editText_address, editText_state, editText_district, editText_taluka;
 
     private TextView textView_title, textView_educationLevelId, textView_addEducation, textView_stateId,
-                     textView_districtId, textView_talukaId;
+            textView_educationNameId, textView_talukaId;
 
 
     private ImageView imageView_back;
@@ -116,10 +116,18 @@ public class CustomDialogAddEducation extends Dialog {
         textView_title = findViewById(R.id.textView_title);
         editText_educationLevel = findViewById(R.id.editText_educationLevel);
         textView_educationLevelId = findViewById(R.id.textView_educationLevelId);
-        editText_institue = findViewById(R.id.editText_institue);
+        editText_educationName = findViewById(R.id.editText_educationName);
+        textView_educationNameId = findViewById(R.id.textView_educationNameId);
+        editText_institue = findViewById(R.id.editText_institueName);
         editText_percentage = findViewById(R.id.editText_percentage);
         editText_passingYear = findViewById(R.id.editText_passingYear);
 
+        editText_institue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "INSTITUTE :"+editText_institue.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /*editText_address = findViewById(R.id.editText_address);
         editText_state = findViewById(R.id.editText_state);
@@ -147,11 +155,13 @@ public class CustomDialogAddEducation extends Dialog {
             for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext())
             {
 
-                editText_educationLevel.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL)));
-                textView_educationLevelId.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL_ID)));
-                editText_institue.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.INSTITUTE_NAME)));
-                editText_percentage.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.PERCENTAGE)));
-                editText_passingYear.setText(cursor.getString(cursor.getColumnIndex(SQLiteEducationDetails.PASSING_YEAR)));
+                editText_educationLevel.setText(cursor.getString(2)); //cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL)
+                textView_educationLevelId.setText(cursor.getString(3)); //cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL_ID)
+                editText_educationName.setText(cursor.getString(4)); //cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION)
+                textView_educationNameId.setText(cursor.getString(5)); //cursor.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_ID)
+                editText_institue.setText(cursor.getString(6)); //cursor.getColumnIndex(SQLiteEducationDetails.INSTITUTE_NAME)
+                editText_percentage.setText(cursor.getString(7)); //cursor.getColumnIndex(SQLiteEducationDetails.PERCENTAGE)
+                editText_passingYear.setText(cursor.getString(8)); //cursor.getColumnIndex(SQLiteEducationDetails.PASSING_YEAR)
 
 
 /*
@@ -177,6 +187,8 @@ public class CustomDialogAddEducation extends Dialog {
 
                 String educationLevel = editText_educationLevel.getText().toString().trim();
                 String educationLevelId = textView_educationLevelId.getText().toString().trim();
+                String educationName = editText_educationName.getText().toString().trim();
+                String educationNameId = textView_educationNameId.getText().toString().trim();
                 String instituteName = editText_institue.getText().toString().trim();
                 String percentage = editText_percentage.getText().toString().trim();
                 String passingYear = editText_passingYear.getText().toString().trim();
@@ -196,7 +208,7 @@ public class CustomDialogAddEducation extends Dialog {
 
                 if(id.equals("0")) {
                     long res = sqLiteEducationDetails.insertEducationDetails("0",
-                            educationLevel, educationLevelId, instituteName, percentage, passingYear); //address, stateName, stateNameId, districtName, districtNameId, talukaName, talukaNameId
+                            educationLevel, educationLevelId, educationName, educationNameId, instituteName, percentage, passingYear); //address, stateName, stateNameId, districtName, districtNameId, talukaName, talukaNameId
 
                     if (res != -1) {
                         Toast.makeText(context, "Value added & id is " + res, Toast.LENGTH_SHORT).show();
@@ -210,7 +222,7 @@ public class CustomDialogAddEducation extends Dialog {
                 else
                 {
                     int res = sqLiteEducationDetails.updateEducationDetails(id, education_details_id,
-                            educationLevel, educationLevelId, instituteName, percentage, passingYear); // address, stateName, stateNameId, districtName, districtNameId, talukaName, talukaNameId
+                            educationLevel, educationLevelId, educationName, educationNameId, instituteName, percentage, passingYear); // address, stateName, stateNameId, districtName, districtNameId, talukaName, talukaNameId
                     if (res != -1) {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
                         addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), education_details_id, educationLevel, instituteName));
@@ -245,6 +257,15 @@ public class CustomDialogAddEducation extends Dialog {
 
                 AsyncTaskLoad runner = new AsyncTaskLoad();
                 runner.execute("EducationLevel");
+
+            }
+        });
+        editText_educationName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("EducationName");
 
             }
         });
@@ -297,7 +318,7 @@ public class CustomDialogAddEducation extends Dialog {
 
                 if(urlFor.equals("Taluka"))
                 {
-                    id = textView_districtId.getText().toString();
+                    id = textView_stateId.getText().toString();
                     if(id.equals("0"))
                     {
                         Toast.makeText(context, "Please select District first", Toast.LENGTH_SHORT).show();
@@ -328,6 +349,13 @@ public class CustomDialogAddEducation extends Dialog {
                 {
                     dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONLEVEL+"Language="+userModel.getLanguage(),"QualificationLevelId",
                             "QualificationLevelName", editText_educationLevel, textView_educationLevelId, context, customDialogLoadingProgressBar);
+
+                }
+                if(params[0].equals("EducationName"))
+                {
+                    String id = textView_educationLevelId.getText().toString();
+                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId=" +id+ "&Language="+userModel.getLanguage(),"QualificationId",
+                            "Qualification", editText_educationName, textView_educationNameId, context, customDialogLoadingProgressBar);
 
                 }
 

@@ -4,6 +4,7 @@ package com.example.matrimonyapp.fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
+import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
 import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -97,6 +99,7 @@ public class QualificationDetailsFragment extends Fragment {
     private AddPersonAdapter addPersonAdapter_education;
     private ArrayList<AddPersonModel> addPersonModelArrayList_education;
     private SQLiteEducationDetails sqLiteEducationDetails;
+    private StringBuilder stringBuilder_education;
 
     public QualificationDetailsFragment() {
         // Required empty public constructor
@@ -134,7 +137,7 @@ public class QualificationDetailsFragment extends Fragment {
         }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
-
+        stringBuilder_education = new StringBuilder();
 
         editText_highestQualificationLevel=view.findViewById(R.id.editText_highestQualificationLevel);
         editText_qualification=view.findViewById(R.id.editText_qualification);
@@ -251,6 +254,39 @@ public class QualificationDetailsFragment extends Fragment {
     private void insertDetails()
     {
 
+        stringBuilder_education.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_education.append("<LowerEducation>");
+        Cursor cursor_eduction = sqLiteEducationDetails.getAllData();
+
+        if(cursor_eduction!=null)
+        {
+
+            for (boolean hasItem = cursor_eduction.moveToFirst(); hasItem; hasItem = cursor_eduction.moveToNext()) {
+
+                stringBuilder_education.append("<Functions>");
+
+                stringBuilder_education.append("<LowerQualificationUserId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.EDUCATION_DETAILS_ID))+"</LowerQualificationUserId>");
+                stringBuilder_education.append("<EducationLevelId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL_ID))+"</EducationLevelId>");
+                stringBuilder_education.append("<EducationNameId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_ID))+"</EducationNameId>");
+                stringBuilder_education.append("<NameOfInstitute>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.INSTITUTE_NAME))+"</NameOfInstitute>");
+                stringBuilder_education.append("<LowerQualificationPercentage>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PERCENTAGE))+"</LowerQualificationPercentage>");
+                stringBuilder_education.append("<LowerQualificationPassingYear>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PASSING_YEAR))+"</LowerQualificationPassingYear>");
+                stringBuilder_education.append("<LowerQualificationLanguageType>"+userModel.getLanguage()+"</LowerQualificationLanguageType>");
+
+                stringBuilder_education.append("</Functions>");
+
+            }
+
+            stringBuilder_education.append("</LowerEducation>");
+
+        }
+
+        cursor_eduction.close();
+
+
+
+
+
 
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
@@ -319,6 +355,7 @@ public class QualificationDetailsFragment extends Fragment {
                 params.put("PassingYear",passingYear);
                 params.put("Hobby",editText_hobby.getText().toString());
                 params.put("Social_Contribution",editText_socialContributions.getText().toString());
+                params.put("xmlDataLowerQualificationDetail",stringBuilder_education.toString());
                 params.put("LanguageType",userModel.getLanguage());
 
                 return params;
@@ -366,6 +403,10 @@ public class QualificationDetailsFragment extends Fragment {
                                     editText_passingYear.setText(jsonObject.getString("PassingYearString"));
                                     editText_hobby.setText(jsonObject.getString("Hobby"));
                                     editText_socialContributions.setText(jsonObject.getString("Social_Contribution"));
+
+                                    sqLiteEducationDetails.deleteAll();
+                                    addPersonModelArrayList_education.clear();
+                                    addPersonAdapter_education.notifyDataSetChanged();
 
                                     //editText_.setText(jsonObject.getString(""));
 

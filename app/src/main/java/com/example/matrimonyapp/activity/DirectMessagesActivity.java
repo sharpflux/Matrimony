@@ -59,6 +59,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
         });
 
 
+
         recyclerView_directMessage = findViewById(R.id.recyclerView_directMessages);
 
         context = getApplicationContext();
@@ -78,10 +79,14 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
         }
 */
+        directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
+        recyclerView_directMessage.setAdapter(directMessagesAdapter);
+        recyclerView_directMessage.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+        recyclerView_directMessage.setLayoutManager(mLayoutManager);
 
 
-
-
+        userActivityStatus("online");
 
         readAllUsers();
         //readChatUsers();
@@ -134,6 +139,15 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
                 }
 
+
+/*
+                directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
+                recyclerView_directMessage.setAdapter(directMessagesAdapter);
+                recyclerView_directMessage.setHasFixedSize(true);
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                recyclerView_directMessage.setLayoutManager(mLayoutManager);
+*/
+
                 directMessagesAdapter.notifyDataSetChanged();
 
             }
@@ -183,12 +197,8 @@ public class DirectMessagesActivity extends AppCompatActivity {
                 }
 
 
-                directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
-                recyclerView_directMessage.setAdapter(directMessagesAdapter);
-                recyclerView_directMessage.setHasFixedSize(true);
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-                recyclerView_directMessage.setLayoutManager(mLayoutManager);
-                //directMessagesAdapter.notifyDataSetChanged();
+
+                directMessagesAdapter.notifyDataSetChanged();
 
             }
 
@@ -227,12 +237,14 @@ public class DirectMessagesActivity extends AppCompatActivity {
                     }
 
                 }
-                directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
+/*                directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
                 recyclerView_directMessage.setAdapter(directMessagesAdapter);
                 recyclerView_directMessage.setHasFixedSize(true);
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-                recyclerView_directMessage.setLayoutManager(mLayoutManager);
-                //directMessagesAdapter.notifyDataSetChanged();
+                recyclerView_directMessage.setLayoutManager(mLayoutManager);*/
+
+
+                directMessagesAdapter.notifyDataSetChanged();
 
             }
         });

@@ -265,8 +265,8 @@ public class CustomDialogAddVehicle extends Dialog {
 
                 if(params[0].equals("VehicleType"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Type&CorrespondenceId=0&Language="+userModel.getLanguage(),"VehicleTypeId",
-                            "VehicleType", editText_vehicleType, textView_vehicleTypeId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Type&CorrespondenceId=0&Language="+userModel.getLanguage(),"ID",
+                            "Name", editText_vehicleType, textView_vehicleTypeId, context, customDialogLoadingProgressBar);
 
                 }
 
@@ -274,7 +274,7 @@ public class CustomDialogAddVehicle extends Dialog {
                 {
                     String id = textView_vehicleTypeId.getText().toString();
                     dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Make&CorrespondenceId="+id+"&Language="+userModel.getLanguage(),
-                            "VehicalMakeId", "VehicalMake",
+                            "ID", "Name",
                             editText_brandName, textView_brandNameId, context, customDialogLoadingProgressBar);
 
                 }
@@ -282,8 +282,8 @@ public class CustomDialogAddVehicle extends Dialog {
                 else if(params[0].equals("ModelName"))
                 {
                     String id = textView_brandNameId.getText().toString();
-                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Modal&CorrespondenceId="+id+"&Language="+userModel.getLanguage(),"VehicleTypeId",
-                            "VehicleType", editText_modelName, textView_modelNameId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_VEHICLETYPE+"Type=Modal&CorrespondenceId="+id+"&Language="+userModel.getLanguage(),"ID",
+                            "Name", editText_modelName, textView_modelNameId, context, customDialogLoadingProgressBar);
 
                 }
 

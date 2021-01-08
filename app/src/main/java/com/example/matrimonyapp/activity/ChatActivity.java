@@ -73,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
 
         firebaseInit();
 
+
         context = getApplicationContext();
 
         chatModelsList = new ArrayList<ChatModel>();
@@ -84,6 +85,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.scrollToPosition(chatModelsList.size());
 
+        context=this;
 
         imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +103,8 @@ public class ChatActivity extends AppCompatActivity {
                     recyclerView_chat.scrollToPosition(chatModelsList.size());
                     editText_message.setText("");*/
 
-                    hideSoftKeyboard();
+                    hideSoftKeyboard((Activity)ChatActivity.this);
+                    recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
 
                     editText_message.setText("");
                 }
@@ -121,9 +124,9 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    private void hideSoftKeyboard() {
-        Activity activity = ((ChatActivity)context);
-        InputMethodManager inputMethodManager = (InputMethodManager)((ChatActivity)context)
+    private void hideSoftKeyboard(Activity activity) {
+
+        InputMethodManager inputMethodManager = (InputMethodManager)activity
                 .getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
 

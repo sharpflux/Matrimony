@@ -405,8 +405,8 @@ public class CustomDialogAddProperty extends Dialog {
                 }
                 else if(params[0].toString()=="BHKType")
                 {
-                    dataFetcher.loadList(URLs.URL_GET_PROPERTYTYPE+"Language="+userModel.getLanguage(),"ProertyTypeId",
-                            "PropertyName", editText_bhkType, textView_bhkTypeId, context, customDialogLoadingProgressBar);
+                    dataFetcher.loadList(URLs.URL_GET_PROPERTYBHKTYPE+"Language="+userModel.getLanguage(),"BHKTypeId",
+                            "BHK_Name", editText_bhkType, textView_bhkTypeId, context, customDialogLoadingProgressBar);
 
 
                 }
