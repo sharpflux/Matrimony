@@ -105,13 +105,14 @@ public class CustomDialogAddLanguageKnown extends Dialog {
             context.startActivity(new Intent(context, LoginActivity.class));
         }
 
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(context);
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
         sqLiteLanguageKnownDetails = new SQLiteLanguageKnownDetails(context);
 
 
         setCanceledOnTouchOutside(true);
-        //getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         imageView_back = findViewById(R.id.imageView_back);
@@ -150,6 +151,15 @@ public class CustomDialogAddLanguageKnown extends Dialog {
 
             cursor.close();
         }
+
+        editText_languageKnown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute("language");
+            }
+        });
+
 
         textView_addLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +220,24 @@ public class CustomDialogAddLanguageKnown extends Dialog {
 
     }
 
+    private class AsyncTaskLoad extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            if(params[0].equals("language"))
+            {
+                dataFetcher.loadList(URLs.URL_GET_MOTHERTONGUE+"Language="+userModel.getLanguage(),"MotherTongueId",
+                        "MotherTongueName", editText_languageKnown, textView_languageKnownId, context, customDialogLoadingProgressBar);
+
+
+            }
+
+            return null;
+        }
+
+
+    }
 
 
     private void blurBackground()

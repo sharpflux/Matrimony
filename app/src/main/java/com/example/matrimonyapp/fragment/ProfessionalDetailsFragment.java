@@ -483,7 +483,14 @@ public class ProfessionalDetailsFragment extends Fragment {
                 }
                 else if(params[0].toString().equals("insertDetails"))
                 {
-                    insertDetails();
+                   // insertDetails();
+
+                    PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
+                    // personalDetailsFragment.setArguments(bundle);
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
+                    fragmentTransaction.commit() ;
                 }
 
                 if(params[0].toString().equals("Occupation"))

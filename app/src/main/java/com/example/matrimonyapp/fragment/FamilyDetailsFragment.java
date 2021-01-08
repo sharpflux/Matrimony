@@ -781,7 +781,7 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_mama.append("<MamaMobileNo>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.MOBILE_NO))+"</MamaMobileNo>");
                 stringBuilder_mama.append("<MamaAddress>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.ADDRESS))+"</MamaAddress>");
                 stringBuilder_mama.append("<MamaCountryId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.COUNTRY_ID))+"</MamaCountryId>");
-                stringBuilder_mama.append("<MamaStateId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStateId>");
+                    stringBuilder_mama.append("<MamaStateId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStateId>");
                 stringBuilder_mama.append("<MamaCityId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.CITY_ID))+"</MamaCityId>");
                 stringBuilder_mama.append("<MamaOccupationId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID))+"</MamaOccupationId>");
                 stringBuilder_mama.append("<MamaLanguageType>"+userModel.getLanguage()+"</MamaLanguageType>");

@@ -4,6 +4,7 @@ package com.example.matrimonyapp.fragment;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
+import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
 import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
@@ -104,6 +106,7 @@ public class PersonalDetailsFragment extends Fragment {
     private AddPersonAdapter addPersonAdapter_languageKnown;
     private ArrayList<AddPersonModel> addPersonModelArrayList_languageKnown;
     private SQLiteLanguageKnownDetails sqLiteLanguageKnownDetails;
+    private StringBuilder stringBuilder_language;
 
     public PersonalDetailsFragment() {
         // Required empty public constructor
@@ -161,7 +164,7 @@ public class PersonalDetailsFragment extends Fragment {
         tv.setText(context.getResources().getString(R.string.personalDetails));
 
         dataFetcher = new DataFetcher("PopUp",getContext());
-
+        stringBuilder_language = new StringBuilder();
         //diet = FieldValidation.radioGroupValidation(radioGroup_diet);
 
 /*        radioGroup_diet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -398,6 +401,37 @@ public class PersonalDetailsFragment extends Fragment {
         /*final String diet = ((RadioButton)view.findViewById(radioGroup_diet.getCheckedRadioButtonId()))
                 .getText().toString();
 */
+
+
+       // stringBuilder_language.delete(0,stringBuilder_language.length()-1);
+        stringBuilder_language.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_language.append("<LanguagesKnownXML>");
+
+        Cursor cursor_language = sqLiteLanguageKnownDetails.getAllData();
+
+        if(cursor_language!=null)
+        {
+
+            for (boolean hasItem = cursor_language.moveToFirst(); hasItem; hasItem = cursor_language.moveToNext()) {
+
+
+                stringBuilder_language.append("<Function>");
+                stringBuilder_language.append("<LanguageDetailsId> "+cursor_language.getString(cursor_language.getColumnIndex(SQLiteLanguageKnownDetails.LANGUAGE_KNOWN_DETAILS_ID))+"</LanguageDetailsId> ");
+                stringBuilder_language.append("<LanguageId>"+cursor_language.getString(cursor_language.getColumnIndex(SQLiteLanguageKnownDetails.LANGUAGE_ID))+"</LanguageId>");
+                stringBuilder_language.append("<FluencyType>"+cursor_language.getString(cursor_language.getColumnIndex(SQLiteLanguageKnownDetails.FLUENCY))+"</FluencyType>");
+               // stringBuilder_language.append("<LanguageType>"+userModel.getLanguage()+"</LanguageType>");
+
+                stringBuilder_language.append("</Function>");
+
+            }
+
+            stringBuilder_language.append("</LanguagesKnownXML>");
+
+        }
+
+        cursor_language.close();
+
+
         disabilityType = editText_disabilityType.getText().toString();
 
         if(editText_disabilityType.getText().toString().equals(""))
@@ -480,6 +514,7 @@ public class PersonalDetailsFragment extends Fragment {
                 params.put("DisabilityType", disabilityType);
                 params.put("Diet",textView_dietId.getText().toString());
                 params.put("LivesWithFamily",String.valueOf(checkBox_livesWithFamily.isChecked()));
+                params.put("LanguagesKnownXML",stringBuilder_language.toString());
                 params.put("LanguageType",userModel.getLanguage());
 
 
@@ -539,6 +574,11 @@ public class PersonalDetailsFragment extends Fragment {
                                     editText_familyStatus.setText(jsonObject.getString("FamilyStatusName"));
                                     editText_familyType.setText(jsonObject.getString("FamilyTypeName"));
                                     editText_familyValues.setText(jsonObject.getString("FamilyValuesName"));
+
+                                    sqLiteLanguageKnownDetails.deleteAll();
+                                    addPersonModelArrayList_languageKnown.clear();
+                                    addPersonAdapter_languageKnown.notifyDataSetChanged();
+
 
 
 /*                                    String diet = jsonObject.getString("Diet");
