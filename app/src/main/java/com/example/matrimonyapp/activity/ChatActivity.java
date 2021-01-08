@@ -85,6 +85,9 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.scrollToPosition(chatModelsList.size());
 
+
+
+
         context=this;
 
         imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
@@ -154,10 +157,11 @@ public class ChatActivity extends AppCompatActivity {
                     }
 
 
-
                 }
                 chatAdapter = new ChatAdapter(ChatActivity.this, chatModelsList);
                 recyclerView_chat.setAdapter(chatAdapter);
+                recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+
 
             }
 

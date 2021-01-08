@@ -67,7 +67,16 @@
 
 
                 >
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,13 +92,28 @@
                     android:layout_gravity="top"
                     android:maxLines="1"
                     />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_lastMessageTime"
+                    android:layout_marginTop="0dp"
+                    android:text="8.00 pm"
 
+                    android:paddingStart="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:textColor="@color/text_gray"
+                    android:textSize="11sp"
+                    android:maxLines="1"
+                    android:gravity="center"
+                    />
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="3dp"
                     android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_weight="1"
                     android:layout_gravity="bottom"
                     >
@@ -105,6 +129,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginBottom="3dp"
                     android:text=""
+                    android:layout_gravity="bottom"
                     android:paddingStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:textColor="@color/text_gray"
@@ -113,8 +138,30 @@
                     android:maxLines="1"
                     />
 
+                    <RelativeLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/filled_green_circle"
+                        android:gravity="center"
 
-                <TextView
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_noOfUnseenMessage"
+                            android:text="@string/_0"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:textColor="@color/white"
+
+                            />
+
+
+                    </RelativeLayout>
+
+<!--                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_lastMessageTime"
@@ -127,7 +174,7 @@
                     android:textColor="@color/text_gray"
                     android:textSize="11sp"
                     android:maxLines="1"
-                    />
+                    />-->
 
                 </LinearLayout>
 
