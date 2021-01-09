@@ -737,11 +737,6 @@ public class FamilyDetailsFragment extends Fragment {
 
                 stringBuilder_property.append("<Functions>");
 
-                 /*
-                stringBuilder_property.append("<PropertyType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID))+"</PropertyType>");
-                stringBuilder_property.append("<PropertyBhkType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID))+"</PropertyBhkType>");
-                stringBuilder_property.append("<PropertyOwnershipType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE))+"</PropertyOwnershipType>");
-                */
 
                 stringBuilder_property.append("<PropertyDetailsId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_DETAILS_ID))+"</PropertyDetailsId>");
                 stringBuilder_property.append("<PropertyTypeId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID))+"</PropertyTypeId>");
@@ -752,8 +747,6 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_property.append("<PropertyCountryId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.COUNTRY_ID))+"</PropertyCountryId>");
                 stringBuilder_property.append("<PropertyStateId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStateId>");
                 stringBuilder_property.append("<PropertyCityId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CITY_ID))+"</PropertyCityId>");
-                //stringBuilder_property.append("<PropertyDistrictId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID))+"</PropertyDistrictId>");
-                //stringBuilder_property.append("<PropertyTalukasId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.TALUKA_ID))+"</PropertyTalukasId>");
                 stringBuilder_property.append("<PropertyLanguage>"+userModel.getLanguage()+"</PropertyLanguage>");
 
                 stringBuilder_property.append("</Functions>");
@@ -1085,47 +1078,6 @@ public class FamilyDetailsFragment extends Fragment {
                                                 jsonObject_details.getString("SiblingsFullname"),
                                                 jsonObject_details.getString("QualificationSiblings")));
 
-
-
-
-
-                                    }
-
-
-                                    sqLitePropertyDetails.deleteAll();
-                                    addPersonModelArrayList_property.clear();
-                                    addPersonAdapter_property.notifyDataSetChanged();
-
-
-                                    JSONArray jsonArray_propertyDetails = jsonObject.getJSONArray("HousePropertyDetailsLST");
-
-                                    for(int j=0; j< jsonArray_propertyDetails.length(); j++)
-                                    {
-                                        JSONObject jsonObject_details = jsonArray_propertyDetails.getJSONObject(j);
-
-
-                                        long id = sqLitePropertyDetails.insertPropertyDetails(
-                                                jsonObject_details.getString("HousePropertyDetailsId"),
-                                               "1","1","Own","1","1",
-                                               /* jsonObject_details.getString("PropertyType"),
-                                                jsonObject_details.getString("PropertyTypeId"),
-                                                jsonObject_details.getString("OwnershipType"),
-                                                jsonObject_details.getString("BhkType"),
-                                                jsonObject_details.getString("BhkTypeId"),*/
-                                                jsonObject_details.getString("Area"),
-                                                jsonObject_details.getString("HouseAddress"),
-                                                jsonObject_details.getString("StatesNameHouse"),
-                                                jsonObject_details.getString("StatesIDHouse"),
-                                                jsonObject_details.getString("DistrictNameHouse"),
-                                                jsonObject_details.getString("DistrictIdHouse"),
-                                                jsonObject_details.getString("TalukaNameHouse"),
-                                                jsonObject_details.getString("TalukasIdHouse"));
-
-
-                                        addPersonModelArrayList_property.add(new AddPersonModel(String.valueOf(id),
-                                                jsonObject_details.getString("HousePropertyDetailsId"),
-                                                jsonObject_details.getString("Area"),
-                                                jsonObject_details.getString("HouseAddress")));
 
 
 
