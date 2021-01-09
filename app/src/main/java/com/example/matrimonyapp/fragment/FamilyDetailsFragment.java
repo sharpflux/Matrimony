@@ -730,7 +730,6 @@ public class FamilyDetailsFragment extends Fragment {
 
         Cursor cursor_property = sqLitePropertyDetails.getAllData();
 
-
         if(cursor_property!=null)
         {
 
@@ -744,12 +743,18 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_property.append("<PropertyOwnershipType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE))+"</PropertyOwnershipType>");
                 */
 
+                stringBuilder_property.append("<PropertyDetailsId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_DETAILS_ID))+"</PropertyDetailsId>");
+                stringBuilder_property.append("<PropertyTypeId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID))+"</PropertyTypeId>");
+                stringBuilder_property.append("<PropertyOwnershipType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE))+"</PropertyOwnershipType>");
+                stringBuilder_property.append("<PropertyBHKType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID))+"</PropertyBHKType>");
                 stringBuilder_property.append("<PropertyArea>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CARPET_AREA))+"</PropertyArea>");
                 stringBuilder_property.append("<PropertyAddress>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))+"</PropertyAddress>");
-                stringBuilder_property.append("<PropertyStatesID>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStatesID>");
+                stringBuilder_property.append("<PropertyCountryId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.COUNTRY_ID))+"</PropertyCountryId>");
+                stringBuilder_property.append("<PropertyStateId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStateId>");
+                stringBuilder_property.append("<PropertyCityId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CITY_ID))+"</PropertyCityId>");
                 //stringBuilder_property.append("<PropertyDistrictId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.DISTRICT_ID))+"</PropertyDistrictId>");
                 //stringBuilder_property.append("<PropertyTalukasId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.TALUKA_ID))+"</PropertyTalukasId>");
-                stringBuilder_property.append("<PropertyLanguageType>"+userModel.getLanguage()+"</PropertyLanguageType>");
+                stringBuilder_property.append("<PropertyLanguage>"+userModel.getLanguage()+"</PropertyLanguage>");
 
                 stringBuilder_property.append("</Functions>");
 
@@ -802,6 +807,7 @@ public class FamilyDetailsFragment extends Fragment {
 
         Cursor cursor_farm = sqLiteFarmDetails.getAllData();
 
+
         if(cursor_farm!=null)
         {
 
@@ -809,10 +815,13 @@ public class FamilyDetailsFragment extends Fragment {
 
                 stringBuilder_farm.append("<Functions>");
 
-                stringBuilder_farm.append("<FarmLandArea>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA))+"</FarmLandArea>");
-                stringBuilder_farm.append("<FarmFullOrPart>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TYPE))+"</FarmFullOrPart>");
-                stringBuilder_farm.append("<FarmCropTaken>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS))+"</FarmCropTaken>");
-                stringBuilder_farm.append("<FarmLanguageType>"+userModel.getLanguage()+"</FarmLanguageType>");
+                stringBuilder_farm.append("<FarmDetailsId>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.FARM_DETAILS_ID))+"</FarmDetailsId>");
+                stringBuilder_farm.append("<FarmArea>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA))+"</FarmArea>");
+                stringBuilder_farm.append("<FullOrPart>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TYPE))+"</FullOrPart>");
+                stringBuilder_farm.append("<CropTaken>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS))+"</CropTaken>");
+                stringBuilder_farm.append("<FarmType>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE))+"</FarmType>");
+                stringBuilder_farm.append("<FarmType>"+userModel.getLanguage()+"</FarmType>");
+                stringBuilder_farm.append("<FarmLanguage>"+userModel.getLanguage()+"</FarmLanguage>");
 
                 stringBuilder_farm.append("</Functions>");
 

@@ -286,6 +286,11 @@ public class PersonalDetailsFragment extends Fragment {
         showPopUp(editText_diet,"Diet");
 
 
+        if(!checkBox_disability.isChecked())
+        {
+            editText_disabilityType.setText("NA");
+            editText_disabilityType.setEnabled(false);
+        }
 
         checkBox_disability.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -512,7 +517,7 @@ public class PersonalDetailsFragment extends Fragment {
                 params.put("FamilyValuesId",textView_familyValues.getText().toString());
                 params.put("Disability",String.valueOf(checkBox_disability.isChecked()));
                 params.put("DisabilityType", disabilityType);
-                params.put("Diet",textView_dietId.getText().toString());
+                params.put("DietId",textView_dietId.getText().toString());
                 params.put("LivesWithFamily",String.valueOf(checkBox_livesWithFamily.isChecked()));
                 params.put("LanguagesKnownXML",stringBuilder_language.toString());
                 params.put("LanguageType",userModel.getLanguage());
@@ -564,8 +569,10 @@ public class PersonalDetailsFragment extends Fragment {
                                     textView_familyStatus.setText(jsonObject.getString("FamilyStatusId"));
                                     textView_familyType.setText(jsonObject.getString("FamilyTypeId"));
                                     textView_familyValues.setText(jsonObject.getString("FamilyValuesId"));
+                                    textView_dietId.setText(jsonObject.getString("DietId"));
 
 
+                                    editText_diet.setText(jsonObject.getString("DietName"));
                                     checkBox_disability.setChecked(jsonObject.getBoolean("Disability"));
                                     editText_disabilityType.setText(jsonObject.getString("DisabilityType"));
                                     checkBox_livesWithFamily.setChecked(jsonObject.getBoolean("LivesWithFamily"));
