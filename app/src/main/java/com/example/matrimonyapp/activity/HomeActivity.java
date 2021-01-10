@@ -43,6 +43,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.NavigationDrawerAdapter;
+import com.example.matrimonyapp.adapter.RecentlyViewedAdapter;
 import com.example.matrimonyapp.adapter.TimelineAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomNavigationView;
@@ -89,13 +90,14 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     //private SimpleGestureFilter detector;
 
     TimelineAdapter timelineAdapter;
+    RecentlyViewedAdapter recentlyViewedAdapter;
     private ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile;
 
     private TextView textView_welcomeUserName;
     private ImageView imageView_profilePic;
 
-    ArrayList<TimelineModel> timelineModelList;
-    RecyclerView recyclerView_timeline;
+    ArrayList<TimelineModel> timelineModelList, arrayList_recentlyviewed;
+    RecyclerView recyclerView_timeline, recyclerView_recentlyViewed;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     SQLiteSetPreference sqLiteSetPreference;
@@ -136,8 +138,10 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
         timelineModelList = new ArrayList<TimelineModel>();
+        arrayList_recentlyviewed = new ArrayList<TimelineModel>();
 
         fetchValues();
+
         timelineAdapter = new TimelineAdapter(this,timelineModelList, getWindowManager().getDefaultDisplay());
         recyclerView_timeline.setAdapter(timelineAdapter);
         recyclerView_timeline.setHasFixedSize(true);
@@ -146,8 +150,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
 
 
-        //detector = new SimpleGestureFilter(this,this);
 
+        recentlyViewedAdapter = new RecentlyViewedAdapter(this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
+        recyclerView_recentlyViewed.setAdapter(recentlyViewedAdapter);
+        recyclerView_recentlyViewed.setHasFixedSize(true);
+        LinearLayoutManager layoutManager_recentlyViewed = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_recentlyViewed.setLayoutManager(layoutManager_recentlyViewed);
 
         swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

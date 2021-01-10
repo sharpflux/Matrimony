@@ -430,7 +430,7 @@ public class SignUp extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),"Something went wrong please try again",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Error in    SignUP verifyMobile"+error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -450,7 +450,7 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        finish();
+        //finish();
     }
 
 

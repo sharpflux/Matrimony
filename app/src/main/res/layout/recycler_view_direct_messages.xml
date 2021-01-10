@@ -40,7 +40,7 @@
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/flower2"
+                    android:src="@color/codeGray"
 
                     />
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -139,12 +139,13 @@
                     />
 
                     <RelativeLayout
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:id="@+id/relativeLayout_noOfUnseenMessage"
                         android:layout_marginEnd="15dp"
                         android:background="@drawable/filled_green_circle"
                         android:gravity="center"
-
+                        android:visibility="gone"
                         >
 
                         <TextView
@@ -153,7 +154,7 @@
                             android:id="@+id/textView_noOfUnseenMessage"
                             android:text="@string/_0"
                             android:gravity="center"
-                            android:textSize="12sp"
+                            android:textSize="10sp"
                             android:textColor="@color/white"
 
                             />

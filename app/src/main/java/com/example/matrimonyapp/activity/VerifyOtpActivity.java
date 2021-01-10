@@ -129,14 +129,15 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                 //registerUser();
                 otpEntered = editText_num1.getText().toString().trim()+editText_num2.getText().toString().trim()+editText_num3.getText().toString().trim()+editText_num4.getText().toString().trim();
-                if(parentActivity.equals("GetOtp"))
+
+               /* if(parentActivity.equals("GetOtp"))
                 {
                     Intent intent = new Intent(VerifyOtpActivity.this, ForgotPassword.class);
                     intent.putExtra("userId",bundle.getString("userId"));
                     startActivity(intent);
                 }
-//
-                if(otpSent.equals(otpEntered))
+//*/
+                //if(otpSent.equals(otpEntered))
                 {
 //
                     if(parentActivity.equals("SignUp"))
@@ -163,16 +164,9 @@ public class VerifyOtpActivity extends AppCompatActivity {
                 }
 
 
-                else{
-                    Toast.makeText(getApplicationContext(),"WRONG OTP!",Toast.LENGTH_SHORT).show();
-                }
-
-
             }
         });
 
-
-       // timeLimit();
 
     }
 
@@ -187,7 +181,6 @@ public class VerifyOtpActivity extends AppCompatActivity {
             parentActivity = bundle.getString("parentActivity");
             mobileNo = bundle.getString("mobileNo");
         }
-       // mobileNo = "+91"+editText_mobileNo.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URLs.URL_GET_OTP+"MobileNo="+mobileNo,
@@ -203,13 +196,6 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                             if (!obj.getBoolean("error") && obj.getString("message").equals("Success")) {
 
-
-                               /* Intent intent = new Intent(getApplicationContext(), VerifyOtpActivity.class);
-                                intent.putExtra("OTP",obj.getString("OTP"));
-                                intent.putExtra("parentActivity","GetOtp");
-                                intent.putExtra("mobileNo",mobileNo);
-                                intent.putExtra("userId",userId);
-                                startActivity(intent);*/
                                 editText_num1.setText("");
                                 editText_num2.setText("");
                                 editText_num3.setText("");
@@ -342,14 +328,11 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
-                                    registerFirebaseUser(fullName, emailId, password, jsonObject.getString("UserId"));
 
-                                  //  Toast.makeText(getApplicationContext(), "You have successfully registered!", Toast.LENGTH_SHORT).show();
+                                    registerFirebaseUser(fullName, mobileNo, birthdate, age, gender, emailId,
+                                            password, jsonObject.getString("UserId"));
 
 
-                                        Intent intent = new Intent(VerifyOtpActivity.this, MainActivity.class);
-                                        startActivity(intent);
-                                        //
 
                                 }
                                 else{
@@ -401,8 +384,10 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
     }
 
-    private void registerFirebaseUser(final String username, String email, String password, final String userId)
+    private void registerFirebaseUser(final String username, final String mobileNo, final String birthdate,
+                                      final String age, final String gender, final String email, String password, final String userId)
     {
+        password="123456";
 
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -419,8 +404,11 @@ public class VerifyOtpActivity extends AppCompatActivity {
                             hashMap.put("firebaseUserId", firebaseUserId);
                             hashMap.put("userId", userId);
                             hashMap.put("userName", username);
-                            hashMap.put("lastMessage", "I am also good");
-                            hashMap.put("lastMessageTime", "10.00pm");
+                            hashMap.put("emailId", email);
+                            hashMap.put("mobileNo", mobileNo);
+                            hashMap.put("birthdate", birthdate);
+                            hashMap.put("age", age);
+                            hashMap.put("gender", gender);
                             hashMap.put("profilePic","default");
                             hashMap.put("activityStatus","offline");
 
@@ -430,6 +418,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                     if(task.isSuccessful())
                                     {
                                         Toast.makeText(VerifyOtpActivity.this,"You have successfully registered!",Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(VerifyOtpActivity.this, MainActivity.class);
+                                        startActivity(intent);
                                     }
                                     else
                                     {

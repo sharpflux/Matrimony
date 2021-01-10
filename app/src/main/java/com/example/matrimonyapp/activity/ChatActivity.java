@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private Intent intent;
 
+    private ScrollView scrollView;
     private ValueEventListener seenListener;
 
 
@@ -63,6 +65,7 @@ public class ChatActivity extends AppCompatActivity {
         intent = getIntent();
 
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
+        scrollView = findViewById(R.id.scrollView);
         linearLayout_message = findViewById(R.id.linearLayout_message);
         recyclerView_chat = findViewById(R.id.recyclerView_chat);
         editText_message = findViewById(R.id.editText_message);
@@ -107,7 +110,7 @@ public class ChatActivity extends AppCompatActivity {
                     editText_message.setText("");*/
 
                     hideSoftKeyboard((Activity)ChatActivity.this);
-                    recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+                    recyclerView_chat.smoothScrollToPosition(chatModelsList.size()-1);
 
                     editText_message.setText("");
                 }
@@ -121,9 +124,6 @@ public class ChatActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
-
 
     }
 
@@ -142,6 +142,7 @@ public class ChatActivity extends AppCompatActivity {
         chatModelsList = new ArrayList<>();
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -156,12 +157,21 @@ public class ChatActivity extends AppCompatActivity {
                         chatModelsList.add(chatModel);
                     }
 
-
                 }
+
                 chatAdapter = new ChatAdapter(ChatActivity.this, chatModelsList);
                 recyclerView_chat.setAdapter(chatAdapter);
-                recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+                recyclerView_chat.setHasFixedSize(true);
 
+                scrollView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // recyclerView_chat.smoothScrollToPosition(recyclerView_chat.getAdapter().getItemCount());
+                        scrollView.smoothScrollTo(0,scrollView.getHeight());
+                        recyclerView_chat.smoothScrollToPosition(recyclerView_chat.getAdapter().getItemCount()-1);
+
+                    }
+                }, 1000);
 
             }
 
@@ -222,7 +232,7 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessage() {
 
 
-        String friendfirebaseUserId = intent.getStringExtra("firebaseUserId");
+        final String friendfirebaseUserId = intent.getStringExtra("firebaseUserId");
         String myfirebaseUserId = firebaseUser.getUid();
 
         String message = editText_message.getText().toString().trim();
@@ -241,6 +251,45 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+
+        final DatabaseReference databaseReference_chatSender = FirebaseDatabase.getInstance().getReference("ChatList")
+                .child(firebaseUser.getUid())
+                .child(friendfirebaseUserId);
+
+        databaseReference_chatSender.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists())
+                {
+                    databaseReference_chatSender.child("id").setValue(friendfirebaseUserId);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        final DatabaseReference databaseReference_chatReceiver = FirebaseDatabase.getInstance().getReference("ChatList")
+                .child(friendfirebaseUserId)
+                .child(firebaseUser.getUid());
+
+        databaseReference_chatReceiver.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(!snapshot.exists())
+                {
+                    databaseReference_chatReceiver.child("id").setValue(firebaseUser.getUid());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
@@ -261,8 +310,7 @@ public class ChatActivity extends AppCompatActivity {
                         .load(directMessagesModel.getProfilePic())
                         .skipMemoryCache(true)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .circleCrop()
-                        .placeholder(R.drawable.noimage2)
+                        .placeholder(R.color.codeGray)
                         .into(imageView_profilePic);
 
                 readMessage(firebaseUser.getUid(), friendfirebaseUserId);

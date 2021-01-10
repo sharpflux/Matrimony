@@ -14,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.DirectMessagesAdapter;
+import com.example.matrimonyapp.modal.ChatListModel;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,11 +36,13 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
     private String currentLanguage;
 
+    FirebaseUser firebaseUser;
     ArrayList<DirectMessagesModel> directMessagesModelList;
     RecyclerView recyclerView_directMessage;
     DirectMessagesAdapter directMessagesAdapter;
     Context context;
 
+    ArrayList<ChatListModel> arrayList_chatListModel ;
     FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private ArrayList<String> arrayList_chatUsers;
@@ -88,8 +93,72 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
         userActivityStatus("online");
 
-        readAllUsers();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        arrayList_chatListModel = new ArrayList<>();
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList_chatListModel.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    ChatListModel chatListModel = snapshot.getValue(ChatListModel.class);
+                    arrayList_chatListModel.add(chatListModel);
+                }
+                readChatList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        //readAllUsers();
         //readChatUsers();
+
+
+    }
+
+    private void readChatList() {
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                directMessagesModelList.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    DirectMessagesModel directMessagesModel = snapshot.getValue(DirectMessagesModel.class);
+                    for(ChatListModel chatListModel : arrayList_chatListModel)
+                    {
+                        if(directMessagesModel.getFirebaseUserId().equals(chatListModel.getId()))
+                        {
+                            directMessagesModelList.add(directMessagesModel);
+                        }
+                    }
+
+
+                }
+
+                directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this, directMessagesModelList, true);
+                recyclerView_directMessage.setAdapter(directMessagesAdapter);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
     }
@@ -135,7 +204,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
                         arrayList_chatUsers.add(chatModel.getSenderId());
                     }
 
-                    readChats();
+                   // readChats();
 
                 }
 
@@ -155,7 +224,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
     }
 
-    private void readChats() {
+   /* private void readChats() {
 
         directMessagesModelList.clear();
 
@@ -210,8 +279,50 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
     }
 
+*/
+/*    private void readChatUsers(String userId, String userName, String lastMessge, String lastMessageTime,
+                               String status, String noOfUnseenMessage) {
 
-    private void readAllUsers()
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        String firebaseUserId = firebaseUser.getUid();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUserId);
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("firebaseUserId", firebaseUserId);
+        hashMap.put("userId", userId);
+        hashMap.put("userName", userName);
+        hashMap.put("lastMessage", lastMessge);
+        hashMap.put("lastMessageSentTime", lastMessageTime);
+        hashMap.put("status", birthdate);
+        hashMap.put("noOfUnseenMessage", noOfUnseenMessage);
+
+
+        String friendfirebaseUserId = intent.getStringExtra("firebaseUserId");
+        String myfirebaseUserId = firebaseUser.getUid();
+
+        String message = editText_message.getText().toString().trim();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("message", message);
+        hashMap.put("senderId", myfirebaseUserId);
+        hashMap.put("receiverId", friendfirebaseUserId);
+        hashMap.put("messageTime", "8:00am");
+        hashMap.put("messageStatus", "delivered");
+
+        reference.child("Chats").push().setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+
+
+    }
+    */
+
+        private void readAllUsers()
     {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

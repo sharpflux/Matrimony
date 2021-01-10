@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,6 +41,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
     private LayoutInflater layoutInflater;
     ArrayList<DirectMessagesModel> list;
     private boolean isChat;
+    int unseenCount=0;
 
     private String theLastMessage, theLastMessageTime;
 
@@ -79,7 +82,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
-                .placeholder(R.drawable.noimage2)
+                .placeholder(R.color.codeGray)
                 .into(holder.circleImage_profilePic);
 
 
@@ -98,6 +101,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
         if(isChat)
         {
             lastMessage(directMessagesModel.getFirebaseUserId(), holder.textView_lastMessage, holder.textView_lastMessageTime);
+            noOfUnseenMessage(directMessagesModel.getFirebaseUserId(), holder.textView_noOfUnseenMessage, holder.relativeLayout_noOfUnseenMessage);
         }
         /*else
         {
@@ -139,7 +143,9 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
         public TextView textView_lastMessage;
         public TextView textView_lastMessageTime;
         public TextView textView_send;
+        public TextView textView_noOfUnseenMessage;
         public RelativeLayout relativeLayout_directMesssages;
+        public RelativeLayout relativeLayout_noOfUnseenMessage;
         public CircleImageView circleImage_profilePic;
         public CircleImageView circleImage_activityStatus;
 
@@ -151,13 +157,58 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
             this.textView_userName = itemView.findViewById(R.id.textView_userName);
             this.textView_lastMessage = itemView.findViewById(R.id.textView_lastMessage);
             this.textView_lastMessageTime = itemView.findViewById(R.id.textView_lastMessageTime);
+            this.textView_noOfUnseenMessage = itemView.findViewById(R.id.textView_noOfUnseenMessage);
             this.relativeLayout_directMesssages = itemView.findViewById(R.id.relativeLayout_directMesssages);
+            this.relativeLayout_noOfUnseenMessage = itemView.findViewById(R.id.relativeLayout_noOfUnseenMessage);
 
 
             this.circleImage_profilePic = itemView.findViewById(R.id.circleImage_profilePic);
             this.circleImage_activityStatus = itemView.findViewById(R.id.circleImage_activityStatus);
             // this.textView_send = itemView.findViewById(R.id.textView_send);
         }
+    }
+
+    private void noOfUnseenMessage(final String firebaseUserId, final TextView textView_noOfUnseenMessage, final RelativeLayout relativeLayout_noOfUnseenMessage)
+    {
+        unseenCount=0;
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                unseenCount=0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    ChatModel chatModel = snapshot.getValue(ChatModel.class);
+
+                    if (chatModel.getReceiverId().equals(firebaseUser.getUid()) && chatModel.getSenderId().equals(firebaseUserId)) //|| chatModel.getReceiverId().equals(firebaseUserId) && chatModel.getSenderId().equals(firebaseUser.getUid())
+                    {
+                        if(!chatModel.getMessageStatus().equals("seen"))
+                        {
+                            unseenCount++;
+                        }
+
+                    }
+
+                }
+
+                textView_noOfUnseenMessage.setText(String.valueOf(unseenCount));
+                if(unseenCount==0)
+                {
+                    relativeLayout_noOfUnseenMessage.setVisibility(View.GONE);
+                }
+                else
+                {
+                    relativeLayout_noOfUnseenMessage.setVisibility(View.VISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
