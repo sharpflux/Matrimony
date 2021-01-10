@@ -694,22 +694,26 @@ public class FamilyDetailsFragment extends Fragment {
 
         if(cursor_sibling!=null)
         {
-
             for (boolean hasItem = cursor_sibling.moveToFirst(); hasItem; hasItem = cursor_sibling.moveToNext()) {
 
                 stringBuilder_sibling.append("<Functions>");
 
                 //stringBuilder_sibling.append("<UserId>"+userModel.getUserId()+"</UserId>");
+                stringBuilder_sibling.append("<SiblingDetailsId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.SIBLING_DETAILS_ID)) + "</SiblingDetailsId>");
                 stringBuilder_sibling.append("<SiblingListId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.RELATION_ID)) + "</SiblingListId>");
-                stringBuilder_sibling.append("<SiblingFullname>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)) + "</SiblingFullname>");
+                stringBuilder_sibling.append("<SiblingName>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)) + "</SiblingName>");
+                stringBuilder_sibling.append("<SiblingSpouseName>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.NAME)) + "</SiblingSpouseName>");
                 stringBuilder_sibling.append("<SiblingMobileNo>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MOBILE_NO)) + "</SiblingMobileNo>");
                 stringBuilder_sibling.append("<SiblingQualificationId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.EDUCATION_ID)) + "</SiblingQualificationId>");
                 stringBuilder_sibling.append("<SiblingOccupationId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.OCCUPATION_ID)) + "</SiblingOccupationId>");
                 stringBuilder_sibling.append("<SiblingMaritalStatus>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MARITAL_STATUS)) + "</SiblingMaritalStatus>");
                 stringBuilder_sibling.append("<InLawsFullName>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_NAME)) + "</InLawsFullName>");
                 stringBuilder_sibling.append("<InLawsMobileNo>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_MOBILE_NO)) + "</InLawsMobileNo>");
-                stringBuilder_sibling.append("<InLawsAddress>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsAddress>");
-                stringBuilder_sibling.append("<SiblingLanguageType>" + userModel.getLanguage() + "</SiblingLanguageType>");
+                stringBuilder_sibling.append("<InLawsAddress>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsMobileNo>");
+                stringBuilder_sibling.append("<InLawsCountryId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsCountryId>");
+                stringBuilder_sibling.append("<InLawsStateId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsStateId>");
+                stringBuilder_sibling.append("<InLawsCityId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsCityId>");
+                stringBuilder_sibling.append("<SiblingLanguage>" + userModel.getLanguage() + "</SiblingLanguage>");
 
 
                 stringBuilder_sibling.append("</Functions>");

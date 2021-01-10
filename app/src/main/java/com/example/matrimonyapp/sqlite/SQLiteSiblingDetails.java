@@ -27,11 +27,11 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     public static final String  FATHER_IN_LAW_MOBILE_NO = "father_in_law_mobile_no";
     public static final String  FATHER_IN_LAW_VILLAGE = "father_in_law_village";
     public static final String  FATHER_IN_LAW_STATE_ID = "father_in_law_state_id";
-    public static final String  FATHER_IN_LAW_DISTRICT_ID = "father_in_law_district_id";
-    public static final String  FATHER_IN_LAW_TALUKA_ID =  "father_in_law_taluka_id";
+    public static final String  FATHER_IN_LAW_COUNTRY_ID = "father_in_law_country_id";
+    public static final String  FATHER_IN_LAW_CITY_ID =  "father_in_law_city_id";
     public static final String  FATHER_IN_LAW_STATE_NAME = "father_in_law_state_name";
-    public static final String  FATHER_IN_LAW_DISTRICT_NAME = "father_in_law_district_name";
-    public static final String  FATHER_IN_LAW_TALUKA_NAME =  "father_in_law_taluka_name";
+    public static final String  FATHER_IN_LAW_COUNTRY_NAME = "father_in_law_country_name";
+    public static final String  FATHER_IN_LAW_CITY_NAME =  "father_in_law_city_name";
 
     public SQLiteSiblingDetails(Context context)
     {
@@ -59,12 +59,12 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
                 + FATHER_IN_LAW_NAME +" text, "
                 + FATHER_IN_LAW_MOBILE_NO +" text, "
                 + FATHER_IN_LAW_VILLAGE +" text, "
+                + FATHER_IN_LAW_COUNTRY_ID +" int, "
+                + FATHER_IN_LAW_COUNTRY_NAME +" text, "
                 + FATHER_IN_LAW_STATE_ID +" int, "
                 + FATHER_IN_LAW_STATE_NAME +" text, "
-                + FATHER_IN_LAW_DISTRICT_ID +" int, "
-                + FATHER_IN_LAW_DISTRICT_NAME +" text, "
-                + FATHER_IN_LAW_TALUKA_ID+" int, "
-                + FATHER_IN_LAW_TALUKA_NAME+" text"
+                + FATHER_IN_LAW_CITY_ID+" int, "
+                + FATHER_IN_LAW_CITY_NAME+" text"
                 +" )");
     }
 
@@ -109,8 +109,8 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     public long insertSibling(String sibling_details_id, String name, String mobileNo, String educationId, String educationName,
                               String occupationId, String occupationName, String maritalStatus,
                               String relationId, String relation, String spouseName, String fil_name, String fil_mobileNo, String fil_village,
-                              String fil_state_id, String fil_district_id, String fil_taluka_id,
-                              String fil_state_name, String fil_district_name, String fil_taluka_name)
+                              String fil_country_id, String fil_state_id,  String fil_city_id,
+                              String fil_country_name, String fil_state_name, String fil_city_name)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -131,12 +131,12 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
         contentValues.put(FATHER_IN_LAW_NAME, fil_name);
         contentValues.put(FATHER_IN_LAW_MOBILE_NO, fil_mobileNo);
         contentValues.put(FATHER_IN_LAW_VILLAGE, fil_village);
+        contentValues.put(FATHER_IN_LAW_COUNTRY_ID, fil_country_id);
+        contentValues.put(FATHER_IN_LAW_COUNTRY_NAME, fil_country_name);
         contentValues.put(FATHER_IN_LAW_STATE_ID, fil_state_id);
         contentValues.put(FATHER_IN_LAW_STATE_NAME, fil_state_name);
-        contentValues.put(FATHER_IN_LAW_DISTRICT_ID, fil_district_id);
-        contentValues.put(FATHER_IN_LAW_DISTRICT_NAME, fil_district_name);
-        contentValues.put(FATHER_IN_LAW_TALUKA_ID, fil_taluka_id);
-        contentValues.put(FATHER_IN_LAW_TALUKA_NAME, fil_taluka_name);
+        contentValues.put(FATHER_IN_LAW_CITY_ID, fil_city_id);
+        contentValues.put(FATHER_IN_LAW_CITY_NAME, fil_city_name);
         //contentValues.put(, );
 
         return sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
@@ -149,8 +149,8 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
     public int updateSibling(String id, String sibling_details_id, String name, String mobileNo, String educationId, String educationName,
                              String occupationId, String occupationName, String maritalStatus,
                              String relationId, String relation, String spouseName, String fil_name, String fil_mobileNo, String fil_village,
-                             String fil_state_id, String fil_district_id, String fil_taluka_id,
-                             String fil_state_name, String fil_district_name, String fil_taluka_name)
+                             String fil_country_id, String fil_state_id,  String fil_city_id,
+                             String fil_country_name, String fil_state_name, String fil_city_name)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -170,12 +170,12 @@ public class SQLiteSiblingDetails extends SQLiteOpenHelper {
         contentValues.put(FATHER_IN_LAW_NAME, fil_name);
         contentValues.put(FATHER_IN_LAW_MOBILE_NO, fil_mobileNo);
         contentValues.put(FATHER_IN_LAW_VILLAGE, fil_village);
+        contentValues.put(FATHER_IN_LAW_COUNTRY_ID, fil_country_id);
+        contentValues.put(FATHER_IN_LAW_COUNTRY_NAME, fil_country_name);
         contentValues.put(FATHER_IN_LAW_STATE_ID, fil_state_id);
         contentValues.put(FATHER_IN_LAW_STATE_NAME, fil_state_name);
-        contentValues.put(FATHER_IN_LAW_DISTRICT_ID, fil_district_id);
-        contentValues.put(FATHER_IN_LAW_DISTRICT_NAME, fil_district_name);
-        contentValues.put(FATHER_IN_LAW_TALUKA_ID, fil_taluka_id);
-        contentValues.put(FATHER_IN_LAW_TALUKA_NAME, fil_taluka_name);
+        contentValues.put(FATHER_IN_LAW_CITY_ID, fil_city_id);
+        contentValues.put(FATHER_IN_LAW_CITY_NAME, fil_city_name);
         //contentValues.put(, );
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, SIBLING_DETAILS_ID+" = ? and "+ID+" = ?",
