@@ -84,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
         chatAdapter = new ChatAdapter(this,chatModelsList);
         recyclerView_chat.setAdapter(chatAdapter);
         recyclerView_chat.setHasFixedSize(true);
+
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.scrollToPosition(chatModelsList.size());
@@ -148,6 +149,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 chatModelsList.clear();
 
+                chatAdapter.notifyItemInserted(chatModelsList.size()-1);
                 for (DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     ChatModel chatModel = snapshot.getValue(ChatModel.class);
@@ -159,11 +161,12 @@ public class ChatActivity extends AppCompatActivity {
 
                 }
 
+              //  chatAdapter.notifyDataSetChanged();
                 chatAdapter = new ChatAdapter(ChatActivity.this, chatModelsList);
                 recyclerView_chat.setAdapter(chatAdapter);
                 recyclerView_chat.setHasFixedSize(true);
 
-                scrollView.postDelayed(new Runnable() {
+               /* scrollView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         // recyclerView_chat.smoothScrollToPosition(recyclerView_chat.getAdapter().getItemCount());
@@ -171,7 +174,7 @@ public class ChatActivity extends AppCompatActivity {
                         recyclerView_chat.smoothScrollToPosition(recyclerView_chat.getAdapter().getItemCount()-1);
 
                     }
-                }, 1000);
+                }, 1000);*/
 
             }
 

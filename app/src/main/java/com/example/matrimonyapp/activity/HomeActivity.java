@@ -123,7 +123,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
             return;
         }
-        String IMEINumber = telephonyManager.getDeviceId();
+       // String IMEINumber = telephonyManager.getDeviceId();
         //textView.setText(IMEINumber);
 //        Toast.makeText(this, " ln : "+userModel.getLanguage()+"\nIMEI : "+IMEINumber, Toast.LENGTH_SHORT).show();
         // timelineAdapter = new TimelineAdapter(this,)
@@ -259,6 +259,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         toolbar = findViewById(R.id.toolbar1);
         textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
         imageView_profilePic = findViewById(R.id.imageView_profilePic);
+
+        recyclerView_recentlyViewed=findViewById(R.id.recyclerView_recentlyViewed);
 
         if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
             finish();
