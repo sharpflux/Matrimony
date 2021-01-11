@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,8 +20,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.HomeActivity;
+import com.example.matrimonyapp.adapter.AddPersonAdapter;
+import com.example.matrimonyapp.adapter.ViewMultipleDetailsAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -28,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +65,10 @@ public class ViewPersonalDetailsFragment extends Fragment {
     UserModel userModel;
 
 
+    private RecyclerView recyclerView_addLanguageKnown;
+    private ViewMultipleDetailsAdapter viewDetails_languageKnown;
+    private ArrayList<AddPersonModel> addPersonModelArrayList_languageKnown;
+    private SQLiteLanguageKnownDetails sqLiteLanguageKnownDetails;
 
 
     @Override
@@ -129,11 +140,22 @@ public class ViewPersonalDetailsFragment extends Fragment {
         textView_emailId = view.findViewById(R.id.textView_emailId);
         textView_alternetEmailId = view.findViewById(R.id.textView_alternetEmailId);
 
+        recyclerView_addLanguageKnown = view.findViewById(R.id.recyclerView_addLanguageKnown);
 
         //textView_dosh = view.findViewById(R.id.textView_dosh);
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
+
+        addPersonModelArrayList_languageKnown = new ArrayList<>();
+        viewDetails_languageKnown = new ViewMultipleDetailsAdapter(getContext(), addPersonModelArrayList_languageKnown, "ViewLanguage");
+        recyclerView_addLanguageKnown.setAdapter(viewDetails_languageKnown);
+        recyclerView_addLanguageKnown.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
+        recyclerView_addLanguageKnown.setLayoutManager(linearLayoutManager_education);
+
+        sqLiteLanguageKnownDetails= new SQLiteLanguageKnownDetails(getContext());
+
 
 
     }
@@ -478,6 +500,43 @@ public class ViewPersonalDetailsFragment extends Fragment {
                                     textView_familyStatus.setText(jsonObject.getString("FamilyStatusName"));
                                     textView_familyType.setText(jsonObject.getString("FamilyTypeName"));
                                     textView_familyValues.setText(jsonObject.getString("FamilyValuesName"));
+
+                                    sqLiteLanguageKnownDetails.deleteAll();
+                                    JSONArray knownLanguagesArray = jsonObject.getJSONArray("KnowLanguageLST");
+
+                                    for (int i=0; i<knownLanguagesArray.length(); i++)
+                                    {
+                                        JSONObject knownLanguageObject = knownLanguagesArray.getJSONObject(i);
+
+                                        String fluency = "";
+                                        if(knownLanguageObject.getBoolean("IsFluent"))
+                                        {
+                                            fluency = getActivity().getResources().getString(R.string.fluent);
+                                        }
+                                        else
+                                        {
+                                            fluency = getActivity().getResources().getString(R.string.non_fluent);
+                                        }
+
+                                        long id = sqLiteLanguageKnownDetails.insertLanguageKnownDetails(
+                                                knownLanguageObject.getString("KnownLanguageId"),
+                                                knownLanguageObject.getString("MotherTongueName"),
+                                                knownLanguageObject.getString("MotherTongueId"),
+                                                fluency
+                                        );
+                                        AddPersonModel addPersonModel = new AddPersonModel(String.valueOf(id),
+                                                knownLanguageObject.getString("KnownLanguageId"),
+                                                knownLanguageObject.getString("MotherTongueName"),
+                                                fluency);
+
+
+                                        addPersonModelArrayList_languageKnown.add(addPersonModel);
+
+                                    }
+
+                                    viewDetails_languageKnown.notifyDataSetChanged();
+
+
 
                                     /*sqLiteLanguageKnownDetails.deleteAll();
                                     addPersonModelArrayList_languageKnown.clear();

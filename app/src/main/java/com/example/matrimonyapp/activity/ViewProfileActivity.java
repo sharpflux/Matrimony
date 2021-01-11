@@ -53,9 +53,10 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     boolean follow_flag=false;
 
-    RecyclerView recyclerView_horizontalImages;
-    ArrayList<SingleImage> arrayList_horizontalImage, arrayList_singleImage;
-    HorizontalImageAdapter horizontalImageAdapter;
+    //RecyclerView recyclerView_horizontalImages;
+    //ArrayList<SingleImage> arrayList_horizontalImage;
+    ArrayList<SingleImage>  arrayList_singleImage;
+    //HorizontalImageAdapter horizontalImageAdapter;
 
     RelativeLayout relativeLayout_image;
     private TextView textView_nameAgeTitle, textView_designationName, textView_companyName, textView_highestQualificationInstitute;
@@ -180,6 +181,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         viewPager2_settings();
 
+/*
 
         arrayList_horizontalImage = new ArrayList<SingleImage>();
 
@@ -190,7 +192,9 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         }
 
-        /*gestureDetector = new GestureDetector(this,new MyProfileActivity.Gesture());*/
+        */
+/*gestureDetector = new GestureDetector(this,new MyProfileActivity.Gesture());*//*
+
 
         uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower1)
                 +"/"+this.getResources().getResourceTypeName(R.drawable.flower1)
@@ -204,6 +208,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                 LinearLayoutManager.HORIZONTAL, false);
         recyclerView_horizontalImages.setLayoutManager(horizontalLayourManager);
         recyclerView_horizontalImages.setAdapter(horizontalImageAdapter);
+*/
 
 
         textView_following.setOnClickListener(new OnClickListener() {
@@ -287,7 +292,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         imageView_back = findViewById(R.id.imageView_back);
         //imageView_home.setColorFilter(ContextCompat.getColor(this,R.color.project_color));
         imageView_profilePic = findViewById(R.id.imageView_profilePic);
-        recyclerView_horizontalImages = findViewById(R.id.recyclerView_horizontalImages);
+        //recyclerView_horizontalImages = findViewById(R.id.recyclerView_horizontalImages);
         viewPager2_singleImage = findViewById(R.id.viewPager2_singleImage);
         relativeLayout_image = findViewById(R.id.relativeLayout_image);
 

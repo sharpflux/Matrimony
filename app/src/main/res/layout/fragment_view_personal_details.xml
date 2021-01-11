@@ -19,6 +19,79 @@
             android:orientation="vertical">
 
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Bold_TextView"
+                        android:text="@string/language_known"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerView_addLanguageKnown"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <!--<TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_bio"
+
+                    android:text="Your bio here  \nIt may include your bdate
+                                    \nhobby, profession, etc"
+                    style="@style/NormalLeft_TextView"
+
+                    android:textSize="14sp"
+                    android:lineSpacingMultiplier="1.2"
+                    />-->
+
+            </LinearLayout>
+
             <!-- About -->
 
                 <LinearLayout
@@ -1677,6 +1750,9 @@
 
 
             </LinearLayout>
+
+
+
 
         </LinearLayout>
 
