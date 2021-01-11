@@ -114,6 +114,11 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
                     CustomDialogAddLanguageKnown customDialogAddLanguageKnown= new CustomDialogAddLanguageKnown(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
                     customDialogAddLanguageKnown.show();
                 }
+                else if(relation.equalsIgnoreCase("ViewLanguage"))
+                {
+                    /*CustomDialogViewLanguageKnown customDialogviewLanguageKnown= new CustomDialogViewLanguageKnown(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
+                    customDialogviewLanguageKnown.show();*/
+                }
 
                 dismiss();
                 //Intent intent = new Intent(context, LoginActivity.class);

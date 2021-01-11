@@ -402,6 +402,9 @@
     <string name="dash">-</string>
     <string name="_postal_code">Postal Code</string>
     <string name="birth_time_type">Birth Time Type</string>
+    <string name="working_city">Working City</string>
+    <string name="working_state">Working State</string>
+    <string name="working_country">Working Country</string>
 
 
 </resources>

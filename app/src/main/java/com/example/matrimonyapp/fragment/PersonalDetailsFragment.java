@@ -586,6 +586,40 @@ public class PersonalDetailsFragment extends Fragment {
                                     addPersonModelArrayList_languageKnown.clear();
                                     addPersonAdapter_languageKnown.notifyDataSetChanged();
 
+                                    JSONArray knownLanguagesArray = jsonObject.getJSONArray("KnowLanguageLST");
+
+                                    for (int i=0; i<knownLanguagesArray.length(); i++)
+                                    {
+                                        JSONObject knownLanguageObject = knownLanguagesArray.getJSONObject(i);
+
+                                        String fluency = "";
+                                        if(knownLanguageObject.getBoolean("IsFluent"))
+                                        {
+                                            fluency = getActivity().getResources().getString(R.string.fluent);
+                                        }
+                                        else
+                                        {
+                                            fluency = getActivity().getResources().getString(R.string.non_fluent);
+                                        }
+
+                                        long id = sqLiteLanguageKnownDetails.insertLanguageKnownDetails(
+                                                knownLanguageObject.getString("KnownLanguageId"),
+                                                knownLanguageObject.getString("MotherTongueName"),
+                                                knownLanguageObject.getString("MotherTongueId"),
+                                                fluency
+                                        );
+                                        AddPersonModel addPersonModel = new AddPersonModel(String.valueOf(id),
+                                                knownLanguageObject.getString("KnownLanguageId"),
+                                                knownLanguageObject.getString("MotherTongueName"),
+                                                fluency);
+
+
+                                        addPersonModelArrayList_languageKnown.add(addPersonModel);
+
+                                    }
+
+                                    addPersonAdapter_languageKnown.notifyDataSetChanged();
+
 
 
 /*                                    String diet = jsonObject.getString("Diet");

@@ -94,8 +94,36 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="@string/company_name"
+                            android:text="@string/current_service"
 
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_currentService"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            />
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/company_name"
                             />
 
                         <TextView
@@ -104,13 +132,57 @@
                             android:id="@+id/textView_companyName"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/company_name"
+                            android:text="@string/dash"
                             />
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
 
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/occupation"
+                            />
 
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_occupation"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
 
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/name_of_department"
+                            />
 
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_nameOfDepartment"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            />
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -132,7 +204,7 @@
                             android:id="@+id/textView_designation"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/designation"
+                            android:text="@string/dash"
                             />
                     </LinearLayout>
 
@@ -159,7 +231,7 @@
                             android:id="@+id/textView_experience"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="5 yrs"
+                            android:text="@string/dash"
 
                             />
                     </LinearLayout>
@@ -187,7 +259,86 @@
                             android:id="@+id/textView_annualIncome"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="Rs. 30000/-"
+                            android:text="@string/dash"
+
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/working_location"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_workingAddress"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            android:inputType="textImeMultiLine"
+                            android:lineSpacingMultiplier="1.2"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/working_country"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_workingCountry"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/working_state"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_workingState"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
 
                             />
                     </LinearLayout>
@@ -205,16 +356,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="@string/company_address"
+                            android:text="@string/working_city"
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_companyAddress"
+                            android:id="@+id/textView_workingCity"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/company_address"
+                            android:text="@string/dash"
+                            android:inputType="textMultiLine"
                             android:lineSpacingMultiplier="1.2"
                             />
                     </LinearLayout>
@@ -273,7 +425,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/Bold_TextView"
-                        android:text="@string/qualification"
+                        android:text="@string/highest_qualification_details"
                         android:textSize="15sp"
                         />
                 </LinearLayout>
@@ -301,7 +453,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/NormalLeft_TextView"
-                        android:text="@string/qualification_level"
+                        android:text="@string/highest_qualification_level"
 
                         />
 
@@ -311,7 +463,7 @@
                         android:id="@+id/textView_qualificationLevel"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="@string/qualification_level"
+                        android:text="@string/dash"
                         />
                 </LinearLayout>
 
@@ -327,7 +479,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/NormalLeft_TextView"
-                        android:text="@string/qualification"
+                        android:text="@string/highest_qualification"
 
                         />
 
@@ -337,7 +489,7 @@
                         android:id="@+id/textView_qualification"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="@string/qualification"
+                        android:text="@string/dash"
                         />
                 </LinearLayout>
 
@@ -363,7 +515,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_nameOfInstitute"
                             android:layout_weight="1"
-                            android:text="@string/name_of_institute"
+                            android:text="@string/dash"
                             style="@style/NormalRight_TextView"
                             />
                     </LinearLayout>
@@ -393,7 +545,7 @@
                             android:id="@+id/textView_percentage"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="85.90%"/>
+                            android:text="@string/dash"/>
 
                     </LinearLayout>
 
@@ -424,7 +576,7 @@
                             android:id="@+id/textView_passingYear"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="2010"
+                            android:text="@string/dash"
                             />
                     </LinearLayout>
 
@@ -504,7 +656,7 @@
                         android:id="@+id/textView_hobby"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="@string/hobby"
+                        android:text="@string/dash"
                         />
                 </LinearLayout>
 
@@ -513,7 +665,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="20dp"
                     >
 
                     <TextView
@@ -531,9 +683,38 @@
                         android:id="@+id/textView_socialContribution"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
-                        android:text="@string/social_contributions"
+                        android:text="@string/dash"
                         />
                 </LinearLayout>
+
+
+<!--                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/passing_year"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_p"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>-->
+
 
           <!--      <LinearLayout
                     android:layout_width="match_parent"

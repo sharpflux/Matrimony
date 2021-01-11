@@ -57,6 +57,7 @@ import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -123,7 +124,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
             return;
         }
-        String IMEINumber = telephonyManager.getDeviceId();
+       // String IMEINumber = telephonyManager.getDeviceId();
         //textView.setText(IMEINumber);
 //        Toast.makeText(this, " ln : "+userModel.getLanguage()+"\nIMEI : "+IMEINumber, Toast.LENGTH_SHORT).show();
         // timelineAdapter = new TimelineAdapter(this,)

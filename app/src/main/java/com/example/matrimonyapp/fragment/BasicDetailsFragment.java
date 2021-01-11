@@ -42,6 +42,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
+import com.example.matrimonyapp.customViews.CustomDialogAddMama;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.validation.FieldValidation;
@@ -258,6 +259,22 @@ public class BasicDetailsFragment extends Fragment {
 
         dataFetcher = new DataFetcher("State",getContext());
 
+        showPopUp(editText_country, "Country");
+        showPopUp(editText_state, "State");
+        showPopUp(editText_city, "City");
+
+
+        showPopUp(editText_birthCountry, "BirthCountry");
+        showPopUp(editText_birthState, "BirthState");
+        showPopUp(editText_birthCity, "BirthCity");
+
+
+        showPopUp(editText_currentCountry, "CurrentCountry");
+        showPopUp(editText_currentState, "CurrentState");
+        showPopUp(editText_currentCity, "CurrentCity");
+
+
+/*
         showPopupSDT(editText_country, "Country", null);
         showPopupSDT(editText_state, "State", textView_countryId);
         showPopupSDT(editText_city, "City", textView_stateId);
@@ -278,7 +295,9 @@ public class BasicDetailsFragment extends Fragment {
         showPopupSDT(editText_birthState, "BirthState", textView_birthCountryId);
         showPopupSDT(editText_birthCity, "BirthCity", textView_birthStateId);
         FieldValidation.textChangedListenerForSDT(editText_birthCountry, editText_birthState, editText_birthCity,
-                textView_birthCountryId, textView_birthStateId, textView_birthCityId);
+                textView_birthCountryId, textView_birthStateId, textView_birthCityId);*/
+
+
 
 
 
@@ -296,6 +315,52 @@ public class BasicDetailsFragment extends Fragment {
         return view;
 
     }
+
+    private void showPopUp(final EditText editText, final String urlFor)
+    {
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+
+                String id="";
+
+                if(urlFor.equals("Country"))
+                {
+
+                }
+                else if(urlFor.equals("State"))
+                {
+                    id =  textView_countryId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select Country first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                }
+
+                else if(urlFor.equals("City"))
+                {
+                    id = textView_stateId.getText().toString();
+                    if(id.equals("0"))
+                    {
+                        Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+
+                runner.execute(urlFor, id);
+
+
+
+            }
+        });
+
+
+    }
+
 
     private void textChangeListener() {
 
@@ -986,9 +1051,6 @@ public class BasicDetailsFragment extends Fragment {
 
     private class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
-        private String functionFor;
-
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -1183,7 +1245,7 @@ public class BasicDetailsFragment extends Fragment {
                 e.printStackTrace();
                 //resp = e.getMessage();
             }
-            return functionFor;
+            return params[0];
         }
 
 

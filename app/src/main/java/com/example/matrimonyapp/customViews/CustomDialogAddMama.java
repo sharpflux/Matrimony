@@ -161,7 +161,6 @@ public class CustomDialogAddMama extends Dialog {
 
         popupFetcher = new PopupFetcher(context);
 
-        textChangedListener();
 
         onClickListener();
 
@@ -200,29 +199,6 @@ public class CustomDialogAddMama extends Dialog {
 
     }
 
-    private void blurBackground()
-    {
-/*
-        //take Screenshot
-        Bitmap bitmap = Screenshot.getInstance().takeScreenshotForScreen((Activity)context);
-
-        //set blurring factor and heighth width of screenshot
-        BlurFactor blurFactor = new BlurFactor();
-        blurFactor.height = bitmap.getHeight();
-        blurFactor.width = bitmap.getWidth();
-        blurFactor.color = context.getResources().getColor(R.color.transparent_bg);
-
-        //blurred image
-        Bitmap blurBitmap = Blur.of(context, bitmap, blurFactor);
-        //convert blurred image into drawable
-        Drawable drawable = new BitmapDrawable(context.getResources(), blurBitmap);
-
-        //set blurred screenshot to background
-        getWindow().setBackgroundDrawable(drawable);*/
-
-    }
-
-
 
     private void onClickListener()
     {
@@ -253,7 +229,8 @@ public class CustomDialogAddMama extends Dialog {
                 String state_name = editText_state.getText().toString().trim();
                 String city_id = textView_cityId.getText().toString().trim();
                 String city_name = editText_city.getText().toString().trim();
-/*                String state_id = textView_mamaStateId.getText().toString().trim();
+/*
+                String state_id = textView_mamaStateId.getText().toString().trim();
                 String district_id = textView_mamaDistrictId.getText().toString().trim();
                 String taluka_id = textView_mamaTalukaId.getText().toString().trim();
                 String state_name = editText_mamaState.getText().toString().trim();
@@ -295,52 +272,6 @@ public class CustomDialogAddMama extends Dialog {
 
             }
         });
-
-    }
-
-    private void textChangedListener()
-    {
-
-/*
-        editText_mamaState.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_mamaDistrict.setText("");
-                textView_mamaDistrictId.setText("0");
-                editText_mamaTaluka.setText("");
-                textView_mamaTalukaId.setText("0");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        editText_mamaDistrict.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                editText_mamaTaluka.setText("");
-                textView_mamaTalukaId.setText("0");
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-*/
-
 
     }
 

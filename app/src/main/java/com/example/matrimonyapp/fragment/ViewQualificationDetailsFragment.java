@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,8 +19,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -27,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,11 +41,17 @@ import java.util.Map;
  */
 public class ViewQualificationDetailsFragment extends Fragment {
 
-    TextView textView_companyName, textView_designation, textView_experience, textView_annualIncome,
-    textView_companyAddress, textView_qualificationLevel, textView_qualification, textView_nameOfInstitute,
-    textView_percentage, textView_passingYear, textView_hobby, textView_socialContribution;
-
     View view;
+    private Bundle bundle;
+    private String userId;
+
+    TextView textView_currentService, textView_nameOfDepartment, textView_occupation,
+            textView_workingCountry, textView_workingState, textView_workingCity,
+            textView_companyName, textView_designation, textView_experience, textView_annualIncome,
+            textView_workingAddress, textView_qualificationLevel, textView_qualification, textView_nameOfInstitute,
+            textView_percentage, textView_passingYear, textView_hobby, textView_socialContribution;
+
+
 
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     UserModel userModel;
@@ -59,17 +71,23 @@ public class ViewQualificationDetailsFragment extends Fragment {
 
         init();
 
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("getDetails");
+
         return view;
     }
 
     private  void init()
     {
+        bundle = this.getArguments();
+        userId = bundle.getString("userId");
+
 
         textView_companyName = view.findViewById(R.id.editText_companyName);
         textView_designation = view.findViewById(R.id.textView_designation);
         textView_experience = view.findViewById(R.id.textView_experience);
         textView_annualIncome = view.findViewById(R.id.textView_annualIncome);
-        textView_companyAddress = view.findViewById(R.id.textView_companyAddress);
+        textView_workingAddress = view.findViewById(R.id.textView_workingAddress);
         textView_qualificationLevel = view.findViewById(R.id.textView_qualificationLevel);
         textView_qualification = view.findViewById(R.id.textView_qualification);
         textView_nameOfInstitute = view.findViewById(R.id.textView_nameOfInstitute);
@@ -78,8 +96,18 @@ public class ViewQualificationDetailsFragment extends Fragment {
         textView_hobby = view.findViewById(R.id.textView_hobby);
         textView_socialContribution = view.findViewById(R.id.textView_socialContribution);
 
+        textView_currentService = view.findViewById(R.id.textView_currentService);
+        textView_nameOfDepartment = view.findViewById(R.id.textView_nameOfDepartment);
+        textView_occupation = view.findViewById(R.id.textView_occupation);
+        textView_workingCountry = view.findViewById(R.id.textView_workingCountry);
+        textView_workingState = view.findViewById(R.id.textView_workingState);
+        textView_workingCity = view.findViewById(R.id.textView_workingCity);
+
+
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
+
+
 
 
     }
@@ -95,7 +123,8 @@ public class ViewQualificationDetailsFragment extends Fragment {
             }
             else if(params[0].equals("getDetails"))
             {
-                getDetails();
+                getQualificationDetails();
+                getProfessionalDetails();
             }
 
 
@@ -135,11 +164,13 @@ public class ViewQualificationDetailsFragment extends Fragment {
         }
     }
 
-    void getDetails()
+
+
+    void getQualificationDetails()
     {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+ userId +"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -157,6 +188,18 @@ public class ViewQualificationDetailsFragment extends Fragment {
 
                                 if(!jsonObject.getBoolean("error"))
                                 {
+
+
+                                    textView_qualificationLevel.setText(jsonObject.getString("QualificationLevelName"));
+                                    textView_qualification.setText(jsonObject.getString("Qualification"));
+                                    textView_nameOfInstitute.setText(jsonObject.getString("Sch_Uni"));
+                                    textView_passingYear.setText(jsonObject.getString("PassingYearString"));
+                                    textView_percentage.setText(jsonObject.getString("Percentage")+" %");
+
+                                    textView_hobby.setText(jsonObject.getString("Hobby"));
+                                    textView_socialContribution.setText(jsonObject.getString("Social_Contribution"));
+
+
                                     /*qualificationDetailsId = jsonObject.getInt("QualificationDetailsId");
 
 
@@ -211,5 +254,96 @@ public class ViewQualificationDetailsFragment extends Fragment {
 
     }
 
+    void getProfessionalDetails()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+11+"&Language="+userModel.getLanguage(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            customDialogLoadingProgressBar.dismiss();
+
+                            //converting response to json object
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            if(jsonArray.length()>0)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                                if(!jsonObject.getBoolean("error"))
+                                {
+                                    //professionalDetailsId = jsonObject.getInt("ProfessionalDetailsId");
+
+
+                                    //textView_currentService.setText(jsonObject.getString(""));
+                                    //textView_nameOfDepartment.setText(jsonObject.getString(""));
+                                    //textView_companyName.setText(jsonObject.getString(""));
+                                    textView_occupation.setText(jsonObject.getString("OccupationName"));
+                                    textView_designation.setText(jsonObject.getString("DesignationName"));
+                                    textView_experience.setText(jsonObject.getString("Experience"));
+                                    //textView_annualIncome.setText(jsonObject.getString(""));
+                                    textView_workingAddress.setText(jsonObject.getString("CompanyAddress"));
+                                   /* textView_workingCountry.setText(jsonObject.getString(""));
+                                    textView_workingState.setText(jsonObject.getString(""));
+                                    textView_workingCity.setText(jsonObject.getString(""));*/
+
+/*
+
+                                    textView_occupationId.setText(jsonObject.getString("OccupationId"));
+                                    textView_designationId.setText(jsonObject.getString("DesignationId"));
+
+                                    editText_occupation.setText(jsonObject.getString("OccupationName"));
+                                    editText_designation.setText(jsonObject.getString("DesignationName"));
+                                    editText_companyName.setText(jsonObject.getString("CompanyName"));
+                                    //editText_percentage.setText(jsonObject.getString("OtherCommunity"));
+                                    editText_companyAddress.setText(jsonObject.getString("CompanyAddress"));
+                                    editText_experience.setText(jsonObject.getString("Experience"));
+                                    editText_income.setText(jsonObject.getString("MonthlyIncome"));
+*/
+
+
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                //professionalDetailsId = 0;
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+
+
+    }
 
 }
