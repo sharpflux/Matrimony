@@ -179,6 +179,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/textView_nameAgeTitle"
                     android:layout_weight="1"
                     android:gravity="left"
                     android:minWidth="90dp"
@@ -186,6 +187,8 @@
                     android:textColor="@color/text_black"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:maxLines="2"
+                    android:lineSpacingMultiplier="1.2"
                     />
 
                     <TextView
@@ -201,32 +204,85 @@
                         />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/linearLayout_occupationTitle"
+                    >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/textView_designationName"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="Community Manager at Acme Group"
+                    android:text=""
                     android:textSize="13sp"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:textColor="@color/text_black"
                     />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/at"
+                        android:textSize="13sp"
+
+                        android:textColor="@color/text_black"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_companyName"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="15dp"
+
+                        android:textSize="13sp"
+
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/text_black"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/linearLayout_qualificationTitle"
+                    >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+
                     android:layout_marginStart="15dp"
+
+                    android:typeface="serif"
+                    android:text="@string/studied_at"
+                    android:textSize="13sp"
+                    android:gravity="left"
+                    android:textColor="@color/text_gray"
+                    />
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_highestQualificationInstitute"
+                    android:layout_marginStart="4dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="10dp"
                     android:typeface="serif"
                     android:text="Studied at SPPU University"
                     android:textSize="13sp"
                     android:gravity="left"
                     android:textColor="@color/text_gray"
+                        android:maxLines="2"
+                        android:lineSpacingMultiplier="1.2"
                     />
 
-
+                </LinearLayout>
             </LinearLayout>
                 <include layout="@layout/unfollowed_profile"
                     android:layout_width="match_parent"

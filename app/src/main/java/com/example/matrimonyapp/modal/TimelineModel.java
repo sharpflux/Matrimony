@@ -16,6 +16,7 @@ public class TimelineModel {
     String userBirthday;
     String userMobileNo;
     String userOccupation;
+    String userCompany;
     String userEmail;
     //Uri profilePic;
     String profilePic;
@@ -36,12 +37,19 @@ public class TimelineModel {
         //        +"/"+context.getResources().getResourceEntryName(R.drawable.flower2));
     }
 
-    public TimelineModel(String userId, String userName, String userAge, String userQualification, String userBio, String profilePic, Context context) {
+    public TimelineModel(String userId, String userName, String userQualification, String userAge,
+                         String userBio, String userBirthday, String userMobileNo, String userOccupation,
+                         String userCompany, String userEmail, String profilePic, Context context) {
         this.userId = userId;
         this.userName = userName;
-        this.userAge = userAge;
         this.userQualification = userQualification;
+        this.userAge = userAge;
         this.userBio = userBio;
+        this.userBirthday = userBirthday;
+        this.userMobileNo = userMobileNo;
+        this.userOccupation = userOccupation;
+        this.userCompany = userCompany;
+        this.userEmail = userEmail;
         this.profilePic = profilePic;
         this.context = context;
     }
@@ -108,6 +116,14 @@ public class TimelineModel {
 
     public void setUserOccupation(String userOccupation) {
         this.userOccupation = userOccupation;
+    }
+
+    public String getUserCompany() {
+        return userCompany;
+    }
+
+    public void setUserCompany(String userCompany) {
+        this.userCompany = userCompany;
     }
 
     public String getUserEmail() {

@@ -261,26 +261,17 @@ public class BasicDetailsFragment extends Fragment {
         showPopupSDT(editText_country, "Country", null);
         showPopupSDT(editText_state, "State", textView_countryId);
         showPopupSDT(editText_city, "City", textView_stateId);
+        FieldValidation.textChangedListenerForSDT(editText_country, editText_state, editText_city,
+                textView_countryId, textView_stateId, textView_cityId);
 
-/*        showPopupSDT(editText_district, "District", textView_stateId);
-        showPopupSDT(editText_taluka, "Taluka", textView_districtId);
-        FieldValidation.textChangedListenerForSDT(editText_state, editText_district, editText_taluka,
-                textView_stateId, textView_districtId, textView_talukaId);
-*/
 
 
         showPopupSDT(editText_currentCountry, "CurrentCountry", null);
         showPopupSDT(editText_currentState, "CurrentState", textView_currentCountryId);
         showPopupSDT(editText_currentCity, "CurrentCity", textView_currentStateId);
-        /*FieldValidation.textChangedListenerForSDT(editText_currentState, editText_currentDistrict, editText_currentTaluka,
-                textView_currentStateId, textView_currentDistrictId, textView_currentTalukaId);
-*/
-/*
-        showPopupSDT(editText_currentDistrict, "CurrentDistrict", textView_stateId);
-        showPopupSDT(editText_currentTaluka, "CurrentTaluka", textView_districtId);
-        FieldValidation.textChangedListenerForSDT(editText_currentState, editText_currentDistrict, editText_currentTaluka,
-                textView_currentStateId, textView_currentDistrictId, textView_currentTalukaId);
-*/
+        FieldValidation.textChangedListenerForSDT(editText_currentCountry, editText_currentState,  editText_currentCity,
+                textView_currentCountryId, textView_currentStateId, textView_currentCityId);
+
 
 
         showPopupSDT(editText_birthCountry, "BirthCountry", null);
@@ -289,11 +280,7 @@ public class BasicDetailsFragment extends Fragment {
         FieldValidation.textChangedListenerForSDT(editText_birthCountry, editText_birthState, editText_birthCity,
                 textView_birthCountryId, textView_birthStateId, textView_birthCityId);
 
-/*      showPopupSDT(editText_birthDistrict, "BirthDistrict", textView_birthStateId);
-        showPopupSDT(editText_birthTaluka, "BirthTaluka", textView_birthDistrictId);
-        FieldValidation.textChangedListenerForSDT(editText_birthState, editText_birthDistrict, editText_birthTaluka,
-                textView_birthStateId, textView_birthDistrictId, textView_birthTalukaId);
-*/
+
 
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -160,7 +160,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_name"
                             android:layout_weight="1"
-                            android:text="@string/name"
+                            android:text="@string/dash"
                             style="@style/NormalRight_TextView"
                             />
                     </LinearLayout>
@@ -187,11 +187,11 @@
                             android:id="@+id/textView_gender"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/gender"/>
+                            android:text="@string/dash"/>
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -211,10 +211,10 @@
                             android:id="@+id/textView_birthdate"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/birthdate"
+                            android:text="@string/dash"
 
                             />
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -236,7 +236,7 @@
                             android:id="@+id/textView_age"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/age"
+                            android:text="@string/dash"
 
                             />
                     </LinearLayout>
@@ -253,17 +253,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             style="@style/NormalLeft_TextView"
-                            android:text="@string/location"
+                            android:text="@string/blood_group"
 
                             />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_location"
+                            android:id="@+id/textView_bloodGroup"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/location"
+                            android:text="@string/dash"
                             />
                     </LinearLayout>
 
@@ -290,12 +290,865 @@
                             android:id="@+id/textView_motherTongue"
                             android:layout_weight="1"
                             style="@style/NormalRight_TextView"
-                            android:text="@string/language"
+                            android:text="@string/dash"
                             />
                     </LinearLayout>
 
 
                 </LinearLayout>
+
+
+
+
+            <!-- Contact Details -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Bold_TextView"
+                        android:text="@string/contactDetails"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/mobile_"
+
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_mobileNo"
+                        android:layout_weight="1"
+                        android:text="@string/dash"
+                        style="@style/NormalRight_TextView"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/alt_mobile"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_alternetMobileNo"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/NormalLeft_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/email" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_emailId"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/alt_email"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_alternetEmailId"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/mother_tongue"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_motherTongue"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>-->
+
+
+            </LinearLayout>
+
+
+            <!-- Birth Info -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="10dp"
+                            android:background="@drawable/circle_image_border"
+                            android:layout_marginStart="10dp"
+                            android:src="@drawable/quote1"
+                            android:tint="@color/text_gray"
+
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/Bold_TextView"
+                            android:text="@string/birth_details"
+                            android:textSize="15sp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/shadow_down"
+                        />
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/birthdate"
+
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthdate"
+                            android:layout_weight="1"
+                            android:text="@string/dash"
+                            style="@style/NormalRight_TextView"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/time"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthTime"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            style="@style/NormalLeft_TextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/birth_time_type" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthTimeType"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            style="@style/NormalLeft_TextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/birth_place" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthPlace"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/birth_country"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthCountryName"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/birth_state"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthStateName"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="5dp"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/NormalLeft_TextView"
+                            android:text="@string/birth_city"
+
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_birthCityName"
+                            android:layout_weight="1"
+                            style="@style/NormalRight_TextView"
+                            android:text="@string/dash"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            <!--Permananet Address-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Bold_TextView"
+                        android:text="@string/permanent_address"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/address_"
+
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_permanentAddress"
+                        android:layout_weight="1"
+                        android:lineSpacingMultiplier="1.2"
+                        android:inputType="textMultiLine"
+                        android:text="@string/dash"
+                        style="@style/NormalRight_TextView"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/village"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_permanentVillage"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/NormalLeft_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/_postal_code" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_permanentPostalCode"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/NormalLeft_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/country" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_permanentCountryName"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/_state"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_permanentStateName"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/_city"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_permanentCityName"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <!--Current Address-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="10dp"
+                        android:background="@drawable/circle_image_border"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/quote1"
+                        android:tint="@color/text_gray"
+
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Bold_TextView"
+                        android:text="@string/current_address"
+                        android:textSize="15sp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/shadow_down"
+                    />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/address_"
+
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentAddress"
+                        android:layout_weight="1"
+                        android:lineSpacingMultiplier="1.2"
+                        android:inputType="textMultiLine"
+                        android:text="@string/dash"
+                        style="@style/NormalRight_TextView"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/village"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentVillage"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/NormalLeft_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/_postal_code" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentPostalCode"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        style="@style/NormalLeft_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/country" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentCountryName"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/_state"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentStateName"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/NormalLeft_TextView"
+                        android:text="@string/_city"
+
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentCityName"
+                        android:layout_weight="1"
+                        style="@style/NormalRight_TextView"
+                        android:text="@string/dash"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
 
 
             <!-- Personal Info -->

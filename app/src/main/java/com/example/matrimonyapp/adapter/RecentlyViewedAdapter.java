@@ -86,90 +86,24 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
 
         holder.textView_userName.setText(timelineModel.getUserName());
 
-        /*holder.relativeLayout.setOnTouchListener(new OnSwipeTouchListener(context){
+
+        holder.textView_userName.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDoubleTaps() {
-                super.onDoubleTaps();
-
-                holder.imageView_doubleTapFav.setVisibility(View.VISIBLE);
-
-                holder.imageView_doubleTapFav.postOnAnimationDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        holder.imageView_doubleTapFav.setVisibility(View.INVISIBLE);
-                    }
-                },400);
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewProfileActivity.class);
+                intent.putExtra("userId", timelineModel.getUserId());
+                intent.putExtra("userName", timelineModel.getUserName());
+                intent.putExtra("userProfilePic", timelineModel.getProfilePic());
+                intent.putExtra("userQualification", timelineModel.getUserQualification());
+                intent.putExtra("userOccupation", timelineModel.getUserOccupation());
+                intent.putExtra("userCompany", timelineModel.getUserCompany());
+                intent.putExtra("userAge", timelineModel.getUserAge());
+                context.startActivity(intent);
 
             }
+        });
 
-            @Override
-            public void onSwipeRight() {
-                super.onSwipeRight();
-
-                Point size = new Point();
-                display.getSize(size);
-
-
-                holder.relativeLayout.animate().alpha(0.2f).setDuration(400).translationX(size.x+10);
-                holder.relativeLayout.postOnAnimationDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        *//*list.remove(position);
-                        notifyDataSetChanged();*//*
-                        holder.relativeLayout.animate().alpha(1f).setDuration(400).translationX(0);
-                    }
-                },400);
-
-
-                if(bool_favorite==false)
-                {
-
-                    holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
-
-                    //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
-                    bool_favorite= true;
-                }
-                else
-                {
-                    holder.imageView_favorite.setImageResource(R.drawable.start1);
-                    bool_favorite = false;
-                }
-
-
-                *//*
-                    contains Code to Add profile to Favorites
-                *//*
-
-            }
-
-            @Override
-            public void onSwipeLeft() {
-                super.onSwipeLeft();
-
-
-                Point size = new Point();
-                display.getSize(size);
-
-
-                holder.relativeLayout.animate().alpha(0.2f).setDuration(400).translationX(-size.x+10);
-                holder.relativeLayout.postOnAnimationDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        list.remove(position);
-                        notifyDataSetChanged();
-                    }
-                },400);
-
-               *//* list.remove(position);
-                notifyDataSetChanged();
-*//*
-            }
-        });*/
-
-
-
-
-        holder.textView_userId.setText(list.get(position).getUserId());
+        holder.textView_userId.setText("@UserId:"+list.get(position).getUserId());
 
 
         //list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()
@@ -179,7 +113,7 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
-                .placeholder(R.color.codeGray)
+                .placeholder(R.color.quantum_grey100)
                 .into(holder.circleImage_profilePic);
 
 

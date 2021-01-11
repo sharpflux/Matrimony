@@ -24,6 +24,7 @@ import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.HorizontalImageAdapter;
 import com.example.matrimonyapp.adapter.ImageSliderAdapter;
@@ -31,6 +32,7 @@ import com.example.matrimonyapp.adapter.ProfileTabLayoutAdapter;
 import com.example.matrimonyapp.customViews.CustomViewPager;
 import com.example.matrimonyapp.modal.SingleImage;
 import com.example.matrimonyapp.utils.BlurImage;
+import com.example.matrimonyapp.volley.URLs;
 import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.PicassoProvider;
@@ -47,6 +49,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     ArrayList<Uri> mArrayUri;
 
     Uri uri;
+    private Bundle bundle;
 
     boolean follow_flag=false;
 
@@ -55,12 +58,15 @@ public class ViewProfileActivity extends AppCompatActivity {
     HorizontalImageAdapter horizontalImageAdapter;
 
     RelativeLayout relativeLayout_image;
+    private TextView textView_nameAgeTitle, textView_designationName, textView_companyName, textView_highestQualificationInstitute;
 
     TabLayout tabLayout_details;
     CustomViewPager viewPager_details;
     TextView textView_follow, textView_following;
     LinearLayout linearLayout_privateAccount;
     View view_include_onFollow, view_include_unfollowed;
+
+    private String userId="0";
 
     ViewPager2 viewPager2_singleImage;
     Handler sliderHandler = new Handler();
@@ -76,6 +82,24 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         init();
 
+        bundle = getIntent().getExtras();
+
+        if(bundle!=null)
+        {
+            userId = bundle.getString("userId");
+            textView_nameAgeTitle.setText(bundle.getString("userName")+", "+bundle.getString("userAge")+"yrs");
+            textView_designationName.setText(bundle.getString("userOccupation"));
+            textView_companyName.setText(bundle.getString("userCompany"));
+            textView_highestQualificationInstitute.setText(bundle.getString("userQualification"));
+
+            Glide.with(ViewProfileActivity.this)
+                    .load(URLs.MainURL+bundle.getString("userProfilePic"))
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(R.color.quantum_grey100)
+                    .into(imageView_profilePic);
+
+        }
 
 
         imageView_back.setOnClickListener(new OnClickListener() {
@@ -91,7 +115,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         tabLayout_details.setTabGravity(TabLayout.GRAVITY_FILL);
         final ProfileTabLayoutAdapter profileTabLayoutAdapter = new ProfileTabLayoutAdapter(
-                this,getSupportFragmentManager(),tabLayout_details.getTabCount());
+                this,getSupportFragmentManager(),tabLayout_details.getTabCount(), userId);
         viewPager_details.setAdapter(profileTabLayoutAdapter);
 
 
@@ -248,6 +272,12 @@ public class ViewProfileActivity extends AppCompatActivity {
         view_include_unfollowed = findViewById(R.id.include_unfollowedProfile);
         viewPager_details = findViewById(R.id.viewPager_details);
         tabLayout_details = findViewById(R.id.tabLayout_details);
+        textView_nameAgeTitle = findViewById(R.id.textView_nameAgeTitle);
+        textView_designationName = findViewById(R.id.textView_designationName);
+        textView_companyName = findViewById(R.id.textView_companyName);
+        textView_companyName = findViewById(R.id.textView_companyName);
+        textView_highestQualificationInstitute = findViewById(R.id.textView_highestQualificationInstitute);
+
 
 /*        imageView_home = findViewById(R.id.imageView_home);
         imageView_search = findViewById(R.id.imageView_search);

@@ -149,7 +149,18 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         recyclerView_timeline.setLayoutManager(mLayoutManager);
         //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
 
-
+        for(int i=0; i<5; i++)
+        {
+            TimelineModel timelineModel = new TimelineModel();
+            timelineModel.setUserName("Dipti Gunjal");
+            timelineModel.setUserId(4+"");
+            timelineModel.setUserAge("26");
+            timelineModel.setUserOccupation("HR");
+            timelineModel.setUserCompany("Infosys");
+            timelineModel.setUserQualification("MCOM");
+            timelineModel.setProfilePic("Verifications/regiProfileImage/4.webp");
+            arrayList_recentlyviewed.add(timelineModel);
+        }
 
         recentlyViewedAdapter = new RecentlyViewedAdapter(this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
         recyclerView_recentlyViewed.setAdapter(recentlyViewedAdapter);
@@ -243,6 +254,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         imageView_home.setBackgroundResource(R.drawable.gradient_place_order); //home Activity highlight*/
 
         imageView_home.setImageResource(R.drawable.filled_home);
+        recyclerView_recentlyViewed = (RecyclerView) findViewById(R.id.recyclerView_recentlyViewed);
         recyclerView_timeline = (RecyclerView) findViewById(R.id.recyclerView_timeline);
         toolbar = findViewById(R.id.toolbar1);
         textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);

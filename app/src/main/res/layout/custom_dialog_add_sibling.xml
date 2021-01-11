@@ -464,65 +464,21 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColorHint="@color/text_black"
-                        android:theme="@style/TextLabel"
-                        android:layout_marginTop="15dp"
-                        android:visibility="gone"
-                        >
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editText_state"
-                            android:hint="@string/_state"
-                            android:drawableEnd="@drawable/ic_action_arrow_down"
-                            android:drawableTint="@color/text_gray"
-
-                            android:textColor="@color/text_black"
-                            android:textSize="15sp"
-                            android:nextFocusRight="@id/editText_district"
-                            android:singleLine="true"
-                            android:focusable="false"
-                            android:clickable="false"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_stateId"
-                        android:visibility="gone"
-                        android:text="@string/_0"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="30dp"
-                        android:baselineAligned="false"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
 
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel">
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp">
 
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/editText_district"
-                                android:hint="@string/_district"
+                                android:id="@+id/editText_country"
+                                android:hint="@string/country"
                                 android:drawableEnd="@drawable/ic_action_arrow_down"
                                 android:drawableTint="#ADADAD"
 
@@ -537,23 +493,61 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_districtId"
+                            android:id="@+id/textView_countryId"
                             android:visibility="gone"
                             android:text="@string/_0"
                             />
 
+
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel">
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+
+                            >
 
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/editText_taluka"
-                                android:hint="@string/_taluka"
+                                android:id="@+id/editText_state"
+                                android:hint="@string/_state"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/text_gray"
+
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:nextFocusRight="@id/editText_district"
+                                android:singleLine="true"
+                                android:focusable="false"
+                                android:clickable="false"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_stateId"
+                            android:visibility="gone"
+                            android:text="@string/_0"
+                            />
+
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_city"
+                                android:hint="@string/_city"
                                 android:drawableEnd="@drawable/ic_action_arrow_down"
                                 android:drawableTint="#ADADAD"
                                 android:textColor="@color/text_black"
@@ -567,7 +561,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_talukaId"
+                            android:id="@+id/textView_cityId"
                             android:visibility="gone"
                             android:text="@string/_0"
                             />
@@ -576,7 +570,28 @@
 
 
 
+
                     </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+
+<!--
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="30dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
+                        >
+-->
+
+
+
+                  <!--  </LinearLayout>-->
 
                 </LinearLayout>
 
