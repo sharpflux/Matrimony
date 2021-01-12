@@ -18,6 +18,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
 import com.example.matrimonyapp.customViews.CustomDialogDotMenuEditDelete;
 import com.example.matrimonyapp.customViews.CustomDialogViewLanguageKnown;
+import com.example.matrimonyapp.customViews.CustomDialogViewSibling;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.ChatModel;
 
@@ -32,14 +33,14 @@ public class ViewMultipleDetailsAdapter extends RecyclerView.Adapter<ViewMultipl
     private int pos;
     private LayoutInflater layoutInflater;
     ArrayList<AddPersonModel> list;
-    String relation;
+    String viewDialog;
 
 
-    public ViewMultipleDetailsAdapter(Context context, ArrayList<AddPersonModel> list, String relation)
+    public ViewMultipleDetailsAdapter(Context context, ArrayList<AddPersonModel> list, String viewDialog)
     {
         this.context = context;
         this.list = list;
-        this.relation = relation;
+        this.viewDialog = viewDialog;
     }
 
     @NonNull
@@ -66,60 +67,50 @@ public class ViewMultipleDetailsAdapter extends RecyclerView.Adapter<ViewMultipl
         holder.textView_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
-                        new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
+
+                if(viewDialog.equals("Sibling"))
+                {
+                    CustomDialogViewSibling customDialogViewSibling =
+                        new CustomDialogViewSibling(context, model.getId(),  model.getDetails_id(),
                                 ViewMultipleDetailsAdapter.this, list, position);
-                customDialogViewLanguageKnown.show();
+                    customDialogViewSibling.show();
+
+                }
+                else if(viewDialog.equals("Language"))
+                {
+                    CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
+                            new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
+                                    ViewMultipleDetailsAdapter.this, list, position);
+                    customDialogViewLanguageKnown.show();
+                }
+                else if(viewDialog.equals("Property"))
+                {
+                    /*CustomDialogViewProperty customDialogViewProperty =
+                            new CustomDialogViewProperty(context, model.getId(),  model.getDetails_id(),
+                                    ViewMultipleDetailsAdapter.this, list, position);
+                    customDialogViewProperty.show();*/
+                }
+                else if(viewDialog.equals("Mama"))
+                {
+                    CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
+                            new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
+                                    ViewMultipleDetailsAdapter.this, list, position);
+                    customDialogViewLanguageKnown.show();
+                }
+                else if(viewDialog.equals("Farm"))
+                {
+                    CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
+                            new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
+                                    ViewMultipleDetailsAdapter.this, list, position);
+                    customDialogViewLanguageKnown.show();
+                }
+
 
 
             }
         });
 
 
-        //holder.textView_dotMenu.setOnClickListener(new View.OnClickListener() {
-           /* @Override
-            public void onClick(View view) {
-*/
-               /* CustomDialogDotMenuEditDelete customDialogDotMenuEditDelete =
-                        new CustomDialogDotMenuEditDelete(context, model.getId(), model.getDetails_id(), ViewMultipleDetailsAdapter.this,
-                                list, position, relation);
-                customDialogDotMenuEditDelete.show();*/
-
-                /*Context wrapper = new ContextThemeWrapper(context, R.style.popupDotMenu);
-
-                PopupMenu popupMenu = new PopupMenu(wrapper, holder.textView_dotMenu);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-
-                        switch (menuItem.getItemId())
-                        {
-
-                            case R.id.edit :
-                                CustomDialogAddSibling customDialogAddSibling = new CustomDialogAddSibling(context, model.getId());
-                                customDialogAddSibling.show();
-                                return true;
-
-                            case R.id.delete :
-
-                                return true;
-
-                            default:
-                                return false;
-                        }
-
-
-                    }
-                });
-
-                popupMenu.inflate(R.menu.menu_edit_delete);
-                popupMenu.show();
-*/
-
-
-
-/*            }
-        });*/
 
 
     }

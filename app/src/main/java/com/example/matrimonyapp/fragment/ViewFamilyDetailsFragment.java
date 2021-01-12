@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,8 +19,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.adapter.ViewMultipleDetailsAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
+import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
+import com.example.matrimonyapp.sqlite.SQLiteMamaDetails;
+import com.example.matrimonyapp.sqlite.SQLitePropertyDetails;
+import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -27,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,11 +47,28 @@ public class ViewFamilyDetailsFragment extends Fragment {
 
     View view;
 
-    TextView textView_isFatherAlive, textView_fatherName, textView_fatherMobileNo, textView_fatherOccupation,
-    textView_fatherAnnualIncome; //, , , , , , , , , , , , ;
+    private TextView textView_isFatherAlive, textView_fatherName, textView_fatherMobileNo, textView_fatherQualification,
+            textView_fatherOccupation, textView_familyAnnualIncome, textView_fatherAddress,
+            textView_fatherCountry, textView_fatherState, textView_fatherCity,
+            textView_isMotherAlive, textView_motherName, textView_motherOccupation,
+            textView_motherQualification, textView_motherOccupationType, textView_motherMobileNo; //, , , , , , , , , , , , ;
+
+    private RecyclerView recyclerView_siblingDetails, recyclerView_mamaDetails, recyclerView_propertyDetails,
+            recyclerView_farmDetails;
+
+    private SQLiteSiblingDetails sqLiteSiblingDetails;
+    private SQLiteFarmDetails sqLiteFarmDetails;
+    private SQLitePropertyDetails sqLitePropertyDetails;
+    private SQLiteMamaDetails sqLiteMamaDetails;
+
+    private ViewMultipleDetailsAdapter viewMultipleDetailsAdapter_sibling, viewMultipleDetailsAdapter_mama,
+            viewMultipleDetailsAdapter_farm, viewMultipleDetailsAdapter_property;
+
+    private ArrayList<AddPersonModel> arrayList_sibling, arrayList_mama, arrayList_property, arrayList_farm;
 
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     UserModel userModel;
+
     public ViewFamilyDetailsFragment() {
         // Required empty public constructor
     }
@@ -55,6 +82,10 @@ public class ViewFamilyDetailsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_view_family_details, container, false);
 
         init();
+
+
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("getDetails");
         return view;
     }
 
@@ -62,25 +93,88 @@ public class ViewFamilyDetailsFragment extends Fragment {
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
+
+
+        textView_isFatherAlive = view.findViewById(R.id.textView_isFatherAlive);
+        textView_fatherName = view.findViewById(R.id.textView_fatherName);
+        textView_fatherMobileNo = view.findViewById(R.id.textView_fatherMobileNo);
+        textView_fatherQualification = view.findViewById(R.id.textView_fatherQualification);
+        textView_fatherOccupation = view.findViewById(R.id.textView_fatherOccupation);
+        textView_familyAnnualIncome = view.findViewById(R.id.textView_familyAnnualIncome);
+        textView_fatherAddress = view.findViewById(R.id.textView_fatherAddress);
+        textView_fatherCountry = view.findViewById(R.id.textView_fatherCountry);
+        textView_fatherState = view.findViewById(R.id.textView_fatherState);
+        textView_fatherCity = view.findViewById(R.id.textView_fatherCity);
+
+
+        textView_isMotherAlive = view.findViewById(R.id.textView_isMotherAlive);
+        textView_motherName = view.findViewById(R.id.textView_motherName);
+        textView_motherOccupation = view.findViewById(R.id.textView_motherOccupation);
+        textView_motherQualification = view.findViewById(R.id.textView_motherQualification);
+        textView_motherOccupationType = view.findViewById(R.id.textView_motherOccupationType);
+        textView_motherMobileNo = view.findViewById(R.id.textView_motherMobileNo);
+
+
+        recyclerView_siblingDetails = view.findViewById(R.id.recyclerView_siblingDetails);
+        recyclerView_mamaDetails = view.findViewById(R.id.recyclerView_mamaDetails);
+        recyclerView_propertyDetails = view.findViewById(R.id.recyclerView_propertyDetails);
+        recyclerView_farmDetails = view.findViewById(R.id.recyclerView_farmDetails);
+
+
+        arrayList_sibling = new ArrayList<>();
+        arrayList_mama = new ArrayList<>();
+        arrayList_property = new ArrayList<>();
+        arrayList_farm = new ArrayList<>();
+
+        sqLiteSiblingDetails = new SQLiteSiblingDetails(getContext());
+        sqLiteMamaDetails = new SQLiteMamaDetails(getContext());
+        sqLiteFarmDetails = new SQLiteFarmDetails(getContext());
+        sqLitePropertyDetails = new SQLitePropertyDetails(getContext());
+
+
+        viewMultipleDetailsAdapter_sibling = new ViewMultipleDetailsAdapter(getContext(), arrayList_sibling, "Sibling");
+        recyclerView_siblingDetails.setAdapter(viewMultipleDetailsAdapter_sibling);
+        recyclerView_siblingDetails.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_sibling = new LinearLayoutManager(getContext());
+        recyclerView_siblingDetails.setLayoutManager(linearLayoutManager_sibling);
+
+
+        viewMultipleDetailsAdapter_mama = new ViewMultipleDetailsAdapter(getContext(), arrayList_mama, "Mama");
+        recyclerView_mamaDetails.setAdapter(viewMultipleDetailsAdapter_mama);
+        recyclerView_mamaDetails.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_mama = new LinearLayoutManager(getContext());
+        recyclerView_mamaDetails.setLayoutManager(linearLayoutManager_mama);
+
+
+        viewMultipleDetailsAdapter_farm = new ViewMultipleDetailsAdapter(getContext(), arrayList_farm, "Farm");
+        recyclerView_farmDetails.setAdapter(viewMultipleDetailsAdapter_farm);
+        recyclerView_farmDetails.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_farm = new LinearLayoutManager(getContext());
+        recyclerView_farmDetails.setLayoutManager(linearLayoutManager_farm);
+
+
+        viewMultipleDetailsAdapter_property = new ViewMultipleDetailsAdapter(getContext(), arrayList_property, "Property");
+        recyclerView_propertyDetails.setAdapter(viewMultipleDetailsAdapter_property);
+        recyclerView_propertyDetails.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_property = new LinearLayoutManager(getContext());
+        recyclerView_propertyDetails.setLayoutManager(linearLayoutManager_property);
+
+
+        // textView_name = view.findViewById(R.id.textView_name);
+
+
     }
+
     class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String[] params) {
 
-            if(params[0].equals("InsertDetails"))
-            {
+            if (params[0].equals("InsertDetails")) {
                 //insertDetails();
+            } else if (params[0].equals("getDetails")) {
+                getFamilyDetails();
             }
-            else if(params[0].equals("getDetails"))
-            {
-                getDetails();
-            }
-
-
-
-
-
 
 
             return null;
@@ -114,11 +208,10 @@ public class ViewFamilyDetailsFragment extends Fragment {
         }
     }
 
-    void getDetails()
-    {
+    void getFamilyDetails() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_FAMILYDETAILS + "UserId=" + 18 + "&Language=" + userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -130,37 +223,96 @@ public class ViewFamilyDetailsFragment extends Fragment {
                             //converting response to json object
                             JSONArray jsonArray = new JSONArray(response);
 
-                            if(jsonArray.length()>0)
-                            {
+                            if (jsonArray.length() > 0) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-                                if(!jsonObject.getBoolean("error"))
-                                {
-                                    /*qualificationDetailsId = jsonObject.getInt("QualificationDetailsId");
+                                if (!jsonObject.getBoolean("error")) {
+
+                                    textView_fatherName.setText(jsonObject.getString("FullnameFather"));
+                                    textView_fatherMobileNo.setText(jsonObject.getString("MobileNoFather"));
+                                    textView_fatherAddress.setText(jsonObject.getString("AddressFather"));
+                                    textView_fatherQualification.setText(jsonObject.getString("QualificationFather"));
+                                    textView_fatherOccupation.setText(jsonObject.getString("OccupationNameFather"));
+                                    textView_fatherCountry.setText(jsonObject.getString("FatherCountryName"));
+                                    textView_fatherState.setText(jsonObject.getString("FatherStateName"));
+                                    textView_fatherCity.setText(jsonObject.getString("FatherCityName"));
+
+                                    textView_motherName.setText(jsonObject.getString("FullnameMother"));
+                                    textView_motherMobileNo.setText(jsonObject.getString("MobileNoMother"));
+                                    textView_motherQualification.setText(jsonObject.getString("QualificationMother"));
+                                    textView_motherOccupation.setText(jsonObject.getString("OccupationNameMother"));
+                                    textView_isMotherAlive.setText(jsonObject.getString("IsAliveMother"));
+
+                                    textView_familyAnnualIncome.setText(jsonObject.getString("SalaryPackageId"));
+
+                                    getSiblingDetails(jsonObject);
+                                    getFarmDetailsXML(jsonObject);
+                                    getMamaDetailsXML(jsonObject);
+                                    getPropertyDetailsXML(jsonObject);
 
 
-                                    textView_highestQualificationLevelId.setText(jsonObject.getString("QualificationLevelId"));
-                                    textView_qualificationId.setText(jsonObject.getString("QualificationId"));
 
-                                    editText_highestQualificationLevel.setText(jsonObject.getString("QualificationLevelName"));
-                                    editText_qualification.setText(jsonObject.getString("Qualification"));
-                                    editText_institue.setText(jsonObject.getString("Sch_Uni"));
-                                    editText_percentage.setText(jsonObject.getString("Percentage")+" %");
-                                    editText_passingYear.setText(jsonObject.getString("PassingYearString"));
-                                    editText_hobby.setText(jsonObject.getString("Hobby"));
-                                    editText_socialContributions.setText(jsonObject.getString("Social_Contribution"));
+                                    /*.setText(jsonObject.getString(""));
+                                    .setText(jsonObject.getString(""));
+                                    .setText(jsonObject.getString(""));
+                                    .setText(jsonObject.getString(""));
+                                    .setText(jsonObject.getString(""));
+                                    .setText(jsonObject.getString(""));*/
+
+                                  /*  checkBox_motherIsAlive.setChecked(jsonObject.getString("").equals("1"));
+                                    familyDetailsId = jsonObject.getInt("FamilyDetailsId");
+                                    fatherDetailsId = jsonObject.getInt("FatherStatesIDAPI");
+                                    motherDetailsId = jsonObject.getInt("MotherDetailsIdAPI");
 */
-                                    //editText_.setText(jsonObject.getString(""));
 
+
+                                    //editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
+
+                                    // textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
+                                    //textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
+                                    //textView_fatherTalukaId.setText(jsonObject.getString("FatherTalukasIdAPI"));
+
+                                    ///---  editText_fatherState.setText(jsonObject.getString("StatesNameFather"));
+                                    //editText_fatherDistrict.setText(jsonObject.getString("DistrictNameFather"));
+                                    //editText_fatherTaluka.setText(jsonObject.getString("TalukaNameFather"));
+
+
+
+
+
+
+
+
+
+
+                                   /* textView_motherQualificationId.setText(jsonObject.getString("MotherQualificationIdAPI"));
+                                    textView_motherOccupationId.setText(jsonObject.getString("MotherOccupationIdAPI"));
+
+                                    //editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
+                                    //   editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
+                                    textView_familyIncome.setText(jsonObject.getString(""));
+
+                                    editText_relative1.setText(jsonObject.getString("Surname1"));
+                                    editText_relative2.setText(jsonObject.getString("Surname2"));
+                                    editText_relative3.setText(jsonObject.getString("Surname3"));
+                                    editText_relative4.setText(jsonObject.getString("Surname4"));
+
+
+                                    textView_fatherCountryId.setText(jsonObject.getString("FatherCountryId"));
+                                    textView_fatherStateId.setText(jsonObject.getString("FatherStateId"));
+                                    textView_fatherCityId.setText(jsonObject.getString("FatherCityId"));
+
+                                    editText_fatherCountry.setText(jsonObject.getString("FatherCountryName"));
+                                    editText_fatherState.setText(jsonObject.getString("FatherStateName"));
+                                    editText_fatherCity.setText(jsonObject.getString("FatherCityName"));
+
+*/
                                 }
 
 
-
-                            }
-                            else
-                            {
+                            } else {
                                 //qualificationDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Invalid Details GET! ", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -172,7 +324,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Something went wrong POST ! ", Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -186,7 +338,203 @@ public class ViewFamilyDetailsFragment extends Fragment {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
 
 
+    }
 
+    private void getPropertyDetailsXML(JSONObject jsonObject) {
+
+        try {
+            sqLitePropertyDetails.deleteAll();
+            arrayList_property.clear();
+            viewMultipleDetailsAdapter_property.notifyDataSetChanged();
+            JSONArray jsonArray_propertyDetails = jsonObject.getJSONArray("HousePropertyDetailsLST");
+
+            for(int j=0; j< jsonArray_propertyDetails.length(); j++)
+            {
+
+                JSONObject jsonObject_details = jsonArray_propertyDetails.getJSONObject(j);
+
+
+                long id = sqLitePropertyDetails.insertPropertyDetails(
+                        jsonObject_details.getString("HousePropertyDetailsId"),
+                        jsonObject_details.getString("PropertyName"),
+                        jsonObject_details.getString("PropertyTypeId"),
+                        jsonObject_details.getString("PropertyOwnershipType"),
+                        jsonObject_details.getString("PropertyBHKType"),
+                        jsonObject_details.getString("PropertyBHKType"),
+                        jsonObject_details.getString("PropertyArea"),
+                        jsonObject_details.getString("PropertyAddress"),
+                        jsonObject_details.getString("CountryName"),
+                        jsonObject_details.getString("PropertyCountryId"),
+                        jsonObject_details.getString("StateName"),
+                        jsonObject_details.getString("PropertyStateId"),
+                        jsonObject_details.getString("CityName"),
+                        jsonObject_details.getString("PropertyCityId"));
+
+
+                arrayList_property.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("HousePropertyDetailsId"),
+                        jsonObject_details.getString("PropertyArea")+" sq. ft. "+jsonObject_details.getString("PropertyName"),
+                        "in "+jsonObject_details.getString("PropertyAddress")));
+
+            }
+
+            viewMultipleDetailsAdapter_property.notifyDataSetChanged();
+
+
+        }
+
+        catch (JSONException jsonException)
+        {
+
+        }
+    }
+
+    private void getMamaDetailsXML(JSONObject jsonObject){
+
+
+        try {
+            sqLiteMamaDetails.deleteAll();
+            arrayList_mama.clear();
+            viewMultipleDetailsAdapter_mama.notifyDataSetChanged();
+            JSONArray jsonArray_mamaDetails = jsonObject.getJSONArray("MamaDetailsLST");
+
+
+
+
+
+
+            for(int j=0; j< jsonArray_mamaDetails.length(); j++)
+            {
+                JSONObject jsonObject_details = jsonArray_mamaDetails.getJSONObject(j);
+
+                long id = sqLiteMamaDetails.insertMamaDetails(
+                        jsonObject_details.getString("MamaDetailsId"),
+                        jsonObject_details.getString("MamaFullnameAPI"),
+                        jsonObject_details.getString("MamaMobileNoAPI"),
+                        jsonObject_details.getString("OccupationIdMama"),
+                        jsonObject_details.getString("OccupationNameMama"),
+                        jsonObject_details.getString("MamaAddressAPI"),
+                        jsonObject_details.getString("MamaCountryName"),
+                        jsonObject_details.getString("MamaCountryId"),
+                        jsonObject_details.getString("MamaStateName"),
+                        jsonObject_details.getString("MamaStateId"),
+                        jsonObject_details.getString("MamaCityName"),
+                        jsonObject_details.getString("MamaCityId"),
+                        jsonObject_details.getString("IsAliveMama"));
+
+                arrayList_mama.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("MamaDetailsId"),
+                        jsonObject_details.getString("MamaFullnameAPI"),
+                        jsonObject_details.getString("MamaAddressAPI")));
+
+
+            }
+
+            viewMultipleDetailsAdapter_mama.notifyDataSetChanged();
+
+        }
+        catch (JSONException jsonException)
+        {
+
+        }
+
+
+
+    }
+
+    private void getFarmDetailsXML(JSONObject jsonObject) {
+
+        try {
+            sqLiteFarmDetails.deleteAll();
+            arrayList_farm.clear();
+            viewMultipleDetailsAdapter_farm.notifyDataSetChanged();
+            JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("FarmDetailsLST");
+
+            for(int j=0; j< jsonArray_farmDetails.length(); j++) {
+                JSONObject jsonObject_details = jsonArray_farmDetails.getJSONObject(j);
+
+
+                long id = sqLiteFarmDetails.insertFarmDetails(
+                        jsonObject_details.getString("FarmPropertyDetailsId"),
+                        jsonObject_details.getString("LandArea"),
+                        jsonObject_details.getString("FullOrPart"),
+                        jsonObject_details.getString("CropTaken"),"Irrigated");
+
+
+                arrayList_farm.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("FarmPropertyDetailsId"),
+                        jsonObject_details.getString("LandArea")+" sq. ft.",
+                        jsonObject_details.getString("CropTaken")));
+
+
+
+            }
+            viewMultipleDetailsAdapter_farm.notifyDataSetChanged();
+            //farmRecyclerView();
+
+        }
+        catch (JSONException jsonException)
+        {}
+
+
+
+
+    }
+
+    private void getSiblingDetails(JSONObject jsonObject) {
+
+        sqLiteSiblingDetails.deleteAll();
+        arrayList_sibling.clear();
+        viewMultipleDetailsAdapter_sibling.notifyDataSetChanged();
+
+        try {
+            JSONArray jsonArray_sibling = jsonObject.getJSONArray("SiblingsDetailsLST");
+
+            for (int i = 0; i < jsonArray_sibling.length(); i++) {
+                JSONObject jsonObject_details = jsonArray_sibling.getJSONObject(i);
+
+
+
+                long id = sqLiteSiblingDetails.insertSibling(
+                        jsonObject_details.getString("SiblingsDetailsId"),
+                        jsonObject_details.getString("SiblingsFullname"),
+                        jsonObject_details.getString("MobileNoSiblings"),
+                        jsonObject_details.getString("QualificationIdSiblings"),
+                        jsonObject_details.getString("QualificationSiblings"),
+                        jsonObject_details.getString("OccupationIdSiblings"),
+                        jsonObject_details.getString("OccupationNameSiblings"),
+                        jsonObject_details.getString("MaritalStatus"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        "Brother", //jsonObject_details.getString("Brother")/relationName
+                        jsonObject_details.getString("SiblingSpouseName"),
+                        jsonObject_details.getString("InLawsFullNameAPI"),
+                        jsonObject_details.getString("InLawsMobileNoAPI"),
+                        jsonObject_details.getString("InLawsAddressAPI"),
+                        jsonObject_details.getString("InLawsCountryId"),
+                        jsonObject_details.getString("InLawsStateId"),
+                        jsonObject_details.getString("InLawsCityId"),
+                        jsonObject_details.getString("CountryName"),
+                        jsonObject_details.getString("StateName"),
+                        jsonObject_details.getString("StateName")
+
+                );
+                AddPersonModel addPersonModel = new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("SiblingsDetailsId"),
+                        jsonObject_details.getString("SiblingsFullname"),
+                        jsonObject_details.getString("QualificationSiblings")
+                );
+
+
+                arrayList_sibling.add(addPersonModel);
+
+            }
+
+            viewMultipleDetailsAdapter_sibling.notifyDataSetChanged();
+
+
+        } catch (JSONException jsonException) {
+
+        }
 
     }
 }

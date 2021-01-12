@@ -102,7 +102,8 @@ public class FamilyDetailsFragment extends Fragment {
 
     Bundle bundle;
 
-    private StringBuilder stringBuilder_sibling, stringBuilder_mama, stringBuilder_property, stringBuilder_farm;
+    private StringBuilder stringBuilder_sibling, stringBuilder_mama, stringBuilder_property,
+            stringBuilder_farm, stringBuilder_vehicle;
 
     private DataFetcher dataFetcher;
 
@@ -129,11 +130,11 @@ public class FamilyDetailsFragment extends Fragment {
     private CustomDialogAddMama customDialogAddMama;
     //private CustomDialogAddVehicle customDialogAddVehicle;
 
-    protected int familyDetailsId=0;
-    protected int fatherDetailsId=0;
-    protected int motherDetailsId=0;
+    protected int familyDetailsId = 0;
+    protected int fatherDetailsId = 0;
+    protected int motherDetailsId = 0;
     private TextInputLayout textInputLayout_motherOccupation;
-    private int currentCountryId =0, currentStateId=0, newCountryId=0, newStateId=0;
+    private int currentCountryId = 0, currentStateId = 0, newCountryId = 0, newStateId = 0;
 
     public FamilyDetailsFragment() {
         // Required empty public constructor
@@ -173,7 +174,6 @@ public class FamilyDetailsFragment extends Fragment {
         textView_fatherCityId = view.findViewById(R.id.textView_fatherCityId);
 
 
-
         editText_familyIncome = view.findViewById(R.id.editText_familyIncome);
         textView_familyIncome = view.findViewById(R.id.textView_familyIncome);
         //editText_fatherProperty = view.findViewById(R.id.editText_fatherProperty);
@@ -210,7 +210,6 @@ public class FamilyDetailsFragment extends Fragment {
         recyclerView_addVehicle = view.findViewById(R.id.recyclerView_addVehicle);
 
 
-
         textView_fatherOccupationId = view.findViewById(R.id.textView_fatherOccupationId);
         textView_motherOccupationId = view.findViewById(R.id.textView_motherOccupationId);
         textInputLayout_motherOccupation = view.findViewById(R.id.textInputLayout_motherOccupation);
@@ -222,21 +221,20 @@ public class FamilyDetailsFragment extends Fragment {
 
         //switchButton_haveMama = view.findViewById(R.id.switchButton_haveMama);
 
-        textView_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
-        imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
-        TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
+        textView_saveAndContinue = ((MainActivity) getActivity()).findViewById(R.id.txt_saveAndContinue);
+        imageView_back = ((MainActivity) getActivity()).findViewById(R.id.imageView_back);
+        TextView tv = ((MainActivity) getActivity()).findViewById(R.id.textView_toolbar);
         //tv.setText("Family Details");
         tv.setText(context.getResources().getString(R.string.family_details));
 
 
-        dataFetcher = new DataFetcher("State",getContext());
+        dataFetcher = new DataFetcher("State", getContext());
 
         stringBuilder_sibling = new StringBuilder();
         stringBuilder_mama = new StringBuilder();
         stringBuilder_property = new StringBuilder();
         stringBuilder_farm = new StringBuilder();
-
-
+        stringBuilder_vehicle = new StringBuilder();
 
 
         AsyncTaskLoad getTask = new AsyncTaskLoad();
@@ -258,8 +256,6 @@ public class FamilyDetailsFragment extends Fragment {
         //textView_noOfSiblings.setText(String.valueOf(sqLiteSiblingDetails.numberOfRows()));
 
 
-
-
         // Mama recyclerView
         addPersonModelArrayList_mama = new ArrayList<>();
 
@@ -269,7 +265,7 @@ public class FamilyDetailsFragment extends Fragment {
         addPersonAdapter_mama = new AddPersonAdapter(getContext(), addPersonModelArrayList_mama, "Mama");
         recyclerView_addMama.setAdapter(addPersonAdapter_mama);
         recyclerView_addMama.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager_mama= new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager_mama = new LinearLayoutManager(getContext());
         recyclerView_addMama.setLayoutManager(linearLayoutManager_mama);
 
 
@@ -285,7 +281,6 @@ public class FamilyDetailsFragment extends Fragment {
         recyclerView_addProperty.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager_property = new LinearLayoutManager(getContext());
         recyclerView_addProperty.setLayoutManager(linearLayoutManager_property);
-
 
 
         //VehicleRecyclerView();
@@ -317,15 +312,11 @@ public class FamilyDetailsFragment extends Fragment {
         recyclerView_addFarm.setLayoutManager(linearLayoutManager_farm);
 
 
-
-
-
-        showPopup(editText_motherQualification,"MotherQualification");
-        showPopup(editText_fatherQualification,"FatherQualification");
-        showPopup(editText_fatherOccupation,"FatherOccupation");
-        showPopup(editText_motherOccupation,"MotherOccupation");
-        showPopup(editText_familyIncome,"FamilyIncome");
-
+        showPopup(editText_motherQualification, "MotherQualification");
+        showPopup(editText_fatherQualification, "FatherQualification");
+        showPopup(editText_fatherOccupation, "FatherOccupation");
+        showPopup(editText_motherOccupation, "MotherOccupation");
+        showPopup(editText_familyIncome, "FamilyIncome");
 
 
         onClickListener();
@@ -345,36 +336,27 @@ public class FamilyDetailsFragment extends Fragment {
     }
 
 
-    private void showPopUpCSC(final EditText editText, final String urlFor)
-    {
+    private void showPopUpCSC(final EditText editText, final String urlFor) {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 AsyncTaskLoad runner = new AsyncTaskLoad();
 
-                String id="";
+                String id = "";
 
-                if(urlFor.equals("Country"))
-                {
+                if (urlFor.equals("Country")) {
 
-                }
-                else if(urlFor.equals("State"))
-                {
-                    id =  textView_fatherCountryId.getText().toString();
-                    if(id.equals("0"))
-                    {
+                } else if (urlFor.equals("State")) {
+                    id = textView_fatherCountryId.getText().toString();
+                    if (id.equals("0")) {
                         Toast.makeText(context, "Please select Country first", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                }
-
-                else if(urlFor.equals("City"))
-                {
+                } else if (urlFor.equals("City")) {
                     id = textView_fatherStateId.getText().toString();
-                    if(id.equals("0"))
-                    {
+                    if (id.equals("0")) {
                         Toast.makeText(context, "Please select State first", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -389,25 +371,21 @@ public class FamilyDetailsFragment extends Fragment {
     }
 
 
-    public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id)
-    {
+    public void showPopupSDT(EditText editText, final String urlFor, final TextView textView_id) {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                String id="0";
+                String id = "0";
 
-                if(textView_id!=null) {
+                if (textView_id != null) {
                     id = textView_id.getText().toString();
 
-                    if(id.equals("0"))
-                    {
-                        if(urlFor.contains("District")) {
+                    if (id.equals("0")) {
+                        if (urlFor.contains("District")) {
                             Toast.makeText(getContext(), "Select State first", Toast.LENGTH_SHORT).show();
-                        }
-                        else if(urlFor.contains("Taluka"))
-                        {
+                        } else if (urlFor.contains("Taluka")) {
                             Toast.makeText(getContext(), "Select District first", Toast.LENGTH_SHORT).show();
                         }
                         return;
@@ -416,13 +394,10 @@ public class FamilyDetailsFragment extends Fragment {
                 }
 
 
-
-                AsyncTaskLoad runner =  new AsyncTaskLoad();
+                AsyncTaskLoad runner = new AsyncTaskLoad();
                 runner.execute(urlFor, id);
             }
         });
-
-
 
 
     }
@@ -430,8 +405,7 @@ public class FamilyDetailsFragment extends Fragment {
 
     private void textChangedListener(EditText editText_state, final EditText editText_district,
                                      final EditText editText_taluka, TextView textView_stateId,
-                                     final TextView textView_districtId, final TextView textView_talukaId)
-    {
+                                     final TextView textView_districtId, final TextView textView_talukaId) {
 
         editText_state.addTextChangedListener(new TextWatcher() {
             @Override
@@ -475,20 +449,17 @@ public class FamilyDetailsFragment extends Fragment {
     }
 
 
-
-    public void onClickListener()
-    {
+    public void onClickListener() {
 
         radioGroup_motherServiceType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
 
-                if(id==R.id.radioButton_serviceWoman){
+                if (id == R.id.radioButton_serviceWoman) {
 
                     textInputLayout_motherOccupation.setVisibility(View.VISIBLE);
                     textInputLayout_motherOccupation.requestFocus();
-                }
-                else if(id==R.id.radioButton_housewife){
+                } else if (id == R.id.radioButton_housewife) {
 
                     textInputLayout_motherOccupation.setVisibility(View.GONE);
                     editText_motherOccupation.setText("");
@@ -499,7 +470,6 @@ public class FamilyDetailsFragment extends Fragment {
 
             }
         });
-
 
 
         imageView_addVehicle.setOnClickListener(new View.OnClickListener() {
@@ -543,13 +513,11 @@ public class FamilyDetailsFragment extends Fragment {
 
                 FragmentManager fragmentManager = getFragmentManager();
 
-                if(fragmentManager.getBackStackEntryCount()>0)
-                {
+                if (fragmentManager.getBackStackEntryCount() > 0) {
                     fragmentManager.popBackStack();
                 }
             }
         });
-
 
 
         imageView_addSibling.setOnClickListener(new View.OnClickListener() {
@@ -574,7 +542,6 @@ public class FamilyDetailsFragment extends Fragment {
 
             }
         });
-
 
 
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
@@ -626,18 +593,15 @@ public class FamilyDetailsFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                fragmentTransaction.commit() ;
+                fragmentTransaction.commit();
             }
         });
-
-
 
 
     }
 
 
-    private void showPopup(EditText editText, final String urlFor)
-    {
+    private void showPopup(EditText editText, final String urlFor) {
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -649,9 +613,8 @@ public class FamilyDetailsFragment extends Fragment {
 
     }
 
-    void insertDetails()
-    {
-        final String father_isAlive = checkBox_fatherIsAlive.isChecked()? "1" : "0";
+    void insertDetails() {
+        final String father_isAlive = checkBox_fatherIsAlive.isChecked() ? "1" : "0";
         fatherName = editText_fatherName.getText().toString().trim();
         fatherMobileNo = editText_fatherMobileNo.getText().toString().trim();
         fatherQualificationId = textView_fatherQualificationId.getText().toString().trim();
@@ -663,7 +626,7 @@ public class FamilyDetailsFragment extends Fragment {
         fatherCountryId = textView_fatherCountryId.getText().toString().trim();
         fatherCityId = textView_fatherCityId.getText().toString().trim();
 
-        final String mother_isAlive = checkBox_motherIsAlive.isChecked()? "1" : "0";
+        final String mother_isAlive = checkBox_motherIsAlive.isChecked() ? "1" : "0";
         motherName = editText_motherName.getText().toString().trim();
         motherMobileNo = editText_motherMobileNo.getText().toString().trim();
         motherQualificationId = textView_motherQualificationId.getText().toString().trim();
@@ -681,6 +644,260 @@ public class FamilyDetailsFragment extends Fragment {
         final int noOfMama = sqLiteMamaDetails.getNoOfMama();
 
 
+        createSiblingXML();
+        createPropertyXML();
+        createMamaXML();
+        createFarmXML();
+        createVehicleXML();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_FAMILYDETAILS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.getString("message").equals("Success") &&
+                                    !jsonObject.getBoolean("error")) {
+                                //getDetails();
+
+                                Toast.makeText(context, "Family details saved successfully!", Toast.LENGTH_SHORT).show();
+
+/*                                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
+                                //qualificationDetailsFragment.setArguments(bundle);
+
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
+                                fragmentTransaction.commit();
+*/
+
+
+                            } else {
+                                Toast.makeText(getContext(), jsonObject.getString("message").toString(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Something went wrong POST ! ", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("FamilyDetailsId", String.valueOf(familyDetailsId));
+                params.put("UserId", userModel.getUserId());
+                params.put("FatherDetailsId", String.valueOf(fatherDetailsId));
+                params.put("FatherIsAlive", father_isAlive);
+                params.put("FatherFullname", fatherName);
+                params.put("FatherMobileNo", fatherMobileNo);
+                params.put("FatherAddress", fatherAddress);
+                params.put("FatherStateId", fatherStateId);
+                params.put("FatherCountryId", fatherCountryId);
+                params.put("FatherCityId", fatherCityId);
+                params.put("FatherQualificationId", fatherQualificationId);
+                params.put("FatherOccupationId", fatherOccupationId);
+                //params.put("FatherAnnualIncome",fatherAnnualIncome);
+                params.put("FatherLanguageType", userModel.getLanguage());
+                params.put("MotherDetailsId", String.valueOf(motherDetailsId));
+                params.put("MotherIsAlive", mother_isAlive);
+                params.put("MotherFullname", motherName);
+                params.put("MotherMobileNo", motherMobileNo);
+                params.put("MotherQualificationId", motherQualificationId);
+                params.put("MotherOccupationId", motherOccupation);
+                //params.put("MotherAnnualIncome",motherAnnualIncome);
+                params.put("MotherLanguageType", userModel.getLanguage());
+                params.put("NoOfBrothers", String.valueOf(noOfBrothers));
+                params.put("NoOfSisters", String.valueOf(noOfSisters));
+                params.put("NoOfMama", String.valueOf(noOfMama));
+                params.put("SalaryPackageId", textView_familyIncome.getText().toString());
+                params.put("Surname1", relative1);
+                params.put("Surname2", relative2);
+                params.put("Surname3", relative3);
+                params.put("Surname4", relative4);
+                params.put("HousePropertyDetailsAPI", stringBuilder_property.toString());
+                params.put("FarmPropertyDetailsAPI", stringBuilder_farm.toString());
+                params.put("SiblingsDetailsAPI", stringBuilder_sibling.toString());
+                params.put("MamaDetailsAPI", stringBuilder_mama.toString());
+                //params.put("VehicleDetailsAPI",stringBuilder_vehicle.toString());
+                params.put("LanguageType", userModel.getLanguage());
+
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+    }
+
+    private void createVehicleXML() {
+
+
+        //Vehicle XML
+        stringBuilder_vehicle.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_vehicle.append("<Assign>");
+
+        Cursor cursor_vehicle = sqLiteVehicleDetails.getAllData();
+
+
+        if (cursor_vehicle != null) {
+
+            for (boolean hasItem = cursor_vehicle.moveToFirst(); hasItem; hasItem = cursor_vehicle.moveToNext()) {
+
+                stringBuilder_farm.append("<Functions>");
+
+                stringBuilder_farm.append("<VehicleDetailsId>" + cursor_vehicle.getString(cursor_vehicle.getColumnIndex(SQLiteVehicleDetails.VEHICLE_DETAILS_ID)) + "</VehicleDetailsId>");
+                stringBuilder_farm.append("<VehicleTypeId>" + cursor_vehicle.getString(cursor_vehicle.getColumnIndex(SQLiteVehicleDetails.VEHICLE_TYPE_ID)) + "</VehicleTypeId>");
+                stringBuilder_farm.append("<VehicleBrandId>" + cursor_vehicle.getString(cursor_vehicle.getColumnIndex(SQLiteVehicleDetails.BRAND_NAME_ID)) + "</VehicleBrandId>");
+                stringBuilder_farm.append("<VehicleModelId>" + cursor_vehicle.getString(cursor_vehicle.getColumnIndex(SQLiteVehicleDetails.MODEL_NAME_ID)) + "</VehicleModelId>");
+                stringBuilder_farm.append("<Year>" + cursor_vehicle.getString(cursor_vehicle.getColumnIndex(SQLiteVehicleDetails.YEAR)) + "</Year>");
+                stringBuilder_farm.append("<Cost>" + cursor_vehicle.getString(cursor_vehicle.getColumnIndex(SQLiteVehicleDetails.COST)) + "</Cost>");
+
+
+                stringBuilder_farm.append("</Functions>");
+
+            }
+
+            stringBuilder_farm.append("</Assign>");
+
+        }
+
+        cursor_vehicle.close();
+
+
+    }
+
+    private void createFarmXML() {
+
+        //Farm XML
+        stringBuilder_farm.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_farm.append("<Assign>");
+
+        Cursor cursor_farm = sqLiteFarmDetails.getAllData();
+        if (cursor_farm != null) {
+
+            for (boolean hasItem = cursor_farm.moveToFirst(); hasItem; hasItem = cursor_farm.moveToNext()) {
+
+                stringBuilder_farm.append("<Functions>");
+
+                stringBuilder_farm.append("<FarmDetailsId>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.FARM_DETAILS_ID)) + "</FarmDetailsId>");
+                stringBuilder_farm.append("<FarmArea>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA)) + "</FarmArea>");
+                stringBuilder_farm.append("<FullOrPart>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TYPE)) + "</FullOrPart>");
+                stringBuilder_farm.append("<CropTaken>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS)) + "</CropTaken>");
+                stringBuilder_farm.append("<FarmType>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE)) + "</FarmType>");
+
+                stringBuilder_farm.append("<FarmLanguage>" + userModel.getLanguage() + "</FarmLanguage>");
+
+                stringBuilder_farm.append("</Functions>");
+
+            }
+
+            stringBuilder_farm.append("</Assign>");
+
+        }
+
+        cursor_farm.close();
+    }
+
+    private void createMamaXML() {
+
+
+        //Mama XML
+        stringBuilder_mama.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_mama.append("<Assign>");
+
+        Cursor cursor_mama = sqLiteMamaDetails.getAllData();
+
+        if (cursor_mama != null) {
+
+            for (boolean hasItem = cursor_mama.moveToFirst(); hasItem; hasItem = cursor_mama.moveToNext()) {
+
+                stringBuilder_mama.append("<Functions>");
+
+                stringBuilder_mama.append("<MamaIsAlive>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.IS_ALIVE)) + "</MamaIsAlive>");
+                stringBuilder_mama.append("<MamaFullname>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.NAME)) + "</MamaFullname>");
+                stringBuilder_mama.append("<MamaMobileNo>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.MOBILE_NO)) + "</MamaMobileNo>");
+                stringBuilder_mama.append("<MamaAddress>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.ADDRESS)) + "</MamaAddress>");
+                stringBuilder_mama.append("<MamaCountryId>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.COUNTRY_ID)) + "</MamaCountryId>");
+                stringBuilder_mama.append("<MamaStateId>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID)) + "</MamaStateId>");
+                stringBuilder_mama.append("<MamaCityId>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.CITY_ID)) + "</MamaCityId>");
+                stringBuilder_mama.append("<MamaOccupationId>" + cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID)) + "</MamaOccupationId>");
+                stringBuilder_mama.append("<MamaLanguageType>" + userModel.getLanguage() + "</MamaLanguageType>");
+
+                stringBuilder_mama.append("</Functions>");
+
+            }
+
+
+            stringBuilder_mama.append("</Assign>");
+
+        }
+
+        cursor_mama.close();
+
+    }
+
+    private void createPropertyXML() {
+
+
+        // Property XML
+
+        stringBuilder_property.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_property.append("<Assign>");
+
+        Cursor cursor_property = sqLitePropertyDetails.getAllData();
+
+        if (cursor_property != null) {
+
+            for (boolean hasItem = cursor_property.moveToFirst(); hasItem; hasItem = cursor_property.moveToNext()) {
+
+                stringBuilder_property.append("<Functions>");
+
+
+                stringBuilder_property.append("<PropertyDetailsId>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_DETAILS_ID)) + "</PropertyDetailsId>");
+                stringBuilder_property.append("<PropertyTypeId>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID)) + "</PropertyTypeId>");
+                stringBuilder_property.append("<PropertyOwnershipType>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE)) + "</PropertPropertyTypeIdyOwnershipType>");
+                stringBuilder_property.append("<PropertyBHKType>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID)) + "</PropertyBHKType>");
+                stringBuilder_property.append("<PropertyArea>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CARPET_AREA)) + "</PropertyArea>");
+                stringBuilder_property.append("<PropertyAddress>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS)) + "</PropertyAddress>");
+                stringBuilder_property.append("<PropertyCountryId>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.COUNTRY_ID)) + "</PropertyCountryId>");
+                stringBuilder_property.append("<PropertyStateId>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID)) + "</PropertyStateId>");
+                stringBuilder_property.append("<PropertyCityId>" + cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CITY_ID)) + "</PropertyCityId>");
+                stringBuilder_property.append("<PropertyLanguage>" + userModel.getLanguage() + "</PropertyLanguage>");
+
+                stringBuilder_property.append("</Functions>");
+
+            }
+
+            stringBuilder_property.append("</Assign>");
+
+        }
+
+        cursor_property.close();
+
+
+    }
+
+    private void createSiblingXML() {
+
         // Sibling XML
         stringBuilder_sibling.append("<?xml version=\"1.0\" ?>");
 
@@ -689,9 +906,7 @@ public class FamilyDetailsFragment extends Fragment {
         Cursor cursor_sibling = sqLiteSiblingDetails.getAllData();
 
 
-
-        if(cursor_sibling!=null)
-        {
+        if (cursor_sibling != null) {
             for (boolean hasItem = cursor_sibling.moveToFirst(); hasItem; hasItem = cursor_sibling.moveToNext()) {
 
                 stringBuilder_sibling.append("<Functions>");
@@ -708,9 +923,9 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_sibling.append("<InLawsFullName>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_NAME)) + "</InLawsFullName>");
                 stringBuilder_sibling.append("<InLawsMobileNo>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_MOBILE_NO)) + "</InLawsMobileNo>");
                 stringBuilder_sibling.append("<InLawsAddress>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsAddress>");
-                stringBuilder_sibling.append("<InLawsCountryId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsCountryId>");
-                stringBuilder_sibling.append("<InLawsStateId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsStateId>");
-                stringBuilder_sibling.append("<InLawsCityId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsCityId>");
+                stringBuilder_sibling.append("<InLawsCountryId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_COUNTRY_ID)) + "</InLawsCountryId>");
+                stringBuilder_sibling.append("<InLawsStateId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_STATE_ID)) + "</InLawsStateId>");
+                stringBuilder_sibling.append("<InLawsCityId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_CITY_ID)) + "</InLawsCityId>");
                 stringBuilder_sibling.append("<SiblingLanguage>" + userModel.getLanguage() + "</SiblingLanguage>");
 
 
@@ -722,221 +937,16 @@ public class FamilyDetailsFragment extends Fragment {
 
 
         }
-
-
-
-        // Property XML
-
-        stringBuilder_property.append("<?xml version=\"1.0\" ?>");
-        stringBuilder_property.append("<Assign>");
-
-        Cursor cursor_property = sqLitePropertyDetails.getAllData();
-
-        if(cursor_property!=null)
-        {
-
-            for (boolean hasItem = cursor_property.moveToFirst(); hasItem; hasItem = cursor_property.moveToNext()) {
-
-                stringBuilder_property.append("<Functions>");
-
-
-                stringBuilder_property.append("<PropertyDetailsId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_DETAILS_ID))+"</PropertyDetailsId>");
-                stringBuilder_property.append("<PropertyTypeId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.PROPERTY_TYPE_ID))+"</PropertyTypeId>");
-                stringBuilder_property.append("<PropertyOwnershipType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.OWNERSHIP_TYPE))+"</PropertyOwnershipType>");
-                stringBuilder_property.append("<PropertyBHKType>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.BHK_TYPE_ID))+"</PropertyBHKType>");
-                stringBuilder_property.append("<PropertyArea>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CARPET_AREA))+"</PropertyArea>");
-                stringBuilder_property.append("<PropertyAddress>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.ADDRESS))+"</PropertyAddress>");
-                stringBuilder_property.append("<PropertyCountryId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.COUNTRY_ID))+"</PropertyCountryId>");
-                stringBuilder_property.append("<PropertyStateId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.STATE_ID))+"</PropertyStateId>");
-                stringBuilder_property.append("<PropertyCityId>"+cursor_property.getString(cursor_property.getColumnIndex(SQLitePropertyDetails.CITY_ID))+"</PropertyCityId>");
-                stringBuilder_property.append("<PropertyLanguage>"+userModel.getLanguage()+"</PropertyLanguage>");
-
-                stringBuilder_property.append("</Functions>");
-
-            }
-
-            stringBuilder_property.append("</Assign>");
-
-        }
-
-
-
-
-
-        //Mama XML
-        stringBuilder_mama.append("<?xml version=\"1.0\" ?>");
-        stringBuilder_mama.append("<Assign>");
-
-        Cursor cursor_mama = sqLiteMamaDetails.getAllData();
-
-        if(cursor_mama!=null)
-        {
-
-            for (boolean hasItem = cursor_mama.moveToFirst(); hasItem; hasItem = cursor_mama.moveToNext()) {
-
-                stringBuilder_mama.append("<Functions>");
-
-                stringBuilder_mama.append("<MamaIsAlive>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.IS_ALIVE))+"</MamaIsAlive>");
-                stringBuilder_mama.append("<MamaFullname>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.NAME))+"</MamaFullname>");
-                stringBuilder_mama.append("<MamaMobileNo>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.MOBILE_NO))+"</MamaMobileNo>");
-                stringBuilder_mama.append("<MamaAddress>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.ADDRESS))+"</MamaAddress>");
-                stringBuilder_mama.append("<MamaCountryId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.COUNTRY_ID))+"</MamaCountryId>");
-                stringBuilder_mama.append("<MamaStateId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStateId>");
-                stringBuilder_mama.append("<MamaCityId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.CITY_ID))+"</MamaCityId>");
-                stringBuilder_mama.append("<MamaOccupationId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID))+"</MamaOccupationId>");
-                stringBuilder_mama.append("<MamaLanguageType>"+userModel.getLanguage()+"</MamaLanguageType>");
-
-                stringBuilder_mama.append("</Functions>");
-
-            }
-
-
-            stringBuilder_mama.append("</Assign>");
-
-        }
-
-
-        //Farm XML
-        stringBuilder_farm.append("<?xml version=\"1.0\" ?>");
-        stringBuilder_farm.append("<Assign>");
-
-        Cursor cursor_farm = sqLiteFarmDetails.getAllData();
-
-
-        if(cursor_farm!=null)
-        {
-
-            for (boolean hasItem = cursor_farm.moveToFirst(); hasItem; hasItem = cursor_farm.moveToNext()) {
-
-                stringBuilder_farm.append("<Functions>");
-
-                stringBuilder_farm.append("<FarmDetailsId>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.FARM_DETAILS_ID))+"</FarmDetailsId>");
-                stringBuilder_farm.append("<FarmArea>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA))+"</FarmArea>");
-                stringBuilder_farm.append("<FullOrPart>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TYPE))+"</FullOrPart>");
-                stringBuilder_farm.append("<CropTaken>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS))+"</CropTaken>");
-                stringBuilder_farm.append("<FarmType>"+cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE))+"</FarmType>");
-                stringBuilder_farm.append("<FarmType>"+userModel.getLanguage()+"</FarmType>");
-                stringBuilder_farm.append("<FarmLanguage>"+userModel.getLanguage()+"</FarmLanguage>");
-
-                stringBuilder_farm.append("</Functions>");
-
-            }
-
-            stringBuilder_farm.append("</Assign>");
-
-        }
-
-        cursor_farm.close();
-        cursor_mama.close();
-        cursor_property.close();
         cursor_sibling.close();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_FAMILYDETAILS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            //converting response to json object
-                            JSONObject jsonObject = new JSONObject(response);
-
-                            if(jsonObject.getString("message").equals("Success") &&
-                                    !jsonObject.getBoolean("error"))
-                            {
-                                //getDetails();
-
-                                Toast.makeText(context,"Family details saved successfully!", Toast.LENGTH_SHORT).show();
-
-/*                                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
-                                //qualificationDetailsFragment.setArguments(bundle);
-
-                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                                fragmentTransaction.commit();
-*/
-
-
-                            }
-                            else
-                            {
-                                Toast.makeText(getContext(),jsonObject.getString("message").toString(),Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-                        error.printStackTrace();
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-
-                params.put("FamilyDetailsId",String.valueOf(familyDetailsId));
-                params.put("UserId",userModel.getUserId());
-                params.put("FatherDetailsId",String.valueOf(fatherDetailsId));
-                params.put("FatherIsAlive",father_isAlive);
-                params.put("FatherFullname",fatherName);
-                params.put("FatherMobileNo",fatherMobileNo);
-                params.put("FatherAddress",fatherAddress);
-                params.put("FatherStateId",fatherStateId);
-                params.put("FatherCountryId",fatherCountryId);
-                params.put("FatherCityId",fatherCityId);
-                params.put("FatherQualificationId",fatherQualificationId);
-                params.put("FatherOccupationId",fatherOccupationId);
-                //params.put("FatherAnnualIncome",fatherAnnualIncome);
-                params.put("FatherLanguageType",userModel.getLanguage());
-                params.put("MotherDetailsId",String.valueOf(motherDetailsId));
-                params.put("MotherIsAlive",mother_isAlive);
-                params.put("MotherFullname",motherName);
-                params.put("MotherMobileNo",motherMobileNo);
-                params.put("MotherQualificationId",motherQualificationId);
-                params.put("MotherOccupationId",motherOccupation);
-                //params.put("MotherAnnualIncome",motherAnnualIncome);
-                params.put("MotherLanguageType",userModel.getLanguage());
-                params.put("NoOfBrothers",String.valueOf(noOfBrothers));
-                params.put("NoOfSisters",String.valueOf(noOfSisters));
-                params.put("NoOfMama",String.valueOf(noOfMama));
-                params.put("SalaryPackageId",textView_familyIncome.getText().toString());
-                params.put("Surname1", relative1);
-                params.put("Surname2", relative2);
-                params.put("Surname3", relative3);
-                params.put("Surname4", relative4);
-                params.put("HousePropertyDetailsAPI",stringBuilder_property.toString());
-                params.put("FarmPropertyDetailsAPI",stringBuilder_farm.toString());
-                params.put("SiblingsDetailsAPI",stringBuilder_sibling.toString());
-                params.put("MamaDetailsAPI",stringBuilder_mama.toString());
-                params.put("LanguageType",userModel.getLanguage());
-
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
 
     }
 
 
-
-    void getDetails()
-    {
+    void getDetails() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_FAMILYDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_FAMILYDETAILS + "UserId=" + userModel.getUserId() + "&Language=" + userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -948,12 +958,10 @@ public class FamilyDetailsFragment extends Fragment {
                             //converting response to json object
                             JSONArray jsonArray = new JSONArray(response);
 
-                            if(jsonArray.length()>0)
-                            {
+                            if (jsonArray.length() > 0) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-                                if(!jsonObject.getBoolean("error"))
-                                {
+                                if (!jsonObject.getBoolean("error")) {
                                     familyDetailsId = jsonObject.getInt("FamilyDetailsId");
                                     fatherDetailsId = jsonObject.getInt("FatherStatesIDAPI");
                                     motherDetailsId = jsonObject.getInt("MotherDetailsIdAPI");
@@ -967,7 +975,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                                     //editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
 
-                                   // textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
+                                    // textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
                                     //textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
                                     //textView_fatherTalukaId.setText(jsonObject.getString("FatherTalukasIdAPI"));
 
@@ -994,7 +1002,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     textView_motherOccupationId.setText(jsonObject.getString("MotherOccupationIdAPI"));
 
                                     //editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
-                                 //   editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
+                                    //   editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
                                     textView_familyIncome.setText(jsonObject.getString("SalaryPackageId"));
 
                                     editText_relative1.setText(jsonObject.getString("Surname1"));
@@ -1011,141 +1019,29 @@ public class FamilyDetailsFragment extends Fragment {
                                     editText_fatherState.setText(jsonObject.getString("FatherStateName"));
                                     editText_fatherCity.setText(jsonObject.getString("FatherCityName"));
 
-                                    sqLiteMamaDetails.deleteAll();
-                                    addPersonModelArrayList_mama.clear();
-                                    addPersonAdapter_mama.notifyDataSetChanged();
-                                    JSONArray jsonArray_mamaDetails = jsonObject.getJSONArray("MamaDetailsLST");
 
+                                    getMamaDetailsXML(jsonObject);
+                                    getSiblingDetailsXML(jsonObject);
+                                    getFarmDetailsXML(jsonObject);
+                                    getPropertyDetailsXML(jsonObject);
 
-                                    for(int j=0; j< jsonArray_mamaDetails.length(); j++)
-                                    {
-
-                                        JSONObject jsonObject_details = jsonArray_mamaDetails.getJSONObject(j);
-
-
-                                        long id = sqLiteMamaDetails.insertMamaDetails(
-                                                jsonObject_details.getString("MamaDetailsId"),
-                                                jsonObject_details.getString("MamaFullnameAPI"),
-                                                jsonObject_details.getString("MamaMobileNoAPI"),
-                                                jsonObject_details.getString("OccupationIdMama"),
-                                                jsonObject_details.getString("OccupationNameMama"),
-                                                jsonObject_details.getString("MamaAddressAPI"),
-                                                jsonObject_details.getString("MamaCountryName"),
-                                                jsonObject_details.getString("MamaCountryId"),
-                                                jsonObject_details.getString("MamaStateName"),
-                                                jsonObject_details.getString("MamaStateId"),
-                                                jsonObject_details.getString("MamaCityName"),
-                                                jsonObject_details.getString("MamaCityId"),
-                                                jsonObject_details.getString("IsAliveMama"));
-
-
-                                        addPersonModelArrayList_mama.add(new AddPersonModel(String.valueOf(id),
-                                                jsonObject_details.getString("MamaDetailsId"),
-                                                jsonObject_details.getString("MamaFullnameAPI"),
-                                                jsonObject_details.getString("MamaAddressAPI")));
-
-
-
-
-                                    }
-
-
-
-                                    sqLitePropertyDetails.deleteAll();
-
-
-                                    sqLiteSiblingDetails.deleteAll();
-                                    addPersonModelArrayList_sibling.clear();
-                                    addPersonAdapter_sibling.notifyDataSetChanged();
-
-                                    JSONArray jsonArray_siblingDetails = jsonObject.getJSONArray("SiblingsDetailsLST");
-
-                                    for(int j=0; j< jsonArray_siblingDetails.length(); j++)
-                                    {
-                                        JSONObject jsonObject_details = jsonArray_siblingDetails.getJSONObject(j);
-
-
-                                        long id = sqLiteSiblingDetails.insertSibling(
-                                                jsonObject_details.getString("SiblingsDetailsId"),
-                                                jsonObject_details.getString("SiblingsFullname"),
-                                                jsonObject_details.getString("MobileNoSiblings"),
-                                                jsonObject_details.getString("QualificationIdSiblings"),
-                                                jsonObject_details.getString("QualificationSiblings"),
-                                                jsonObject_details.getString("OccupationIdSiblings"),
-                                                jsonObject_details.getString("OccupationNameSiblings"),
-                                                jsonObject_details.getString("MaritalStatus"),
-                                                jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("SiblingSpouseName"),
-                                                jsonObject_details.getString("SiblingSpouseName"), //change-> should be replaced with spouse Name
-                                                jsonObject_details.getString("InLawsFullNameAPI"),
-                                                jsonObject_details.getString("InLawsMobileNoAPI"),
-                                                jsonObject_details.getString("InLawsAddressAPI"),
-                                                jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("SiblingListIdAPI"));
-
-
-                                        addPersonModelArrayList_sibling.add(new AddPersonModel(String.valueOf(id),
-                                                jsonObject_details.getString("SiblingsDetailsId"),
-                                                jsonObject_details.getString("SiblingsFullname"),
-                                                jsonObject_details.getString("QualificationSiblings")));
-
-
-
-
-
-                                    }
-
-
-
-                                    sqLiteFarmDetails.deleteAll();
-                                    addPersonModelArrayList_farm.clear();
-
-
-                                    JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("FarmDetailsLST");
-
-
-                                    for(int j=0; j< jsonArray_farmDetails.length(); j++) {
-                                        JSONObject jsonObject_details = jsonArray_farmDetails.getJSONObject(j);
-
-
-                                        long id = sqLiteFarmDetails.insertFarmDetails(
-                                                jsonObject_details.getString("FarmPropertyDetailsId"),
-                                                jsonObject_details.getString("LandArea"),
-                                                jsonObject_details.getString("FullOrPart"),
-                                                jsonObject_details.getString("CropTaken"),"Irrigated");
-
-
-                                        addPersonModelArrayList_farm.add(new AddPersonModel(String.valueOf(id),
-                                                jsonObject_details.getString("FarmPropertyDetailsId"),
-                                                jsonObject_details.getString("LandArea"),
-                                                jsonObject_details.getString("CropTaken")));
-
-
-
-                                    }
-                                    addPersonAdapter_farm.notifyDataSetChanged();
-                                    //farmRecyclerView();
 
 
                                 }
 
-
-
-                            }
-                            else
-                            {
+                            } else {
                                 familyDetailsId = 0;
                                 fatherDetailsId = 0;
                                 motherDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext()," Please enter your details! ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), " Please enter your details! ", Toast.LENGTH_SHORT).show();
                             }
 
-                        } catch (JSONException e) {
+
+                        }catch(
+                                JSONException e)
+
+                        {
                             e.printStackTrace();
                         }
 
@@ -1154,9 +1050,9 @@ public class FamilyDetailsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                     //   Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getContext(),error.toString(),Toast.LENGTH_SHORT).show();
-                        Log.e("Error",error.toString());
+                        //   Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        Log.e("Error", error.toString());
                     }
                 }) {
             @Override
@@ -1173,6 +1069,204 @@ public class FamilyDetailsFragment extends Fragment {
 
 
     }
+
+
+    private void getPropertyDetailsXML(JSONObject jsonObject) {
+
+        try {
+            sqLitePropertyDetails.deleteAll();
+            addPersonModelArrayList_property.clear();
+            addPersonAdapter_property.notifyDataSetChanged();
+            JSONArray jsonArray_propertyDetails = jsonObject.getJSONArray("HousePropertyDetailsLST");
+
+            for(int j=0; j< jsonArray_propertyDetails.length(); j++)
+            {
+
+                JSONObject jsonObject_details = jsonArray_propertyDetails.getJSONObject(j);
+
+
+                long id = sqLitePropertyDetails.insertPropertyDetails(
+                        jsonObject_details.getString("HousePropertyDetailsId"),
+                        jsonObject_details.getString("PropertyName"),
+                        jsonObject_details.getString("PropertyTypeId"),
+                        jsonObject_details.getString("PropertyOwnershipType"),
+                        jsonObject_details.getString("PropertyBHKType"),
+                        jsonObject_details.getString("PropertyBHKType"),
+                        jsonObject_details.getString("PropertyArea"),
+                        jsonObject_details.getString("PropertyAddress"),
+                        jsonObject_details.getString("CountryName"),
+                        jsonObject_details.getString("PropertyCountryId"),
+                        jsonObject_details.getString("StateName"),
+                        jsonObject_details.getString("PropertyStateId"),
+                        jsonObject_details.getString("CityName"),
+                        jsonObject_details.getString("PropertyCityId"));
+
+
+                addPersonModelArrayList_property.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("HousePropertyDetailsId"),
+                        jsonObject_details.getString("PropertyArea")+" sq. ft. "+jsonObject_details.getString("PropertyName"),
+                        "in "+jsonObject_details.getString("PropertyAddress")));
+
+            }
+
+            addPersonAdapter_property.notifyDataSetChanged();
+
+
+        }
+
+        catch (JSONException jsonException)
+        {
+
+        }
+    }
+
+    private void getFarmDetailsXML(JSONObject jsonObject) {
+
+        try {
+            sqLiteFarmDetails.deleteAll();
+            addPersonModelArrayList_farm.clear();
+            addPersonAdapter_farm.notifyDataSetChanged();
+            JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("FarmDetailsLST");
+
+            for(int j=0; j< jsonArray_farmDetails.length(); j++) {
+                JSONObject jsonObject_details = jsonArray_farmDetails.getJSONObject(j);
+
+
+                long id = sqLiteFarmDetails.insertFarmDetails(
+                        jsonObject_details.getString("FarmPropertyDetailsId"),
+                        jsonObject_details.getString("LandArea"),
+                        jsonObject_details.getString("FullOrPart"),
+                        jsonObject_details.getString("CropTaken"),"Irrigated");
+
+
+                addPersonModelArrayList_farm.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("FarmPropertyDetailsId"),
+                        jsonObject_details.getString("LandArea"),
+                        jsonObject_details.getString("CropTaken")));
+
+
+
+            }
+            addPersonAdapter_farm.notifyDataSetChanged();
+            //farmRecyclerView();
+
+        }
+        catch (JSONException jsonException)
+        {}
+
+
+
+
+    }
+
+    private void getSiblingDetailsXML(JSONObject jsonObject) {
+
+
+        try {
+            sqLiteSiblingDetails.deleteAll();
+            addPersonModelArrayList_sibling.clear();
+            addPersonAdapter_sibling.notifyDataSetChanged();
+
+            JSONArray jsonArray_siblingDetails = jsonObject.getJSONArray("SiblingsDetailsLST");
+
+            for (int j = 0; j < jsonArray_siblingDetails.length(); j++) {
+                JSONObject jsonObject_details = jsonArray_siblingDetails.getJSONObject(j);
+
+
+                long id = sqLiteSiblingDetails.insertSibling(
+                        jsonObject_details.getString("SiblingsDetailsId"),
+                        jsonObject_details.getString("SiblingsFullname"),
+                        jsonObject_details.getString("MobileNoSiblings"),
+                        jsonObject_details.getString("QualificationIdSiblings"),
+                        jsonObject_details.getString("QualificationSiblings"),
+                        jsonObject_details.getString("OccupationIdSiblings"),
+                        jsonObject_details.getString("OccupationNameSiblings"),
+                        jsonObject_details.getString("MaritalStatus"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        jsonObject_details.getString("SiblingSpouseName"),
+                        jsonObject_details.getString("SiblingSpouseName"), //change-> should be replaced with spouse Name
+                        jsonObject_details.getString("InLawsFullNameAPI"),
+                        jsonObject_details.getString("InLawsMobileNoAPI"),
+                        jsonObject_details.getString("InLawsAddressAPI"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        jsonObject_details.getString("SiblingListIdAPI"),
+                        jsonObject_details.getString("SiblingListIdAPI"));
+
+
+                addPersonModelArrayList_sibling.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("SiblingsDetailsId"),
+                        jsonObject_details.getString("SiblingsFullname"),
+                        jsonObject_details.getString("QualificationSiblings")));
+
+
+            }
+
+            addPersonAdapter_sibling.notifyDataSetChanged();
+
+
+        } catch (JSONException jsonException) {
+
+
+        }
+    }
+
+    private void getMamaDetailsXML(JSONObject jsonObject){
+
+
+        try {
+            sqLiteMamaDetails.deleteAll();
+            addPersonModelArrayList_mama.clear();
+            addPersonAdapter_mama.notifyDataSetChanged();
+            JSONArray jsonArray_mamaDetails = jsonObject.getJSONArray("MamaDetailsLST");
+
+
+
+
+
+
+            for(int j=0; j< jsonArray_mamaDetails.length(); j++)
+            {
+                JSONObject jsonObject_details = jsonArray_mamaDetails.getJSONObject(j);
+
+                long id = sqLiteMamaDetails.insertMamaDetails(
+                        jsonObject_details.getString("MamaDetailsId"),
+                        jsonObject_details.getString("MamaFullnameAPI"),
+                        jsonObject_details.getString("MamaMobileNoAPI"),
+                        jsonObject_details.getString("OccupationIdMama"),
+                        jsonObject_details.getString("OccupationNameMama"),
+                        jsonObject_details.getString("MamaAddressAPI"),
+                        jsonObject_details.getString("MamaCountryName"),
+                        jsonObject_details.getString("MamaCountryId"),
+                        jsonObject_details.getString("MamaStateName"),
+                        jsonObject_details.getString("MamaStateId"),
+                        jsonObject_details.getString("MamaCityName"),
+                        jsonObject_details.getString("MamaCityId"),
+                        jsonObject_details.getString("IsAliveMama"));
+
+                addPersonModelArrayList_mama.add(new AddPersonModel(String.valueOf(id),
+                        jsonObject_details.getString("MamaDetailsId"),
+                        jsonObject_details.getString("MamaFullnameAPI"),
+                        jsonObject_details.getString("MamaAddressAPI")));
+
+
+            }
+
+            addPersonAdapter_mama.notifyDataSetChanged();
+
+        }
+        catch (JSONException jsonException)
+        {
+
+        }
+
+
+
+    }
+
+
 
 
 

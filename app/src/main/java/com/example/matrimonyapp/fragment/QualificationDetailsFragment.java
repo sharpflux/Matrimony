@@ -413,7 +413,7 @@ public class QualificationDetailsFragment extends Fragment {
 
                                     sqLiteEducationDetails.deleteAll();
                                     addPersonModelArrayList_education.clear();
-                                    addPersonAdapter_education.notifyDataSetChanged();
+                                    Adapter_candidateQualification.notifyDataSetChanged();
 
                                     JSONArray jsonArray_education = jsonObject.getJSONArray("LowerQualificationLST");
 
