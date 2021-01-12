@@ -10,15 +10,20 @@
     app:layout_goneMarginBottom="10dp">
 
 
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:gravity="center"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
+        android:layout_weight="1"
         android:id="@+id/linearlayout"
         >
 
@@ -35,26 +40,26 @@
             android:layout_marginStart="10dp"
             android:id="@+id/textView_name"
             android:text="@string/Name"
-            android:layout_marginEnd="5dp"
+
             android:textColor="@color/text_black"
             android:textSize="13sp"
             android:layout_weight="1"
             android:singleLine="true"
             />
-
-        <ImageView
-            android:id="@+id/textView_view"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView_address"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="center_vertical|end"
             android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:src="@drawable/ic_outline_visibility_24"
-            android:textColor="@color/purple"
-            android:textSize="15sp"
 
-             />
+            android:layout_marginTop="5dp"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="2"
+            android:text="@string/address_"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp" />
+
+
         <!--        <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,19 +77,26 @@
                     />-->
 
     </LinearLayout>
-
     <TextView
-        android:id="@+id/textView_address"
-        android:layout_width="match_parent"
+        android:id="@+id/textView_view"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginTop="0dp"
-        android:lineSpacingMultiplier="1.2"
-        android:maxLines="2"
-        android:text="@string/address_"
-        android:textColor="@color/text_gray"
-        android:textSize="12sp" />
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="@string/view"
+        android:paddingStart="9dp"
+        android:paddingEnd="9dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:background="@drawable/gray_outline"
+        android:textColor="@color/grey_4a"
+        android:textSize="12sp"
+
+        />
+</LinearLayout>
+
     <!--    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

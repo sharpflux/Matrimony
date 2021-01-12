@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ import com.example.matrimonyapp.customViews.CustomDialogDotMenuEditDelete;
 import com.example.matrimonyapp.customViews.CustomDialogViewLanguageKnown;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.ChatModel;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -131,7 +134,8 @@ public class ViewMultipleDetailsAdapter extends RecyclerView.Adapter<ViewMultipl
     public class ViewHolder extends RecyclerView.ViewHolder{
 
 
-        public  TextView textView_id, textView_name, textView_address, textView_view; //, textView_dotMenu
+        public  TextView textView_id, textView_name, textView_address;
+        TextView textView_view; //, textView_dotMenu
 
 
         public ViewHolder(@NonNull View itemView) {
