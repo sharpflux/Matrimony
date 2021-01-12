@@ -166,11 +166,14 @@ public class DirectMessagesActivity extends AppCompatActivity {
     private void userActivityStatus(String activityStatus)
     {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        if(firebaseUser.getUid()!=null) {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("activityStatus", activityStatus);
+            databaseReference.updateChildren(hashMap);
+        }
 
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("activityStatus", activityStatus);
-        databaseReference.updateChildren(hashMap);
+
 
 
     }

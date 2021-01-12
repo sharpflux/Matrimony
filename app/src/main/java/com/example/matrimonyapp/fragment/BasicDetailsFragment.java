@@ -814,7 +814,7 @@ public class BasicDetailsFragment extends Fragment {
 
                                     textView_countryId.setText(jsonObject.getString("PermanantCountryId"));
                                     textView_stateId.setText(jsonObject.getString("PermanantStateId"));
-                                    textView_countryId.setText(jsonObject.getString("PermanantCityId"));
+                                    textView_cityId.setText(jsonObject.getString("PermanantCityId"));
 
                                     editText_currentAddress.setText(jsonObject.getString("CurrentAddress"));
                                     editText_currentVillage.setText(jsonObject.getString("CurrentVillage"));

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -606,7 +608,7 @@ public class FamilyDetailsFragment extends Fragment {
 
 /*                if(bundle!=null)
                 {
-                    bundle.putString("fatherName",fatherName);
+                    bulinearlayout_addMoreFarmndle.putString("fatherName",fatherName);
                     bundle.putString("fatherMobileNo",fatherMobileNo);
                     bundle.putString("fatherOccupation",fatherOccupationId);
                     bundle.putString("fatherAnnualIncome",fatherAnnualIncome);
@@ -709,7 +711,7 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_sibling.append("<SiblingMaritalStatus>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.MARITAL_STATUS)) + "</SiblingMaritalStatus>");
                 stringBuilder_sibling.append("<InLawsFullName>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_NAME)) + "</InLawsFullName>");
                 stringBuilder_sibling.append("<InLawsMobileNo>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_MOBILE_NO)) + "</InLawsMobileNo>");
-                stringBuilder_sibling.append("<InLawsAddress>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsMobileNo>");
+                stringBuilder_sibling.append("<InLawsAddress>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsAddress>");
                 stringBuilder_sibling.append("<InLawsCountryId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsCountryId>");
                 stringBuilder_sibling.append("<InLawsStateId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsStateId>");
                 stringBuilder_sibling.append("<InLawsCityId>" + cursor_sibling.getString(cursor_sibling.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_VILLAGE)) + "</InLawsCityId>");
@@ -783,7 +785,7 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_mama.append("<MamaMobileNo>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.MOBILE_NO))+"</MamaMobileNo>");
                 stringBuilder_mama.append("<MamaAddress>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.ADDRESS))+"</MamaAddress>");
                 stringBuilder_mama.append("<MamaCountryId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.COUNTRY_ID))+"</MamaCountryId>");
-                    stringBuilder_mama.append("<MamaStateId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStateId>");
+                stringBuilder_mama.append("<MamaStateId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.STATE_ID))+"</MamaStateId>");
                 stringBuilder_mama.append("<MamaCityId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.CITY_ID))+"</MamaCityId>");
                 stringBuilder_mama.append("<MamaOccupationId>"+cursor_mama.getString(cursor_mama.getColumnIndex(SQLiteMamaDetails.OCCUPATION_ID))+"</MamaOccupationId>");
                 stringBuilder_mama.append("<MamaLanguageType>"+userModel.getLanguage()+"</MamaLanguageType>");
@@ -864,7 +866,7 @@ public class FamilyDetailsFragment extends Fragment {
                             }
                             else
                             {
-                                Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),jsonObject.getString("message").toString(),Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -892,7 +894,7 @@ public class FamilyDetailsFragment extends Fragment {
                 params.put("FatherFullname",fatherName);
                 params.put("FatherMobileNo",fatherMobileNo);
                 params.put("FatherAddress",fatherAddress);
-                params.put("FatherStatesID",fatherStateId);
+                params.put("FatherStateId",fatherStateId);
                 params.put("FatherCountryId",fatherCountryId);
                 params.put("FatherCityId",fatherCityId);
                 params.put("FatherQualificationId",fatherQualificationId);
@@ -925,9 +927,10 @@ public class FamilyDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
 
     }
 
@@ -968,7 +971,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                                     //editText_fatherAnnualIncome.setText(jsonObject.getString("AnnualIncomeFather"));
 
-                                    textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
+                                   // textView_fatherStateId.setText(jsonObject.getString("FatherStatesIDAPI"));
                                     //textView_fatherDistrictId.setText(jsonObject.getString("FatherDistrictIdAPI"));
                                     //textView_fatherTalukaId.setText(jsonObject.getString("FatherTalukasIdAPI"));
 
@@ -995,7 +998,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     textView_motherOccupationId.setText(jsonObject.getString("MotherOccupationIdAPI"));
 
                                     //editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
-                                    editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
+                                 //   editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
                                     textView_familyIncome.setText(jsonObject.getString("SalaryPackageId"));
 
                                     editText_relative1.setText(jsonObject.getString("Surname1"));
@@ -1003,6 +1006,14 @@ public class FamilyDetailsFragment extends Fragment {
                                     editText_relative3.setText(jsonObject.getString("Surname3"));
                                     editText_relative4.setText(jsonObject.getString("Surname4"));
 
+
+                                    textView_fatherCountryId.setText(jsonObject.getString("FatherCountryId"));
+                                    textView_fatherStateId.setText(jsonObject.getString("FatherStateId"));
+                                    textView_fatherCityId.setText(jsonObject.getString("FatherCityId"));
+
+                                    editText_fatherCountry.setText(jsonObject.getString("FatherCountryName"));
+                                    editText_fatherState.setText(jsonObject.getString("FatherStateName"));
+                                    editText_fatherCity.setText(jsonObject.getString("FatherCityName"));
 
                                     sqLiteMamaDetails.deleteAll();
                                     addPersonModelArrayList_mama.clear();
@@ -1023,12 +1034,12 @@ public class FamilyDetailsFragment extends Fragment {
                                                 jsonObject_details.getString("OccupationIdMama"),
                                                 jsonObject_details.getString("OccupationNameMama"),
                                                 jsonObject_details.getString("MamaAddressAPI"),
-                                                jsonObject_details.getString("StatesIdMama"),
-                                                jsonObject_details.getString("DistrictIdMama"),
-                                                jsonObject_details.getString("TalukasIdMama"),
-                                                jsonObject_details.getString("StatesNameMama"),
-                                                jsonObject_details.getString("DistrictNameMama"),
-                                                jsonObject_details.getString("TalukaNameMama"),
+                                                jsonObject_details.getString("MamaCountryName"),
+                                                jsonObject_details.getString("MamaCountryId"),
+                                                jsonObject_details.getString("MamaStateName"),
+                                                jsonObject_details.getString("MamaStateId"),
+                                                jsonObject_details.getString("MamaCityName"),
+                                                jsonObject_details.getString("MamaCityId"),
                                                 jsonObject_details.getString("IsAliveMama"));
 
 
@@ -1041,6 +1052,10 @@ public class FamilyDetailsFragment extends Fragment {
 
 
                                     }
+
+
+
+                                    sqLitePropertyDetails.deleteAll();
 
 
                                     sqLiteSiblingDetails.deleteAll();
@@ -1064,8 +1079,8 @@ public class FamilyDetailsFragment extends Fragment {
                                                 jsonObject_details.getString("OccupationNameSiblings"),
                                                 jsonObject_details.getString("MaritalStatus"),
                                                 jsonObject_details.getString("SiblingListIdAPI"),
-                                                jsonObject_details.getString("ReltionName"),
-                                                jsonObject_details.getString("InLawsFullNameAPI"), //change-> should be replaced with spouse Name
+                                                jsonObject_details.getString("SiblingSpouseName"),
+                                                jsonObject_details.getString("SiblingSpouseName"), //change-> should be replaced with spouse Name
                                                 jsonObject_details.getString("InLawsFullNameAPI"),
                                                 jsonObject_details.getString("InLawsMobileNoAPI"),
                                                 jsonObject_details.getString("InLawsAddressAPI"),
@@ -1092,7 +1107,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                                     sqLiteFarmDetails.deleteAll();
                                     addPersonModelArrayList_farm.clear();
-                                    addPersonAdapter_farm.notifyDataSetChanged();
+
 
                                     JSONArray jsonArray_farmDetails = jsonObject.getJSONArray("FarmDetailsLST");
 
@@ -1116,7 +1131,7 @@ public class FamilyDetailsFragment extends Fragment {
 
 
                                     }
-
+                                    addPersonAdapter_farm.notifyDataSetChanged();
                                     //farmRecyclerView();
 
 
@@ -1143,8 +1158,9 @@ public class FamilyDetailsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-
+                     //   Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),error.toString(),Toast.LENGTH_SHORT).show();
+                        Log.e("Error",error.toString());
                     }
                 }) {
             @Override
@@ -1154,9 +1170,10 @@ public class FamilyDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
 
 
     }

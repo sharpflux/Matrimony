@@ -261,6 +261,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
         imageView_profilePic = findViewById(R.id.imageView_profilePic);
 
+        recyclerView_recentlyViewed=findViewById(R.id.recyclerView_recentlyViewed);
+
         if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));

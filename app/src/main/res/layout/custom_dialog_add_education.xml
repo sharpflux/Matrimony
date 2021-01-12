@@ -134,7 +134,7 @@
 
 
 <!---->
-            <com.google.android.material.textfield.TextInputLayout
+        <!--    <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:theme="@style/TextLabel"
@@ -149,6 +149,29 @@
                     android:textColor="@color/text_black"
                     android:textSize="15sp"
                     android:inputType="text"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>-->
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/TextLabel"
+                android:layout_marginTop="15dp"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_institueName"
+                    android:hint="@string/institue_university"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp"
+                    android:inputType="textMultiLine"
+                    android:lineSpacingMultiplier="1.2"
+                    android:maxLines="5"
+                    android:scrollbars="none"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
