@@ -30,6 +30,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
+import com.example.matrimonyapp.adapter.CandidateQualificationAdapter;
 import com.example.matrimonyapp.adapter.DataFetcher;
 import com.example.matrimonyapp.customViews.CustomDialogAddEducation;
 import com.example.matrimonyapp.customViews.CustomDialogAddPercentage;
@@ -37,6 +38,7 @@ import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
 import com.example.matrimonyapp.customViews.CustomDialogAddYear;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.AddPersonModel;
+import com.example.matrimonyapp.modal.CandidateEducationModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteEducationDetails;
 import com.example.matrimonyapp.sqlite.SQLiteFarmDetails;
@@ -98,6 +100,10 @@ public class QualificationDetailsFragment extends Fragment {
     private RecyclerView recyclerView_addEducation;
     private AddPersonAdapter addPersonAdapter_education;
     private ArrayList<AddPersonModel> addPersonModelArrayList_education;
+
+    private ArrayList<CandidateEducationModel> candidateQualificationArrayList_education;
+    private CandidateQualificationAdapter Adapter_candidateQualification;
+
     private SQLiteEducationDetails sqLiteEducationDetails;
     private StringBuilder stringBuilder_education;
 
@@ -196,11 +202,13 @@ public class QualificationDetailsFragment extends Fragment {
 
         addPersonModelArrayList_education = new ArrayList<>();
 
+        candidateQualificationArrayList_education=new ArrayList<>();
+
         sqLiteEducationDetails = new SQLiteEducationDetails(getContext());
 
 
-        addPersonAdapter_education = new AddPersonAdapter(getContext(), addPersonModelArrayList_education, "Education");
-        recyclerView_addEducation.setAdapter(addPersonAdapter_education);
+        Adapter_candidateQualification = new CandidateQualificationAdapter(context,candidateQualificationArrayList_education);
+        recyclerView_addEducation.setAdapter(Adapter_candidateQualification);
         recyclerView_addEducation.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
         recyclerView_addEducation.setLayoutManager(linearLayoutManager_education);
@@ -269,7 +277,7 @@ public class QualificationDetailsFragment extends Fragment {
                 stringBuilder_education.append("<EducationLevelId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL_ID))+"</EducationLevelId>");
                 stringBuilder_education.append("<EducationNameId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_ID))+"</EducationNameId>");
                 stringBuilder_education.append("<NameOfInstitute>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.INSTITUTE_NAME))+"</NameOfInstitute>");
-                stringBuilder_education.append("<LowerQualificationPercentage>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PERCENTAGE))+"</LowerQualificationPercentage>");
+                stringBuilder_education.append("<LowerQualificationPercentage>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PERCENTAGE)).toString().replaceAll("%","").trim()+"</LowerQualificationPercentage>");
                 stringBuilder_education.append("<LowerQualificationPassingYear>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PASSING_YEAR))+"</LowerQualificationPassingYear>");
                 stringBuilder_education.append("<LowerQualificationLanguageType>"+userModel.getLanguage()+"</LowerQualificationLanguageType>");
 
@@ -307,8 +315,7 @@ public class QualificationDetailsFragment extends Fragment {
 
                             JSONObject jsonObject = new JSONObject(response);
 
-                            if(jsonObject.getString("message").equals("Success") &&
-                                    !jsonObject.getBoolean("error"))
+                            if(jsonObject.getString("message").equals("Success") && !jsonObject.getBoolean("error"))
                             {
                                 getDetails();
 
@@ -325,7 +332,7 @@ public class QualificationDetailsFragment extends Fragment {
                             }
                             else
                             {
-                                Toast.makeText(getContext(),"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),jsonObject.getString("message"),Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -407,6 +414,26 @@ public class QualificationDetailsFragment extends Fragment {
                                     sqLiteEducationDetails.deleteAll();
                                     addPersonModelArrayList_education.clear();
                                     addPersonAdapter_education.notifyDataSetChanged();
+
+                                    JSONArray jsonArray_education = jsonObject.getJSONArray("LowerQualificationLST");
+
+                                    for(int j=0; j< jsonArray_education.length(); j++) {
+                                        JSONObject jsonObject_details = jsonArray_education.getJSONObject(j);
+
+
+                                        long id = sqLiteEducationDetails.insertEducationDetails(
+                                                jsonObject_details.getString("LowerQualificationDetailId"),
+                                                jsonObject_details.getString("QualificationLevelName"),
+                                                jsonObject_details.getString("QualificationLevelId"),
+                                                jsonObject_details.getString("Qualification"),
+                                                jsonObject_details.getString("QualificationId"),
+                                                jsonObject_details.getString("NameOfInstitute"),
+                                                jsonObject_details.getString("PassingYear"),
+                                                jsonObject_details.getString("Percentage") );
+
+
+                                    }
+
 
                                     //editText_.setText(jsonObject.getString(""));
 

@@ -649,10 +649,6 @@ public class FamilyDetailsFragment extends Fragment {
 
     }
 
-
-
-
-
     void insertDetails()
     {
         final String father_isAlive = checkBox_fatherIsAlive.isChecked()? "1" : "0";
