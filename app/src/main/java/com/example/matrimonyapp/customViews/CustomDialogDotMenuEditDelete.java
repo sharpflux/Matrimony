@@ -106,7 +106,7 @@ public class CustomDialogDotMenuEditDelete extends Dialog {
                 }
                 else if(relation.equalsIgnoreCase("Education"))
                 {
-                    CustomDialogAddEducation customDialogAddEducation= new CustomDialogAddEducation(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position);
+                    CustomDialogAddEducation customDialogAddEducation= new CustomDialogAddEducation(context, id, details_id, addPersonAdapter, addPersonModelArrayList, position,null);
                     customDialogAddEducation.show();
                 }
                 else if(relation.equalsIgnoreCase("Language"))

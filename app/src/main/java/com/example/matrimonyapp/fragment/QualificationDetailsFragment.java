@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -207,11 +208,31 @@ public class QualificationDetailsFragment extends Fragment {
         sqLiteEducationDetails = new SQLiteEducationDetails(getContext());
 
 
+        addPersonAdapter_education = new AddPersonAdapter(getContext(), addPersonModelArrayList_education, "Sibling");
+        recyclerView_addEducation.setAdapter(addPersonAdapter_education);
+        recyclerView_addEducation.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
+        recyclerView_addEducation.setLayoutManager(linearLayoutManager_education);
+
+
+        ViewGroup.LayoutParams params = recyclerView_addEducation.getLayoutParams();
+        int complaint_height=200;
+        if (addPersonModelArrayList_education.size() > 2) {
+            params.height = ((addPersonModelArrayList_education.size() - 1) * 100) + complaint_height;
+        } else {
+            params.height = complaint_height+100;
+        }
+        recyclerView_addEducation.setLayoutParams(params);
+
+
+
+/*
         Adapter_candidateQualification = new CandidateQualificationAdapter(context,candidateQualificationArrayList_education);
         recyclerView_addEducation.setAdapter(Adapter_candidateQualification);
         recyclerView_addEducation.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
         recyclerView_addEducation.setLayoutManager(linearLayoutManager_education);
+*/
 
 
 
@@ -221,7 +242,7 @@ public class QualificationDetailsFragment extends Fragment {
             public void onClick(View view) {
 
                 customDialogAddEducation = new CustomDialogAddEducation(getContext(), "0", "0",
-                        addPersonAdapter_education, addPersonModelArrayList_education, 0);
+                        addPersonAdapter_education, addPersonModelArrayList_education, 0,recyclerView_addEducation);
                 customDialogAddEducation.show();
 
             }
@@ -369,6 +390,9 @@ public class QualificationDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
 
 
@@ -412,8 +436,12 @@ public class QualificationDetailsFragment extends Fragment {
                                     editText_socialContributions.setText(jsonObject.getString("Social_Contribution"));
 
                                     sqLiteEducationDetails.deleteAll();
+                                    candidateQualificationArrayList_education.clear();
+                                  //  Adapter_candidateQualification.notifyDataSetChanged();
+
                                     addPersonModelArrayList_education.clear();
-                                    addPersonAdapter_education.notifyDataSetChanged();
+
+
 
                                     JSONArray jsonArray_education = jsonObject.getJSONArray("LowerQualificationLST");
 
@@ -428,15 +456,43 @@ public class QualificationDetailsFragment extends Fragment {
                                                 jsonObject_details.getString("Qualification"),
                                                 jsonObject_details.getString("QualificationId"),
                                                 jsonObject_details.getString("NameOfInstitute"),
-                                                jsonObject_details.getString("PassingYear"),
-                                                jsonObject_details.getString("Percentage") );
+                                                jsonObject_details.getString("Percentage"),
+                                                jsonObject_details.getString("PassingYear") );
 
 
+
+                                        addPersonModelArrayList_education.add(new AddPersonModel(String.valueOf(id),
+                                                jsonObject_details.getString("QualificationLevelName"),
+                                                jsonObject_details.getString("Qualification"),
+                                                jsonObject_details.getString("NameOfInstitute")));
+
+
+                           /*             candidateQualificationArrayList_education.add(new
+                                                        CandidateEducationModel(  jsonObject_details.getString("LowerQualificationDetailId"),
+                                                jsonObject_details.getString("QualificationLevelId"),
+                                                jsonObject_details.getString("QualificationId"),
+                                                jsonObject_details.getString("QualificationLevelName"),
+                                                jsonObject_details.getString("Qualification"),
+                                                jsonObject_details.getString("NameOfInstitute"),
+                                                jsonObject_details.getString("Percentage"),
+                                                jsonObject_details.getString("PassingYear"))
+                                        );*/
                                     }
+
+                                    addPersonAdapter_education.notifyDataSetChanged();
+
+                                    ViewGroup.LayoutParams params = recyclerView_addEducation.getLayoutParams();
+                                    int complaint_height=200;
+                                    if (addPersonModelArrayList_education.size() > 2) {
+                                        params.height = ((addPersonModelArrayList_education.size() - 1) * 100) + complaint_height;
+                                    } else {
+                                        params.height = complaint_height+100;
+                                    }
+                                    recyclerView_addEducation.setLayoutParams(params);
 
 
                                     //editText_.setText(jsonObject.getString(""));
-
+                                    customDialogLoadingProgressBar.dismiss();
                                 }
 
 
@@ -447,10 +503,12 @@ public class QualificationDetailsFragment extends Fragment {
                                 qualificationDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
                                 Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                                customDialogLoadingProgressBar.dismiss();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            customDialogLoadingProgressBar.dismiss();
                         }
 
                     }
@@ -459,6 +517,7 @@ public class QualificationDetailsFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        customDialogLoadingProgressBar.dismiss();
 
                     }
                 }) {
@@ -469,10 +528,10 @@ public class QualificationDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
-
 
     }
 
@@ -528,7 +587,7 @@ public class QualificationDetailsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-
+            customDialogLoadingProgressBar.dismiss();
         }
 
 

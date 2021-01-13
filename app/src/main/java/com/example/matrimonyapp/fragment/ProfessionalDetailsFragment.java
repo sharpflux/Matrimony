@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -301,14 +302,17 @@ public class ProfessionalDetailsFragment extends Fragment {
     private void insertDetails()
     {
 
+      final  String CompanyOrDepartmentName;
         RadioButton radioButton_currentService = (RadioButton)view.findViewById(radioGroup_currentService.getCheckedRadioButtonId());
         if(radioButton_currentService==view.findViewById(R.id.radioButton_govermentService))
         {
             currentService = "1";
+            CompanyOrDepartmentName=editText_departmentName.getText().toString();
         }
         else
         {
             currentService = "2";
+            CompanyOrDepartmentName=editText_companyName.getText().toString();
         }
 /*        if(radioButton_currentService!=null)
         {
@@ -370,7 +374,7 @@ public class ProfessionalDetailsFragment extends Fragment {
                 params.put("UserId",userModel.getUserId());
                 //change -> add in API
                 params.put("ServiceTypeId",currentService);
-                params.put("CompanyName",editText_companyName.getText().toString());
+                params.put("CompanyName",CompanyOrDepartmentName.toString());
                 params.put("DesignationId",textView_designationId.getText().toString());
                 //params.put("DepartmentName",editText_departmentName.getText().toString());
                 params.put("ExperienceInYears",editText_experience.getText().toString());
@@ -385,6 +389,9 @@ public class ProfessionalDetailsFragment extends Fragment {
                 return params;
             }
         };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
 
@@ -414,18 +421,39 @@ public class ProfessionalDetailsFragment extends Fragment {
                                 {
                                     professionalDetailsId = jsonObject.getInt("ProfessionalDetailsId");
 
+                                    if(jsonObject.getString("ServiceTypeId").equals("1"))
+                                    {
+                                        editText_departmentName.setText(jsonObject.getString("CompanyName"));
+                                        ((RadioButton)radioGroup_currentService.getChildAt(0)).setChecked(true);
+                                    }
+                                    else
+                                    {
+                                        ((RadioButton)radioGroup_currentService.getChildAt(1)).setChecked(true);
+                                        editText_companyName.setText(jsonObject.getString("CompanyName"));
+                                    }
 
-                                    textView_occupationId.setText(jsonObject.getString("OccupationId"));
+
+                                    //textView_occupationId.setText(jsonObject.getString("OccupationId"));
                                     textView_designationId.setText(jsonObject.getString("DesignationId"));
 
                                     editText_occupation.setText(jsonObject.getString("OccupationName"));
                                     editText_designation.setText(jsonObject.getString("DesignationName"));
+
+                                    textView_designationId.setText(jsonObject.getString("DesignationId"));
+
                                     editText_companyName.setText(jsonObject.getString("CompanyName"));
                                     //editText_percentage.setText(jsonObject.getString("OtherCommunity"));
                                     editText_companyAddress.setText(jsonObject.getString("CompanyAddress"));
-                                    editText_experience.setText(jsonObject.getString("Experience"));
-                                    editText_income.setText(jsonObject.getString("MonthlyIncome"));
+                                    editText_experience.setText(jsonObject.getString("ExperienceInYears"));
+                                    editText_income.setText(jsonObject.getString("SalaryPackageName"));
+                                    textView_income.setText(jsonObject.getString("SalaryPackageId"));
 
+                                    editText_country.setText(jsonObject.getString("CompanyName"));
+                                    textView_countryId.setText(jsonObject.getString("CountryId"));
+                                    editText_state.setText(jsonObject.getString("StateName"));
+                                    textView_stateId.setText(jsonObject.getString("StateId"));
+                                    editText_city.setText(jsonObject.getString("CityName"));
+                                    textView_cityId.setText(jsonObject.getString("CityId"));
 
 
                                 }
@@ -460,11 +488,10 @@ public class ProfessionalDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
-
-
     }
 
     private class AsyncTaskLoad extends AsyncTask<String, String, String> {
@@ -483,7 +510,7 @@ public class ProfessionalDetailsFragment extends Fragment {
                 }
                 else if(params[0].toString().equals("insertDetails"))
                 {
-                   // insertDetails();
+                    insertDetails();
 
                     PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
                     // personalDetailsFragment.setArguments(bundle);

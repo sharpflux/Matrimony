@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +26,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
@@ -75,10 +78,10 @@ public class CustomDialogAddEducation extends Dialog {
     private ArrayList<AddPersonModel> addPersonModelArrayList;
     private int position;
     private CustomDialogAddPercentage customDialogAddPercentage;
-
+    private RecyclerView RecyclerView_addEducation;
 
     public CustomDialogAddEducation(Context context, String id, String education_details_id,  AddPersonAdapter addPersonAdapter,
-                               ArrayList<AddPersonModel> addPersonModelArrayList, int position)
+                               ArrayList<AddPersonModel> addPersonModelArrayList, int position,RecyclerView recyclerView_addEducation)
     {
         super(context);
         this.context = context;
@@ -87,6 +90,7 @@ public class CustomDialogAddEducation extends Dialog {
         this.addPersonAdapter = addPersonAdapter;
         this.addPersonModelArrayList = addPersonModelArrayList;
         this.position = position;
+        this.RecyclerView_addEducation=recyclerView_addEducation;
     }
 
 
@@ -227,7 +231,14 @@ public class CustomDialogAddEducation extends Dialog {
                         Toast.makeText(context, "Value Updated & id is " + res, Toast.LENGTH_SHORT).show();
                         addPersonModelArrayList.set(position, new AddPersonModel(String.valueOf(id), education_details_id, educationLevel, instituteName));
                         addPersonAdapter.notifyDataSetChanged();
-
+                        ViewGroup.LayoutParams params = RecyclerView_addEducation.getLayoutParams();
+                        int complaint_height=200;
+                        if (position > 2) {
+                            params.height = ((position- 1) * 100) + complaint_height;
+                        } else {
+                            params.height = complaint_height+100;
+                        }
+                        RecyclerView_addEducation.setLayoutParams(params);
 
                     } else {
                         Toast.makeText(context, "Error in sqlite updation", Toast.LENGTH_SHORT).show();

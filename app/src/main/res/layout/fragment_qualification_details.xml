@@ -364,7 +364,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/recyclerView_addEducation"
                             android:background="@color/white"
 
@@ -382,8 +382,8 @@
                             >
 
                             <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
+                                android:layout_width="335dp"
+                                android:layout_height="30dp"
                                 android:layout_weight="1"
                                 android:text="@string/add_more"
                                 android:textColor="@color/text_black"
