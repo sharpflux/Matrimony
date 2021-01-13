@@ -43,7 +43,7 @@ public class URLs {
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";
 
-        public static final String URL_GET_FAMILYDETAILS        = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
+    public static final String URL_GET_FAMILYDETAILS            = MainURL+"api/FamilyDetailsAPI/GetUserFamilyDetailsAPI?";
     public static final String URL_POST_FAMILYDETAILS           = MainURL+"api/FamilyDetailsAPI/FamilyDetailsInsertUpdate";
 
     public static final String URL_GET_QUALIFICATIONDETAILS     = MainURL+"api/QualificationDetailsAPI/GetUserQualificationDetailsAPI?";

@@ -170,7 +170,7 @@ public class ViewQualificationDetailsFragment extends Fragment {
     {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+ userId +"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+ 18 +"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -258,7 +258,7 @@ public class ViewQualificationDetailsFragment extends Fragment {
     {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+11+"&Language="+userModel.getLanguage(),
+                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+18+"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
