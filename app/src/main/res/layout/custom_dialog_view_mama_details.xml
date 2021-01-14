@@ -9,7 +9,6 @@
     android:layout_marginBottom="40dp"
     android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp"
-
     >
 
     <include
@@ -71,7 +70,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/Bold_TextView"
-                        android:text="@string/siblings_details"
+                        android:text="@string/mama_details"
                         android:textSize="15sp"
                         />
                 </LinearLayout>
@@ -100,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/NormalLeft_TextView"
-                        android:text="@string/siblings_name"
+                        android:text="@string/is_alive"
 
 
                         />
@@ -108,7 +107,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_siblingName"
+                        android:id="@+id/textView_mamaAlive"
                         android:layout_weight="1"
                         android:text="@string/dash"
                         style="@style/NormalRight_TextView"
@@ -126,14 +125,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/NormalLeft_TextView"
-                        android:text="@string/relation"
+                        android:text="@string/name"
 
                         />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_relation"
+                        android:id="@+id/textView_name"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
                         android:text="@string/dash"/>
@@ -165,61 +164,16 @@
 
                 </LinearLayout>
 
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
 
-                    <TextView
-                        style="@style/NormalLeft_TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/birthdate" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_birthdate"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
 
-                        />
-                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/NormalLeft_TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/qualification" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_qualification"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
                     >
 
                     <TextView
@@ -242,72 +196,11 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
-                        android:text="@string/marital_status"
-
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_maritalStatus"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-                        />
-                </LinearLayout>
-
-
-
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="5dp"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
-                        android:text="@string/spouse_name"
-
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_spouseName"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-                        />
-                </LinearLayout>
-
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/linearLayout_fatherInLaw"
                 android:orientation="vertical"
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp"
@@ -339,7 +232,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/Bold_TextView"
-                        android:text="@string/father_in_law_information"
+                        android:text="@string/address_details"
                         android:textSize="15sp"
                         />
                 </LinearLayout>
@@ -368,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/NormalLeft_TextView"
-                        android:text="@string/name"
+                        android:text="@string/address_"
 
 
                         />
@@ -376,64 +269,13 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherInLawName"
+                        android:id="@+id/textView_address"
                         android:layout_weight="1"
                         android:text="@string/dash"
                         style="@style/NormalRight_TextView"
                         />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
-                        android:text="@string/mobile_"
-
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherInLawMobileNo"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"/>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/NormalLeft_TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/address_" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherInLawAddress"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-
-                        />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -454,7 +296,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherInLawCountry"
+                        android:id="@+id/textView_country"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
                         android:text="@string/dash"
@@ -481,15 +323,12 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherInLawState"
+                        android:id="@+id/textView_state"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
                         android:text="@string/dash"
                         />
                 </LinearLayout>
-
-
-
 
 
 
@@ -514,7 +353,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherInLawCity"
+                        android:id="@+id/textView_city"
                         android:layout_weight="1"
                         style="@style/NormalRight_TextView"
                         android:text="@string/dash"
@@ -522,9 +361,231 @@
                 </LinearLayout>
 
 
+
+
             </LinearLayout>
+            <!-- <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:paddingTop="5dp"
+                 android:paddingBottom="10dp"
+                 android:layout_gravity="center"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginBottom="20dp"
+                 android:background="@color/white"
+                 >
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     android:layout_marginTop="10dp"
+                     >
+
+                     <ImageView
+                         android:layout_width="35dp"
+                         android:layout_height="35dp"
+                         android:padding="10dp"
+                         android:background="@drawable/circle_image_border"
+                         android:layout_marginStart="10dp"
+                         android:src="@drawable/quote1"
+                         android:tint="@color/text_gray"
+
+                         />
+
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         style="@style/Bold_TextView"
+                         android:text="@string/father_in_law_information"
+                         android:textSize="15sp"
+                         />
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="1dp"
+                     android:layout_marginTop="8dp"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginEnd="10dp"
+                     android:orientation="horizontal"
+                     android:background="@drawable/shadow_down"
+                     />
+
+
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:orientation="horizontal"
+                     >
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         style="@style/NormalLeft_TextView"
+                         android:text="@string/name"
+
+
+                         />
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/textView_fatherInLawName"
+                         android:layout_weight="1"
+                         android:text="@string/dash"
+                         style="@style/NormalRight_TextView"
+                         />
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:orientation="horizontal"
+                     >
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         style="@style/NormalLeft_TextView"
+                         android:text="@string/mobile_"
+
+                         />
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/textView_fatherInLawMobileNo"
+                         android:layout_weight="1"
+                         style="@style/NormalRight_TextView"
+                         android:text="@string/dash"/>
+
+                 </LinearLayout>
+
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:orientation="horizontal"
+                     >
+
+                     <TextView
+                         style="@style/NormalLeft_TextView"
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         android:text="@string/address_" />
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/textView_fatherInLawAddress"
+                         android:layout_weight="1"
+                         style="@style/NormalRight_TextView"
+                         android:text="@string/dash"
+
+                         />
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:orientation="horizontal"
+                     >
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         style="@style/NormalLeft_TextView"
+                         android:text="@string/country"
+
+                         />
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/textView_fatherInLawCountry"
+                         android:layout_weight="1"
+                         style="@style/NormalRight_TextView"
+                         android:text="@string/dash"
+                         />
+                 </LinearLayout>
+
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:orientation="horizontal"
+                     >
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         style="@style/NormalLeft_TextView"
+                         android:text="@string/_state"
+
+                         />
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/textView_fatherInLawState"
+                         android:layout_weight="1"
+                         style="@style/NormalRight_TextView"
+                         android:text="@string/dash"
+                         />
+                 </LinearLayout>
+
+
+
+
+
+
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:orientation="horizontal"
+                     android:layout_marginBottom="5dp"
+                     >
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:layout_weight="1"
+                         style="@style/NormalLeft_TextView"
+                         android:text="@string/_city"
+
+                         />
+
+                     <TextView
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/textView_fatherInLawCity"
+                         android:layout_weight="1"
+                         style="@style/NormalRight_TextView"
+                         android:text="@string/dash"
+                         />
+                 </LinearLayout>
+
+
+             </LinearLayout>-->
 
         </LinearLayout>
+
+
 
 
     </ScrollView>

@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.customViews.CustomDialogChangeLanguage;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
@@ -52,8 +53,11 @@ public class LoginActivity extends AppCompatActivity {
     String password, mobileNo;
     private String currentLanguage;
 
+    CustomDialogChangeLanguage customDialogChangeLanguage;
+
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    private Bundle bundle;
 
 
     @Override
@@ -68,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
+
 
 
         editText_mobileNo = findViewById(R.id.editText_mobileNo);
@@ -122,6 +127,29 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+        customDialogChangeLanguage = new CustomDialogChangeLanguage(LoginActivity.this);
+
+        bundle = getIntent().getExtras();
+        if(bundle!=null)
+        {
+            if (bundle.getString("ActivityState").equals("started"))
+            {
+                customDialogChangeLanguage.show();
+            }
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(customDialogChangeLanguage.isShowing())
+        {
+            customDialogChangeLanguage.dismiss();
+        }
 
     }
 
@@ -200,7 +228,17 @@ public class LoginActivity extends AppCompatActivity {
                                     userModel.setBirthdate(jsonObject.getString("DateOfBirth"));
                                     userModel.setGender(jsonObject.getString("Gender"));
                                     userModel.setProfilePic(jsonObject.getString("ProfileImage"));
-                                    userModel.setLanguage(jsonObject.getString("LanguageType"));
+
+
+                                    if(bundle.containsKey("locale"))
+                                    {
+                                        userModel.setLanguage(bundle.getString("locale"));
+                                    }
+                                    else {
+                                        userModel.setLanguage("en");
+                                    }
+
+
                                             /* new UserModel(jsonObject.getString("UserId"),
                                             jsonObject.getString("FullName"),
                                             jsonObject.getString("MobileNo"),

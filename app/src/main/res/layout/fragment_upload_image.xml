@@ -33,42 +33,38 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="29.7dp"
-                    android:layout_marginStart="29.7dp"
-                    android:orientation="horizontal"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
+                    android:orientation="vertical"
                     android:baselineAligned="false"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
-                    >
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-
+                    android:id="@+id/linearLayout_addPhoto"
                     >
 
 
                 <RelativeLayout
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
                     android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="30dp"
                 >
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_image"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="0dp"
-                        android:src="@drawable/noimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="300dp"
+                        android:maxHeight="600dp"
+                        android:src="@color/quantum_grey100"
                         app:civ_border_color="@color/transparent"
                         app:civ_border_width="0.2dp" />
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="15dp"
@@ -76,6 +72,7 @@
                         android:src="@drawable/add8"
                         app:civ_border_color="@color/white"
                         app:civ_border_width="0.5dp"
+
                         app:civ_circle_background_color="@color/white" />
 
                     <!-- <de.hdodenhof.circleimageview.CircleImageView
@@ -98,11 +95,14 @@
                         android:gravity="center"
                         android:minWidth="190dp"
                         android:textStyle="bold"
-                        android:text="Saloni Jagtap"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="13dp"
+
+                        android:background="@drawable/gray_outline"
+                        android:text="@string/add_profile_photo"
                         android:textColor="@color/text_black"
                         android:textSize="14sp" />
 
-                </LinearLayout>
 
 
 
@@ -139,6 +139,7 @@
                     android:theme="@style/TextLabel"
                     android:layout_weight="1"
                     android:layout_marginEnd="10dp"
+                    android:visibility="gone"
                     >
 
                     <EditText
@@ -169,6 +170,7 @@
                         android:layout_gravity="center_vertical"
                         android:tint="@color/text_gray"
                         android:padding="6dp"
+                        android:visibility="gone"
                         />
 
                 </LinearLayout>
@@ -196,6 +198,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="20dp"
+    android:visibility="gone"
     >
 
     <TextView
@@ -264,7 +267,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="15dp"
-
+                    android:visibility="gone"
                     android:background="@drawable/shadow_down"
                     />
 
@@ -276,6 +279,7 @@
                     android:id="@+id/gridView_gallery"
                     android:numColumns="3"
                     android:layout_marginBottom="50dp"
+                    android:visibility="gone"
                     >
                 </GridView>
 

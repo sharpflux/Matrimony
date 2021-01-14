@@ -301,6 +301,13 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, ViewProfileActivity.class);
+                intent.putExtra("userId", item.getUserId());
+                intent.putExtra("userName", item.getUserName());
+                intent.putExtra("userProfilePic", item.getProfilePic());
+                intent.putExtra("userQualification", item.getUserQualification());
+                intent.putExtra("userOccupation", item.getUserOccupation());
+                intent.putExtra("userCompany", item.getUserCompany());
+                intent.putExtra("userAge", item.getUserAge());
                 context.startActivity(intent);
 
             }

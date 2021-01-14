@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Base64;
 import android.view.View;
 import android.widget.DatePicker;
@@ -59,13 +60,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SignUp extends AppCompatActivity {
 
     private EditText editText_birthdate, editText_age, editText_fullName,
-            editText_mobileNo,  editText_emailId, editText_password;
+            editText_mobileNo,  editText_emailId, editText_password, editText_confirmPassword;
 
     RadioGroup radioGroup_gender;
 
     CustomDialogAccountExists customDialogAccountExists;
 
-    TextView textView_signUp, textView_backToSignIn;
+    TextView textView_signUp, textView_backToSignIn, textView_showPassword, textView_showConfirmPassword;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -100,6 +101,9 @@ public class SignUp extends AppCompatActivity {
         editText_mobileNo = findViewById(R.id.editText_mobileNo);
         editText_emailId = findViewById(R.id.editText_emailId);
         editText_password = findViewById(R.id.editText_password);
+        editText_confirmPassword = findViewById(R.id.editText_confirmPassword);
+        textView_showPassword = findViewById(R.id.textView_showPassword);
+        textView_showConfirmPassword = findViewById(R.id.textView_showConfirmPassword);
         textView_signUp = findViewById(R.id.textView_signUp);
         textView_backToSignIn = findViewById(R.id.textView_backToSignIn);
         FieldValidation.validateRadioGroup(radioGroup_gender);
@@ -110,7 +114,8 @@ public class SignUp extends AppCompatActivity {
 
 
 
-
+        showPassword(textView_showPassword, editText_password);
+        showPassword(textView_showConfirmPassword, editText_confirmPassword);
 
 
         relativeLayout_changeProfilePic.setOnClickListener(new View.OnClickListener() {
@@ -124,11 +129,21 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(checkProfilePic() && checkRequiredFields(editText_fullName, editText_mobileNo, editText_emailId, editText_birthdate, editText_password)) {
-                   // verifyMobileNo();
-                    AsyncTaskRunner runner = new AsyncTaskRunner();
-                    runner.execute("verifyMobileNo");
+                if(editText_password.getText().toString().equals(editText_confirmPassword.getText().toString()))
+                {
+                    if(checkProfilePic() && checkRequiredFields(editText_fullName, editText_mobileNo, editText_birthdate, editText_password, editText_confirmPassword)) {
+                        // verifyMobileNo();
+                        AsyncTaskRunner runner = new AsyncTaskRunner();
+                        runner.execute("verifyMobileNo");
+                    }
+
                 }
+                else
+                {
+                    Toast.makeText(SignUp.this, getResources().getString(R.string.password_confirm_password_doesnt_match), Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
         });
@@ -193,6 +208,26 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    private void showPassword(final TextView textView, final EditText editText) {
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(textView.getText().equals(getResources().getString(R.string._show)))
+                {
+                    editText.setTransformationMethod(null);
+                    textView.setText(getResources().getString(R.string._hide));
+                }
+                else
+                {
+                    editText.setTransformationMethod(new PasswordTransformationMethod());
+                    textView.setText(getResources().getString(R.string._show));
+                }
+            }
+        });
+
+
+    }
 
 
     private void changeProfilepicDialog() {

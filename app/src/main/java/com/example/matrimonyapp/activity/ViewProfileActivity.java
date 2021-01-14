@@ -103,6 +103,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         }
 
 
+
+
+
         imageView_back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,14 +173,17 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         arrayList_singleImage = new ArrayList<SingleImage>();
 
-        for(int i=0; i<9; i++) {
-            mArrayUri.add(uri);
-            SingleImage singleImage = new SingleImage(uri.toString());
-            arrayList_singleImage.add(singleImage);
+        ArrayList <String> sliderImages = new ArrayList<>();
+        for(int i=0; i<5; i++)
+        {
+            //mArrayUri.add(uri);
+            //SingleImage singleImage = new SingleImage(uri.toString());
+            sliderImages.add(bundle.getString("userProfilePic"));
 
         }
 
-        viewPager2_singleImage.setAdapter(new ImageSliderAdapter(arrayList_singleImage,viewPager2_singleImage));
+        viewPager2_singleImage.setAdapter(new ImageSliderAdapter(ViewProfileActivity.this,
+                sliderImages,viewPager2_singleImage));
 
         viewPager2_settings();
 

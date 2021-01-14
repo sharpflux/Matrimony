@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/quantum_grey300"
+    tools:targetApi="lollipop">
+<item>
+
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <stroke android:color="#959393"
@@ -7,3 +14,6 @@
     <corners android:radius="2.3dp"/>
 
 </shape>
+
+</item>
+</ripple>

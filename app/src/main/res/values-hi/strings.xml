@@ -50,6 +50,7 @@
     <string name="postal_code">डाक कोड *</string>
     <string name="address_type">पता प्रकार</string>
     <string name="email">ईमेल आईडी *</string>
+    <string name="_email">ईमेल आईडी </string>
     <string name="alt_email">वैकल्पिक ईमेल आईडी दर्ज करें*</string>
     <string name="search_state"> राज्य खोजें</string>
     <string name="Open"> खुला हुआ</string>
@@ -403,6 +404,15 @@
     <string name="working_city">Working City</string>
     <string name="working_state">Working State</string>
     <string name="working_country">Working Country</string>
+    <string name="property_address">Property Address</string>
+    <string name="address_details">Address Details</string>
+    <string name="confirm_password">Confirm Password *</string>
+    <string name="_show">Show</string>
+    <string name="_hide">Hide</string>
+    <string name="view">View</string>
+
+    <string name="password_confirm_password_doesnt_match">Password and Confirm Password doesn\'t match</string>
+    <string name="birthdate1">Birthdate *</string>
 
 
 </resources>

@@ -51,6 +51,7 @@
     <string name="postal_code">पिनकोड *</string>
     <string name="address_type">पत्त्याचा प्रकार</string>
     <string name="email">ई - मेल आयडी *</string>
+    <string name="_email">ई - मेल आयडी </string>
     <string name="alt_email">वैकल्पिक ईमेल आयडी</string>
     <string name="search_state">शोध राज्य</string>
     <string name="Open">उघडा</string>
@@ -405,6 +406,15 @@
     <string name="working_city">Working City</string>
     <string name="working_state">Working State</string>
     <string name="working_country">Working Country</string>
+    <string name="property_address">Property Address</string>
+    <string name="address_details">Address Details</string>
+    <string name="confirm_password">Confirm Password *</string>
+    <string name="_show">Show</string>
+    <string name="_hide">Hide</string>
+    <string name="view">View</string>
+
+    <string name="password_confirm_password_doesnt_match">Password and Confirm Password doesn\'t match</string>
+    <string name="birthdate1">Birthdate *</string>
 
 
 </resources>

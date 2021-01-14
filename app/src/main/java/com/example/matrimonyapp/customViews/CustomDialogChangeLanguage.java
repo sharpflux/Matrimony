@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.LanguageAdapter;
 import com.example.matrimonyapp.modal.UserModel;
@@ -41,7 +42,8 @@ public class CustomDialogChangeLanguage extends Dialog {
     public TextView textView_english, textView_marathi, textView_hindi;
     private RecyclerView recyclerView_language;
     private LanguageAdapter languageAdapter;
-
+    private UserModel userModel;
+    public Locale locale;
 
 
     public CustomDialogChangeLanguage(Context context) {
@@ -77,15 +79,15 @@ public class CustomDialogChangeLanguage extends Dialog {
 
         setContentView(R.layout.custom_dialog_change_language);
 
-
-
+        userModel = CustomSharedPreference.getInstance(context).getUser();
+        
         setCanceledOnTouchOutside(true);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-/*        textView_english = findViewById(R.id.textView_english);
+        textView_english = findViewById(R.id.textView_english);
         textView_marathi = findViewById(R.id.textView_marathi);
-        textView_hindi = findViewById(R.id.textView_hindi);*/
-        recyclerView_language = findViewById(R.id.recyclerView_language);
+        textView_hindi = findViewById(R.id.textView_hindi);
+/*        recyclerView_language = findViewById(R.id.recyclerView_language);
 
         arrayList_languages = new ArrayList<>();
         arrayList_languages.add(context.getResources().getString(R.string.english));
@@ -98,28 +100,96 @@ public class CustomDialogChangeLanguage extends Dialog {
         recyclerView_language.setAdapter(languageAdapter);
         recyclerView_language.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-        recyclerView_language.setLayoutManager(mLayoutManager);
-
-
-
-
-
-        /*textView_english.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "English", Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-
-
+        recyclerView_language.setLayoutManager(mLayoutManager);*/
+        
+        
+        
+        changeLanguage(textView_english,"en");
+        changeLanguage(textView_marathi,"mr");
+        changeLanguage(textView_hindi,"hi");
 
 
     }
 
+    private void changeLanguage(TextView textView, final String localeName)
+    {
+        
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+                setLocale(localeName);
+                
+            }
+        });
+        
+    }
+    public void setLocale(String localeName) {
+
+        UserModel userModel = CustomSharedPreference.getInstance(context).getUser();
+        locale = new Locale(localeName);
+        Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = locale;
+
+
+
+        res.updateConfiguration(conf, dm);
+
+
+        ((Activity)context).recreate();
+        userModel.setLanguage(localeName);
+        CustomSharedPreference.getInstance(context).saveUser(userModel);
+
+
+
+        Intent intent = ((Activity)context).getIntent();
+        intent.putExtra("ActivityState","refresh");
+        intent.putExtra("locale",localeName);
+        ((Activity)context).finish();
+        ((Activity)context).startActivity(intent);
 
 
 
 
+
+
+
+
+
+
+
+        //if (!localeName.equals(currentLanguage))
+        {
+            /*myLocale = new Locale(localeName);
+            Resources res = context.getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+
+            res.updateConfiguration(conf, dm);
+
+           *//* SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+            finish();*//*
+*//*
+            Intent refresh = new Intent(context, LoginActivity.class);
+            refresh.putExtra("ActivityState", "refreshed");
+            context.startActivity(refresh);
+*//*
+
+
+            //finish();
+            //((Activity)context).recreate();
+            userModel.setLanguage(localeName);*/
+
+         //   CustomSharedPreference.getInstance(context).saveUser(userModel);
+
+
+        }/* else
+            {
+            Toast.makeText(context, "Language already selected!", Toast.LENGTH_SHORT).show();
+        }
+*/    }
 
 }

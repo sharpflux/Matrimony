@@ -79,6 +79,8 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Single
                     setLocale("hi");
                 }
 
+                customDialogChangeLanguage.dismiss();
+
             }
         });
 
@@ -110,7 +112,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Single
             userModel.setLanguage(localeName);
 
             CustomSharedPreference.getInstance(context).saveUser(userModel);
-            customDialogChangeLanguage.dismiss();
+
 
         }/* else
             {

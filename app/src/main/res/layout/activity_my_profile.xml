@@ -486,6 +486,8 @@ android:visibility="gone"
 
                         >
 
+
+                            <!--Add Bio-->
                             <LinearLayout
                                 android:layout_width="210dp"
                                 android:layout_height="wrap_content"
@@ -498,6 +500,7 @@ android:visibility="gone"
                                 android:paddingTop="10dp"
                                 android:paddingEnd="10dp"
                                 android:background="@drawable/rounded_corner_gray_border"
+                                android:visibility="gone"
                                 >
 
 

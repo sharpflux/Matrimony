@@ -150,7 +150,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         recyclerView_timeline.setLayoutManager(mLayoutManager);
         //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
 
-        for(int i=0; i<5; i++)
+        /*for(int i=0; i<5; i++)
         {
             TimelineModel timelineModel = new TimelineModel();
             timelineModel.setUserName("Dipti Gunjal");
@@ -161,7 +161,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             timelineModel.setUserQualification("MCOM");
             timelineModel.setProfilePic("Verifications/regiProfileImage/4.webp");
             arrayList_recentlyviewed.add(timelineModel);
-        }
+        }*/
 
         recentlyViewedAdapter = new RecentlyViewedAdapter(this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
         recyclerView_recentlyViewed.setAdapter(recentlyViewedAdapter);
@@ -572,6 +572,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                             Log.d("RESPONSE",response);
                             //converting response to json object
                             JSONObject jsonObject = new JSONObject(response);
+                            arrayList_recentlyviewed.clear();
 
                             JSONArray jsonArray = jsonObject.getJSONArray("Registrations");
 
@@ -591,7 +592,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                     timelineModel.setUserOccupation(userJson.getString("OccupationName"));
                                     timelineModel.setUserQualification(userJson.getString("Qualification"));
                                     timelineModel.setUserEmail(userJson.getString("EmailId"));
+                                    timelineModel.setUserAge(userJson.getString("Age"));
+                                    timelineModel.setUserCompany("Infosys");
                                     timelineModelList.add(timelineModel);
+
+                                    arrayList_recentlyviewed.add(timelineModel);
                                 }
                                 //   getDetails();
                                 ///getProfilePic();
@@ -599,6 +604,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                 timelineAdapter.notifyDataSetChanged();
                                 customDialogLoadingProgressBar.dismiss();
 
+
+                                recentlyViewedAdapter.notifyDataSetChanged();
                                // Toast.makeText(HomeActivity.this,"Received successfully!", Toast.LENGTH_SHORT).show();
 
                             }

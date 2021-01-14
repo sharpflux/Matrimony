@@ -148,7 +148,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
         addPersonModelArrayList_languageKnown = new ArrayList<>();
-        viewDetails_languageKnown = new ViewMultipleDetailsAdapter(getContext(), addPersonModelArrayList_languageKnown, "ViewLanguage");
+        viewDetails_languageKnown = new ViewMultipleDetailsAdapter(getContext(), addPersonModelArrayList_languageKnown, "Language");
         recyclerView_addLanguageKnown.setAdapter(viewDetails_languageKnown);
         recyclerView_addLanguageKnown.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
@@ -235,6 +235,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
                                     textView_alternetMobileNo.setText(jsonObject.getString("AlternateNo"));
                                     textView_emailId.setText(jsonObject.getString("EmailId"));
                                     textView_age.setText(jsonObject.getString("Age"));
+                                    textView_gender.setText(jsonObject.getString("Gender"));
                                     textView_alternetEmailId.setText(jsonObject.getString("AlternateEmail"));
 
                                     textView_permanentAddress.setText(jsonObject.getString("PermanantAddress"));

@@ -168,13 +168,14 @@
                     android:layout_height="wrap_content"
                     android:theme="@style/TextLabel"
                     android:layout_marginTop="15dp"
+                    android:visibility="gone"
                     >
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_dosh"
-                        android:hint="@string/dosh"
+                        android:hint="@string/_0"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:inputType=""

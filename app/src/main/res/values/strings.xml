@@ -50,6 +50,7 @@
     <string name="postal_code">Postal code *</string>
     <string name="address_type">Address Type</string>
     <string name="email">Email Id *</string>
+    <string name="_email">Email Id </string>
     <string name="alt_email">Alternate Email Id</string>
     <string name="search_state"> Search State</string>
     <string name="Open"> Open</string>
@@ -402,6 +403,13 @@
     <string name="working_state">Working State</string>
     <string name="working_country">Working Country</string>
     <string name="view">View</string>
+    <string name="property_address">Property Address</string>
+    <string name="address_details">Address Details</string>
+    <string name="confirm_password">Confirm Password *</string>
+    <string name="_show">Show</string>
+    <string name="_hide">Hide</string>
+    <string name="password_confirm_password_doesnt_match">Password and Confirm Password doesn\'t match</string>
+    <string name="birthdate1">Birthdate *</string>
 
 
 </resources>

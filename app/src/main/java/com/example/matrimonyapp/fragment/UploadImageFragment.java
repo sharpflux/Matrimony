@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +72,7 @@ public class UploadImageFragment extends Fragment {
     List<String> imagesEncodedList;
     private GridView gvGallery;
     private GalleryAdapter galleryAdapter;
-
+    LinearLayout linearLayout_addPhoto;
 
     public UploadImageFragment() {
         // Required empty public constructor
@@ -108,6 +109,7 @@ public class UploadImageFragment extends Fragment {
         //textView_uploadImage = view.findViewById(R.id.textView_upload);
         imageView_upload = view.findViewById(R.id.profile_image);
         imageView_addNew = view.findViewById(R.id.imageView_addNew);
+        linearLayout_addPhoto = view.findViewById(R.id.linearLayout_addPhoto);
 
         gvGallery = view.findViewById(R.id.gridView_gallery);
 

@@ -17,7 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.customViews.CustomDialogAddSibling;
 import com.example.matrimonyapp.customViews.CustomDialogDotMenuEditDelete;
+import com.example.matrimonyapp.customViews.CustomDialogViewFarm;
 import com.example.matrimonyapp.customViews.CustomDialogViewLanguageKnown;
+import com.example.matrimonyapp.customViews.CustomDialogViewMama;
+import com.example.matrimonyapp.customViews.CustomDialogViewProperty;
 import com.example.matrimonyapp.customViews.CustomDialogViewSibling;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.ChatModel;
@@ -64,6 +67,12 @@ public class ViewMultipleDetailsAdapter extends RecyclerView.Adapter<ViewMultipl
         holder.textView_address.setText(model.getAddress());
         //holder.textView_qualification.setText(model.getQualification());
 
+        if(viewDialog.equals("Language"))
+        {
+            holder.textView_view.setVisibility(View.GONE);
+        }
+
+
         holder.textView_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,31 +87,31 @@ public class ViewMultipleDetailsAdapter extends RecyclerView.Adapter<ViewMultipl
                 }
                 else if(viewDialog.equals("Language"))
                 {
-                    CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
+                    /*CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
                             new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
                                     ViewMultipleDetailsAdapter.this, list, position);
-                    customDialogViewLanguageKnown.show();
+                    customDialogViewLanguageKnown.show();*/
                 }
                 else if(viewDialog.equals("Property"))
                 {
-                    /*CustomDialogViewProperty customDialogViewProperty =
+                    CustomDialogViewProperty customDialogViewProperty =
                             new CustomDialogViewProperty(context, model.getId(),  model.getDetails_id(),
                                     ViewMultipleDetailsAdapter.this, list, position);
-                    customDialogViewProperty.show();*/
+                    customDialogViewProperty.show();
                 }
                 else if(viewDialog.equals("Mama"))
                 {
-                    CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
-                            new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
+                    CustomDialogViewMama customDialogViewMama =
+                            new CustomDialogViewMama(context, model.getId(),  model.getDetails_id(),
                                     ViewMultipleDetailsAdapter.this, list, position);
-                    customDialogViewLanguageKnown.show();
+                    customDialogViewMama.show();
                 }
                 else if(viewDialog.equals("Farm"))
                 {
-                    CustomDialogViewLanguageKnown customDialogViewLanguageKnown =
-                            new CustomDialogViewLanguageKnown(context, model.getId(),  model.getDetails_id(),
+                    CustomDialogViewFarm customDialogViewFarm =
+                            new CustomDialogViewFarm(context, model.getId(),  model.getDetails_id(),
                                     ViewMultipleDetailsAdapter.this, list, position);
-                    customDialogViewLanguageKnown.show();
+                    customDialogViewFarm.show();
                 }
 
 

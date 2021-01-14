@@ -69,6 +69,7 @@
 
                </LinearLayout>
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,9 +104,9 @@
                 android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/noimage2"
+                android:src="@drawable/icon1"
                 app:civ_border_color="@color/white"
-                android:elevation="5dp"
+                android:elevation="10dp"
 
                 app:civ_border_width="0.2dp" />
 
@@ -120,6 +121,7 @@
                 app:civ_border_color="@color/white"
                 android:elevation="5dp"
                 app:civ_border_width="0.5dp"
+                android:visibility="gone"
                 app:civ_circle_background_color="@color/white" />
 
             <!-- <de.hdodenhof.circleimageview.CircleImageView
@@ -298,7 +300,7 @@ android:padding="2dp"
                     android:textColor="@color/quantum_black_100"
                     android:textColorHint="@color/light_weight_gray"
                     android:textSize="13sp"
-                    android:hint="@string/email"
+                    android:hint="@string/_email"
                     android:inputType="textEmailAddress"
                     android:textCursorDrawable="@drawable/edittext_cursor"
                     />
@@ -354,7 +356,7 @@ android:padding="2dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:hint="@string/birthdate"
+                        android:hint="@string/birthdate1"
                         android:inputType="text"
                         android:maxLength="10"
                         android:paddingStart="08dp"
@@ -495,11 +497,12 @@ android:padding="2dp"
                     />
 
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/editText_password"
                     android:layout_gravity="center"
                     android:background="@null"
+                    android:layout_weight="1"
                     android:paddingStart="08dp"
                     android:textColor="@color/quantum_black_100"
                     android:textColorHint="@color/light_weight_gray"
@@ -508,9 +511,89 @@ android:padding="2dp"
                     android:inputType="textPassword"
                     android:textCursorDrawable="@drawable/edittext_cursor"
                     />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView_showPassword"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/_show"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray"
+
+                    />
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/loginConfirmPasswordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginTop="20dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="5dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:src ="@drawable/password2"
+                    android:drawablePadding="08dp"
+                    android:gravity="center"
+
+                    />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_confirmPassword"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:layout_weight="1"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/quantum_black_100"
+                    android:textColorHint="@color/light_weight_gray"
+                    android:textSize="13sp"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"
+                    android:textCursorDrawable="@drawable/edittext_cursor"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView_showConfirmPassword"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/_show"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    android:textColor="@color/gray"
+
+                    />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/textView_signUp"

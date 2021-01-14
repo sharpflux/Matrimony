@@ -65,7 +65,7 @@ public class CustomDialogViewSibling extends Dialog {
 
     private ImageView imageView_back;
 
-
+    private  LinearLayout linearLayout_fatherInLaw;
 
     private Map<String, Integer> list;
 
@@ -136,6 +136,7 @@ public class CustomDialogViewSibling extends Dialog {
         textView_fatherInLawCountry = findViewById(R.id.textView_fatherInLawCountry);
         textView_fatherInLawState = findViewById(R.id.textView_fatherInLawState);
         textView_fatherInLawCity = findViewById(R.id.textView_fatherInLawCity);
+        linearLayout_fatherInLaw = findViewById(R.id.linearLayout_fatherInLaw);
 
 
         textView_cancel = findViewById(R.id.textView_cancel);
@@ -168,6 +169,18 @@ public class CustomDialogViewSibling extends Dialog {
                 textView_fatherInLawCountry.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_COUNTRY_NAME)));
                 textView_fatherInLawState.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_STATE_NAME)));
                 textView_fatherInLawCity.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.FATHER_IN_LAW_CITY_NAME)));
+
+
+                if(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.MARITAL_STATUS)).equals(context.getResources().getString(R.string.unmarried)))
+                {
+                    linearLayout_fatherInLaw.setVisibility(View.GONE);
+                }
+                else
+                {
+                    linearLayout_fatherInLaw.setVisibility(View.VISIBLE);
+                }
+
+
                 //.setText(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.)));
 
                 //Toast.makeText(context, cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE))+"---",Toast.LENGTH_SHORT).show();
