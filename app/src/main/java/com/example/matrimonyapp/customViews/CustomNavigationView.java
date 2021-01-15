@@ -16,6 +16,9 @@ import android.widget.Toast;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.HomeActivity;
+import com.example.matrimonyapp.activity.InterestActivity;
+import com.example.matrimonyapp.activity.MyProfileActivity;
 import com.example.matrimonyapp.activity.PaymentMethodsActivity;
 import com.example.matrimonyapp.activity.SubscriptionActivity;
 import com.example.matrimonyapp.adapter.ExpandableListAdapter;
@@ -79,11 +82,16 @@ public class CustomNavigationView
 
                     case 0:
                         drawerLayout.closeDrawers();
-                        break;
+                        Intent intent_home = new Intent(context, HomeActivity.class);
+                        context.startActivity(intent_home);
 
+                        break;
 
                     case 1:
                         drawerLayout.closeDrawers();
+                        Intent intent_myProfile = new Intent(context, MyProfileActivity.class);
+                        context.startActivity(intent_myProfile);
+
                         break;
 
 
@@ -94,6 +102,18 @@ public class CustomNavigationView
 
                     case 3:
                         drawerLayout.closeDrawers();
+                        Intent intent_interests = new Intent(context, InterestActivity.class);
+                        context.startActivity(intent_interests);
+                        break;
+
+                    case 4:
+                        drawerLayout.closeDrawers();
+
+                        break;
+
+
+                    case 5:
+                        drawerLayout.closeDrawers();
 
                         Intent intent = new Intent(context, SubscriptionActivity.class);
                         context.startActivity(intent);
@@ -102,12 +122,12 @@ public class CustomNavigationView
                         break;
 
 
-                    case 5:
+                    case 7:
                         drawerLayout.closeDrawers();
                         break;
 
 
-                    case 7:
+                    case 9:
                         CustomSharedPreference.getInstance(context).logout();
                         break;
 
@@ -208,32 +228,46 @@ public class CustomNavigationView
 
         //0
         ExpandedMenuModel expandedMenuModel = new ExpandedMenuModel();
+        expandedMenuModel.setMenuName(context.getResources().getString(R.string.home));
+        expandedMenuModel.setMenuIconId(R.drawable.home3);
+        arrayList_expandedMenuModel.add(expandedMenuModel);
+
+
+        //1
+        expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.my_profile));
         expandedMenuModel.setMenuIconId(R.drawable.my_acc);
 
         arrayList_expandedMenuModel.add(expandedMenuModel);
 
-        //1
+        //2
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.favorite));
         expandedMenuModel.setMenuIconId(R.drawable.start1);
         arrayList_expandedMenuModel.add(expandedMenuModel);
 
 
-        //2
+        //3
+        expandedMenuModel = new ExpandedMenuModel();
+        expandedMenuModel.setMenuName(context.getResources().getString(R.string.interests));
+        expandedMenuModel.setMenuIconId(R.drawable.black_heart);
+        arrayList_expandedMenuModel.add(expandedMenuModel);
+
+
+        //4
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.notifications));
         expandedMenuModel.setMenuIconId(R.drawable.notification);
         arrayList_expandedMenuModel.add(expandedMenuModel);
 
-        //3
+        //5
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.subscription_plan));
         expandedMenuModel.setMenuIconId(R.drawable.offer);
         arrayList_expandedMenuModel.add(expandedMenuModel);
 
 
-        //4
+        //6
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.change_language));
         expandedMenuModel.setMenuIconId(R.drawable.language1);
@@ -244,14 +278,14 @@ public class CustomNavigationView
         expandedMenuModel.setArrayList_subMenu(arrayList_submenu);
         arrayList_expandedMenuModel.add(expandedMenuModel);
 
-        //5
+        //7
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.help_and_feedback));
         expandedMenuModel.setMenuIconId(R.drawable.ic_action_info);
         arrayList_expandedMenuModel.add(expandedMenuModel);
 
 
-        //6
+        //8
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.rate_app));
         expandedMenuModel.setMenuIconId(R.drawable.start1);
@@ -259,7 +293,7 @@ public class CustomNavigationView
 
 
 
-        //7
+        //9
         expandedMenuModel = new ExpandedMenuModel();
         expandedMenuModel.setMenuName(context.getResources().getString(R.string.logout));
         expandedMenuModel.setMenuIconId(R.drawable.power);

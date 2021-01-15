@@ -121,7 +121,7 @@ public class SignUp extends AppCompatActivity {
         relativeLayout_changeProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeProfilepicDialog();
+                //changeProfilepicDialog();
             }
         });
 
@@ -204,7 +204,7 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
-        EnableRuntimePermission();
+      //  EnableRuntimePermission();
 
     }
 
@@ -230,7 +230,7 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-    private void changeProfilepicDialog() {
+    /*private void changeProfilepicDialog() {
         customDialogChangeProfilePic.show();
 
         customDialogChangeProfilePic.textView_addFromCamera.setOnClickListener(new View.OnClickListener() {
@@ -255,7 +255,7 @@ public class SignUp extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, requestCode, data);
@@ -263,10 +263,10 @@ public class SignUp extends AppCompatActivity {
             switch (requestCode)
             {
                 case SELECT_FILE:
-                    onSelectFromGalleryResult(data);
+                   // onSelectFromGalleryResult(data);
                     break;
                 case REQUEST_CAMERA:
-                    onCaptureImageResult(data);
+                   // onCaptureImageResult(data);
                     break;
             }
 
@@ -275,7 +275,7 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    public void EnableRuntimePermission() {
+/*    public void EnableRuntimePermission() {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(SignUp.this,
                 Manifest.permission.CAMERA)) {
@@ -288,8 +288,9 @@ public class SignUp extends AppCompatActivity {
                     Manifest.permission.CAMERA}, RequestPermissionCode);
 
         }
-    }
+    }*/
 
+/*
     private void onSelectFromGalleryResult(Intent data)
     {
         Bitmap bm = null;
@@ -311,9 +312,11 @@ public class SignUp extends AppCompatActivity {
 
         }
         circleImageView_profilePic.setImageBitmap(bm);
+*/
 /*
         AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute("InsertProfilePic");*/
+        runner.execute("InsertProfilePic");*//*
+
 
     }
 
@@ -334,8 +337,10 @@ public class SignUp extends AppCompatActivity {
         selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
 
 
-        /*thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        ImageUrl= Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);*/
+        */
+/*thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        ImageUrl= Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);*//*
+
         File destination = new File(Environment.getExternalStorageDirectory(),
                 System.currentTimeMillis() + ".jpg");
 
@@ -355,13 +360,16 @@ public class SignUp extends AppCompatActivity {
 
         Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
         circleImageView_profilePic.setImageBitmap(imageBitmap);
+*/
 /*
         AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute("InsertProfilePic");*/
+        runner.execute("InsertProfilePic");*//*
+
 
 
     }
 
+*/
 
 
     @Override

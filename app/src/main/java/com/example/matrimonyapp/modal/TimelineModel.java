@@ -18,6 +18,11 @@ public class TimelineModel {
     String userOccupation;
     String userCompany;
     String userEmail;
+    String userHeight;
+    String userCity;
+    String userReligion;
+    String userMaritalStatus;
+
     //Uri profilePic;
     String profilePic;
     Context context;
@@ -39,7 +44,8 @@ public class TimelineModel {
 
     public TimelineModel(String userId, String userName, String userQualification, String userAge,
                          String userBio, String userBirthday, String userMobileNo, String userOccupation,
-                         String userCompany, String userEmail, String profilePic, Context context) {
+                         String userCompany, String userEmail, String userHeight, String userCity,
+                         String userReligion, String userMaritalStatus, String profilePic, Context context) {
         this.userId = userId;
         this.userName = userName;
         this.userQualification = userQualification;
@@ -50,6 +56,10 @@ public class TimelineModel {
         this.userOccupation = userOccupation;
         this.userCompany = userCompany;
         this.userEmail = userEmail;
+        this.userHeight = userHeight;
+        this.userCity = userCity;
+        this.userReligion = userReligion;
+        this.userMaritalStatus = userMaritalStatus;
         this.profilePic = profilePic;
         this.context = context;
     }
@@ -140,5 +150,45 @@ public class TimelineModel {
 
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public String getUserHeight() {
+        return userHeight;
+    }
+
+    public void setUserHeight(String userHeight) {
+        this.userHeight = userHeight;
+    }
+
+    public String getUserCity() {
+        return userCity;
+    }
+
+    public void setUserCity(String userCity) {
+        this.userCity = userCity;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public String getUserReligion() {
+        return userReligion;
+    }
+
+    public void setUserReligion(String userReligion) {
+        this.userReligion = userReligion;
+    }
+
+    public String getUserMaritalStatus() {
+        return userMaritalStatus;
+    }
+
+    public void setUserMaritalStatus(String userMaritalStatus) {
+        this.userMaritalStatus = userMaritalStatus;
     }
 }

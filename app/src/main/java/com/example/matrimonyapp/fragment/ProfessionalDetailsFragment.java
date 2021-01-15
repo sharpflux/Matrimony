@@ -338,12 +338,10 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                                 Toast.makeText(getContext(),"Professional details saved successfully!", Toast.LENGTH_SHORT).show();
 
-
-                                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
-                                // personalDetailsFragment.setArguments(bundle);
+                                UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadDocumentsFragment);
                                 fragmentTransaction.commit() ;
 
                             }

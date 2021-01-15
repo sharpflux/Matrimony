@@ -4,16 +4,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.InterestTabLayoutAdapter;
+import com.example.matrimonyapp.customViews.CustomNavigationView;
 import com.example.matrimonyapp.customViews.CustomViewPager;
+import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.volley.CustomSharedPreference;
+import com.example.matrimonyapp.volley.URLs;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class InterestActivity extends AppCompatActivity {
 
@@ -22,6 +34,12 @@ public class InterestActivity extends AppCompatActivity {
     ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile, imageView_menu;
 
     private String currentLanguage;
+    private DrawerLayout drawerLayout;
+    ExpandableListView expandableList;
+    TextView textView_welcomeUserName;
+    CircleImageView circleImageView_headerProfilePic;
+    UserModel userModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +49,8 @@ public class InterestActivity extends AppCompatActivity {
         init();
 
 
-
-        imageView_menu.setVisibility(View.GONE);
+        userModel = CustomSharedPreference.getInstance(InterestActivity.this).getUser();
+        //imageView_menu.setVisibility(View.GONE);
 
 /*        imageView_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,9 +132,79 @@ public class InterestActivity extends AppCompatActivity {
         });
 
         onClickListener();
-
+        navigation();
 
     }
+
+
+
+    private void navigation()
+    {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+        //arrayList_expandedMenuModel = new ArrayList<>();
+        View view_header = navigationView.getHeaderView(0);
+
+        circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
+        textView_welcomeUserName = view_header.findViewById(R.id.textView_welcomeUserName);
+        TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
+
+
+        Glide.with(InterestActivity.this)
+                .load(URLs.MainURL+userModel.getProfilePic())
+                .placeholder(R.drawable.default_profile)
+                .into(circleImageView_headerProfilePic);
+
+        textView_welcomeUserName.setText(userModel.getFullName());
+        textView_emailId.setText(userModel.getEmailId());
+
+        CustomNavigationView customNavigationView = new CustomNavigationView(InterestActivity.this,
+                drawerLayout, expandableList, navigationView);
+
+        customNavigationView.createNavigation();
+
+
+        findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(drawerLayout.isDrawerOpen(navigationView))
+                {
+                    drawerLayout.closeDrawers();
+                }
+                else {
+                    drawerLayout.openDrawer(navigationView);
+                }
+
+            }
+        });
+
+        //prepareListData();
+
+
+        // setting list adapter
+
+/*
+      expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+          @Override
+          public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+              //Log.d("DEBUG", "submenu item clicked");
+              return false;
+          }
+      });
+      expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+          @Override
+          public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+              //Log.d("DEBUG", "heading clicked");
+              return false;
+          }
+      });*/
+    }
+
+
 
     @Override
     protected void onResume() {

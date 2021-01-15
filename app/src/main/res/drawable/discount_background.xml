@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+
+<!--    <item  android:height="50dp"  android:start="10dp" android:end="250dp" android:top="0dp" android:bottom="130dp" >
+        <bitmap  android:alpha="0.1" android:src="@drawable/white_icon"/>
+    </item>-->
+
+    <item android:drawable="@drawable/gradient_place_order">
+        <shape android:shape="rectangle">
+            <corners android:radius="100dp"
+                />
+        </shape>
+    </item>
+
+    <item android:height="100dp" android:width="100dp" android:top="30dp" android:start="200dp">
+
+
+        <bitmap  android:alpha="0.1" android:src="@drawable/discount" android:tint="@color/white"/>
+    </item>
+
+
+
+
+
+
+
+
+
+</layer-list>

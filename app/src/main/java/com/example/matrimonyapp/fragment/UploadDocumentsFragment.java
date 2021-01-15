@@ -167,18 +167,13 @@ public class UploadDocumentsFragment extends Fragment {
                /* AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
 */
-
+                FamilyDetailsFragment familyDetailsFragment = new FamilyDetailsFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
 
-                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
+                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, familyDetailsFragment);
+                fragmentTransaction.commit() ;
 
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
-
-                /*UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
-
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadDocumentsFragment);*/
-                fragmentTransaction.commit();
 
 
             }

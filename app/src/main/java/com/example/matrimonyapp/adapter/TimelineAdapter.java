@@ -72,7 +72,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.profiles_recycler_view, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.recycler_view_profiles, parent, false);
         TimelineAdapter.ViewHolder viewHolder = new TimelineAdapter.ViewHolder(listItem);
         return viewHolder;
 
@@ -189,6 +189,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
 
         holder.textView_userId.setText(list.get(position).getUserName());
+        holder.textView_userName.setText(list.get(position).getUserName());
+        holder.textView_userAge.setText(list.get(position).getUserAge()+" "+context.getResources().getString(R.string.years));
+        holder.textView_userQualification.setText(list.get(position).getUserQualification());
+        holder.textView_userCity.setText(list.get(position).getUserCity());
+        holder.textView_userMaritalStatus.setText(list.get(position).getUserMaritalStatus());
+        holder.textView_userReligion.setText(list.get(position).getUserReligion());
+        holder.textView_userHeight.setText(list.get(position).getUserHeight()+" cms");
+       // holder.textView_userOccupation.setText(list.get(position).getUserOccupation());
         //holder.textView_userName.setText(list.get(position).getUserName());
         //holder.textView_userAge.setText(list.get(position).getUserAge());
         //holder.textView_userQualification.setText(list.get(position).getUserQualification());
@@ -202,7 +210,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
-                .placeholder(R.drawable.noimage2)
+                .placeholder(R.color.quantum_grey100)
                 .into(holder.circleImage_profilePic);
 
 
@@ -212,85 +220,13 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 .load(URLs.MainURL+list.get(position).getProfilePic())
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .placeholder(R.drawable.noimage2)
-                .override(Target.SIZE_ORIGINAL,LinearLayout.LayoutParams.MATCH_PARENT)
+                .placeholder(R.color.quantum_grey100)
+               /// .override(Target.SIZE_ORIGINAL,LinearLayout.LayoutParams.MATCH_PARENT)
               //  .centerCrop()
                 //.transition(DrawableTransitionOptions.withCrossFade(500))
 
-                .into(holder.imageView_profilePic)
-                ;
-/*
-        new SimpleTarget<Drawable>() {
-            @Override
-            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                .into(holder.imageView_profilePic);
 
-                Bitmap res = ((BitmapDrawable)resource).getBitmap();
-
-                int width = holder.imageView_profilePic.getMeasuredWidth();
-                int diw = res.getWidth();
-                if(diw>0)
-                {
-                    int height = 0;
-                    height = width * res.getHeight() / diw;
-                    //res = Bitmap.createScaledBitmap(res, width, height, false);h
-
-                    if(height>holder.imageView_profilePic.getMaxHeight())
-                    {
-                        int dih = res.getHeight();
-                        if(dih>0)
-                        {
-                            width = height * res.getWidth() / dih;
-                            res = Bitmap.createScaledBitmap(res, width, height, false);
-                        }
-                    }
-
-                }
-
-                holder.imageView_profilePic.setImageBitmap(res);
-            }
-        }*/
-
-
-     /*   if(!list.get(position).getProfilePic().equals("0")) {
-            Thread thread = new Thread() {
-                @Override
-                public void run() {
-                    super.run();
-
-                    try {
-                        URL url = new URL(URLs.MainURL + list.get(position).getProfilePic());
-
-                        final Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                        //params[0] = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, bitmap.getHeight());
-
-                        float density = context.getResources().getDisplayMetrics().density;
-                        float width = holder.imageView_profilePic.getWidth()*density;
-                        float height = bitmap.getHeight()*density;
-
-                        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Math.round(width),Math.round(height));
-                        params.setMargins(0,0,0,0);
-
-                        ((Activity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                holder.imageView_profilePic.setLayoutParams(params);
-                                holder.imageView_profilePic.setMaxHeight(bitmap.getHeight());
-                            }
-                        });
-
-                    } catch (MalformedURLException e) {
-                        Log.d("MalformedURLException", "-----------ERROR-----------");
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            };
-
-            thread.start();
-        }*/
 
         //holder.circleImage_profilePic.setImageDrawable(holder.imageView_profilePic.getDrawable());
 
@@ -315,26 +251,26 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
 
 
-        holder.imageView_like.setOnClickListener(new View.OnClickListener() {
+        holder.linearLayout_interests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(bool_like==false)
                 {
 
-                    holder.imageView_like.setImageResource(R.drawable.red_heart);
+                    holder.imageView_interests.setImageResource(R.drawable.red_heart);
 
                     //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
                     bool_like = true;
                 }
                 else
                 {
-                    holder.imageView_like.setImageResource(R.drawable.black_heart);
+                    holder.imageView_interests.setImageResource(R.drawable.black_heart);
                     bool_like = false;
                 }
             }
         });
 
-        holder.imageView_favorite.setOnClickListener(new View.OnClickListener() {
+        holder.linearLayout_favorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(bool_favorite==false)
@@ -369,13 +305,19 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public TextView textView_userId;
         public TextView textView_userName;
         public TextView textView_userQualification;
+        public TextView textView_userOccupation;
+        public TextView textView_userReligion;
+        public TextView textView_userMaritalStatus;
+        public TextView textView_userCity;
         public TextView textView_userBio;
         public TextView textView_userAge;
+        public TextView textView_userHeight;
         public ImageView imageView_profilePic;
-        public ImageView imageView_like;
+        public ImageView imageView_interests;
         public ImageView imageView_favorite;
         public ImageView imageView_doubleTapFav;
         public ImageView imageView_reject;
+        LinearLayout linearLayout_cancel, linearLayout_favorites, linearLayout_message, linearLayout_interests;
         public de.hdodenhof.circleimageview.CircleImageView circleImage_profilePic;
         public RelativeLayout relativeLayout;
 
@@ -385,15 +327,27 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
             this.relativeLayout = itemView.findViewById(R.id.relativeLayout);
             this.textView_userId = itemView.findViewById(R.id.textView_userId);
-            //this.textView_userName = itemView.findViewById(R.id.textView_userName);
+            this.textView_userName = itemView.findViewById(R.id.textView_userName);
+            this.textView_userAge = itemView.findViewById(R.id.textView_userAge);
+            this.textView_userHeight = itemView.findViewById(R.id.textView_userHeight);
             this.circleImage_profilePic = itemView.findViewById(R.id.circleImage_profilePic);
             this.textView_userQualification = itemView.findViewById(R.id.textView_userQualification);
+            this.textView_userReligion = itemView.findViewById(R.id.textView_userReligion);
+            this.textView_userMaritalStatus = itemView.findViewById(R.id.textView_userMaritalStatus);
+            this.textView_userCity = itemView.findViewById(R.id.textView_userCity);
             this.textView_userBio = itemView.findViewById(R.id.textView_userBio);
             this.imageView_profilePic = itemView.findViewById(R.id.imageView_profilePic);
             this.imageView_reject = itemView.findViewById(R.id.imageView_reject);
-            this.imageView_like = itemView.findViewById(R.id.imageView_like);
+           // this.imageView_like = itemView.findViewById(R.id.imageView_like);
             this.imageView_favorite = itemView.findViewById(R.id.imageView_favorite);
             this.imageView_doubleTapFav = itemView.findViewById(R.id.imageView_doubleTapFav);
+            this.linearLayout_cancel = itemView.findViewById(R.id.linearLayout_cancel);
+            this.linearLayout_favorites = itemView.findViewById(R.id.linearLayout_favorites);
+            this.linearLayout_message = itemView.findViewById(R.id.linearLayout_message);
+            this.linearLayout_interests = itemView.findViewById(R.id.linearLayout_interests);
+            this.imageView_interests = itemView.findViewById(R.id.imageView_interests);
+
+
 
             setIsRecyclable(false);
 

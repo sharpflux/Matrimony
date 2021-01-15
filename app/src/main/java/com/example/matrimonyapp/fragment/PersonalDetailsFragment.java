@@ -464,22 +464,14 @@ public class PersonalDetailsFragment extends Fragment {
 
                                 Toast.makeText(getContext(),"Personal details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                /*UploadImageFragment uploadImageFragment = new UploadImageFragment();
-                                //uploadImageFragment.setArguments(bundle);
-
+                                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
-                                fragmentTransaction.commit();*/
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
+                                fragmentTransaction.commit();
 
-/*                                UploadImageFragment uploadImageFragment= new UploadImageFragment();
-                                // personalDetailsFragment.setArguments(bundle);
-                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
-                                fragmentTransaction.commit() ;*/
 
-                                getActivity().finish();
+
 
 
                                 //getActivity().finish();

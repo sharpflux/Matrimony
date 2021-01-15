@@ -232,13 +232,12 @@ public class ReligiousDetailsFragment extends Fragment {
 
                                 Toast.makeText(getContext(),"Religious details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                FamilyDetailsFragment familyDetailsFragment = new FamilyDetailsFragment();
-                                familyDetailsFragment.setArguments(bundle);
+                                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
 
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
 
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, familyDetailsFragment);
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
                                 fragmentTransaction.commit() ;
 
                             }

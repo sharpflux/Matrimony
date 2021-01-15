@@ -686,14 +686,9 @@ public class BasicDetailsFragment extends Fragment {
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
 
-/*                                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
-
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);*/
-
-                                UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
-
-                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadDocumentsFragment);
-                                fragmentTransaction.commit();
+                                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
+                                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
+                                fragmentTransaction.commit() ;
 
                             }
                             else

@@ -41,7 +41,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.adapter.DailyRecommendationsAdapter;
 import com.example.matrimonyapp.adapter.NavigationDrawerAdapter;
 import com.example.matrimonyapp.adapter.RecentlyViewedAdapter;
 import com.example.matrimonyapp.adapter.TimelineAdapter;
@@ -72,6 +74,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class HomeActivity extends AppCompatActivity  {//implements SimpleGestureFilter.SimpleGestureListener
     
@@ -92,13 +96,14 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     TimelineAdapter timelineAdapter;
     RecentlyViewedAdapter recentlyViewedAdapter;
+    DailyRecommendationsAdapter dailyRecommendationsAdapter;
     private ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile;
 
     private TextView textView_welcomeUserName;
     private ImageView imageView_profilePic;
 
-    ArrayList<TimelineModel> timelineModelList, arrayList_recentlyviewed;
-    RecyclerView recyclerView_timeline, recyclerView_recentlyViewed;
+    ArrayList<TimelineModel> timelineModelList, arrayList_recentlyviewed, arrayList_dailyRecommendations;
+    RecyclerView recyclerView_timeline, recyclerView_recentlyViewed, recyclerView_dailyRecommendations;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     SQLiteSetPreference sqLiteSetPreference;
@@ -110,6 +115,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+    private CircleImageView circleImageView_headerProfilePic;
+    private ExpandableListView expandableList;
+    private DrawerLayout drawerLayout;
+
+
+    CircleImageView circleImage_welcomeProfilePic, circleImage_progressProfilePic;
 
 
     @Override
@@ -130,7 +141,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         // timelineAdapter = new TimelineAdapter(this,)
 
 
-        //navigation();
+        navigation();
 
 
         setToolbar();
@@ -140,6 +151,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         timelineModelList = new ArrayList<TimelineModel>();
         arrayList_recentlyviewed = new ArrayList<TimelineModel>();
+        arrayList_dailyRecommendations = new ArrayList<TimelineModel>();
 
         fetchValues();
 
@@ -163,11 +175,20 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             arrayList_recentlyviewed.add(timelineModel);
         }*/
 
-        recentlyViewedAdapter = new RecentlyViewedAdapter(this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
+        recentlyViewedAdapter = new RecentlyViewedAdapter(HomeActivity.this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
         recyclerView_recentlyViewed.setAdapter(recentlyViewedAdapter);
         recyclerView_recentlyViewed.setHasFixedSize(true);
-        LinearLayoutManager layoutManager_recentlyViewed = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager_recentlyViewed = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView_recentlyViewed.setLayoutManager(layoutManager_recentlyViewed);
+
+
+        dailyRecommendationsAdapter = new DailyRecommendationsAdapter(HomeActivity.this,arrayList_dailyRecommendations, getWindowManager().getDefaultDisplay());
+        recyclerView_dailyRecommendations.setAdapter(dailyRecommendationsAdapter);
+        recyclerView_dailyRecommendations.setHasFixedSize(true);
+        LinearLayoutManager layoutManager_dailyRecommendations = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_dailyRecommendations.setLayoutManager(layoutManager_dailyRecommendations);
+
+
 
         swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -179,6 +200,72 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         onClickListener();
 
+    }
+
+    private void navigation()
+    {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+
+        //arrayList_expandedMenuModel = new ArrayList<>();
+        View view_header = navigationView.getHeaderView(0);
+
+        circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
+        textView_welcomeUserName = view_header.findViewById(R.id.textView_welcomeUserName);
+        TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
+
+
+        Glide.with(HomeActivity.this)
+                .load(URLs.MainURL+userModel.getProfilePic())
+                .placeholder(R.drawable.default_profile)
+                .into(circleImageView_headerProfilePic);
+
+        textView_welcomeUserName.setText(userModel.getFullName());
+        textView_emailId.setText(userModel.getEmailId());
+
+        CustomNavigationView customNavigationView = new CustomNavigationView(HomeActivity.this,
+                drawerLayout, expandableList, navigationView);
+
+        customNavigationView.createNavigation();
+
+
+        findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(drawerLayout.isDrawerOpen(navigationView))
+                {
+                    drawerLayout.closeDrawers();
+                }
+                else {
+                    drawerLayout.openDrawer(navigationView);
+                }
+
+            }
+        });
+
+        //prepareListData();
+
+
+        // setting list adapter
+
+/*
+      expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+          @Override
+          public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+              //Log.d("DEBUG", "submenu item clicked");
+              return false;
+          }
+      });
+      expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+          @Override
+          public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+              //Log.d("DEBUG", "heading clicked");
+              return false;
+          }
+      });*/
     }
 
 
@@ -260,8 +347,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         toolbar = findViewById(R.id.toolbar1);
         textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
         imageView_profilePic = findViewById(R.id.imageView_profilePic);
+        circleImage_welcomeProfilePic = findViewById(R.id.circleImage_welcomeProfilePic);
+        circleImage_progressProfilePic = findViewById(R.id.circleImage_progressProfilePic);
 
         recyclerView_recentlyViewed=findViewById(R.id.recyclerView_recentlyViewed);
+        recyclerView_dailyRecommendations = findViewById(R.id.recyclerView_dailyRecommendations);
 
         if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
             finish();
@@ -274,6 +364,19 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         {
             //imageView_profilePic.setImageURI();
         }
+
+
+
+        ;
+        Glide.with(HomeActivity.this)
+                .load(URLs.MainURL+userModel.getProfilePic())
+                .placeholder(R.color.quantum_grey100)
+                .into(circleImage_welcomeProfilePic);
+
+        Glide.with(HomeActivity.this)
+                .load(URLs.MainURL+userModel.getProfilePic())
+                .placeholder(R.color.quantum_grey100)
+                .into(circleImage_progressProfilePic);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -544,7 +647,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             }
         });*/
 
-        findViewById(R.id.imageView_menu).setVisibility(View.GONE);
 
     }
 
@@ -573,6 +675,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                             //converting response to json object
                             JSONObject jsonObject = new JSONObject(response);
                             arrayList_recentlyviewed.clear();
+                            arrayList_dailyRecommendations.clear();
 
                             JSONArray jsonArray = jsonObject.getJSONArray("Registrations");
 
@@ -589,14 +692,21 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                     timelineModel.setProfilePic(userJson.getString("ImageUrl"));
                                     timelineModel.setUserBirthday(userJson.getString("DateOfBirthString"));
                                     timelineModel.setUserMobileNo(userJson.getString("MobileNo"));
-                                    timelineModel.setUserOccupation(userJson.getString("OccupationName"));
-                                    timelineModel.setUserQualification(userJson.getString("Qualification"));
+                                    //timelineModel.setUserOccupation(userJson.getString("OccupationName"));
+                                    timelineModel.setUserOccupation("MBA-Marketing");
+                                    //timelineModel.setUserQualification(userJson.getString("Qualification"));
+                                    timelineModel.setUserQualification("MBA-Marketing");
                                     timelineModel.setUserEmail(userJson.getString("EmailId"));
                                     timelineModel.setUserAge(userJson.getString("Age"));
                                     timelineModel.setUserCompany("Infosys");
+                                    timelineModel.setUserHeight(userJson.getString("Height"));
+                                    timelineModel.setUserCity("Tamil Nadu, India");
+                                    timelineModel.setUserReligion("Hindu");
+                                    timelineModel.setUserMaritalStatus("Never Married");
                                     timelineModelList.add(timelineModel);
 
                                     arrayList_recentlyviewed.add(timelineModel);
+                                    arrayList_dailyRecommendations.add(timelineModel);
                                 }
                                 //   getDetails();
                                 ///getProfilePic();
@@ -606,6 +716,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
                                 recentlyViewedAdapter.notifyDataSetChanged();
+                                dailyRecommendationsAdapter.notifyDataSetChanged();
                                // Toast.makeText(HomeActivity.this,"Received successfully!", Toast.LENGTH_SHORT).show();
 
                             }

@@ -21,10 +21,10 @@
         android:paddingTop="15dp"
         android:orientation="horizontal"
 
-        android:background="@drawable/button_gradient_without_radius"
+        android:background="@color/quantum_grey800"
         android:paddingBottom="10dp"
         >
-
+        <!--android:background="@drawable/button_gradient_without_radius"-->
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"

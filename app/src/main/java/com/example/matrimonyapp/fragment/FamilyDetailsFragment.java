@@ -587,13 +587,16 @@ public class FamilyDetailsFragment extends Fragment {
 /*                bundle.putString("",);
                 bundle.putString("",);*/
 
-                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
+/*                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
                 //qualificationDetailsFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                getActivity().finish();
+
             }
         });
 
@@ -667,6 +670,8 @@ public class FamilyDetailsFragment extends Fragment {
                                 //getDetails();
 
                                 Toast.makeText(context, "Family details saved successfully!", Toast.LENGTH_SHORT).show();
+
+                                getActivity().finish();
 
 /*                                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
                                 //qualificationDetailsFragment.setArguments(bundle);
