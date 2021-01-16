@@ -46,6 +46,10 @@
         <activity
             android:name=".activity.HomeActivity"
             android:launchMode="singleInstance" />
+
+        <activity
+            android:name=".activity.SignalrChatActivity"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".activity.PaymentMethodsActivity"
             android:launchMode="singleInstance" />

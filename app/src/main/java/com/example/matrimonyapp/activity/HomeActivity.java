@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -119,6 +121,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     private ExpandableListView expandableList;
     private DrawerLayout drawerLayout;
 
+    LinearLayout linearChat;
 
     CircleImageView circleImage_welcomeProfilePic, circleImage_progressProfilePic;
 
@@ -147,7 +150,15 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         setToolbar();
 
 
+        linearChat=findViewById(R.id.linearChat);
+        linearChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Intent intent = new Intent(HomeActivity.this, SignalrChatActivity.class);
+                startActivity(intent);
+            }
+        });
 
         timelineModelList = new ArrayList<TimelineModel>();
         arrayList_recentlyviewed = new ArrayList<TimelineModel>();
@@ -772,7 +783,9 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(HomeActivity.this).addToRequestQueue(stringRequest);
+
 
 
 

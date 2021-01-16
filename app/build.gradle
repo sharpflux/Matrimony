@@ -148,6 +148,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-basement:17.5.0'
     implementation 'com.google.firebase:firebase-analytics:18.0.0'
 
+    compile files('libs/signalr-client-sdk.jar')
+    compile files('libs/signalr-client-sdk-android.jar')
 
 
 }
