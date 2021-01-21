@@ -75,7 +75,7 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="15 Received"
+                    android:text="@string/received"
 
                     />
 
@@ -83,10 +83,14 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="10 Sent"
+                    android:text="@string/sent"
                     />
 
-
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accepted"
+                    />
 
             </com.google.android.material.tabs.TabLayout>
             <LinearLayout

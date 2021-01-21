@@ -483,6 +483,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/textView_favorites"
                     android:text="@string/favorite"
                     android:textColor="@color/white"
                     android:textSize="11.5sp"
@@ -515,6 +516,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/textView_interests"
                     android:text="@string/interests"
                     android:textColor="@color/white"
                     android:textSize="11.5sp"

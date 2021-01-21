@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -84,12 +85,13 @@ public class FamilyDetailsFragment extends Fragment {
     private EditText editText_fatherName, editText_fatherMobileNo, editText_fatherQualification,
             editText_fatherOccupation, editText_fatherState, editText_fatherCountry, editText_fatherCity,
             editText_fatherAddress, editText_motherName, editText_motherMobileNo, editText_motherQualification,
-            editText_motherOccupation, editText_relative1, editText_relative2, editText_relative3, editText_relative4,
-            editText_familyIncome;
+            editText_motherOccupation, editText_aliveMama, editText_totalMama, editText_expiredMama,
+            editText_motherIncome, editText_fatherIncome, editText_relative1, editText_relative2,
+            editText_relative3, editText_relative4, editText_familyIncome;
 
 
     private ImageView imageView_back, imageView_addProperty, imageView_addVehicle, imageView_addSibling, imageView_addMama, imageView_addFarm;
-
+    private LinearLayout linearlayout_editDetails;
     private RadioGroup radioGroup_motherServiceType;
     private RadioButton radioButton_serviceWoman, radioButton_housewife;
 
@@ -98,12 +100,12 @@ public class FamilyDetailsFragment extends Fragment {
             motherOccupation, familyIncome, relative1, relative2, relative3, relative4;
 
     //SwitchButton switchButton_haveFather, switchButton_haveMother;
-    CheckBox checkBox_fatherIsAlive, checkBox_motherIsAlive;
+    CheckBox checkBox_fatherIsAlive, checkBox_motherIsAlive, checkBox_ownFourWheeler, checkBox_ownTwoWheeler;
 
     Bundle bundle;
 
     private StringBuilder stringBuilder_sibling, stringBuilder_mama, stringBuilder_property,
-            stringBuilder_farm, stringBuilder_vehicle;
+            stringBuilder_farm, stringBuilder_vehicle, stringBuilder_extraInfo;
 
     private DataFetcher dataFetcher;
 
@@ -165,6 +167,7 @@ public class FamilyDetailsFragment extends Fragment {
         editText_fatherQualification = view.findViewById(R.id.editText_fatherQualification);
         textView_fatherQualificationId = view.findViewById(R.id.textView_fatherQualificationId);
         editText_fatherOccupation = view.findViewById(R.id.editText_fatherOccupation);
+        editText_fatherIncome = view.findViewById(R.id.editText_fatherIncome);
 
         editText_fatherState = view.findViewById(R.id.editText_fatherState);
         textView_fatherStateId = view.findViewById(R.id.textView_fatherStateId);
@@ -188,7 +191,11 @@ public class FamilyDetailsFragment extends Fragment {
         radioButton_serviceWoman = view.findViewById(R.id.radioButton_serviceWoman);
         radioButton_housewife = view.findViewById(R.id.radioButton_housewife);
         editText_motherOccupation = view.findViewById(R.id.editText_motherOccupation);
-        //editText_motherAnnualIncome = view.findViewById(R.id.editText_motherAnnualIncome);
+        editText_motherIncome = view.findViewById(R.id.editText_motherIncome);
+
+
+        checkBox_ownFourWheeler = view.findViewById(R.id.checkBox_ownFourWheeler);
+        checkBox_ownTwoWheeler = view.findViewById(R.id.checkBox_ownTwoWheeler);
 
         editText_relative1 = view.findViewById(R.id.editText_relative1);
         editText_relative2 = view.findViewById(R.id.editText_relative2);
@@ -201,7 +208,7 @@ public class FamilyDetailsFragment extends Fragment {
         imageView_addMama = view.findViewById(R.id.imageView_addMama);
         imageView_addProperty = view.findViewById(R.id.imageView_addProperty);
         imageView_addVehicle = view.findViewById(R.id.imageView_addVehicle);
-        imageView_addFarm = view.findViewById(R.id.imageView_addFarm);
+        linearlayout_editDetails = view.findViewById(R.id.linearlayout_editDetails);
 
         recyclerView_addSibling = view.findViewById(R.id.recyclerView_addSibling);
         recyclerView_addMama = view.findViewById(R.id.recyclerView_addMama);
@@ -215,9 +222,9 @@ public class FamilyDetailsFragment extends Fragment {
         textInputLayout_motherOccupation = view.findViewById(R.id.textInputLayout_motherOccupation);
 
 
-/*        textField_mamaName = view.findViewById(R.id.textField_mamaName);
-        textField_mamaMobileNo = view.findViewById(R.id.textField_mamaMobileNo );
-        textField_mamaOccupation = view.findViewById(R.id.textField_mamaOccupation);*/
+        editText_totalMama = view.findViewById(R.id.editText_totalMama);
+        editText_expiredMama = view.findViewById(R.id.editText_expiredMama );
+        editText_aliveMama = view.findViewById(R.id.editText_aliveMama);
 
         //switchButton_haveMama = view.findViewById(R.id.switchButton_haveMama);
 
@@ -235,6 +242,7 @@ public class FamilyDetailsFragment extends Fragment {
         stringBuilder_property = new StringBuilder();
         stringBuilder_farm = new StringBuilder();
         stringBuilder_vehicle = new StringBuilder();
+        stringBuilder_extraInfo = new StringBuilder();
 
 
         AsyncTaskLoad getTask = new AsyncTaskLoad();
@@ -495,11 +503,11 @@ public class FamilyDetailsFragment extends Fragment {
             }
         });
 
-        imageView_addFarm.setOnClickListener(new View.OnClickListener() {
+        linearlayout_editDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), "0", "0",
+                CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), CustomDialogAddFarm.id, "0",
                         addPersonAdapter_farm, addPersonModelArrayList_farm, 0);
 
                 customDialogAddFarm.show();
@@ -651,6 +659,7 @@ public class FamilyDetailsFragment extends Fragment {
         createPropertyXML();
         createMamaXML();
         createFarmXML();
+        createExtraInfoXML();
         createVehicleXML();
 
 
@@ -739,7 +748,7 @@ public class FamilyDetailsFragment extends Fragment {
                 params.put("FarmPropertyDetailsAPI", stringBuilder_farm.toString());
                 params.put("SiblingsDetailsAPI", stringBuilder_sibling.toString());
                 params.put("MamaDetailsAPI", stringBuilder_mama.toString());
-                //params.put("VehicleDetailsAPI",stringBuilder_vehicle.toString());
+               // params.put("ExtraInfo",stringBuilder_extraInfo.toString());
                 params.put("LanguageType", userModel.getLanguage());
 
                 return params;
@@ -750,6 +759,41 @@ public class FamilyDetailsFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+    }
+
+    private void createExtraInfoXML() {
+
+
+        //ExtraInfo XML
+        stringBuilder_extraInfo.append("<?xml version=\"1.0\" ?>");
+        stringBuilder_extraInfo.append("<Assign>");
+
+
+        stringBuilder_extraInfo.append("<Functions>");
+
+        stringBuilder_extraInfo.append("<ExtraInfoDetailsId>" + "0" + "</ExtraInfoDetailsId>");
+        stringBuilder_extraInfo.append("<FatherIncome>" + editText_fatherIncome.getText().toString()+ "</FatherIncome>");
+        stringBuilder_extraInfo.append("<MotherIncome>" + editText_motherIncome.getText().toString() + "</MotherIncome>");
+        stringBuilder_extraInfo.append("<TotalNoOfMama>" + editText_totalMama.getText().toString() + "</TotalNoOfMama>");
+        stringBuilder_extraInfo.append("<AliveMama>" + editText_aliveMama.getText().toString() + "</AliveMama>");
+        stringBuilder_extraInfo.append("<ExpireMama>" + editText_expiredMama.getText().toString() + "</ExpireMama>");
+        stringBuilder_extraInfo.append("<OwnFourWheeler>" + String.valueOf(checkBox_ownFourWheeler.isChecked()) + "</OwnFourWheeler>");
+        stringBuilder_extraInfo.append("<OwnTwoWheeler>" + String.valueOf(checkBox_ownTwoWheeler.isChecked()) + "</OwnTwoWheeler>");
+
+                //stringBuilder_farm.append("<FarmLanguage>" + userModel.getLanguage() + "</FarmLanguage>");
+
+        stringBuilder_extraInfo.append("</Functions>");
+
+
+
+            stringBuilder_extraInfo.append("</Assign>");
+
+
+
+
+
+
 
     }
 
@@ -804,12 +848,13 @@ public class FamilyDetailsFragment extends Fragment {
                 stringBuilder_farm.append("<Functions>");
 
                 stringBuilder_farm.append("<FarmDetailsId>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.FARM_DETAILS_ID)) + "</FarmDetailsId>");
-                stringBuilder_farm.append("<FarmArea>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.AREA)) + "</FarmArea>");
-                stringBuilder_farm.append("<FullOrPart>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TYPE)) + "</FullOrPart>");
-                stringBuilder_farm.append("<CropTaken>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS)) + "</CropTaken>");
-                stringBuilder_farm.append("<FarmType>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE)) + "</FarmType>");
+                stringBuilder_farm.append("<TotalLand>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.TOTAL_AREA)) + "</TotalLand>");
+                stringBuilder_farm.append("<IrrigatedArea>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.IRRIGATED_AREA)) + "</IrrigatedArea>");
+                stringBuilder_farm.append("<PartiallyIrrigatedArea>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.PARTIALLY_IRRIGATED_AREA)) + "</PartiallyIrrigatedArea>");
+                stringBuilder_farm.append("<NonIrrigatedArea>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.NON_IRRIGATED_AREA)) + "</NonIrrigatedArea>");
+                stringBuilder_farm.append("<CropsId>" + cursor_farm.getString(cursor_farm.getColumnIndex(SQLiteFarmDetails.CROPS_ID)) + "</CropsId>");
 
-                stringBuilder_farm.append("<FarmLanguage>" + userModel.getLanguage() + "</FarmLanguage>");
+                //stringBuilder_farm.append("<FarmLanguage>" + userModel.getLanguage() + "</FarmLanguage>");
 
                 stringBuilder_farm.append("</Functions>");
 
@@ -1027,7 +1072,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                                     getMamaDetailsXML(jsonObject);
                                     getSiblingDetailsXML(jsonObject);
-                                    getFarmDetailsXML(jsonObject);
+                                    //getFarmDetailsXML(jsonObject);
                                     getPropertyDetailsXML(jsonObject);
 
 
@@ -1141,7 +1186,7 @@ public class FamilyDetailsFragment extends Fragment {
                         jsonObject_details.getString("FarmPropertyDetailsId"),
                         jsonObject_details.getString("LandArea"),
                         jsonObject_details.getString("FullOrPart"),
-                        jsonObject_details.getString("CropTaken"),"Irrigated");
+                        jsonObject_details.getString("CropTaken"),"Irrigated","","");
 
 
                 addPersonModelArrayList_farm.add(new AddPersonModel(String.valueOf(id),
@@ -1228,10 +1273,6 @@ public class FamilyDetailsFragment extends Fragment {
             JSONArray jsonArray_mamaDetails = jsonObject.getJSONArray("MamaDetailsLST");
 
 
-
-
-
-
             for(int j=0; j< jsonArray_mamaDetails.length(); j++)
             {
                 JSONObject jsonObject_details = jsonArray_mamaDetails.getJSONObject(j);
@@ -1276,7 +1317,7 @@ public class FamilyDetailsFragment extends Fragment {
 
 
 
-    public class AsyncTaskLoad extends AsyncTask<String, String, String> {
+     class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
         private String resp;
 

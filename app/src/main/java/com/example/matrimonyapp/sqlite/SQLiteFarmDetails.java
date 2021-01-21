@@ -14,10 +14,14 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "farm";
     public static final String  ID = "id";
     public static final String  FARM_DETAILS_ID = "farm_details_id";
-    public static final String  AREA = "area";
-    public static final String  TYPE = "type";
-    public static final String  CROPS = "crops";
-    public static final String  IRRIGATION_TYPE = "irrigation_type";
+    public static final String  TOTAL_AREA = "total_area";
+    public static final String  IRRIGATED_AREA = "irrigated_area";
+    public static final String  PARTIALLY_IRRIGATED_AREA = "partially_irrigated_area";
+    public static final String  NON_IRRIGATED_AREA = "non_irrigated_area";
+    //public static final String  TYPE = "type";
+    public static final String  CROPS_ID = "crops_id";
+    public static final String  CROPS_NAME = "crops_name";
+   // public static final String  IRRIGATION_TYPE = "irrigation_type";
 /*    public static final String  DISTRICT_ID = "district_id";
     public static final String  TALUKA_ID =  "taluka_id";
     public static final String  STATE_NAME = "state_name";
@@ -39,10 +43,13 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
             sqLiteDatabase.execSQL("create table " + TABLE_NAME + " ( "
                     + ID + " INTEGER PRIMARY KEY autoincrement, "
                     + FARM_DETAILS_ID + " int, "
-                    + AREA + " text, "
-                    + TYPE + " text, "
-                    + CROPS + " text, "
-                    + IRRIGATION_TYPE + " text "
+                    + TOTAL_AREA + " text, "
+                    + IRRIGATED_AREA + " text, "
+                    + PARTIALLY_IRRIGATED_AREA + " text, "
+                    + NON_IRRIGATED_AREA + " text, "
+                    + CROPS_ID + " text, "
+                    + CROPS_NAME + " text "
+
                     + " )");
         }
         catch (SQLException e)
@@ -103,7 +110,8 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
 
     }
 
-    public long insertFarmDetails(String farm_details_id, String area, String type, String crops, String irrigation_type)
+    public long insertFarmDetails(String farm_details_id, String totalArea, String irrigatedArea,
+                                  String partiallyIrrigatedArea, String nonIrrigatedArea, String cropsId, String cropsName)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -112,10 +120,13 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
 
         //contentValues.put(ID, null);
         contentValues.put(FARM_DETAILS_ID, farm_details_id);
-        contentValues.put(AREA, area);
-        contentValues.put(TYPE, type);
-        contentValues.put(CROPS, crops);
-        contentValues.put(IRRIGATION_TYPE, irrigation_type);
+        contentValues.put(TOTAL_AREA, totalArea);
+        contentValues.put(IRRIGATED_AREA, irrigatedArea);
+        contentValues.put(PARTIALLY_IRRIGATED_AREA, partiallyIrrigatedArea);
+        contentValues.put(NON_IRRIGATED_AREA, nonIrrigatedArea);
+        contentValues.put(CROPS_ID, cropsId);
+        contentValues.put(CROPS_NAME, cropsName);
+        //contentValues.put(IRRIGATION_TYPE, irrigation_type);
 
         //contentValues.put(, );
 
@@ -126,17 +137,21 @@ public class SQLiteFarmDetails extends SQLiteOpenHelper {
     }
 
 
-    public int updateFarmDetails( String id, String farm_details_id, String area, String type, String crops, String irrigation_type)
+    public int updateFarmDetails( String id, String farm_details_id, String totalArea, String irrigatedArea,
+                                  String partiallyIrrigatedArea, String nonIrrigatedArea, String cropsId, String cropsName)
     {
 
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(AREA, area);
-        contentValues.put(TYPE, type);
-        contentValues.put(CROPS, crops);
-        contentValues.put(IRRIGATION_TYPE, irrigation_type);
+        contentValues.put(FARM_DETAILS_ID, farm_details_id);
+        contentValues.put(TOTAL_AREA, totalArea);
+        contentValues.put(IRRIGATED_AREA, irrigatedArea);
+        contentValues.put(PARTIALLY_IRRIGATED_AREA, partiallyIrrigatedArea);
+        contentValues.put(NON_IRRIGATED_AREA, nonIrrigatedArea);
+        contentValues.put(CROPS_ID, cropsId);
+        contentValues.put(CROPS_NAME, cropsName);
 
         return sqLiteDatabase.update(TABLE_NAME, contentValues, FARM_DETAILS_ID+" = ? and "+ID+" = ?",
                 new String[]{farm_details_id, id});

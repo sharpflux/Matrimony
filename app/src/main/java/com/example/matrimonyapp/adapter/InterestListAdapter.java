@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
 import com.example.matrimonyapp.modal.TimelineModel;
+import com.example.matrimonyapp.volley.URLs;
 
 import java.util.ArrayList;
 
@@ -52,19 +54,20 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         final TimelineModel item = list.get(position);
-
-        holder.textView_userId.setText(list.get(position).getUserId());
+        Glide.with(context)
+                .load(URLs.MainURL+item.getProfilePic())
+                .placeholder(R.color.codeGray)
+                //.centerCrop()
+               // .transition(DrawableTransitionOptions.withCrossFade(500))
+                .into(holder.circleImage_profilePic);
+       // holder.textView_userBirthday.setText(list.get(position).getUserId());
         holder.textView_userName.setText(list.get(position).getUserName());
         //holder.textView_send.setText(list.get(position).getUserAge());
-        Glide.with(context)
-                .load(list.get(position).getProfilePic())
-                .placeholder(R.color.codeGray)
-                .centerCrop()
-                .transition(DrawableTransitionOptions.withCrossFade(500))
-                .into(holder.circleImage_profilePic);
-        //holder.circleImage_profilePic.setImageURI(list.get(position).getProfilePic());
 
-        holder.textView_userId.setOnClickListener(new View.OnClickListener() {
+
+
+
+        holder.linearLayout_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -89,18 +92,23 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView textView_userId;
+        public TextView textView_userBirthday;
         public TextView textView_userName;
         public TextView textView_send;
+        public LinearLayout linearLayout_user, linearLayout_requested;
+
         public CircleImageView circleImage_profilePic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.textView_userId = itemView.findViewById(R.id.textView_userId);
+            this.textView_userBirthday = itemView.findViewById(R.id.textView_userBirthday);
             this.textView_userName = itemView.findViewById(R.id.textView_userName);
+            this.linearLayout_user = itemView.findViewById(R.id.linearLayout_user);
+            this.linearLayout_requested = itemView.findViewById(R.id.linearLayout_requested);
 
             this.circleImage_profilePic = itemView.findViewById(R.id.circleImage_profilePic);
-           // this.textView_send = itemView.findViewById(R.id.textView_send);
+            this.textView_send = itemView.findViewById(R.id.textView_send);
         }
     }
 }

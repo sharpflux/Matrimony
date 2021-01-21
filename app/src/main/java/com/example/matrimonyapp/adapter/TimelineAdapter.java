@@ -20,11 +20,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -35,15 +42,25 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
+import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
 import com.example.matrimonyapp.listener.OnSwipeTouchListener;
 import com.example.matrimonyapp.modal.TimelineModel;
+import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.modal.UsersConnectionModel;
+import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
+import com.example.matrimonyapp.volley.VolleySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
 
@@ -60,11 +77,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
     //private Bitmap bitmap;
     //private LinearLayout.LayoutParams params;//= new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);;
 
+
+    private UserModel userModel;
+
     public TimelineAdapter(Context context, ArrayList<TimelineModel> list, Display display)
     {
         this.context = context;
         this.list = list;
         this.display = display;
+        this.userModel = CustomSharedPreference.getInstance(context).getUser();
     }
 
     @NonNull
@@ -170,6 +191,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             @Override
             public void onClick(View view) {
 
+
                 Point size = new Point();
                 display.getSize(size);
 
@@ -183,7 +205,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                     }
                 },400);
 
-
+                AsyncTaskLoad runner = new AsyncTaskLoad();
+                runner.execute(item.getUserId(),String.valueOf(UsersConnectionModel.REJECTED),"0");
             }
         });
 
@@ -257,14 +280,19 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 if(bool_like==false)
                 {
 
-                    holder.imageView_interests.setImageResource(R.drawable.red_heart);
-
+                    AsyncTaskLoad runner = new AsyncTaskLoad();
+                    runner.execute(item.getUserId(),String.valueOf(UsersConnectionModel.INTERESTED),"0");
+                    //holder.imageView_interests.setImageResource(R.drawable.red_heart);
+                    holder.textView_favorites.setText(context.getResources().getString(R.string.cancel));
                     //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
                     bool_like = true;
                 }
                 else
                 {
-                    holder.imageView_interests.setImageResource(R.drawable.black_heart);
+                    AsyncTaskLoad runner = new AsyncTaskLoad();
+                    runner.execute(item.getUserId(),"0", String.valueOf(UsersConnectionModel.INTERESTED));
+                    holder.textView_favorites.setText(context.getResources().getString(R.string.interests));
+                    //holder.imageView_interests.setImageResource(R.drawable.black_heart);
                     bool_like = false;
                 }
             }
@@ -273,18 +301,21 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         holder.linearLayout_favorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(bool_favorite==false)
                 {
-
-                    holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
-
+                    AsyncTaskLoad runner = new AsyncTaskLoad();
+                    runner.execute(item.getUserId(),String.valueOf(UsersConnectionModel.FAVORITE),"0");
+                    //holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
+                    holder.textView_favorites.setText(context.getResources().getString(R.string.cancel));
                     //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
                     bool_favorite = true;
                 }
                 else
-                {
-                    holder.imageView_favorite.setImageResource(R.drawable.start1);
-
+                {AsyncTaskLoad runner = new AsyncTaskLoad();
+                    runner.execute(item.getUserId(),"0",String.valueOf(UsersConnectionModel.FAVORITE));
+                    //holder.imageView_favorite.setImageResource(R.drawable.start1);
+                    holder.textView_favorites.setText(context.getResources().getString(R.string.favorite));
                     bool_favorite = false;
                 }
             }
@@ -293,6 +324,85 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
     }
 
+
+    class AsyncTaskLoad extends AsyncTask<String, String, String>
+    {
+
+        @Override
+        protected String doInBackground(String[] params) {
+
+            insertDetails(params[0],params[1],params[2]);
+
+            return params[0];
+        }
+    }
+
+    private void insertDetails(final String toUserId, final String connectionType, final String removeConnectionType)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_USER_CONNECTIONS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if(jsonObject.getString("message").equals("Success") &&
+                                    !jsonObject.getBoolean("error"))
+                            {
+                                //getDetails();
+
+                                Toast.makeText(context,"REQUEST SENT!", Toast.LENGTH_SHORT).show();
+
+
+
+                            }
+                            else
+                            {
+                                Toast.makeText(context,"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                //params.put("ConnectChoiceId","0");
+                params.put("FromUserId",userModel.getUserId());
+                params.put("ToUserId",toUserId);
+                params.put("ConntectionTypeId", connectionType);
+                params.put("RemoveFromConntectionTypeId", removeConnectionType);
+
+
+
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+
+
+
+
+    }
 
     @Override
     public int getItemCount() {
@@ -312,6 +422,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public TextView textView_userBio;
         public TextView textView_userAge;
         public TextView textView_userHeight;
+        public TextView textView_favorites;
+        public TextView textView_interests;
         public ImageView imageView_profilePic;
         public ImageView imageView_interests;
         public ImageView imageView_favorite;
@@ -346,6 +458,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             this.linearLayout_message = itemView.findViewById(R.id.linearLayout_message);
             this.linearLayout_interests = itemView.findViewById(R.id.linearLayout_interests);
             this.imageView_interests = itemView.findViewById(R.id.imageView_interests);
+            this.textView_interests = itemView.findViewById(R.id.textView_interests);
+            this.textView_favorites = itemView.findViewById(R.id.textView_favorites);
 
 
 

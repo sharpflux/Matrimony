@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ShowImageSliderActivity"></activity>
+        <activity android:name=".activity.FavoritesRejectedActivity"></activity>
+        <activity android:name=".activity.EditProfileActivity" />
+        <activity android:name=".activity.ShowImageSliderActivity" />
         <activity android:name=".activity.SubscriptionActivity" />
         <activity android:name=".activity.ServiceProviderSignUpActivity" />
         <activity android:name=".activity.FullImageActivity" />
@@ -46,7 +48,6 @@
         <activity
             android:name=".activity.HomeActivity"
             android:launchMode="singleInstance" />
-
         <activity
             android:name=".activity.SignalrChatActivity"
             android:launchMode="singleInstance" />

@@ -105,7 +105,7 @@ public class InterestActivity extends AppCompatActivity {
 
         tabLayout_interest.setTabGravity(TabLayout.GRAVITY_FILL);
         final InterestTabLayoutAdapter interestTabLayoutAdapter = new InterestTabLayoutAdapter(
-                this,getSupportFragmentManager(),tabLayout_interest.getTabCount());
+                this,getSupportFragmentManager(),tabLayout_interest.getTabCount(),"Interest");
         viewPager_interest.setAdapter(interestTabLayoutAdapter);
 
 
@@ -137,6 +137,11 @@ public class InterestActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 
     private void navigation()
     {
@@ -149,7 +154,7 @@ public class InterestActivity extends AppCompatActivity {
 
         circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
         textView_welcomeUserName = view_header.findViewById(R.id.textView_welcomeUserName);
-        TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
+
 
 
         Glide.with(InterestActivity.this)
@@ -158,7 +163,6 @@ public class InterestActivity extends AppCompatActivity {
                 .into(circleImageView_headerProfilePic);
 
         textView_welcomeUserName.setText(userModel.getFullName());
-        textView_emailId.setText(userModel.getEmailId());
 
         CustomNavigationView customNavigationView = new CustomNavigationView(InterestActivity.this,
                 drawerLayout, expandableList, navigationView);

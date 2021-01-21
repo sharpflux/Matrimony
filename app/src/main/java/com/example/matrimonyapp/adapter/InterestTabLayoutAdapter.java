@@ -13,46 +13,74 @@ public class InterestTabLayoutAdapter extends FragmentPagerAdapter {
 
     Context context;
     int totalTabs;
+    String fragmentFor;
 
 
-
-    public  InterestTabLayoutAdapter (Context context, FragmentManager fragmentManager, int totalTabs)
+    public  InterestTabLayoutAdapter (Context context, FragmentManager fragmentManager, int totalTabs,String fragmentFor)
     {
         super(fragmentManager);
         this.context = context;
         this.totalTabs = totalTabs;
+        this.fragmentFor = fragmentFor;
 
     }
 
     @Override
     public Fragment getItem(int position) {
 
-        switch (position)
+
+        if(fragmentFor.equals("Interest")) {
+
+            switch (position) {
+
+                case 0:
+                    ViewInterestFragment viewInterestReceivedFragment =
+                            new ViewInterestFragment(context, "Receive");
+
+                    return viewInterestReceivedFragment;
+
+
+                case 1:
+                    ViewInterestFragment viewInterestSentFragment =
+                            new ViewInterestFragment(context, "Sent");
+
+                    return viewInterestSentFragment;
+
+
+                case 2:
+                    ViewInterestFragment viewInterestAcceptedFragment =
+                            new ViewInterestFragment(context, "Accepted");
+                    return viewInterestAcceptedFragment;
+
+                default:
+                    return null;
+            }
+        }
+        else if(fragmentFor.equals("Favorites"))
         {
+            switch (position) {
 
-            case 0:
-                ViewInterestFragment viewInterestReceivedFragment =
-                        new ViewInterestFragment(context,"Received");
+                case 0:
+                    ViewInterestFragment viewFavoritesFragment =
+                            new ViewInterestFragment(context, "Favorites");
 
-                return viewInterestReceivedFragment;
-
-
-            case 1:
-                ViewInterestFragment viewInterestSentFragment =
-                        new ViewInterestFragment(context,"Sent");
-
-                return viewInterestSentFragment;
+                    return viewFavoritesFragment;
 
 
-            case 2:
-                ViewQualificationDetailsFragment viewQualificationDetailsFragment =
-                        new ViewQualificationDetailsFragment();
-                return viewQualificationDetailsFragment;
+                case 1:
+                    ViewInterestFragment viewRejectedFragment =
+                            new ViewInterestFragment(context, "Rejected");
 
-            default:
-                return null;
+                    return viewRejectedFragment;
+
+
+
+                default:
+                    return null;
+            }
         }
 
+        return null;
     }
 
     @Override

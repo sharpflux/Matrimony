@@ -433,6 +433,8 @@
                                 android:singleLine="true"
                                 android:clickable="false"
                                 android:focusable="false"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/drawable_arrow_color"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -462,6 +464,8 @@
                                 android:singleLine="true"
                                 android:clickable="false"
                                 android:focusable="false"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/drawable_arrow_color"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -486,12 +490,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/editText_birthCity"
-                                android:hint="@string/birth_city"
+                                android:hint="@string/birth_city_taluka"
                                 android:textColor="@color/text_black"
                                 android:textSize="15sp"
                                 android:singleLine="true"
                                 android:clickable="false"
                                 android:focusable="false"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/drawable_arrow_color"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -611,6 +617,8 @@
                                 android:textSize="15sp"
                                 android:focusable="false"
                                 android:clickable="false"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/drawable_arrow_color"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -782,70 +790,6 @@
                     android:layout_gravity="center"
                     >
 
-                    <!--Address-->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/TextLabel"
-                        android:layout_marginTop="15dp"
-                        >
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editText_address"
-                            android:hint="@string/address"
-                            android:textColor="@color/text_black"
-                            android:textSize="15sp"
-                            android:inputType="textMultiLine"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!--Village-->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:textColorHint="@color/text_black"
-                        android:theme="@style/TextLabel">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editText_village"
-                            android:hint="@string/village"
-
-
-                            android:textColor="@color/text_black"
-                            android:textSize="15sp"
-                            android:nextFocusRight="@id/editText_district"
-                            android:singleLine="true"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!--Postal Code-->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:textColorHint="@color/text_black"
-                        android:theme="@style/TextLabel">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editText_postalCode"
-                            android:hint="@string/postal_code"
-                            android:inputType="number"
-                            android:maxLength="6"
-                            android:textColor="@color/text_black"
-                            android:textSize="15sp"
-                            android:singleLine="true"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
                     <!--Country-->
                     <com.google.android.material.textfield.TextInputLayout
@@ -914,7 +858,7 @@
                         android:text="@string/_0"
                         android:visibility="gone"
                         />
-                    <!--District-->
+                    <!--City-->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -938,7 +882,7 @@
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
-                    <!--DistrictId-->
+                    <!--CitytId-->
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -946,6 +890,73 @@
                         android:text="@string/_0"
                         android:visibility="gone"
                         />
+
+                    <!--Village-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_village"
+                            android:hint="@string/village"
+
+
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:nextFocusRight="@id/editText_district"
+                            android:singleLine="true"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!--Address-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextLabel"
+                        android:layout_marginTop="15dp"
+                        >
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_address"
+                            android:hint="@string/address"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:inputType="textMultiLine"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    <!--Postal Code-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:textColorHint="@color/text_black"
+                        android:theme="@style/TextLabel">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_postalCode"
+                            android:hint="@string/postal_code"
+                            android:inputType="number"
+                            android:maxLength="6"
+                            android:textColor="@color/text_black"
+                            android:textSize="15sp"
+                            android:singleLine="true"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
 <!--
@@ -1084,69 +1095,6 @@
                         android:layout_gravity="center"
                         >
 
-                        <!--Current Address-->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:theme="@style/TextLabel"
-                            android:layout_marginTop="15dp"
-                            >
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/editText_currentAddress"
-                                android:hint="@string/address"
-                                android:textColor="@color/text_black"
-                                android:textSize="15sp"
-                                android:inputType="textMultiLine"
-                                />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!--Current Village-->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel">
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/editText_currentVillage"
-                                android:hint="@string/village"
-                                android:textColor="@color/text_black"
-                                android:textSize="15sp"
-                                android:nextFocusRight="@id/editText_district"
-                                android:singleLine="true"
-                                />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <!--Current Postal Code-->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel">
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/editText_currentPostalCode"
-                                android:hint="@string/postal_code"
-                                android:inputType="number"
-                                android:maxLength="6"
-                                android:textColor="@color/text_black"
-                                android:textSize="15sp"
-                                android:singleLine="true"
-                                />
-
-                        </com.google.android.material.textfield.TextInputLayout>
 
                         <!--Country-->
                         <com.google.android.material.textfield.TextInputLayout
@@ -1183,7 +1131,7 @@
                             />
 
 
-                        //Current State
+                        <!--Current State-->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1208,7 +1156,7 @@
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
-                        //Current StateId
+                        <!--Current StateId-->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1217,7 +1165,7 @@
                             android:visibility="gone"
                             />
 
-                        //Current District
+                        <!--Current City-->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1240,7 +1188,7 @@
                                 android:singleLine="true" />
 
                         </com.google.android.material.textfield.TextInputLayout>
-                        //Current DistrictId
+                        <!--Current CityId-->
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1250,71 +1198,138 @@
                             />
 
 
-                        //Current District
+                        <!--Current Village-->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel"
-                            android:visibility="gone">
+                            android:theme="@style/TextLabel">
 
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/editText_currentDistrict"
-                                android:hint="@string/district"
-                                android:drawableEnd="@drawable/ic_action_arrow_down"
-                                android:drawableTint="#ADADAD"
-
+                                android:id="@+id/editText_currentVillage"
+                                android:hint="@string/village"
                                 android:textColor="@color/text_black"
                                 android:textSize="15sp"
-                                android:clickable="false"
-                                android:focusable="false"
-                                android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-                        //Current DistrictId
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/textView_currentDistrictId"
-                            android:text="District Id"
-                            android:visibility="gone"
-                            />
-
-                        //Current Taluka
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:textColorHint="@color/text_black"
-                            android:theme="@style/TextLabel"
-                            android:visibility="gone">
-
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/editText_currentTaluka"
-                                android:hint="@string/taluka"
-                                android:drawableEnd="@drawable/ic_action_arrow_down"
-                                android:drawableTint="#ADADAD"
-                                android:textColor="@color/text_black"
-                                android:textSize="15sp"
+                                android:nextFocusRight="@id/editText_district"
                                 android:singleLine="true"
-                                android:focusable="false"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
-                        //Current TalukaId
-                        <TextView
+
+
+
+                        <!--Current Address-->
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_currentTalukaId"
-                            android:text="Taluka Id"
-                            android:visibility="gone"
-                            />
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
 
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_currentAddress"
+                                android:hint="@string/address"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:inputType="textMultiLine"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!--Current Postal Code-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_currentPostalCode"
+                                android:hint="@string/postal_code"
+                                android:inputType="number"
+                                android:maxLength="6"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:singleLine="true"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                        <!--
+                                                &lt;!&ndash;Current District&ndash;&gt;
+                                                <com.google.android.material.textfield.TextInputLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="15dp"
+                                                    android:textColorHint="@color/text_black"
+                                                    android:theme="@style/TextLabel"
+                                                    android:visibility="gone">
+
+                                                    <EditText
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:id="@+id/editText_currentDistrict"
+                                                        android:hint="@string/district"
+                                                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                                                        android:drawableTint="#ADADAD"
+
+                                                        android:textColor="@color/text_black"
+                                                        android:textSize="15sp"
+                                                        android:clickable="false"
+                                                        android:focusable="false"
+                                                        android:singleLine="true" />
+
+                                                </com.google.android.material.textfield.TextInputLayout>
+                                                //Current DistrictId
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/textView_currentDistrictId"
+                                                    android:text="District Id"
+                                                    android:visibility="gone"
+                                                    />
+
+                                                //Current Taluka
+                                                <com.google.android.material.textfield.TextInputLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="15dp"
+                                                    android:textColorHint="@color/text_black"
+                                                    android:theme="@style/TextLabel"
+                                                    android:visibility="gone">
+
+                                                    <EditText
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:id="@+id/editText_currentTaluka"
+                                                        android:hint="@string/taluka"
+                                                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                                                        android:drawableTint="#ADADAD"
+                                                        android:textColor="@color/text_black"
+                                                        android:textSize="15sp"
+                                                        android:singleLine="true"
+                                                        android:focusable="false"
+                                                        />
+
+                                                </com.google.android.material.textfield.TextInputLayout>
+                                                //Current TalukaId
+                                                <TextView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/textView_currentTalukaId"
+                                                    android:text="Taluka Id"
+                                                    android:visibility="gone"
+                                                    />-->
 
 
                     </LinearLayout>

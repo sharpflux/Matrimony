@@ -16,10 +16,12 @@ import android.widget.Toast;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.FavoritesRejectedActivity;
 import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.InterestActivity;
 import com.example.matrimonyapp.activity.MyProfileActivity;
 import com.example.matrimonyapp.activity.PaymentMethodsActivity;
+import com.example.matrimonyapp.activity.SetPreferencesActivity;
 import com.example.matrimonyapp.activity.SubscriptionActivity;
 import com.example.matrimonyapp.adapter.ExpandableListAdapter;
 import com.example.matrimonyapp.modal.ExpandedMenuModel;
@@ -89,7 +91,7 @@ public class CustomNavigationView
 
                     case 1:
                         drawerLayout.closeDrawers();
-                        Intent intent_myProfile = new Intent(context, MyProfileActivity.class);
+                        Intent intent_myProfile = new Intent(context, SetPreferencesActivity.class);
                         context.startActivity(intent_myProfile);
 
                         break;
@@ -97,6 +99,9 @@ public class CustomNavigationView
 
                     case 2:
                         drawerLayout.closeDrawers();
+                        Intent intent_favorites = new Intent(context, FavoritesRejectedActivity.class);
+                        context.startActivity(intent_favorites);
+
                         break;
 
 
@@ -235,8 +240,8 @@ public class CustomNavigationView
 
         //1
         expandedMenuModel = new ExpandedMenuModel();
-        expandedMenuModel.setMenuName(context.getResources().getString(R.string.my_profile));
-        expandedMenuModel.setMenuIconId(R.drawable.my_acc);
+        expandedMenuModel.setMenuName(context.getResources().getString(R.string.set_preferences));
+        expandedMenuModel.setMenuIconId(R.drawable.search);
 
         arrayList_expandedMenuModel.add(expandedMenuModel);
 

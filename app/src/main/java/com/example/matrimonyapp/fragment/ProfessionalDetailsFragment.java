@@ -510,11 +510,11 @@ public class ProfessionalDetailsFragment extends Fragment {
                 {
                     insertDetails();
 
-                    PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
+                    FamilyDetailsFragment familyDetailsFragment = new FamilyDetailsFragment();
                     // personalDetailsFragment.setArguments(bundle);
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
+                    fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, familyDetailsFragment);
                     fragmentTransaction.commit() ;
                 }
 

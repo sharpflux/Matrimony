@@ -41,6 +41,11 @@
                 android:textAllCaps="true"
                 />
 
+
+
+
+
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -132,6 +137,8 @@
                         android:id="@+id/editText_fatherQualification"
                         android:hint="@string/qualification"
                         android:textColor="@color/text_black"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="#ADADAD"
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"/>
@@ -158,6 +165,8 @@
                         android:id="@+id/editText_fatherOccupation"
                         android:hint="@string/occupation_"
                         android:inputType=""
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="#ADADAD"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:clickable="false"
@@ -171,11 +180,488 @@
                     android:id="@+id/textView_fatherOccupationId"
                     android:visibility="gone"
                     />
+                        <!--Father Income-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editText_fatherIncome"
+                        android:hint="@string/annual_income"
+                        android:inputType=""
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="#ADADAD"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_fatherIncomeId"
+                    android:visibility="gone"
+                    />
             </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/address_"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
 
-            <!--Farm Details-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="0.5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_fatherCountry"
+                                android:hint="@string/country"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/text_gray"
+
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:nextFocusRight="@id/editText_country"
+                                android:singleLine="true"
+                                android:focusable="false"
+                                android:clickable="false"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherCountryId"
+                            android:visibility="gone"
+                            android:text="@string/_0"
+                            />
+
+
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_fatherState"
+                                android:hint="@string/_state"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:singleLine="true" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherStateId"
+                            android:visibility="gone"
+                            android:text="@string/_0"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:textColorHint="@color/text_black"
+                            android:theme="@style/TextLabel">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_fatherCity"
+                                android:hint="@string/_city"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:singleLine="true"
+                                android:focusable="false"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_fatherCityId"
+                            android:visibility="gone"
+                            android:text="@string/_0"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_fatherAddress"
+                                android:hint="@string/address_"
+                                android:inputType="textMultiLine|textCapWords"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!--Mother Details-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/mother_information"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
+
+                <!--Mother Details-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="0.5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/is_alive"
+                            android:id="@+id/checkBox_motherIsAlive"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_black"
+                            android:layoutDirection="rtl"
+                            android:button="@drawable/custom_checkbox"
+                            android:gravity="left"
+                            />
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_motherName"
+                                android:hint="@string/mother_name"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:inputType="textCapWords"
+                                android:digits="@string/only_text_with_space"
+                                android:singleLine="true"/>
+
+
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_motherMobileNo"
+                                android:hint="@string/mobile_"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_motherQualification"
+                                android:hint="@string/qualification"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:focusable="false"
+                                android:clickable="false"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherQualificationId"
+                            android:visibility="gone"
+                            />
+
+
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioGroup_motherServiceType"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="15dp"
+                            android:theme="@style/RadioButtonTheme"
+
+                            >
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radioButton_housewife"
+                                android:text="@string/housewife"
+                                android:textColor="@color/text_black"
+                                android:textSize="13sp"
+                                android:checked="true"
+                                />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radioButton_serviceWoman"
+                                android:text="@string/service_woman"
+                                android:textSize="13sp"
+                                android:layout_marginStart="25dp"
+                                android:textColor="@color/text_black"
+                                />
+
+                        </RadioGroup>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            android:visibility="gone"
+                            android:id="@+id/textInputLayout_motherOccupation"
+                            >
+
+                            <EditText
+                                android:id="@+id/editText_motherOccupation"
+                                android:layout_width="match_parent"
+                                android:layout_height="53dp"
+                                android:hint="@string/occupation_"
+                                android:inputType="text"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="#ADADAD"
+                                android:clickable="false"
+                                android:focusable="false"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherOccupationId"
+                            android:visibility="gone"
+                            />
+
+                        <!--Mother's Income-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            android:visibility="gone"
+                            android:id="@+id/textInputLayout_motherIncome"
+                            >
+
+                            <EditText
+                                android:id="@+id/editText_motherIncome"
+                                android:layout_width="match_parent"
+                                android:layout_height="53dp"
+                                android:hint="@string/occupation_"
+                                android:inputType="text"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:drawableEnd="@drawable/ic_action_arrow_down"
+                                android:drawableTint="@color/drawable_arrow_color"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_motherIncomeId"
+                            android:visibility="gone"
+                            />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <!-- Sibling Details-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/siblings_details"
+                    android:textSize="13sp"
+                    android:textColor="@color/grey_4a"
+                    android:layout_marginStart="15dp"
+                    android:textAllCaps="true"
+                    />
+                <!-- Sibling Details-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:cardElevation="0.5dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recyclerView_addSibling"
+
+                            android:background="@color/white"
+
+                            />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearlayout_addMoreSibling"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/add_more"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+
+                                />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/imageView_addSibling"
+                                android:layout_marginStart="10dp"
+                                android:src="@drawable/add11"
+                                android:tint="@color/project_color"
+                                android:contentDescription="@string/add_farm"
+                                />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+
+
+                <!--Farm Details-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,7 +676,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 app:cardElevation="0.5dp"
                 >
             <LinearLayout
@@ -217,7 +703,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearlayout_addMoreFarm"
+                    android:id="@+id/linearlayout_editDetails"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
@@ -228,7 +714,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/add_more"
+                        android:text="@string/edit_details"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
 
@@ -239,9 +725,10 @@
                         android:layout_height="30dp"
                         android:id="@+id/imageView_addFarm"
                         android:layout_marginStart="10dp"
-                        android:src="@drawable/add11"
+                        android:src="@drawable/edit"
                         android:tint="@color/project_color"
                         android:contentDescription="@string/add_farm"
+                        android:padding="4dp"
                         />
 
                 </LinearLayout>
@@ -329,7 +816,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
                 <!-- Add Vehicle -->
                 <!-- Vehicle Details-->
                 <TextView
@@ -342,12 +828,68 @@
                     android:layout_marginStart="15dp"
                     android:textAllCaps="true"
                     />
+                <!--Vehicle Details-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:cardElevation="0.5dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        >
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/owns_4_wheeler"
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/checkBox_ownFourWheeler"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_black"
+                            android:layoutDirection="rtl"
+                            android:button="@drawable/custom_checkbox"
+                            android:gravity="left"
+                            />
+
+
+
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/owns_2_wheeler"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/checkBox_ownTwoWheeler"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_black"
+                            android:layoutDirection="rtl"
+                            android:button="@drawable/custom_checkbox"
+                            android:gravity="left"
+                            />
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
                 <!-- Vehicle Details-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     app:cardElevation="0.5dp"
+                    android:visibility="gone"
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -452,11 +994,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_familyIncome"
-                        android:hint="@string/family_income"
+                        android:hint="@string/family_income_from_all_sources"
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -471,347 +1015,20 @@
             </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/address_"
-                android:textSize="13sp"
-                android:textColor="@color/grey_4a"
-                android:layout_marginStart="15dp"
-                android:textAllCaps="true"
-                />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="10dp"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherAddress"
-                        android:hint="@string/address_"
-                        android:inputType="textMultiLine|textCapWords"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@color/text_black"
-                android:theme="@style/TextLabel"
-                android:layout_marginTop="15dp">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_fatherCountry"
-                    android:hint="@string/country"
-                    android:drawableEnd="@drawable/ic_action_arrow_down"
-                    android:drawableTint="@color/text_gray"
-
-                    android:textColor="@color/text_black"
-                    android:textSize="15sp"
-                    android:nextFocusRight="@id/editText_country"
-                    android:singleLine="true"
-                    android:focusable="false"
-                    android:clickable="false"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView_fatherCountryId"
-                android:visibility="gone"
-                android:text="@string/_0"
-                />
-
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/text_black"
-                    android:theme="@style/TextLabel">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherState"
-                        android:hint="@string/_state"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="#ADADAD"
-
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:singleLine="true" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_fatherStateId"
-                    android:visibility="gone"
-                    android:text="@string/_0"
-                    />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColorHint="@color/text_black"
-                    android:theme="@style/TextLabel">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_fatherCity"
-                        android:hint="@string/_city"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="#ADADAD"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:singleLine="true"
-                        android:focusable="false"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_fatherCityId"
-                    android:visibility="gone"
-                    android:text="@string/_0"
-                    />
-
-
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-                <!--Mother Details-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/mother_information"
-                android:textSize="13sp"
-                android:textColor="@color/grey_4a"
-                android:layout_marginStart="15dp"
-                android:textAllCaps="true"
-                />
-
-                <!--Mother Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="10dp"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-
-
-                    <CheckBox
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/is_alive"
-                        android:id="@+id/checkBox_motherIsAlive"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_black"
-                        android:layoutDirection="rtl"
-                        android:button="@drawable/custom_checkbox"
-                        android:gravity="left"
-                        />
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_motherName"
-                        android:hint="@string/mother_name"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:inputType="textCapWords"
-                        android:digits="@string/only_text_with_space"
-                        android:singleLine="true"/>
-
-
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_motherMobileNo"
-                        android:hint="@string/mobile_"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/editText_motherQualification"
-                        android:hint="@string/qualification"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:focusable="false"
-                        android:clickable="false"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_motherQualificationId"
-                    android:visibility="gone"
-                    />
-
-
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/radioGroup_motherServiceType"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    android:theme="@style/RadioButtonTheme"
-
-                    >
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioButton_housewife"
-                        android:text="@string/housewife"
-                        android:textColor="@color/text_black"
-                        android:textSize="13sp"
-                        android:checked="true"
-                        />
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioButton_serviceWoman"
-                        android:text="@string/service_woman"
-                        android:textSize="13sp"
-                        android:layout_marginStart="25dp"
-                        android:textColor="@color/text_black"
-                        />
-
-                </RadioGroup>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/TextLabel"
-                    android:layout_marginTop="15dp"
-                    android:visibility="gone"
-                    android:id="@+id/textInputLayout_motherOccupation"
-                    >
-
-                    <EditText
-                        android:id="@+id/editText_motherOccupation"
-                        android:layout_width="match_parent"
-                        android:layout_height="53dp"
-                        android:hint="@string/occupation_"
-                        android:inputType="text"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp"
-                        android:clickable="false"
-                        android:focusable="false"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_motherOccupationId"
-                    android:visibility="gone"
-                    />
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-                <!-- Sibling Details-->
+                <!--Mama Details-->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="@string/siblings_details"
+                    android:text="@string/mama_details"
                     android:textSize="13sp"
                     android:textColor="@color/grey_4a"
                     android:layout_marginStart="15dp"
                     android:textAllCaps="true"
                     />
-                <!-- Sibling Details-->
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -831,70 +1048,78 @@
                         >
 
 
-                        <androidx.recyclerview.widget.RecyclerView
+                        <!--Mama-->
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/recyclerView_addSibling"
-
-                            android:background="@color/white"
-
-                            />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/linearlayout_addMoreSibling"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical"
-                            android:clickable="true"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
                             >
 
-                            <TextView
-                                android:layout_width="0dp"
+                            <EditText
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/add_more"
+                                android:id="@+id/editText_aliveMama"
+                                android:hint="@string/no_of_alive_mama"
                                 android:textColor="@color/text_black"
                                 android:textSize="15sp"
+                                android:inputType="textCapWords"
+                                android:digits="@string/only_text_with_space"
+                                android:singleLine="true"/>
 
-                                />
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:id="@+id/imageView_addSibling"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/add11"
-                                android:tint="@color/project_color"
-                                android:contentDescription="@string/add_farm"
-                                />
+                        <!--Mama-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
-                        </LinearLayout>
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_expiredMama"
+                                android:hint="@string/no_of_expired_mama"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <!--Mama-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_totalMama"
+                                android:hint="@string/no_of_mama"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:focusable="false"
+                                android:clickable="false"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-
-
-                <!--Mama Details-->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/mama_details"
-                    android:textSize="13sp"
-                    android:textColor="@color/grey_4a"
-                    android:layout_marginStart="15dp"
-                    android:textAllCaps="true"
-                    />
                 <!--Mama Details-->
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="0dp"
                     app:cardElevation="0.5dp"
                     >
                     <LinearLayout

@@ -144,10 +144,10 @@ public class CustomDialogViewFarm extends Dialog {
             for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext())
             {
 
-                textView_farmingArea.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.AREA)));
+/*                textView_farmingArea.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.AREA)));
                 textView_areaFarmed.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.TYPE)));
                 textView_cropsTaken.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.CROPS)));
-                textView_farmType.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE)));
+                textView_farmType.setText(cursor.getString(cursor.getColumnIndex(SQLiteFarmDetails.IRRIGATION_TYPE)));*/
 
             }
 

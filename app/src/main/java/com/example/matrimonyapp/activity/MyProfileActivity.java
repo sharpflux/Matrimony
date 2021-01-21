@@ -557,7 +557,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
         circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
         textView_welcomeUserName = view_header.findViewById(R.id.textView_welcomeUserName);
-        TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
+        //TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
 
 
         Glide.with(MyProfileActivity.this)
@@ -566,7 +566,7 @@ public class MyProfileActivity extends AppCompatActivity {
               .into(circleImageView_headerProfilePic);
 
       textView_welcomeUserName.setText(userModel.getFullName());
-      textView_emailId.setText(userModel.getEmailId());
+//      textView_emailId.setText(userModel.getEmailId());
 
       CustomNavigationView customNavigationView = new CustomNavigationView(MyProfileActivity.this,
               drawerLayout, expandableList, navigationView);

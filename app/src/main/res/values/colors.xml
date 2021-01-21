@@ -7,6 +7,8 @@
     <color name="light_weight_gray">#99000000</color>
     <color name="toolbar_text_black">#0f0d0e</color>
     <color name="text_black">#403f3f</color>
+    <color name="drawable_arrow_color">#ADADAD</color>
+
     <color name="text_white">#E5E5E5</color> <!--F0EDED-->
     <color name="viewline">#cccccc</color>
     <color name="blue">#2546b0</color>

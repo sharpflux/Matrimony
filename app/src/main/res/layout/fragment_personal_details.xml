@@ -366,6 +366,8 @@
                         android:maxLines="1"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
 
@@ -401,6 +403,8 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -434,6 +438,8 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -467,6 +473,8 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -500,6 +508,8 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -641,6 +651,8 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>

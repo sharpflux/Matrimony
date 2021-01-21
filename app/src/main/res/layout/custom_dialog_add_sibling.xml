@@ -215,7 +215,10 @@
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:focusable="false"
-                        android:clickable="false"/>
+                        android:clickable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
@@ -242,7 +245,10 @@
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:clickable="false"
-                        android:focusable="false"/>
+                        android:focusable="false"
+                        android:drawableEnd="@drawable/ic_action_arrow_down"
+                        android:drawableTint="@color/drawable_arrow_color"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
@@ -329,7 +335,7 @@
                     android:layout_marginTop="0dp"
                     android:orientation="vertical"
                     android:id="@+id/linearLayout_fatherInLaw"
-                    android:visibility="gone"
+
                     android:layout_marginBottom="20dp"
                     >
                     <androidx.cardview.widget.CardView
@@ -441,28 +447,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                        <!--FIL Address-->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/TextLabel"
-                        android:layout_marginTop="15dp"
-                        >
 
-
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editText_fatherInLawVillage"
-                            android:hint="@string/address_"
-                            android:textColor="@color/text_black"
-                            android:textSize="15sp"
-                            android:lineSpacingMultiplier="1.2"
-                            android:maxLines="5"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -566,7 +551,28 @@
                             android:text="@string/_0"
                             />
 
+                        <!--FIL Address-->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/TextLabel"
+                            android:layout_marginTop="15dp"
+                            >
 
+
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/editText_fatherInLawVillage"
+                                android:hint="@string/address_"
+                                android:textColor="@color/text_black"
+                                android:textSize="15sp"
+                                android:lineSpacingMultiplier="1.2"
+                                android:maxLines="5"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
 

@@ -140,7 +140,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         }
        // String IMEINumber = telephonyManager.getDeviceId();
         //textView.setText(IMEINumber);
-//        Toast.makeText(this, " ln : "+userModel.getLanguage()+"\nIMEI : "+IMEINumber, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, " ln : "+userModel.getLanguage()+"\nIMEI : "+IMEINumber, Toast.LENGTH_SHORT).show();
         // timelineAdapter = new TimelineAdapter(this,)
 
 
@@ -215,6 +215,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     private void navigation()
     {
+
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
         final NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
@@ -224,8 +226,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
         textView_welcomeUserName = view_header.findViewById(R.id.textView_welcomeUserName);
-        TextView textView_emailId= view_header.findViewById(R.id.textView_emailId);
-
+        TextView textView_editProfile= view_header.findViewById(R.id.textView_editProfile);
+        LinearLayout linearLayout_navigationHeader = view_header.findViewById(R.id.linearLayout_navigationHeader);
 
         Glide.with(HomeActivity.this)
                 .load(URLs.MainURL+userModel.getProfilePic())
@@ -233,8 +235,14 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                 .into(circleImageView_headerProfilePic);
 
         textView_welcomeUserName.setText(userModel.getFullName());
-        textView_emailId.setText(userModel.getEmailId());
-
+        //textView_emailId.setText(userModel.getEmailId());
+        linearLayout_navigationHeader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         CustomNavigationView customNavigationView = new CustomNavigationView(HomeActivity.this,
                 drawerLayout, expandableList, navigationView);
 
