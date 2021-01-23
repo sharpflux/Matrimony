@@ -238,7 +238,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 });
             }
         },String.class,String.class);
- hubProxy.on("getallMessages", new SubscriptionHandler3<String, String, String>() {
+/* hubProxy.on("getallMessages", new SubscriptionHandler3<String, String, String>() {
 
             @Override
             public void run(final String s, final String s2, final String s3) {
@@ -246,17 +246,17 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                       //  send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
-                       /*ChatModel chatModel = new ChatModel();
+                       *//*ChatModel chatModel = new ChatModel();
                        chatModel.setMessage(s);
                        chatModelsList.add(chatModel);
-                       chatAdapter.notifyDataSetChanged();*/
+                       chatAdapter.notifyDataSetChanged();*//*
 
                         Log.e("MESSAGES", s +"\n------------------------\n"+s2+"\n------------------------\n"+s3);
 
                     }
                 });
             }
-        },String.class,String.class, String.class);
+        },String.class,String.class, String.class);*/
 
 
         /*try {
