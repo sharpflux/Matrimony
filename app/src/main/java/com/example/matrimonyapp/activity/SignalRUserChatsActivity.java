@@ -107,6 +107,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
             public void prepareRequest(microsoft.aspnet.signalr.client.http.Request request) {
                 request.addHeader("DisplayName", userModel.getFullName());
                 request.addHeader("FromUserId", userModel.getUserId());
+                request.addHeader("ProfilePic", userModel.getProfilePic());
             }
         };
         // connect to signalr server
@@ -135,8 +136,8 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                         String username = jsonObject.getString("DisplayName");
                         String connection_id = jsonObject.getString("connectionID");
                         DirectMessagesModel directMessagesModel = new DirectMessagesModel();
-                        directMessagesModel.setUserId("4");
-                        directMessagesModel.setProfilePic("4");
+                        directMessagesModel.setUserId(jsonObject.getString("FromUserId"));
+                        directMessagesModel.setProfilePic(jsonObject.getString("ProfilePic"));
                         directMessagesModel.setUserName(username);
                         directMessagesModel.setFirebaseUserId(connection_id);
                         directMessagesModelList.add(directMessagesModel);
