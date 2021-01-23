@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ChatActivity;
+import com.example.matrimonyapp.activity.SignalRMessagesActivity;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
 import com.example.matrimonyapp.volley.URLs;
@@ -91,23 +92,25 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, ChatActivity.class);
-                intent.putExtra("firebaseUserId", list.get(position).getFirebaseUserId());
+                Intent intent = new Intent(context, SignalRMessagesActivity.class);
+                intent.putExtra("connectionId", list.get(position).getFirebaseUserId());
+                intent.putExtra("toUserId", list.get(position).getUserId());
                 context.startActivity(intent);
 
             }
         });
 
-        if(isChat)
+/*        if(isChat)
         {
             lastMessage(directMessagesModel.getFirebaseUserId(), holder.textView_lastMessage, holder.textView_lastMessageTime);
             noOfUnseenMessage(directMessagesModel.getFirebaseUserId(), holder.textView_noOfUnseenMessage, holder.relativeLayout_noOfUnseenMessage);
-        }
+        }*/
         /*else
         {
             holder.textView_lastMessage.setVisibility(View.GONE);
         }*/
 
+/*
         if(isChat)
         {
             if(directMessagesModel.getActivityStatus().equals("online"))
@@ -123,6 +126,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
         {
             holder.circleImage_activityStatus.setVisibility(View.GONE);
         }
+*/
 
 
 

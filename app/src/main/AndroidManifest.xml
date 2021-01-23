@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.FavoritesRejectedActivity"></activity>
+        <activity android:name=".activity.SignalRMessagesActivity"></activity>
+        <activity android:name=".activity.SignalRUserChatsActivity" />
+        <activity android:name=".activity.SignalRUserChats" />
+        <activity android:name=".activity.FavoritesRejectedActivity" />
         <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".activity.ShowImageSliderActivity" />
         <activity android:name=".activity.SubscriptionActivity" />

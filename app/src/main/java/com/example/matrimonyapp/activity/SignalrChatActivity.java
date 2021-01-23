@@ -109,6 +109,7 @@ public class SignalrChatActivity extends AppCompatActivity {
             @Override
             public void prepareRequest(Request request) {
                 request.addHeader("username", username.getText().toString().trim()); //get username
+                request.addHeader("userId", username.getText().toString().trim()); //get username
             }
         };
         String serverUrl="http://sam.sharpflux.com/signalr"; // connect to signalr server

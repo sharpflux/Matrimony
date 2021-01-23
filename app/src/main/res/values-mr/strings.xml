@@ -187,7 +187,7 @@
     <string name="add_profile_photo">प्रोफाइल फोटो जोडा</string>
     <string name="add_from_gallery">गॅलरीमधून जोडा </string>
     <string name="add_from_camera">कॅमेर्‍यामधून जोडा </string>
-    <string name="add_profile_photo_desc">जोडीदार माझा स्वत: चे प्रतिनिधित्व करण्यासाठी आपला प्रोफाइल फोटो बदला.</string>
+    <string name="add_profile_photo_desc">&#8226; जोडीदार माझा स्वत: चे प्रतिनिधित्व करण्यासाठी आपला प्रोफाइल फोटो बदला.</string>
     <string name="change_photo">फोटो बदला</string>
     <string name="edit_profile_desc">प्रोफाइल संपादित करा जेणेकरून इतर आपल्याला चांगले ओळखतील.</string>
     <string name="set_preferences_desc">चांगल्या शोध निकालांसाठी आपली प्राधान्ये सेट करा.</string>

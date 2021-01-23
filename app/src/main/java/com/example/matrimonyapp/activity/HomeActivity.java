@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,6 +54,7 @@ import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomNavigationView;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.TimelineModel;
+import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.sqlite.SQLiteSetPreference;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
@@ -75,8 +77,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import microsoft.aspnet.signalr.client.Credentials;
+import microsoft.aspnet.signalr.client.Platform;
+import microsoft.aspnet.signalr.client.SignalRFuture;
+import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
+import microsoft.aspnet.signalr.client.hubs.HubConnection;
+import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler1;
+import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler2;
+import microsoft.aspnet.signalr.client.transport.ClientTransport;
+import microsoft.aspnet.signalr.client.transport.ServerSentEventsTransport;
 
 
 public class HomeActivity extends AppCompatActivity  {//implements SimpleGestureFilter.SimpleGestureListener
@@ -93,6 +105,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     private RecyclerView drawerrecyview;
     private NavigationDrawerAdapter navigationDrawerAdapter;
     private ArrayList<NavigationItemListModel> activityListModelArrayList;
+
+    public static HubConnection hubConnection;
 
     //private SimpleGestureFilter detector;
 
@@ -146,6 +160,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         navigation();
 
+        connect();
 
         setToolbar();
 
@@ -155,14 +170,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HomeActivity.this, SignalrChatActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SignalRUserChatsActivity.class);
                 startActivity(intent);
             }
         });
 
-        timelineModelList = new ArrayList<TimelineModel>();
-        arrayList_recentlyviewed = new ArrayList<TimelineModel>();
-        arrayList_dailyRecommendations = new ArrayList<TimelineModel>();
+
 
         fetchValues();
 
@@ -213,6 +226,10 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     }
 
+
+    private void connect() {
+
+    }
     private void navigation()
     {
 
@@ -265,82 +282,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             }
         });
 
-        //prepareListData();
 
 
-        // setting list adapter
-
-/*
-      expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-          @Override
-          public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-              //Log.d("DEBUG", "submenu item clicked");
-              return false;
-          }
-      });
-      expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-          @Override
-          public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
-              //Log.d("DEBUG", "heading clicked");
-              return false;
-          }
-      });*/
     }
 
 
-   /* private void navigation() {
 
-        drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigation_view);
-        textView_welcomeUserName = findViewById(R.id.textView_welcomeUserName);
-        textView_welcomeUserName.setText(userModel.getFullName());
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-                super.onDrawerOpened(drawerView);
-            }
-        };
-
-        //Setting the actionbarToggle to drawer layout
-        drawer.addDrawerListener(actionBarDrawerToggle);
-
-        //calling sync state is necessary or else your hamburger icon wont show up
-        actionBarDrawerToggle.syncState();
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
-
-        invalidateOptionsMenu();
-
-        ////////////////////////////////
-        drawerrecyview = findViewById(R.id.drawerrecyview);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(HomeActivity.this);
-        drawerrecyview.setLayoutManager(layoutManager);
-        drawerrecyview.setItemAnimator(new DefaultItemAnimator());
-
-
-        activityListModelArrayList = new ArrayList<>();
-        for (int i = 0; i < IMAGES.length; i++) {
-            NavigationItemListModel activityListModel = new NavigationItemListModel();
-            activityListModel.setTxt(TEXT[i]);
-            activityListModel.setImage(IMAGES[i]);
-            activityListModelArrayList.add(activityListModel);
-        }
-
-
-
-        navigationDrawerAdapter = new NavigationDrawerAdapter(HomeActivity.this, activityListModelArrayList);
-        drawerrecyview.setAdapter(navigationDrawerAdapter);
-
-
-
-    }*/
    
    
    
@@ -368,6 +315,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         imageView_profilePic = findViewById(R.id.imageView_profilePic);
         circleImage_welcomeProfilePic = findViewById(R.id.circleImage_welcomeProfilePic);
         circleImage_progressProfilePic = findViewById(R.id.circleImage_progressProfilePic);
+
+        timelineModelList = new ArrayList<TimelineModel>();
+        arrayList_recentlyviewed = new ArrayList<TimelineModel>();
+        arrayList_dailyRecommendations = new ArrayList<TimelineModel>();
+
 
         recyclerView_recentlyViewed=findViewById(R.id.recyclerView_recentlyViewed);
         recyclerView_dailyRecommendations = findViewById(R.id.recyclerView_dailyRecommendations);

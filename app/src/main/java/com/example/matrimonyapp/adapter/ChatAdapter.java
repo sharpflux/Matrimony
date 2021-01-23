@@ -42,26 +42,26 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
         layoutInflater = LayoutInflater.from(parent.getContext());
 
-        if(viewType == MSG_TYPE_LEFT)
+        //if(viewType == MSG_TYPE_LEFT)
         {
             View listItem = layoutInflater.inflate(R.layout.recycler_view_message_left, parent, false);
             ChatAdapter.ViewHolder viewHolder = new ChatAdapter.ViewHolder(listItem);
             return viewHolder;
 
         }
-        else
+        /*else
         {
             View listItem = layoutInflater.inflate(R.layout.recycler_view_message_right, parent, false);
             ChatAdapter.ViewHolder viewHolder = new ChatAdapter.ViewHolder(listItem);
             return viewHolder;
 
         }
-
+*/
 
 
     }
 
-    @Override
+/*    @Override
     public int getItemViewType(int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -74,7 +74,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             return MSG_TYPE_LEFT;
         }
 
-    }
+
+
+    }*/
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
@@ -82,10 +84,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         final ChatModel chatModel = list.get(position);
 
         holder.textView_message.setText(list.get(position).getMessage());
-        holder.textView_messageTime.setText(list.get(position).getMessageTime());
+//        holder.textView_messageTime.setText(list.get(position).getMessageTime());
 
-
-        if(chatModel.getMessageStatus().equals("seen"))
+      /*  if(chatModel.getMessageStatus().equals("seen"))
         {
             holder.imageView_messageStatus.setImageDrawable(context.getDrawable(R.drawable.double_check));
         }
@@ -97,7 +98,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         {
             holder.imageView_messageStatus.setImageDrawable(context.getDrawable(R.drawable.clock));
         }
-
+*/
 
 
         /*holder.textView_lastMessageTime.setText(list.get(position).getLastMessageTime());
@@ -147,8 +148,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             this.textView_lastMessageTime = itemView.findViewById(R.id.textView_lastMessageTime);*/
 
             this.textView_message = itemView.findViewById(R.id.textView_message);
-            this.textView_messageTime = itemView.findViewById(R.id.textView_messageTime);
-            this.imageView_messageStatus = itemView.findViewById(R.id.imageView_messageStatus);
+            /*this.textView_messageTime = itemView.findViewById(R.id.textView_messageTime);
+            this.imageView_messageStatus = itemView.findViewById(R.id.imageView_messageStatus);*/
             //this.circleImage_profilePic = itemView.findViewById(R.id.circleImage_profilePic);
             // this.textView_send = itemView.findViewById(R.id.textView_send);
         }

@@ -2,7 +2,7 @@
     <string name="app_name">Jodidar Maza</string>
     <string name="tag_line">Your search for perfect partner ends here...</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="my_profile">My Account</string>
+    <string name="my_profile">My Profile</string>
     <string name="rate_app">Rate App</string>
     <string name="subscription_plan">Subscription Plan</string>
 
@@ -186,7 +186,7 @@
     <string name="add_profile_photo">Add Profile Photo</string>
     <string name="add_from_gallery">Add from Gallery </string>
     <string name="add_from_camera">Add from Camera </string>
-    <string name="add_profile_photo_desc">Change your profile photo to represent yourself on JodidarMaza.</string>
+    <string name="add_profile_photo_desc">&#8226; Change your profile photo to represent yourself on JodidarMaza.</string>
     <string name="change_photo">Change photo</string>
     <string name="edit_profile_desc">Edit Profile so that others will know you better.</string>
     <string name="set_preferences_desc">Set your Preferences for better search results.</string>
