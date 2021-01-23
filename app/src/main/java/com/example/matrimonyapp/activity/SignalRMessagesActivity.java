@@ -167,7 +167,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
 
     void connect() {
-        Platform.loadPlatformComponent(new AndroidPlatformComponent());
+/*        Platform.loadPlatformComponent(new AndroidPlatformComponent());
         Credentials credentials = new Credentials() {
             @Override
             public void prepareRequest(Request request) {
@@ -187,7 +187,9 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         String CLIENT_METHOD_BROADAST_MESSAGE = "getUserList"; // get webapi serv methods
         hubProxy = hubConnection.createHubProxy("chatHub"); // web api  necessary method name
         ClientTransport clientTransport = new ServerSentEventsTransport((hubConnection.getLogger()));
-        SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);
+        SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);*/
+
+        hubProxy = SignalRUserChatsActivity.hubProxy;
 
 
         /*hubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE, new SubscriptionHandler1<String>() {
@@ -220,10 +222,10 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             }
         }, String.class);*/
 
-        hubProxy.on("sendMessage", new SubscriptionHandler3<String, String, String>() {
+        hubProxy.on("sendMessage", new SubscriptionHandler2<String, String>() {
 
             @Override
-            public void run(final String s, final String s2, String s3) {
+            public void run(final String s, final String s2) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -235,13 +237,15 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     }
                 });
             }
-        },String.class,String.class, String.class);
-        try {
+        },String.class,String.class);
+
+
+        /*try {
             signalRFuture.get();
         } catch (InterruptedException | ExecutionException e) {
             Log.e("SimpleSignalR", e.toString());
             return;
-        }
+        }*/
     }
 
 

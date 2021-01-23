@@ -59,7 +59,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
     private String currentLanguage;
     private UserModel userModel;
-    public HubProxy hubProxy;
+    public static HubProxy hubProxy;
     public HubConnection hubConnection;
     ArrayList<DirectMessagesModel> directMessagesModelList;
     RecyclerView recyclerView_directMessage;
