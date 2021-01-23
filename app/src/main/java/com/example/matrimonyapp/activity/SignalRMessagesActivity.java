@@ -152,8 +152,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             toUserId = bundle.getString("toUserId");
         }
         connect();
-        hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
-
+        //hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
 
     }
 
