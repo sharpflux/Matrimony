@@ -152,16 +152,22 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             toUserId = bundle.getString("toUserId");
         }
         connect();
+        hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
+
 
     }
 
     private void sendMessage() {
 
         // WebApi Method
-
+        ChatModel chatModel = new ChatModel();
+        chatModel.setMessage(message);
+        chatModel.setSenderId(userModel.getUserId());
+        chatModel.setReceiverId(toUserId);
+        chatModelsList.add(chatModel);
+        chatAdapter.notifyDataSetChanged();
         hubProxy.invoke("sendMessage", new Object[]{editText_message.getText().toString().trim(), toUserId,
             connectionId});//we have parameterized what we want in the web API method
-
 
     }
 
@@ -232,31 +238,62 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                       //  send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
                        ChatModel chatModel = new ChatModel();
                        chatModel.setMessage(s);
+                       chatModel.setSenderId(toUserId);
+                       chatModel.setReceiverId(userModel.getUserId());
                        chatModelsList.add(chatModel);
                        chatAdapter.notifyDataSetChanged();
                     }
                 });
             }
         },String.class,String.class);
-/* hubProxy.on("getallMessages", new SubscriptionHandler3<String, String, String>() {
+ hubProxy.on("getallMessages", new SubscriptionHandler1<String>() {
 
             @Override
-            public void run(final String s, final String s2, final String s3) {
+            public void run(final String s) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                       //  send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
-                       *//*ChatModel chatModel = new ChatModel();
-                       chatModel.setMessage(s);
-                       chatModelsList.add(chatModel);
-                       chatAdapter.notifyDataSetChanged();*//*
+                     /*
+*/
 
-                        Log.e("MESSAGES", s +"\n------------------------\n"+s2+"\n------------------------\n"+s3);
+
+                        try {
+
+                            JSONArray jsonArray = new JSONArray(s);
+
+                            for (int i=0; i<jsonArray.length(); i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                /*if ((jsonObject.getString("FromUserId").equals(userModel.getUserId()) && jsonObject.getString("ToUserId").equals(toUserId))
+                                || (jsonObject.getString("FromUserId").equals(toUserId) && jsonObject.getString("ToUserId").equals(userModel.getUserId())))
+                                {*/
+                                    ChatModel chatModel = new ChatModel();
+                                    chatModel.setMessage(jsonObject.getString("Message"));
+                                    chatModel.setMessageTime(jsonObject.getString("MessageDateTime"));
+                                    chatModel.setSenderId(jsonObject.getString("FromUserId"));
+                                    chatModel.setReceiverId(jsonObject.getString("ToUserId"));
+                                    chatModelsList.add(chatModel);
+
+                                //}
+
+                            }
+
+                            chatAdapter.notifyDataSetChanged();
+
+                        }
+                        catch (JSONException jsonException)
+                        {
+                            jsonException.printStackTrace();
+                        }
+
+
+                        Log.e("MESSAGES", "\n------------------------\n"+s +"\n------------------------\n");
 
                     }
                 });
             }
-        },String.class,String.class, String.class);*/
+        },String.class);
 
 
         /*try {

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.modal.ChatModel;
+import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,6 +28,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     ArrayList<ChatModel> list;
     private static final int MSG_TYPE_LEFT = 0;
     private static final int MSG_TYPE_RIGHT = 1;
+    private UserModel userModel;
 
     private FirebaseUser firebaseUser;
 
@@ -34,6 +37,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     {
         this.context = context;
         this.list = list;
+        userModel = CustomSharedPreference.getInstance(context).getUser();
     }
 
     @NonNull
@@ -42,30 +46,31 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
         layoutInflater = LayoutInflater.from(parent.getContext());
 
-        //if(viewType == MSG_TYPE_LEFT)
+
+        if(viewType == MSG_TYPE_LEFT)
         {
             View listItem = layoutInflater.inflate(R.layout.recycler_view_message_left, parent, false);
             ChatAdapter.ViewHolder viewHolder = new ChatAdapter.ViewHolder(listItem);
             return viewHolder;
 
         }
-        /*else
+        else
         {
             View listItem = layoutInflater.inflate(R.layout.recycler_view_message_right, parent, false);
             ChatAdapter.ViewHolder viewHolder = new ChatAdapter.ViewHolder(listItem);
             return viewHolder;
 
         }
-*/
 
 
     }
 
-/*    @Override
+    @Override
     public int getItemViewType(int position) {
+        ChatModel chatModel = list.get(position);
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(list.get(position).getSenderId().equals(firebaseUser.getUid()))
+        //firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(chatModel.getSenderId().equals(userModel.getUserId()))
         {
             return MSG_TYPE_RIGHT;
         }
@@ -76,7 +81,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
 
 
-    }*/
+    }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
