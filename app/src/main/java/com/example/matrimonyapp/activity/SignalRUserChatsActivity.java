@@ -100,6 +100,8 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
     }
 
+
+
     private void readOnlineUsers() {
         Platform.loadPlatformComponent(new AndroidPlatformComponent());
         Credentials credentials = new Credentials() {
