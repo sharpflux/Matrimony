@@ -57,6 +57,7 @@ import microsoft.aspnet.signalr.client.hubs.HubConnection;
 import microsoft.aspnet.signalr.client.hubs.HubProxy;
 import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler1;
 import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler2;
+import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler3;
 import microsoft.aspnet.signalr.client.transport.ClientTransport;
 import microsoft.aspnet.signalr.client.transport.ServerSentEventsTransport;
 
@@ -115,13 +116,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         recyclerView_chat.scrollToPosition(chatModelsList.size());
 
 
-        Bundle bundle =intent.getExtras();
-        if (bundle!=null)
-        {
-            connectionId = bundle.getString("connectionId");
-            toUserId = bundle.getString("toUserId");
-        }
-        connect();
+
         context=this;
 
         imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +144,14 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Bundle bundle =intent.getExtras();
+        if (bundle!=null)
+        {
+            connectionId = bundle.getString("connectionId");
+            toUserId = bundle.getString("toUserId");
+        }
+        connect();
 
     }
 
@@ -180,10 +183,13 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             public void run() {
             }
         });
+
         String CLIENT_METHOD_BROADAST_MESSAGE = "getUserList"; // get webapi serv methods
         hubProxy = hubConnection.createHubProxy("chatHub"); // web api  necessary method name
         ClientTransport clientTransport = new ServerSentEventsTransport((hubConnection.getLogger()));
         SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);
+
+
         /*hubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE, new SubscriptionHandler1<String>() {
             @Override
             public void run(String s) {
@@ -213,10 +219,11 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 }
             }
         }, String.class);*/
-        hubProxy.on("sendMessage", new SubscriptionHandler2<String ,String>() {
+
+        hubProxy.on("sendMessage", new SubscriptionHandler3<String, String, String>() {
 
             @Override
-            public void run(final String s, final String s2) {
+            public void run(final String s, final String s2, String s3) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -228,7 +235,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     }
                 });
             }
-        },String.class,String.class);
+        },String.class,String.class, String.class);
         try {
             signalRFuture.get();
         } catch (InterruptedException | ExecutionException e) {

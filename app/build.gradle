@@ -155,8 +155,6 @@ dependencies {
 
     implementation 'com.sloydev:collapsingavatartoolbar:1.0.0'
 
-
-
 }
 
 apply plugin: 'com.google.gms.google-services'
