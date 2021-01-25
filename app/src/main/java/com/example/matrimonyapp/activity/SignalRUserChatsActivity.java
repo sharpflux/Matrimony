@@ -1,10 +1,16 @@
 package com.example.matrimonyapp.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,11 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.DirectMessagesAdapter;
+import com.example.matrimonyapp.helpers.Globals;
 import com.example.matrimonyapp.modal.ChatListModel;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.service.ChatService;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,6 +78,46 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
     private ArrayList<String> arrayList_chatUsers;
 
+    MyReceiver myReceiver;
+
+    // Chat Service
+    ChatService chatService;
+    boolean mBound = false;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
+            chatService = binder.getService();
+            // chatService.GetRooms();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +141,17 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
         context = getApplicationContext();
         directMessagesModelList = new ArrayList<DirectMessagesModel>();
 
+        Intent intent = new Intent(this, ChatService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+        //Register events we want to receive from Chat Service
+        myReceiver = new  MyReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("UserList");
+        registerReceiver(myReceiver, intentFilter);
 
 
-
-        readOnlineUsers();
+     //   readOnlineUsers();
 
     }
 
@@ -211,4 +266,48 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
     }
 
 
+    private class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            switch (intent.getAction()) {
+                case "notifyAdapter":
+                    //adapter.notifyDataSetChanged();
+                    break;
+                case "UserList":
+                    JSONArray jsonArray =(JSONArray) Globals.userlist;
+                    try {
+                        directMessagesModelList.clear();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = null;
+
+                            jsonObject = jsonArray.getJSONObject(i);
+                            String username = jsonObject.getString("DisplayName");
+                            String connection_id = jsonObject.getString("connectionID");
+                            DirectMessagesModel directMessagesModel = new DirectMessagesModel();
+                            directMessagesModel.setUserId(jsonObject.getString("FromUserId"));
+                            directMessagesModel.setProfilePic(jsonObject.getString("ProfilePic"));
+                            directMessagesModel.setUserName(username);
+                            directMessagesModel.setFirebaseUserId(connection_id);
+                            directMessagesModelList.add(directMessagesModel);
+
+
+
+                    }
+                        directMessagesAdapter = new DirectMessagesAdapter(SignalRUserChatsActivity.this,directMessagesModelList, true);
+                        recyclerView_directMessage.setAdapter(directMessagesAdapter);
+                        recyclerView_directMessage.setHasFixedSize(true);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                        recyclerView_directMessage.setLayoutManager(mLayoutManager);
+                        directMessagesAdapter.notifyDataSetChanged();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+            }
+        }
+    } // MyReceiver
 }

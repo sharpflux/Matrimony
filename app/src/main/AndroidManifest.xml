@@ -78,6 +78,10 @@
         <activity android:name=".activity.SecondActivity" />
         <activity android:name=".activity.MainActivity" />
 
+        <service
+            android:name=".service.ChatService"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

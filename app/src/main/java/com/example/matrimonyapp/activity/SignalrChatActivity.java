@@ -34,6 +34,7 @@ import microsoft.aspnet.signalr.client.hubs.HubConnection;
 import microsoft.aspnet.signalr.client.hubs.HubProxy;
 import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler1;
 import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler2;
+import microsoft.aspnet.signalr.client.hubs.SubscriptionHandler4;
 import microsoft.aspnet.signalr.client.transport.ClientTransport;
 import microsoft.aspnet.signalr.client.transport.ServerSentEventsTransport;
 
@@ -83,7 +84,7 @@ public class SignalrChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!message.getText().toString().trim().equals("") && sender != null) { // WebApi Methods
-                    hubProxy.invoke("sendMessage", new Object[]{message.getText().toString().trim(), sender.connectionID
+                    hubProxy.invoke("sendMessage", new Object[]{message.getText().toString().trim(), "50", sender.connectionID
                     });//we have parameterized what we want in the web API method
                 }
             }
@@ -108,8 +109,11 @@ public class SignalrChatActivity extends AppCompatActivity {
         Credentials credentials = new Credentials() {
             @Override
             public void prepareRequest(Request request) {
-                request.addHeader("username", username.getText().toString().trim()); //get username
-                request.addHeader("userId", username.getText().toString().trim()); //get username
+                request.addHeader("DisplayName", username.getText().toString().trim());
+                request.addHeader("FromUserId", String.valueOf(18));
+                request.addHeader("ProfilePic", String.valueOf("abbc"));
+                //get username
+              //  request.addHeader("userId", username.getText().toString().trim()); //get username
             }
         };
         String serverUrl="http://sam.sharpflux.com/signalr"; // connect to signalr server
@@ -124,6 +128,10 @@ public class SignalrChatActivity extends AppCompatActivity {
         hubProxy = hubConnection.createHubProxy("chatHub"); // web api  necessary method name
         ClientTransport clientTransport = new ServerSentEventsTransport((hubConnection.getLogger()));
         SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);
+
+
+
+
         hubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE, new SubscriptionHandler1<String>() {
             @Override
             public void run(String s) {
@@ -134,7 +142,7 @@ public class SignalrChatActivity extends AppCompatActivity {
                     user_names.add("Select User");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String username = jsonObject.getString("username");
+                        String username = jsonObject.getString("DisplayName");
                         String connection_id = jsonObject.getString("connectionID");
                         UserChat user = new UserChat(username, connection_id);
                         userList.add(user);
@@ -146,6 +154,7 @@ public class SignalrChatActivity extends AppCompatActivity {
                             ArrayAdapter<String> adapter=new ArrayAdapter<String>(cx,android.R.layout.simple_list_item_1,user_names);
                             adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
                             users.setAdapter(adapter);
+
                         }
                     });
                 } catch (JSONException e) {
@@ -153,7 +162,9 @@ public class SignalrChatActivity extends AppCompatActivity {
                 }
             }
         }, String.class);
-        hubProxy.on("sendMessage", new SubscriptionHandler2<String ,String>() {
+
+
+        hubProxy.on("SendMessage", new SubscriptionHandler2<String ,String>() {
 
             @Override
             public void run(final String s, final String s2) {
@@ -165,6 +176,8 @@ public class SignalrChatActivity extends AppCompatActivity {
                 });
             }
         },String.class,String.class);
+
+
         try {
             signalRFuture.get();
         } catch (InterruptedException | ExecutionException e) {

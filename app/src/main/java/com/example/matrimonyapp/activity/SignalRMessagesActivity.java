@@ -1,10 +1,15 @@
 package com.example.matrimonyapp.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -24,10 +29,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ChatAdapter;
+import com.example.matrimonyapp.adapter.DirectMessagesAdapter;
+import com.example.matrimonyapp.helpers.Globals;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.service.ChatService;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -78,12 +86,52 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     HubProxy hubProxy;
     private Intent intent;
 
-    String connectionId, toUserId;
+    String connectionId="", toUserId="";
 
     Handler mHandler=new Handler(); //listener
     private ScrollView scrollView;
 
+    MyReceiver myReceiver;
+    ChatService chatService;
+    boolean mBound = false;
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(myReceiver!=null)
+         unregisterReceiver(myReceiver);
+
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
+    }
+
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
+            chatService = binder.getService();
+            mBound = true;
+
+           // chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","50");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,7 +176,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 if(!message.equals(""))
                 {
 
-                    sendMessage();
+                    chatService.Send(connectionId,toUserId, editText_message.getText().toString());
+                   // sendMessage();
                     hideSoftKeyboard((Activity)SignalRMessagesActivity.this);
 //                    recyclerView_chat.smoothScrollToPosition(chatModelsList.size()-1);
 
@@ -137,6 +186,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
             }
         });
+
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,12 +198,20 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         Bundle bundle =intent.getExtras();
         if (bundle!=null)
         {
-            connectionId = bundle.getString("connectionId");
+           connectionId = bundle.getString("connectionId");
             toUserId = bundle.getString("toUserId");
         }
-        connect();
-        hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
+       // connect();
+     //   hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
+        Intent intent = new Intent(this, ChatService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 
+        //Register events we want to receive from Chat Service
+        myReceiver = new MyReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("notifyAdapter");
+       // intentFilter.addAction("UserList");
+        registerReceiver(myReceiver, intentFilter);
 
     }
 
@@ -171,6 +229,50 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
     }
 
+    private class MyReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            switch (intent.getAction()) {
+                case "notifyAdapter":
+
+                    ChatModel chatModel = new ChatModel();
+                    chatModel.setMessage(Globals.NewMessage);
+                    chatModel.setSenderId(toUserId);
+                    chatModel.setReceiverId(userModel.getUserId());
+                    chatModelsList.add(chatModel);
+                    chatAdapter.notifyDataSetChanged();
+
+                    break;
+
+                case "UserList":
+                    JSONArray jsonArray =(JSONArray) Globals.userlist;
+                    try {
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject = null;
+
+                            jsonObject = jsonArray.getJSONObject(i);
+                            if (jsonObject.getString("FromUserId").equals(toUserId))
+                            {
+                                connectionId = jsonObject.getString("connectionID");
+                                break;
+                            }
+
+
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+            }
+        }
+    } // MyReceiver
 
     void connect() {
 /*        Platform.loadPlatformComponent(new AndroidPlatformComponent());
@@ -195,7 +297,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         ClientTransport clientTransport = new ServerSentEventsTransport((hubConnection.getLogger()));
         SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);*/
 
-        hubProxy = SignalRUserChatsActivity.hubProxy;
+        //hubProxy = SignalRUserChatsActivity.hubProxy;
 
 
         /*hubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE, new SubscriptionHandler1<String>() {
@@ -246,6 +348,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 });
             }
         },String.class,String.class);
+
+
  hubProxy.on("getallMessages", new SubscriptionHandler1<String>() {
 
             @Override
@@ -253,10 +357,6 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                      //  send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
-                     /*
-*/
-
 
                         try {
 

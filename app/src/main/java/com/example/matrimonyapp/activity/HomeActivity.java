@@ -1,15 +1,20 @@
 package com.example.matrimonyapp.activity;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -52,10 +57,12 @@ import com.example.matrimonyapp.adapter.RecentlyViewedAdapter;
 import com.example.matrimonyapp.adapter.TimelineAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomNavigationView;
+import com.example.matrimonyapp.helpers.Globals;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.service.ChatService;
 import com.example.matrimonyapp.sqlite.SQLiteSetPreference;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -69,6 +76,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -138,6 +146,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     LinearLayout linearChat;
 
     CircleImageView circleImage_welcomeProfilePic, circleImage_progressProfilePic;
+
 
 
     @Override
@@ -808,6 +817,5 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
     }
-
 
 }
