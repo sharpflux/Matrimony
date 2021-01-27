@@ -78,6 +78,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
     private ArrayList<String> arrayList_chatUsers;
 
+    public static String FromConnectionId="0";
     MyReceiver myReceiver;
 
     // Chat Service
@@ -198,6 +199,12 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                         directMessagesModel.setUserName(username);
                         directMessagesModel.setFirebaseUserId(connection_id);
                         directMessagesModelList.add(directMessagesModel);
+
+
+                        if(jsonObject.getString("FromUserId").equals(userModel.getUserId()))
+                        {
+                            FromConnectionId = connection_id;
+                        }
 
                     }
                     mHandler.post(new Runnable() {

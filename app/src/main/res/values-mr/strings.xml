@@ -446,6 +446,9 @@
     <string name="sent">Sent</string>
     <string name="accepted">Accepted</string>
     <string name="rejected">Rejected</string>
+    <string name="_occupation_father">Father\'s Occupation</string>
+    <string name="highest_education">Highest Education</string>
+    <string name="highest_education_level">Highest Education Level</string>
 
 
 </resources>

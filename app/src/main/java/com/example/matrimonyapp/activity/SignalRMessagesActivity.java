@@ -86,7 +86,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     HubProxy hubProxy;
     private Intent intent;
 
-    String connectionId="", toUserId="";
+    String connectionId="0", toUserId="";
 
     Handler mHandler=new Handler(); //listener
     private ScrollView scrollView;
@@ -94,7 +94,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     MyReceiver myReceiver;
     ChatService chatService;
     boolean mBound = false;
-
+    private LinearLayoutManager mLayoutManager;
+    private boolean isAtBottom=false;
 
 
     @Override
@@ -123,8 +124,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
             chatService = binder.getService();
             mBound = true;
+            chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","50");
 
-           // chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","50");
         }
 
         @Override
@@ -159,7 +160,9 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         recyclerView_chat.setAdapter(chatAdapter);
         recyclerView_chat.setHasFixedSize(true);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+        mLayoutManager = new LinearLayoutManager(context);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.scrollToPosition(chatModelsList.size());
 
@@ -176,12 +179,22 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 if(!message.equals(""))
                 {
 
+
                     chatService.Send(connectionId,toUserId, editText_message.getText().toString());
                    // sendMessage();
-                    hideSoftKeyboard((Activity)SignalRMessagesActivity.this);
-//                    recyclerView_chat.smoothScrollToPosition(chatModelsList.size()-1);
+                   // hideSoftKeyboard((Activity)SignalRMessagesActivity.this);
 
+
+                    ChatModel chatModel = new ChatModel();
+                    chatModel.setMessage(message);
+                    chatModel.setSenderId(userModel.getUserId());
+                    chatModel.setReceiverId(toUserId);
+                    chatModelsList.add(0,chatModel);
+                    chatAdapter.notifyItemInserted(0);
                     editText_message.setText("");
+                    //scrollView.scrollTo(0, scrollView.getBottom()+60);
+                    //recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+
                 }
 
             }
@@ -210,24 +223,46 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         myReceiver = new MyReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("notifyAdapter");
+        intentFilter.addAction("getallMessages");
        // intentFilter.addAction("UserList");
         registerReceiver(myReceiver, intentFilter);
 
+
+
+
+        RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+
+                recyclerView_chat.smoothScrollToPosition(0);
+                /*if (isAtBottom) {
+
+                } else {
+                }*/
+            }
+        };
+
+        recyclerView_chat.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    isAtBottom = true;
+                } else {
+                    isAtBottom = false;
+                }
+            }
+        });
+
+        //Assigns observer to adapter and LayoutManager to RecyclerView
+
+        chatAdapter.registerAdapterDataObserver(observer);
+        recyclerView_chat.smoothScrollToPosition(0);
+
     }
 
-    private void sendMessage() {
-
-        // WebApi Method
-        ChatModel chatModel = new ChatModel();
-        chatModel.setMessage(message);
-        chatModel.setSenderId(userModel.getUserId());
-        chatModel.setReceiverId(toUserId);
-        chatModelsList.add(chatModel);
-        chatAdapter.notifyDataSetChanged();
-        hubProxy.invoke("sendMessage", new Object[]{editText_message.getText().toString().trim(), toUserId,
-            connectionId});//we have parameterized what we want in the web API method
-
-    }
 
     private class MyReceiver extends BroadcastReceiver {
 
@@ -241,19 +276,59 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     chatModel.setMessage(Globals.NewMessage);
                     chatModel.setSenderId(toUserId);
                     chatModel.setReceiverId(userModel.getUserId());
-                    chatModelsList.add(chatModel);
-                    chatAdapter.notifyDataSetChanged();
+                    chatModelsList.add(0,chatModel);
+                    chatAdapter.notifyItemInserted(0);
+                    //scrollView.scrollTo(0, scrollView.getBottom()+60);
+                    //recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+
+                    break;
+                case "getallMessages":
+
+                    chatModelsList.clear();
+                    JSONArray jsonArray = null;
+                    try {
+                        jsonArray = new JSONArray(Globals.allMessages);
+                        for (int i=0; i<jsonArray.length(); i++)
+                        {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                /*if ((jsonObject.getString("FromUserId").equals(userModel.getUserId()) && jsonObject.getString("ToUserId").equals(toUserId))
+                                || (jsonObject.getString("FromUserId").equals(toUserId) && jsonObject.getString("ToUserId").equals(userModel.getUserId())))
+                                {*/
+                                    ChatModel chatModel1 = new ChatModel();
+                                    chatModel1.setMessage(jsonObject.getString("Message"));
+                                    chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
+                                    chatModel1.setSenderId(jsonObject.getString("FromUserId"));
+                                    chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
+                                    chatModelsList.add(chatModel1);
+
+
+
+                            //}
+
+                        }
+
+
+                        chatAdapter.notifyDataSetChanged();
+                       // mLayoutManager.scrollToPositionWithOffset(0,100);
+                       // scrollView.fullScroll(View.FOCUS_FORWARD);
+                       // recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+                        //scrollView.scrollTo(0, scrollView.getBottom()+60);
+
+                    } catch (JSONException jsonException) {
+                        jsonException.printStackTrace();
+                    }
+
 
                     break;
 
                 case "UserList":
-                    JSONArray jsonArray =(JSONArray) Globals.userlist;
+                    JSONArray jsonArray1 =(JSONArray) Globals.userlist;
                     try {
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
+                        for (int i = 0; i < jsonArray1.length(); i++) {
                             JSONObject jsonObject = null;
 
-                            jsonObject = jsonArray.getJSONObject(i);
+                            jsonObject = jsonArray1.getJSONObject(i);
                             if (jsonObject.getString("FromUserId").equals(toUserId))
                             {
                                 connectionId = jsonObject.getString("connectionID");

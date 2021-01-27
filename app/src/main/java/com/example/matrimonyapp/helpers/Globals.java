@@ -13,5 +13,6 @@ public class Globals {
     public static ArrayList<String> Rooms = new ArrayList<>();
     public static JSONArray userlist = new JSONArray();
     public static String NewMessage = new String();
+    public static String allMessages = new String();
     public static ArrayList<ChatModel> chatModelArrayList = new ArrayList<>();
 }

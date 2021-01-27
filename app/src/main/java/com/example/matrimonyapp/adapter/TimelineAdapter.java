@@ -41,6 +41,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.SignalRMessagesActivity;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
 import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
 import com.example.matrimonyapp.listener.OnSwipeTouchListener;
@@ -273,6 +274,17 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         });
 
 
+        holder.linearLayout_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context, SignalRMessagesActivity.class);
+                intent.putExtra("connectionId", "0");
+                intent.putExtra("toUserId", list.get(position).getUserId());
+                context.startActivity(intent);
+
+            }
+        });
 
         holder.linearLayout_interests.setOnClickListener(new View.OnClickListener() {
             @Override

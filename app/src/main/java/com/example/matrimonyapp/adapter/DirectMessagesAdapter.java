@@ -17,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ChatActivity;
 import com.example.matrimonyapp.activity.SignalRMessagesActivity;
+import com.example.matrimonyapp.activity.SignalRUserChatsActivity;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
 import com.example.matrimonyapp.volley.URLs;
@@ -93,6 +94,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
             public void onClick(View view) {
 
                 Intent intent = new Intent(context, SignalRMessagesActivity.class);
+               // intent.putExtra("FromConnectionId", SignalRUserChatsActivity.FromConnectionId);
                 intent.putExtra("connectionId", list.get(position).getFirebaseUserId());
                 intent.putExtra("toUserId", list.get(position).getUserId());
                 context.startActivity(intent);

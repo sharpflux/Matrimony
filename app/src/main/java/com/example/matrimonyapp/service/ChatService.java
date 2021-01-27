@@ -87,11 +87,13 @@ public class ChatService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         if (!StartHubConnection()) {
-            ExitWithMessage("Chat Service failed to start!");
+            //ExitWithMessage("Chat Service failed to start!");
+            StartHubConnection();
         }
 
         if (!RegisterEvents()) {
-            ExitWithMessage("End-point error: Failed to register Events!");
+            RegisterEvents();
+            //ExitWithMessage("End-point error: Failed to register Events!");
         }
 
         return mBinder;
@@ -115,13 +117,12 @@ public class ChatService extends Service {
                 request.addHeader("DisplayName", userModel.getFullName());
                 request.addHeader("FromUserId", userModel.getUserId());
                 request.addHeader("ProfilePic", userModel.getProfilePic());
-                //get username
-                //  request.addHeader("userId", username.getText().toString().trim()); //get username
+
             }
         };
 
         connection.setCredentials(credentials);
-       // connection.getHeaders().put("Device", "Mobile");
+
 
         // Create Proxy
         proxy = connection.createHubProxy(hubName);
@@ -178,6 +179,33 @@ public class ChatService extends Service {
                     }
                 }
             }, String.class);
+
+
+
+
+            proxy.on("getallMessages", new SubscriptionHandler2<String, String>() {
+
+                @Override
+                public void run(final String s, String s2) {
+
+                   // Log.e("MESSAGES", "\n--------------------------------------\n"+s +"\n--------------------------------------\n");
+
+                    mHandler.post(new Runnable() {
+
+
+                        @Override
+                        public void run() {
+
+                            Globals.allMessages = s;
+                            sendBroadcast(new Intent().setAction("getallMessages"));
+
+
+                        }
+                    });
+                }
+            },String.class, String.class);
+
+
 
 
 

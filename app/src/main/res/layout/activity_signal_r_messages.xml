@@ -5,57 +5,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/toolbar_chat"
+        android:id="@+id/include_toolbar_chat"
+        android:layout_alignParentTop="true"
+        />
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginBottom="65dp"
+        android:id="@+id/scrollView"
+        android:layout_below="@id/include_toolbar_chat"
 
+        >
 
-        <include layout="@layout/toolbar_chat"
-            android:id="@+id/include_toolbar_chat"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:orientation="horizontal"
-            android:background="@drawable/shadow_down"
-            android:layout_alignBottom="@+id/include_direct_messages_toolbar"
-            />
-
-
-        <ScrollView
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="65dp"
-            android:id="@+id/scrollView"
+            android:paddingTop="10dp"
+            android:id="@+id/linearLayout_message"
+            android:orientation="vertical"
+
             >
 
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:id="@+id/linearLayout_message"
-                android:orientation="vertical"
-                >
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerView_chat"
+                app:stackFromEnd="true"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/recyclerView_chat"
-                    app:stackFromEnd="true"
-                    />
+                />
 
-            </LinearLayout>
+        </LinearLayout>
 
 
 
-        </ScrollView>
+    </ScrollView>
 
-    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_alignBottom="@+id/include_toolbar_chat"
+
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,6 +62,10 @@
         android:background="@color/transparent"
         android:layout_alignParentBottom="true"
         android:layout_margin="5dp"
+        android:paddingTop="10dp"
+        android:layout_alignBottom="@id/scrollView"
+        android:id="@id/linearLayout_message"
+
         >
 
         <androidx.cardview.widget.CardView
@@ -142,6 +144,9 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
+
+
 
 
 </RelativeLayout>
