@@ -683,12 +683,15 @@ public class BasicDetailsFragment extends Fragment {
 
                                 Toast.makeText(context,"Basic details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                getActivity().finish();
+
+
+                                /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
 
                                 ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
-                                fragmentTransaction.commit() ;
+                                fragmentTransaction.commit() ;*/
 
                             }
                             else

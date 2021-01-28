@@ -521,8 +521,13 @@ public class FamilyDetailsFragment extends Fragment {
 
                 FragmentManager fragmentManager = getFragmentManager();
 
-                if (fragmentManager.getBackStackEntryCount() > 0) {
+                if (fragmentManager.getBackStackEntryCount() > 0)
+                {
                     fragmentManager.popBackStack();
+                }
+                else
+                {
+                    getActivity().finish();
                 }
             }
         });

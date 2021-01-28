@@ -108,6 +108,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
             ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
             chatService = binder.getService();
             // chatService.GetRooms();
+            chatService.GetRecentChats(userModel.getUserId(),"1","50");
             mBound = true;
         }
 
@@ -149,6 +150,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
         myReceiver = new  MyReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("UserList");
+        intentFilter.addAction("MyStatus");
         registerReceiver(myReceiver, intentFilter);
 
 
@@ -294,6 +296,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                             DirectMessagesModel directMessagesModel = new DirectMessagesModel();
                             directMessagesModel.setUserId(jsonObject.getString("FromUserId"));
                             directMessagesModel.setProfilePic(jsonObject.getString("ProfilePic"));
+                            directMessagesModel.setActivityStatus( String.valueOf( jsonObject.getBoolean("IsOnline")));
                             directMessagesModel.setUserName(username);
                             directMessagesModel.setFirebaseUserId(connection_id);
                             directMessagesModelList.add(directMessagesModel);
@@ -311,6 +314,28 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    }
+
+                    break;
+
+                case "MyStatus":
+                    for (int i=0; i<directMessagesModelList.size(); i++)
+                    {
+                        DirectMessagesModel dm = directMessagesModelList.get(i);
+                        if (dm.getUserId().equals(Globals.UserId) && Globals.status.equals("true"))
+                        {
+                            dm.setActivityStatus("true");
+
+                            directMessagesModelList.set(i,dm);
+                            directMessagesAdapter.notifyItemChanged(i);
+                        }
+                        else {
+                            dm.setActivityStatus("false");
+
+                            directMessagesModelList.set(i,dm);
+                            directMessagesAdapter.notifyItemChanged(i);
+                        }
+
                     }
 
                     break;

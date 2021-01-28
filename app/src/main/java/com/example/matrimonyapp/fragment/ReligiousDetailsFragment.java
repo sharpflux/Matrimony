@@ -103,6 +103,10 @@ public class ReligiousDetailsFragment extends Fragment {
                 {
                     fragmentManager.popBackStackImmediate();
                 }
+                else
+                {
+                    getActivity().finish();
+                }
             }
         });
 
@@ -232,14 +236,16 @@ public class ReligiousDetailsFragment extends Fragment {
 
                                 Toast.makeText(getContext(),"Religious details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
+                                getActivity().finish();
+
+                                /*PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
 
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
 
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
                                 fragmentTransaction.commit() ;
-
+*/
                             }
                             else
                             {

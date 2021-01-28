@@ -15,4 +15,7 @@ public class Globals {
     public static String NewMessage = new String();
     public static String allMessages = new String();
     public static ArrayList<ChatModel> chatModelArrayList = new ArrayList<>();
+
+    public static String UserId = new String();
+    public static String status = new String();
 }

@@ -136,6 +136,10 @@ public class QualificationDetailsFragment extends Fragment {
                 {
                     fragmentManager.popBackStack();
                 }
+                else
+                {
+                    getActivity().finish();
+                }
             }
         });
 
@@ -342,13 +346,15 @@ public class QualificationDetailsFragment extends Fragment {
 
                                 Toast.makeText(getContext(),"Qualification details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
+                                getActivity().finish();
+
+                                /*ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
                                 professionalDetailsFragment.setArguments(bundle);
 
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, professionalDetailsFragment);
-                                fragmentTransaction.commit() ;
+                                fragmentTransaction.commit() ;*/
 
                             }
                             else

@@ -112,10 +112,8 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
             holder.textView_lastMessage.setVisibility(View.GONE);
         }*/
 
-/*
-        if(isChat)
-        {
-            if(directMessagesModel.getActivityStatus().equals("online"))
+
+            if(Boolean.parseBoolean(directMessagesModel.getActivityStatus()))
             {
                 holder.circleImage_activityStatus.setVisibility(View.VISIBLE);
             }
@@ -123,12 +121,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
             {
                 holder.circleImage_activityStatus.setVisibility(View.GONE);
             }
-        }
-        else
-        {
-            holder.circleImage_activityStatus.setVisibility(View.GONE);
-        }
-*/
+
 
 
 

@@ -79,7 +79,7 @@ public class ChatService extends Service {
 
     @Override
     public void onDestroy() {
-       // connection.stop();
+       connection.stop();
         super.onDestroy();
     }
 
@@ -165,7 +165,7 @@ public class ChatService extends Service {
 
 
 
-            proxy.on("getUserList", new SubscriptionHandler1<String>() {
+           /* proxy.on("getUserList", new SubscriptionHandler1<String>() {
                 @Override
                 public void run(String s) {
                     try { // we added the list of connected users
@@ -179,7 +179,7 @@ public class ChatService extends Service {
                     }
                 }
             }, String.class);
-
+*/
 
 
 
@@ -206,6 +206,62 @@ public class ChatService extends Service {
             },String.class, String.class);
 
 
+            proxy.on("iamOnline", new SubscriptionHandler2<String, String>() {
+
+                @Override
+                public void run(final String s,final String s2) {
+
+                    // Log.e("MESSAGES", "\n--------------------------------------\n"+s +"\n--------------------------------------\n");
+
+                    mHandler.post(new Runnable() {
+
+
+                        @Override
+                        public void run() {
+
+                            Globals.UserId = s;
+                            Globals.status = s2;
+                            sendBroadcast(new Intent().setAction("MyStatus"));
+
+
+                        }
+                    });
+                }
+            },String.class, String.class);
+
+
+            proxy.on("getRecentChatUsers", new SubscriptionHandler1<String>() {
+
+                @Override
+                public void run(final String s) {
+
+                   // Log.e("MESSAGES", "\n--------------------------------------\n"+s +"\n--------------------------------------\n");
+
+                    mHandler.post(new Runnable() {
+
+
+                        @Override
+                        public void run() {
+
+                            JSONArray jsonArray = null;
+                            try {
+
+                                jsonArray = new JSONArray(s);
+                                Globals.userlist=jsonArray;
+                                sendBroadcast(new Intent().setAction("UserList"));
+
+                            } catch (JSONException jsonException) {
+                                jsonException.printStackTrace();
+                            }
+
+
+
+                        }
+                    });
+                }
+            },String.class);
+
+
 
 
 
@@ -228,36 +284,7 @@ public class ChatService extends Service {
         }.execute();
     }
 
-    public void Join(final String roomName) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                User.CurrentRoom = roomName;
-                proxy.invoke("Join", roomName);
-                return null;
-            }
-        }.execute();
-    }
 
-    public void CreateRoom(final String roomName) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                proxy.invoke("CreateRoom", roomName);
-                return null;
-            }
-        }.execute();
-    }
-
-    public void DeleteRoom(final String roomName) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                proxy.invoke("DeleteRoom", roomName);
-                return null;
-            }
-        }.execute();
-    }
 
 
     public void GetAllMessages(final String fromUserId,final  String toUserId,final  String StartIndex, final  String  PageSize ) {
@@ -265,6 +292,18 @@ public class ChatService extends Service {
             @Override
             protected Void doInBackground(Void... params) {
                 proxy.invoke("GetMessage", fromUserId,toUserId,StartIndex,PageSize);
+                return null;
+            }
+        }.execute();
+    }
+
+
+
+    public void GetRecentChats(final String fromUserId,final  String StartIndex, final  String  PageSize ) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                proxy.invoke("GetRecentChatAndOnlineUsers", fromUserId,StartIndex,PageSize);
                 return null;
             }
         }.execute();
@@ -293,26 +332,7 @@ public class ChatService extends Service {
         }.execute();
     }
 
-    public void GetRooms() {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                proxy.invoke(RoomViewModel[].class, "GetRooms").done(
-                        new Action<RoomViewModel[]>() {
-                            @Override
-                            public void run(RoomViewModel[] rooms) throws Exception {
-                                Globals.Rooms.clear();
 
-                                for (RoomViewModel room : rooms)
-                                    Globals.Rooms.add(room.Name);
-
-                                sendBroadcast(new Intent().setAction("notifyAdapter"));
-                            }
-                        });
-                return null;
-            }
-        }.execute();
-    }
 
     private void ExitWithMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

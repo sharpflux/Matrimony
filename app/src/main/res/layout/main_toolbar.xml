@@ -8,7 +8,7 @@
     app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp"
-    android:background="@color/quantum_bluegrey800"
+    android:background="@color/quantum_bluegrey900"
     android:elevation="4dp"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

@@ -444,6 +444,8 @@
     <string name="_occupation_father">Father\'s Occupation </string>
     <string name="highest_education">Highest Education</string>
     <string name="highest_education_level">Highest Education Level</string>
+    <string name="not_filled">Not Filled</string>
+    <string name="save">Save</string>
 
 
 </resources>

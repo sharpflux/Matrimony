@@ -48,7 +48,7 @@
                         android:layout_width="15dp"
                         android:layout_height="15dp"
 
-                        android:src="@drawable/ic_verified_green"
+                        android:src="@color/green_dark"
                         android:layout_alignBottom="@id/circleImage_profilePic"
                         android:layout_alignEnd="@id/circleImage_profilePic"
                     />
