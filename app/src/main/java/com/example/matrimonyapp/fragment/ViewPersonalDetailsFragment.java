@@ -55,11 +55,23 @@ public class ViewPersonalDetailsFragment extends Fragment {
             textView_currentCountryName, textView_currentStateName, textView_currentCityName,
             textView_birthTime, textView_birthTimeType, textView_birthPlace, textView_birthCountryName,
             textView_birthStateName, textView_birthCityName, textView_mobileNo,
-            textView_alternetMobileNo, textView_emailId, textView_alternetEmailId,
+             textView_emailId,
             textView_motherTongue, textView_height, textView_weight, textView_colour,
             textView_maritalStatus, textView_familyStatus, textView_familyType, textView_familyValues,
             textView_disability, textView_disabilityType, textView_diet, textView_livesWithFamily,
-            textView_religion, textView_caste, textView_subCaste, textView_gothram, textView_dosh;
+            textView_religion, textView_caste, textView_subCaste, textView_gothram; //textView_dosh, textView_alternetMobileNo, textView_alternetEmailId,
+
+
+
+    TextView textView_currentService, textView_nameOfDepartment, textView_occupation,
+            textView_workingCountry, textView_workingState, textView_workingCity,
+            textView_companyName, textView_designation, textView_experience, textView_annualIncome,
+            textView_workingAddress, textView_qualificationLevel, textView_qualification, textView_nameOfInstitute,
+            textView_percentage, textView_passingYear, textView_hobby, textView_socialContribution;
+
+
+
+
 
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     UserModel userModel;
@@ -112,7 +124,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
         textView_caste = view.findViewById(R.id.textView_caste);
         textView_subCaste = view.findViewById(R.id.textView_subCaste);
         textView_gothram = view.findViewById(R.id.textView_gothram);
-        textView_dosh = view.findViewById(R.id.textView_dosh);
+        //textView_dosh = view.findViewById(R.id.textView_dosh);
 
         textView_permanentAddress = view.findViewById(R.id.textView_permanentAddress);
         textView_permanentVillage = view.findViewById(R.id.textView_permanentVillage);
@@ -135,10 +147,38 @@ public class ViewPersonalDetailsFragment extends Fragment {
         textView_birthStateName = view.findViewById(R.id.textView_birthStateName);
         textView_birthCityName = view.findViewById(R.id.textView_birthCityName);
 
+
+
+
+        textView_companyName = view.findViewById(R.id.editText_companyName);
+        textView_designation = view.findViewById(R.id.textView_designation);
+        textView_experience = view.findViewById(R.id.textView_experience);
+        textView_annualIncome = view.findViewById(R.id.textView_annualIncome);
+        textView_workingAddress = view.findViewById(R.id.textView_workingAddress);
+        textView_qualificationLevel = view.findViewById(R.id.textView_qualificationLevel);
+        textView_qualification = view.findViewById(R.id.textView_qualification);
+        textView_nameOfInstitute = view.findViewById(R.id.textView_nameOfInstitute);
+        textView_percentage = view.findViewById(R.id.textView_percentage);
+        textView_passingYear = view.findViewById(R.id.textView_passingYear);
+        textView_hobby = view.findViewById(R.id.textView_hobby);
+        textView_socialContribution = view.findViewById(R.id.textView_socialContribution);
+
+        textView_currentService = view.findViewById(R.id.textView_currentService);
+        textView_nameOfDepartment = view.findViewById(R.id.textView_nameOfDepartment);
+        textView_occupation = view.findViewById(R.id.textView_occupation);
+        textView_workingCountry = view.findViewById(R.id.textView_workingCountry);
+        textView_workingState = view.findViewById(R.id.textView_workingState);
+        textView_workingCity = view.findViewById(R.id.textView_workingCity);
+
+
+
+
+
+
         textView_mobileNo = view.findViewById(R.id.textView_mobileNo);
-        textView_alternetMobileNo = view.findViewById(R.id.textView_alternetMobileNo);
+        //textView_alternetMobileNo = view.findViewById(R.id.textView_alternetMobileNo);
         textView_emailId = view.findViewById(R.id.textView_emailId);
-        textView_alternetEmailId = view.findViewById(R.id.textView_alternetEmailId);
+        //textView_alternetEmailId = view.findViewById(R.id.textView_alternetEmailId);
 
         recyclerView_addLanguageKnown = view.findViewById(R.id.recyclerView_addLanguageKnown);
 
@@ -161,6 +201,21 @@ public class ViewPersonalDetailsFragment extends Fragment {
     }
 
 
+    private void checkIfEmpty(TextView textView, String value) {
+
+        value = value.trim();
+
+        if(value.isEmpty() || value.equals("0") || value.equals(""))
+        {
+            textView.setText(getResources().getString(R.string.not_filled));
+        }
+        else
+        {
+            textView.setText(value);
+        }
+
+    }
+
     class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
@@ -172,6 +227,8 @@ public class ViewPersonalDetailsFragment extends Fragment {
                 getBasicDetails();
                 getReligiousDetails();
                 getPersonalDetails();
+                getProfessionalDetails();
+                getQualificationDetails();
             }
 
 
@@ -227,40 +284,43 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
                                 if (!jsonObject.getBoolean("error")) {
 
+                                    checkIfEmpty(textView_name, jsonObject.getString("FullName"));
+                                    checkIfEmpty(textView_bloodGroup, jsonObject.getString("BloodGroupName"));
+                                    checkIfEmpty(textView_mobileNo, jsonObject.getString("MobileNo"));
+                                    checkIfEmpty(textView_emailId, jsonObject.getString("EmailId"));
+                                    checkIfEmpty(textView_age, jsonObject.getString("Age"));
+                                    checkIfEmpty(textView_gender, jsonObject.getString("Gender"));
 
-                                    textView_name.setText(jsonObject.getString("FullName"));
-                                    textView_bloodGroup.setText(jsonObject.getString("BloodGroupName"));
+                                    checkIfEmpty(textView_permanentAddress, jsonObject.getString("PermanantAddress"));
+                                    checkIfEmpty(textView_permanentVillage, jsonObject.getString("PermanantVillage"));
+                                    checkIfEmpty(textView_permanentPostalCode, jsonObject.getString("PermanantPostCode"));
+                                    checkIfEmpty(textView_permanentCountryName, jsonObject.getString("PermanantCountryName"));
+                                    checkIfEmpty(textView_permanentStateName, jsonObject.getString("PermanantState"));
+                                    checkIfEmpty(textView_permanentCityName, jsonObject.getString("PermanantCity"));
 
-                                    textView_mobileNo.setText(jsonObject.getString("MobileNo"));
-                                    textView_alternetMobileNo.setText(jsonObject.getString("AlternateNo"));
-                                    textView_emailId.setText(jsonObject.getString("EmailId"));
-                                    textView_age.setText(jsonObject.getString("Age"));
-                                    textView_gender.setText(jsonObject.getString("Gender"));
-                                    textView_alternetEmailId.setText(jsonObject.getString("AlternateEmail"));
+                                    checkIfEmpty(textView_currentAddress, jsonObject.getString("CurrentAddress"));
+                                    checkIfEmpty(textView_currentVillage, jsonObject.getString("CurrentVillage"));
+                                    checkIfEmpty(textView_currentPostalCode, jsonObject.getString("CurrentPostCode"));
+                                    checkIfEmpty(textView_currentCountryName, jsonObject.getString("CurrentCountryName"));
+                                    checkIfEmpty(textView_currentStateName, jsonObject.getString("CurrentStateName"));
+                                    checkIfEmpty(textView_currentCityName, jsonObject.getString("CurrentCityName"));
 
-                                    textView_permanentAddress.setText(jsonObject.getString("PermanantAddress"));
-                                    textView_permanentVillage.setText(jsonObject.getString("PermanantVillage"));
-                                    textView_permanentPostalCode.setText(jsonObject.getString("PermanantPostCode"));
-                                    textView_permanentCountryName.setText(jsonObject.getString("PermanantCountryName"));
-                                    textView_permanentStateName.setText(jsonObject.getString("PermanantState"));
-                                    textView_permanentCityName.setText(jsonObject.getString("PermanantCity"));
-
-
-
-                                    textView_currentAddress.setText(jsonObject.getString("CurrentAddress"));
-                                    textView_currentVillage.setText(jsonObject.getString("CurrentVillage"));
-                                    textView_currentPostalCode.setText(jsonObject.getString("CurrentPostCode"));
-                                    textView_currentCountryName.setText(jsonObject.getString("CurrentCountryName"));
-                                    textView_currentStateName.setText(jsonObject.getString("CurrentStateName"));
-                                    textView_currentCityName.setText(jsonObject.getString("CurrentCityName"));
+                                    checkIfEmpty(textView_birthdate, jsonObject.getString("Birthdate"));
+                                    checkIfEmpty(textView_birthTimeType, jsonObject.getString("AccuracyOfTime"));
+                                    checkIfEmpty(textView_birthPlace, jsonObject.getString("BirthPlace"));
+                                    checkIfEmpty(textView_birthCountryName, jsonObject.getString("BirthCountryName"));
+                                    checkIfEmpty(textView_birthStateName, jsonObject.getString("BirthStateName"));
+                                    checkIfEmpty(textView_birthCityName, jsonObject.getString("BirthCityName"));
 
 
-                                    textView_birthdate.setText(jsonObject.getString("Birthdate"));
-                                    textView_birthTimeType.setText(jsonObject.getString("AccuracyOfTime"));
-                                    textView_birthPlace.setText(jsonObject.getString("BirthPlace"));
-                                    textView_birthCountryName.setText(jsonObject.getString("BirthCountryName"));
-                                    textView_birthStateName.setText(jsonObject.getString("BirthStateName"));
-                                    textView_birthCityName.setText(jsonObject.getString("BirthCityName"));
+
+
+
+
+
+                                    //textView_alternetMobileNo.setText(jsonObject.getString("AlternateNo"));
+
+                                    //textView_alternetEmailId.setText(jsonObject.getString("AlternateEmail"));
 
 
                                     String birthTimeString = jsonObject.getString("BirthTimeString");
@@ -292,51 +352,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
                                     textView_birthTime.setText(time);
 
-                                    /*basicDetailsId = jsonObject.getInt("BasicDetailsId");
 
-
-                                    //editText_birthTime.setText(jsonObject.getString("BirthTimeString"));
-                                    textView_birthdate.setText(jsonObject.getString("BirthPlace"));
-
-                                    .setText(jsonObject.getString("BirthCountryName"));
-                                    editText_birthState.setText(jsonObject.getString("BirthStateName"));
-                                    editText_birthCity.setText(jsonObject.getString("BirthCityName"));
-
-                                    textView_birthCountryId.setText(jsonObject.getString("BirthCountryId"));
-                                    textView_birthStateId.setText(jsonObject.getString("BirthStateId"));
-                                    textView_birthCityId.setText(jsonObject.getString("BirthCityId"));
-
-
-                                    .setText(jsonObject.getString("BloodGroupName"));
-                                    textView_bloodGroupId.setText(jsonObject.getString("BloodGroupId"));
-
-                                    .setText(jsonObject.getString("AlternateNo"));
-                                    editText_altEmailId.setText(jsonObject.getString("AlternateEmail"));
-
-                                    .setText(jsonObject.getString("PermanantAddress"));
-                                    editText_village.setText(jsonObject.getString("PermanantVillage"));
-
-                                    editText_country.setText(jsonObject.getString("PermanantCountryName"));
-                                    editText_state.setText(jsonObject.getString("PermanantState"));
-                                    editText_city.setText(jsonObject.getString("PermanantCity"));
-
-                                    textView_countryId.setText(jsonObject.getString("PermanantCountryId"));
-                                    textView_stateId.setText(jsonObject.getString("PermanantStateId"));
-                                    textView_countryId.setText(jsonObject.getString("PermanantCityId"));
-
-                                    editText_currentAddress.setText(jsonObject.getString("CurrentAddress"));
-                                    editText_currentVillage.setText(jsonObject.getString("CurrentVillage"));
-
-                                    editText_currentCountry.setText(jsonObject.getString("CurrentCountryName"));
-                                    editText_currentState.setText(jsonObject.getString("CurrentStateName"));
-                                    editText_currentCity.setText(jsonObject.getString("CurrentCityName"));
-
-
-                                    textView_currentCountryId.setText(jsonObject.getString("CurrentCountryId"));
-                                    textView_currentStateId.setText(jsonObject.getString("CurrentStateId"));
-                                    textView_currentCityId.setText(jsonObject.getString("CurrentCityId"));
-
-*/
                                 }
 
                             }
@@ -394,14 +410,17 @@ public class ViewPersonalDetailsFragment extends Fragment {
                                         textView_subCasteId.setText(jsonObject.getString("SubCasteId"));
                                         textView_motherTongueId.setText(jsonObject.getString("MotherTongueId"));*/
 
-                                    textView_religion.setText(jsonObject.getString("ReligionName"));
-                                    textView_caste.setText(jsonObject.getString("CasteName"));
-                                    textView_subCaste.setText(jsonObject.getString("SubCasteName"));
-                                    //.setChecked(jsonObject.getBoolean("OtherCommunity"));
-                                    textView_gothram.setText(jsonObject.getString("Gothram"));
-                                    textView_dosh.setText(jsonObject.getString("Dosh"));
-                                    textView_motherTongue.setText(jsonObject.getString("MotherTongueName"));
 
+                                    //.setChecked(jsonObject.getBoolean("OtherCommunity"));
+
+                                   // textView_dosh.setText(jsonObject.getString("Dosh"));
+
+
+                                    checkIfEmpty(textView_religion, jsonObject.getString("ReligionName"));
+                                    checkIfEmpty(textView_caste, jsonObject.getString("CasteName"));
+                                    checkIfEmpty(textView_subCaste, jsonObject.getString("SubCasteName"));
+                                    checkIfEmpty(textView_gothram, jsonObject.getString("Gothram"));
+                                    checkIfEmpty(textView_motherTongue, jsonObject.getString("MotherTongueName"));
 
                                 }
 
@@ -462,6 +481,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
                                    // personalDetailsId = jsonObject.getInt("PersonalDetailsId");
 
 
+
                                     textView_height.setText(jsonObject.getString("Height")+"cms.");
                                     textView_weight.setText(jsonObject.getString("Weight")+"Kgs.");
 
@@ -495,12 +515,13 @@ public class ViewPersonalDetailsFragment extends Fragment {
                                         textView_livesWithFamily.setText(R.string.no);
                                     }
 
+                                    checkIfEmpty(textView_colour, jsonObject.getString("SkinColourName"));
+                                    checkIfEmpty(textView_maritalStatus, jsonObject.getString("MaritalStatusName"));
+                                    checkIfEmpty(textView_familyStatus, jsonObject.getString("FamilyStatusName"));
+                                    checkIfEmpty(textView_familyType, jsonObject.getString("FamilyTypeName"));
+                                    checkIfEmpty(textView_familyValues, jsonObject.getString("FamilyValuesName"));
 
-                                    textView_colour.setText(jsonObject.getString("SkinColourName"));
-                                    textView_maritalStatus.setText(jsonObject.getString("MaritalStatusName"));
-                                    textView_familyStatus.setText(jsonObject.getString("FamilyStatusName"));
-                                    textView_familyType.setText(jsonObject.getString("FamilyTypeName"));
-                                    textView_familyValues.setText(jsonObject.getString("FamilyValuesName"));
+
 
                                     sqLiteLanguageKnownDetails.deleteAll();
                                     JSONArray knownLanguagesArray = jsonObject.getJSONArray("KnowLanguageLST");
@@ -591,6 +612,186 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
 
     }
+
+
+
+
+
+    void getQualificationDetails()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+ userId +"&Language="+userModel.getLanguage(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            customDialogLoadingProgressBar.dismiss();
+
+                            //converting response to json object
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            if(jsonArray.length()>0)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                                if(!jsonObject.getBoolean("error"))
+                                {
+
+                                    checkIfEmpty(textView_qualificationLevel, jsonObject.getString("QualificationLevelName"));
+                                    checkIfEmpty(textView_qualification, jsonObject.getString("Qualification"));
+                                    checkIfEmpty(textView_nameOfInstitute, jsonObject.getString("Sch_Uni"));
+                                    checkIfEmpty(textView_passingYear, jsonObject.getString("PassingYearString"));
+                                    checkIfEmpty(textView_hobby, jsonObject.getString("Hobby"));
+                                    checkIfEmpty(textView_socialContribution, jsonObject.getString("Social_Contribution"));
+                                    checkIfEmpty(textView_colour, jsonObject.getString("SkinColourName"));
+
+
+                                    textView_percentage.setText(jsonObject.getString("Percentage")+" %");
+
+
+
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                //qualificationDetailsId = 0;
+                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+
+
+    }
+
+    void getProfessionalDetails()
+    {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+userId+"&Language="+userModel.getLanguage(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            customDialogLoadingProgressBar.dismiss();
+
+                            //converting response to json object
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            if(jsonArray.length()>0)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                                if(!jsonObject.getBoolean("error"))
+                                {
+                                    //professionalDetailsId = jsonObject.getInt("ProfessionalDetailsId");
+
+                                    checkIfEmpty(textView_occupation, jsonObject.getString("OccupationName"));
+                                    checkIfEmpty(textView_designation, jsonObject.getString("DesignationName"));
+                                    checkIfEmpty(textView_experience, jsonObject.getString("Experience"));
+                                    checkIfEmpty(textView_workingAddress, jsonObject.getString("CompanyAddress"));
+                                    checkIfEmpty(textView_annualIncome, jsonObject.getString("MonthlyIncome"));
+
+
+                                    //textView_currentService.setText(jsonObject.getString(""));
+                                    //textView_nameOfDepartment.setText(jsonObject.getString(""));
+                                    //textView_companyName.setText(jsonObject.getString(""));
+
+                                    //textView_annualIncome.setText(jsonObject.getString(""));
+
+                                   /* textView_workingCountry.setText(jsonObject.getString(""));
+                                    textView_workingState.setText(jsonObject.getString(""));
+                                    textView_workingCity.setText(jsonObject.getString(""));*/
+
+/*
+
+                                    textView_occupationId.setText(jsonObject.getString("OccupationId"));
+                                    textView_designationId.setText(jsonObject.getString("DesignationId"));
+
+                                    editText_occupation.setText(jsonObject.getString("OccupationName"));
+                                    editText_designation.setText(jsonObject.getString("DesignationName"));
+                                    editText_companyName.setText(jsonObject.getString("CompanyName"));
+                                    //editText_percentage.setText(jsonObject.getString("OtherCommunity"));
+                                    editText_companyAddress.setText(jsonObject.getString("CompanyAddress"));
+                                    editText_experience.setText(jsonObject.getString("Experience"));
+                                    editText_income.setText(jsonObject.getString("MonthlyIncome"));
+*/
+
+
+
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                //professionalDetailsId = 0;
+                                customDialogLoadingProgressBar.dismiss();
+                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+
+
+    }
+
+
+
+
+
 
 
 }

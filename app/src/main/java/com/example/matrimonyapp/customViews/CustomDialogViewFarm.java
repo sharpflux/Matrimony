@@ -57,10 +57,11 @@ public class CustomDialogViewFarm extends Dialog {
 
     public Context context;
 
+    private TextView textView_title, textView_cancel;
 
-    private TextView textView_title, textView_cancel, textView_farmingArea, textView_areaFarmed,
+  /*  private TextView textView_farmingArea, textView_areaFarmed,
             textView_cropsTaken, textView_farmType;
-
+*/
     private ImageView imageView_back;
 
 
@@ -121,11 +122,13 @@ public class CustomDialogViewFarm extends Dialog {
         imageView_back = findViewById(R.id.imageView_back);
         textView_title = findViewById(R.id.textView_title);
 
+/*
 
         textView_farmingArea = findViewById(R.id.textView_farmingArea);
         textView_areaFarmed = findViewById(R.id.textView_areaFarmed);
         textView_cropsTaken = findViewById(R.id.textView_cropsTaken);
         textView_farmType = findViewById(R.id.textView_farmType);
+*/
 
 
         textView_cancel = findViewById(R.id.textView_cancel);

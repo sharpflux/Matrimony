@@ -48,7 +48,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
     View view;
 
     private TextView textView_isFatherAlive, textView_fatherName, textView_fatherMobileNo, textView_fatherQualification,
-            textView_fatherOccupation, textView_familyAnnualIncome, textView_fatherAddress,
+            textView_fatherOccupation, textView_familyAnnualIncome, textView_fatherAnnualIncome, textView_fatherAddress,
             textView_fatherCountry, textView_fatherState, textView_fatherCity,
             textView_isMotherAlive, textView_motherName, textView_motherOccupation,
             textView_motherQualification, textView_motherOccupationType, textView_motherMobileNo,
@@ -109,7 +109,8 @@ public class ViewFamilyDetailsFragment extends Fragment {
         textView_fatherMobileNo = view.findViewById(R.id.textView_fatherMobileNo);
         textView_fatherQualification = view.findViewById(R.id.textView_fatherQualification);
         textView_fatherOccupation = view.findViewById(R.id.textView_fatherOccupation);
-        textView_familyAnnualIncome = view.findViewById(R.id.textView_familyAnnualIncome);
+        //textView_familyAnnualIncome = view.findViewById(R.id.textView_familyAnnualIncome);
+        textView_fatherAnnualIncome = view.findViewById(R.id.textView_fatherAnnualIncome);
         textView_fatherAddress = view.findViewById(R.id.textView_fatherAddress);
         textView_fatherCountry = view.findViewById(R.id.textView_fatherCountry);
         textView_fatherState = view.findViewById(R.id.textView_fatherState);
@@ -120,6 +121,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
         textView_motherName = view.findViewById(R.id.textView_motherName);
         textView_motherOccupation = view.findViewById(R.id.textView_motherOccupation);
         textView_motherQualification = view.findViewById(R.id.textView_motherQualification);
+        textView_motherOccupation = view.findViewById(R.id.textView_motherOccupation);
         textView_motherOccupationType = view.findViewById(R.id.textView_motherOccupationType);
         textView_motherMobileNo = view.findViewById(R.id.textView_motherMobileNo);
 
@@ -178,6 +180,21 @@ public class ViewFamilyDetailsFragment extends Fragment {
 
         // textView_name = view.findViewById(R.id.textView_name);
 
+
+    }
+
+    private void checkIfEmpty(TextView textView, String value) {
+
+        value = value.trim();
+
+        if(value.isEmpty() || value.equals("0") || value.equals(""))
+        {
+            textView.setText(getResources().getString(R.string.not_filled));
+        }
+        else
+        {
+            textView.setText(value);
+        }
 
     }
 
@@ -243,22 +260,30 @@ public class ViewFamilyDetailsFragment extends Fragment {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
 
                                 if (!jsonObject.getBoolean("error")) {
+                                    checkIfEmpty(textView_fatherName, jsonObject.getString("FullnameFather"));
+                                    checkIfEmpty(textView_fatherMobileNo, jsonObject.getString("MobileNoFather"));
+                                    checkIfEmpty(textView_fatherAddress, jsonObject.getString("AddressFather"));
+                                    checkIfEmpty(textView_fatherQualification, jsonObject.getString("QualificationFather"));
+                                    checkIfEmpty(textView_fatherOccupation, jsonObject.getString("OccupationNameFather"));
+                                    checkIfEmpty(textView_fatherCountry, jsonObject.getString("FatherCountryName"));
+                                    checkIfEmpty(textView_fatherState, jsonObject.getString("FatherStateName"));
+                                    checkIfEmpty(textView_fatherCity, jsonObject.getString("FatherCityName"));
 
-                                    textView_fatherName.setText(jsonObject.getString("FullnameFather"));
-                                    textView_fatherMobileNo.setText(jsonObject.getString("MobileNoFather"));
-                                    textView_fatherAddress.setText(jsonObject.getString("AddressFather"));
-                                    textView_fatherQualification.setText(jsonObject.getString("QualificationFather"));
-                                    textView_fatherOccupation.setText(jsonObject.getString("OccupationNameFather"));
-                                    textView_fatherCountry.setText(jsonObject.getString("FatherCountryName"));
-                                    textView_fatherState.setText(jsonObject.getString("FatherStateName"));
-                                    textView_fatherCity.setText(jsonObject.getString("FatherCityName"));
 
-                                    textView_motherName.setText(jsonObject.getString("FullnameMother"));
-                                    textView_motherMobileNo.setText(jsonObject.getString("MobileNoMother"));
-                                    textView_motherQualification.setText(jsonObject.getString("QualificationMother"));
-                                    textView_motherOccupation.setText(jsonObject.getString("OccupationNameMother"));
+                                    checkIfEmpty(textView_motherName, jsonObject.getString("FullnameMother"));
+                                    checkIfEmpty(textView_motherMobileNo, jsonObject.getString("MobileNoMother"));
+                                    checkIfEmpty(textView_motherQualification, jsonObject.getString("QualificationMother"));
+                                    checkIfEmpty(textView_motherOccupation, jsonObject.getString("OccupationNameMother"));
 
-                                    textView_familyAnnualIncome.setText(jsonObject.getString("SalaryPackageId"));
+
+                                    checkIfEmpty(textView_relative1, jsonObject.getString("Surname1"));
+                                    checkIfEmpty(textView_relative2, jsonObject.getString("Surname2"));
+                                    checkIfEmpty(textView_relative3, jsonObject.getString("Surname3"));
+                                    checkIfEmpty(textView_relative4, jsonObject.getString("Surname4"));
+
+
+
+                                    //textView_familyAnnualIncome.setText(jsonObject.getString("SalaryPackageId"));
 
                                     getSiblingDetails(jsonObject);
                                     getFarmDetailsXML(jsonObject);
@@ -286,10 +311,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
                                     }
 
 
-                                    textView_relative1.setText(jsonObject.getString("Surname1"));
-                                    textView_relative2.setText(jsonObject.getString("Surname2"));
-                                    textView_relative3.setText(jsonObject.getString("Surname3"));
-                                    textView_relative4.setText(jsonObject.getString("Surname4"));
+
                                    /* .setText(jsonObject.getString(""));
                                     .setText(jsonObject.getString(""));*/
 

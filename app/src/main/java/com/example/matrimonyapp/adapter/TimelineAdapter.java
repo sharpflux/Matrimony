@@ -43,6 +43,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.SignalRMessagesActivity;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
+import com.example.matrimonyapp.activity.ViewProfileDetailsActivity;
 import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
 import com.example.matrimonyapp.listener.OnSwipeTouchListener;
 import com.example.matrimonyapp.modal.TimelineModel;
@@ -260,7 +261,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, ViewProfileActivity.class);
+                Intent intent = new Intent(context, ViewProfileDetailsActivity.class);
                 intent.putExtra("userId", item.getUserId());
                 intent.putExtra("userName", item.getUserName());
                 intent.putExtra("userProfilePic", item.getProfilePic());

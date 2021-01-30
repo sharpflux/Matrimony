@@ -155,10 +155,10 @@ public class CustomDialogViewProperty extends Dialog {
                 textView_bhkType.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.BHK_TYPE)));
                 textView_carpetArea.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CARPET_AREA)));
                 textView_address.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.ADDRESS)));
-                textView_country.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.COUNTRY_NAME)));
+                /*textView_country.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.COUNTRY_NAME)));
                 textView_state.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.STATE_NAME)));
                 textView_city.setText(cursor.getString(cursor.getColumnIndex(SQLitePropertyDetails.CITY_NAME)));
-
+*/
 
             }
 

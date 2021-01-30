@@ -449,6 +449,10 @@
     <string name="language_settings">Language Settings</string>
     <string name="recent_chats">Recent Chats</string>
     <string name="online_users">Online Users</string>
+    <string name="about">About</string>
+    <string name="family">Family</string>
+    <string name="preferences">Preferences</string>
+    <string name="working_location_address">Working Location Address</string>
 
 
 </resources>

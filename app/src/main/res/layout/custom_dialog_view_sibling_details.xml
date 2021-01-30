@@ -38,273 +38,791 @@
             android:layout_marginBottom="20dp"
             >
 
-            <LinearLayout
+
+
+
+            <!--Sibling Details-->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="5dp"
-                android:paddingBottom="10dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
                 >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
 
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:padding="10dp"
-                        android:background="@drawable/circle_image_border"
-                        android:layout_marginStart="10dp"
-                        android:src="@drawable/quote1"
-                        android:tint="@color/text_gray"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
 
-                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="0dp"
+                            android:src="@drawable/ic_action_profile"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/siblings_details"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/Bold_TextView"
-                        android:text="@string/siblings_details"
-                        android:textSize="15sp"
-                        />
-                </LinearLayout>
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/name"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/shadow_down"
-                    />
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
-                        android:text="@string/siblings_name"
-
-
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_siblingName"
-                        android:layout_weight="1"
-                        android:text="@string/dash"
-                        style="@style/NormalRight_TextView"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
-
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:text="@string/relation"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
 
-                        />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_relation"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"/>
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
+
+
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:text="@string/mobile_"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
 
-                        />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_mobileNo"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"/>
-
-                </LinearLayout>
-
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
 
                     <TextView
-                        style="@style/NormalLeft_TextView"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/birthdate" />
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/qualification"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
+
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_birthdate"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-
-                        />
-                </LinearLayout>-->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
-
-                    <TextView
-                        style="@style/NormalLeft_TextView"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/qualification" />
-
-                    <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_qualification"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:text="@string/occupation_"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
 
-                        />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_occupation"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-                        />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    >
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:text="@string/marital_status"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
 
-                        />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView_maritalStatus"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/spouse_name"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp"
                         />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_spouseName"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp"
+                        />
+
+
+
+
                 </LinearLayout>
 
+            </androidx.cardview.widget.CardView>
 
 
-
-
-
+            <!--Father-In-Laws Details-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardView_fatherInLaw"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="5dp"
-                    >
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="0dp"
+                            android:src="@drawable/ic_action_profile"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/father_in_law_information"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
+
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/NormalLeft_TextView"
-                        android:text="@string/spouse_name"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/name"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
 
-                        />
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_spouseName"
-                        android:layout_weight="1"
-                        style="@style/NormalRight_TextView"
-                        android:text="@string/dash"
-                        />
+                        android:id="@+id/textView_fatherInLawName"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/mobile_"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_fatherInLawMobileNo"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/country"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_fatherInLawCountry"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/_state"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_fatherInLawState"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/_city"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_fatherInLawCity"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/address_"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_fatherInLawAddress"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="@string/not_filled"
+                        android:textColor="@color/quantum_grey700"
+                        android:textSize="13sp" />
+
+
+
                 </LinearLayout>
 
+            </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
 
-            <LinearLayout
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/shadow_down"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:background="@drawable/shadow_down"
+        android:layout_below="@id/include_toolbar"
+        />
+
+
+
+    <TextView
+        android:id="@+id/textView_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/gradient_bottom_rounded_corner"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        />
+
+
+
+
+</RelativeLayout>
+
+<!--
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:paddingTop="5dp"
+android:paddingBottom="10dp"
+android:layout_gravity="center"
+android:layout_marginTop="10dp"
+android:background="@color/white"
+    >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp"
+    >
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="10dp"
+        android:background="@drawable/circle_image_border"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/quote1"
+        android:tint="@color/text_gray"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Bold_TextView"
+        android:text="@string/siblings_details"
+        android:textSize="15sp"
+        />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="horizontal"
+    android:background="@drawable/shadow_down"
+    />
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/NormalLeft_TextView"
+        android:text="@string/siblings_name"
+
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_siblingName"
+        android:layout_weight="1"
+        android:text="@string/dash"
+        style="@style/NormalRight_TextView"
+        />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/NormalLeft_TextView"
+        android:text="@string/relation"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_relation"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"/>
+
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/NormalLeft_TextView"
+        android:text="@string/mobile_"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_mobileNo"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"/>
+
+</LinearLayout>
+
+&lt;!&ndash;<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        style="@style/NormalLeft_TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/birthdate" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_birthdate"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"
+
+        />
+</LinearLayout>&ndash;&gt;
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        style="@style/NormalLeft_TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/qualification" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_qualification"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"
+
+        />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/NormalLeft_TextView"
+        android:text="@string/occupation_"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_occupation"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"
+        />
+</LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/NormalLeft_TextView"
+        android:text="@string/marital_status"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_maritalStatus"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"
+        />
+</LinearLayout>
+
+
+
+
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal"
+    android:layout_marginBottom="5dp"
+    >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/NormalLeft_TextView"
+        android:text="@string/spouse_name"
+
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_spouseName"
+        android:layout_weight="1"
+        style="@style/NormalRight_TextView"
+        android:text="@string/dash"
+        />
+</LinearLayout>
+
+
+</LinearLayout>
+
+
+  <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout_fatherInLaw"
@@ -524,36 +1042,13 @@
 
             </LinearLayout>
 
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
-    <LinearLayout
-        android:id="@+id/shadow_down"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:orientation="horizontal"
-        android:background="@drawable/shadow_down"
-        android:layout_below="@id/include_toolbar"
-        />
-
-
-
-    <TextView
-        android:id="@+id/textView_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/gradient_bottom_rounded_corner"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="@string/cancel"
-        android:textColor="@color/white"
-        android:layout_alignParentBottom="true"
-        />
 
 
 
 
-</RelativeLayout>
+
+
+
+
+
+-->

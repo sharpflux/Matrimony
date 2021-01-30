@@ -26,6 +26,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -65,7 +67,7 @@ public class CustomDialogViewSibling extends Dialog {
 
     private ImageView imageView_back;
 
-    private  LinearLayout linearLayout_fatherInLaw;
+    private CardView cardView_fatherInLaw;
 
     private Map<String, Integer> list;
 
@@ -136,7 +138,7 @@ public class CustomDialogViewSibling extends Dialog {
         textView_fatherInLawCountry = findViewById(R.id.textView_fatherInLawCountry);
         textView_fatherInLawState = findViewById(R.id.textView_fatherInLawState);
         textView_fatherInLawCity = findViewById(R.id.textView_fatherInLawCity);
-        linearLayout_fatherInLaw = findViewById(R.id.linearLayout_fatherInLaw);
+        cardView_fatherInLaw = findViewById(R.id.cardView_fatherInLaw);
 
 
         textView_cancel = findViewById(R.id.textView_cancel);
@@ -173,11 +175,11 @@ public class CustomDialogViewSibling extends Dialog {
 
                 if(cursor.getString(cursor.getColumnIndex(SQLiteSiblingDetails.MARITAL_STATUS)).equals(context.getResources().getString(R.string.unmarried)))
                 {
-                    linearLayout_fatherInLaw.setVisibility(View.GONE);
+                    cardView_fatherInLaw.setVisibility(View.GONE);
                 }
                 else
                 {
-                    linearLayout_fatherInLaw.setVisibility(View.VISIBLE);
+                    cardView_fatherInLaw.setVisibility(View.VISIBLE);
                 }
 
 

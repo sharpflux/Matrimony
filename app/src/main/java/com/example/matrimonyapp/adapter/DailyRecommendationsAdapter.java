@@ -35,6 +35,7 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
+import com.example.matrimonyapp.activity.ViewProfileDetailsActivity;
 import com.example.matrimonyapp.listener.OnSwipeTouchListener;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.volley.URLs;
@@ -95,7 +96,7 @@ public class DailyRecommendationsAdapter extends RecyclerView.Adapter<DailyRecom
         holder.textView_userName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewProfileActivity.class);
+                Intent intent = new Intent(context, ViewProfileDetailsActivity.class);
                 intent.putExtra("userId", timelineModel.getUserId());
                 intent.putExtra("userName", timelineModel.getUserName());
                 intent.putExtra("userProfilePic", timelineModel.getProfilePic());
