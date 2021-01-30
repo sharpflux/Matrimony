@@ -259,7 +259,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         //Assigns observer to adapter and LayoutManager to RecyclerView
 
         chatAdapter.registerAdapterDataObserver(observer);
-        recyclerView_chat.smoothScrollToPosition(0);
+       // recyclerView_chat.smoothScrollToPosition(0);
 
     }
 
@@ -309,6 +309,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
 
                         chatAdapter.notifyDataSetChanged();
+                        recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
                        // mLayoutManager.scrollToPositionWithOffset(0,100);
                        // scrollView.fullScroll(View.FOCUS_FORWARD);
                        // recyclerView_chat.smoothScrollToPosition(chatModelsList.size());

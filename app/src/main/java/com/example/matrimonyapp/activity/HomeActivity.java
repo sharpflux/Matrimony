@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     private ExpandableListView expandableList;
     private DrawerLayout drawerLayout;
 
-    LinearLayout linearChat;
+    LinearLayout linearChat, linearLayout_dailyRecommendations, linearLayout_recentlyViewed;
 
     CircleImageView circleImage_welcomeProfilePic, circleImage_progressProfilePic;
 
@@ -325,6 +325,10 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         circleImage_welcomeProfilePic = findViewById(R.id.circleImage_welcomeProfilePic);
         circleImage_progressProfilePic = findViewById(R.id.circleImage_progressProfilePic);
 
+
+        linearLayout_dailyRecommendations = findViewById(R.id.linearLayout_dailyRecommendations);
+        linearLayout_recentlyViewed = findViewById(R.id.linearLayout_recentlyViewed);
+
         timelineModelList = new ArrayList<TimelineModel>();
         arrayList_recentlyviewed = new ArrayList<TimelineModel>();
         arrayList_dailyRecommendations = new ArrayList<TimelineModel>();
@@ -377,6 +381,10 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         onClickNewActivity(imageView_message, HomeActivity.this, DirectMessagesActivity.class);
         onClickNewActivity(imageView_myProfile, HomeActivity.this, MyProfileActivity.class);
         onClickNewActivity(imageView_like, HomeActivity.this, InterestActivity.class);
+        onClickNewActivity(linearLayout_dailyRecommendations, HomeActivity.this, ViewAllActivity.class);
+
+
+
     }
 
     private void onClickNewActivity(View view, final Context context, final Class goToClass) {

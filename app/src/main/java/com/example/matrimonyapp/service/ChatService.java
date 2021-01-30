@@ -165,21 +165,20 @@ public class ChatService extends Service {
 
 
 
-           /* proxy.on("getUserList", new SubscriptionHandler1<String>() {
+            proxy.on("getUserList", new SubscriptionHandler1<String>() {
                 @Override
                 public void run(String s) {
                     try { // we added the list of connected users
                         JSONArray jsonArray = new JSONArray(s);
 
-                        Globals.userlist=jsonArray;
-                        sendBroadcast(new Intent().setAction("UserList"));
+                        Globals.onlineUserlist=jsonArray;
+                        sendBroadcast(new Intent().setAction("OnlineUsers"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             }, String.class);
-*/
 
 
 

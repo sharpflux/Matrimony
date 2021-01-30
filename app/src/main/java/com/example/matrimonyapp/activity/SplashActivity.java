@@ -75,7 +75,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, SelectLanguageActivity.class);
                             intent.putExtra("ActivityState","started");
                             finish();
                             startActivity(intent);

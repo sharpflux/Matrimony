@@ -142,7 +142,7 @@ public class ViewInterestFragment extends Fragment {
 
                         try {
 
-                           // customDialogLoadingProgressBar.dismiss();
+                            customDialogLoadingProgressBar.dismiss();
 
                             //converting response to json object
                             JSONArray jsonArray = new JSONArray(response);

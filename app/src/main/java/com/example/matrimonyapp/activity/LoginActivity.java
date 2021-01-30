@@ -53,11 +53,11 @@ public class LoginActivity extends AppCompatActivity {
     String password, mobileNo;
     private String currentLanguage;
 
-    CustomDialogChangeLanguage customDialogChangeLanguage;
+    //CustomDialogChangeLanguage customDialogChangeLanguage;
 
     private FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
-    private Bundle bundle;
+    //private Bundle bundle;
 
 
     @Override
@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        customDialogChangeLanguage = new CustomDialogChangeLanguage(LoginActivity.this);
+        /*customDialogChangeLanguage = new CustomDialogChangeLanguage(LoginActivity.this);
 
         bundle = getIntent().getExtras();
         if(bundle!=null)
@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             {
                 customDialogChangeLanguage.show();
             }
-        }
+        }*/
 
     }
 
@@ -146,10 +146,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(customDialogChangeLanguage.isShowing())
+        /*if(customDialogChangeLanguage.isShowing())
         {
             customDialogChangeLanguage.dismiss();
-        }
+        }*/
 
     }
 
@@ -230,13 +230,13 @@ public class LoginActivity extends AppCompatActivity {
                                     userModel.setProfilePic(jsonObject.getString("ProfileImage"));
 
 
-                                    if(bundle.containsKey("locale"))
+                                    /*if(bundle.containsKey("locale"))
                                     {
                                         userModel.setLanguage(bundle.getString("locale"));
                                     }
                                     else {
                                         userModel.setLanguage("en");
-                                    }
+                                    }*/
 
 
                                             /* new UserModel(jsonObject.getString("UserId"),

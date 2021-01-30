@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,19 +35,22 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Single
     private Context context;
     private ArrayList<String> arrayList_languages;
     private int checkedPosition = -1;
-    private CustomDialogChangeLanguage customDialogChangeLanguage;
+    //private CustomDialogChangeLanguage customDialogChangeLanguage;
     private UserModel userModel;
-
+    private int lastSelectedPosition = -1;
     Locale myLocale;
+
+    public static String localeName="en";
    // String currentLanguage = "en";
 
-    public LanguageAdapter(Context context, ArrayList<String> arrayList_languages, CustomDialogChangeLanguage customDialogChangeLanguage) {
+    public LanguageAdapter(Context context, ArrayList<String> arrayList_languages) {
         this.context = context;
         this.arrayList_languages = arrayList_languages;
-        this.customDialogChangeLanguage = customDialogChangeLanguage;
+        //this.customDialogChangeLanguage = customDialogChangeLanguage;
 
         userModel = CustomSharedPreference.getInstance(context).getUser();
 
+        localeName = userModel.getLanguage();
 
     }
 
@@ -60,13 +65,29 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Single
     @Override
     public void onBindViewHolder(@NonNull SingleViewHolder holder, final int position) {
 
-        holder.textView.setText(arrayList_languages.get(position));
+         if(position==0)
+                {
+                    holder.textView_localeName.setText("en");
+                }
+                else if(position==1)
+                {
+                    holder.textView_localeName.setText("mr");
+                }
+                else if(position==2)
+                {
+                    holder.textView_localeName.setText("hi");
+                }
 
+
+
+
+        holder.textView.setText(arrayList_languages.get(position));
+        holder.radioButton_language.setChecked(localeName.equals(holder.textView_localeName.getText().toString())); //lastSelectedPosition == position
         holder.textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(position==0)
+               /* if(position==0)
                 {
                     setLocale("en");
                 }
@@ -77,16 +98,19 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Single
                 else if(position==2)
                 {
                     setLocale("hi");
-                }
+                }*/
 
-                customDialogChangeLanguage.dismiss();
+                //customDialogChangeLanguage.dismiss();
 
             }
         });
 
 
-
-
+       /* if (userModel.getLanguage().equals(holder.textView_localeName.getText().toString()))
+        {
+            holder.radioButton_language.setChecked(true);
+        }
+*/
     }
 
     public void setLocale(String localeName) {
@@ -128,13 +152,50 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Single
 
     class SingleViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textView;
+        private TextView textView, textView_localeName;
+        private RadioButton radioButton_language;
+        private LinearLayout linearLayout_language;
         //private ImageView imageView;
 
         SingleViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textView_language);
+            radioButton_language = itemView.findViewById(R.id.radioButton_language);
+            linearLayout_language = itemView.findViewById(R.id.linearLayout_language);
+            textView_localeName = itemView.findViewById(R.id.textView_localeName);
             //imageView = itemView.findViewById(R.id.imageView);
+
+
+            radioButton_language.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lastSelectedPosition = getAdapterPosition();
+                    notifyDataSetChanged();
+
+
+
+                    switch (lastSelectedPosition)
+                    {
+                        case 0:
+                            localeName = "en";
+                            break;
+                        case 1:
+                            localeName = "mr";
+                            break;
+                        case 2:
+                            localeName = "hi";
+                            break;
+                        default:
+                            localeName = "en";
+                            break;
+
+                    }
+
+                    /*Toast.makeText(LanguageAdapter.this.context,
+                            "selected language is " + textView.getText(),
+                            Toast.LENGTH_LONG).show();*/
+                }
+            });
         }
 
     }

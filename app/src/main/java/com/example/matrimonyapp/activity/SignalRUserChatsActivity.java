@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.DirectMessagesAdapter;
+import com.example.matrimonyapp.adapter.HorizontalImageAdapter;
 import com.example.matrimonyapp.helpers.Globals;
 import com.example.matrimonyapp.modal.ChatListModel;
 import com.example.matrimonyapp.modal.ChatModel;
@@ -69,9 +70,9 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
     private UserModel userModel;
     public static HubProxy hubProxy;
     public HubConnection hubConnection;
-    ArrayList<DirectMessagesModel> directMessagesModelList;
-    RecyclerView recyclerView_directMessage;
-    DirectMessagesAdapter directMessagesAdapter;
+    ArrayList<DirectMessagesModel> directMessagesModelList, onlineUsersModelList;
+    RecyclerView recyclerView_directMessage, recyclerView_onlineUsers;
+    DirectMessagesAdapter directMessagesAdapter, onlineUsersAdapter;
     Context context;
     Handler mHandler=new Handler();
     ArrayList<ChatListModel> arrayList_chatListModel ;
@@ -138,10 +139,12 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
 
+        recyclerView_onlineUsers = findViewById(R.id.recyclerView_onlineUsers);
         recyclerView_directMessage = findViewById(R.id.recyclerView_directMessages);
 
         context = getApplicationContext();
         directMessagesModelList = new ArrayList<DirectMessagesModel>();
+        onlineUsersModelList = new ArrayList<DirectMessagesModel>();
 
         Intent intent = new Intent(this, ChatService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
@@ -151,7 +154,11 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("UserList");
         intentFilter.addAction("MyStatus");
+        intentFilter.addAction("OnlineUsers");
         registerReceiver(myReceiver, intentFilter);
+
+
+
 
 
      //   readOnlineUsers();
@@ -310,6 +317,41 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
                         recyclerView_directMessage.setLayoutManager(mLayoutManager);
                         directMessagesAdapter.notifyDataSetChanged();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+
+                case "OnlineUsers":
+                    JSONArray jsonArrayOnline =(JSONArray) Globals.userlist;
+                    try {
+                        directMessagesModelList.clear();
+                    for (int i = 0; i < jsonArrayOnline.length(); i++) {
+                        JSONObject jsonObject = null;
+
+                            jsonObject = jsonArrayOnline.getJSONObject(i);
+                            String username = jsonObject.getString("DisplayName");
+                            String connection_id = jsonObject.getString("connectionID");
+                            DirectMessagesModel directMessagesModel = new DirectMessagesModel();
+                            directMessagesModel.setUserId(jsonObject.getString("FromUserId"));
+                            directMessagesModel.setProfilePic(jsonObject.getString("ProfilePic"));
+                            directMessagesModel.setActivityStatus( String.valueOf( jsonObject.getBoolean("IsOnline")));
+                            directMessagesModel.setUserName(username);
+                            directMessagesModel.setFirebaseUserId(connection_id);
+                            onlineUsersModelList.add(directMessagesModel);
+
+
+
+                    }
+                        onlineUsersAdapter = new DirectMessagesAdapter(SignalRUserChatsActivity.this, onlineUsersModelList, true);
+                        recyclerView_onlineUsers.setAdapter(onlineUsersAdapter);
+                        recyclerView_onlineUsers.setHasFixedSize(true);
+                        LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+                        recyclerView_onlineUsers.setLayoutManager(mLayoutManager);
+                        onlineUsersAdapter.notifyDataSetChanged();
 
 
                     } catch (JSONException e) {
