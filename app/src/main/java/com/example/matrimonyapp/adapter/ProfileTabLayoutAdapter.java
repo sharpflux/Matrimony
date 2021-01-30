@@ -50,11 +50,11 @@ public class ProfileTabLayoutAdapter extends FragmentPagerAdapter {
                 viewFamilyDetailsFragment.setArguments(bundle);
                 return  viewFamilyDetailsFragment;
 
-            case 2:
+           /* case 2:
                 ViewQualificationDetailsFragment viewQualificationDetailsFragment =
                         new ViewQualificationDetailsFragment();
                 viewQualificationDetailsFragment.setArguments(bundle);
-                return viewQualificationDetailsFragment;
+                return viewQualificationDetailsFragment;*/
 
             default:
                 return null;

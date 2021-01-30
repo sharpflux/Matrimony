@@ -120,12 +120,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
             textView_companyName.setText(bundle.getString("userCompany"));
             textView_highestQualificationInstitute.setText(bundle.getString("userQualification"));
 
-            Glide.with(ViewProfileDetailsActivity.this)
-                    .load(URLs.MainURL+bundle.getString("userProfilePic"))
-                    .skipMemoryCache(true)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .placeholder(R.color.quantum_grey100)
-                    .into(imageView_profilePic);
+
 */
         }
 
@@ -178,7 +173,6 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
                 +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));
 
         arrayList_singleImage = new ArrayList<SingleImage>();
-
         ArrayList<String> sliderImages = new ArrayList<>();
         for(int i=0; i<5; i++)
         {

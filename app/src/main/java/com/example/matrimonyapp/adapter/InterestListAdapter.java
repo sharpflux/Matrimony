@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.ViewProfileActivity;
+import com.example.matrimonyapp.activity.ViewProfileDetailsActivity;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.volley.URLs;
 
@@ -71,7 +72,10 @@ public class InterestListAdapter extends RecyclerView.Adapter<InterestListAdapte
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, ViewProfileActivity.class);
+                Intent intent = new Intent(context, ViewProfileDetailsActivity.class);
+                intent.putExtra("userId", item.getUserId());
+                intent.putExtra("userName", item.getUserName());
+                intent.putExtra("userProfilePic", item.getProfilePic());
                 context.startActivity(intent);
 
             }

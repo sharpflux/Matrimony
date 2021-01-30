@@ -257,7 +257,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         holder.textView_userQualification.setText(list.get(position).getUserQualification());
 
-        holder.textView_userId.setOnClickListener(new View.OnClickListener() {
+        holder.textView_userName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

@@ -79,7 +79,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -420,7 +421,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -710,7 +712,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -788,7 +791,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -866,7 +870,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -1006,7 +1011,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>
@@ -1084,7 +1090,8 @@
                             android:layout_marginEnd="0dp"
                             android:padding="2dp"
                             android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800" />
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
 
 
                     </LinearLayout>

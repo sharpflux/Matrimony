@@ -381,7 +381,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         onClickNewActivity(imageView_message, HomeActivity.this, DirectMessagesActivity.class);
         onClickNewActivity(imageView_myProfile, HomeActivity.this, MyProfileActivity.class);
         onClickNewActivity(imageView_like, HomeActivity.this, InterestActivity.class);
-        onClickNewActivity(linearLayout_dailyRecommendations, HomeActivity.this, ViewProfileDetailsActivity.class);
+        onClickNewActivity(linearLayout_dailyRecommendations, HomeActivity.this, ViewAllActivity.class);
+        onClickNewActivity(linearLayout_recentlyViewed, HomeActivity.this, ViewAllActivity.class);
 
 
 
