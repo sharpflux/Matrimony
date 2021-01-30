@@ -14,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:id="@+id/linearLayout_toolbar"
         android:layout_marginTop="0dp"
         android:paddingStart="5dp"
         android:paddingEnd="15dp"
@@ -31,7 +32,7 @@
             android:tint="@color/black"
             />
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView_profilePic"
+            android:id="@+id/circleImageView_profilePic"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="5dp"
@@ -49,8 +50,8 @@
             android:text="Chats"
             android:textColor="@color/black"
             android:layout_gravity="center_vertical"
-            android:textSize="17sp"
-            android:fontFamily="serif"/>
+            android:textSize="19sp"
+            android:fontFamily="@font/arima_madurai_medium"/>
 
         <ImageView
             android:layout_width="30dp"

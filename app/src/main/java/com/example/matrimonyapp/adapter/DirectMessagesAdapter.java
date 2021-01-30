@@ -97,6 +97,8 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
                // intent.putExtra("FromConnectionId", SignalRUserChatsActivity.FromConnectionId);
                 intent.putExtra("connectionId", list.get(position).getFirebaseUserId());
                 intent.putExtra("toUserId", list.get(position).getUserId());
+                intent.putExtra("toUserName", list.get(position).getUserName());
+                intent.putExtra("toUserProfilePic", list.get(position).getProfilePic());
                 context.startActivity(intent);
 
             }

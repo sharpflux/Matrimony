@@ -38,6 +38,7 @@ import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.service.ChatService;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +57,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import microsoft.aspnet.signalr.client.Credentials;
 import microsoft.aspnet.signalr.client.Platform;
 import microsoft.aspnet.signalr.client.SignalRFuture;
@@ -73,7 +75,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
     LinearLayout linearLayout_message;
     TextView textView_userName;
-    ImageView imageView_back, imageView_sendMessage, imageView_profilePic;
+    ImageView imageView_back, imageView_sendMessage;
+    CircleImageView circleImageView_profilePic;
     EditText editText_message;
     String message;
     private String currentLanguage;
@@ -86,6 +89,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     HubProxy hubProxy;
     private Intent intent;
 
+    LinearLayout linearLayout_toolbar;
+
     String connectionId="0", toUserId="";
 
     Handler mHandler=new Handler(); //listener
@@ -96,6 +101,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     boolean mBound = false;
     private LinearLayoutManager mLayoutManager;
     private boolean isAtBottom=false;
+    private Bundle bundle;
 
 
     @Override
@@ -142,12 +148,13 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
         scrollView = findViewById(R.id.scrollView);
+        linearLayout_toolbar = findViewById(R.id.linearLayout_toolbar);
         linearLayout_message = findViewById(R.id.linearLayout_message);
         recyclerView_chat = findViewById(R.id.recyclerView_chat);
         editText_message = findViewById(R.id.editText_message);
         textView_userName = findViewById(R.id.textView_userName);
         imageView_back = findViewById(R.id.imageView_back);
-        imageView_profilePic = findViewById(R.id.imageView_profilePic);
+        circleImageView_profilePic = findViewById(R.id.circleImageView_profilePic);
         imageView_sendMessage = findViewById(R.id.imageView_sendMessage);
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
@@ -165,7 +172,6 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         mLayoutManager.setStackFromEnd(true);
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.scrollToPosition(chatModelsList.size());
-
 
 
         context=this;
@@ -208,12 +214,39 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             }
         });
 
-        Bundle bundle =intent.getExtras();
+        bundle =intent.getExtras();
         if (bundle!=null)
         {
            connectionId = bundle.getString("connectionId");
             toUserId = bundle.getString("toUserId");
+            textView_userName.setText(bundle.getString("toUserName"));
+
+            Glide.with(context)
+                    .load(URLs.MainURL+bundle.getString("toUserProfilePic"))
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .circleCrop()
+                    .placeholder(R.color.quantum_grey100)
+                    .into(circleImageView_profilePic);
+
         }
+
+
+        linearLayout_toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (bundle!=null) {
+                    Intent intent = new Intent(SignalRMessagesActivity.this, ViewProfileDetailsActivity.class);
+                    intent.putExtra("userId", toUserId);
+                    intent.putExtra("userName", bundle.getString("toUserName"));
+                    intent.putExtra("userProfilePic", bundle.getString("toUserProfilePic"));
+                    startActivity(intent);
+                }
+            }
+        });
+
        // connect();
      //   hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
         Intent intent = new Intent(this, ChatService.class);

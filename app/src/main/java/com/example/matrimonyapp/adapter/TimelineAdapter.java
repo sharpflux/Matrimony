@@ -282,6 +282,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 Intent intent = new Intent(context, SignalRMessagesActivity.class);
                 intent.putExtra("connectionId", "0");
                 intent.putExtra("toUserId", list.get(position).getUserId());
+                intent.putExtra("toUserName", list.get(position).getUserName());
+                intent.putExtra("toUserProfilePic", list.get(position).getProfilePic());
                 context.startActivity(intent);
 
             }
