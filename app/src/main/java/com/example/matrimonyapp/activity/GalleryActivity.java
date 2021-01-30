@@ -69,6 +69,7 @@ public class GalleryActivity extends AppCompatActivity {
 
     private String currentLanguage;
 
+    //
     // Views
     RecyclerView imageRecyclerView, selectedImageRecyclerView;
     Spinner spinner_folderNames;
