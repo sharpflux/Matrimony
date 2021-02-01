@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,6 +72,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
             textView_percentage, textView_passingYear, textView_hobby, textView_socialContribution;
 
 
+    private Context context;
 
 
 
@@ -102,6 +105,8 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
         bundle = this.getArguments();
         userId = bundle.getString("userId");
+
+        context = getContext();
 
         textView_name = view.findViewById(R.id.textView_name);
         textView_gender = view.findViewById(R.id.textView_gender);
@@ -205,13 +210,15 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
         value = value.trim();
 
-        if(value.isEmpty() || value.equals("0") || value.equals(""))
+        if((textView.getText().toString().equals("Not Filled") ) && value.isEmpty() || value.equals("0") || value.equals(""))
         {
             textView.setText(getResources().getString(R.string.not_filled));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.red_btn_bg_color));
         }
         else
         {
             textView.setText(value);
+            textView.setTextColor(ContextCompat.getColor(context, R.color.quantum_grey700));
         }
 
     }

@@ -107,11 +107,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
     StringBuilder state_builder_id;
     String StateId="";
 
-    ArrayList arrayList_stateId, arrayList_countryId, arrayList_cityId, arrayList_religion,
+    ArrayList arrayList_residentialCountryIds, arrayList_residentialStateIds, arrayList_residentialCityIds,
+            arrayList_workingCountryIds, arrayList_workingStateIds,arrayList_workingCityIds, arrayList_religion,
             arrayList_caste, arrayList_SubCaste, arrayList_maritalStatus, arrayList_familyType,
             arrayList_diet, arrayList_occupation, arrayList_individualIncome, arrayList_familyIncome,
-            arrayList_familyValues, arrayList_color, arrayList_highestQualificationLevel, arrayList_qualification,
-            arrayList_workingStateId, arrayList_workingCountryId, arrayList_workingCityId;
+            arrayList_familyValues, arrayList_color, arrayList_highestQualificationLevel, arrayList_qualification;
 
 
     ArrayList<MultipleHierarchyModel> arrayList_religionHierarchy, arrayList_locationHierarchy;
@@ -193,7 +193,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
 
 
-        getSQLitedetails();
+        //getSQLitedetails();
 
 
     }
@@ -218,12 +218,12 @@ public class SetPreferencesActivity extends AppCompatActivity {
         list = new ArrayList<>();
         dataFetcherLocation = new DataFetcherLocation(lOcationModal, customDialogLocationRec, list, SetPreferencesActivity.this);
         multipleSelectionDataFetcher = new MultipleSelectionDataFetcher("", context);
-        arrayList_stateId = new ArrayList();
-        arrayList_countryId = new ArrayList();
-        arrayList_cityId = new ArrayList();
-        arrayList_workingStateId = new ArrayList();
-        arrayList_workingCountryId = new ArrayList();
-        arrayList_workingCityId = new ArrayList();
+        arrayList_residentialCountryIds = new ArrayList();
+        arrayList_residentialStateIds = new ArrayList();
+        arrayList_residentialCityIds = new ArrayList();
+        arrayList_workingCountryIds = new ArrayList();
+        arrayList_workingStateIds = new ArrayList();
+        arrayList_workingCityIds = new ArrayList();
 
         arrayList_religion = new ArrayList();
         arrayList_caste = new ArrayList();
@@ -553,7 +553,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
             {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
-                        "Name", editText_country, arrayList_countryId, SetPreferencesActivity.this,
+                        "Name", editText_country, arrayList_residentialCountryIds, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
 
@@ -561,11 +561,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
             else if(params[0].equals("State"))
             {
                 //String id = textView_countryId.getText().toString();
-                String countryId = arrayList_countryId.toString().substring(1,arrayList_countryId.toString().length()-1).replaceAll(" ","");
+                String countryId = arrayList_residentialCountryIds.toString().substring(1,arrayList_residentialCountryIds.toString().length()-1).replaceAll(" ","");
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_STATE+"CountryId="+countryId
                                 +",&Language="+userModel.getLanguage(),"StatesID",
-                        "StatesName", editText_state, arrayList_stateId, SetPreferencesActivity.this,
+                        "StatesName", editText_state, arrayList_residentialStateIds, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
 
@@ -573,11 +573,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
             else if(params[0].equals("City"))
             {
                 //String id = textView_stateId.getText().toString();
-                String statesId = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
+                String statesId = arrayList_residentialStateIds.toString().substring(1,arrayList_residentialStateIds.toString().length()-1).replaceAll(" ","");
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_CITY +"StatesId="+statesId
                                 +",&Language="+userModel.getLanguage(),"DistrictId",
-                        "DistrictName", editText_city, arrayList_cityId, SetPreferencesActivity.this,
+                        "DistrictName", editText_city, arrayList_residentialCityIds, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
 
@@ -588,7 +588,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
             {
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
-                        "Name", editText_workingCountry, arrayList_workingCountryId, SetPreferencesActivity.this,
+                        "Name", editText_workingCountry, arrayList_workingCountryIds, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
 
@@ -596,11 +596,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
             else if(params[0].equals("WorkingState"))
             {
                 //String id = textView_countryId.getText().toString();
-                String countryId = arrayList_workingCountryId.toString().substring(1,arrayList_workingCountryId.toString().length()-1).replaceAll(" ","");
+                String countryId = arrayList_workingCountryIds.toString().substring(1,arrayList_workingCountryIds.toString().length()-1).replaceAll(" ","");
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_STATE+"CountryId="+countryId
                                 +",&Language="+userModel.getLanguage(),"StatesID",
-                        "StatesName", editText_workingState, arrayList_workingStateId, SetPreferencesActivity.this,
+                        "StatesName", editText_workingState, arrayList_workingStateIds, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
 
@@ -608,11 +608,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
             else if(params[0].equals("WorkingCity"))
             {
                 //String id = textView_stateId.getText().toString();
-                String statesId = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
+                String statesId = arrayList_workingStateIds.toString().substring(1,arrayList_workingStateIds.toString().length()-1).replaceAll(" ","");
 
                 multipleSelectionDataFetcher.loadList(URLs.URL_GET_MULTIPLE_CITY +"StatesId="+statesId
                                 +",&Language="+userModel.getLanguage(),"DistrictId",
-                        "DistrictName", editText_workingCity, arrayList_workingCityId, SetPreferencesActivity.this,
+                        "DistrictName", editText_workingCity, arrayList_workingCityIds, SetPreferencesActivity.this,
                         customDialogLoadingProgressBar);
 
 
@@ -727,7 +727,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         }
     }
 
-    private void insertDetails()
+    private void insertSQLDetails()
     {
         RadioButton radioButton_gender, radioButton_serviceType, radioButton_workingLocation, radioButton_jobType;
 
@@ -759,15 +759,15 @@ public class SetPreferencesActivity extends AppCompatActivity {
         final String state = editText_state.getText().toString();
         final String country = editText_country.getText().toString();
         final String city = editText_city.getText().toString();
-        final String stateIds = arrayList_stateId.toString().substring(1,arrayList_stateId.toString().length()-1).replaceAll(" ","");
-        final String countryIds = arrayList_countryId.toString().substring(1,arrayList_countryId.toString().length()-1).replaceAll(" ","");
-        final String cityIds = arrayList_cityId.toString().substring(1,arrayList_cityId.toString().length()-1).replaceAll(" ","");
+        final String stateIds = arrayList_residentialStateIds.toString().substring(1,arrayList_residentialStateIds.toString().length()-1).replaceAll(" ","");
+        final String countryIds = arrayList_residentialCountryIds.toString().substring(1,arrayList_residentialCountryIds.toString().length()-1).replaceAll(" ","");
+        final String cityIds = arrayList_residentialCityIds.toString().substring(1,arrayList_residentialCityIds.toString().length()-1).replaceAll(" ","");
         final String workingState = editText_workingState.getText().toString();
         final String workingCountry = editText_workingCountry.getText().toString();
         final String workingCity = editText_workingCity.getText().toString();
-        final String workingStateIds = arrayList_workingStateId.toString().substring(1,arrayList_workingStateId.toString().length()-1).replaceAll(" ","");
-        final String workingCountryIds = arrayList_workingCountryId.toString().substring(1,arrayList_workingCountryId.toString().length()-1).replaceAll(" ","");
-        final String workingCityIds = arrayList_workingCityId.toString().substring(1,arrayList_workingCityId.toString().length()-1).replaceAll(" ","");
+        final String workingStateIds = arrayList_workingStateIds.toString().substring(1,arrayList_workingStateIds.toString().length()-1).replaceAll(" ","");
+        final String workingCountryIds = arrayList_workingCountryIds.toString().substring(1,arrayList_workingCountryIds.toString().length()-1).replaceAll(" ","");
+        final String workingCityIds = arrayList_workingCityIds.toString().substring(1,arrayList_workingCityIds.toString().length()-1).replaceAll(" ","");
         final String maritalStatus = editText_maritalStatus.getText().toString();
         final String maritalStatusIds = arrayList_maritalStatus.toString().substring(1,arrayList_maritalStatus.toString().length()-1).replaceAll(" ","");
         final String familyType = editText_familyType.getText().toString();
@@ -917,7 +917,160 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
         }
 
-    private void getSQLitedetails(){
+
+        private void insertDetails()
+        {
+            RadioButton radioButton_gender, radioButton_serviceType, radioButton_workingLocation, radioButton_jobType;
+
+            radioButton_gender = (RadioButton)findViewById(radioGroup_gender.getCheckedRadioButtonId());
+            radioButton_serviceType = (RadioButton)findViewById(radioGroup_serviceType.getCheckedRadioButtonId());
+            radioButton_workingLocation = (RadioButton)findViewById(radioGroup_workingLocation.getCheckedRadioButtonId());
+            radioButton_jobType = (RadioButton)findViewById(radioGroup_jobType.getCheckedRadioButtonId());
+
+
+            if(radioButton_gender!=null)
+            {
+                gender = radioButton_gender.getText().toString();
+            }
+
+            if(radioButton_serviceType!=null)
+            {
+                serviceType = radioButton_serviceType.getText().toString();
+            }
+
+            if(radioButton_workingLocation!=null)
+            {
+                workingLocation = radioButton_workingLocation.getText().toString();
+            }
+
+            if(radioButton_jobType!=null)
+            {
+                jobType = radioButton_jobType.getText().toString();
+            }
+
+            final String state = editText_state.getText().toString();
+            final String residentialCountryIds = arrayList_residentialCountryIds.toString().substring(1,arrayList_residentialCountryIds.toString().length()-1).replaceAll(" ","");
+            final String residentialStateIds = arrayList_residentialStateIds.toString().substring(1,arrayList_residentialStateIds.toString().length()-1).replaceAll(" ","");
+            final String residentialCityIds = arrayList_residentialCityIds.toString().substring(1,arrayList_residentialCityIds.toString().length()-1).replaceAll(" ","");
+
+            final String workingCountryIds = arrayList_workingCountryIds.toString().substring(1,arrayList_residentialCountryIds.toString().length()-1).replaceAll(" ","");
+            final String workingStateIds = arrayList_residentialStateIds.toString().substring(1,arrayList_residentialStateIds.toString().length()-1).replaceAll(" ","");
+            final String workingCityIds = arrayList_residentialCityIds.toString().substring(1,arrayList_residentialCityIds.toString().length()-1).replaceAll(" ","");
+
+            final String maritalStatusIds = arrayList_maritalStatus.toString().substring(1,arrayList_maritalStatus.toString().length()-1).replaceAll(" ","");
+            final String familyTypeIds = arrayList_familyType.toString().substring(1,arrayList_familyType.toString().length()-1).replaceAll(" ","");
+            final String familyValueIds= arrayList_familyValues.toString().substring(1,arrayList_familyValues.toString().length()-1).replaceAll(" ","");
+            final String familyIncomeIds = arrayList_familyIncome.toString().substring(1,arrayList_familyIncome.toString().length()-1).replaceAll(" ","");
+            final String individualIncomeIds = arrayList_individualIncome.toString().substring(1,arrayList_individualIncome.toString().length()-1).replaceAll(" ","");
+            final String qualificationLevelIds = arrayList_highestQualificationLevel.toString().substring(1,arrayList_highestQualificationLevel.toString().length()-1).replaceAll(" ","");
+            final String qualificationIds = arrayList_qualification.toString().substring(1,arrayList_qualification.toString().length()-1).replaceAll(" ","");
+            final String dietIds = arrayList_diet.toString().substring(1,arrayList_diet.toString().length()-1).replaceAll(" ","");
+            final String colorIds = arrayList_color.toString().substring(1,arrayList_color.toString().length()-1).replaceAll(" ","");
+            final String occupationIds = arrayList_occupation.toString().substring(1,arrayList_occupation.toString().length()-1).replaceAll(" ","");
+            final String religionIds = arrayList_religion.toString().substring(1,arrayList_religion.toString().length()-1).replaceAll(" ","");
+            final String casteIds = arrayList_caste.toString().substring(1,arrayList_caste.toString().length()-1).replaceAll(" ","");
+            final String subCasteIds = arrayList_SubCaste.toString().substring(1,arrayList_SubCaste.toString().length()-1).replaceAll(" ","");
+
+            String ageMin = rangeBar_ageRange.getLeftPinValue();
+            String ageMax = rangeBar_ageRange.getRightPinValue();
+            String heightMin = rangeBar_heightRange.getLeftPinValue();
+            String heightMax = rangeBar_heightRange.getRightPinValue();
+
+
+
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                    URLs.URL_POST_FILTER,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.d("RESPONSE","-----------------------------\n"+response);
+                            /*try {
+
+
+                                //converting response to json object
+                                JSONObject jsonObject = new JSONObject(response);
+
+                                JSONArray jsonArray = jsonObject.getJSONArray("Registrations");
+
+                                if(jsonArray.length()>0)
+                                {
+                                    //   getDetails();
+                                    ///getProfilePic();
+
+                                    Toast.makeText(SetPreferencesActivity.this,"Received successfully!", Toast.LENGTH_SHORT).show();
+
+                                }
+                                else
+                                {
+                                    Toast.makeText(SetPreferencesActivity.this,"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                                }
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+*/
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(SetPreferencesActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                            error.printStackTrace();
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+
+
+                    params.put("SetPreferenceId","0");                 //1
+                    params.put("UserId",userModel.getUserId());                 //1
+
+                    params.put("LookingFor", gender);                               //4
+                    params.put("RelegionIds", religionIds);                      //10
+                    params.put("CasteIds", casteIds);                            //11
+                    params.put("SubCasteIds", subCasteIds);
+                    params.put("ResidentialCountryIds", residentialCountryIds);                            //5
+                    params.put("ResidentialStateIds", residentialStateIds);                     //6
+                    params.put("ResidentialCityIds", residentialCityIds);                         //7
+                    params.put("WorkingCountryIds", workingCountryIds);                         //7
+                    params.put("WorkingStateIds", workingStateIds);                         //7
+                    params.put("WorkingCityIds", workingCityIds);                         //7
+
+
+                    params.put("AgeMin", rangeBar_ageRange.getLeftPinValue());  //8
+                    params.put("AgeMax", rangeBar_ageRange.getRightPinValue()); //9
+                                      //12
+                    params.put("HeightMin", rangeBar_heightRange.getLeftPinValue());//22
+                    params.put("HeightMax", rangeBar_heightRange.getRightPinValue());   //23
+
+                    params.put("QualificationLevelIds", qualificationLevelIds);  //13
+                    params.put("QualificationIds", qualificationIds);    //14
+                    params.put("ServiceType", serviceType);
+                    params.put("WorkingIn", workingLocation);
+                    params.put("CurrentService", jobType);
+                    params.put("OccupationIds", occupationIds);                //17
+
+                    params.put("ExpectedFamilyIncomeIds", familyIncomeIds);        //18
+                    params.put("ExpectedIndividualIncomeIds", individualIncomeIds);//19
+                    params.put("FamilyTypeIds", familyTypeIds);                    //20
+                    params.put("FamilyValuesIds", familyValueIds);                  //21
+                    params.put("DietIds", dietIds);                            //16
+                    params.put("ColorIds", colorIds);                     //24
+                    params.put("MaritalStatusIds", maritalStatusIds);            //15
+
+                    return params;
+                }
+            };
+
+            VolleySingleton.getInstance(SetPreferencesActivity.this).addToRequestQueue(stringRequest);
+
+
+        }
+
+    /*private void getSQLitedetails(){
 
 
         Cursor cursor = sqLiteSetPreference.getDataByUserId(userModel.getUserId());
@@ -1001,7 +1154,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         }
         cursor.close();
 
-    }
+    }*/
 
 
     private ArrayList stringToInt(ArrayList arrayList)
@@ -1032,18 +1185,18 @@ public class SetPreferencesActivity extends AppCompatActivity {
         editText_subCaste.setText("");
 
 
-        arrayList_stateId.clear();
+        arrayList_residentialStateIds.clear();
         editText_state.setText("");
-        arrayList_countryId.clear();
+        arrayList_residentialCountryIds.clear();
         editText_country.setText("");
-        arrayList_cityId.clear();
+        arrayList_residentialCityIds.clear();
         editText_city.setText("");
 
-        arrayList_workingStateId.clear();
+        arrayList_workingStateIds.clear();
         editText_workingState.setText("");
-        arrayList_workingCountryId.clear();
+        arrayList_workingCountryIds.clear();
         editText_workingCountry.setText("");
-        arrayList_workingCityId.clear();
+        arrayList_workingCityIds.clear();
         editText_workingCity.setText("");
 
         arrayList_maritalStatus.clear();

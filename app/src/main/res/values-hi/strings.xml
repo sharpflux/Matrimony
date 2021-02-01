@@ -456,6 +456,10 @@
     <string name="family">Family</string>
     <string name="preferences">Preferences</string>
     <string name="working_location_address">Working Location Address</string>
+    <string name="desired_partner">Desired Partner</string>
+    <string name="service_type">Service Type</string>
+    <string name="working_in">Working In</string>
+    <string name="looking_for">Looking For</string>
 
 
 </resources>

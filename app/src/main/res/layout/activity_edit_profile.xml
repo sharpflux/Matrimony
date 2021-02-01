@@ -229,256 +229,165 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/name"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_name"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/birthdate"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_birthdate"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/mobile_"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_mobileNo"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/_email"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_emailId"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/country"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_country"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/_state"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_state"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/_city"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_city"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/village"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_village"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    style="@style/FieldValue_TextView"
+                    android:text="@string/not_filled"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/address_"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_address"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/_postal_code"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_postalCode"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
             </LinearLayout>
@@ -554,107 +463,71 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/religion"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_religion"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/caste"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_caste"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/gothram"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_gothram"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/mother_tongue"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_motherToungue"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
             </LinearLayout>
@@ -729,131 +602,86 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/height"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_height"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/weight"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_weight"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/colour"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_colour"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/marital_status"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_maritalStatus"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/lives_with_family"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_livesWithFamily"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
             </LinearLayout>
@@ -929,131 +757,86 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/highest_education_level"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_highestQualificationLevel"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/highest_education"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_highestQualification"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/institue_university"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_nameOfInstitute"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/percentage"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_percentage"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/passing_year"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_passingYear"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
             </LinearLayout>
@@ -1129,106 +912,70 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/current_service"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_currentService"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/designation"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_designation"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/experience"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_experience"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/annual_income"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_annualIncome"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
@@ -1305,159 +1052,104 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/father_name"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_fatherName"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/_occupation_father"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_fatherOccupation"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:text="@string/annual_income_father"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    style="@style/FieldName_TextView"
+                    android:text="@string/annual_income_father"/>
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_fatherIncome"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/mother_name"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_motherName"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/occupation_mother"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_motherOccupation"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldName_TextView"
                     android:text="@string/annual_income_mother"
-                    android:textColor="@color/text_black"
-                    android:textSize="13sp" />
+                    />
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_motherIncome"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
+                    style="@style/FieldValue_TextView"
                     android:text="@string/not_filled"
-                    android:textColor="@color/quantum_grey700"
-                    android:textSize="13sp" />
+                    />
 
 
 

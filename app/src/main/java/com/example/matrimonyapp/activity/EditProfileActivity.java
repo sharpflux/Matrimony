@@ -34,8 +34,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.adapter.ProfileTabLayoutAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogChangeProfilePic;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.customViews.CustomViewPager;
 import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
@@ -43,6 +45,7 @@ import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
+import com.google.android.material.tabs.TabLayout;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -64,33 +67,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private ImageView imageView_back;
-    private CircleImageView circleImageView_profilePic;
+    private ImageView imageView_back, toolbarImageView;
+    private CircleImageView circleImageView_profilePic, circleImage_profilePic;
 
-
-    private TextView textView_religion, textView_caste, textView_gothram, textView_motherToungue;
-
-    private TextView textView_name, textView_birthdate, textView_mobileNo, textView_emailId, textView_country,
-            textView_state, textView_city, textView_village, textView_address, textView_postalCode;
-
-    private TextView textView_fatherName, textView_fatherOccupation,textView_fatherIncome, textView_motherName,
-            textView_motherOccupation, textView_motherIncome;
-
-    private TextView textView_highestQualificationLevel, textView_highestQualification, textView_nameOfInstitute,
-            textView_percentage, textView_passingYear;
-
-    private TextView textView_currentService, textView_designation, textView_experience, textView_annualIncome;
-
-    private TextView textView_height, textView_weight, textView_colour, textView_maritalStatus, textView_livesWithFamily;
 
     private RelativeLayout relativeLayout_changeProfilePic;
 
-    private LinearLayout linearLayout_basicDetails, linearLayout_religiousDetails, linearLayout_personalDetails,
-            linearLayout_qualificationDetails, linearLayout_professionalDetails, linearLayout_familyDetails;
 
 
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
+    //Tabs
+    TabLayout tabLayout_details;
+    CustomViewPager viewPager_details;
 
 
     //Change Profile Pic
@@ -111,12 +100,46 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_edit_my_profile);
 
 
         init();
 
         onClickListener();
+
+
+
+
+        viewPager_details.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        tabLayout_details.setTabGravity(TabLayout.GRAVITY_FILL);
+        final ProfileTabLayoutAdapter profileTabLayoutAdapter = new ProfileTabLayoutAdapter(
+                this,getSupportFragmentManager(),tabLayout_details.getTabCount(), userModel.getUserId(),"EditProfile");
+        viewPager_details.setAdapter(profileTabLayoutAdapter);
+
+
+
+        viewPager_details.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout_details));
+
+        tabLayout_details.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                viewPager_details.setCurrentItem(tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
 
 
 
@@ -145,12 +168,7 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        callFragment(linearLayout_basicDetails, "Basic");
-        callFragment(linearLayout_religiousDetails, "Religious");
-        callFragment(linearLayout_personalDetails, "Personal");
-        callFragment(linearLayout_qualificationDetails, "Qualification");
-        callFragment(linearLayout_professionalDetails, "Professional");
-        callFragment(linearLayout_familyDetails, "Family");
+
         //callFragment(linearLayout_basicDetails, "Basic");
 
 
@@ -331,11 +349,16 @@ public class EditProfileActivity extends AppCompatActivity {
     private void init() {
 
 
-        imageView_back = findViewById(R.id.imageView_back);
+        imageView_back = findViewById(R.id.backButton);
+        toolbarImageView = findViewById(R.id.toolbarImageView);
         circleImageView_profilePic = findViewById(R.id.circleImageView_profilePic);
+        circleImage_profilePic = findViewById(R.id.circleImage_profilePic);
+
+        viewPager_details = findViewById(R.id.viewPager_details);
+        tabLayout_details = findViewById(R.id.tabLayout_details);
 
 
-        textView_name = findViewById(R.id.textView_name);
+        /*textView_name = findViewById(R.id.textView_name);
         textView_birthdate = findViewById(R.id.textView_birthdate);
         textView_mobileNo = findViewById(R.id.textView_mobileNo);
         textView_emailId = findViewById(R.id.textView_emailId);
@@ -379,15 +402,15 @@ public class EditProfileActivity extends AppCompatActivity {
         textView_motherName = findViewById(R.id.textView_motherName);
         textView_motherOccupation = findViewById(R.id.textView_motherOccupation);
         textView_motherIncome = findViewById(R.id.textView_motherIncome);
-
+*/
 
         relativeLayout_changeProfilePic = findViewById(R.id.relativeLayout_changeProfilePic);
-        linearLayout_basicDetails = findViewById(R.id.linearLayout_basicDetails);
+        /*linearLayout_basicDetails = findViewById(R.id.linearLayout_basicDetails);
         linearLayout_religiousDetails = findViewById(R.id.linearLayout_religiousDetails);
         linearLayout_personalDetails = findViewById(R.id.linearLayout_personalDetails);
         linearLayout_qualificationDetails = findViewById(R.id.linearLayout_qualificationDetails);
         linearLayout_professionalDetails = findViewById(R.id.linearLayout_professionalDetails);
-        linearLayout_familyDetails = findViewById(R.id.linearLayout_familyDetails);
+        linearLayout_familyDetails = findViewById(R.id.linearLayout_familyDetails);*/
 
 
 
@@ -479,7 +502,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         try {
 
                             //converting response to json object
-
+                            customDialogLoadingProgressBar.dismiss();
                             JSONArray jsonArray = new JSONArray(response);
                             if(jsonArray.length()==1)
                             {
@@ -497,8 +520,22 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 .networkPolicy(NetworkPolicy.NO_CACHE)
                                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                                                 .error(R.drawable.default_profile)
-                                                .placeholder(R.drawable.default_profile)
-                                                .into(circleImageView_profilePic);
+                                                .placeholder(R.color.codeGray)
+                                                .into(circleImageView_profilePic);                                        Picasso.get().invalidate(URLs.MainURL + jsonObject.getString("ImageUrl"));
+                                        Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
+                                                .networkPolicy(NetworkPolicy.NO_CACHE)
+                                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                                .error(R.drawable.default_profile)
+                                                .placeholder(R.color.quantum_bluegrey900)
+                                                .into(toolbarImageView);
+
+
+                                        Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
+                                                .networkPolicy(NetworkPolicy.NO_CACHE)
+                                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                                .error(R.drawable.default_profile)
+                                                .placeholder(R.color.quantum_bluegrey900)
+                                                .into(circleImage_profilePic);
 
                                         userModel.setProfilePic(URLs.MainURL+jsonObject.getString("ImageUrl"));
 
@@ -542,482 +579,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
 
-    void getBasicDetails()
-    {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_BASICDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            customDialogLoadingProgressBar.dismiss();
-
-                            //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if(jsonArray.length()>0)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                                if(!jsonObject.getBoolean("error"))
-                                {
-                                    //basicDetailsId = jsonObject.getInt("BasicDetailsId");
-
-
-
-                                    checkIfEmpty(textView_name, jsonObject.getString("FullName"));
-                                    checkIfEmpty(textView_birthdate, jsonObject.getString("Birthdate"));
-                                    checkIfEmpty(textView_mobileNo, jsonObject.getString("MobileNo"));
-                                    checkIfEmpty(textView_emailId, jsonObject.getString("EmailId"));
-
-
-                                    checkIfEmpty(textView_country, jsonObject.getString("PermanantCountryName"));
-                                    checkIfEmpty(textView_state, jsonObject.getString("PermanantState"));
-                                    checkIfEmpty(textView_city, jsonObject.getString("PermanantCity"));
-                                    checkIfEmpty(textView_address, jsonObject.getString("PermanantAddress"));
-                                    checkIfEmpty(textView_village, jsonObject.getString("PermanantVillage"));
-                                    checkIfEmpty(textView_postalCode, jsonObject.getString("PermanantPostCode"));
-
-
-
-
-
-
-                                }
-
-
-
-                            }
-                            else
-                            {
-
-                                //Toast.makeText(EditProfileActivity.this,"Please enter your details! ",Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EditProfileActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-    }
-
-
-
-    void getReligiousDetails()
-    {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_RELIGIONDETAIL+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            customDialogLoadingProgressBar.dismiss();
-
-                            //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if(jsonArray.length()>0)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                                if(!jsonObject.getBoolean("error"))
-                                {
-                                    //religionDetailsId = jsonObject.getInt("ReligiousDetailsId");
-
-                                    checkIfEmpty(textView_religion, jsonObject.getString("ReligionName"));
-                                    checkIfEmpty(textView_caste, jsonObject.getString("CasteName"));
-                                    checkIfEmpty(textView_gothram, jsonObject.getString("Gothram"));
-                                    checkIfEmpty(textView_motherToungue, jsonObject.getString("MotherTongueName"));
-
-
-                                    //textView_gothram.setText(jsonObject.getString("SubCasteName"));
-                                    //checkBox_otherCaste.setChecked(jsonObject.getBoolean("OtherCommunity"));
-
-                                }
-
-
-
-                            }
-                            else
-                            {
-
-                                //Toast.makeText(EditProfileActivity.this,"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EditProfileActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-
-
-
-
-    }
-
-
-
-    void getPersonalDetails()
-    {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_PERSONALDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            customDialogLoadingProgressBar.dismiss();
-
-                            //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if(jsonArray.length()>0)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                                if(!jsonObject.getBoolean("error"))
-                                {
-                                    //personalDetailsId = jsonObject.getInt("PersonalDetailsId");
-
-                                    checkIfEmpty(textView_height, jsonObject.getString("Height"));
-                                    checkIfEmpty(textView_weight, jsonObject.getString("Weight"));
-                                    checkIfEmpty(textView_livesWithFamily, jsonObject.getString("LivesWithFamily"));
-                                    checkIfEmpty(textView_colour, jsonObject.getString("SkinColourName"));
-                                    checkIfEmpty(textView_maritalStatus, jsonObject.getString("MaritalStatusName"));
-
-
-
-                                }
-
-
-
-                            }
-                            else
-                            {
-                                customDialogLoadingProgressBar.dismiss();
-                                //Toast.makeText(EditProfileActivity.this,"Sorry for the inconvenience \nPlease try again!" ,Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EditProfileActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-
-
-
-
-    }
-
-
-    void getQualificationDetails()
-    {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_QUALIFICATIONDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            customDialogLoadingProgressBar.dismiss();
-
-                            //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if(jsonArray.length()>0)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                                if(!jsonObject.getBoolean("error"))
-                                {
-                                    //qualificationDetailsId = jsonObject.getInt("QualificationDetailsId");
-                                    checkIfEmpty(textView_highestQualificationLevel, jsonObject.getString("QualificationLevelName"));
-                                    checkIfEmpty(textView_highestQualification, jsonObject.getString("Qualification"));
-                                    checkIfEmpty(textView_nameOfInstitute, jsonObject.getString("Sch_Uni"));
-                                    checkIfEmpty(textView_percentage, jsonObject.getString("Percentage"));
-                                    checkIfEmpty(textView_passingYear, jsonObject.getString("PassingYearString"));
-
-                                    /*textView_highestQualificationLevel.setText(jsonObject.getString(""));
-                                    textView_highestQualification.setText(jsonObject.getString(""));
-                                    textView_nameOfInstitute.setText(jsonObject.getString(""));
-                                    textView_percentage.setText(jsonObject.getString("")+" %");
-                                    textView_passingYear.setText(jsonObject.getString(""));*/
-
-
-                                }
-
-
-
-                            }
-                            else
-                            {
-
-                                customDialogLoadingProgressBar.dismiss();
-                                //Toast.makeText(EditProfileActivity.this,"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
-                                customDialogLoadingProgressBar.dismiss();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            customDialogLoadingProgressBar.dismiss();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EditProfileActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-                        customDialogLoadingProgressBar.dismiss();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-
-    }
-
-
-    void getProfessionalDetails()
-    {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_PROFESSIONALDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            customDialogLoadingProgressBar.dismiss();
-
-                            //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if(jsonArray.length()>0)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                                if(!jsonObject.getBoolean("error"))
-                                {
-                                    //professionalDetailsId = jsonObject.getInt("ProfessionalDetailsId");
-
-                                    String currentService = "";
-                                    if(jsonObject.getString("ServiceTypeId").equals("1"))
-                                    {
-                                        currentService = getResources().getString(R.string.govt_job);
-
-                                    }
-                                    else
-                                    {
-                                        currentService = getResources().getString(R.string.private_job);
-                                    }
-
-                                    checkIfEmpty(textView_currentService, currentService);
-                                    checkIfEmpty(textView_designation, jsonObject.getString("DesignationName"));
-                                    checkIfEmpty(textView_experience, jsonObject.getString("ExperienceInYears"));
-                                    checkIfEmpty(textView_annualIncome, jsonObject.getString("SalaryPackageName"));
-
-
-
-
-                                    //editText_occupation.setText(jsonObject.getString("OccupationName"));
-
-
-
-
-
-
-                                }
-
-
-
-                            }
-                            else
-                            {
-
-                                customDialogLoadingProgressBar.dismiss();
-                                //Toast.makeText(EditProfileActivity.this,"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EditProfileActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-    }
-
-
-
-    void getFamilyDetails() {
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_FAMILYDETAILS + "UserId=" + userModel.getUserId() + "&Language=" + userModel.getLanguage(),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-
-                            customDialogLoadingProgressBar.dismiss();
-
-                            //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            if (jsonArray.length() > 0) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-
-                                if (!jsonObject.getBoolean("error")) {
-                                    //familyDetailsId = jsonObject.getInt("FamilyDetailsId");
-
-
-                                    //checkBox_fatherIsAlive.setChecked(jsonObject.getString("IsAliveFather").equals("1"));
-
-
-                                    checkIfEmpty(textView_fatherName, jsonObject.getString("FullnameFather"));
-                                    checkIfEmpty(textView_fatherOccupation, jsonObject.getString("OccupationNameFather"));
-                                    checkIfEmpty(textView_motherName, jsonObject.getString("FullnameMother"));
-                                    checkIfEmpty(textView_motherOccupation, jsonObject.getString("OccupationNameMother"));
-
-
-
-                                    //checkBox_motherIsAlive.setChecked(jsonObject.getString("IsAliveMother").equals("1"));
-
-                                    //editText_motherAnnualIncome.setText(jsonObject.getString("AnnualIncomeMother"));
-                                    //   editText_familyIncome.setText(jsonObject.getString("SalaryPackageName"));
-                                    //textView_familyIncome.setText(jsonObject.getString("SalaryPackageId"));
-
-
-
-
-                                }
-
-                            } else {
-
-                                customDialogLoadingProgressBar.dismiss();
-                                //Toast.makeText(EditProfileActivity.this, " Please enter your details! ", Toast.LENGTH_SHORT).show();
-                            }
-
-
-                        }catch(
-                                JSONException e)
-
-                        {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //   Toast.makeText(getContext(),"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
-                        Toast.makeText(EditProfileActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-                        Log.e("Error", error.toString());
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-
-
-    }
-
 
     private void checkIfEmpty(TextView textView, String value) {
 
@@ -1045,12 +606,7 @@ public class EditProfileActivity extends AppCompatActivity {
             if (params[0].equals("getDetails"))
             {
                 getProfilePic();
-                getBasicDetails();
-                getReligiousDetails();
-                getPersonalDetails();
-                getQualificationDetails();
-                getProfessionalDetails();
-                getFamilyDetails();
+
 
             }
             else if(params[0].equals("InsertProfilePic"))

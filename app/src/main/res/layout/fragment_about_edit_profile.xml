@@ -11,15 +11,1020 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+
+                    >
+
+
+                    <!--Basic Details-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout_basicDetails"
+                            android:orientation="vertical"
+                            android:paddingStart="13dp"
+                            android:paddingTop="17dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="17dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:padding="0dp"
+                                    android:src="@drawable/ic_action_profile"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="@string/basic_details"
+                                    android:textColor="@color/quantum_bluegrey800"
+                                    android:textSize="17sp" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_action_edit"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/name"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_name"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/birthdate"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_birthdate"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/mobile_"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_mobileNo"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/_email"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_emailId"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/country"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_country"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/_state"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_state"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/_city"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_city"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/village"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_village"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/address_"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_address"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/_postal_code"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_postalCode"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <!--Religious Details-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout_religiousDetails"
+                            android:orientation="vertical"
+                            android:paddingStart="13dp"
+                            android:paddingTop="17dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="17dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:padding="1dp"
+                                    android:src="@drawable/ic_moon"
+                                    android:rotation="60"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="@string/religious_details"
+                                    android:textColor="@color/quantum_bluegrey800"
+                                    android:textSize="17sp" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_action_edit"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/religion"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_religion"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/caste"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_caste"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/gothram"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_gothram"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/mother_tongue"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_motherToungue"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <!--Personal Details-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout_personalDetails"
+                            android:orientation="vertical"
+                            android:paddingStart="13dp"
+                            android:paddingTop="17dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="17dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:padding="1dp"
+                                    android:src="@drawable/ic_action_person"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="@string/personalDetails"
+                                    android:textColor="@color/quantum_bluegrey800"
+                                    android:textSize="17sp" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_action_edit"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/height"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_height"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/weight"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_weight"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/colour"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_colour"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/marital_status"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_maritalStatus"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/lives_with_family"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_livesWithFamily"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <!--Education Details-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout_qualificationDetails"
+                            android:orientation="vertical"
+                            android:paddingStart="13dp"
+                            android:paddingTop="17dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="17dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:padding="0dp"
+                                    android:src="@drawable/education1"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="@string/education_details"
+                                    android:textColor="@color/quantum_bluegrey800"
+                                    android:textSize="17sp" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_action_edit"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/highest_education_level"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_highestQualificationLevel"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/highest_education"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_highestQualification"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/institue_university"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_nameOfInstitute"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/percentage"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_percentage"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/passing_year"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_passingYear"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <!--Professional Details-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout_professionalDetails"
+                            android:orientation="vertical"
+                            android:paddingStart="13dp"
+                            android:paddingTop="17dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="17dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:padding="1dp"
+                                    android:src="@drawable/ic_business_24"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="@string/professional_details"
+                                    android:textColor="@color/quantum_bluegrey800"
+                                    android:textSize="17sp" />
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_action_edit"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/current_service"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_currentService"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/designation"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_designation"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/experience"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_experience"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/annual_income"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_annualIncome"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <!--Family Details-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="30dp"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/linearLayout_familyDetails"
+                            android:orientation="vertical"
+                            android:paddingStart="13dp"
+                            android:paddingTop="17dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="17dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginStart="10dp"
+                                    android:padding="1dp"
+                                    android:src="@drawable/family5"
+                                    android:tint="@color/quantum_bluegrey900"
+                                    />
+
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_weight="1"
+                                    android:ellipsize="end"
+                                    android:gravity="center_vertical"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:text="@string/family_details"
+                                    android:textColor="@color/quantum_bluegrey800"
+                                    android:textSize="17sp" />
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:padding="2dp"
+                                    android:src="@drawable/ic_action_edit"
+                                    android:tint="@color/quantum_bluegrey800" />
+
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/father_name"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_fatherName"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/_occupation_father"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_fatherOccupation"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/annual_income_father"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_fatherIncome"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/mother_name"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_motherName"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/occupation_mother"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_motherOccupation"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                style="@style/FieldName_TextView"
+                                android:text="@string/annual_income_mother"
+                                />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView_motherIncome"
+                                style="@style/FieldValue_TextView"
+                                android:text="@string/not_filled"
+                                />
+
+
+
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
-            <!--Basic Details-->
+            &lt;!&ndash;Basic Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,7 +1118,7 @@
                         android:id="@+id/textView_gender"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -166,7 +1171,7 @@
                         android:id="@+id/textView_motherTongue"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -209,7 +1214,7 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!--Birth Details-->
+            &lt;!&ndash;Birth Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -290,7 +1295,7 @@
                         android:id="@+id/textView_birthdate"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -323,7 +1328,7 @@
                         android:id="@+id/textView_birthTimeType"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -339,7 +1344,7 @@
                         android:id="@+id/textView_birthPlace"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -355,7 +1360,7 @@
                         android:id="@+id/textView_birthCountryName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -371,7 +1376,7 @@
                         android:id="@+id/textView_birthStateName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -387,7 +1392,7 @@
                         android:id="@+id/textView_birthCityName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -395,7 +1400,7 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!--Religious Details-->
+            &lt;!&ndash;Religious Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -472,7 +1477,7 @@
                         android:layout_height="wrap_content"
                         style="@style/FieldValue_TextView"
                         android:id="@+id/textView_religion"
-                         />
+                        />
 
 
                     <TextView
@@ -489,7 +1494,7 @@
                         android:id="@+id/textView_caste"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -507,7 +1512,7 @@
                         android:id="@+id/textView_subCaste"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -523,7 +1528,7 @@
                         android:id="@+id/textView_gothram"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -541,7 +1546,7 @@
                         android:id="@+id/textView_motherToungue"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -550,7 +1555,7 @@
 
 
 
-            <!--Permanent Address Details-->
+            &lt;!&ndash;Permanent Address Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -630,7 +1635,7 @@
                         android:id="@+id/textView_permanentCountryName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -647,7 +1652,7 @@
                         android:id="@+id/textView_permanentStateName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -663,7 +1668,7 @@
                         android:id="@+id/textView_permanentCityName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -679,7 +1684,7 @@
                         android:id="@+id/textView_permanentVillage"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -695,7 +1700,7 @@
                         android:id="@+id/textView_permanentAddress"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -711,7 +1716,7 @@
                         android:id="@+id/textView_permanentPostalCode"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -720,7 +1725,7 @@
 
 
 
-            <!--Current Address Details-->
+            &lt;!&ndash;Current Address Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -800,7 +1805,7 @@
                         android:id="@+id/textView_currentCountryName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -817,7 +1822,7 @@
                         android:id="@+id/textView_currentStateName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -833,7 +1838,7 @@
                         android:id="@+id/textView_currentCityName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -849,7 +1854,7 @@
                         android:id="@+id/textView_currentVillage"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -865,7 +1870,7 @@
                         android:id="@+id/textView_currentAddress"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -881,7 +1886,7 @@
                         android:id="@+id/textView_currentPostalCode"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -890,7 +1895,7 @@
 
 
 
-            <!--Personal Details-->
+            &lt;!&ndash;Personal Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -967,7 +1972,7 @@
                         android:id="@+id/textView_height"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -984,7 +1989,7 @@
                         android:id="@+id/textView_weight"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1002,7 +2007,7 @@
                         android:id="@+id/textView_colour"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1019,7 +2024,7 @@
                         android:id="@+id/textView_maritalStatus"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1051,7 +2056,7 @@
                         android:id="@+id/textView_familyType"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1067,7 +2072,7 @@
                         android:id="@+id/textView_familyValues"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1083,7 +2088,7 @@
                         android:id="@+id/textView_diet"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1100,7 +2105,7 @@
                         android:id="@+id/textView_disability"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1117,7 +2122,7 @@
                         android:id="@+id/textView_disabilityType"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1136,7 +2141,7 @@
                         android:id="@+id/textView_livesWithFamily"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -1146,7 +2151,7 @@
 
 
 
-            <!--Highest Qualification Details-->
+            &lt;!&ndash;Highest Qualification Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1224,7 +2229,7 @@
                         android:id="@+id/textView_qualificationLevel"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1241,7 +2246,7 @@
                         android:id="@+id/textView_qualification"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1259,7 +2264,7 @@
                         android:id="@+id/textView_nameOfInstitute"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1275,7 +2280,7 @@
                         android:id="@+id/textView_percentage"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1293,7 +2298,7 @@
                         android:id="@+id/textView_passingYear"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -1302,7 +2307,7 @@
 
 
 
-            <!--Professional Details-->
+            &lt;!&ndash;Professional Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1379,7 +2384,7 @@
                         android:id="@+id/textView_currentService"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1396,7 +2401,7 @@
                         android:id="@+id/textView_companyName"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1414,7 +2419,7 @@
                         android:id="@+id/textView_occupation"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1431,7 +2436,7 @@
                         android:id="@+id/textView_nameOfDepartment"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1447,7 +2452,7 @@
                         android:id="@+id/textView_designation"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1463,7 +2468,7 @@
                         android:id="@+id/textView_experience"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1479,7 +2484,7 @@
                         android:id="@+id/textView_annualIncome"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -1495,7 +2500,7 @@
                         android:id="@+id/textView_workingAddress"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1512,7 +2517,7 @@
                         android:id="@+id/textView_workingCountry"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1529,7 +2534,7 @@
                         android:id="@+id/textView_workingState"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1548,7 +2553,7 @@
                         android:id="@+id/textView_workingCity"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                 </LinearLayout>
@@ -1557,7 +2562,7 @@
 
 
 
-            <!--Other Details-->
+            &lt;!&ndash;Other Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1635,7 +2640,7 @@
                         android:id="@+id/textView_hobby"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
                     <TextView
@@ -1651,7 +2656,7 @@
                         android:id="@+id/textView_socialContribution"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                         />
+                        />
 
 
 
@@ -1665,7 +2670,7 @@
 
 
 
-            <!--Language Details-->
+            &lt;!&ndash;Language Details&ndash;&gt;
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1741,7 +2746,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </ScrollView>
 

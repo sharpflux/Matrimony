@@ -119,7 +119,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         tabLayout_details.setTabGravity(TabLayout.GRAVITY_FILL);
         final ProfileTabLayoutAdapter profileTabLayoutAdapter = new ProfileTabLayoutAdapter(
-                this,getSupportFragmentManager(),tabLayout_details.getTabCount(), userId);
+                this,getSupportFragmentManager(),tabLayout_details.getTabCount(), userId,"ViewDetails");
         viewPager_details.setAdapter(profileTabLayoutAdapter);
 
 

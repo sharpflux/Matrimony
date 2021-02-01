@@ -1,6 +1,7 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,6 +75,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
 
     private Bundle bundle;
     private String userId;
+    private Context context;
 
     public ViewFamilyDetailsFragment() {
         // Required empty public constructor
@@ -99,6 +102,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
         bundle = this.getArguments();
         userId = bundle.getString("userId");
 
+        context = getContext();
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
@@ -187,13 +191,17 @@ public class ViewFamilyDetailsFragment extends Fragment {
 
         value = value.trim();
 
-        if(value.isEmpty() || value.equals("0") || value.equals(""))
+        if((textView.getText().toString().equals("Not Filled") ) && value.isEmpty() || value.equals("0") || value.equals(""))
         {
             textView.setText(getResources().getString(R.string.not_filled));
+            textView.setTextColor(ContextCompat.getColor(context, R.color.red_btn_bg_color));
+
         }
         else
         {
             textView.setText(value);
+            textView.setTextColor(ContextCompat.getColor(context, R.color.quantum_grey700));
+
         }
 
     }

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"> <!--Theme.AppCompat.Light.DarkActionBar-->
@@ -43,6 +43,30 @@
     </style>
 
 
+    <style name="FieldName_TextView">
+
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="maxLines">1</item>
+        <item name="singleLine">true</item>
+        <item name="android:textColor">@color/quantum_bluegrey900</item>
+        <item name="android:textSize">13sp</item>
+
+        <item name="android:fontWeight" tools:targetApi="o">900</item>
+
+    </style>
+
+    <style name="FieldValue_TextView">
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="maxLines">2</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:textColor">@color/quantum_grey700</item>
+        <item name="android:textSize">13sp</item>
+
+
+    </style>
     <style name="NormalLeft_TextView">
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginTop">8dp</item>

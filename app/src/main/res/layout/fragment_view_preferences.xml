@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F5F5F5">
 
@@ -9,19 +9,372 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="wrap_content">
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout_preferences">
 
 
 
-            <!--Father Details-->
+
+
+            <!--Desired Partner Details-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout_personalDetails"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="1dp"
+                            android:src="@drawable/ic_action_person"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/desired_partner"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/looking_for"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_lookingFor"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/height_should_be_between"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_height"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+
+
+                        android:text="@string/age_should_be_between"
+
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_age"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/colour"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_colour"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/marital_status"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_maritalStatus"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/family_status"
+                        android:visibility="gone"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_familyStatus"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        android:visibility="gone"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/family_type"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_familyType"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/family_values"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_familyValues"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/diet"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_diet"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!--Religious Details-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout_religiousDetails"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="1dp"
+                            android:src="@drawable/ic_moon"
+                            android:rotation="60"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/religious_details"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/religion"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_religion"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/caste"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_caste"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/sub_caste"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_subCaste"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!--Highest Qualification Details-->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,8 +407,7 @@
                             android:layout_height="20dp"
                             android:layout_marginStart="10dp"
                             android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
+                            android:src="@drawable/education1"
                             android:tint="@color/quantum_bluegrey800" />
 
 
@@ -70,7 +422,7 @@
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:text="@string/father_information"
+                            android:text="@string/qualification_details"
                             android:textColor="@color/quantum_bluegrey800"
                             android:textSize="17sp" />
                         <ImageView
@@ -90,69 +442,162 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/FieldName_TextView"
-                        android:text="@string/is_alive"
+                        android:text="@string/highest_education_level"
                         />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_isFatherAlive"
+                        android:id="@+id/textView_qualificationLevel"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
-
+                        />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/FieldName_TextView"
-                        android:text="@string/name"
+
+                        android:text="@string/highest_qualification"
                         />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherName"
+                        android:id="@+id/textView_qualification"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
+                        />
+
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!--Occupation Details-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout_professionalDetails"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="1dp"
+                            android:src="@drawable/ic_business_24"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/occupation_details"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/FieldName_TextView"
-                        android:text="@string/mobile_"
+                        android:text="@string/service_type"
                         />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherMobileNo"
+                        android:id="@+id/textView_serviceType"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
+                        />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/FieldName_TextView"
-                        android:text="@string/qualification"
+                        android:text="@string/working_in"
                         />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherQualification"
+                        android:id="@+id/textView_workingIn"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/current_service"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_currentService"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+
 
 
                     <TextView
@@ -166,27 +611,252 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherOccupation"
+                        android:id="@+id/textView_occupation"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
+                        />
+
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@style/FieldName_TextView"
-                        android:text="@string/annual_income_father"
+                        android:text="@string/expected_individual_income"
                         />
 
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherAnnualIncome"
+                        android:id="@+id/textView_expectedIndividualIncome"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/expected_family_income"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_expectedFamilyIncome"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!--Working Address Details-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout_permanentAddressDetails"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="0dp"
+                            android:src="@drawable/ic_action_profile"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/working_location"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
+
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/working_country"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_workingCountry"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/working_state"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_workingState"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/FieldName_TextView"
+                        android:text="@string/working_city"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_workingCity"
+                        style="@style/FieldValue_TextView"
+                        android:text="@string/not_filled"
+                        />
+
+
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <!--Residential Address Details-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout_currentAddressDetails"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="13dp"
+                    android:paddingBottom="17dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="10dp"
+                            android:padding="0dp"
+                            android:src="@drawable/ic_action_profile"
+                            android:tint="@color/quantum_bluegrey800" />
+
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/residential_location"
+                            android:textColor="@color/quantum_bluegrey800"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginEnd="0dp"
+                            android:padding="2dp"
+                            android:src="@drawable/ic_action_edit"
+                            android:tint="@color/quantum_bluegrey800"
+                            android:visibility="gone"/>
+
+
+                    </LinearLayout>
+
+
+
+
 
 
                     <TextView
@@ -195,17 +865,13 @@
                         style="@style/FieldName_TextView"
                         android:text="@string/country"
                         />
-
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherCountry"
+                        android:id="@+id/textView_residentialCountry"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
-
-
+                        />
 
 
                     <TextView
@@ -219,14 +885,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherState"
+                        android:id="@+id/textView_residentialState"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
-
-
-
-
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -239,31 +901,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherCity"
+                        android:id="@+id/textView_residentialCity"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-                       />
-
-
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/address_"
                         />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_fatherAddress"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
 
 
 
@@ -273,848 +914,6 @@
             </androidx.cardview.widget.CardView>
 
 
-            <!--Mother   Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_motherDetails"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
-                            android:tint="@color/quantum_bluegrey800" />
-
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/mother_information"
-                            android:textColor="@color/quantum_bluegrey800"
-                            android:textSize="17sp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginEnd="0dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800"
-                            android:visibility="gone"/>
-
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/is_alive"
-                        />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_isMotherAlive"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/name" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_motherName"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/mobile_"
-                        />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_motherMobileNo"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/qualification"
-                        />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_motherQualification"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/occupation_"
-                        />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_motherOccupationType"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/occupation_" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_motherOccupation"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <!-- No of Siblings -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        >
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/no_of_siblings"
-                            android:textColor="@color/text_black"
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:id="@+id/textView_noOfSiblings"
-                            style="@style/FieldValue_TextView"
-                            android:text="@string/not_filled"
-                            />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <!--Sibling   Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_siblingDetails"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
-                            android:tint="@color/quantum_bluegrey800" />
-
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/siblings_details"
-                            android:textColor="@color/quantum_bluegrey800"
-                            android:textSize="17sp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginEnd="0dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800"
-                            android:visibility="gone"/>
-
-
-                    </LinearLayout>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recyclerView_siblingDetails"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-            <!--Farm   Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_FarmDetails"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
-                            android:tint="@color/quantum_bluegrey800" />
-
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/farm_details"
-                            android:textColor="@color/quantum_bluegrey800"
-                            android:textSize="17sp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginEnd="0dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800"
-                            android:visibility="gone"/>
-
-
-                    </LinearLayout>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recyclerView_farmDetails"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-            <!--Property Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_propertyDetails"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
-                            android:tint="@color/quantum_bluegrey800" />
-
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/property_details"
-                            android:textColor="@color/quantum_bluegrey800"
-                            android:textSize="17sp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginEnd="0dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800"
-                            android:visibility="gone"/>
-
-
-                    </LinearLayout>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recyclerView_propertyDetails"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-            <!-- No of Mama -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    >
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/no_of_mama"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/textView_noOfMama"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-                </LinearLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-            <!--Mama Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_mamaDetails"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
-                            android:tint="@color/quantum_bluegrey800" />
-
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/mama_details"
-                            android:textColor="@color/quantum_bluegrey800"
-                            android:textSize="17sp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginEnd="0dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800"
-                            android:visibility="gone"/>
-
-
-                    </LinearLayout>
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/recyclerView_mamaDetails"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-            <!--Relative Details-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="2dp"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_relativeDetails"
-                    android:orientation="vertical"
-                    android:paddingStart="13dp"
-                    android:paddingTop="17dp"
-                    android:paddingEnd="13dp"
-                    android:paddingBottom="17dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="10dp"
-                            android:padding="1dp"
-                            android:src="@drawable/ic_moon"
-                            android:rotation="60"
-                            android:tint="@color/quantum_bluegrey800" />
-
-
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"
-                            android:ellipsize="end"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/relative_information"
-                            android:textColor="@color/quantum_bluegrey800"
-                            android:textSize="17sp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginEnd="0dp"
-                            android:padding="2dp"
-                            android:src="@drawable/ic_action_edit"
-                            android:tint="@color/quantum_bluegrey800"
-                            android:visibility="gone"/>
-
-
-                    </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/relative1"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_relative1"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/relative2"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_relative2"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/relative3"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_relative3"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled"
-                       />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/FieldName_TextView"
-                        android:text="@string/relative4"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView_relative4"
-                        style="@style/FieldValue_TextView"
-                        android:text="@string/not_filled" />
-
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-                &lt;!&ndash; No of sibling &ndash;&gt;
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingTop="0dp"
-                    android:paddingBottom="5dp"
-                    android:layout_gravity="center"
-                    >
-                    &lt;!&ndash;Sibling Details&ndash;&gt;
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="10dp"
-                        android:layout_gravity="center"
-                        android:background="@color/white"
-                        android:layout_marginTop="20dp"
-                        >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="10dp"
-                            >
-
-                            <ImageView
-                                android:layout_width="35dp"
-                                android:layout_height="35dp"
-                                android:padding="10dp"
-                                android:background="@drawable/circle_image_border"
-                                android:layout_marginStart="10dp"
-                                android:src="@drawable/quote1"
-                                android:tint="@color/text_gray"
-
-                                />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView_noOfSiblings"
-                                style="@style/Bold_TextView"
-                                android:text="@string/siblings_details"
-                                android:textSize="15sp"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:orientation="horizontal"
-                            android:background="@drawable/shadow_down"
-                            />
-
-
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="10dp"
-                        >
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalLeft_TextView"
-                            android:text="No. of siblings"
-                            />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            style="@style/NormalRight_TextView"
-                            android:text="1"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
--->
 
 
 
@@ -1123,8 +922,75 @@
     </ScrollView>
 
 
-
-
-
 </RelativeLayout>
 
+
+    <!--
+
+                &lt;!&ndash;Other Details&ndash;&gt;
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="13dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="13dp"
+                        android:paddingBottom="17dp">
+
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/FieldName_TextView"
+                            android:text="@string/looking_for"
+                            />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_lookingFor"
+                            style="@style/FieldValue_TextView"
+                            android:text="@string/not_filled"
+                            />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/FieldName_TextView"
+                            android:text="@string/social_contributions"
+                            />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView_socialContribution"
+                            style="@style/FieldValue_TextView"
+                            android:text="@string/not_filled"
+                            />
+
+
+
+
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+
+    -->

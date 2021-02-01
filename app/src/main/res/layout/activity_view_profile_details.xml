@@ -55,7 +55,7 @@
         android:textSize="20sp"
         android:fontFamily="@font/arima_madurai_medium"
         android:layout_marginBottom="25dp"
-        android:text="Bruno"
+        android:text="@string/app_name"
 
         app:layout_constraintBottom_toBottomOf="@id/toolbarImageView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,10 +105,10 @@
                 />
 
 
-<!--            <com.google.android.material.tabs.TabItem
+            <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/preferences"/>-->
+                android:text="@string/preferences"/>
 
         </com.google.android.material.tabs.TabLayout>
 
