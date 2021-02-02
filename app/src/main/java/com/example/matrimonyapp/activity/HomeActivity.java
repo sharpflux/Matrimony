@@ -81,6 +81,7 @@ import com.google.gson.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,9 +133,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     SQLiteSetPreference sqLiteSetPreference;
 
-    static String gender, stateIds, countryIds, cityIds, maritalStatusIds, familyTypeIds, familyValueIds,
+    static String gender, maritalStatusIds, familyTypeIds, familyValueIds,
             familyIncomeIds, individualIncomeIds, qualificationLevelIds, qualificationIds, dietIds, colorIds,
-            occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax;
+            occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax,
+            currentService, serviceType, workingIn, residentialCountryIds, residentialStateIds, residentialCityIds, workingCountryIds, workingStateIds, workingCityIds ;
+
+
 
 
     FirebaseAuth firebaseAuth;
@@ -186,7 +190,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
 
-        fetchValues();
+        //fetchValues();
 
         timelineAdapter = new TimelineAdapter(this,timelineModelList, getWindowManager().getDefaultDisplay());
         recyclerView_timeline.setAdapter(timelineAdapter);
@@ -368,7 +372,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         swipeRefresLayout.setColorSchemeResources(R.color.project_color);
 
-       // register("","","");
+       AsyncTaskRunner runner = new AsyncTaskRunner();
+       runner.execute("GetDetails");
 
     }
 
@@ -435,6 +440,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         }
 
     }
+/*
 
     private void fetchValues() {
 
@@ -517,6 +523,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         runner.execute("InsertDetails");
         return;
     }
+*/
 
 /*
     @Override
@@ -640,19 +647,13 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     }
 
 
-   /* public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.END);
-        return true;
 
-
-    }*/
 
     private void insertDetails() {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_FILTER,
+                URLs.URL_POST_GETPROFILES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -662,11 +663,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
                             Log.d("RESPONSE",response);
                             //converting response to json object
-                            JSONObject jsonObject = new JSONObject(response);
+                            //JSONObject jsonObject = new JSONObject(response);
                             arrayList_recentlyviewed.clear();
                             arrayList_dailyRecommendations.clear();
 
-                            JSONArray jsonArray = jsonObject.getJSONArray("Registrations");
+                            JSONArray jsonArray =new JSONArray(response);
 
                             if(jsonArray.length()>0)
                             {
@@ -732,30 +733,54 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                // params.put("UserId",userModel.getUserId());                 //1
-                params.put("PageIndex", "1");                               //2
-                params.put("PageSize", "100");                              //3
-                params.put("Gender", gender);                               //4
-                params.put("StateId", stateIds);                            //5
-                params.put("DistrictId", countryIds);                     //6
-                params.put("TalukasId", cityIds);                         //7
+                params.put("PageIndex :","1");
+                params.put("PageSize :","50");
+                params.put("UserId :",userModel.getUserId());
+
+
+/*
+                params.put("SetPreferenceId","0");
+                params.put("UserId",userModel.getUserId());
+
+                params.put("LookingFor", gender);
+                params.put("RelegionIds", religionIds);
+                params.put("CasteIds", casteIds);
+                params.put("SubCasteIds", subCasteIds);
+                params.put("ResidentialCountryIds", residentialCountryIds);
+                params.put("ResidentialStateIds", residentialStateIds);
+                params.put("ResidentialCityIds", residentialCityIds);
+                params.put("WorkingCountryIds", workingCountryIds);
+                params.put("WorkingStateIds", workingStateIds);
+                params.put("WorkingCityIds", workingCityIds);
+
+
                 params.put("AgeMin", ageMin);  //8
                 params.put("AgeMax", ageMax); //9
-                params.put("ReligionId", religionIds);                      //10
-                params.put("CasteId", casteIds);                            //11
-                params.put("SubCastId", subCasteIds);                       //12
-                params.put("HightestQulificationLevelIds", qualificationLevelIds);  //13
-                params.put("HightestQulificationIds", qualificationIds);    //14
-                params.put("MaritalStatusIds", maritalStatusIds);            //15
-                params.put("DietsIds", dietIds);                            //16
-                params.put("OccupationsIds", occupationIds);                //17
-                params.put("ExpectedFamilyIncome", familyIncomeIds);        //18
-                params.put("ExpectedIndividualIncome", individualIncomeIds);//19
-                params.put("FamilyType", familyTypeIds);                    //20
-                params.put("FamilyValue", familyValueIds);                  //21
-                params.put("Height", heightMin);//22
+                //12
+                params.put("HeightMin", heightMin);//22
                 params.put("HeightMax", heightMax);   //23
-                params.put("SkinColourName", colorIds);                     //24
+
+                params.put("QualificationLevelIds", qualificationLevelIds);  //13
+                params.put("QualificationIds", qualificationIds);    //14
+                params.put("ServiceType", serviceType);
+                params.put("WorkingIn", workingIn);
+                params.put("CurrentService", currentService);
+                params.put("OccupationIds", occupationIds);                //17
+
+                params.put("ExpectedFamilyIncomeIds", familyIncomeIds);        //18
+                params.put("ExpectedIndividualIncomeIds", individualIncomeIds);//19
+                params.put("FamilyTypeIds", familyTypeIds);                    //20
+                params.put("FamilyValuesIds", familyValueIds);                  //21
+                params.put("DietIds", dietIds);                            //16
+                params.put("ColorIds", colorIds);                     //24
+                params.put("MaritalStatusIds", maritalStatusIds);            //15
+
+
+
+*/
+
+
+
 
                 return params;
             }
@@ -776,11 +801,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
             if(params[0].equals("InsertDetails"))
             {
-                insertDetails();
+
             }
-            else if(params[0].equals("getDetails"))
+            if(params[0].equals("GetDetails"))
             {
-                getDetails();
+                insertDetails();
             }
 
 
@@ -821,10 +846,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     }
 
 
-    private void getDetails() {
 
 
 
-    }
 
 }

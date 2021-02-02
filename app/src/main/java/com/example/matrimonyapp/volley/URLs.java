@@ -74,8 +74,9 @@ public class URLs {
     public static final String URL_GET_MULTIPLEIMAGES           = MainURL+"";
 
 
+    public static final String URL_POST_GETPROFILES             = MainURL+"api/SetPreferenceNew/GetProfiles"; //api/RegistrationAPINew/SETPreferenceFilter
     public static final String URL_POST_FILTER                  = MainURL+"api/SetPreferenceNew/SetPreferenceGET"; //api/RegistrationAPINew/SETPreferenceFilter
-    public static final String URL_GET_FILTER                   = MainURL+"";
+    public static final String URL_POST_GETPREFERENCES                   = MainURL+"api/SetPreferenceNew/SavedPreferenceGET?";
 
 
     public static final String URL_GET_PROPERTYTYPE             = MainURL+"api/PersonalDetailsAPI/PropertyType?";

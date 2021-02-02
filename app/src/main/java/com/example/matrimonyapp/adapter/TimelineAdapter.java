@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,6 +53,10 @@ import com.example.matrimonyapp.modal.UsersConnectionModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
+import com.jackandphantom.androidlikebutton.AndroidLikeButton;
+import com.varunest.sparkbutton.SparkButton;
+import com.varunest.sparkbutton.SparkEventListener;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,6 +66,7 @@ import java.io.InterruptedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -146,14 +152,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 if(bool_favorite==false)
                 {
 
-                    holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
+                    //holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
 
                     //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
                     bool_favorite= true;
                 }
                 else
                 {
-                    holder.imageView_favorite.setImageResource(R.drawable.start1);
+                    //holder.imageView_favorite.setImageResource(R.drawable.start1);
                     bool_favorite = false;
                 }
 
@@ -337,6 +343,57 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         });
 
 
+
+        holder.imageView_interests.setEventListener(new SparkEventListener() {
+            @Override
+            public void onEvent(ImageView button, boolean buttonState) {
+
+            }
+
+            @Override
+            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
+                holder.imageView_doubleTapFav.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onEventAnimationStart(ImageView button, boolean buttonState) {
+                holder.imageView_doubleTapFav.setVisibility(View.VISIBLE);
+
+
+                holder.imageView_doubleTapFav.setActiveImage(R.drawable.red_heart);
+                holder.imageView_doubleTapFav.setInactiveImage(R.drawable.red_heart);
+                holder.imageView_doubleTapFav.setColors(ContextCompat.getColor(context, R.color.red_heart),ContextCompat.getColor(context, R.color.yellow_favorite));
+                holder.imageView_doubleTapFav.playAnimation();
+
+            }
+        });
+holder.imageView_favorite.setEventListener(new SparkEventListener() {
+            @Override
+            public void onEvent(ImageView button, boolean buttonState) {
+
+            }
+
+            @Override
+            public void onEventAnimationEnd(ImageView button, boolean buttonState) {
+                holder.imageView_doubleTapFav.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onEventAnimationStart(ImageView button, boolean buttonState) {
+                holder.imageView_doubleTapFav.setVisibility(View.VISIBLE);
+
+
+                holder.imageView_doubleTapFav.setActiveImage(R.drawable.starfilled);
+                holder.imageView_doubleTapFav.setInactiveImage(R.drawable.starfilled);
+                holder.imageView_doubleTapFav.setColors(ContextCompat.getColor(context, R.color.yellow_favorite),ContextCompat.getColor(context, R.color.green_dark));
+                holder.imageView_doubleTapFav.playAnimation();
+
+            }
+        });
+
+
     }
 
 
@@ -440,11 +497,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         public TextView textView_favorites;
         public TextView textView_interests;
         public ImageView imageView_profilePic;
-        public ImageView imageView_interests;
-        public ImageView imageView_favorite;
-        public ImageView imageView_doubleTapFav;
-        public ImageView imageView_reject;
-        LinearLayout linearLayout_cancel, linearLayout_favorites, linearLayout_message, linearLayout_interests;
+        public SparkButton imageView_interests;
+        public SparkButton imageView_favorite;
+        public SparkButton imageView_doubleTapFav;
+        public SparkButton imageView_reject;
+        RelativeLayout  linearLayout_favorites,  linearLayout_interests;
+        RelativeLayout linearLayout_cancel, linearLayout_message;
         public de.hdodenhof.circleimageview.CircleImageView circleImage_profilePic;
         public RelativeLayout relativeLayout;
 
@@ -472,7 +530,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             this.linearLayout_favorites = itemView.findViewById(R.id.linearLayout_favorites);
             this.linearLayout_message = itemView.findViewById(R.id.linearLayout_message);
             this.linearLayout_interests = itemView.findViewById(R.id.linearLayout_interests);
-            this.imageView_interests = itemView.findViewById(R.id.imageView_interests);
+            this.imageView_interests = itemView.findViewById(R.id.spark_button);
             this.textView_interests = itemView.findViewById(R.id.textView_interests);
             this.textView_favorites = itemView.findViewById(R.id.textView_favorites);
 

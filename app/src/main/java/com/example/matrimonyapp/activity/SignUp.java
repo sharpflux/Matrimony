@@ -131,7 +131,7 @@ public class SignUp extends AppCompatActivity {
 
                 if(editText_password.getText().toString().equals(editText_confirmPassword.getText().toString()))
                 {
-                    if(checkProfilePic() && checkRequiredFields(editText_fullName, editText_mobileNo, editText_birthdate, editText_password, editText_confirmPassword)) {
+                    if(checkRequiredFields(editText_fullName, editText_mobileNo, editText_birthdate, editText_password, editText_confirmPassword)) {
                         // verifyMobileNo();
                         AsyncTaskRunner runner = new AsyncTaskRunner();
                         runner.execute("verifyMobileNo");

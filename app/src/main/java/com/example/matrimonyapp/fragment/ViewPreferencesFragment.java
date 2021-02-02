@@ -36,6 +36,7 @@ import com.example.matrimonyapp.volley.VolleySingleton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -188,7 +189,7 @@ public class ViewPreferencesFragment extends Fragment {
             if (params[0].equals("InsertDetails")) {
                 //insertDetails();
             } else if (params[0].equals("getDetails")) {
-                //getDetails();
+                getDetails();
 
             }
 
@@ -225,10 +226,12 @@ public class ViewPreferencesFragment extends Fragment {
     }
 
 
+
+
     void getDetails() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_BASICDETAILS + "UserId=" +userId+ "&Language=" + userModel.getLanguage(),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_GETPREFERENCES,  //+ "&Language=" + userModel.getLanguage()
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -238,21 +241,50 @@ public class ViewPreferencesFragment extends Fragment {
                             customDialogLoadingProgressBar.dismiss();
 
                             //converting response to json object
-                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonObject = new JSONObject(response);
 
-                            if (jsonArray.length() > 0) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                            if (jsonObject.length()>0) {
 
-                                if (!jsonObject.getBoolean("error")) {
-
-
-                                    checkIfEmpty(textView_age, jsonObject.getString("Age"));
+                                JSONObject jsonParent = jsonObject.getJSONObject("Root").getJSONObject("Parent");
 
 
+                                textView_age.setText(jsonParent.getString("AgeMin")
+                                        + " - "+jsonParent.getString("AgeMax")+" "
+                                        +getContext().getResources().getString(R.string.years));
+
+                                textView_height.setText(jsonParent.getString("HeightMin")
+                                        + " - "+jsonParent.getString("HeightMax")+" "
+                                        +getContext().getResources().getString(R.string.ft));
+
+
+                                checkIfEmpty(textView_serviceType, jsonParent.getString("ServiceType"));
+                                checkIfEmpty(textView_workingIn, jsonParent.getString("WorkingIn"));
+                                checkIfEmpty(textView_currentService, jsonParent.getString("CurrentService"));
 
 
 
-                                }
+
+                                getJsonData(jsonParent,"Relegions", "Relegions","ReligionId", "ReligionName", textView_religion);
+                                getJsonData(jsonParent,"Caste","Caste","CasteId", "CasteName", textView_caste);
+                                getJsonData(jsonParent,"SubCaste", "SubCaste","SubCasteId", "SubCasteName", textView_subCaste);
+                                getJsonData(jsonParent,"ResidentialCountry", "ResidentialCountry","ID", "Name", textView_residentialCountry);
+                                getJsonData(jsonParent,"ResidentialState", "ResidentialState", "ID", "Name", textView_residentialState);
+                                getJsonData(jsonParent,"ResidentialCity", "CityMaster","ID", "Name", textView_residentialCity);
+                                getJsonData(jsonParent,"WorkingCountry", "WorkingCountry", "ID", "Name", textView_workingCountry);
+                                getJsonData(jsonParent,"WorkingStateId", "WorkingStateId", "ID", "Name", textView_workingState);
+                                getJsonData(jsonParent,"WorkingCity", "WorkingCity", "ID", "Name", textView_workingCity);
+                                getJsonData(jsonParent,"QualificationLevel", "QualificationLevel", "QualificationLevelId", "QualificationLevelName", textView_qualificationLevel);
+                                getJsonData(jsonParent,"Qualification", "Qualification", "QualificationId", "Qualification", textView_qualification);
+                                getJsonData(jsonParent,"Occupation", "Occupation", "OccupationId", "OccupationName", textView_occupation);
+                                getJsonData(jsonParent,"ExpectedIndividualIncome", "ExpectedIndividualIncome", "SalaryPackageId", "SalaryPackageName", textView_expectedIndividualIncome);
+                                getJsonData(jsonParent,"ExpectedFamilyIncome", "ExpectedFamilyIncome", "SalaryPackageId", "SalaryPackageName", textView_expectedFamilyIncome);
+                                getJsonData(jsonParent,"FamilyType", "FamilyType", "FamilyTypeId", "FamilyTypeName", textView_familyType);
+                                getJsonData(jsonParent,"FamilyValues", "FamilyValues", "FamilyValuesId", "FamilyValuesName", textView_familyValues);
+                                getJsonData(jsonParent,"Diet", "Diet", "DietId", "DietName", textView_diet);
+                                getJsonData(jsonParent,"MaritalStatus", "MaritalStatus", "MaritalStatusId", "MaritalStatusName", textView_maritalStatus);
+
+
+
 
                             }
                         } catch (JSONException e) {
@@ -271,6 +303,8 @@ public class ViewPreferencesFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("UserId",userModel.getUserId());
+
                 return params;
             }
         };
@@ -280,9 +314,56 @@ public class ViewPreferencesFragment extends Fragment {
 
     }
 
+    private void getJsonData(JSONObject jsonObject, String parentKeyName, String childKeyName, String columnId, String columnName, TextView textView) {
+
+        try {
+            textView.setText("");
+            String names="";
+
+            if(jsonObject.has(parentKeyName))
+            {
+
+                Object object = new JSONTokener(jsonObject.getJSONObject(parentKeyName).getString(childKeyName)).nextValue();
 
 
 
+                if (object instanceof JSONArray)
+                {
+                    JSONArray jsonArray = new JSONArray(jsonObject.getJSONObject(parentKeyName).getString(childKeyName));
+                    for (int i=0; i<jsonArray.length(); i++)
+                    {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        names = names + jsonObject1.getString(columnName)+", ";
+                    }
+                    names = names.substring(0,names.length()-1);
+                    //stringIds = stringIds.substring(0,stringIds.length()-1);
+                }
+
+                else if(object instanceof JSONObject)
+                {
+                    JSONObject json = new JSONObject(jsonObject.getJSONObject(parentKeyName).getString(childKeyName));
+
+                    names = json.getString(columnName);
+
+                }
+
+
+                textView.setText(names);
+
+
+            }
+
+
+
+
+
+
+        } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+        }
+
+
+    }
 
 
 
