@@ -154,6 +154,9 @@ dependencies {
     compile files('libs/signalr-client-sdk-android.jar')
 
     implementation 'com.sloydev:collapsingavatartoolbar:1.0.0'
+    implementation 'com.github.varunest:sparkbutton:1.0.6'
+
+    implementation 'com.jackandphantom.android:androidlikebutton:1.2.0'
 
 }
 
