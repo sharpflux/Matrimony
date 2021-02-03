@@ -58,7 +58,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
     private String fullName, gender, birthdate, mobileNo,
             emailId, age, password, language="en";
 
-
+//
     AlertDialog.Builder builder;
 
     private CountDownTimer countDownTimer;
