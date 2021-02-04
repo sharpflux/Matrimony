@@ -267,13 +267,13 @@ public class QualificationDetailsFragment extends Fragment {
                 insertTask.execute("insertDetails");
 
 
-                ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
+              /*  ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
                 //professionalDetailsFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, professionalDetailsFragment);
-                fragmentTransaction.commit() ;
+                fragmentTransaction.commit() ;*/
 
             }
         });

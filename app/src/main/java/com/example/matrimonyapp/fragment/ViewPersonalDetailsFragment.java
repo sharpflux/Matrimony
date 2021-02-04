@@ -590,7 +590,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
                             {
                                 //personalDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!" ,Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!" ,Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -765,7 +765,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
                             {
                                 //professionalDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

@@ -119,21 +119,21 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             public void onDoubleTaps() {
                 super.onDoubleTaps();
 
-                holder.imageView_doubleTapFav.setVisibility(View.VISIBLE);
+               /* holder.imageView_doubleTapFav.setVisibility(View.VISIBLE);
 
                 holder.imageView_doubleTapFav.postOnAnimationDelayed(new Runnable() {
                     @Override
                     public void run() {
                         holder.imageView_doubleTapFav.setVisibility(View.INVISIBLE);
                     }
-                },400);
+                },400);*/
 
             }
 
             @Override
             public void onSwipeRight() {
                 super.onSwipeRight();
-
+/*
                 Point size = new Point();
                 display.getSize(size);
 
@@ -142,31 +142,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 holder.relativeLayout.postOnAnimationDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        /*list.remove(position);
-                        notifyDataSetChanged();*/
+
                         holder.relativeLayout.animate().alpha(1f).setDuration(400).translationX(0);
                     }
                 },400);
 
 
-                if(bool_favorite==false)
-                {
-
-                    //holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
-
-                    //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
-                    bool_favorite= true;
-                }
-                else
-                {
-                    //holder.imageView_favorite.setImageResource(R.drawable.start1);
-                    bool_favorite = false;
-                }
+               */
 
 
-                /*
-                    contains Code to Add profile to Favorites
-                */
 
             }
 
@@ -174,7 +158,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             public void onSwipeLeft() {
                 super.onSwipeLeft();
 
-
+/*
                 Point size = new Point();
                 display.getSize(size);
 
@@ -186,7 +170,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                         list.remove(position);
                         notifyDataSetChanged();
                     }
-                },400);
+                },400);*/
 
                /* list.remove(position);
                 notifyDataSetChanged();
@@ -227,15 +211,11 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         holder.textView_userMaritalStatus.setText(list.get(position).getUserMaritalStatus());
         holder.textView_userReligion.setText(list.get(position).getUserReligion());
         holder.textView_userHeight.setText(list.get(position).getUserHeight()+" cms");
-       // holder.textView_userOccupation.setText(list.get(position).getUserOccupation());
-        //holder.textView_userName.setText(list.get(position).getUserName());
-        //holder.textView_userAge.setText(list.get(position).getUserAge());
-        //holder.textView_userQualification.setText(list.get(position).getUserQualification());
+
         holder.textView_userBio.setText(Html.fromHtml("<b>"+list.get(position).getUserName()+"</b>  "
                 +" "+list.get(position).getUserEmail()+" "));
 
-        //list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()
-        //holder.imageView_profilePic.setImageURI(list.get(position).getProfilePic());
+
         Glide.with(context)
                 .load(URLs.MainURL+list.get(position).getProfilePic())
                 .skipMemoryCache(true)
@@ -252,14 +232,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.color.quantum_grey100)
-               /// .override(Target.SIZE_ORIGINAL,LinearLayout.LayoutParams.MATCH_PARENT)
-              //  .centerCrop()
-                //.transition(DrawableTransitionOptions.withCrossFade(500))
-
                 .into(holder.imageView_profilePic);
 
 
-        //holder.circleImage_profilePic.setImageDrawable(holder.imageView_profilePic.getDrawable());
+
 
         holder.textView_userQualification.setText(list.get(position).getUserQualification());
 
@@ -281,7 +257,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         });
 
 
-        holder.linearLayout_message.setOnClickListener(new View.OnClickListener() {
+        holder.imageView_messages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -295,59 +271,42 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
             }
         });
 
-        holder.linearLayout_interests.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bool_like==false)
-                {
 
-                    AsyncTaskLoad runner = new AsyncTaskLoad();
-                    runner.execute(item.getUserId(),String.valueOf(UsersConnectionModel.INTERESTED),"0");
-                    //holder.imageView_interests.setImageResource(R.drawable.red_heart);
-                    holder.textView_favorites.setText(context.getResources().getString(R.string.cancel));
-                    //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
-                    bool_like = true;
-                }
-                else
-                {
-                    AsyncTaskLoad runner = new AsyncTaskLoad();
-                    runner.execute(item.getUserId(),"0", String.valueOf(UsersConnectionModel.INTERESTED));
-                    holder.textView_favorites.setText(context.getResources().getString(R.string.interests));
-                    //holder.imageView_interests.setImageResource(R.drawable.black_heart);
-                    bool_like = false;
-                }
-            }
-        });
 
-        holder.linearLayout_favorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (Integer.parseInt(list.get(position).getFavorites())>0)
+        {
 
-                if(bool_favorite==false)
-                {
-                    AsyncTaskLoad runner = new AsyncTaskLoad();
-                    runner.execute(item.getUserId(),String.valueOf(UsersConnectionModel.FAVORITE),"0");
-                    //holder.imageView_favorite.setImageResource(R.drawable.favoritefilled);
-                    holder.textView_favorites.setText(context.getResources().getString(R.string.cancel));
-                    //holder.imageView_like.setBackgroundResource(R.drawable.red_heart);
-                    bool_favorite = true;
-                }
-                else
-                {AsyncTaskLoad runner = new AsyncTaskLoad();
-                    runner.execute(item.getUserId(),"0",String.valueOf(UsersConnectionModel.FAVORITE));
-                    //holder.imageView_favorite.setImageResource(R.drawable.start1);
-                    holder.textView_favorites.setText(context.getResources().getString(R.string.favorite));
-                    bool_favorite = false;
-                }
-            }
-        });
+            holder.imageView_favorite.setChecked(true);
+        }
+        if (Integer.parseInt(list.get(position).getInterested())>0)
+        {
+            holder.imageView_interests.setChecked(true);
+        }
+        if (Integer.parseInt(list.get(position).getRejected())>0)
+        {
+            holder.relativeLayout.setVisibility(View.GONE);
+        }
+
+
+
 
 
 
         holder.imageView_interests.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
-
+                if(buttonState)
+                {
+                    if (Integer.parseInt(list.get(position).getInterested())==0) {
+                        AsyncTaskLoad runner = new AsyncTaskLoad();
+                        runner.execute(item.getUserId(), String.valueOf(UsersConnectionModel.INTERESTED), "0");
+                    }
+                }
+                else
+                {
+                    AsyncTaskLoad runner = new AsyncTaskLoad();
+                    runner.execute(item.getUserId(),"0", String.valueOf(UsersConnectionModel.INTERESTED));
+                }
             }
 
             @Override
@@ -371,7 +330,18 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 holder.imageView_favorite.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
-
+                if(buttonState)
+                {
+                    if (Integer.parseInt(list.get(position).getFavorites())==0) {
+                        AsyncTaskLoad runner = new AsyncTaskLoad();
+                        runner.execute(item.getUserId(), String.valueOf(UsersConnectionModel.FAVORITE), "0");
+                    }
+                }
+                else
+                {
+                    AsyncTaskLoad runner = new AsyncTaskLoad();
+                    runner.execute(item.getUserId(),"0",String.valueOf(UsersConnectionModel.FAVORITE));
+                }
             }
 
             @Override
@@ -428,14 +398,12 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
                             {
                                 //getDetails();
 
-                                Toast.makeText(context,"REQUEST SENT!", Toast.LENGTH_SHORT).show();
-
-
+                                //Toast.makeText(context,"REQUEST SENT!", Toast.LENGTH_SHORT).show();
 
                             }
                             else
                             {
-                                Toast.makeText(context,"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(context,"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -501,6 +469,7 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
         public SparkButton imageView_favorite;
         public SparkButton imageView_doubleTapFav;
         public SparkButton imageView_reject;
+        public SparkButton imageView_messages;
         RelativeLayout  linearLayout_favorites,  linearLayout_interests;
         RelativeLayout linearLayout_cancel, linearLayout_message;
         public de.hdodenhof.circleimageview.CircleImageView circleImage_profilePic;
@@ -529,6 +498,7 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
             this.linearLayout_cancel = itemView.findViewById(R.id.linearLayout_cancel);
             this.linearLayout_favorites = itemView.findViewById(R.id.linearLayout_favorites);
             this.linearLayout_message = itemView.findViewById(R.id.linearLayout_message);
+            this.imageView_messages = itemView.findViewById(R.id.imageView_message);
             this.linearLayout_interests = itemView.findViewById(R.id.linearLayout_interests);
             this.imageView_interests = itemView.findViewById(R.id.spark_button);
             this.textView_interests = itemView.findViewById(R.id.textView_interests);

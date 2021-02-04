@@ -154,7 +154,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("UserList");
         intentFilter.addAction("MyStatus");
-        intentFilter.addAction("OnlineUsers");
+        //intentFilter.addAction("OnlineUsers");
         registerReceiver(myReceiver, intentFilter);
 
 
@@ -325,7 +325,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
                     break;
 
-                case "OnlineUsers":
+               /* case "OnlineUsers":
                     JSONArray jsonArrayOnline =(JSONArray) Globals.userlist;
                     try {
                         directMessagesModelList.clear();
@@ -359,7 +359,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                     }
 
                     break;
-
+*/
                 case "MyStatus":
                     for (int i=0; i<directMessagesModelList.size(); i++)
                     {

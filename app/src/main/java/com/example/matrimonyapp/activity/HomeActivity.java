@@ -141,8 +141,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
 
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+    //FirebaseAuth firebaseAuth;
+    //DatabaseReference databaseReference;
     private CircleImageView circleImageView_headerProfilePic;
     private ExpandableListView expandableList;
     private DrawerLayout drawerLayout;
@@ -166,8 +166,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             return;
         }
        // String IMEINumber = telephonyManager.getDeviceId();
-        //textView.setText(IMEINumber);
-        //Toast.makeText(this, " ln : "+userModel.getLanguage()+"\nIMEI : "+IMEINumber, Toast.LENGTH_SHORT).show();
+
         // timelineAdapter = new TimelineAdapter(this,)
 
 
@@ -188,42 +187,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             }
         });
 
-
-
-        //fetchValues();
-
-        timelineAdapter = new TimelineAdapter(this,timelineModelList, getWindowManager().getDefaultDisplay());
-        recyclerView_timeline.setAdapter(timelineAdapter);
-        recyclerView_timeline.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView_timeline.setLayoutManager(mLayoutManager);
-        //Toast.makeText(getApplicationContext(), " userId : "+userModel.getUserId(), Toast.LENGTH_SHORT).show();
-
-        /*for(int i=0; i<5; i++)
-        {
-            TimelineModel timelineModel = new TimelineModel();
-            timelineModel.setUserName("Dipti Gunjal");
-            timelineModel.setUserId(4+"");
-            timelineModel.setUserAge("26");
-            timelineModel.setUserOccupation("HR");
-            timelineModel.setUserCompany("Infosys");
-            timelineModel.setUserQualification("MCOM");
-            timelineModel.setProfilePic("Verifications/regiProfileImage/4.webp");
-            arrayList_recentlyviewed.add(timelineModel);
-        }*/
-
-        recentlyViewedAdapter = new RecentlyViewedAdapter(HomeActivity.this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
-        recyclerView_recentlyViewed.setAdapter(recentlyViewedAdapter);
-        recyclerView_recentlyViewed.setHasFixedSize(true);
-        LinearLayoutManager layoutManager_recentlyViewed = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView_recentlyViewed.setLayoutManager(layoutManager_recentlyViewed);
-
-
-        dailyRecommendationsAdapter = new DailyRecommendationsAdapter(HomeActivity.this,arrayList_dailyRecommendations, getWindowManager().getDefaultDisplay());
-        recyclerView_dailyRecommendations.setAdapter(dailyRecommendationsAdapter);
-        recyclerView_dailyRecommendations.setHasFixedSize(true);
-        LinearLayoutManager layoutManager_dailyRecommendations = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView_dailyRecommendations.setLayoutManager(layoutManager_dailyRecommendations);
 
 
 
@@ -251,7 +214,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         expandableList = (ExpandableListView) findViewById(R.id.navigationmenu);
         final NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
 
-        //arrayList_expandedMenuModel = new ArrayList<>();
+
         View view_header = navigationView.getHeaderView(0);
 
         circleImageView_headerProfilePic = view_header.findViewById(R.id.circleImageView_profilePic);
@@ -265,7 +228,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                 .into(circleImageView_headerProfilePic);
 
         textView_welcomeUserName.setText(userModel.getFullName());
-        //textView_emailId.setText(userModel.getEmailId());
+
         linearLayout_navigationHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,12 +263,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     }
 
 
-
-   
-   
-   
-
-
     private void init()
     {
 
@@ -317,8 +274,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         imageView_message = findViewById(R.id.imageView_message);
         imageView_like = findViewById(R.id.imageView_like);
         imageView_myProfile = findViewById(R.id.imageView_myProfile);
-/*        imageView_home.setColorFilter(ContextCompat.getColor(this,R.color.white)); //home Activity highlight
-        imageView_home.setBackgroundResource(R.drawable.gradient_place_order); //home Activity highlight*/
+
 
         imageView_home.setImageResource(R.drawable.filled_home);
         recyclerView_recentlyViewed = (RecyclerView) findViewById(R.id.recyclerView_recentlyViewed);
@@ -341,19 +297,34 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         recyclerView_recentlyViewed=findViewById(R.id.recyclerView_recentlyViewed);
         recyclerView_dailyRecommendations = findViewById(R.id.recyclerView_dailyRecommendations);
 
+        timelineAdapter = new TimelineAdapter(this,timelineModelList, getWindowManager().getDefaultDisplay());
+        recyclerView_timeline.setAdapter(timelineAdapter);
+        recyclerView_timeline.setHasFixedSize(true);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView_timeline.setLayoutManager(mLayoutManager);
+
+
+        recentlyViewedAdapter = new RecentlyViewedAdapter(HomeActivity.this,arrayList_recentlyviewed, getWindowManager().getDefaultDisplay());
+        recyclerView_recentlyViewed.setAdapter(recentlyViewedAdapter);
+        recyclerView_recentlyViewed.setHasFixedSize(true);
+        LinearLayoutManager layoutManager_recentlyViewed = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_recentlyViewed.setLayoutManager(layoutManager_recentlyViewed);
+
+
+        dailyRecommendationsAdapter = new DailyRecommendationsAdapter(HomeActivity.this,arrayList_dailyRecommendations, getWindowManager().getDefaultDisplay());
+        recyclerView_dailyRecommendations.setAdapter(dailyRecommendationsAdapter);
+        recyclerView_dailyRecommendations.setHasFixedSize(true);
+        LinearLayoutManager layoutManager_dailyRecommendations = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_dailyRecommendations.setLayoutManager(layoutManager_dailyRecommendations);
+
+
+
         if (!CustomSharedPreference.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
-//        textView_welcomeUserName.setText(userModel.getFullName());
-        if( userModel!=null && !userModel.getProfilePic().equals("1"))
-        {
-            //imageView_profilePic.setImageURI();
-        }
-
-
 
         ;
         Glide.with(HomeActivity.this)
@@ -367,8 +338,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                 .into(circleImage_progressProfilePic);
 
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseLogin(userModel.getEmailId(),"123456");
+        /*firebaseAuth = FirebaseAuth.getInstance();
+        firebaseLogin(userModel.getEmailId(),"123456");*/
 
         swipeRefresLayout.setColorSchemeResources(R.color.project_color);
 
@@ -380,16 +351,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     private void onClickListener() {
 
-
-        //onClickNewActivity(imageView_home, HomeActivity.this, HomeActivity.class);
         onClickNewActivity(imageView_search, HomeActivity.this, SetPreferencesActivity.class);
         onClickNewActivity(imageView_message, HomeActivity.this, DirectMessagesActivity.class);
         onClickNewActivity(imageView_myProfile, HomeActivity.this, MyProfileActivity.class);
         onClickNewActivity(imageView_like, HomeActivity.this, InterestActivity.class);
         onClickNewActivity(linearLayout_dailyRecommendations, HomeActivity.this, ViewAllActivity.class);
         onClickNewActivity(linearLayout_recentlyViewed, HomeActivity.this, ViewAllActivity.class);
-
-
 
     }
 
@@ -409,7 +376,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     }
 
-    private void firebaseLogin(String emailId, String password)
+    /*private void firebaseLogin(String emailId, String password)
     {
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -419,15 +386,15 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
                 if(task.isSuccessful())
                 {
-                   /* Intent intent = new Intent(Home.this, HomeActivity.class);
+                   *//* Intent intent = new Intent(Home.this, HomeActivity.class);
                     startActivity(intent);
-                    finish();*/
+                    finish();*//*
 
                 }
 
             }
         });
-    }
+    }*/
 
 
     @Override
@@ -525,103 +492,13 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     }
 */
 
-/*
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent me){
-        // Call onTouchEvent of SimpleGestureFilter class
-        this.detector.onTouchEvent(me);
-        return super.dispatchTouchEvent(me);
-    }
-    @Override
-    public void onSwipe(int direction) {
-        String str = "";
-
-        switch (direction) {
-
-            case SimpleGestureFilter.SWIPE_RIGHT : str = "Swipe Right";
-
-                */
-/*Intent i = new Intent(HomeActivity.this,LoginActivity.class);
-                startActivity(i);*//*
 
 
-                break;
-            case SimpleGestureFilter.SWIPE_LEFT :  str = "Swipe Left";
-                //Intent i = new Intent(this, MyProfileActivity.class);
-               // Bundle bundle = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.anim_slide_in_left,R.anim.anim_slide_out_left).toBundle();
-                //startActivity(i, bundle);
-                //startActivity(i);
-                break;
-            case SimpleGestureFilter.SWIPE_DOWN :  str = "Swipe Down";
-                break;
-            case SimpleGestureFilter.SWIPE_UP :    str = "Swipe Up";
-                break;
-
-        }
-       // Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onDoubleTap() {
-       // Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
-    }
-
-
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-*/
-
-
-
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // toggle nav drawer on selecting action bar app icon/title
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-       /* actionBarDrawerToggle.syncState();*/
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        /*actionBarDrawerToggle.onConfigurationChanged(newConfig);*/
-    }
-
-/*    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.END)) {
-
-            drawer.closeDrawer(Gravity.RIGHT); //OPEN Nav Drawer!
-        } else {
-            finish();
-        }
-    }*/
 
 
     private void setToolbar() {
 
         setSupportActionBar(toolbar);
-/*        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(false);
-       // actionBar.setTitle("");*/
-
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -629,20 +506,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
             actionBar.setCustomView(R.layout.main_toolbar);
         }
-        /*findViewById(R.id.imageView_menu).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.e("Click", "keryu");
-
-                if (drawer.isDrawerOpen(navigationView)) {
-                    drawer.closeDrawer(navigationView);
-                } else {
-                    drawer.openDrawer(navigationView);
-                }
-            }
-        });*/
-
 
     }
 
@@ -693,7 +556,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                     timelineModel.setUserCity("Tamil Nadu, India");
                                     timelineModel.setUserReligion("Hindu");
                                     timelineModel.setUserMaritalStatus("Never Married");
+                                    timelineModel.setInterested(userJson.getString("Interested"));
+                                    timelineModel.setFavorites(userJson.getString("Favorites"));
+                                    timelineModel.setRejected(userJson.getString("Rejected"));
                                     timelineModelList.add(timelineModel);
+
 
                                     arrayList_recentlyviewed.add(timelineModel);
                                     arrayList_dailyRecommendations.add(timelineModel);

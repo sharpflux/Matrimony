@@ -515,13 +515,13 @@ public class ProfessionalDetailsFragment extends Fragment {
                 else if(params[0].toString().equals("insertDetails"))
                 {
                     insertDetails();
-
+/*
                     FamilyDetailsFragment familyDetailsFragment = new FamilyDetailsFragment();
-                    // personalDetailsFragment.setArguments(bundle);
+
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, familyDetailsFragment);
-                    fragmentTransaction.commit() ;
+                    fragmentTransaction.commit() ;*/
                 }
 
                 if(params[0].toString().equals("Occupation"))

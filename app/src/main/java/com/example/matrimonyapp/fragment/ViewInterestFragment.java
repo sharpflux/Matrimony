@@ -190,8 +190,7 @@ public class ViewInterestFragment extends Fragment {
                             }
                             else
                             {
-
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

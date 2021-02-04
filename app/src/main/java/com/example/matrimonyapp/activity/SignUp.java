@@ -453,6 +453,7 @@ public class SignUp extends AppCompatActivity {
                                         editText_birthdate.setText("");
                                         editText_age.setText("");
                                         editText_password.setText("");
+                                        editText_confirmPassword.setText("");
                                         radioGroup_gender.clearCheck();
                                         customDialogAccountExists.dismiss();
 
@@ -473,7 +474,7 @@ public class SignUp extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),"Error in    SignUP verifyMobile"+error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Error in SignUP verifyMobile"+error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

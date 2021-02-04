@@ -22,6 +22,9 @@ public class TimelineModel {
     String userCity;
     String userReligion;
     String userMaritalStatus;
+    String interested;
+    String rejected;
+    String favorites;
 
     //Uri profilePic;
     String profilePic;
@@ -190,5 +193,29 @@ public class TimelineModel {
 
     public void setUserMaritalStatus(String userMaritalStatus) {
         this.userMaritalStatus = userMaritalStatus;
+    }
+
+    public String getInterested() {
+        return interested;
+    }
+
+    public void setInterested(String interested) {
+        this.interested = interested;
+    }
+
+    public String getRejected() {
+        return rejected;
+    }
+
+    public void setRejected(String rejected) {
+        this.rejected = rejected;
+    }
+
+    public String getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(String favorites) {
+        this.favorites = favorites;
     }
 }

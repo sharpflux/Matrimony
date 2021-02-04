@@ -161,7 +161,7 @@ public class ViewAllActivity extends AppCompatActivity {
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_FILTER,
+                URLs.URL_POST_GETPROFILES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -171,10 +171,10 @@ public class ViewAllActivity extends AppCompatActivity {
 
                             Log.d("RESPONSE",response);
                             //converting response to json object
-                            JSONObject jsonObject = new JSONObject(response);
+                            //JSONObject jsonObject = new JSONObject(response);
 
 
-                            JSONArray jsonArray = jsonObject.getJSONArray("Registrations");
+                            JSONArray jsonArray =new JSONArray(response);
 
                             if(jsonArray.length()>0)
                             {
@@ -233,8 +233,12 @@ public class ViewAllActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
+                params.put("PageIndex :","1");
+                params.put("PageSize :","50");
+                params.put("UserId :",userModel.getUserId());
+
                 // params.put("UserId",userModel.getUserId());                 //1
-                params.put("PageIndex", "1");                               //2
+               /* params.put("PageIndex", "1");                               //2
                 params.put("PageSize", "100");                              //3
                 params.put("Gender", "0");                               //4
                 params.put("StateId", "0");                            //5
@@ -257,7 +261,7 @@ public class ViewAllActivity extends AppCompatActivity {
                 params.put("Height", "0");//22
                 params.put("HeightMax", "0");   //23
                 params.put("SkinColourName", "0");                     //24
-
+*/
 /*
 params.put("Gender", gender);                               //4
                 params.put("StateId", stateIds);                            //5

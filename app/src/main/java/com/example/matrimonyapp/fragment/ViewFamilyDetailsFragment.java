@@ -332,7 +332,7 @@ public class ViewFamilyDetailsFragment extends Fragment {
 
                             } else {
                                 //qualificationDetailsId = 0;
-                                Toast.makeText(getContext(), "Invalid Details GET! ", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(), "Invalid Details GET! ", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

@@ -634,7 +634,7 @@
                 android:id="@+id/linearLayout_message"
                 >
                 <com.varunest.sparkbutton.SparkButton
-
+                    android:id="@id/imageView_message"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:sparkbutton_activeImage="@drawable/send_message2"
@@ -645,14 +645,7 @@
                     android:layout_alignParentTop="true"
                     app:sparkbutton_secondaryColor="@color/quantum_bluegrey900"
                     android:layout_marginTop="-15dp"/>
-                <!--<ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:src="@drawable/send_message3"
-                    android:tint="@color/blue"
-                    android:padding="7dp"
-android:layout_centerInParent="true"
-                    />-->
+
 
                 <TextView
                     android:layout_width="wrap_content"

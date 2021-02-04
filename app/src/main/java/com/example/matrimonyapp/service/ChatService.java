@@ -163,6 +163,7 @@ public class ChatService extends Service {
                 }
             },String.class,String.class);
 
+/*
 
 
             proxy.on("getUserList", new SubscriptionHandler1<String>() {
@@ -179,6 +180,7 @@ public class ChatService extends Service {
                     }
                 }
             }, String.class);
+*/
 
 
 

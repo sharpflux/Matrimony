@@ -68,8 +68,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
     private String currentLanguage;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
-    FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+//    FirebaseAuth firebaseAuth;
+//    DatabaseReference databaseReference;
 
 
 
@@ -95,7 +95,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        //firebaseAuth = FirebaseAuth.getInstance();
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(VerifyOtpActivity.this);
 
@@ -149,9 +149,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
                         age = bundle.getString("age");
                         gender = bundle.getString("gender");
                         password = bundle.getString("password");
-
                         registerUser();
-
                     }
                     else if(parentActivity.equals("GetOtp"))
                     {
@@ -329,14 +327,15 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
 
-                                    registerFirebaseUser(fullName, mobileNo, birthdate, age, gender, emailId,
-                                            password, jsonObject.getString("UserId"));
+                                    /*registerFirebaseUser(fullName, mobileNo, birthdate, age, gender, emailId,
+                                            password, jsonObject.getString("UserId"));*/
 
-
+                                    Intent intent = new Intent(VerifyOtpActivity.this, HomeActivity.class);
+                                    startActivity(intent);
 
                                 }
                                 else{
-                                    Toast.makeText(getApplicationContext(),"Sorry for the inconvenience \n Please try again!",Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(getApplicationContext(),"Sorry for the inconvenience \n Please try again!",Toast.LENGTH_SHORT).show();
 
                                 }
                             } catch (JSONException e) {
@@ -384,7 +383,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
 
     }
 
-    private void registerFirebaseUser(final String username, final String mobileNo, final String birthdate,
+    /*private void registerFirebaseUser(final String username, final String mobileNo, final String birthdate,
                                       final String age, final String gender, final String email, String password, final String userId)
     {
         password="123456";
@@ -433,14 +432,14 @@ public class VerifyOtpActivity extends AppCompatActivity {
                     }
                 });
 
-    }
+    }*/
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
-        Toast.makeText(getApplicationContext(),"BACK Pressed",Toast.LENGTH_SHORT).show();
-        finish();
+        //Toast.makeText(getApplicationContext(),"BACK Pressed",Toast.LENGTH_SHORT).show();
+        //finish();
     }
 
 /*    @Override
