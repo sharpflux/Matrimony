@@ -434,7 +434,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
                             } else {
                                 //  religionDetailsId = 0;
-                                Toast.makeText(getContext(), "Invalid Details GET! ", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(), "Invalid Details GET! ", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -669,7 +669,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
                             else
                             {
                                 //qualificationDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

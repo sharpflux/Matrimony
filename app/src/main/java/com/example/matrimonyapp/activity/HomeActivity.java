@@ -26,6 +26,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,7 +108,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     private Toolbar toolbar;
     private UserModel userModel;
-
+    private RelativeLayout relativeLayout_message;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
@@ -182,7 +183,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HomeActivity.this, SignalRUserChatsActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SubscriptionPlanActivity.class);
                 startActivity(intent);
             }
         });
@@ -275,6 +276,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         imageView_like = findViewById(R.id.imageView_like);
         imageView_myProfile = findViewById(R.id.imageView_myProfile);
 
+        relativeLayout_message = findViewById(R.id.relativeLayout_message);
+
 
         imageView_home.setImageResource(R.drawable.filled_home);
         recyclerView_recentlyViewed = (RecyclerView) findViewById(R.id.recyclerView_recentlyViewed);
@@ -352,11 +355,23 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     private void onClickListener() {
 
         onClickNewActivity(imageView_search, HomeActivity.this, SetPreferencesActivity.class);
-        onClickNewActivity(imageView_message, HomeActivity.this, DirectMessagesActivity.class);
+        //onClickNewActivity(imageView_message, HomeActivity.this, DirectMessagesActivity.class);
         onClickNewActivity(imageView_myProfile, HomeActivity.this, MyProfileActivity.class);
         onClickNewActivity(imageView_like, HomeActivity.this, InterestActivity.class);
         onClickNewActivity(linearLayout_dailyRecommendations, HomeActivity.this, ViewAllActivity.class);
         onClickNewActivity(linearLayout_recentlyViewed, HomeActivity.this, ViewAllActivity.class);
+
+
+        relativeLayout_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(HomeActivity.this, SignalRUserChatsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 

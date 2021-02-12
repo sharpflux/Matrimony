@@ -460,6 +460,16 @@
     <string name="service_type">Service Type</string>
     <string name="working_in">Working In</string>
     <string name="looking_for">Looking For</string>
+    <string name="monthly_plan">Monthly Plan</string>
+    <string name="quaterly_plan">Quaterly Plan</string>
+    <string name="half_yearly_plan">Half Yearly Plan</string>
+    <string name="yearly_plan">Yearly Plan</string>
+    <string name="old_user">Old User</string>
+    <string name="new_user">New User ? </string>
+    <string name="register_here">Register here</string>
+    <string name="registration">Registration</string>
+    <string name="register">Register</string>
+    <string name="backToLogIn">Back to LogIn</string>
 
 
 </resources>

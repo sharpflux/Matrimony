@@ -56,6 +56,35 @@
             android:textSize="20sp"
             android:fontFamily="@font/arima_madurai_medium"/>
 
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/relativeLayout_message"
+            >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView_message"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/message3"
+            android:tint="@color/white"
+
+            />
+            <TextView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/filled_red_circle"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+                android:text="1"
+                android:textSize="6sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                />
+        </RelativeLayout>
+
     </LinearLayout>
 
 

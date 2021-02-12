@@ -71,7 +71,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
     public static HubProxy hubProxy;
     public HubConnection hubConnection;
     ArrayList<DirectMessagesModel> directMessagesModelList, onlineUsersModelList;
-    RecyclerView recyclerView_directMessage, recyclerView_onlineUsers;
+    RecyclerView recyclerView_directMessage;
     DirectMessagesAdapter directMessagesAdapter, onlineUsersAdapter;
     Context context;
     Handler mHandler=new Handler();
@@ -139,7 +139,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
 
-        recyclerView_onlineUsers = findViewById(R.id.recyclerView_onlineUsers);
+        //recyclerView_onlineUsers = findViewById(R.id.recyclerView_onlineUsers);
         recyclerView_directMessage = findViewById(R.id.recyclerView_directMessages);
 
         context = getApplicationContext();
