@@ -95,16 +95,16 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
                 intent.putExtra("userId", timelineModel.getUserId());
                 intent.putExtra("userName", timelineModel.getUserName());
                 intent.putExtra("userProfilePic", timelineModel.getProfilePic());
-                intent.putExtra("userQualification", timelineModel.getUserQualification());
+                /*intent.putExtra("userQualification", timelineModel.getUserQualification());
                 intent.putExtra("userOccupation", timelineModel.getUserOccupation());
                 intent.putExtra("userCompany", timelineModel.getUserCompany());
-                intent.putExtra("userAge", timelineModel.getUserAge());
+                intent.putExtra("userAge", timelineModel.getUserAge());*/
                 context.startActivity(intent);
 
             }
         });
 
-        holder.textView_userId.setText("@UserId:"+list.get(position).getUserId());
+        holder.textView_userId.setText(list.get(position).getUserCity());
 
 
         //list.get(position).getUserBio()+" "+list.get(position).getUserBio()+" "+list.get(position).getUserBio()
@@ -117,7 +117,12 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
                 .placeholder(R.color.quantum_grey100)
                 .into(holder.circleImage_profilePic);
 
-
+        if (position==list.size()-1)
+        {
+            ViewGroup.MarginLayoutParams linearLayoutLayoutParams = (ViewGroup.MarginLayoutParams)holder.linearLayout.getLayoutParams();
+            linearLayoutLayoutParams.setMarginEnd(linearLayoutLayoutParams.getMarginStart());
+            holder.linearLayout.requestLayout();
+        }
 
     }
 
@@ -133,6 +138,7 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
         public TextView textView_userId;
         public TextView textView_userName;
         public TextView textView_send;
+        public LinearLayout linearLayout;
 
         public de.hdodenhof.circleimageview.CircleImageView circleImage_profilePic;
 
@@ -145,6 +151,7 @@ public class RecentlyViewedAdapter extends RecyclerView.Adapter<RecentlyViewedAd
             this.textView_userId = itemView.findViewById(R.id.textView_userId);
             this.textView_userName = itemView.findViewById(R.id.textView_userName);
             this.textView_send = itemView.findViewById(R.id.textView_send);
+            this.linearLayout = itemView.findViewById(R.id.linearLayout);
 
             this.circleImage_profilePic = itemView.findViewById(R.id.circleImage_profilePic);
 

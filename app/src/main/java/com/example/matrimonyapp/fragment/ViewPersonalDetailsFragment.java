@@ -3,6 +3,7 @@ package com.example.matrimonyapp.fragment;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,8 +57,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
             textView_currentAddress, textView_currentVillage, textView_currentPostalCode,
             textView_currentCountryName, textView_currentStateName, textView_currentCityName,
             textView_birthTime, textView_birthTimeType, textView_birthPlace, textView_birthCountryName,
-            textView_birthStateName, textView_birthCityName, textView_mobileNo,
-             textView_emailId,
+            textView_birthStateName, textView_birthCityName, textView_mobileNo, textView_emailId,
             textView_motherTongue, textView_height, textView_weight, textView_colour,
             textView_maritalStatus, textView_familyStatus, textView_familyType, textView_familyValues,
             textView_disability, textView_disabilityType, textView_diet, textView_livesWithFamily,
@@ -256,7 +256,9 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
         @Override
         protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                super.onProgressUpdate(values);
+            }
         }
 
         @Override

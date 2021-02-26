@@ -64,7 +64,9 @@ import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.service.ChatService;
+import com.example.matrimonyapp.sqlite.SQLiteRecentlyViewedProfiles;
 import com.example.matrimonyapp.sqlite.SQLiteSetPreference;
+import com.example.matrimonyapp.sqlite.SQLiteVehicleDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -116,19 +118,22 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     private NavigationDrawerAdapter navigationDrawerAdapter;
     private ArrayList<NavigationItemListModel> activityListModelArrayList;
 
+    private SQLiteRecentlyViewedProfiles sqLiteRecentlyViewedProfiles;
+
     public static HubConnection hubConnection;
 
     //private SimpleGestureFilter detector;
 
     TimelineAdapter timelineAdapter;
-    RecentlyViewedAdapter recentlyViewedAdapter;
+    public static RecentlyViewedAdapter recentlyViewedAdapter;
     DailyRecommendationsAdapter dailyRecommendationsAdapter;
     private ImageView imageView_home, imageView_search, imageView_message, imageView_like ,imageView_myProfile;
 
     private TextView textView_welcomeUserName;
     private ImageView imageView_profilePic;
 
-    ArrayList<TimelineModel> timelineModelList, arrayList_recentlyviewed, arrayList_dailyRecommendations;
+    ArrayList<TimelineModel> timelineModelList,  arrayList_dailyRecommendations;
+    public  static ArrayList<TimelineModel> arrayList_recentlyviewed;
     RecyclerView recyclerView_timeline, recyclerView_recentlyViewed, recyclerView_dailyRecommendations;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
@@ -161,11 +166,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         init();
 
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+/*        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
             return;
-        }
+        }*/
        // String IMEINumber = telephonyManager.getDeviceId();
 
         // timelineAdapter = new TimelineAdapter(this,)
@@ -329,7 +334,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
 
-        ;
         Glide.with(HomeActivity.this)
                 .load(URLs.MainURL+userModel.getProfilePic())
                 .placeholder(R.color.quantum_grey100)
@@ -343,6 +347,34 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         /*firebaseAuth = FirebaseAuth.getInstance();
         firebaseLogin(userModel.getEmailId(),"123456");*/
+
+
+        sqLiteRecentlyViewedProfiles = new SQLiteRecentlyViewedProfiles(HomeActivity.this);
+
+        Cursor cursor = sqLiteRecentlyViewedProfiles.getAllData();
+        if (cursor != null)
+        {
+            Log.d("CURSOR","\n\n----------------------------\n"+
+                    cursor.toString()+"\n----------------------------\n\n");
+            arrayList_recentlyviewed.clear();
+            for (boolean hasItem = cursor.moveToFirst(); hasItem; hasItem = cursor.moveToNext())
+            {
+
+                TimelineModel timelineModel = new TimelineModel();
+                timelineModel.setUserId(cursor.getString(1));
+                timelineModel.setUserName(cursor.getString(2));
+                timelineModel.setProfilePic(cursor.getString(3));
+                timelineModel.setUserCity(cursor.getString(4));
+                arrayList_recentlyviewed.add(timelineModel);
+            }
+            recentlyViewedAdapter.notifyDataSetChanged();
+            cursor.close();
+        }
+
+
+        //sqLiteRecentlyViewedProfiles.onDatabaseChanged();
+
+
 
         swipeRefresLayout.setColorSchemeResources(R.color.project_color);
 
@@ -542,7 +574,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                             Log.d("RESPONSE",response);
                             //converting response to json object
                             //JSONObject jsonObject = new JSONObject(response);
-                            arrayList_recentlyviewed.clear();
+                            //arrayList_recentlyviewed.clear();
                             arrayList_dailyRecommendations.clear();
 
                             JSONArray jsonArray =new JSONArray(response);
@@ -577,7 +609,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                     timelineModelList.add(timelineModel);
 
 
-                                    arrayList_recentlyviewed.add(timelineModel);
+                                   // arrayList_recentlyviewed.add(timelineModel);
                                     arrayList_dailyRecommendations.add(timelineModel);
                                 }
                                 //   getDetails();
@@ -587,7 +619,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                 customDialogLoadingProgressBar.dismiss();
 
 
-                                recentlyViewedAdapter.notifyDataSetChanged();
+                                //recentlyViewedAdapter.notifyDataSetChanged();
                                 dailyRecommendationsAdapter.notifyDataSetChanged();
                                // Toast.makeText(HomeActivity.this,"Received successfully!", Toast.LENGTH_SHORT).show();
 

@@ -124,6 +124,7 @@ public class CustomSharedPreference {
         ((Activity)context).finish();
         CustomSharedPreference cs =getInstance(context);
         cs=null;
+
     }
 
 

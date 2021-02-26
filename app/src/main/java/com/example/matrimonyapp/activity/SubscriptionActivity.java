@@ -33,7 +33,14 @@ import com.example.matrimonyapp.utils.PayPalClientIdConfiguration;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.razorpay.Checkout;
+
+import com.razorpay.Order;
+import com.razorpay.Payment;
+import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultListener;
+import com.razorpay.PaymentResultWithDataListener;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
 /*
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -41,12 +48,14 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 */
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class SubscriptionActivity extends Activity implements PaymentResultListener {
+public class SubscriptionActivity extends Activity implements PaymentResultWithDataListener {
 
     View view_toolbar;
 
@@ -55,16 +64,10 @@ public class SubscriptionActivity extends Activity implements PaymentResultListe
     private ArrayList<SubscriptionModel> arrayList_subscriptionModel;
     private ViewPager2 viewPager2_subscription;
     private TabLayout tabLayout_subscription;
-    private int PAYPAL_REQUEST_CODE = 10;
-    private int DROPIN_REQUEST_CODE = 10;
-
+    RazorpayClient razorpayClient;
     private String TAG = "Payment Error";
 
-/*
-    private static PayPalConfiguration payPalConfiguration = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
-            .clientId(PayPalClientIdConfiguration.CLIENT_ID);
-*/
+
 
 
     @Override
@@ -104,8 +107,9 @@ public class SubscriptionActivity extends Activity implements PaymentResultListe
                 new SubscriptionAdapter.SelectPlanClickListener() {
             @Override
             public void onPlanSelect(SubscriptionModel data) {
-                startPayment(data.getAmount());
-               // paypalPaymentMethod( data.getAmount());
+                orderAPI();
+                //startPayment(data.getAmount());
+
             }
         }));
         viewPager2_settings();
@@ -118,143 +122,81 @@ public class SubscriptionActivity extends Activity implements PaymentResultListe
             }
         }).attach();
 
-/*
 
-        Intent intent = new Intent(this, PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
-        startService(intent);
-*/
-
-/*
-
-        GooglePayment.isReadyToPay(new BraintreeFragment(), new BraintreeResponseListener<Boolean>() {
-            @Override
-            public void onResponse(Boolean isReadyToPay) {
-                if (isReadyToPay) {
-                    // Show Google Pay button
-                }
-            }
-        });
-*/
 
     }
 
 
-   /* public void onBraintreeSubmit(View v) {
-
-        DropInRequest dropInRequest = new DropInRequest()
-                .clientToken(PayPalClientIdConfiguration.CLIENT_ID);
-        startActivityForResult(dropInRequest.getIntent(this), DROPIN_REQUEST_CODE);
-    }
-*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-/*
-        if (requestCode == DROPIN_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                DropInResult result = data.getParcelableExtra(DropInResult.EXTRA_DROP_IN_RESULT);
-                // use the result to update your UI and send the payment method nonce to your server
-            } else if (resultCode == RESULT_CANCELED) {
-                // the user canceled
-            } else {
-                // handle errors here, an exception may be available in
-                Exception error = (Exception) data.getSerializableExtra(DropInActivity.EXTRA_ERROR);
-            }
-        }*/
 
-        if (requestCode == PAYPAL_REQUEST_CODE)
-        {
-            if (resultCode == Activity.RESULT_OK)
-            {
-                Toast.makeText(this, "Payment made Successfully!!!",Toast.LENGTH_SHORT).show();
+
+
+
+    }
+
+    public void orderAPI() {
+
+
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                //Your code goes here
+
+
+
+
+                JSONObject orderRequest = new JSONObject();
+                try {
+                    razorpayClient = new RazorpayClient("rzp_live_WyOXzpKM7aU75s", "ytHyLATItR2CwNXMWTgwMjy8");
+                    orderRequest.put("amount", 100);
+                    orderRequest.put("currency", "INR");
+                    orderRequest.put("receipt", "ORDER_2");
+                    /*JSONObject payment = new JSONObject();
+                    payment.put("capture", "automatic");
+
+                    JSONObject captureOptions = new JSONObject();
+                    captureOptions.put("automatic_expiry_period", 12);
+                    captureOptions.put("manual_expiry_period", 7200);
+                    captureOptions.put("refund_speed", "optimum");
+                    payment.put("capture_options", captureOptions);
+                    orderRequest.put("payment", payment);*/
+                    Order order = razorpayClient.Orders.create(orderRequest);
+                    orderRequest.put("order_id", order.toJson().getString("id"));
+                    Checkout checkout = new Checkout();
+                  //  checkout.setImage(R.drawable.icon1);
+
+                    checkout.setKeyID("rzp_live_WyOXzpKM7aU75s");
+                    checkout.open(SubscriptionActivity.this,orderRequest);
+
+
+                } catch (JSONException | RazorpayException e) {
+                    e.printStackTrace();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                    Log.e("ERROR", "\n\n--------------------------------------\n"
+                            + exception.getMessage() + "\n--------------------------------------------\n\n");
+                }
             }
-            else
-            {
-                Toast.makeText(this, "Sorry!!!\n Please try again...",Toast.LENGTH_SHORT).show();
-            }
-        }
+        });
+
+        thread.start();
+
 
     }
 
 
-  /*  private void enableGooglePay(DropInRequest dropInRequest) {
-        GooglePaymentRequest googlePaymentRequest = new GooglePaymentRequest()
-                .transactionInfo(TransactionInfo.newBuilder()
-                        .setTotalPrice("1.00")
-                        .setTotalPriceStatus(WalletConstants.TOTAL_PRICE_STATUS_FINAL)
-                        .setCurrencyCode("USD")
-                        .build())
-                // We recommend collecting and passing billing address information
-                // with all Google Pay transactions as a best practice.
-                .billingAddressRequired(true);
-        // Optional in sandbox; if set in sandbox, this value must be
-        // a valid production Google Merchant ID.
-      //.googleMerchantId("merchant-id-from-google");
 
-        dropInRequest.googlePaymentRequest(googlePaymentRequest);
-    }*/
 
-    public void startPayment(String amount) {
-       // checkout.setKeyID("rzp_live_L1RM7ciJabgrxA");
-        /**
-         * Instantiate Checkout
-         */
-        Checkout checkout = new Checkout();
-        checkout.setImage(R.drawable.icon1);
-        /**
-         * Set your logo here #528ff0
-         */
-       // checkout.setImage(R.drawable.logo);
 
-        /**
-         * Reference to current activity
-         */
-        final Activity activity = this;
-
-        /**
-         * Pass your payment options to the Razorpay Checkout as a JSONObject
-         */
-        try {
-            JSONObject options = new JSONObject();
-
-            options.put("name", "JodidarMaza");
-            options.put("description", "Reference No. #123456");
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            //options.put("order_id", "order_DBJOWzybf0sJbb");//from response of step 3.
-            options.put("theme.color", "#528ff0");
-            options.put("currency", "INR");
-
-            int amount_in_rs = Integer.parseInt(amount)*100;
-
-            options.put("amount", String.valueOf(amount_in_rs));//pass amount in currency subunits
-            //options.put("prefill.email", "salonijagtap.sharpflux@gmail.com");
-            //options.put("prefill.contact", "7774037721");
-            checkout.open(activity, options);
-        } catch (Exception e) {
-            Log.e(TAG, "Error in starting Razorpay Checkout", e);
-        }
-
-    }
     @Override
     protected void onDestroy() {
-    //    stopService(new Intent(this, PayPalService.class));
+
         super.onDestroy();
     }
-
-/*
-    public void paypalPaymentMethod(String amount)
-    {
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(Integer.parseInt(amount)),"USD",
-                "Plan Activation", PayPalPayment.PAYMENT_INTENT_SALE);
-
-        Intent intent = new Intent(SubscriptionActivity.this, PaymentActivity.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, payPalConfiguration);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-    }
-*/
 
 
     public void viewPager2_settings()
@@ -292,14 +234,36 @@ public class SubscriptionActivity extends Activity implements PaymentResultListe
 
     }
 
+
+
     @Override
-    public void onPaymentSuccess(String s) {
-        Toast.makeText(SubscriptionActivity.this,"Successful Payment!!!",Toast.LENGTH_SHORT).show();
+    public void onPaymentSuccess(String s, PaymentData paymentData) {
+        //Toast.makeText(SubscriptionActivity.this, s, Toast.LENGTH_SHORT).show();
+
+
+        try {
+            JSONObject captureRequest = new JSONObject();
+            captureRequest.put("amount",100);
+            captureRequest.put("currency","INR");
+
+            Payment payment = razorpayClient.Payments.capture( paymentData.getPaymentId(),captureRequest);
+
+        } catch (JSONException | RazorpayException e) {
+            e.printStackTrace();
+        }
+
+        //
 
     }
 
     @Override
-    public void onPaymentError(int i, String s) {
-        Toast.makeText(SubscriptionActivity.this,"Error in Payment : "+s,Toast.LENGTH_SHORT).show();
+    public void onPaymentError(int i, String s, PaymentData paymentData) {
+        Toast.makeText(SubscriptionActivity.this, "ON RAZORPAY ERROR - "+s,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+        Toast.makeText(SubscriptionActivity.this, "CAPTURED - "+hasCapture,Toast.LENGTH_SHORT).show();
     }
 }

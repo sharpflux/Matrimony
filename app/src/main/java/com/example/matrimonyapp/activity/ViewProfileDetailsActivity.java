@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomViewPager;
 import com.example.matrimonyapp.modal.SingleImage;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.sqlite.SQLiteRecentlyViewedProfiles;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
@@ -57,6 +59,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
     Uri uri;
     private Bundle bundle;
+    private SQLiteRecentlyViewedProfiles sqLiteRecentlyViewedProfiles;
 
     private UserModel userModel;
     boolean follow_flag=false;
@@ -275,6 +278,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
     private void init() {
         mArrayUri = new ArrayList<Uri>();
 
+
         userModel = CustomSharedPreference.getInstance(ViewProfileDetailsActivity.this).getUser();
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(ViewProfileDetailsActivity.this);
@@ -309,6 +313,10 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
         //recyclerView_horizontalImages = findViewById(R.id.recyclerView_horizontalImages);
       //  viewPager2_singleImage = findViewById(R.id.viewPager2_singleImage);
         relativeLayout_image = findViewById(R.id.relativeLayout_image);
+
+
+        sqLiteRecentlyViewedProfiles = new SQLiteRecentlyViewedProfiles(ViewProfileDetailsActivity.this);
+
 
 
         AsyncTaskRunner runner = new AsyncTaskRunner();
@@ -395,7 +403,8 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
                             //converting response to json object
                             JSONArray jsonArray = new JSONArray(response);
-
+                            Log.d("USER","---------------------------------------------\n"
+                                    +response+"\n---------------------------------------------\n");
                             if(jsonArray.length()>0)
                             {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
@@ -406,6 +415,27 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
 
                                     textView_name.setText(jsonObject.getString("FullName"));
+                                    long res = sqLiteRecentlyViewedProfiles.insertRecentlyViewedProfiles(userId,
+                                            jsonObject.getString("FullName"),
+                                            bundle.getString("userProfilePic"),
+                                            jsonObject.getString("PermanantCity"));
+
+
+                                    
+                                    if(res==0)
+                                    {
+                                        Toast.makeText(ViewProfileDetailsActivity.this, "Already Exists",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if(res==-1)
+                                    {
+                                        Toast.makeText(ViewProfileDetailsActivity.this, "Failed",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(ViewProfileDetailsActivity.this, "Successfull!!!",Toast.LENGTH_SHORT).show();
+                                    }
+/*
+
 
                                     Glide.with(ViewProfileDetailsActivity.this)
                                             .load(URLs.MainURL+jsonObject.getString("ProfileImage"))
@@ -421,6 +451,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
                                             .placeholder(R.color.quantum_grey100)
                                             .into(toolbarImageView);
 
+*/
 
 
                                    /* checkIfEmpty(textView_birthdate, jsonObject.getString("Birthdate"));
@@ -438,8 +469,6 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
 
 
-
-
                                 }
 
 
@@ -447,7 +476,6 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
                             }
                             else
                             {
-
                                 //Toast.makeText(EditProfileActivity.this,"Please enter your details! ",Toast.LENGTH_SHORT).show();
                             }
 
@@ -481,7 +509,6 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
 
             getBasicDetails();
-
 
             return null;
 
