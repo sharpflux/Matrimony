@@ -81,9 +81,9 @@ import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.MemoryPolicy;
+//import com.squareup.picasso.NetworkPolicy;
+//import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -102,7 +102,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import jp.wasabeef.blurry.internal.Blur;
+
 
 public class MyProfileActivity extends AppCompatActivity {
 
@@ -178,10 +178,12 @@ public class MyProfileActivity extends AppCompatActivity {
 
 
 
-
+        uri = null;
+/*
         uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower3)
         +"/"+this.getResources().getResourceTypeName(R.drawable.flower3)
         +"/"+this.getResources().getResourceEntryName(R.drawable.flower3));
+*/
 
 
 
@@ -825,13 +827,13 @@ public class MyProfileActivity extends AppCompatActivity {
                                         && !(URLs.MainURL+jsonObject.getString("ImageUrl")).equals("0"))
                                     {
                                         //to clear cache
-                                        Picasso.get().invalidate(URLs.MainURL + jsonObject.getString("ImageUrl"));
-                                        Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
-                                                .networkPolicy(NetworkPolicy.NO_CACHE)
-                                                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                                                .error(R.drawable.default_profile)
-                                                .placeholder(R.drawable.default_profile)
-                                                .into(circleImageView_profilePic);
+//                                        Picasso.get().invalidate(URLs.MainURL + jsonObject.getString("ImageUrl"));
+//                                        Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
+//                                                .networkPolicy(NetworkPolicy.NO_CACHE)
+//                                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+//                                                .error(R.drawable.default_profile)
+//                                                .placeholder(R.drawable.default_profile)
+//                                                .into(circleImageView_profilePic);
 
                                         userModel.setProfilePic(URLs.MainURL+jsonObject.getString("ImageUrl"));
 

@@ -87,7 +87,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/flower3"
+                        android:src="@color/codeGray"
                         android:id="@+id/circleImage_welcomeProfilePic"
                         />
                     <LinearLayout
@@ -303,7 +303,7 @@
                                 <de.hdodenhof.circleimageview.CircleImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:src="@drawable/flower3"
+                                    android:src="@color/codeGray"
                                     android:id="@+id/circleImage_progressProfilePic"
                                     />
 
@@ -425,6 +425,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/recyclerView_recentlyViewed"
                             android:layout_marginTop="10dp"
+                            app:stackFromEnd="true"
                         />
 
 
@@ -451,7 +452,6 @@
             </androidx.core.widget.NestedScrollView>
 
                 <LinearLayout
-                    android:id="@+id/shadow"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:background="@drawable/shadow_down"

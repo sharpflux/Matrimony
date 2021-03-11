@@ -118,7 +118,6 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cardView_propetyType"
                         android:layout_marginStart="2dp"
                         android:layout_marginEnd="2dp"
                         android:layout_marginTop="8dp"
@@ -491,7 +490,6 @@
 
 
     <LinearLayout
-        android:id="@+id/shadow_down"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"
@@ -509,6 +507,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/gradient_bottom_rounded_corner"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:text="@string/add_vehicle"

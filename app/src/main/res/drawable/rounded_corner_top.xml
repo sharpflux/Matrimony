@@ -3,8 +3,8 @@
 
     <corners android:topLeftRadius="3dp"
         android:topRightRadius="3dp"/>
-    <solid android:color="@color/white"/>
+    <solid android:color="@color/quantum_bluegrey900"/>
     <stroke android:width="11.3dp"
-        android:color="@color/white"/>
+        android:color="@color/quantum_bluegrey900"/>
 
 </shape>

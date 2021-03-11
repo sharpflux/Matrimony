@@ -137,7 +137,6 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_full"
                             android:text="@string/fluent"
                             android:textSize="13sp"
                             android:textColor="@color/text_black"/>
@@ -145,7 +144,6 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_partly"
                             android:text="@string/non_fluent"
                             android:textSize="13sp"
                             android:layout_marginStart="25dp"
@@ -167,7 +165,6 @@
 
 
     <LinearLayout
-        android:id="@+id/shadow_down"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"
@@ -177,7 +174,7 @@
 
 
 
-    <TextView
+<!--    <TextView
         android:id="@+id/textView_addLanguageKnown"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -187,9 +184,19 @@
         android:text="@string/add_language_details"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
-        />
+        />-->
 
-
-
+    <TextView
+        android:id="@+id/textView_addLanguageKnown"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_bottom_rounded_corner"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:text="@string/add_language_details"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

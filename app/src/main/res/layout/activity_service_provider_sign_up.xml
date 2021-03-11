@@ -29,7 +29,6 @@
                 android:gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imageViewLogo2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
@@ -85,7 +84,6 @@
                         />
 
                     <EditText
-                        android:id="@+id/editText_service"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -147,7 +145,6 @@
                         />
 
                     <EditText
-                        android:id="@+id/editText_ownerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -490,7 +487,6 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/loginPasswordLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -567,7 +563,6 @@
                         />
 
                     <EditText
-                        android:id="@+id/editText_serviceDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -798,7 +793,6 @@
                         />
 
                     <EditText
-                        android:id="@+id/editText_taluka"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

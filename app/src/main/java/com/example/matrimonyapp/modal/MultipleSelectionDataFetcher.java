@@ -93,7 +93,7 @@ public class MultipleSelectionDataFetcher {
                                 {
                                     for (int j=0; j<list.size(); j++) {
 
-                                        if((int)arrayList_id.get(i)==list.get(j).getId())
+                                        if((int)Integer.parseInt(arrayList_id.get(i).toString())==list.get(j).getId())
                                         {
                                             list.get(j).setChecked(true);
                                         }

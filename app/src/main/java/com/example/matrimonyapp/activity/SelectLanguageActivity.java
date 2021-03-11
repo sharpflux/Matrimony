@@ -57,6 +57,7 @@ public class SelectLanguageActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(SelectLanguageActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

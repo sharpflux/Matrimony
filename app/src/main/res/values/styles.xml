@@ -10,15 +10,6 @@
     </style>
 
 
-    <style name="popupDotMenu" >
-        <item name="android:textColorPrimary">@color/text_black</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:popupElevation">0dp</item>
-        <item name="android:popupBackground">@drawable/custom_dialog_rounded_corner</item>
-        <item name="android:layout_width">150dp</item>
-        <item name="android:width">150dp</item>
-
-    </style>
     <style name="MySpinner">
         <item name="android:divider">#A7A7A7</item>
         <item name="android:dividerHeight">1dp</item>
@@ -33,13 +24,6 @@
     <style name="customNumberPicker" parent="AppTheme">
         <item name="android:textColorPrimary">@color/project_color</item>
         <item name="android:numbersSelectorColor">@color/project_color</item>
-    </style>
-
-
-
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlActivated">#ffc317</item>
-        <item name="colorControlNormal">#ececec</item>
     </style>
 
 
@@ -103,22 +87,9 @@
         <item name="android:minWidth">90dp</item>
     </style>
 
-    <style name="Registration_TextView">
-        <item name="android:layout_marginTop">30dp</item>
-        <item name="android:textColor">@color/text_black</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">17sp</item>
-    </style>
-
 
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
-    </style>
-
-    <style name="MyCustomRangeSeekbar" parent="Widget.AppCompat.SeekBar.Discrete">
-        <item name="android:progressTint">@color/project_color</item>
-        <item name="android:thumbTint">@color/project_color</item>
-
     </style>
 
     <style name="MyCustomPopupMenu" parent="Widget.AppCompat.PopupMenu">
@@ -160,10 +131,6 @@
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

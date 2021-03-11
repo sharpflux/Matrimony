@@ -34,13 +34,13 @@ import com.example.matrimonyapp.modal.SingleImage;
 import com.example.matrimonyapp.utils.BlurImage;
 import com.example.matrimonyapp.volley.URLs;
 import com.google.android.material.tabs.TabLayout;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.PicassoProvider;
-import com.squareup.picasso.Target;
+//import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.PicassoProvider;
+//import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
-import jp.wasabeef.blurry.Blurry;
+//import jp.wasabeef.blurry.Blurry;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
@@ -146,9 +146,9 @@ public class ViewProfileActivity extends AppCompatActivity {
         });
 
 
-        Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
+   /*     Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
                 +"/"+this.getResources().getResourceTypeName(R.drawable.flower2)
-                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));
+                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));*/
        /* Target target = new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {

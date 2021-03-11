@@ -60,9 +60,10 @@ public class PostsActivity extends AppCompatActivity {
         });
 
 
-        Uri uri_profilePic = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
+     /*   Uri uri_profilePic = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
                 +"/"+this.getResources().getResourceTypeName(R.drawable.flower2)
-                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));
+                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));*/
+        Uri uri_profilePic=null;
         Uri uri_postPic=uri_profilePic;
         for(int i=0; i<9; i++)
         {

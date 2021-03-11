@@ -136,7 +136,6 @@
 
 
             <LinearLayout
-                android:id="@+id/shadow_down"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
@@ -250,7 +249,6 @@
             <ImageView
                 android:layout_width="70dp"
                 android:layout_height="60dp"
-                android:id="@+id/imageView"
                 android:src="@drawable/ribbon1"
                 android:layout_alignTop="@id/linearLayout"
                 android:layout_alignEnd="@id/linearLayout"

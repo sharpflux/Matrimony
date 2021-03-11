@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <solid android:color="@color/red_btn_bg_color"/>
-
+    <solid android:color="#110000"/>
+<!--@color/red_btn_bg_color-->
 </shape>

@@ -39,7 +39,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:id="@+id/ilname"
                     android:theme="@style/TextLabel"
                    >
 
@@ -55,7 +54,6 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ilnumber"
                     android:theme="@style/TextLabel"
                     >
 
@@ -71,7 +69,6 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iladdress"
                     android:theme="@style/TextLabel"
                     >
 
@@ -94,7 +91,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ilarea"
                         android:theme="@style/TextLabel"
                         android:layout_marginTop="32.3dp"
                         android:textColorHint="@color/text_black"
@@ -114,7 +110,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:theme="@style/TextLabel"
-                        android:id="@+id/ilcity"
                         android:layout_marginTop="32.3dp"
                         android:textColorHint="@color/text_black">
 
@@ -138,7 +133,6 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:id="@+id/ilstate"
                         android:theme="@style/TextLabel"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32.3dp"
@@ -157,7 +151,6 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ilcountry"
                         android:layout_weight="1"
                         android:theme="@style/TextLabel"
                         android:layout_marginTop="32.3dp"
@@ -184,7 +177,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:theme="@style/TextLabel"
-                        android:id="@+id/ilpincode"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32.3dp"
                         android:textColorHint="@color/text_black"

@@ -614,7 +614,6 @@
         </ScrollView>
 
     <LinearLayout
-        android:id="@+id/shadow_down"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"
@@ -641,11 +640,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/gradient_bottom_rounded_corner"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
             android:gravity="center"
             android:layout_gravity="center"
             android:text="@string/add_sibling"
-            android:paddingBottom="17.3dp"
-            android:paddingTop="17.3dp"
+
             android:textColor="@color/white"
             android:duplicateParentState="true"
             />

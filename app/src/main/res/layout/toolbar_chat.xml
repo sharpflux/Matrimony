@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar_direct_messages"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
@@ -56,7 +55,6 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/imageView_dotMenu"
             android:layout_marginStart="10dp"
             android:padding="5dp"
             android:src="@drawable/dot_menu"

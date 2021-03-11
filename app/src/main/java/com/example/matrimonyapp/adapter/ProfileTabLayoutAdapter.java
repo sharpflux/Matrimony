@@ -44,6 +44,7 @@ public class ProfileTabLayoutAdapter extends FragmentPagerAdapter {
                 case 0:
                     ViewPersonalDetailsFragment viewPersonalDetailsFragment =
                             new ViewPersonalDetailsFragment();
+                    bundle.putString("activityName", activityName);
                     viewPersonalDetailsFragment.setArguments(bundle);
                     return viewPersonalDetailsFragment;
 
@@ -51,6 +52,7 @@ public class ProfileTabLayoutAdapter extends FragmentPagerAdapter {
                 case 1:
                     ViewFamilyDetailsFragment viewFamilyDetailsFragment =
                             new ViewFamilyDetailsFragment();
+                    bundle.putString("activityName", activityName);
                     viewFamilyDetailsFragment.setArguments(bundle);
                     return viewFamilyDetailsFragment;
 
@@ -72,6 +74,7 @@ public class ProfileTabLayoutAdapter extends FragmentPagerAdapter {
                 case 0:
                     AboutEditProfileFragment aboutEditProfileFragment =
                             new AboutEditProfileFragment();
+                    bundle.putString("activityName", activityName);
                     aboutEditProfileFragment.setArguments(bundle);
                     return aboutEditProfileFragment;
 
@@ -79,6 +82,7 @@ public class ProfileTabLayoutAdapter extends FragmentPagerAdapter {
                 case 1:
                     ViewPreferencesFragment viewPreferencesFragment =
                             new ViewPreferencesFragment();
+                    bundle.putString("activityName", activityName);
                     viewPreferencesFragment.setArguments(bundle);
                     return viewPreferencesFragment;
 

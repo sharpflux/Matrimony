@@ -2,20 +2,13 @@
 <resources>
     <string name="app_name">जोड़ीदार माझा</string>
     <string name="tag_line">एक अनोखी स्वभाव गुणमिलन चाचणी</string>
-    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="my_profile" >मेरी प्रोफाइल</string>
     <string name="rate_app" >एप्लिकेशन का मूल्यांकन करें</string>
     <string name="subscription_plan" >सदस्यता योजना</string>
 
-    <string name="provide_your">सत्यापन के लिए अपना मोबाइल \n नंबर प्रदान करें</string>
     <string name="mobile">मोबाइल नंबर *</string>
     <string name="mobile_">मोबाइल नंबर</string>
     <string name="alt_mobile">वैकल्पिक मोबाइल नंबर दर्ज करें</string>
     <string name="password">पासवर्ड *</string>
-    <string name="firstName">पहला  नाम *</string>
-    <string name="middleName">मध्य नाम *</string>
-    <string name="lastName">अंतिम नाम *</string>
-    <string name="signIn">साइन इन करें</string>
     <string name="backToSignIn">वापस साइन इन करें</string>
     <string name="dontHaveAnAccount">खाता नहीं है?</string>
     <string name="signUp">साइन अप करें</string>
@@ -25,7 +18,6 @@
     <string name="gender">लिंग</string>
     <string name="male">नर</string>
     <string name="female">महिला</string>
-    <string name="date">तारीख</string>
     <string name="birth_details">जन्म विवरण</string>
     <string name="birthdate">जन्म दिन </string>
     <string name="age">आयु</string>
@@ -35,16 +27,13 @@
     <string name="birth_taluka">जन्म तालुका </string>
     <string name="birth_district">जन्म जिला </string>
     <string name="accurate">सही</string>
-    <string name="approximate">लगभग</string>
     <string name="approx">लगभग</string>
     <string name="city">शहर *</string>
     <string name="village">गाँव</string>
     <string name="state">राज्य *</string>
     <string name="country">देश</string>
     <string name="_state">राज्य</string>
-    <string name="district">जिला *</string>
     <string name="_district">जिला</string>
-    <string name="taluka">तालुका *</string>
     <string name="_taluka">तालुका</string>
     <string name="pincode"> पिन कोड *</string>
     <string name="postal_code">डाक कोड *</string>
@@ -52,9 +41,6 @@
     <string name="email">ईमेल आईडी *</string>
     <string name="_email">ईमेल आईडी </string>
     <string name="alt_email">वैकल्पिक ईमेल आईडी दर्ज करें*</string>
-    <string name="search_state"> राज्य खोजें</string>
-    <string name="Open"> खुला हुआ</string>
-    <string name="Close"> बंद करे</string>
     <string name="password1">कुंजिका</string>
     <string name="registered">पंजीकृत मोबाइल नं</string>
     <string name="indiaCode">+91</string>
@@ -67,7 +53,6 @@
 
     <string name="change_profile_photo">प्रोफाइल फोटो बदलें</string>
     <string name="remove_profile_photo">प्रोफ़ाइल फ़ोटो निकालें </string>
-    <string name="camera">कैमरा</string>
     <string name="mobile_no_on_another_account">यह मोबाइल नं। दूसरे खाते में है</string>
     <string name="login_to_existing_account">मौजूदा खाते में प्रवेश करें</string>
     <string name="create_new_account">नया खाता बनाएँ</string>
@@ -77,10 +62,7 @@
     <string name="set_preferences">प्राथमिकताएँ सेट करें</string>
     <string name="reset_preferences">रीसेट प्राथमिकताएँ</string>
     <string name="who_are_you_looking_for">आप किसे ढूँढ रहे हैं?</string>
-    <string name="location">स्थायी स्थान</string>
-    <string name="add_location">स्थान जोड़ना</string>
     <string name="age_should_be_between">उम्र बीच में होनी चाहिए</string>
-    <string name="salary_should_be_between">सैलरी यह बीच होना चाहिए</string>
     <string name="height_should_be_between">ऊँचाई यह बीच होना चाहिए</string>
     <string name="willing_to_marry_in_other_communities">अन्य समुदायों में शादी करने की इच्छा?</string>
     <string name="qualification">योग्यता</string>
@@ -107,9 +89,7 @@
     <string name="father_name">पिता का नाम</string>
     <string name="mother_name">माता का नाम</string>
     <string name="mother_information">माँ की जानकारी</string>
-    <string name="occupation_father">पिता का व्यवसाय *</string>
     <string name="occupation_mother">मां का व्यवसाय *</string>
-    <string name="family_income">परिवार की वार्षिक आय</string>
     <string name="annual_income">वार्षिक आय</string>
     <string name="annual_income_father">पिता की वार्षिक आय</string>
     <string name="annual_income_mother">माँ की वार्षिक आय</string>
@@ -132,7 +112,6 @@
     <string name="basic_details">मूल विवरण </string>
     <string name="family_details">पारिवारिक विवरण </string>
     <string name="gothram">गोथ्राम </string>
-    <string name="dosh">दोष </string>
     <string name="mother_tongue">मातृभाषा</string>
     <string name="language">भाषा</string>
     <string name="change_language">भाषा बदलो</string>
@@ -144,24 +123,14 @@
     <string name="institue_university">संस्थान विश्वविद्यालय का नाम</string>
     <string name="name_of_institute">संस्था का नाम</string>
     <string name="percentage">प्रतिशत</string>
-    <string name="add_percentage">प्रतिशत जोड़ें </string>
     <string name="year">वर्ष</string>
     <string name="passing_year">पासिंग वर्ष</string>
-    <string name="graduation">स्नातक स्तर की पढ़ाई </string>
-    <string name="post_graduation">स्नातकोत्तर</string>
     <string name="highest_qualification_details">उच्चतम योग्यता विवरण</string>
-    <string name="ssc">एसएससी</string>
-    <string name="hsc">एचएससी</string>
-    <string name="course">कोर्स</string>
-    <string name="acamedics">शैक्षणिक</string>
     <string name="extra_activities">अतिरिक्त गतिविधियाँ</string>
     <string name="hobby">शौक</string>
     <string name="social_contributions">सामाजिक योगदान</string>
     <string name="company_name">कंपनी का नाम / फर्म का नाम</string>
-    <string name="works_in">काम में *</string>
     <string name="designation">पद</string>
-    <string name="monthly_income">मासिक आय</string>
-    <string name="salary_package">पैकेज</string>
     <string name="experience">अनुभव (वर्षों में) </string>
     <string name="company_address">कंपनी का पता</string>
     <string name="bio">जैव</string>
@@ -171,17 +140,9 @@
     <string name="send">संदेश</string>
     <string name="user_id">\@userId101</string>
     <string name="user_name">उपयोगकर्ता नाम</string>
-    <string name="user_bio">आपका बायो यहां!!!..</string>
-    <string name="about_me">मेरे बारे में</string>
-    <string name="profile_information">प्रोफ़ाइल जानकारी</string>
-    <string name="religious_information">धार्मिक जानकारी</string>
     <string name="professional_information">व्यावसायिक जानकारी</string>
     <string name="professional_details">पेशेवर विवरण</string>
-    <string name="family_information">परिवार की जानकारी</string>
-    <string name="personal_information">व्यक्तिगत जानकारी</string>
-    <string name="educational_information">शैक्षिक सूचना</string>
     <string name="favorite">पसंदीदा</string>
-    <string name="add_to_favorite">पसंदीदा में जोड़े</string>
     <string name="edit_profile">प्रोफ़ाइल संपादित करें</string>
     <string name="add_profile_photo">प्रोफ़ाइल फ़ोटो जोड़ें</string>
     <string name="add_from_gallery">गैलरी से जोड़ें </string>
@@ -192,8 +153,6 @@
     <string name="set_preferences_desc">बेहतर खोज परिणामों के लिए अपनी प्राथमिकताएँ निर्धारित करें.</string>
     <string name="complete_your_profile">अपनी प्रोफाइल पूरी कीजिए</string>
     <string name="add_bio">जैव जोड़ें</string>
-    <string name="add_your_basic_details">अपने मूल विवरण जोड़ें</string>
-    <string name="tell_basic_details">अपने दोस्तों को अपने बारे में थोड़ा बताएं</string>
     <string name="tell_about_yourself">अपने दोस्तों को अपने बारे में थोड़ा बताएं</string>
     <string name="share_photo_desc">जब आप फ़ोटो साझा करते हैं, तो वे आपकी प्रोफ़ाइल पर दिखाई देंगे</string>
     <string name="share_first_photo_desc">अपनी पहली फोटो शेयर करें</string>
@@ -202,23 +161,14 @@
     <string name="only_text">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="only_text_with_space">a bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MultiPhotoSelect</string>
-
-    <string name="permission_rationale">"Storage permission is needed for fetching images from Gallery."</string>
-
     <!-- Content descriptions -->
-    <string name="descr_image">Image</string>
     <string name="image">Image</string>
     <string name="no_image_selected">No image Selected</string>
 
 
     <string name="height">ऊंचाई </string>
     <string name="ft">ft.</string>
-    <string name="inch">inch</string>
     <string name="weight">वजन</string>
-    <string name="kgs">kgs. </string>
     <string name="colour">रंग</string>
     <string name="marital_status">वैवाहिक स्थिति</string>
 
@@ -229,8 +179,6 @@
     <string name="disability">विकलांगता</string>
     <string name="disability_type">विकलांगता प्रकार</string>
     <string name="diet">आहार</string>
-    <string name="veg">शाकाहारी</string>
-    <string name="non_veg">मासाहारी</string>
     <string name="lives_with_family">परिवार के साथ रहता है?</string>
 
 
@@ -242,19 +190,10 @@
     <string name="vehicle_details">वाहन की सूचना</string>
     <string name="farm_details">खेती का विवरण</string>
     <string name="crops_taken">फसलें लीं</string>
-    <string name="full">पूर्ण</string>
-    <string name="partly">आंशिक रूप में</string>
     <string name="vehicle_type">वाहन का प्रकार</string>
     <string name="cost">मूल्य</string>
     <string name="brand_name">ब्रांड का नाम</string>
     <string name="model_name">मॉडल का नाम</string>
-    <string name="farm_type">खेती का प्रकार</string>
-    <string name="irrigated">सिंचित</string>
-    <string name="area_farmed">खेती वाला इलाका</string>
-    <string name="non_irrigated">गैर-सिंचित</string>
-    <string name="property">संपत्ति</string>
-    <string name="siblings_name">भाई-बहन का नाम</string>
-    <string name="siblings_information">भाई-बहन की जानकारी</string>
     <string name="siblings_details">भाई-बहन का विवरण</string>
     <string name="education">शिक्षा</string>
     <string name="relative_information">सापेक्ष की जानकारी</string>
@@ -263,23 +202,12 @@
     <string name="relative2">सापेक्ष 2</string>
     <string name="relative3">सापेक्ष 3</string>
     <string name="relative4">सापेक्ष 4</string>
-    <string name="surname1">उपनाम 1</string>
-    <string name="surname2">उपनाम 2</string>
-    <string name="surname3">उपनाम 3</string>
-    <string name="surname4">उपनाम 4</string>
-    <string name="mama_information">Mama\'s Information</string>
     <string name="mama_details">Mama\'s Details</string>
-    <string name="mama_name">Mama Name</string>
 
-    <string name="contine">जारी रखें</string>
-    <string name="we_have">हमने "4 अंक का कोड" भेजा है</string>
-    <string name="on_91">On +91 97374928198</string>
     <string name="edit">संपादित करें</string>
     <string name="delete">हटाना</string>
     <string name="be_patient">धैर्य रखें</string>
     <string name="we_are_verifying">हम आपके मोबाइल नंबर की पुष्टि कर रहे हैं</string>
-    <string name="_55">55 sec</string>
-    <string name="_60">60 sec</string>
     <string name="resend_otp">OTP को फिर से भेजें</string>
     <string name="search">खोज</string>
 
@@ -288,16 +216,8 @@
     <string name="ok">ठीक है</string>
     <string name="done">हॊ गया</string>
 
-    <string name="need_help">मदद की ज़रूरत है?</string>
-    <string name="email_invoice">ईमेल चालान</string>
-
-    <string name="payment_info">भुगतान की जानकारी</string>
-
     <string name="notifications">सूचनाएं</string>
     <string name="logout">लॉग आउट</string>
-
-    <string name="net_pay">कुल भुगतान</string>
-    <string name="payment_method">भुगतान का तरीका</string>
 
     <string name="save_cont">सहेजें और जारी रखें</string>
     <string name="full_name">पूरा नाम *</string>
@@ -308,7 +228,6 @@
     <string name="service_description">सेवा विवरण</string>
 
 
-    <string name="contact_mobile_no">मोबाइल नंबर पर संपर्क करें</string>
     <string name="address">पता *</string>
     <string name="address_">पता</string>
     <string name="residential_location">आवासीय स्थान</string>
@@ -317,7 +236,6 @@
     <string name="current_address">वर्तमान पता</string>
     <string name="is_address_same">क्या वर्तमान पता स्थायी पते के समान है</string>
     <string name="area">क्षेत्र</string>
-    <string name="farming_area">खेती का क्षेत्र</string>
     <string name="carpet_area">कालीन क्षेत्र</string>
     <string name="sq_ft">sq. ft.</string>
     <string name="rs">\u20B9</string>
@@ -335,8 +253,6 @@
 
     <string name="login_reg">लॉग / साइन इन करें </string>
 
-    <string name="welcome">स्वागत हे</string>
-
 
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
@@ -345,7 +261,6 @@
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="help_and_feedback">मदत आणि अभिप्राय</string>
     <string name="spouse_name">जीवनसाथी का नाम</string>
     <string name="education_details">Education Details</string>
@@ -362,7 +277,6 @@
     <string name="account_is_private">This account is private</string>
     <string name="follow_account_to_see_information"> Follow this account to see their photos and other information</string>
     <string name="interest_accepted">Interest Accepted</string>
-    <string name="buy_now">Buy Now</string>
     <string name="select_this_plan">Select this plan</string>
     <string name="birth_city">Birth City</string>
     <string name="birth_country">Birth Country</string>
@@ -374,28 +288,6 @@
     <string name="year_of_birth">Year of Birth</string>
     <string name="care_of">Care Of</string>
     <string name="upload_documents">Upload Documents</string>
-    <string name="payments">Payments</string>
-    <string name="wallets">Wallets</string>
-    <string name="amazon_pay">Amazon pay</string>
-    <string name="linked">Linked</string>
-    <string name="get_flat_10_cashback_on_payment_above_99rs">Get flat 10% Cashback on payment above Rs. 99/-</string>
-    <string name="paypal">PayPal</string>
-    <string name="link_account">LINK ACCOUNT</string>
-    <string name="paytm">PayTM</string>
-    <string name="credit_debit_card">CREDIT/DEBIT CARD</string>
-    <string name="_3432_xxxxxxxx_1231">3432-XXXXXXXX-1231</string>
-    <string name="make_payment">MAKE PAYMENT</string>
-    <string name="pay_on_delivery">PAY ON DELIVERY</string>
-    <string name="please_keep_extra_change_when_delivery_boy_arrive_for_ndelivery">
-        Please keep extra change when delivery boy arrive for\ndelivery.</string>
-    <string name="pay_with_cash">PAY WITH CASH</string>
-    <string name="search_plate">Search Plate</string>
-    <string name="cvv">CVV</string>
-    <string name="add_new_card">Add New Card</string>
-    <string name="cash">Cash</string>
-    <string name="_1_item_to_pay_280">1 item, To pay : ₹ 280</string>
-    <string name="securely_save_card_details">Securely save card details</string>
-    <string name="apply">APPLY</string>
     <string name="at">at</string>
     <string name="studied_at">Studied at</string>
     <string name="dash">-</string>
@@ -404,7 +296,6 @@
     <string name="working_city">Working City</string>
     <string name="working_state">Working State</string>
     <string name="working_country">Working Country</string>
-    <string name="property_address">Property Address</string>
     <string name="address_details">Address Details</string>
     <string name="confirm_password">Confirm Password *</string>
     <string name="_show">Show</string>
@@ -438,7 +329,6 @@
     <string name="no_of_expired_mama">No. of Mama expired</string>
     <string name="family_income_from_all_sources">Family Annual Income from all sources</string>
     <string name="birth_city_taluka">Birth City or Taluka</string>
-    <string name="remove_favorite">Remove Favorite</string>
     <string name="requested">Requested</string>
     <string name="received">Received</string>
     <string name="sent">Sent</string>
@@ -451,7 +341,6 @@
     <string name="save">Save</string>
     <string name="language_settings">Language Settings</string>
     <string name="recent_chats">Recent Chats</string>
-    <string name="online_users">Online Users</string>
     <string name="about">About</string>
     <string name="family">Family</string>
     <string name="preferences">Preferences</string>
@@ -464,12 +353,12 @@
     <string name="quaterly_plan">Quaterly Plan</string>
     <string name="half_yearly_plan">Half Yearly Plan</string>
     <string name="yearly_plan">Yearly Plan</string>
-    <string name="old_user">Old User</string>
     <string name="new_user">New User ? </string>
     <string name="register_here">Register here</string>
     <string name="registration">Registration</string>
     <string name="register">Register</string>
     <string name="backToLogIn">Back to LogIn</string>
+    <string name="total_no_of_mama">Total No. of Mama</string>
 
 
 </resources>

@@ -125,7 +125,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_removeProfilePic"
                     android:layout_margin="20dp"
                     android:text="@string/remove_profile_photo"
                     android:textSize="14sp"

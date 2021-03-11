@@ -27,11 +27,7 @@ import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //CustomDialogChangeLanguage customDialogChangeLanguage;
 
-    private FirebaseAuth firebaseAuth;
-    DatabaseReference databaseReference;
+   /* private FirebaseAuth firebaseAuth;
+    DatabaseReference databaseReference;*/
     //private Bundle bundle;
 
 
@@ -169,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void firebaseLogin(String emailId, String password)
-    {
+    {/*
         firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.signInWithEmailAndPassword(emailId, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -183,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
 
     void verifyLogin()
@@ -321,6 +317,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void registerFirebase(final String username, String email, String password, final String userId)
     {
+/*
         firebaseAuth = FirebaseAuth.getInstance();
         password="123456";
         firebaseAuth.createUserWithEmailAndPassword(email,password)
@@ -363,6 +360,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+*/
 
     }
 

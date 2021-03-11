@@ -121,7 +121,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_totalLand"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
                         android:ellipsize="end"
@@ -145,7 +144,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_irrigatedArea"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
                         android:ellipsize="end"
@@ -173,7 +171,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_partiallyIrrigatedArea"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
                         android:ellipsize="end"
@@ -198,7 +195,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_nonIrrigatedArea"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
                         android:ellipsize="end"
@@ -223,7 +219,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView_cropsTaken"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="4dp"
                         android:ellipsize="end"
@@ -417,7 +412,6 @@
 
 
     <LinearLayout
-        android:id="@+id/shadow_down"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"
@@ -426,9 +420,20 @@
         />
 
 
-
     <TextView
         android:id="@+id/textView_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_bottom_rounded_corner"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/white" />
+<!--    <TextView
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/gradient_bottom_rounded_corner"
@@ -437,7 +442,7 @@
         android:text="@string/cancel"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
-        />
+        />-->
 
 
 

@@ -43,8 +43,8 @@ import com.example.matrimonyapp.volley.URLs;
 import java.util.ArrayList;
 import java.util.Map;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+//import jp.wasabeef.blurry.internal.Blur;
+//import jp.wasabeef.blurry.internal.BlurFactor;
 
 
 public class CustomDialogAddEducation extends Dialog {

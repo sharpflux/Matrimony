@@ -19,7 +19,7 @@
             android:layout_height="85dp"
             android:id="@+id/circleImage_profilePic"
             android:layout_marginTop="10dp"
-            android:src="@drawable/flower3"
+            android:src="@color/codeGray"
             />
 
         <TextView

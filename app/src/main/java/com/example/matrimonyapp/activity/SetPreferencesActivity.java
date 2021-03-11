@@ -51,18 +51,20 @@ import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
-import com.suke.widget.SwitchButton;
+//import com.suke.widget.SwitchButton;
 import com.yahoo.mobile.client.android.util.rangeseekbar.RangeSeekBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class SetPreferencesActivity extends AppCompatActivity {
 
@@ -71,7 +73,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
     private View include_toolbar;
 
     private Context context;
-
+    private  int setPreferencesId=0;
     private TextView textView_toolbarHeader, textView_ageRange, textView_salaryRange, textView_heightRange,
             textView_qualificationId, textView_maritalStatusId, textView_familyTypeId, textView_familyValuesId,
             textView_colorId, textView_occupationId, textView_religonId, textView_stateId, textView_cityId,
@@ -102,7 +104,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
     DataFetcherLocation dataFetcherLocation;
     AddLOcationModal lOcationModal;
     ArrayList<AddLOcationModal> list;
-    SwitchButton switchButton_otherCaste;
+    //SwitchButton switchButton_otherCaste;
     SQLiteSetPreference sqLiteSetPreference;
     StringBuilder state_builder_id;
     String StateId="";
@@ -320,6 +322,8 @@ public class SetPreferencesActivity extends AppCompatActivity {
         textView_toolbarHeader.setText("Set Preferences");
         state_builder_id = new StringBuilder();
 
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("getDetails");
 
     }
 
@@ -513,6 +517,10 @@ public class SetPreferencesActivity extends AppCompatActivity {
             if(params[0].equals("insertDetails"))
             {
                 insertDetails();
+            }
+            else if(params[0].equals("getDetails"))
+            {
+                getDetails();
             }
             else if (params[0] == "Religion") {
                     /*int id = Integer.parseInt(params[1].toString());
@@ -726,6 +734,150 @@ public class SetPreferencesActivity extends AppCompatActivity {
             super.onCancelled();
         }
     }
+
+    void getDetails() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_GETPREFERENCES,  //+ "&Language=" + userModel.getLanguage()
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            customDialogLoadingProgressBar.dismiss();
+
+                            //converting response to json object
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            if (jsonObject.length()>0) {
+
+                                JSONObject jsonParent = jsonObject.getJSONObject("Root").getJSONObject("Parent");
+
+                                rangeBar_ageRange.setRangePinsByValue(Float.parseFloat(jsonParent.getString("AgeMin")),
+                                        Float.parseFloat(jsonParent.getString("AgeMax")));
+
+                                rangeBar_heightRange.setRangePinsByValue(Float.parseFloat(jsonParent.getString("HeightMin")),
+                                        Float.parseFloat(jsonParent.getString("HeightMax")));
+
+
+
+/*
+                                checkIfEmpty(textView_serviceType, jsonParent.getString("ServiceType"));
+                                checkIfEmpty(textView_workingIn, jsonParent.getString("WorkingIn"));
+                                checkIfEmpty(textView_currentService, jsonParent.getString("CurrentService"));
+
+*/
+
+
+
+                                getJsonData(jsonParent,"Relegions", "Relegions","ReligionId", "ReligionName", editText_religon, arrayList_religion);
+                                getJsonData(jsonParent,"Caste","Caste","CasteId", "CasteName", editText_caste, arrayList_caste);
+                                getJsonData(jsonParent,"SubCaste", "SubCaste","SubCasteId", "SubCasteName", editText_subCaste, arrayList_SubCaste);
+                                getJsonData(jsonParent,"ResidentialCountry", "ResidentialCountry","ID", "Name", editText_country, arrayList_residentialCountryIds);
+                                getJsonData(jsonParent,"ResidentialState", "ResidentialState", "ID", "Name", editText_state, arrayList_residentialStateIds);
+                                getJsonData(jsonParent,"ResidentialCity", "CityMaster","ID", "Name", editText_city, arrayList_residentialCityIds);
+                                getJsonData(jsonParent,"WorkingCountry", "WorkingCountry", "ID", "Name", editText_workingCountry, arrayList_workingCountryIds);
+                                getJsonData(jsonParent,"WorkingStateId", "WorkingStateId", "ID", "Name", editText_workingState, arrayList_workingStateIds);
+                                getJsonData(jsonParent,"WorkingCity", "WorkingCity", "ID", "Name", editText_workingCity, arrayList_workingCityIds);
+                                getJsonData(jsonParent,"QualificationLevel", "QualificationLevel", "QualificationLevelId", "QualificationLevelName", editText_highestQualificationLevel, arrayList_highestQualificationLevel);
+                                getJsonData(jsonParent,"Qualification", "Qualification", "QualificationId", "Qualification", editText_qualification, arrayList_qualification);
+                                getJsonData(jsonParent,"Occupation", "Occupation", "OccupationId", "OccupationName", editText_occupation, arrayList_occupation);
+                                getJsonData(jsonParent,"ExpectedIndividualIncome", "ExpectedIndividualIncome", "SalaryPackageId", "SalaryPackageName", editText_individualIncome, arrayList_individualIncome);
+                                getJsonData(jsonParent,"ExpectedFamilyIncome", "ExpectedFamilyIncome", "SalaryPackageId", "SalaryPackageName", editText_familyIncome, arrayList_familyIncome);
+                                getJsonData(jsonParent,"FamilyType", "FamilyType", "FamilyTypeId", "FamilyTypeName", editText_familyType, arrayList_familyType);
+                                getJsonData(jsonParent,"FamilyValues", "FamilyValues", "FamilyValuesId", "FamilyValuesName", editText_familyValues, arrayList_familyValues);
+                                getJsonData(jsonParent,"Diet", "Diet", "DietId", "DietName", editText_diet, arrayList_diet);
+                                getJsonData(jsonParent,"MaritalStatus", "MaritalStatus", "MaritalStatusId", "MaritalStatusName", editText_maritalStatus, arrayList_maritalStatus);
+                                //getJsonData(jsonParent,"MaritalStatus", "MaritalStatus", "MaritalStatusId", "MaritalStatusName", editText_maritalStatus, arrayList_maritalStatus);
+
+
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SetPreferencesActivity.this, "Something went wrong POST ! ", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("UserId",userModel.getUserId());
+
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(SetPreferencesActivity.this).addToRequestQueue(stringRequest);
+
+
+    }
+
+    private void getJsonData(JSONObject jsonObject, String parentKeyName, String childKeyName,
+                             String columnId, String columnName, EditText textView, ArrayList arrayList) {
+
+        try {
+            textView.setText("");
+            String names="";
+            arrayList.clear();
+
+            if(jsonObject.has(parentKeyName))
+            {
+
+                Object object = new JSONTokener(jsonObject.getJSONObject(parentKeyName).getString(childKeyName)).nextValue();
+
+
+
+                if (object instanceof JSONArray)
+                {
+                    JSONArray jsonArray = new JSONArray(jsonObject.getJSONObject(parentKeyName).getString(childKeyName));
+                    for (int i=0; i<jsonArray.length(); i++)
+                    {
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        names = names + jsonObject1.getString(columnName)+", ";
+                        arrayList.add(jsonObject1.getString(columnId));
+                    }
+                    names = names.substring(0,names.length()-2);
+                    //stringIds = stringIds.substring(0,stringIds.length()-1);
+                }
+
+                else if(object instanceof JSONObject)
+                {
+                    JSONObject json = new JSONObject(jsonObject.getJSONObject(parentKeyName).getString(childKeyName));
+
+                    names = json.getString(columnName);
+                    arrayList.add(json.getString((columnId)));
+
+                }
+
+
+                textView.setText(names);
+
+
+            }
+
+
+
+
+
+
+        } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+        }
+
+
+    }
+
+
 
     private void insertSQLDetails()
     {

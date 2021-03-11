@@ -53,7 +53,7 @@
                         android:layout_marginEnd="0dp"
                         android:layout_marginBottom="0dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/flower3" />
+                        android:src="@color/codeGray" />
 
                     <ImageView
                         android:layout_width="30dp"
@@ -206,9 +206,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/linearLayout_occupationTitle"
-                    >
+                    android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -251,9 +249,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="2dp"
-                    android:layout_marginBottom="10dp"
-                    android:id="@+id/linearLayout_qualificationTitle"
-                    >
+                    android:layout_marginBottom="10dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

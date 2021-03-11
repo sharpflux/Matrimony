@@ -19,13 +19,14 @@ import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+/*import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.ValueEventListener;*/
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,15 +37,15 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
     private String currentLanguage;
 
-    FirebaseUser firebaseUser;
+    //FirebaseUser firebaseUser;
     ArrayList<DirectMessagesModel> directMessagesModelList;
     RecyclerView recyclerView_directMessage;
     DirectMessagesAdapter directMessagesAdapter;
     Context context;
 
     ArrayList<ChatListModel> arrayList_chatListModel ;
-    FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference;
+/*    FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;*/
     private ArrayList<String> arrayList_chatUsers;
 
     @Override
@@ -71,9 +72,9 @@ public class DirectMessagesActivity extends AppCompatActivity {
         directMessagesModelList = new ArrayList<DirectMessagesModel>();
 
 
-        Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
+/*        Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
                 +"/"+this.getResources().getResourceTypeName(R.drawable.flower2)
-                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));
+                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));*/
 
 /*
         for(int i=0; i<15; i++)
@@ -93,9 +94,10 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
         userActivityStatus("online");
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        //firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         arrayList_chatListModel = new ArrayList<>();
 
+/*
 
         databaseReference = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -115,6 +117,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
             }
         });
+*/
 
 
 
@@ -126,6 +129,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
     private void readChatList() {
 
+/*
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -160,11 +164,13 @@ public class DirectMessagesActivity extends AppCompatActivity {
             }
         });
 
+*/
 
     }
 
     private void userActivityStatus(String activityStatus)
     {
+/*
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser.getUid()!=null) {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -174,13 +180,14 @@ public class DirectMessagesActivity extends AppCompatActivity {
         }
 
 
+*/
 
 
     }
 
     private void readChatUsers()
     {
-
+/*
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
 
@@ -212,18 +219,18 @@ public class DirectMessagesActivity extends AppCompatActivity {
                 }
 
 
-/*
+*//*
                 directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
                 recyclerView_directMessage.setAdapter(directMessagesAdapter);
                 recyclerView_directMessage.setHasFixedSize(true);
                 LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
                 recyclerView_directMessage.setLayoutManager(mLayoutManager);
-*/
+*//*
 
                 directMessagesAdapter.notifyDataSetChanged();
 
             }
-        });
+        });*/
 
     }
 
@@ -327,7 +334,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
         private void readAllUsers()
     {
-
+/*
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -351,17 +358,13 @@ public class DirectMessagesActivity extends AppCompatActivity {
                     }
 
                 }
-/*                directMessagesAdapter = new DirectMessagesAdapter(DirectMessagesActivity.this,directMessagesModelList, true);
-                recyclerView_directMessage.setAdapter(directMessagesAdapter);
-                recyclerView_directMessage.setHasFixedSize(true);
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-                recyclerView_directMessage.setLayoutManager(mLayoutManager);*/
+
 
 
                 directMessagesAdapter.notifyDataSetChanged();
 
             }
-        });
+        });*/
 
     }
 

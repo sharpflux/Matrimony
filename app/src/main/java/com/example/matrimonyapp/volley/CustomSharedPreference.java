@@ -11,7 +11,8 @@ import android.util.DisplayMetrics;
 
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.UserModel;
-import com.google.firebase.auth.FirebaseAuth;
+
+
 
 import java.io.File;
 import java.util.Locale;
@@ -114,7 +115,7 @@ public class CustomSharedPreference {
         editor.clear();
         //editor.apply();
         editor.commit();
-        FirebaseAuth.getInstance().signOut();
+        //FirebaseAuth.getInstance().signOut();
         deleteCache(context);
         Intent intent = new Intent(context, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

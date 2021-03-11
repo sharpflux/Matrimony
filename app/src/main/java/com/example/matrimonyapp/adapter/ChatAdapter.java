@@ -14,8 +14,8 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+/*import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;*/
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private static final int MSG_TYPE_RIGHT = 1;
     private UserModel userModel;
 
-    private FirebaseUser firebaseUser;
+//    private FirebaseUser firebaseUser;
 
 
     public ChatAdapter(Context context, ArrayList<ChatModel> list)

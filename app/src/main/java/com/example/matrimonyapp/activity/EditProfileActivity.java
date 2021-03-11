@@ -33,6 +33,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ProfileTabLayoutAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogChangeProfilePic;
@@ -46,9 +47,9 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.material.tabs.TabLayout;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.MemoryPolicy;
+//import com.squareup.picasso.NetworkPolicy;
+//import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -514,7 +515,21 @@ public class EditProfileActivity extends AppCompatActivity {
                                     if(!(URLs.MainURL+jsonObject.getString("ImageUrl")).equals("1")
                                             && !(URLs.MainURL+jsonObject.getString("ImageUrl")).equals("0"))
                                     {
+                                        Glide.with(EditProfileActivity.this)
+                                        .load(URLs.MainURL + jsonObject.getString("ImageUrl"))
+                                                .placeholder(R.color.codeGray)
+                                        .into(circleImageView_profilePic);
+                                        Glide.with(EditProfileActivity.this)
+                                                .load(URLs.MainURL + jsonObject.getString("ImageUrl"))
+                                                .placeholder(R.color.codeGray)
+                                                .into(toolbarImageView);
+                                        Glide.with(EditProfileActivity.this)
+                                                .load(URLs.MainURL + jsonObject.getString("ImageUrl"))
+                                                .placeholder(R.color.codeGray)
+                                                .into(circleImage_profilePic);
+
                                         //to clear cache
+/*
                                         Picasso.get().invalidate(URLs.MainURL + jsonObject.getString("ImageUrl"));
                                         Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
                                                 .networkPolicy(NetworkPolicy.NO_CACHE)
@@ -528,14 +543,17 @@ public class EditProfileActivity extends AppCompatActivity {
                                                 .error(R.drawable.default_profile)
                                                 .placeholder(R.color.quantum_bluegrey900)
                                                 .into(toolbarImageView);
+*/
 
 
+/*
                                         Picasso.get().load(URLs.MainURL + jsonObject.getString("ImageUrl"))
                                                 .networkPolicy(NetworkPolicy.NO_CACHE)
                                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                                                 .error(R.drawable.default_profile)
                                                 .placeholder(R.color.quantum_bluegrey900)
                                                 .into(circleImage_profilePic);
+*/
 
                                         userModel.setProfilePic(URLs.MainURL+jsonObject.getString("ImageUrl"));
 

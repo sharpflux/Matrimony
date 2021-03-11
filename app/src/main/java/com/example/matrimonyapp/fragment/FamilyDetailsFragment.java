@@ -61,7 +61,7 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.suke.widget.SwitchButton;
+//import com.suke.widget.SwitchButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;

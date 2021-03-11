@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="item_offset">2dp</dimen>
-    <dimen name="_12sdp">26.399994dip</dimen>
     <dimen name="dimen_10">10.0dip</dimen>
     <dimen name="padding_mini">4.0dip</dimen>
     <color name="grey_4a">#ff4a4a4a</color>

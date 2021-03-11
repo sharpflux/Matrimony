@@ -32,8 +32,8 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+//import jp.wasabeef.blurry.internal.Blur;
+//import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialogChangeLanguage extends Dialog {
 

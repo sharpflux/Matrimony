@@ -26,13 +26,20 @@ import com.example.matrimonyapp.modal.DirectMessagesModel;
 import com.example.matrimonyapp.volley.URLs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
+/*import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;*/
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,12 +56,12 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView_chat;
     ChatAdapter chatAdapter;
     Context context;
-    private FirebaseUser firebaseUser;
-    DatabaseReference databaseReference;
+    //private FirebaseUser firebaseUser;
+    //DatabaseReference databaseReference;
     private Intent intent;
 
     private ScrollView scrollView;
-    private ValueEventListener seenListener;
+    //private ValueEventListener seenListener;
 
 
     @Override
@@ -142,7 +149,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatModelsList = new ArrayList<>();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+/*        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -166,15 +173,7 @@ public class ChatActivity extends AppCompatActivity {
                 recyclerView_chat.setAdapter(chatAdapter);
                 recyclerView_chat.setHasFixedSize(true);
 
-               /* scrollView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // recyclerView_chat.smoothScrollToPosition(recyclerView_chat.getAdapter().getItemCount());
-                        scrollView.smoothScrollTo(0,scrollView.getHeight());
-                        recyclerView_chat.smoothScrollToPosition(recyclerView_chat.getAdapter().getItemCount()-1);
 
-                    }
-                }, 1000);*/
 
             }
 
@@ -182,14 +181,14 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
     }
 
     private void messageStatus(final String userId)
     {
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+/*        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
 
         seenListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -213,19 +212,19 @@ public class ChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
     }
 
     private void userActivityStatus(String activityStatus)
     {
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+      /*  final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("activityStatus", activityStatus);
         databaseReference.updateChildren(hashMap);
-
+*/
 
     }
 
@@ -234,6 +233,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage() {
 
+/*
 
         final String friendfirebaseUserId = intent.getStringExtra("firebaseUserId");
         String myfirebaseUserId = firebaseUser.getUid();
@@ -293,10 +293,12 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+*/
 
     }
 
     private void firebaseInit() {
+/*
 
         final String friendfirebaseUserId = intent.getStringExtra("firebaseUserId");
 
@@ -327,6 +329,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         messageStatus(friendfirebaseUserId);
+*/
 
     }
 
@@ -347,7 +350,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        databaseReference.removeEventListener(seenListener);
+       // databaseReference.removeEventListener(seenListener);
         userActivityStatus("offline");
     }
 

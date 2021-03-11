@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string-array name="tickLabels_salary">
-        <item>1L</item>
-        <item>2L</item>
-        <item>4L</item>
-        <item>6L</item>
-        <item>8L</item>
-        <item>10L</item>
-        <item>12L</item>
-        <item>14L</item>
-        <item>16L</item>
-
-    </string-array>
-
 
     <string-array name="tickLabels_height">
         <item>3ft</item>
@@ -25,41 +12,7 @@
     </string-array>
 
 
-    <string-array name="tickLabels_age" tools:ignore="DuplicateDefinition">
-        <item>21</item>
-        <item>22</item>
-        <item>23</item>
-        <item>24</item>
-        <item>25</item>
-        <item>26</item>
-        <item>27</item>
-        <item>28</item>
-        <item>29</item>
-        <item>30</item>
-        <item>31</item>
-        <item>32</item>
-        <item>33</item>
-        <item>34</item>
-        <item>35</item>
-        <item>36</item>
-        <item>37</item>
-        <item>38</item>
-        <item>39</item>
-        <item>40</item>
-        <item>41</item>
-        <item>42</item>
-        <item>43</item>
-        <item>44</item>
-        <item>45</item>
-        <item>46</item>
-        <item>47</item>
-        <item>48</item>
-        <item>49</item>
-        <item>50</item>
-
-    </string-array>
-
-<!--
+    <!--
     <string-array name="tickLabels_age" tools:ignore="DuplicateDefinition">
         <item>21</item>
         <item>24</item>

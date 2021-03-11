@@ -26,8 +26,8 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+//import jp.wasabeef.blurry.internal.Blur;
+//import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialogAddYear extends Dialog {
 

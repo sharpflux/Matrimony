@@ -1,20 +1,13 @@
 <resources>
     <string name="app_name">Jodidar Maza</string>
     <string name="tag_line">Your search for perfect partner ends here...</string>
-    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="my_profile">My Profile</string>
     <string name="rate_app">Rate App</string>
     <string name="subscription_plan">Subscription Plan</string>
 
-    <string name="provide_your">Provide your Mobile Number \n for Verification</string>
     <string name="mobile">Mobile No. *</string>
     <string name="mobile_">Mobile No. </string>
     <string name="alt_mobile">Alternate Mobile No.</string>
     <string name="password">Password *</string>
-    <string name="firstName">First Name *</string>
-    <string name="middleName">Middle Name *</string>
-    <string name="lastName">Last Name *</string>
-    <string name="signIn">Sign In</string>
     <string name="backToSignIn">Back to Sign In</string>
     <string name="dontHaveAnAccount">Don\'t have an account?</string>
     <string name="signUp">Sign Up</string>
@@ -24,7 +17,6 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="date">Date</string>
     <string name="birth_details">Birth Details</string>
     <string name="birthdate">Birthdate </string>
     <string name="age">Age</string>
@@ -34,7 +26,6 @@
     <string name="birth_taluka">Birth Taluka </string>
     <string name="birth_district">Birth District </string>
     <string name="accurate">Accurate</string>
-    <string name="approximate">Approximate</string>
     <string name="approx">Approx</string>
     <string name="city">City *</string>
     <string name="_city">City</string>
@@ -42,9 +33,7 @@
     <string name="state">State *</string>
     <string name="country">Country</string>
     <string name="_state">State</string>
-    <string name="district">District *</string>
     <string name="_district">District</string>
-    <string name="taluka">Taluka *</string>
     <string name="_taluka">Taluka</string>
     <string name="pincode">Pincode *</string>
     <string name="postal_code">Postal code *</string>
@@ -52,9 +41,6 @@
     <string name="email">Email Id *</string>
     <string name="_email">Email Id </string>
     <string name="alt_email">Alternate Email Id</string>
-    <string name="search_state"> Search State</string>
-    <string name="Open"> Open</string>
-    <string name="Close"> Close</string>
     <string name="password1">Password</string>
     <string name="registered">Registered Mobile No.</string>
     <string name="indiaCode">+91</string>
@@ -67,7 +53,6 @@
 
     <string name="change_profile_photo">Change Profile Photo</string>
     <string name="remove_profile_photo">Remove Profile Photo</string>
-    <string name="camera">Camera</string>
     <string name="mobile_no_on_another_account">This mobile no. is on another account</string>
     <string name="login_to_existing_account">Log in to existing account</string>
     <string name="create_new_account">Create New Account</string>
@@ -77,10 +62,7 @@
     <string name="set_preferences">Set Preferences</string>
     <string name="reset_preferences">Reset Preferences</string>
     <string name="who_are_you_looking_for">Who are you looking for?</string>
-    <string name="location">Permanent Location</string>
-    <string name="add_location">Add Location</string>
     <string name="age_should_be_between">Age should be between</string>
-    <string name="salary_should_be_between">Salary should be between</string>
     <string name="height_should_be_between">Height should be between</string>
     <string name="willing_to_marry_in_other_communities">Willing to marry in other communities ?</string>
     <string name="qualification">Qualification</string>
@@ -107,9 +89,7 @@
     <string name="father_name">Father\'s Name</string>
     <string name="mother_name">Mother\'s Name</string>
     <string name="mother_information">Mother\'s Information</string>
-    <string name="occupation_father">Father\'s Occupation *</string>
     <string name="occupation_mother">Mother\'s Occupation *</string>
-    <string name="family_income">Family Annual Income</string>
     <string name="annual_income">Annual Income</string>
     <string name="annual_income_father">Father\'s Annual Income</string>
     <string name="annual_income_mother">Mother\'s Annual Income</string>
@@ -132,7 +112,6 @@
     <string name="basic_details">Basic Details </string>
     <string name="family_details">Family Details </string>
     <string name="gothram">Gothram </string>
-    <string name="dosh">Dosh </string>
     <string name="mother_tongue">Mother Tongue</string>
     <string name="language">Language</string>
     <string name="change_language">Change Language</string>
@@ -144,24 +123,14 @@
     <string name="institue_university">Name of Institute or University</string>
     <string name="name_of_institute">Name of Institute</string>
     <string name="percentage">Percentage</string>
-    <string name="add_percentage">Add Percentage </string>
     <string name="year">Year</string>
     <string name="passing_year">Passing Year</string>
-    <string name="graduation">Graduation </string>
-    <string name="post_graduation">Post Graduation </string>
     <string name="highest_qualification_details">Highest Qualifictaion Details</string>
-    <string name="ssc">SSC</string>
-    <string name="hsc">HSC</string>
-    <string name="course">Course</string>
-    <string name="acamedics">Academics</string>
     <string name="extra_activities">Extra Activities</string>
     <string name="hobby">Hobby</string>
     <string name="social_contributions">Social Contributions</string>
     <string name="company_name">Company Name</string>
-    <string name="works_in">Works in *</string>
     <string name="designation">Designation</string>
-    <string name="monthly_income">Monthly Income</string>
-    <string name="salary_package">Package</string>
     <string name="experience">Experience (in years) </string>
     <string name="company_address">Company Address </string>
     <string name="bio">Bio</string>
@@ -171,17 +140,9 @@
     <string name="send">Send</string>
     <string name="user_id">\@userId101</string>
     <string name="user_name">userName</string>
-    <string name="user_bio">Your Bio here!!!..</string>
-    <string name="about_me">About Me</string>
-    <string name="profile_information">Profile Information</string>
-    <string name="religious_information">Religious Information</string>
     <string name="professional_information">Professional Information</string>
     <string name="professional_details">Professional Details</string>
-    <string name="family_information">Family Information</string>
-    <string name="personal_information">Personal Information</string>
-    <string name="educational_information">Educational Information</string>
     <string name="favorite">Favorites</string>
-    <string name="add_to_favorite">Add to favorites</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="add_profile_photo">Add Profile Photo</string>
     <string name="add_from_gallery">Add from Gallery </string>
@@ -192,8 +153,6 @@
     <string name="set_preferences_desc">Set your Preferences for better search results.</string>
     <string name="complete_your_profile">Complete your profile</string>
     <string name="add_bio">Add bio</string>
-    <string name="add_your_basic_details">Add your basic details</string>
-    <string name="tell_basic_details">Tell your friends a little bit about yourself.</string>
     <string name="tell_about_yourself">Tell your friends a little bit about yourself.</string>
     <string name="share_photo_desc">When you share photos, they\'ll appear on your profile</string>
     <string name="share_first_photo_desc">Share your first photo</string>
@@ -202,23 +161,14 @@
     <string name="only_text">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="only_text_with_space">a bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MultiPhotoSelect</string>
-
-    <string name="permission_rationale">"Storage permission is needed for fetching images from Gallery."</string>
-
     <!-- Content descriptions -->
-    <string name="descr_image">Image</string>
     <string name="image">Image</string>
     <string name="no_image_selected">No image Selected</string>
 
 
     <string name="height">Height </string>
     <string name="ft">ft.</string>
-    <string name="inch">inch</string>
     <string name="weight">Weight</string>
-    <string name="kgs">kgs. </string>
     <string name="colour">Colour</string>
     <string name="marital_status">Marital Status</string>
 
@@ -229,8 +179,6 @@
     <string name="disability">Disability</string>
     <string name="disability_type">Disability Type</string>
     <string name="diet">Diet</string>
-    <string name="veg">Veg</string>
-    <string name="non_veg">Non-Veg</string>
     <string name="lives_with_family">Lives with family ?</string>
 
 
@@ -242,19 +190,10 @@
     <string name="vehicle_details">Vehicle Details</string>
     <string name="farm_details">Farm Details</string>
     <string name="crops_taken">Crops Taken</string>
-    <string name="full">Full</string>
-    <string name="partly">Partly</string>
     <string name="vehicle_type">Vehicle Type</string>
     <string name="cost">Cost</string>
     <string name="brand_name">Brand Name</string>
     <string name="model_name">Model Name</string>
-    <string name="farm_type">Farm Type</string>
-    <string name="irrigated">Irrigated</string>
-    <string name="area_farmed">Area Farmed</string>
-    <string name="non_irrigated">Non-Irrigated</string>
-    <string name="property">Property</string>
-    <string name="siblings_name">Siblings Name</string>
-    <string name="siblings_information">Sibling\'s Information</string>
     <string name="siblings_details">Sibling\'s Details</string>
     <string name="education">Education</string>
     <string name="relative_information">Relative\'s Information</string>
@@ -263,23 +202,12 @@
     <string name="relative2">Relative 2</string>
     <string name="relative3">Relative 3</string>
     <string name="relative4">Relative 4</string>
-    <string name="surname1">Surname 1</string>
-    <string name="surname2">Surname 2</string>
-    <string name="surname3">Surname 3</string>
-    <string name="surname4">Surname 4</string>
-    <string name="mama_information">Mama\'s Information</string>
     <string name="mama_details">Mama\'s Details</string>
-    <string name="mama_name">Mama Name</string>
 
-    <string name="contine">CONTINUE</string>
-    <string name="we_have">We have sent a “4 digit Code”</string>
-    <string name="on_91">On +91 97374928198</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="be_patient">Be Patient</string>
     <string name="we_are_verifying">We are verifying your mobile number</string>
-    <string name="_55">55 sec</string>
-    <string name="_60">60 sec</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="search">Search</string>
 
@@ -288,16 +216,8 @@
     <string name="ok">Ok</string>
     <string name="done">Done</string>
 
-    <string name="need_help">NEED HELP?</string>
-    <string name="email_invoice">Email Invoice</string>
-
-    <string name="payment_info">Payment Information</string>
-
     <string name="notifications">Notifications</string>
     <string name="logout">Logout</string>
-
-    <string name="net_pay">Net Pay</string>
-    <string name="payment_method">Payment Method</string>
 
     <string name="save_cont">SAVE &amp; CONTINUE</string>
     <string name="full_name">Full name *</string>
@@ -307,7 +227,6 @@
     <string name="service_description">Service Description</string>
 
 
-    <string name="contact_mobile_no">Contact Mobile Number</string>
     <string name="address">Address *</string>
     <string name="address_">Address</string>
     <string name="residential_location">Residential Location</string>
@@ -316,7 +235,6 @@
     <string name="current_address">Current Address</string>
     <string name="is_address_same">Is Current Address same as Permanent Address </string>
     <string name="area">Area</string>
-    <string name="farming_area">Farming Area</string>
     <string name="carpet_area">Carpet Area</string>
     <string name="sq_ft">sq. ft.</string>
     <string name="rs">\u20B9</string>
@@ -334,8 +252,6 @@
 
     <string name="login_reg">Login / Register</string>
 
-    <string name="welcome">Welcome to JodidarMaza </string>
-
 
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
@@ -344,7 +260,6 @@
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="help_and_feedback">Help &amp; feedback</string>
     <string name="spouse_name">Spouse\'s Name</string>
     <string name="education_details">Education Details</string>
@@ -361,7 +276,6 @@
     <string name="account_is_private">This account is private</string>
     <string name="follow_account_to_see_information"> Follow this account to see their photos and other information</string>
     <string name="interest_accepted">Interest Accepted</string>
-    <string name="buy_now">Buy Now</string>
     <string name="select_this_plan">Select this plan</string>
     <string name="birth_city">Birth City</string>
     <string name="birth_country">Birth Country</string>
@@ -372,28 +286,6 @@
     <string name="year_of_birth">Year of Birth</string>
     <string name="care_of">Care Of</string>
     <string name="upload_documents">Upload Documents</string>
-    <string name="payments">Payments</string>
-    <string name="wallets">Wallets</string>
-    <string name="amazon_pay">Amazon pay</string>
-    <string name="linked">Linked</string>
-    <string name="get_flat_10_cashback_on_payment_above_99rs">Get flat 10% Cashback on payment above Rs. 99/-</string>
-    <string name="paypal">PayPal</string>
-    <string name="link_account">LINK ACCOUNT</string>
-    <string name="paytm">PayTM</string>
-    <string name="credit_debit_card">CREDIT/DEBIT CARD</string>
-    <string name="_3432_xxxxxxxx_1231">3432-XXXXXXXX-1231</string>
-    <string name="make_payment">MAKE PAYMENT</string>
-    <string name="pay_on_delivery">PAY ON DELIVERY</string>
-    <string name="please_keep_extra_change_when_delivery_boy_arrive_for_ndelivery">
-        Please keep extra change when delivery boy arrive for\ndelivery.</string>
-    <string name="pay_with_cash">PAY WITH CASH</string>
-    <string name="search_plate">Search Plate</string>
-    <string name="cvv">CVV</string>
-    <string name="add_new_card">Add New Card</string>
-    <string name="cash">Cash</string>
-    <string name="_1_item_to_pay_280">1 item, To pay : ₹ 280</string>
-    <string name="securely_save_card_details">Securely save card details</string>
-    <string name="apply">APPLY</string>
     <string name="at">at</string>
     <string name="studied_at">Studied at</string>
     <string name="dash">-</string>
@@ -403,7 +295,6 @@
     <string name="working_state">Working State</string>
     <string name="working_country">Working Country</string>
     <string name="view">View</string>
-    <string name="property_address">Property Address</string>
     <string name="address_details">Address Details</string>
     <string name="confirm_password">Confirm Password *</string>
     <string name="_show">Show</string>
@@ -435,7 +326,6 @@
     <string name="no_of_expired_mama">No. of Mama expired</string>
     <string name="family_income_from_all_sources">Family Annual Income from all sources</string>
     <string name="birth_city_taluka">Birth City or Taluka</string>
-    <string name="remove_favorite">Remove Favorite</string>
     <string name="requested">Requested</string>
     <string name="received">Received</string>
     <string name="sent">Sent</string>
@@ -448,7 +338,6 @@
     <string name="save">Save</string>
     <string name="language_settings">Language Settings</string>
     <string name="recent_chats">Recent Chats</string>
-    <string name="online_users">Online Users</string>
     <string name="about">About</string>
     <string name="family">Family</string>
     <string name="preferences">Preferences</string>
@@ -461,12 +350,12 @@
     <string name="quaterly_plan">Quaterly Plan</string>
     <string name="half_yearly_plan">Half Yearly Plan</string>
     <string name="yearly_plan">Yearly Plan</string>
-    <string name="old_user">Old User </string>
     <string name="new_user">New User ? </string>
     <string name="register_here">Register here</string>
     <string name="registration">Registration</string>
     <string name="register">Register</string>
     <string name="backToLogIn">Back to LogIn</string>
+    <string name="total_no_of_mama">Total No. of Mama</string>
 
 
 </resources>

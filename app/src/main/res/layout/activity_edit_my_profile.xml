@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
+    android:id="@+id/motionLayout"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/motion_scene_edit_profile_collapsing_toolbar"
     android:background="@color/quantum_bluegrey900">
@@ -61,6 +61,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/cardView"
             android:orientation="vertical"
             android:layout_below="@+id/circleImageView_profilePic"
             app:cardCornerRadius="15dp"
@@ -70,7 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView_addProfilePic"
+                android:id="@+id/textView_addPhoto"
                 android:text="@string/add_profile_photo"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
@@ -87,6 +88,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/textView_changeProfilePhoto"
             android:text="@string/add_profile_photo_desc"
             android:layout_marginTop="13dp"
             android:paddingStart="20dp"
@@ -108,7 +110,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="24dp"
-        android:src="@drawable/flower2"
+        android:src="@color/codeGray"
         app:layout_constraintBottom_toBottomOf="@id/toolbarImageView"
         app:layout_constraintEnd_toStartOf="@id/toolbarTitle"
         app:layout_constraintStart_toStartOf="parent" />
@@ -160,6 +162,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tabItem_about"
                 android:text="@string/about"
                 android:foregroundTint="@color/quantum_grey"
                 />
@@ -177,6 +180,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/tabItem_preferences"
                 android:text="@string/preferences"/>
 
         </com.google.android.material.tabs.TabLayout>

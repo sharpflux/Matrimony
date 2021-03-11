@@ -171,9 +171,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
         });
 
 
-        Uri uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE+"://"+this.getResources().getResourcePackageName(R.drawable.flower2)
-                +"/"+this.getResources().getResourceTypeName(R.drawable.flower2)
-                +"/"+this.getResources().getResourceEntryName(R.drawable.flower2));
+
 
         arrayList_singleImage = new ArrayList<SingleImage>();
         ArrayList<String> sliderImages = new ArrayList<>();

@@ -373,7 +373,6 @@
                                 android:contentDescription="@string/image"/>
 
                             <TextView
-                                android:id="@+id/txt_subcasteId"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_0"
@@ -416,7 +415,6 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView_maritalStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -905,7 +903,6 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_working_country"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -944,7 +941,6 @@
                                     android:contentDescription="@string/image"/>
 
                                 <TextView
-                                    android:id="@+id/textView_workingStateId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -997,7 +993,6 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_working_state"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -1036,7 +1031,6 @@
                                     android:contentDescription="@string/image"/>
 
                                 <TextView
-                                    android:id="@+id/textView_workingDistrictId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -1089,7 +1083,6 @@
                             >
 
                             <LinearLayout
-                                android:id="@+id/lr_working_city"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="3dp"
@@ -1128,7 +1121,6 @@
                                     android:contentDescription="@string/image"/>
 
                                 <TextView
-                                    android:id="@+id/textView_workingTalukaId"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/_0"
@@ -1500,7 +1492,6 @@
                                 android:contentDescription="@string/image"/>
 
                             <TextView
-                                android:id="@+id/txt_qualificationINId"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_0"
@@ -1580,7 +1571,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:id="@+id/radioButton_nonService"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
                             android:text="@string/non_service"
@@ -1616,7 +1606,6 @@
                         <RadioButton
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_workingInAbroad"
                             android:text="@string/working_in_abroad"
                             android:layout_weight="1"
                             android:layout_gravity="center_vertical"
@@ -1641,7 +1630,6 @@
                         <RadioButton
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_govtJob"
                             android:layout_weight="1"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
@@ -1652,7 +1640,6 @@
                         <RadioButton
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_privateJob"
                             android:layout_weight="1"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="15dp"
@@ -1919,7 +1906,6 @@
                                 android:contentDescription="@string/image"/>
 
                             <TextView
-                                android:id="@+id/txt_personalIncomeId"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_0"
@@ -2014,7 +2000,6 @@
                                 android:contentDescription="@string/image"/>
 
                             <TextView
-                                android:id="@+id/txt_familyIncomeId"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_0"
@@ -2429,7 +2414,6 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView_diet"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -2481,7 +2465,6 @@
                                 android:contentDescription="@string/image"/>
 
                             <TextView
-                                android:id="@+id/txt_dietsId"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/_0"
@@ -2595,7 +2578,6 @@
 
 
     <LinearLayout
-        android:id="@+id/shadow_down"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"

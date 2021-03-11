@@ -27,8 +27,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.MultipleSelectionAdapter;
 import com.example.matrimonyapp.adapter.PromptAdapter;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+
 
 public class CustomDialogMultipleSelection extends Dialog implements View.OnClickListener {
 

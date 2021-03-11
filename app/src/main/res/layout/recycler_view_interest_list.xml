@@ -43,7 +43,7 @@
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/flower2"
+                    android:src="@color/codeGray"
 
                     />
 
@@ -106,7 +106,6 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cardView_follow"
                     app:cardElevation="2dp"
                     app:cardCornerRadius="5dp"
                     android:layout_marginTop="20dp"
@@ -120,7 +119,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/linearLayout_follow"
                         android:orientation="horizontal"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
@@ -180,7 +178,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_linearLayout_requested"
                             android:text="@string/requested"
                             android:paddingStart="5dp"
                             android:paddingEnd="5dp"
@@ -203,7 +200,6 @@
 
             </LinearLayout>
         <LinearLayout
-            android:id="@+id/shadow"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:orientation="horizontal"

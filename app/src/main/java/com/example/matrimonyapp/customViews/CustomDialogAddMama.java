@@ -42,15 +42,15 @@ import com.example.matrimonyapp.sqlite.SQLiteSiblingDetails;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
-import com.suke.widget.SwitchButton;
+//import com.suke.widget.SwitchButton;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import jp.wasabeef.blurry.Blurry;
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
-import jp.wasabeef.blurry.internal.BlurTask;
+//import jp.wasabeef.blurry.Blurry;
+//import jp.wasabeef.blurry.internal.Blur;
+//import jp.wasabeef.blurry.internal.BlurFactor;
+//import jp.wasabeef.blurry.internal.BlurTask;
 
 public class CustomDialogAddMama extends Dialog {
 

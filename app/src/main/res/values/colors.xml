@@ -5,39 +5,23 @@
     <color name="colorAccent">#000000</color>
     <color name="black">#000000</color>
     <color name="light_weight_gray">#99000000</color>
-    <color name="toolbar_text_black">#0f0d0e</color>
     <color name="text_black">#403f3f</color>
     <color name="drawable_arrow_color">#ADADAD</color>
 
     <color name="text_white">#E5E5E5</color> <!--F0EDED-->
-    <color name="viewline">#cccccc</color>
     <color name="blue">#2546b0</color>
-    <color name="green">#349d13</color>
-    <color name="smokegray">#bdc0c6</color>
     <color name="green_dark">#60b244</color>
     <color name="gray">#90959f</color>
 
-    <color name="silver">#777779</color>
-    <color name="lightsilver">#b6b6b6</color>
     <color name="orange">#fa6c3c</color>
-    <color name="transparent_bg">#80000000</color>
     <color name="transparent">#00000000</color>
     <color name="text_gray">#a09e9f</color>
-    <color name="line_gray">#a09e9f</color>
     <color name="white">#ffffff</color>
     <color name="purple">#92309a</color>
-    <color name="order_text_gray">#a7a7a7</color>
     <color name="order_view_gray">#979797</color>
-    <color name="order_text_green">#39b633</color>
-    <color name="profile_text_gray">#9b9898</color>
-    <color name="add_view_gray">#ebebeb</color>
-    <color name="view_blue">#3fa0ff</color>
-    <color name="another_text_gray">#707070</color>
-    <color name="size_gray">#9b9898</color>
     <color name="project_color">#9e2e90</color>
     <color name="red_heart">#D80027</color>
     <color name="yellow_favorite">#FFE333</color>
-    <color name="default_background">#F5F5F5</color>
     <color name="pink">#cb2470</color>
     <color name="codeGray">#e7e7e7</color>
 

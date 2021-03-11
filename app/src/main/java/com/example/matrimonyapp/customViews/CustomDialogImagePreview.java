@@ -16,8 +16,7 @@ import android.widget.TextView;
 
 import com.example.matrimonyapp.R;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+
 
 public class CustomDialogImagePreview extends Dialog implements View.OnClickListener {
 

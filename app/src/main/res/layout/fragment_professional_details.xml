@@ -75,7 +75,6 @@
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/radioButton_privateService"
                                 android:text="@string/private_job"
                                 android:textSize="13sp"
                                 android:layout_marginStart="25dp"

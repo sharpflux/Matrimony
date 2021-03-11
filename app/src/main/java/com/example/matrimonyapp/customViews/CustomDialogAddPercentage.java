@@ -21,8 +21,8 @@ import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+//import jp.wasabeef.blurry.internal.Blur;
+//import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialogAddPercentage extends Dialog {
 

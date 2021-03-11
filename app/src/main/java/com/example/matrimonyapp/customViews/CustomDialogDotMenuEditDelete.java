@@ -31,8 +31,8 @@ import com.example.matrimonyapp.sqlite.SQLiteVehicleDetails;
 
 import java.util.ArrayList;
 
-import jp.wasabeef.blurry.internal.Blur;
-import jp.wasabeef.blurry.internal.BlurFactor;
+//import jp.wasabeef.blurry.internal.Blur;
+//import jp.wasabeef.blurry.internal.BlurFactor;
 
 public class CustomDialogDotMenuEditDelete extends Dialog {
 

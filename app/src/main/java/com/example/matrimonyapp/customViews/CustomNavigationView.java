@@ -9,9 +9,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -19,8 +17,6 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.FavoritesRejectedActivity;
 import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.InterestActivity;
-import com.example.matrimonyapp.activity.MyProfileActivity;
-import com.example.matrimonyapp.activity.PaymentMethodsActivity;
 import com.example.matrimonyapp.activity.SetPreferencesActivity;
 import com.example.matrimonyapp.activity.SubscriptionActivity;
 import com.example.matrimonyapp.adapter.ExpandableListAdapter;

@@ -206,7 +206,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_fatherIncomeId"
                     android:visibility="gone"
                     />
             </LinearLayout>
@@ -550,9 +549,7 @@
                             android:layout_height="wrap_content"
                             android:theme="@style/TextLabel"
                             android:layout_marginTop="15dp"
-                            android:visibility="gone"
-                            android:id="@+id/textInputLayout_motherIncome"
-                            >
+                            android:visibility="gone">
 
                             <EditText
                                 android:id="@+id/editText_motherIncome"
@@ -573,7 +570,6 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView_motherIncomeId"
                             android:visibility="gone"
                             />
                     </LinearLayout>
@@ -624,7 +620,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/linearlayout_addMoreSibling"
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal"
                             android:gravity="center_vertical"
@@ -723,7 +718,6 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:id="@+id/imageView_addFarm"
                         android:layout_marginStart="10dp"
                         android:src="@drawable/edit"
                         android:tint="@color/project_color"
@@ -783,7 +777,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/linearlayout_addMoreProperty"
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal"
                             android:gravity="center_vertical"
@@ -917,7 +910,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/linearlayout_addMoreVehicle"
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal"
                             android:gravity="center_vertical"
@@ -1063,8 +1055,8 @@
                                 android:hint="@string/no_of_alive_mama"
                                 android:textColor="@color/text_black"
                                 android:textSize="15sp"
-                                android:inputType="textCapWords"
-                                android:digits="@string/only_text_with_space"
+                                android:inputType="number"
+                                android:maxLength="1"
                                 android:singleLine="true"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -1084,7 +1076,7 @@
                                 android:id="@+id/editText_expiredMama"
                                 android:hint="@string/no_of_expired_mama"
                                 android:inputType="number"
-                                android:maxLength="10"
+                                android:maxLength="1"
                                 android:textColor="@color/text_black"
                                 android:textSize="15sp" />
 
@@ -1103,7 +1095,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/editText_totalMama"
-                                android:hint="@string/no_of_mama"
+                                android:hint="@string/total_no_of_mama"
                                 android:textColor="@color/text_black"
                                 android:textSize="15sp"
                                 android:focusable="false"
@@ -1148,7 +1140,6 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/linearlayout_addMoreMama"
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal"
                             android:gravity="center_vertical"

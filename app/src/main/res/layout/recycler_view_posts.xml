@@ -34,7 +34,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="15dp"
-                    android:src="@drawable/flower2"
+                    android:src="@color/codeGray"
                     />
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_height="300dp"
                     android:minHeight="300dp"
                     android:id="@+id/imageView_postPic"
-                    android:src="@drawable/flower2"
+                    android:src="@color/codeGray"
                     android:scaleType="fitXY"
                     />
 

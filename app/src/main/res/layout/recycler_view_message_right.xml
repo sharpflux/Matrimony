@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/relativeLayout_textMessage"
     android:orientation="vertical"
     android:gravity="end"
     >
@@ -67,7 +66,6 @@
                     android:layout_gravity="end"
                     >
                 <TextView
-                    android:id="@+id/textView_messageTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -81,7 +79,6 @@
                 <ImageView
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    android:id="@+id/imageView_messageStatus"
                     android:layout_marginStart="3dp"
                     android:src="@drawable/clock"
                     android:tint="@color/quantum_bluegrey50"
@@ -91,14 +88,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_senderId"
                     android:visibility="gone"
                     android:text=""
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_receiverId"
                     android:visibility="gone"
                     android:text=""
                     />

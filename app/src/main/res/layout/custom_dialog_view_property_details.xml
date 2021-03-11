@@ -658,7 +658,6 @@
 
 
     <LinearLayout
-        android:id="@+id/shadow_down"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:orientation="horizontal"
@@ -668,6 +667,7 @@
 
 
 
+<!--
     <TextView
         android:id="@+id/textView_cancel"
         android:layout_width="match_parent"
@@ -679,8 +679,20 @@
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         />
+-->
 
-
+    <TextView
+        android:id="@+id/textView_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_bottom_rounded_corner"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>

@@ -287,7 +287,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_motherDetails"
                     android:orientation="vertical"
                     android:paddingStart="13dp"
                     android:paddingTop="17dp"
@@ -518,7 +517,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_siblingDetails"
                     android:orientation="vertical"
                     android:paddingStart="13dp"
                     android:paddingTop="17dp"
@@ -597,7 +595,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_FarmDetails"
                     android:orientation="vertical"
                     android:paddingStart="13dp"
                     android:paddingTop="17dp"
@@ -676,7 +673,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_propertyDetails"
                     android:orientation="vertical"
                     android:paddingStart="13dp"
                     android:paddingTop="17dp"
@@ -809,7 +805,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_mamaDetails"
                     android:orientation="vertical"
                     android:paddingStart="13dp"
                     android:paddingTop="17dp"
@@ -888,7 +883,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearLayout_relativeDetails"
                     android:orientation="vertical"
                     android:paddingStart="13dp"
                     android:paddingTop="17dp"

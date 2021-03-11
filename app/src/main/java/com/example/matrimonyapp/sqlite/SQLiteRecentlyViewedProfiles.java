@@ -137,7 +137,8 @@ public class SQLiteRecentlyViewedProfiles extends SQLiteOpenHelper {
                              if (timelineModel.getUserId().equals(firstUserId))
                              {
                                  HomeActivity.arrayList_recentlyviewed.remove(i);
-                                 deleteRecentlyViewedProfiles(new Integer(firstUserId));
+                                 int del = deleteRecentlyViewedProfiles(new Integer(firstUserId));
+
                                  break;
                              }
                          }

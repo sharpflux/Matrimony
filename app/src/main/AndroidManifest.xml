@@ -57,12 +57,8 @@
         <activity
             android:name=".activity.SignalrChatActivity"
             android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.PaymentMethodsActivity"
-            android:launchMode="singleInstance" />
-        <activity
-            android:name=".activity.AddNewCardActivity"
-            android:launchMode="singleInstance" />
+
+
         <activity
             android:name=".activity.SignUp"
             android:launchMode="singleInstance" />

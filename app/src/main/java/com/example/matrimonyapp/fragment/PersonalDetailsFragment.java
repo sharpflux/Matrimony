@@ -52,7 +52,7 @@ import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.kevalpatel2106.rulerpicker.RulerValuePicker;
 import com.kevalpatel2106.rulerpicker.RulerValuePickerListener;
-import com.suke.widget.SwitchButton;
+//import com.suke.widget.SwitchButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
