@@ -197,8 +197,40 @@ public class CustomDialogAddEducation extends Dialog {
                 String percentage = editText_percentage.getText().toString().trim();
                 String passingYear = editText_passingYear.getText().toString().trim();
 
+                if (editText_educationLevel.getText().toString().isEmpty()) {
+                    editText_educationLevel.setError("Required");
 
+                    return;
+                }
 
+                if (textView_educationLevelId.getText().toString().equals("0")) {
+                    editText_educationLevel.setError("Required");
+
+                    return;
+                }
+
+                if (editText_educationName.getText().toString().isEmpty()) {
+                    editText_educationName.setError("Required");
+
+                    return;
+                }
+
+                if (editText_institue.getText().toString().isEmpty()) {
+                    editText_institue.setError("Required");
+
+                    return;
+                }
+                if (editText_percentage.getText().toString().isEmpty()) {
+                    editText_percentage.setError("Required");
+
+                    return;
+                }
+
+                if (editText_passingYear.getText().toString().isEmpty()) {
+                    editText_passingYear.setError("Required");
+
+                    return;
+                }
 /*
                 String address = editText_address.getText().toString().trim();
                 String stateName = editText_state.getText().toString().trim();

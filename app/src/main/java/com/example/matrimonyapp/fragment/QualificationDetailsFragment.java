@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ import java.util.Map;
 public class QualificationDetailsFragment extends Fragment {
 
     View view;
-    private TextView textView_saveAndContinue, textView_qualificationId, textView_highestQualificationLevelId;
+    private TextView textView_saveAndContinue, textView_qualificationId, textView_highestQualificationLevelId,tvHeadingEducationDetails;
     private EditText editText_highestQualificationLevel, editText_qualification, editText_institue,
             editText_percentage, editText_passingYear, editText_hobby, editText_socialContributions ;
     /*editText_sscNameOfInstitute, editText_sscPer,editText_hscNameOfInstitute,
@@ -111,7 +112,7 @@ public class QualificationDetailsFragment extends Fragment {
     public QualificationDetailsFragment() {
         // Required empty public constructor
     }
-
+    private Handler mHandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,7 +126,7 @@ public class QualificationDetailsFragment extends Fragment {
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
         tv.setText(context.getResources().getString(R.string.qualification_details));
 
-
+        mHandler = new Handler();
         imageView_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,6 +162,7 @@ public class QualificationDetailsFragment extends Fragment {
         textView_qualificationId=view.findViewById(R.id.textView_qualificationId);
         recyclerView_addEducation = view.findViewById(R.id.recyclerView_addEducation);
         imageView_addEducation = view.findViewById(R.id.imageView_addEducation);
+        tvHeadingEducationDetails=view.findViewById(R.id.tvHeadingEducationDetails);
 
         bundle = getArguments();
 
@@ -263,8 +265,16 @@ public class QualificationDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");
+
+                        AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                        insertTask.execute("insertDetails");
+
+
+               /* getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show();
+                    }
+                });*/
 
 
               /*  ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
@@ -287,6 +297,58 @@ public class QualificationDetailsFragment extends Fragment {
     private void insertDetails()
     {
 
+        if (textView_highestQualificationLevelId.getText().equals("0")) {
+            editText_highestQualificationLevel.setError("Required");
+            return;
+        }
+        if (textView_qualificationId.getText().equals("0")) {
+            editText_qualification.setError("Required");
+            return;
+        }
+
+        if (editText_institue.getText().toString().isEmpty()) {
+            editText_institue.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
+        if (editText_percentage.getText().toString().isEmpty()) {
+            editText_percentage.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+        if (editText_hobby.getText().toString().isEmpty()) {
+            editText_hobby.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+        if (editText_socialContributions.getText().toString().isEmpty()) {
+            editText_socialContributions.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+        if (editText_passingYear.getText().toString().isEmpty()) {
+            editText_passingYear.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, Integer.parseInt(editText_passingYear.getText().toString()));
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
+        final String passingYear = sdf.format(calendar.getTime());
+
+
+
+
+
+
         stringBuilder_education.append("<?xml version=\"1.0\" ?>");
         stringBuilder_education.append("<LowerEducation>");
         Cursor cursor_eduction = sqLiteEducationDetails.getAllData();
@@ -297,7 +359,6 @@ public class QualificationDetailsFragment extends Fragment {
             for (boolean hasItem = cursor_eduction.moveToFirst(); hasItem; hasItem = cursor_eduction.moveToNext()) {
 
                 stringBuilder_education.append("<Functions>");
-
                 stringBuilder_education.append("<LowerQualificationUserId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.EDUCATION_DETAILS_ID))+"</LowerQualificationUserId>");
                 stringBuilder_education.append("<EducationLevelId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_LEVEL_ID))+"</EducationLevelId>");
                 stringBuilder_education.append("<EducationNameId>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.QUALIFICATION_ID))+"</EducationNameId>");
@@ -305,13 +366,16 @@ public class QualificationDetailsFragment extends Fragment {
                 stringBuilder_education.append("<LowerQualificationPercentage>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PERCENTAGE)).toString().replaceAll("%","").trim()+"</LowerQualificationPercentage>");
                 stringBuilder_education.append("<LowerQualificationPassingYear>"+cursor_eduction.getString(cursor_eduction.getColumnIndex(SQLiteEducationDetails.PASSING_YEAR))+"</LowerQualificationPassingYear>");
                 stringBuilder_education.append("<LowerQualificationLanguageType>"+userModel.getLanguage()+"</LowerQualificationLanguageType>");
-
                 stringBuilder_education.append("</Functions>");
 
             }
 
             stringBuilder_education.append("</LowerEducation>");
 
+        }
+        else {
+            tvHeadingEducationDetails.setError("Please Enter Eductational Details");
+            return;
         }
 
         cursor_eduction.close();
@@ -321,12 +385,7 @@ public class QualificationDetailsFragment extends Fragment {
 
 
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.clear();
-        calendar.set(Calendar.YEAR, Integer.parseInt(editText_passingYear.getText().toString()));
-        String myFormat = "yyyy-MM-dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-        final String passingYear = sdf.format(calendar.getTime());
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URLs.URL_POST_QUALIFICATIONDETAILS,
@@ -508,7 +567,11 @@ public class QualificationDetailsFragment extends Fragment {
                             {
                                 qualificationDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+
+                                if (getContext() != null) {
+                                    Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                                }
+
                                 customDialogLoadingProgressBar.dismiss();
                             }
 
@@ -553,25 +616,52 @@ public class QualificationDetailsFragment extends Fragment {
 
                 if(params[0].equals("getDetails"))
                 {
-                    getDetails();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            getDetails();
+                        }
+                    });
+
                 }
                 else if(params[0].equals("insertDetails"))
                 {
-                    insertDetails();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            insertDetails();
+                        }
+                    });
+
                 }
 
 
                 if(params[0].toString().equals("QualificationLevel"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONLEVEL+"Language="+userModel.getLanguage(),
-                            "QualificationLevelId",
-                            "QualificationLevelName", editText_highestQualificationLevel,
-                            textView_highestQualificationLevelId, getContext(), customDialogLoadingProgressBar);
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONLEVEL+"Language="+userModel.getLanguage(),
+                                    "QualificationLevelId",
+                                    "QualificationLevelName", editText_highestQualificationLevel,
+                                    textView_highestQualificationLevelId, getContext(), customDialogLoadingProgressBar);
+                            editText_highestQualificationLevel.setError(null);
+                        }
+                    });
+
 
                 }
 
                 else if(params[0].toString().equals("QualificationName"))
                 {
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            editText_qualification.setError(null);
+                        }
+                    });
                         dataFetcher.loadList(URLs.URL_GET_QUALIFICATIONNAME+"QualificationLevelId="
                                     +params[1].toString()+
                                     "&Language="+userModel.getLanguage(),"QualificationId",

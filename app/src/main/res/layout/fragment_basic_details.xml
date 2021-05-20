@@ -624,7 +624,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_bloodGroupId"
                             android:visibility="gone"
-                            android:text="_0"
+                            android:text="0"
                             />
 
                     </LinearLayout>

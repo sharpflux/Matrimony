@@ -1,6 +1,8 @@
 package com.example.matrimonyapp.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private String currentLanguage;
     private String fragmentName="Basic";
     private Fragment fragment;
-
+    ImageView imageView_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        imageView_back=findViewById(R.id.imageView_back);
 
         setTitle("Registration");
         RelativeLayout relativeLayout = findViewById(R.id.dynamic_fragment_frame_layout);
@@ -34,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         if (bundle!=null)
         {
             fragmentName = bundle.getString("fragmentName");
+
+          /*  if( bundle.getString("ShowBackButton").equals("No")){
+                imageView_back.setVisibility(View.GONE);
+            }
+          else {
+                imageView_back.setVisibility(View.VISIBLE);
+            }*/
 
             switch (fragmentName)
             {
@@ -71,12 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         fragmentTransaction.add(R.id.dynamic_fragment_frame_layout, fragment);
-        //fragmentTransaction.addToBackStack(getClas);
         fragmentTransaction.commit();
-
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
-
-
     }
 
     @Override

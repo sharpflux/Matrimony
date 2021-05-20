@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -191,10 +192,6 @@ public class LoginActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(getApplicationContext());
         builder.setCancelable(false);
 
-        //mobileNo = editText_mobileNo.getText().toString().trim();
-
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URLs.URL_GET_LOGIN+"MobileNo="+mobileNo+"&UserPassword="+password,
                 new Response.Listener<String>() {
@@ -204,6 +201,8 @@ public class LoginActivity extends AppCompatActivity {
                         try {
 
                             //converting response to json object
+
+                            customDialogLoadingProgressBar.dismiss();
 
                             JSONArray jsonArray = new JSONArray(response);
 
@@ -255,9 +254,21 @@ public class LoginActivity extends AppCompatActivity {
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
                                     //CustomSharedPreference customSharedPreference = new CustomSharedPreference(getApplicationContext());
 
-                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                    startActivity(intent);
-                                    finish();
+
+                                    if(jsonObject.getString("ShowFragment").equals("COMPLETED")){
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        intent.putExtra("fragmentName",jsonObject.getString("ShowFragment"));
+                                        intent.putExtra("ShowBackButton","No");
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
                                 }
                             }
                              else{
@@ -309,6 +320,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
 
@@ -396,8 +408,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            customDialogLoadingProgressBar.dismiss();
         }
 
         @Override

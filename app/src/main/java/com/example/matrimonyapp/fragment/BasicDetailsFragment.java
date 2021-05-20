@@ -62,14 +62,14 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class BasicDetailsFragment extends Fragment {
+public class BasicDetailsFragment extends Fragment  {
 
     private EditText editText_birthdate, editText_age, editText_birthTime, editText_firstName,
             editText_altMobileNo, editText_altEmailId, editText_mobileNo, editText_address, editText_emailId,
             editText_birthState, editText_birthCity, editText_birthPlace, editText_bloodGroup, editText_state, editText_postalCode,
             editText_currentState,  editText_currentPostalCode, editText_birthCountry,
             editText_currentAddress, editText_currentVillage, editText_village, editText_currentCountry, editText_country,
-            editText_city, editText_currentCity;
+            editText_city, editText_currentCity,editText_time;
 // editText_taluka, editText_district,editText_currentDistrict, editText_currentTaluka,editText_birthDistrict,editText_birthTaluka,
     private ImageView imageView_back;
 
@@ -86,7 +86,7 @@ public class BasicDetailsFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     private int basicDetailsId=0;
-
+    private Handler mHandler;
     private int mHour, mMinute;
     private int intCurrentCountryId =0, intCurrentStateId=0, newCountryId=0, newStateId=0,
             currentBirthCountryId=0, currentBirthStateId=0, newBirthCountryId=0, newBirthStateId=0,
@@ -118,9 +118,9 @@ public class BasicDetailsFragment extends Fragment {
         view= inflater.inflate(R.layout.fragment_basic_details, container, false);
 
         context = getContext();
-
+        mHandler = new Handler();
         init();
-
+        ((RadioButton)radioGroup_birthTimeType.getChildAt(0)).setChecked(true);
 
         if(userModel!=null)
         {
@@ -517,6 +517,7 @@ public class BasicDetailsFragment extends Fragment {
         editText_firstName = (EditText) view.findViewById(R.id.editText_firstName);
         editText_altMobileNo = view.findViewById(R.id.editText_altMobileNo);
         editText_altEmailId = view.findViewById(R.id.editText_altEmailId);
+        editText_time=view.findViewById(R.id.editText_time);
 
         radioGroup_gender = (RadioGroup) view.findViewById(R.id.radioGroup_gender);
 
@@ -621,43 +622,176 @@ public class BasicDetailsFragment extends Fragment {
 
         void insertDetails()
     {
+        if (editText_firstName.getText().toString().isEmpty()) {
+            editText_firstName.setError("Name is Required");
+            customDialogLoadingProgressBar.dismiss();
+           return;
+        }
 
         fullName = editText_firstName.getText().toString().trim();
 
         birthdate = editText_birthdate.getText().toString().trim();
+
+        if (editText_birthdate.getText().toString().isEmpty()) {
+            editText_birthdate.setError("Date of Birth Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
+        if( ((RadioButton)view.findViewById(radioGroup_birthTimeType.getCheckedRadioButtonId()))==null){
+            birthTimeType="Accurate";
+        }
+        else {
+            birthTimeType= ((RadioButton)view.findViewById(radioGroup_birthTimeType.getCheckedRadioButtonId()))
+                    .getText().toString();
+        }
         birthTime = timeHrs;
-        birthTimeType= ((RadioButton)view.findViewById(radioGroup_birthTimeType.getCheckedRadioButtonId()))
-                .getText().toString();
+        if (birthTime.equals("00:00:00")) {
+            editText_time.setError("Birth time Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
 
         birthPlace = editText_birthPlace.getText().toString().trim();
+        if (editText_birthPlace.getText().toString().isEmpty()) {
+            editText_birthPlace.setError("Birth place Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
 /*        birthTalukaId = textView_birthTalukaId.getText().toString().trim();
         birthDistrictId = textView_birthDistrictId.getText().toString().trim();*/
         birthCountryId = textView_birthCountryId.getText().toString().trim();
         birthStateId = textView_birthStateId.getText().toString().trim();
         birthCityId = textView_birthCityId.getText().toString().trim();
-
         bloodGroupId = textView_bloodGroupId.getText().toString().trim();
+        if (birthCountryId.equals("0")) {
+            editText_birthCountry.setError("Country Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+        if (birthStateId.equals("0")) {
+            editText_birthState.setError("State Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+        if (birthCityId.equals("0")) {
+            editText_birthCity.setError("State Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+        if (bloodGroupId.equals("0")) {
+            editText_bloodGroup.setError("Blood group Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
 
 
         emailId = editText_emailId.getText().toString().trim();
+        if (editText_emailId.getText().toString().isEmpty()) {
+            editText_emailId.setError("Email Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
         altEmailId = editText_altEmailId.getText().toString().trim();
         mobileNo = editText_mobileNo.getText().toString().trim();
+        if (editText_mobileNo.getText().toString().isEmpty()) {
+            editText_mobileNo.setError("Mobile Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
         altMobileNo = editText_altMobileNo.getText().toString().trim();
 
-        address = editText_address.getText().toString().trim();
-        village = editText_village.getText().toString().trim();
-        postalCode = editText_postalCode.getText().toString().trim();
+
         countryId = textView_countryId.getText().toString().trim();
+        if (countryId.equals("0")) {
+            editText_country.setError("Country Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
         stateId = textView_stateId.getText().toString().trim();
+        if (stateId.equals("0")) {
+            editText_state.setError("State Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
         cityId = textView_cityId.getText().toString().trim();
 
+        village = editText_village.getText().toString().trim();
+        if (editText_village.getText().toString().isEmpty()) {
+            editText_village.setError("Village Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
+        address = editText_address.getText().toString().trim();
+        if (editText_address.getText().toString().isEmpty()) {
+            editText_address.setError("Address Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
+        postalCode = editText_postalCode.getText().toString().trim();
+        if (editText_postalCode.getText().toString().isEmpty()) {
+            editText_postalCode.setError("Post Code Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
 
         currentAddress = editText_currentAddress.getText().toString().trim();
+        if (editText_currentAddress.getText().toString().isEmpty()) {
+            editText_currentAddress.setError("Address Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
         currentVillage = editText_currentVillage.getText().toString().trim();
+        if (editText_currentVillage.getText().toString().isEmpty()) {
+            editText_currentVillage.setError("Current Address Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
         currentCountryId = textView_currentCountryId.getText().toString().trim();
+
+        if (currentCountryId.equals("0")) {
+            editText_currentCountry.setError("Country Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
         currentStateId = textView_currentStateId.getText().toString().trim();
         currentCityId = textView_currentCityId.getText().toString().trim();
         currentPostalCode = editText_currentPostalCode.getText().toString().trim();
+
+        if (currentStateId.equals("0")) {
+            editText_currentState.setError("State Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+        if (currentCityId.equals("0")) {
+            editText_currentCity.setError("State Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+        if (editText_currentPostalCode.getText().toString().isEmpty()) {
+            editText_currentPostalCode.setError("Current Address Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
 /*
         talukaId = textView_talukaId.getText().toString().trim();
         districtId = textView_districtId.getText().toString().trim();
@@ -703,6 +837,7 @@ public class BasicDetailsFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            customDialogLoadingProgressBar.dismiss();
                         }
 
                     }
@@ -1065,7 +1200,14 @@ public class BasicDetailsFragment extends Fragment {
                 }
                 else if(params[0].equals("insertDetails"))
                 {
-                    insertDetails();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            insertDetails();
+                        }
+                    });
+
+
 /*                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.addToBackStack(null);
 
@@ -1077,9 +1219,19 @@ public class BasicDetailsFragment extends Fragment {
 
                 else if(params[0].equals("BloodGroup"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_BLOODGROUP+"Language="+userModel.getLanguage(),"BloodTypeId",
-                            "BloodType", editText_bloodGroup, textView_bloodGroupId,getContext(),
-                            customDialogLoadingProgressBar);
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataFetcher.loadList(URLs.URL_GET_BLOODGROUP+"Language="+userModel.getLanguage(),"BloodTypeId",
+                                    "BloodType", editText_bloodGroup, textView_bloodGroupId,getContext(),
+                                    customDialogLoadingProgressBar);
+                            editText_bloodGroup.setError(null);
+                        }
+                    });
+
+
+
 
 
                 }
@@ -1087,31 +1239,67 @@ public class BasicDetailsFragment extends Fragment {
                 if(params[0].equals("Country"))
                 {
 
-                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
-                            "Name", editText_country, textView_countryId,getContext(),
-                            customDialogLoadingProgressBar);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                                    "Name", editText_country, textView_countryId,getContext(),
+                                    customDialogLoadingProgressBar);
+                            editText_country.setError(null);
+                        }
+                    });
+
+
 
 
                 }
                 else if(params[0].equals("State"))
                 {
-                    String id = textView_countryId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
-                            + "&CountryID="+id,"StatesID",
-                            "StatesName", editText_state, textView_stateId,getContext(),
-                            customDialogLoadingProgressBar);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            String id = textView_countryId.getText().toString();
+
+                            dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                            + "&CountryID="+id,"StatesID",
+                                    "StatesName", editText_state, textView_stateId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+
+                            editText_state.setError(null);
+                        }
+                    });
+
+
+
+
 
 
                 }
                 else if(params[0].equals("City"))
                 {
-                    String id = textView_stateId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
-                                    + "&StateID="+id,"ID",
-                            "Name", editText_city, textView_cityId,getContext(),
-                            customDialogLoadingProgressBar);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+
+                            String id = textView_stateId.getText().toString();
+
+                            dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                            + "&StateID="+id,"ID",
+                                    "Name", editText_city, textView_cityId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+
+                            editText_city.setError(null);
+                        }
+                    });
+
+
+
 
 
                 }
@@ -1138,31 +1326,73 @@ public class BasicDetailsFragment extends Fragment {
                 if(params[0].equals("CurrentCountry"))
                 {
 
-                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
-                            "Name", editText_currentCountry, textView_currentCountryId,getContext(),
-                            customDialogLoadingProgressBar);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+
+                            dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                                    "Name", editText_currentCountry, textView_currentCountryId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+
+                            editText_currentCountry.setError(null);
+                        }
+                    });
+
+
+
+
 
 
                 }
                 else if(params[0].equals("CurrentState"))
                 {
-                    String id = textView_currentCountryId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
-                                    + "&CountryID="+id,"StatesID",
-                            "StatesName", editText_currentState, textView_currentStateId,getContext(),
-                            customDialogLoadingProgressBar);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+
+                            String id = textView_currentCountryId.getText().toString();
+
+                            dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                            + "&CountryID="+id,"StatesID",
+                                    "StatesName", editText_currentState, textView_currentStateId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+
+                            editText_currentState.setError(null);
+                        }
+                    });
+
+
+
 
 
                 }
                 else if(params[0].equals("CurrentCity"))
                 {
-                    String id = textView_currentStateId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
-                                    + "&StateID="+id,"ID",
-                            "Name", editText_currentCity, textView_currentCityId,getContext(),
-                            customDialogLoadingProgressBar);
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+
+                            String id = textView_currentStateId.getText().toString();
+
+                            dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                            + "&StateID="+id,"ID",
+                                    "Name", editText_currentCity, textView_currentCityId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+
+                            editText_currentCity.setError(null);
+                        }
+                    });
+
+
+
 
 
                 }
@@ -1188,32 +1418,54 @@ public class BasicDetailsFragment extends Fragment {
 
                 if(params[0].equals("BirthCountry"))
                 {
-                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
-                            "Name", editText_birthCountry, textView_birthCountryId,getContext(),
-                            customDialogLoadingProgressBar);
 
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                                    "Name", editText_birthCountry, textView_birthCountryId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+                            editText_birthCountry.setError(null);
+                        }
+                    });
 
 
                 }
                 else if(params[0].equals("BirthState"))
                 {
-                    String id = textView_birthCountryId.getText().toString();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String id = textView_birthCountryId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
-                                    + "&CountryID="+id,"StatesID",
-                            "StatesName", editText_birthState, textView_birthStateId,getContext(),
-                            customDialogLoadingProgressBar);
+                            dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                            + "&CountryID="+id,"StatesID",
+                                    "StatesName", editText_birthState, textView_birthStateId,getContext(),
+                                    customDialogLoadingProgressBar);
+                            editText_birthState.setError(null);
+                        }
+                    });
+
 
 
                 }
                 else if(params[0].equals("BirthCity"))
                 {
-                    String id = textView_birthStateId.getText().toString();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String id = textView_birthStateId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
-                                    + "&StateID="+id,"ID",
-                            "Name", editText_birthCity, textView_birthCityId,getContext(),
-                            customDialogLoadingProgressBar);
+                            dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                            + "&StateID="+id,"ID",
+                                    "Name", editText_birthCity, textView_birthCityId,getContext(),
+                                    customDialogLoadingProgressBar);
+
+                            editText_birthCity.setError(null);
+                        }
+                    });
+
 
 
                 }

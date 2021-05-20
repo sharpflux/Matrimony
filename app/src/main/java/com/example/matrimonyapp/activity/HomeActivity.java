@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -51,6 +52,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.DailyRecommendationsAdapter;
 import com.example.matrimonyapp.adapter.NavigationDrawerAdapter;
@@ -144,7 +146,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             occupationIds, religionIds, casteIds, subCasteIds, ageMin, ageMax, heightMin, heightMax,
             currentService, serviceType, workingIn, residentialCountryIds, residentialStateIds, residentialCityIds, workingCountryIds, workingStateIds, workingCityIds ;
 
-
+    private Handler mHandler;
 
 
     //FirebaseAuth firebaseAuth;
@@ -163,7 +165,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        mHandler = new Handler();
         init();
 
 /*        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -199,7 +201,14 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         swipeRefresLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                insertDetails();
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        AsyncTaskRunner runner = new AsyncTaskRunner();
+                        runner.execute("GetDetails");
+                    }
+                });
                 swipeRefresLayout.setRefreshing(false);
             }
         });
@@ -231,6 +240,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         Glide.with(HomeActivity.this)
                 .load(URLs.MainURL+userModel.getProfilePic())
                 .placeholder(R.drawable.default_profile)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(circleImageView_headerProfilePic);
 
         textView_welcomeUserName.setText(userModel.getFullName());
@@ -337,11 +348,15 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         Glide.with(HomeActivity.this)
                 .load(URLs.MainURL+userModel.getProfilePic())
                 .placeholder(R.color.quantum_grey100)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(circleImage_welcomeProfilePic);
 
         Glide.with(HomeActivity.this)
                 .load(URLs.MainURL+userModel.getProfilePic())
                 .placeholder(R.color.quantum_grey100)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(circleImage_progressProfilePic);
 
 
@@ -719,7 +734,13 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             }
             if(params[0].equals("GetDetails"))
             {
-                insertDetails();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        insertDetails();
+                    }
+                });
+
             }
 
 

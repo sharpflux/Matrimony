@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -48,7 +49,6 @@ import java.util.Map;
  */
 public class ReligiousDetailsFragment extends Fragment {
 
-
     View view;
     private TextView textView_saveAndContinue, textView_religionId, textView_casteId, textView_subCasteId,
     textView_motherTongueId;
@@ -72,10 +72,9 @@ public class ReligiousDetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_religious_details, container, false);
 
@@ -86,7 +85,6 @@ public class ReligiousDetailsFragment extends Fragment {
         }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
-
 
         imageView_back =((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv =((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
@@ -119,13 +117,10 @@ public class ReligiousDetailsFragment extends Fragment {
         editText_gothram = view.findViewById(R.id.editText_gothram);
         editText_dosh = view.findViewById(R.id.editText_dosh);
         editText_motherTongue = view.findViewById(R.id.editText_motherTongue);
-
         textView_religionId = view.findViewById(R.id.textView_religionId);
         textView_casteId = view.findViewById(R.id.textView_casteId);
         textView_subCasteId = view.findViewById(R.id.textView_subCasteId);
         textView_motherTongueId = view.findViewById(R.id.textView_motherTongueId);
-
-
         checkBox_otherCaste = view.findViewById(R.id.checkBox_otherCaste);
 
         bundle=getArguments();
@@ -158,32 +153,23 @@ public class ReligiousDetailsFragment extends Fragment {
             }
         });
 
-
-
         onClickListener();
-
 
         return view;
     }
 
     void onClickListener()
     {
-
         showPopUp(editText_religion,"Religion",null);
         showPopUp(editText_caste,"Caste",textView_religionId);
         showPopUp(editText_subCaste,"SubCaste",textView_casteId);
         showPopUp(editText_motherTongue,"MotherTongue",null);
 
-
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
-
-
             }
         });
 
@@ -205,37 +191,24 @@ public class ReligiousDetailsFragment extends Fragment {
                 {
                     runner.execute(urlFor,textView_id.getText().toString());
                 }
-
             }
         });
 
     }
 
-
-
     void insertDetails()
     {
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_RELIGIONDETAIL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  URLs.URL_POST_RELIGIONDETAIL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
-
                             //converting response to json object
-
                             JSONObject jsonObject = new JSONObject(response);
-
-                            if(jsonObject.getString("message").equals("Success") &&
-                                    !jsonObject.getBoolean("error"))
+                            if(jsonObject.getString("message").equals("Success") && !jsonObject.getBoolean("error"))
                             {
                                 getDetails();
-
                                 Toast.makeText(getContext(),"Religious details saved successfully!", Toast.LENGTH_SHORT).show();
-
                                 getActivity().finish();
 
                                 /*PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
@@ -244,8 +217,7 @@ public class ReligiousDetailsFragment extends Fragment {
                                 fragmentTransaction.addToBackStack(null);
 
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
-                                fragmentTransaction.commit() ;
-*/
+                                fragmentTransaction.commit() ;*/
                             }
                             else
                             {
@@ -269,7 +241,6 @@ public class ReligiousDetailsFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-
                 params.put("ReligiousDetailsId",String.valueOf(religionDetailsId));
                 params.put("UserId",userModel.getUserId());
                 params.put("ReligionId",textView_religionId.getText().toString());
@@ -280,24 +251,17 @@ public class ReligiousDetailsFragment extends Fragment {
                 params.put("Dosh",editText_dosh.getText().toString());
                 params.put("MotherTongueId",textView_motherTongueId.getText().toString());
                 params.put("LanguageType",userModel.getLanguage());
-
-
-
                 return params;
             }
         };
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
-
     }
 
     void getDetails()
     {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_RELIGIONDETAIL+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URLs.URL_GET_RELIGIONDETAIL+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -321,7 +285,6 @@ public class ReligiousDetailsFragment extends Fragment {
                                     textView_casteId.setText(jsonObject.getString("CasteId"));
                                     textView_subCasteId.setText(jsonObject.getString("SubCasteId"));
                                     textView_motherTongueId.setText(jsonObject.getString("MotherTongueId"));
-
                                     editText_religion.setText(jsonObject.getString("ReligionName"));
                                     editText_caste.setText(jsonObject.getString("CasteName"));
                                     editText_subCaste.setText(jsonObject.getString("SubCasteName"));
@@ -329,12 +292,7 @@ public class ReligiousDetailsFragment extends Fragment {
                                     editText_gothram.setText(jsonObject.getString("Gothram"));
                                     editText_dosh.setText(jsonObject.getString("Dosh"));
                                     editText_motherTongue.setText(jsonObject.getString("MotherTongueName"));
-
-
-
                                 }
-
-
 
                             }
                             else
@@ -363,25 +321,18 @@ public class ReligiousDetailsFragment extends Fragment {
             }
         };
 
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
-
-
-
-
     }
 
     private class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
         private String resp;
-
-
-
         @Override
         protected String doInBackground(String... params) {
             publishProgress("Sleeping..."); // Calls onProgressUpdate()
 
             try {
-
 
                 if(params[0].toString()=="getDetails")
                 {
@@ -397,8 +348,6 @@ public class ReligiousDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_RELIGION+"Language="+userModel.getLanguage(),
                             "ReligionID", "ReligionName", editText_religion,
                             textView_religionId,getContext(), customDialogLoadingProgressBar);
-
-
                 }
                 else if(params[0].toString()=="Caste")
                 {
@@ -406,8 +355,6 @@ public class ReligiousDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_CASTE+"ReligionId="+religionId+"&Language="+userModel.getLanguage(),
                             "CasteId","CasteName", editText_caste, textView_casteId,
                             getContext(), customDialogLoadingProgressBar);
-
-
                 }
                 else if(params[0].toString()=="SubCaste")
                 {
@@ -415,22 +362,17 @@ public class ReligiousDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_SUBCASTE+"CasteId="+casteId+"&Language="+userModel.getLanguage(),
                             "SubCasteId","SubCasteName", editText_subCaste, textView_subCasteId,
                             getContext(), customDialogLoadingProgressBar);
-
-
                 }
                 else if(params[0].toString()=="MotherTongue")
                 {
                     dataFetcher.loadList(URLs.URL_GET_MOTHERTONGUE+"Language="+userModel.getLanguage(),
                             "MotherTongueId","MotherTongueName", editText_motherTongue, textView_motherTongueId,
                             getContext(), customDialogLoadingProgressBar);
-
-
                 }
 
-
-
-
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
                 resp = e.getMessage();
             }
@@ -459,6 +401,4 @@ public class ReligiousDetailsFragment extends Fragment {
         }
 
     }
-
-
 }

@@ -185,6 +185,7 @@
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:inputType=""
+                        android:text="0"
                         android:digits="@string/only_text"
                         android:singleLine="true"
                         />

@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -34,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ProfileTabLayoutAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogChangeProfilePic;
@@ -75,7 +77,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private RelativeLayout relativeLayout_changeProfilePic;
 
 
-
+    private Handler mHandler;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
 
     //Tabs
@@ -103,7 +105,7 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_my_profile);
 
-
+        mHandler = new Handler();
         init();
 
         onClickListener();
@@ -184,6 +186,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.putExtra("fragmentName",fragmentName);
+                intent.putExtra("ShowBackButton","Yes");
                 startActivity(intent);
             }
         });
@@ -429,11 +432,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     void insertProfilePic()
     {
-
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_PROFILEPIC,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,URLs.URL_POST_PROFILEPIC,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -446,8 +445,17 @@ public class EditProfileActivity extends AppCompatActivity {
 
                             if(!jsonObject.getBoolean("error"))
                             {
+
+                                mHandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        getProfilePic();
+                                    }
+                                });
+
+
                                 //   getDetails();
-                                getProfilePic();
+
                                 //Picasso.get().(userModel.getProfilePic()).into(circleImageView_profilePic);
 
                                 // userModel.setProfilePic(URLs.MainURL+jsonObject.getString("ImageUrl"));
@@ -486,16 +494,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         };
 
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
-
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
     }
 
     void getProfilePic()
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_PROFILEPIC + "UserId=" + userModel.getUserId(),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URLs.URL_GET_PROFILEPIC + "UserId=" + userModel.getUserId(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -518,14 +524,20 @@ public class EditProfileActivity extends AppCompatActivity {
                                         Glide.with(EditProfileActivity.this)
                                         .load(URLs.MainURL + jsonObject.getString("ImageUrl"))
                                                 .placeholder(R.color.codeGray)
+                                                .skipMemoryCache(true)
+                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
                                         .into(circleImageView_profilePic);
                                         Glide.with(EditProfileActivity.this)
                                                 .load(URLs.MainURL + jsonObject.getString("ImageUrl"))
                                                 .placeholder(R.color.codeGray)
+                                                .skipMemoryCache(true)
+                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
                                                 .into(toolbarImageView);
                                         Glide.with(EditProfileActivity.this)
                                                 .load(URLs.MainURL + jsonObject.getString("ImageUrl"))
                                                 .placeholder(R.color.codeGray)
+                                                .skipMemoryCache(true)
+                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
                                                 .into(circleImage_profilePic);
 
                                         //to clear cache
@@ -591,7 +603,8 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         };
 
-        VolleySingleton.getInstance(EditProfileActivity.this).addToRequestQueue(stringRequest);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
     }
 

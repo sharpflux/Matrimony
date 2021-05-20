@@ -358,7 +358,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                     for (int i=0; i<directMessagesModelList.size(); i++)
                     {
                         DirectMessagesModel dm = directMessagesModelList.get(i);
-                        if (dm.getUserId().equals(Globals.UserId) && Globals.status.equals("true"))
+                        if (dm.getUserId().equals("4") && Globals.status.equals("true"))
                         {
                             dm.setActivityStatus("true");
 

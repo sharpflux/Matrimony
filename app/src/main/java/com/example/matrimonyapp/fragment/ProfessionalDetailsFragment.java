@@ -64,7 +64,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 
     private RadioGroup radioGroup_currentService;
     private CardView cardView_governmentService, cardView_privateService;
-
+    private Handler mHandler;
     Bundle bundle;
     UserModel userModel;
     DataFetcher dataFetcher;
@@ -89,7 +89,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 
         bundle = getArguments();
         context = getContext();
-
+        mHandler = new Handler();
 
         if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
@@ -514,7 +514,13 @@ public class ProfessionalDetailsFragment extends Fragment {
                 }
                 else if(params[0].toString().equals("insertDetails"))
                 {
-                    insertDetails();
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            insertDetails();
+                        }
+                    });
 /*
                     FamilyDetailsFragment familyDetailsFragment = new FamilyDetailsFragment();
 
