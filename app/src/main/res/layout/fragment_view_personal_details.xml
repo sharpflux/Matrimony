@@ -19,6 +19,8 @@
             android:orientation="vertical">
 
 
+
+
             <!--Basic Details-->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

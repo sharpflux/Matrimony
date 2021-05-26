@@ -86,6 +86,8 @@ public class URLs {
     public static final String URL_POST_USER_CONNECTIONS        = MainURL+"api/UserConnections/UserConnections";
     public static final String URL_GET_USER_CONNECTIONS         = MainURL+"api/UserConnections/GetUsersByConnections?";
 
+    public static final String URL_GET_PROFILECHECKER         = MainURL+"api/ProfileApi/ProfileCompleteChecker?UserId=";
+
     public static final String URL_CONNECT_SIGNALR              = "http://sam.sharpflux.com/signalr";
 
 /*

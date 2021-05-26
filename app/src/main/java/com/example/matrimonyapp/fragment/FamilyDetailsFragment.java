@@ -35,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
@@ -75,6 +76,8 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  */
 public class FamilyDetailsFragment extends Fragment {
+
+    private Handler mHandler;
 
     View view;
     private Context context;
@@ -151,9 +154,11 @@ public class FamilyDetailsFragment extends Fragment {
 
         context = getContext();
 
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+
         bundle = getArguments();
 
-
+        mHandler = new Handler();
         if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
         }
@@ -523,6 +528,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                 if (fragmentManager.getBackStackEntryCount() > 0)
                 {
+
                     fragmentManager.popBackStack();
                 }
                 else
@@ -632,15 +638,65 @@ public class FamilyDetailsFragment extends Fragment {
     void insertDetails() {
         final String father_isAlive = checkBox_fatherIsAlive.isChecked() ? "1" : "0";
         fatherName = editText_fatherName.getText().toString().trim();
+        if (editText_fatherName.getText().toString().isEmpty()) {
+            editText_fatherName.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
         fatherMobileNo = editText_fatherMobileNo.getText().toString().trim();
+        if (editText_fatherMobileNo.getText().toString().isEmpty()) {
+            editText_fatherMobileNo.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
         fatherQualificationId = textView_fatherQualificationId.getText().toString().trim();
+        if (fatherQualificationId.equals("0")) {
+            editText_fatherQualification.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
         fatherOccupationId = textView_fatherOccupationId.getText().toString().trim();
+
+        if (fatherOccupationId.equals("0")) {
+            editText_fatherOccupation.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
         //fatherAnnualIncome = editText_fatherAnnualIncome.getText().toString().trim();
         //fatherProperty= editText_fatherProperty.getText().toString();
         fatherAddress = editText_fatherAddress.getText().toString().trim();
-        fatherStateId = textView_fatherStateId.getText().toString().trim();
+        if (editText_fatherAddress.getText().toString().isEmpty()) {
+            editText_fatherAddress.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
         fatherCountryId = textView_fatherCountryId.getText().toString().trim();
+
+        if (fatherCountryId.equals("0")) {
+            editText_fatherCountry.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
+        fatherStateId = textView_fatherStateId.getText().toString().trim();
+        if (fatherStateId.equals("0")) {
+            editText_fatherState.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
+
+
         fatherCityId = textView_fatherCityId.getText().toString().trim();
+        if (fatherCityId.equals("0")) {
+            editText_fatherCity.setError("Required");
+            customDialogLoadingProgressBar.dismiss();
+            return;
+        }
 
         final String mother_isAlive = checkBox_motherIsAlive.isChecked() ? "1" : "0";
         motherName = editText_motherName.getText().toString().trim();
@@ -1008,7 +1064,7 @@ public class FamilyDetailsFragment extends Fragment {
 
                         try {
 
-                            customDialogLoadingProgressBar.dismiss();
+
 
                             //converting response to json object
                             JSONArray jsonArray = new JSONArray(response);
@@ -1020,10 +1076,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     familyDetailsId = jsonObject.getInt("FamilyDetailsId");
                                     fatherDetailsId = jsonObject.getInt("FatherStatesIDAPI");
                                     motherDetailsId = jsonObject.getInt("MotherDetailsIdAPI");
-
-
                                     checkBox_fatherIsAlive.setChecked(jsonObject.getString("IsAliveFather").equals("1"));
-
                                     editText_fatherName.setText(jsonObject.getString("FullnameFather"));
                                     editText_fatherMobileNo.setText(jsonObject.getString("MobileNoFather"));
                                     editText_fatherAddress.setText(jsonObject.getString("AddressFather"));
@@ -1088,7 +1141,8 @@ public class FamilyDetailsFragment extends Fragment {
                                 familyDetailsId = 0;
                                 fatherDetailsId = 0;
                                 motherDetailsId = 0;
-                                customDialogLoadingProgressBar.dismiss();
+                                if(customDialogLoadingProgressBar!=null)
+                                     customDialogLoadingProgressBar.dismiss();
                                 Toast.makeText(getContext(), " Please enter your details! ", Toast.LENGTH_SHORT).show();
                             }
 
@@ -1317,11 +1371,6 @@ public class FamilyDetailsFragment extends Fragment {
 
     }
 
-
-
-
-
-
      class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
         private String resp;
@@ -1342,8 +1391,13 @@ public class FamilyDetailsFragment extends Fragment {
                 }
                 else if(params[0].equals("insertDetails"))
                 {
-                    insertDetails();
-                    //customDialogLoadingProgressBar.dismiss(); //after uncommenting above line remove this line
+
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            insertDetails();
+                        }
+                    });
                 }
 
 
@@ -1351,9 +1405,15 @@ public class FamilyDetailsFragment extends Fragment {
                 if(params[0].equals("FatherCountry"))
                 {
 
-                    dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
-                            "Name", editText_fatherCountry, textView_fatherCountryId,getContext(),
-                            customDialogLoadingProgressBar);
+                    new Thread(new Runnable() {
+                        public void run(){
+                            dataFetcher.loadList(URLs.URL_GET_COUNTRY+"Language="+userModel.getLanguage(),"Id",
+                                    "Name", editText_fatherCountry, textView_fatherCountryId,getContext(),
+                                    customDialogLoadingProgressBar);
+                        }
+                    }).start();
+
+
 
 
                     return "Country";
@@ -1361,24 +1421,40 @@ public class FamilyDetailsFragment extends Fragment {
                 }
                 else if(params[0].equals("FatherState"))
                 {
-                    String id = textView_fatherCountryId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
-                                    + "&CountryID="+id,"StatesID", "StatesName",
-                            editText_fatherState, textView_fatherStateId,getContext(),
-                            customDialogLoadingProgressBar);
+
+                    new Thread(new Runnable() {
+                        public void run(){
+                            String id = textView_fatherCountryId.getText().toString();
+
+                            dataFetcher.loadList(URLs.URL_GET_STATE+"Language="+userModel.getLanguage()
+                                            + "&CountryID="+id,"StatesID", "StatesName",
+                                    editText_fatherState, textView_fatherStateId,getContext(),
+                                    customDialogLoadingProgressBar);
+                        }
+                    }).start();
+
+
+
+
 
 
 
                 }
                 else if(params[0].equals("FatherCity"))
                 {
-                    String id = textView_fatherStateId.getText().toString();
 
-                    dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
-                                    + "&StateID="+id,"ID",
-                            "Name", editText_fatherCity, textView_fatherCityId,getContext(),
-                            customDialogLoadingProgressBar);
+                    new Thread(new Runnable() {
+                        public void run(){
+                            String id = textView_fatherStateId.getText().toString();
+
+                            dataFetcher.loadList(URLs.URL_GET_CITY+"Language="+userModel.getLanguage()
+                                            + "&StateID="+id,"ID",
+                                    "Name", editText_fatherCity, textView_fatherCityId,getContext(),
+                                    customDialogLoadingProgressBar);
+                        }
+                    }).start();
+
 
 
                 }
@@ -1505,8 +1581,12 @@ public class FamilyDetailsFragment extends Fragment {
         @Override
         protected void onPreExecute() {
 
-            customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
-            customDialogLoadingProgressBar.show();
+
+            if (!getActivity().isFinishing() && customDialogLoadingProgressBar != null) {
+                customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+                customDialogLoadingProgressBar.show();
+            }
+
 
         }
 

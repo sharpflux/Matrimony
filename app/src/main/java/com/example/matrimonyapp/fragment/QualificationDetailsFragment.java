@@ -255,6 +255,7 @@ public class QualificationDetailsFragment extends Fragment {
         });
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+        customDialogLoadingProgressBar.setCancelable(false);
 
         AsyncTaskLoad getTask = new AsyncTaskLoad();
         getTask.execute("getDetails");
@@ -398,7 +399,7 @@ public class QualificationDetailsFragment extends Fragment {
                             //converting response to json object
 
                             JSONObject jsonObject = new JSONObject(response);
-
+                            customDialogLoadingProgressBar.dismiss();
                             if(jsonObject.getString("message").equals("Success") && !jsonObject.getBoolean("error"))
                             {
                                 getDetails();
@@ -683,7 +684,7 @@ public class QualificationDetailsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            customDialogLoadingProgressBar.dismiss();
+
         }
 
 

@@ -164,7 +164,7 @@
     <!-- Content descriptions -->
     <string name="image">Image</string>
     <string name="no_image_selected">No image Selected</string>
-
+    <string name="selected_photos">Selected Photos</string>
 
     <string name="height">Height </string>
     <string name="ft">ft.</string>
@@ -286,6 +286,7 @@
     <string name="year_of_birth">Year of Birth</string>
     <string name="care_of">Care Of</string>
     <string name="upload_documents">Upload Documents</string>
+    <string name="upload_image">Upload Image</string>
     <string name="at">at</string>
     <string name="studied_at">Studied at</string>
     <string name="dash">-</string>
@@ -339,6 +340,7 @@
     <string name="language_settings">Language Settings</string>
     <string name="recent_chats">Recent Chats</string>
     <string name="about">About</string>
+
     <string name="family">Family</string>
     <string name="preferences">Preferences</string>
     <string name="working_location_address">Working Location Address</string>

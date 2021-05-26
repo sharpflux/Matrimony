@@ -46,7 +46,7 @@ public class AboutEditProfileFragment extends Fragment {
     private Context context;
 
 
-    private TextView textView_religion, textView_caste, textView_gothram, textView_motherToungue;
+    private TextView textView_religion, textView_caste, textView_gothram, textView_motherToungue,tvAddMoreImages;
 
     private TextView textView_name, textView_birthdate, textView_mobileNo, textView_emailId, textView_country,
             textView_state, textView_city, textView_village, textView_address, textView_postalCode;
@@ -77,6 +77,12 @@ public class AboutEditProfileFragment extends Fragment {
 
         onClickListener();
 
+        tvAddMoreImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((EditProfileActivity)getActivity()).openFragment("Test");
+            }
+        });
 
         //AsyncTaskRunner runner = new AsyncTaskRunner();
         //runner.execute("getDetails");
@@ -669,6 +675,8 @@ public class AboutEditProfileFragment extends Fragment {
         linearLayout_qualificationDetails = view.findViewById(R.id.linearLayout_qualificationDetails);
         linearLayout_professionalDetails = view.findViewById(R.id.linearLayout_professionalDetails);
         linearLayout_familyDetails = view.findViewById(R.id.linearLayout_familyDetails);
+
+        tvAddMoreImages=view.findViewById(R.id.tvAddMoreImages);
 
 
         context = getContext();

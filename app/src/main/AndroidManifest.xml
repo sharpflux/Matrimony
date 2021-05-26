@@ -14,8 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SubscriptionPlanActivity"></activity>
-        <activity android:name=".activity.SelectLanguageActivity"></activity>
+        <activity android:name=".activity.ImageUploadSelectedActivity"></activity>
+        <activity android:name=".activity.SubscriptionPlanActivity" />
+        <activity android:name=".activity.SelectLanguageActivity" />
         <activity android:name=".activity.ViewAllActivity" />
         <activity android:name=".activity.SignalRMessagesActivity" />
         <activity android:name=".activity.SignalRUserChatsActivity" />
@@ -27,6 +28,7 @@
         <activity android:name=".activity.ServiceProviderSignUpActivity" />
         <activity android:name=".activity.FullImageActivity" />
         <activity android:name=".activity.GalleryActivity" />
+        <activity android:name=".activity.GalleryItemDisplayActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,8 +59,6 @@
         <activity
             android:name=".activity.SignalrChatActivity"
             android:launchMode="singleInstance" />
-
-
         <activity
             android:name=".activity.SignUp"
             android:launchMode="singleInstance" />
@@ -80,10 +80,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_live_L1RM7ciJabgrxA" />
+
         <service
             android:name=".service.ChatService"
             android:exported="false" />
@@ -93,7 +93,6 @@
         android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />

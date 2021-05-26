@@ -4,9 +4,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"> <!--Theme.AppCompat.Light.DarkActionBar-->
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/quantum_bluegrey900</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
+
     </style>
 
 
@@ -133,5 +134,7 @@
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/quantum_bluegrey900</item>
+        <item name="android:statusBarColor">@color/quantum_bluegrey900</item>
     </style>
 </resources>

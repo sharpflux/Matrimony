@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.Activity;
@@ -41,6 +43,7 @@ import com.example.matrimonyapp.adapter.ProfileTabLayoutAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogChangeProfilePic;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomViewPager;
+import com.example.matrimonyapp.fragment.BlankFragment;
 import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
@@ -165,8 +168,10 @@ public class EditProfileActivity extends AppCompatActivity {
         relativeLayout_changeProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enableRuntimePermission();
-                changeProfilepicDialog();
+
+                openFragment("Hellow");
+                //enableRuntimePermission();
+                //changeProfilepicDialog();
 
             }
         });
@@ -624,6 +629,15 @@ public class EditProfileActivity extends AppCompatActivity {
             textView.setText(value);
         }
 
+    }
+
+    public void openFragment(String text) {
+        BlankFragment fragment = BlankFragment.newInstance(text);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
+        transaction.addToBackStack(null);
+        transaction.add(R.id.fragment_container, fragment, "BLANK_FRAGMENT").commit();
     }
 
 

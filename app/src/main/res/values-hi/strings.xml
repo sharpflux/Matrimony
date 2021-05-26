@@ -49,16 +49,13 @@
     <string name="vertical_ellipses">&#8942;</string>
     <string name="yes">हाँ</string>
     <string name="no">नहीं</string>
-
-
+    <string name="upload_image">तस्वीर अपलोड</string>
     <string name="change_profile_photo">प्रोफाइल फोटो बदलें</string>
     <string name="remove_profile_photo">प्रोफ़ाइल फ़ोटो निकालें </string>
     <string name="mobile_no_on_another_account">यह मोबाइल नं। दूसरे खाते में है</string>
     <string name="login_to_existing_account">मौजूदा खाते में प्रवेश करें</string>
     <string name="create_new_account">नया खाता बनाएँ</string>
-    <string name="log_on_to_another_account">आप इससे जुड़े खाते में लॉग इन कर सकते हैं
-        मोबाइल न। या नए मोबाइल नंबर का उपयोग कर सकते हैं। नया खाता बनाने के लिए</string>
-
+    <string name="log_on_to_another_account">आप इससे जुड़े खाते में लॉग इन कर सकते हैं मोबाइल न। या नए मोबाइल नंबर का उपयोग कर सकते हैं। नया खाता बनाने के लिए</string>
     <string name="set_preferences">प्राथमिकताएँ सेट करें</string>
     <string name="reset_preferences">रीसेट प्राथमिकताएँ</string>
     <string name="who_are_you_looking_for">आप किसे ढूँढ रहे हैं?</string>
@@ -76,7 +73,7 @@
     <string name="occupation_details">व्यवसाय विवरण</string>
     <string name="current_service">वर्तमान सेवा</string>
     <string name="name_of_department">विभाग का नाम</string>
-
+    <string name="selected_photos">चयनित तस्वीरें</string>
     <string name="service">सर्विस </string>
     <string name="non_service">सेवा नही </string>
     <string name="govt_job">सरकारी नौकरी </string>

@@ -17,7 +17,51 @@
                     android:orientation="vertical"
 
                     >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/quantum_yellow50"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/ic_baseline_camera"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Add More Photos"
+                    android:textColor="@color/quantum_bluegrey800"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvAddMoreImages"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:background="@drawable/gradient_rounded_corners"
+                    android:text="Add"
+                    android:layout_marginEnd="7dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
 
+
+            </LinearLayout>
 
                     <!--Basic Details-->
                     <androidx.cardview.widget.CardView

@@ -5,7 +5,7 @@
     <string name="rate_app" >रेट अॅप</string>
     <string name="subscription_plan" >सदस्यता योजना</string>
 
-
+    <string name="upload_image">प्रतिमा अपलोड </string>
     <string name="mobile">मोबाईल क्र. *</string>
     <string name="mobile_">मोबाईल क्र. </string>
     <string name="alt_mobile">पर्यायी मोबाइल क्र.</string>
@@ -118,7 +118,8 @@
         <string name="english">इंग्रजी (डीफॉल्ट)</string>
     <string name="marathi">मराठी</string>
     <string name="hindi">हिंदी</string>
-
+    <string name="selected_photos">
+निवडलेले फोटों</string>
 
 
     <string name="institue_university">संस्था / विद्यापीठाचे नाव</string>

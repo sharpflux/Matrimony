@@ -5,6 +5,10 @@
     <dimen name="padding_mini">4.0dip</dimen>
     <color name="grey_4a">#ff4a4a4a</color>
     <dimen name="primary_text_size">16.0sp</dimen>
+    <dimen name="item_margin">1dp</dimen>
+    <dimen name="item_margin_half">1dp</dimen>
 
+    <dimen name="folder_column_width">120dp</dimen>
 
+    <dimen name="picture_column_width">90dp</dimen>
 </resources>

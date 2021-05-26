@@ -166,6 +166,10 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mHandler = new Handler();
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(HomeActivity.this);
+      /*  AsyncTaskRunner runner2 = new AsyncTaskRunner();
+        runner2.execute("ProfileChecker");*/
+
         init();
 
 /*        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -282,6 +286,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     private void init()
     {
+
+
 
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
 
@@ -742,12 +748,24 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                 });
 
             }
+            if(params[0].equals("ProfileChecker"))
+            {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        new Thread(new Runnable() {
+                            public void run(){
+                                ProfileChecker();
+                            }
+                        }).start();
 
 
 
+                    }
+                });
 
-
-
+            }
 
             return null;
         }
@@ -755,8 +773,11 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         @Override
         protected void onPreExecute() {
-            customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(HomeActivity.this);
-            customDialogLoadingProgressBar.show();
+
+            if (!isFinishing() && customDialogLoadingProgressBar != null) {
+                customDialogLoadingProgressBar.setCancelable(false);
+                customDialogLoadingProgressBar.show();
+            }
         }
 
         @Override
@@ -781,7 +802,65 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     }
 
 
+    private void ProfileChecker() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_PROFILECHECKER+userModel.getUserId(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
+                        try {
+
+
+                            Log.d("RESPONSE",response);
+
+                            arrayList_dailyRecommendations.clear();
+
+                            JSONArray jsonArray =new JSONArray(response);
+                            customDialogLoadingProgressBar.dismiss();
+                            if(jsonArray.length()>0)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                if(!jsonObject.getString("FragmentName").equals("COMPLETED")){
+                                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    intent.putExtra("fragmentName",jsonObject.getString("FragmentName"));
+                                    intent.putExtra("ShowBackButton","No");
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                            }
+                            else
+                            {
+                                Toast.makeText(HomeActivity.this,"Invalid Details POST ! ",Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(HomeActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("UserId :",userModel.getUserId());
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getInstance(HomeActivity.this).addToRequestQueue(stringRequest);
+    }
 
 
 
