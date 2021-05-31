@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -162,7 +163,6 @@ public class GalleryItemDisplayActivity extends AppCompatActivity {
         if (isselect) {
             selectedItem.add(file);
         } else {
-
             selectedItem.remove(file);
         }
         if (selectedItem.size() > 0) {
@@ -170,7 +170,16 @@ public class GalleryItemDisplayActivity extends AppCompatActivity {
 
         } else {
             okbutton.setVisibility(View.GONE);
+        }
 
+        if (selectedItem.size() < 5) {
+
+            okbutton.setVisibility(View.VISIBLE);
+
+        } else {
+            selectedItem.remove(file);
+            Toast.makeText(GalleryItemDisplayActivity.this, "Sorry you can not select more than 5 Images..", Toast.LENGTH_SHORT).show();
+            okbutton.setVisibility(View.GONE);
         }
 
 //        System.out.println("Pdffile" + Gson().toJson(selectedFileModellist));

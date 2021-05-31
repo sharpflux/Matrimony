@@ -67,11 +67,13 @@ public class URLs {
     public static final String URL_GET_SUBCASTE                 = MainURL+"api/CasteApi/Get_SubCasteAPI?";
     public static final String URL_GET_MULTIPLE_SUBCASTE        = MainURL+"api/CasteApi/Get_SubCasteMultipleAPI?";
 
-    public static final String URL_POST_PROFILEPIC              = MainURL+"api/Registration/ImageUploader";
+    public static final String URL_POST_PROFILEPIC              = MainURL+"api/Registration/ProfileImageUploader";
     public static final String URL_GET_PROFILEPIC               = MainURL+"api/Registration/fetchUserProfile?";
 
     public static final String URL_POST_MULTIPLEIMAGES          = MainURL+"api/Registration/MultipleImageUploader";
-    public static final String URL_GET_MULTIPLEIMAGES           = MainURL+"";
+    public static final String URL_GET_MULTIPLEIMAGES           = MainURL+"api/Registration/UploadedMultipleImagesGET?UserId=";
+    public static final String URL_POST_IMAGEUPLOADMULTIPLE          = MainURL+"api/Registration/ImageUploadMultiple";
+
 
 
     public static final String URL_POST_GETPROFILES             = MainURL+"api/SetPreferenceNew/GetProfiles"; //api/RegistrationAPINew/SETPreferenceFilter

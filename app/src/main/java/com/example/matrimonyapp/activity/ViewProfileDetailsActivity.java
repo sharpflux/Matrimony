@@ -3,6 +3,7 @@ package com.example.matrimonyapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -31,10 +32,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ImageSliderAdapter;
 import com.example.matrimonyapp.adapter.ProfileTabLayoutAdapter;
+import com.example.matrimonyapp.adapter.SliderAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomViewPager;
 import com.example.matrimonyapp.modal.SingleImage;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.modal.sliderModel;
 import com.example.matrimonyapp.sqlite.SQLiteRecentlyViewedProfiles;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -48,6 +51,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -85,13 +90,24 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
     private int BLUR_PRECENTAGE = 50;
     private String currentLanguage;
+    SliderAdapter sliderAdapter;
+    ArrayList<sliderModel> sliderModelArrayList;
+    Timer timer;
+    Handler handler = new Handler();
+
+    ViewPager viewPager;
+    TabLayout indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile_details);
 
+        sliderModelArrayList=new ArrayList<>();
+        viewPager = findViewById(R.id.viewPager);
+        indicator = findViewById(R.id.indicator);
 
+        userModel = CustomSharedPreference.getInstance(ViewProfileDetailsActivity.this).getUser();
         init();
 
 
@@ -110,12 +126,12 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
                     .into(circleImage_profilePic);
 
 
-            Glide.with(ViewProfileDetailsActivity.this)
+          /*  Glide.with(ViewProfileDetailsActivity.this)
                     .load(URLs.MainURL+bundle.getString("userProfilePic"))
                     .skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .placeholder(R.color.quantum_grey100)
-                    .into(toolbarImageView);
+                    .into(toolbarImageView);*/
 
             //textView_name.setText(bundle.getString("userName"));
             /*textView_nameAgeTitle.setText(bundle.getString("userName")+", "+bundle.getString("userAge")+"yrs");
@@ -282,7 +298,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(ViewProfileDetailsActivity.this);
 
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
-        toolbarImageView = findViewById(R.id.toolbarImageView);
+//        toolbarImageView = findViewById(R.id.toolbarImageView);
         viewPager_details = findViewById(R.id.viewPager_details);
         tabLayout_details = findViewById(R.id.tabLayout_details);
         textView_name = findViewById(R.id.toolbarTitle);
@@ -319,9 +335,115 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
 
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute();
-
+        setDynamicslider();
+        autoScroll();
     }
 
+
+
+    private void setDynamicslider() {
+
+        bundle = getIntent().getExtras();
+
+        if(bundle!=null) {
+            userId = bundle.getString("userId");
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_MULTIPLEIMAGES + userId,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            try {
+
+                                JSONArray obj = new JSONArray(response);
+                                for (int i = 0; i < obj.length(); i++) {
+                                    //
+                                    JSONObject userJson = obj.getJSONObject(i);
+                                    if (!userJson.getBoolean("error")) {
+                                        sliderModel sellOptions =
+                                                new sliderModel
+                                                        (URLs.MainURL + userJson.getString("ImageUrl"),
+                                                                1
+                                                        );
+
+                                        sliderModelArrayList.add(sellOptions);
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    sliderAdapter = new SliderAdapter(getApplicationContext(), sliderModelArrayList);
+                                    viewPager.setAdapter(sliderAdapter);
+                                    indicator.setupWithViewPager(viewPager, true);
+
+
+                                    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                        @Override
+                                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                                        }
+
+                                        @Override
+                                        public void onPageSelected(int position) {
+
+                                        }
+
+                                        @Override
+                                        public void onPageScrollStateChanged(int state) {
+
+                                        }
+                                    });
+
+                                    // mShimmerViewContainer.stopShimmerAnimation();
+                                    //mShimmerViewContainer.setVisibility(View.GONE);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                //mShimmerViewContainer.stopShimmerAnimation();
+                                ///mShimmerViewContainer.setVisibility(View.GONE);
+                            }
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            // mShimmerViewContainer.stopShimmerAnimation();
+                            // mShimmerViewContainer.setVisibility(View.GONE);
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+
+                    return params;
+                }
+            };
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        }
+    }
+    private void autoScroll() {
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (viewPager.getCurrentItem() < sliderModelArrayList.size() - 1) {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                } else {
+                    viewPager.setCurrentItem(0);
+                }
+            }
+        };
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+            }
+        }, 4000, 6000);
+
+    }
 
     /*public void viewPager2_settings()
     {
@@ -419,7 +541,7 @@ public class ViewProfileDetailsActivity extends AppCompatActivity {
                                             jsonObject.getString("PermanantCity"));
 
 
-                                    
+
                                     if(res==0)
                                     {
                                         Toast.makeText(ViewProfileDetailsActivity.this, "Already Exists",Toast.LENGTH_SHORT).show();

@@ -7,7 +7,9 @@
     app:layoutDescription="@xml/motion_scene_collapsing_toolbar"
     android:background="@color/quantum_bluegrey900">
 
-    <ImageView
+
+
+<!--    <ImageView
         android:id="@+id/toolbarImageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,7 +18,40 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <FrameLayout
+        android:id="@+id/toolbarImageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--3rd party library for circular indicator is used-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@id/viewPager"
+            android:layout_centerInParent="true"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="14.7dp"
+            app:layout_constraintBottom_toBottomOf="@id/viewPager"
+            app:tabBackground="@drawable/indicator_slider"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp" />
+
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/backButton"

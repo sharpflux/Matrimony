@@ -551,7 +551,6 @@ public class BasicDetailsFragment extends Fragment  {
         editText_state = view.findViewById(R.id.editText_state);
         editText_city = view.findViewById(R.id.editText_city);
         editText_postalCode = view.findViewById(R.id.editText_postalCode);
-
         textView_countryId = view.findViewById(R.id.textView_countryId);
         textView_stateId = view.findViewById(R.id.textView_stateId);
         textView_cityId = view.findViewById(R.id.textView_cityId);
@@ -582,9 +581,6 @@ public class BasicDetailsFragment extends Fragment  {
         textView_currentDistrictId = view.findViewById(R.id.textView_currentDistrictId);
         textView_currentTalukaId = view.findViewById(R.id.textView_currentTalukaId);
 */
-
-
-
 
         imageView_back=((MainActivity)getActivity()).findViewById(R.id.imageView_back);
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);

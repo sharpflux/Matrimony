@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -47,11 +49,14 @@ import com.example.matrimonyapp.fragment.BlankFragment;
 import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
 import com.example.matrimonyapp.modal.AddPersonModel;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.utils.PictureFacer;
 import com.example.matrimonyapp.validation.FieldValidation;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
+import com.example.matrimonyapp.volley.VolleyMultipartRequest;
 import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 //import com.squareup.picasso.MemoryPolicy;
 //import com.squareup.picasso.NetworkPolicy;
 //import com.squareup.picasso.Picasso;
@@ -86,6 +91,9 @@ public class EditProfileActivity extends AppCompatActivity {
     //Tabs
     TabLayout tabLayout_details;
     CustomViewPager viewPager_details;
+    private Bitmap bitmap;
+
+    Bitmap newBitmap;
 
 
     //Change Profile Pic
@@ -94,14 +102,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public static final int REQUEST_CAMERA = 1, SELECT_FILE = 0, ACTIVITY_CONSTANT = 2;
     private String selfieString;
     public static final int RequestPermissionCode = 1;
-
-
-
-
-
     private UserModel userModel;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,9 +170,9 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                openFragment("Hellow");
-                //enableRuntimePermission();
-                //changeProfilepicDialog();
+               // openFragment("Hellow");
+                enableRuntimePermission();
+                changeProfilepicDialog();
 
             }
         });
@@ -290,22 +291,15 @@ public class EditProfileActivity extends AppCompatActivity {
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-
-
-        Bitmap newBitmap = Bitmap.createBitmap(thumbnail.getWidth(), thumbnail.getHeight(), thumbnail.getConfig());
+        newBitmap = Bitmap.createBitmap(thumbnail.getWidth(), thumbnail.getHeight(), thumbnail.getConfig());
         Canvas canvas = new Canvas(newBitmap);
         canvas.drawColor(Color.WHITE);
         canvas.drawBitmap(thumbnail, 0, 0, null);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
         selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
-
-
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-
+        File destination = new File(Environment.getExternalStorageDirectory(),System.currentTimeMillis() + ".jpg");
         FileOutputStream fo;
-
         try {
             destination.createNewFile();
             fo = new FileOutputStream(destination);
@@ -335,18 +329,16 @@ public class EditProfileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Bitmap newBitmap = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), bm.getConfig());
+            newBitmap = Bitmap.createBitmap(bm.getWidth(), bm.getHeight(), bm.getConfig());
             Canvas canvas = new Canvas(newBitmap);
             canvas.drawColor(Color.WHITE);
             canvas.drawBitmap(bm, 0, 0, null);
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             newBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
-
             selfieString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
 
         }
         circleImageView_profilePic.setImageBitmap(bm);
-
         AsyncTaskRunner runner = new AsyncTaskRunner();
         runner.execute("InsertProfilePic");
 
@@ -434,6 +426,65 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
 
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    private void UploadImages() {
+
+        final String tags = "Hello";
+
+        if (newBitmap != null) {
+            VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URLs.URL_POST_PROFILEPIC, new Response.Listener<NetworkResponse>()
+            {
+                @Override
+                public void onResponse(NetworkResponse response) {
+                    try {
+                        customDialogLoadingProgressBar.dismiss();
+                        JSONObject obj = new JSONObject(new String(response.data));
+
+                        if (obj.getBoolean("error")) {
+                            Toast.makeText(EditProfileActivity.this, obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(EditProfileActivity.this, "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            customDialogLoadingProgressBar.dismiss();
+                            Toast.makeText(EditProfileActivity.this, "Network Error !" + error.networkResponse.statusCode, Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("UserId", userModel.getUserId());
+                    return params;
+                }
+
+                @Override
+                protected Map<String, DataPart> getByteData() {
+                    Map<String, DataPart> params = new HashMap<>();
+                    params.put("Profile", new DataPart("Profile_" + userModel.getUserId() + ".jpg", getFileDataFromDrawable(newBitmap)));
+                    return params;
+                }
+            };
+            volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            VolleySingleton.getInstance(this).addToRequestQueue(volleyMultipartRequest);
+        }
+
+    }
+
 
     void insertProfilePic()
     {
@@ -489,12 +540,8 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-
-
                 params.put("UserId",userModel.getUserId());
                 params.put("ProfileImage",selfieString);
-
-
                 return params;
             }
         };
@@ -656,7 +703,8 @@ public class EditProfileActivity extends AppCompatActivity {
             }
             else if(params[0].equals("InsertProfilePic"))
             {
-                insertProfilePic();
+                UploadImages();
+               // insertProfilePic();
             }
 
 

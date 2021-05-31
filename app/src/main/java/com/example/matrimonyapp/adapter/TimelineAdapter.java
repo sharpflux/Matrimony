@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,8 +36,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
@@ -227,14 +231,37 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
 
     RequestBuilder thubnail = Glide.with(context).load(URLs.MainURL+list.get(position).getProfilePic());
+/*        Glide.with(context)
+                .load(URLs.MainURL+list.get(position).getProfilePic())
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.color.quantum_grey100)
+                .into(holder.imageView_profilePic);*/
+
+        holder.progressBar.setVisibility(View.VISIBLE);
+
         Glide.with(context)
                 .load(URLs.MainURL+list.get(position).getProfilePic())
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .placeholder(R.color.quantum_grey100)
+                .error(R.drawable.default_profile)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        holder.progressBar.setVisibility(View.GONE);
+                        return false; // important to return false so the error placeholder can be placed
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        holder.progressBar.setVisibility(View.GONE);
+                        return false; // important to return false so the error placeholder can be placed
+                    }
+
+
+                })
                 .into(holder.imageView_profilePic);
-
-
 
 
         holder.textView_userQualification.setText(list.get(position).getUserQualification());
@@ -475,7 +502,7 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
         public de.hdodenhof.circleimageview.CircleImageView circleImage_profilePic;
         public RelativeLayout relativeLayout;
 
-
+        ProgressBar progressBar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -503,7 +530,7 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
             this.imageView_interests = itemView.findViewById(R.id.spark_button);
             this.textView_interests = itemView.findViewById(R.id.textView_interests);
             this.textView_favorites = itemView.findViewById(R.id.textView_favorites);
-
+            this.progressBar=itemView.findViewById(R.id.progressBar);
 
 
             setIsRecyclable(false);

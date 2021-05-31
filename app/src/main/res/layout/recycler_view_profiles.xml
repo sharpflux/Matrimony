@@ -96,6 +96,7 @@
 
 
 
+
             <ImageView
 
                 android:id="@+id/imageView_profilePic"
@@ -113,6 +114,18 @@
                 />
 
 
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/circle_progress_bar_gradient"
+                >
+
+            </ProgressBar>
             <com.varunest.sparkbutton.SparkButton
                 android:id="@+id/imageView_doubleTapFav"
                 android:layout_width="120dp"
