@@ -408,8 +408,7 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
 
     private void insertDetails(final String toUserId, final String connectionType, final String removeConnectionType)
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                URLs.URL_POST_USER_CONNECTIONS,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.URL_POST_USER_CONNECTIONS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -456,9 +455,7 @@ holder.imageView_favorite.setEventListener(new SparkEventListener() {
                 params.put("ToUserId",toUserId);
                 params.put("ConntectionTypeId", connectionType);
                 params.put("RemoveFromConntectionTypeId", removeConnectionType);
-
-
-
+                params.put("FullName", userModel.getFullName());
                 return params;
             }
         };

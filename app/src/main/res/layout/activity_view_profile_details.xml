@@ -28,8 +28,7 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
@@ -91,10 +90,9 @@
         android:fontFamily="@font/arima_madurai_medium"
         android:layout_marginBottom="25dp"
         android:text="@string/app_name"
-
         app:layout_constraintBottom_toBottomOf="@id/toolbarImageView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/circleImage_profilePic" />
+
 
 
 

@@ -74,6 +74,7 @@
     <string name="current_service">वर्तमान सेवा</string>
     <string name="name_of_department">विभाग का नाम</string>
     <string name="selected_photos">चयनित तस्वीरें</string>
+    <string name="callNow">अब कॉल करें</string>
     <string name="service">सर्विस </string>
     <string name="non_service">सेवा नही </string>
     <string name="govt_job">सरकारी नौकरी </string>
@@ -97,7 +98,7 @@
     <string name="add_sibling">सिबलिंग जोड़ें</string>
     <string name="add_mama">Add Mama</string>
     <string name="name">नाम</string>
-
+    <string name="upgrade_message">कॉल करने के लिए प्रीमियम सदस्यता में अपग्रेड करें </string>
     <string name="father_in_law_information">ससुर की जानकारी</string>
     <string name="relation">रिश्ता</string>
     <string name="married">विवाहित</string>
@@ -308,7 +309,8 @@
     <string name="view_all">View All</string>
     <string name="best_wishes_from_jodidar_maza">Best wishes from JodidarMaza for searching a perfect life partner</string>
     <string name="matches_suggested_for_you">Matches suggested just for you</string>
-    <string name="upgrade_now">Upgrade Now</string>
+    <string name="upgrade_now">अभी अपग्रेड करें</string>
+    <string name="pay_now">Pay Now</string>
     <string name="profiles_viewed">Profiles Viewed</string>
     <string name="profiles_you_have_recently_viewed">Profiles you have recently viewed</string>
     <string name="attract_more_profiles">Attract more profiles!</string>

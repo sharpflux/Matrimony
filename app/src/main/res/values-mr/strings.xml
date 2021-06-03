@@ -121,7 +121,8 @@
     <string name="selected_photos">
 निवडलेले फोटों</string>
 
-
+    <string name="upgrade_message">कॉल करण्यासाठी प्रीमियम सदस्यता श्रेणीसुधारित करा </string>
+    <string name="callNow">आता कॉल करां</string>
     <string name="institue_university">संस्था / विद्यापीठाचे नाव</string>
     <string name="name_of_institute">संस्थेचे नाव</string>
     <string name="percentage">टक्केवारी</string>
@@ -314,7 +315,9 @@
     <string name="view_all">View All</string>
     <string name="best_wishes_from_jodidar_maza">Best wishes from JodidarMaza for searching a perfect life partner</string>
     <string name="matches_suggested_for_you">Matches suggested just for you</string>
-    <string name="upgrade_now">Upgrade Now</string>
+    <string name="upgrade_now">
+आता अपग्रेड करा</string>
+    <string name="pay_now">Pay Now</string>
     <string name="profiles_viewed">Profiles Viewed</string>
     <string name="profiles_you_have_recently_viewed">Profiles you have recently viewed</string>
     <string name="attract_more_profiles">Attract more profiles!</string>

@@ -35,8 +35,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
 
 
 
-    public SubscriptionAdapter(ArrayList<SubscriptionModel> arrayList_subscriptionModel,
-                               ViewPager2 viewPager2_subscription, SelectPlanClickListener selectPlanClickListener) {
+    public SubscriptionAdapter(ArrayList<SubscriptionModel> arrayList_subscriptionModel, ViewPager2 viewPager2_subscription, SelectPlanClickListener selectPlanClickListener) {
         this.arrayList_subscriptionModel = arrayList_subscriptionModel;
         this.viewPager2_subscription = viewPager2_subscription;
         this.selectPlanClickListener = selectPlanClickListener;
@@ -88,7 +87,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
             textView_packName = itemView.findViewById(R.id.textView_packName);
             textView_tagLine = itemView.findViewById(R.id.textView_tagLine);
             textView_amount = itemView.findViewById(R.id.textView_amount);
-            textView_packType = itemView.findViewById(R.id.textView_packType);
+//            textView_packType = itemView.findViewById(R.id.textView_packType);
             textView_description = itemView.findViewById(R.id.textView_description);
             textView_selectThisPlan = itemView.findViewById(R.id.textView_selectThisPlan);
 

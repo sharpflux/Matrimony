@@ -157,6 +157,7 @@
     <string name="share_photo_desc">When you share photos, they\'ll appear on your profile</string>
     <string name="share_first_photo_desc">Share your first photo</string>
     <string name="profile">Profile</string>
+    <string name="upgrade_message">Upgrade to premium membership to call </string>
 
     <string name="only_text">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="only_text_with_space">a bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
@@ -213,6 +214,7 @@
 
 
     <string name="cancel">Cancel</string>
+    <string name="callNow">Call Now</string>
     <string name="ok">Ok</string>
     <string name="done">Done</string>
 
@@ -278,6 +280,7 @@
     <string name="interest_accepted">Interest Accepted</string>
     <string name="select_this_plan">Select this plan</string>
     <string name="birth_city">Birth City</string>
+    <string name="pay_now">Pay Now</string>
     <string name="birth_country">Birth Country</string>
     <string name="login">Login</string>
     <string name="verify_otp">Verify OTP</string>

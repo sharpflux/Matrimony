@@ -18,7 +18,232 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                >
 
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/linearLayout_cancel"
+                    >
+
+                    <com.varunest.sparkbutton.SparkButton
+                        android:id="@+id/ivCallNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:sparkbutton_activeImage="@drawable/ic_baseline_call_24"
+                        app:sparkbutton_inActiveImage="@drawable/ic_baseline_call_24"
+                        app:sparkbutton_iconSize="25dp"
+                        app:sparkbutton_primaryColor="@color/yellow_favorite"
+                        app:sparkbutton_animationSpeed="1.5"
+                        app:sparkbutton_secondaryColor="@color/orange"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="-15dp"/>
+                    <!--               <com.varunest.sparkbutton.SparkButton
+                                       android:layout_width="30dp"
+                                       android:layout_height="30dp"
+
+                                       android:src="@drawable/ic_cancel_black_24dp"
+                                       android:tint="@color/blue"
+                                       android:padding="5dp"
+                                       />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/callNow"
+                        android:textColor="@color/quantum_bluegrey900"
+                        android:textSize="11.5sp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                   </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/linearLayout_favorites"
+                    >
+
+                    <com.varunest.sparkbutton.SparkButton
+                        android:id="@+id/imageView_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:sparkbutton_activeImage="@drawable/starfilled"
+                        app:sparkbutton_inActiveImage="@drawable/start1"
+                        app:sparkbutton_iconSize="25dp"
+                        app:sparkbutton_primaryColor="@color/yellow_favorite"
+                        app:sparkbutton_animationSpeed="2.0"
+                        app:sparkbutton_secondaryColor="@color/orange"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="-15dp"/>
+
+                    <!--<com.jackandphantom.androidlikebutton.AndroidLikeButton
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+
+                        android:layout_centerHorizontal="true"
+                        app:circle_active="true"
+                        app:like_icon="@drawable/starfilled"
+                        android
+                        app:unlike_icon="@drawable/starborder"
+                        app:circle_startColor="#fcd229"
+                        app:circle_endColor="#f4ac1b"
+                        app:dot_color_1="#f5ce31"
+                        app:dot_color_2="#ed8128"
+                        app:dot_active="false"
+                        app:liked="true"
+
+
+                        />
+    -->
+
+
+                    <!--                <com.like.LikeButton
+
+                                        app:icon_type="Star"
+
+                                        app:circle_start_color="@color/colorPrimary"
+                                        app:like_drawable="@drawable/thumb_image"
+                                        app:unlike_drawable="@drawable/thumb_off"
+                                        app:dots_primary_color="@color/black"
+                                        app:dots_secondary_color="@color/blue"
+                                        app:circle_end_color="@color/blue"
+                                        app:icon_size="30dp"
+                                        app:liked="true"
+                                        app:anim_scale_factor="2"
+                                        android:id="@+id/imageView_favorite"
+
+                                        />-->
+                    <!--                <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+
+                                        android:src="@drawable/starfilled"
+                                        android:tint="@color/white"
+                                        android:padding="7dp"
+                                        />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_favorites"
+                        android:text="@string/favorite"
+                        android:textColor="@color/quantum_bluegrey900"
+                        android:textSize="11.5sp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/linearLayout_interests"
+                    >
+
+
+                    <com.varunest.sparkbutton.SparkButton
+                        android:id="@+id/spark_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:sparkbutton_activeImage="@drawable/red_heart"
+                        app:sparkbutton_inActiveImage="@drawable/black_heart"
+                        app:sparkbutton_iconSize="25dp"
+                        app:sparkbutton_primaryColor="@color/red_heart"
+                        app:sparkbutton_animationSpeed="2.0"
+                        android:layout_alignParentTop="true"
+                        app:sparkbutton_secondaryColor="@color/yellow_favorite"
+                        android:layout_marginTop="-15dp"/>
+                    <!--
+                                    <ImageView
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:id="@+id/imageView_interests"
+                                        android:src="@drawable/red_heart"
+                                        android:tint="@color/blue"
+                                        android:padding="5dp"
+                                        />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView_interests"
+                        android:text="@string/interests"
+                        android:textColor="@color/quantum_bluegrey900"
+                        android:textSize="11.5sp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/linearLayout_message"
+                    >
+                    <com.varunest.sparkbutton.SparkButton
+                        android:id="@id/imageView_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:sparkbutton_activeImage="@drawable/send_message2"
+                        app:sparkbutton_inActiveImage="@drawable/message3"
+                        app:sparkbutton_iconSize="25dp"
+                        app:sparkbutton_primaryColor="@color/blue"
+                        app:sparkbutton_animationSpeed="2.0"
+                        android:layout_alignParentTop="true"
+                        app:sparkbutton_secondaryColor="@color/quantum_bluegrey900"
+                        android:layout_marginTop="-15dp"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/message"
+                        android:textColor="@color/quantum_bluegrey900"
+                        android:textSize="11.5sp"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentBottom="true"
+                        />
+
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
 
 
             <!--Basic Details-->
@@ -184,7 +409,6 @@
                         android:id="@+id/textView_mobileNo"
                         style="@style/FieldValue_TextView"
                         android:text="@string/not_filled"
-
                         android:visibility="gone"/>
 
 

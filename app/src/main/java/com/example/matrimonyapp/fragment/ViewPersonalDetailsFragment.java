@@ -1,16 +1,29 @@
 package com.example.matrimonyapp.fragment;
 
 
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +36,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.HomeActivity;
+import com.example.matrimonyapp.activity.LoginActivity;
+import com.example.matrimonyapp.activity.SignUp;
+import com.example.matrimonyapp.activity.SubscriptionActivity;
 import com.example.matrimonyapp.adapter.AddPersonAdapter;
 import com.example.matrimonyapp.adapter.ViewMultipleDetailsAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
@@ -32,6 +48,7 @@ import com.example.matrimonyapp.sqlite.SQLiteLanguageKnownDetails;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 import com.example.matrimonyapp.volley.VolleySingleton;
+import com.varunest.sparkbutton.SparkButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +57,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.Manifest.permission.CALL_PHONE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,7 +69,8 @@ public class ViewPersonalDetailsFragment extends Fragment {
     View view;
     private Bundle bundle;
     private String userId;
-
+    Dialog slideDialog;
+    private static final int CALL_PERMISSION_REQUEST_CODE = 1234;
     TextView textView_name, textView_gender, textView_birthdate, textView_age, textView_bloodGroup,
             textView_permanentAddress, textView_permanentVillage, textView_permanentPostalCode,
             textView_permanentCountryName, textView_permanentStateName, textView_permanentCityName,
@@ -61,8 +81,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
             textView_motherTongue, textView_height, textView_weight, textView_colour,
             textView_maritalStatus, textView_familyStatus, textView_familyType, textView_familyValues,
             textView_disability, textView_disabilityType, textView_diet, textView_livesWithFamily,
-            textView_religion, textView_caste, textView_subCaste, textView_gothram; //textView_dosh, textView_alternetMobileNo, textView_alternetEmailId,
-
+            textView_religion, textView_caste, textView_subCaste, textView_gothram, tvUpgrade; //textView_dosh, textView_alternetMobileNo, textView_alternetEmailId,
 
 
     TextView textView_currentService, textView_nameOfDepartment, textView_occupation,
@@ -75,7 +94,6 @@ public class ViewPersonalDetailsFragment extends Fragment {
     private Context context;
 
 
-
     CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     UserModel userModel;
 
@@ -84,7 +102,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
     private ViewMultipleDetailsAdapter viewDetails_languageKnown;
     private ArrayList<AddPersonModel> addPersonModelArrayList_languageKnown;
     private SQLiteLanguageKnownDetails sqLiteLanguageKnownDetails;
-
+    SparkButton ivCallNow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,6 +125,20 @@ public class ViewPersonalDetailsFragment extends Fragment {
         userId = bundle.getString("userId");
 
         context = getContext();
+
+        ivCallNow = view.findViewById(R.id.ivCallNow);
+
+        ivCallNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // ShowDialog();
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                runner.execute("IsSubscribed");
+
+
+            }
+        });
+
 
         textView_name = view.findViewById(R.id.textView_name);
         textView_gender = view.findViewById(R.id.textView_gender);
@@ -153,8 +185,6 @@ public class ViewPersonalDetailsFragment extends Fragment {
         textView_birthCityName = view.findViewById(R.id.textView_birthCityName);
 
 
-
-
         textView_companyName = view.findViewById(R.id.editText_companyName);
         textView_designation = view.findViewById(R.id.textView_designation);
         textView_experience = view.findViewById(R.id.textView_experience);
@@ -176,10 +206,6 @@ public class ViewPersonalDetailsFragment extends Fragment {
         textView_workingCity = view.findViewById(R.id.textView_workingCity);
 
 
-
-
-
-
         textView_mobileNo = view.findViewById(R.id.textView_mobileNo);
         //textView_alternetMobileNo = view.findViewById(R.id.textView_alternetMobileNo);
         textView_emailId = view.findViewById(R.id.textView_emailId);
@@ -199,8 +225,7 @@ public class ViewPersonalDetailsFragment extends Fragment {
         LinearLayoutManager linearLayoutManager_education = new LinearLayoutManager(getContext());
         recyclerView_addLanguageKnown.setLayoutManager(linearLayoutManager_education);
 
-        sqLiteLanguageKnownDetails= new SQLiteLanguageKnownDetails(getContext());
-
+        sqLiteLanguageKnownDetails = new SQLiteLanguageKnownDetails(getContext());
 
 
     }
@@ -210,13 +235,10 @@ public class ViewPersonalDetailsFragment extends Fragment {
 
         value = value.trim();
 
-        if((textView.getText().toString().equals("Not Filled") ) && value.isEmpty() || value.equals("0") || value.equals(""))
-        {
+        if ((textView.getText().toString().equals("Not Filled")) && value.isEmpty() || value.equals("0") || value.equals("")) {
             textView.setText(getResources().getString(R.string.not_filled));
             textView.setTextColor(ContextCompat.getColor(context, R.color.red_btn_bg_color));
-        }
-        else
-        {
+        } else {
             textView.setText(value);
             textView.setTextColor(ContextCompat.getColor(context, R.color.quantum_grey700));
         }
@@ -236,6 +258,8 @@ public class ViewPersonalDetailsFragment extends Fragment {
                 getPersonalDetails();
                 getProfessionalDetails();
                 getQualificationDetails();
+            } else if (params[0].equals("IsSubscribed")) {
+                checkIfSubscribed();
             }
 
 
@@ -273,10 +297,79 @@ public class ViewPersonalDetailsFragment extends Fragment {
     }
 
 
+    void checkIfSubscribed() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_USERSUBsCRIBEDORNOT + "UserId=" + userModel.getUserId(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            customDialogLoadingProgressBar.dismiss();
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            if (jsonArray.length() > 0) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+                                if (!jsonObject.getBoolean("error")) {
+
+                                    if (!jsonObject.getBoolean("IsSubscribed")) {
+                                            ShowDialog();
+                                    } else {
+
+                                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                        callIntent.setData(Uri.parse("tel:" +textView_mobileNo.getText().toString() ));
+
+                                        if (ContextCompat.checkSelfPermission(getActivity(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                                            startActivity(callIntent);
+                                        } else {
+                                            requestPermissions(new String[]{CALL_PHONE}, 1);
+                                        }
+
+
+                                    }
+                                }
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Something went wrong POST ! ", Toast.LENGTH_SHORT).show();
+
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == CALL_PERMISSION_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:" + textView_mobileNo.getText().toString()));
+            startActivity(callIntent);
+        }
+    }
+
     void getBasicDetails() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_BASICDETAILS + "UserId=" +userId+ "&Language=" + userModel.getLanguage(),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,   URLs.URL_GET_BASICDETAILS + "UserId=" +userId+ "&Language=" + userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -623,7 +716,54 @@ public class ViewPersonalDetailsFragment extends Fragment {
     }
 
 
+    public  void ShowDialog()
+    {
+        slideDialog = new Dialog(getContext(), R.style.CustomDialogAnimation);
+        slideDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // Setting dialogview
+        Window window = slideDialog.getWindow();
+        //  window.setGravity(Gravity.BOTTOM);
 
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        slideDialog.setContentView(R.layout.activity_sorting);
+
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        slideDialog.getWindow().getAttributes().windowAnimations = R.style.CustomDialogAnimation;
+        layoutParams.copyFrom(slideDialog.getWindow().getAttributes());
+
+        LinearLayout layoutcancel= slideDialog.findViewById(R.id.cancel);
+        tvUpgrade=slideDialog.findViewById(R.id.tvUpgrade);
+
+        tvUpgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SubscriptionActivity.class);
+                intent.putExtra("ClassName","SubscriptionActivity");
+                startActivity(intent);
+            }
+        });
+
+        layoutcancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                slideDialog.dismiss();
+            }
+        });
+
+
+        //int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.530);
+
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = height;
+        layoutParams.gravity = Gravity.BOTTOM;
+
+        slideDialog.getWindow().setAttributes(layoutParams);
+        slideDialog.setCancelable(true);
+        slideDialog.setCanceledOnTouchOutside(true);
+
+        slideDialog.show();
+    }
 
 
     void getQualificationDetails()

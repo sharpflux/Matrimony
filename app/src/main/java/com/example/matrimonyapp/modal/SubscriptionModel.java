@@ -2,7 +2,7 @@ package com.example.matrimonyapp.modal;
 
 public class SubscriptionModel {
 
-    private String packName, tag, amount, description, packType;
+    private String packName, tag, amount, description, packType,PackageId;
 
     public SubscriptionModel() {
     }
@@ -13,6 +13,14 @@ public class SubscriptionModel {
         this.amount = amount;
         this.description = description;
         this.packType = packType;
+    }
+
+    public String getPackageId() {
+        return PackageId;
+    }
+
+    public void setPackageId(String packageId) {
+        PackageId = packageId;
     }
 
     public String getPackName() {

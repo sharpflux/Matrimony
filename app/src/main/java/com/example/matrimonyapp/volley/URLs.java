@@ -37,8 +37,13 @@ public class URLs {
 
     public static final String URL_GET_REGISTEREDUSER           = MainURL+"api/Registration/GetRegisterUserAPI?";
 
+    public static final String URL_GET_USERSUBsCRIBEDORNOT           = MainURL+"api/MembershipApi/MembershipSubscriberCheckbyUser?";
+
     public static final String URL_GET_BASICDETAILS             = MainURL+"api/Registration/GetUserBasicDetailsAPI?";
     public static final String URL_POST_BASICDETAILS            = MainURL+"api/BasicDetailsAPI/BasicDetailsInsertUpdate"; //"/api/BasicDetailsAPI/BasicDetailsInsertUpdate";
+
+    public static final String URL_GET_PACKAGES                 = MainURL+"api/MembershipApi/PackageMasterGETApi?Language=en";
+    public static final String URL_POST_MEMBERSHIP              = MainURL+"api/MembershipApi/MembershipSubscriberInsertUpdate";
 
     public static final String URL_GET_RELIGIONDETAIL           = MainURL+"api/ReligiousDetailsAPI/GetUserReligiousDetailsAPI?";
     public static final String URL_POST_RELIGIONDETAIL          = MainURL+"api/ReligiousDetailsAPI/ReligiousDetailsInsertUpdate";

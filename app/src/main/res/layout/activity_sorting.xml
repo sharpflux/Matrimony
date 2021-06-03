@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.ImageUploadSelectedActivity">
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp">
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="17dp"
+                android:layout_weight="1"
+                android:letterSpacing="0.0525"
+                android:text="Package"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/ic_cross" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="18dp"
+                android:fontFamily="@font/sfpro_display_medium"
+                android:letterSpacing="0.0525"
+
+                android:textSize="13.3sp" />
+        </LinearLayout>
+
+        <View
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImage_profilePic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="25dp"
+                android:src="@color/codeGray"
+                />
+
+
+            <TextView
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/arima_madurai_medium"
+                android:layout_marginBottom="25dp"
+                android:text="@string/upgrade_message" />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/tvUpgrade"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:background="@drawable/gradient_place_order"
+        android:text="@string/upgrade_now"
+        android:textSize="16dp"
+        android:textColor="@color/white" />
+</RelativeLayout>

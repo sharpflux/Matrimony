@@ -109,7 +109,7 @@
                     />
 
 
-                <TextView
+              <!--  <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
@@ -131,7 +131,7 @@
                     android:layout_gravity="bottom"
                     android:fontFamily="@font/arapey_italic"
                     />
-
+-->
             </LinearLayout>
 
 
@@ -177,7 +177,7 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="30dp"
-                android:text="Subscription Plan description here Subscription Plan description here Subscription Plan description here Subscription Plan description here Subscription Plan description here"
+                android:text="Access 100 verified mobile numbers.  \n View unlimited profiles. \n Increase the chance of finding your life partner"
                 android:gravity="center_horizontal"
                 android:textSize="13sp"
                 android:textColor="@color/text_gray"
@@ -189,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_selectThisPlan"
-                android:text="@string/select_this_plan"
+                android:text="@string/pay_now"
                 android:gravity="center"
                 android:textSize="14sp"
                 android:textColor="@color/white"

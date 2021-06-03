@@ -81,6 +81,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;*/
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
@@ -89,7 +92,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -161,6 +166,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,8 +175,30 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(HomeActivity.this);
       /*  AsyncTaskRunner runner2 = new AsyncTaskRunner();
         runner2.execute("ProfileChecker");*/
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
 
         init();
+
+        FirebaseMessaging.getInstance().getToken() .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                        Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+        FirebaseMessaging.getInstance().subscribeToTopic("All");
+        FirebaseMessaging.getInstance().subscribeToTopic(userModel.getUserId());
+
+
 
 /*        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
@@ -194,7 +222,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(HomeActivity.this, SubscriptionPlanActivity.class);
+                Intent intent = new Intent(HomeActivity.this, SubscriptionActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "711632208988",
-    "project_id": "jodidar-maza",
-    "storage_bucket": "jodidar-maza.appspot.com"
+    "project_number": "622615306502",
+    "project_id": "jodidarmaza-2a239",
+    "storage_bucket": "jodidarmaza-2a239.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:711632208988:android:4f878845b809d723171299",
+        "mobilesdk_app_id": "1:622615306502:android:4185d6992f7abd78f83e87",
         "android_client_info": {
           "package_name": "com.example.matrimonyapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "711632208988-7qka49b2go8b98vhe4nre3in70vbmv06.apps.googleusercontent.com",
+          "client_id": "622615306502-qo4m7hvrimfmo1anshlbs4v0konq2enr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.matrimonyapp",
-            "certificate_hash": "d62534288a377e447759cb6f983753b4f5f5e892"
+            "certificate_hash": "8f90442766c7704399c80e8a4c048aac9d15a722"
           }
         },
         {
-          "client_id": "711632208988-to47ef6lcdu3di0k287fksfhpjj46h16.apps.googleusercontent.com",
+          "client_id": "622615306502-0bgouen8f1ro36tge84l95bb6adtfhiu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyChZ7CPz-KBH-7rb8B05vnakvD5fZLPb1c"
+          "current_key": "AIzaSyB3iPdqO3jCn5qCoyY6pzTYXQhzsPQZxoQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "711632208988-to47ef6lcdu3di0k287fksfhpjj46h16.apps.googleusercontent.com",
+              "client_id": "622615306502-0bgouen8f1ro36tge84l95bb6adtfhiu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
