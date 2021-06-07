@@ -79,7 +79,7 @@ public class ChatService extends Service {
 
     @Override
     public void onDestroy() {
-      // connection.stop();
+        connection.stop();
         super.onDestroy();
     }
 
@@ -187,6 +187,7 @@ public class ChatService extends Service {
                     try { // we added the list of connected users
                         JSONObject jsonObj= new JSONObject(s);
                         Globals.offlineUser=jsonObj;
+                        Toast.makeText(ChatService.this,jsonObj.getString("FromUserId") +" Is Disconnected!", Toast.LENGTH_LONG).show();
                         sendBroadcast(new Intent().setAction("offlineUser"));
 
                     } catch (JSONException e) {

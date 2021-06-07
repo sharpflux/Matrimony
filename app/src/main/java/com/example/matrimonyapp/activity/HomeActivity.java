@@ -61,6 +61,7 @@ import com.example.matrimonyapp.adapter.TimelineAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.customViews.CustomNavigationView;
 import com.example.matrimonyapp.helpers.Globals;
+import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserChat;
@@ -165,7 +166,68 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     CircleImageView circleImage_welcomeProfilePic, circleImage_progressProfilePic;
 
 
+    MyReceiver myReceiver;
+    ChatService chatService;
+    boolean mBound = false;
 
+    private class MyReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            switch (intent.getAction()) {
+                case "notifyAdapter":
+
+
+                    break;
+                case "getallMessages":
+
+                    break;
+
+                case "UserList":
+
+                    break;
+            }
+        }
+    } // MyReceiver
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+
+        try {
+            if(myReceiver!=null)
+                unregisterReceiver(myReceiver);
+
+            if (mBound) {
+                unbindService(mConnection);
+                mBound = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        super.onStop();
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
+            chatService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +238,10 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
       /*  AsyncTaskRunner runner2 = new AsyncTaskRunner();
         runner2.execute("ProfileChecker");*/
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
+
+
+
 
         init();
 
@@ -190,24 +256,13 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                         // Get new FCM registration token
                         String token = task.getResult();
 
-                        Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("All");
         FirebaseMessaging.getInstance().subscribeToTopic(userModel.getUserId());
-
-
-
-/*        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
-            return;
-        }*/
-       // String IMEINumber = telephonyManager.getDeviceId();
-
-        // timelineAdapter = new TimelineAdapter(this,)
 
 
         navigation();
@@ -251,7 +306,12 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
 
     private void connect() {
-
+        Intent intent = new Intent(this, ChatService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        myReceiver = new MyReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("notifyAdapter");
+        registerReceiver(myReceiver, intentFilter);
     }
     private void navigation()
     {
@@ -496,7 +556,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     @Override
     protected void onResume() {
         super.onResume();
-
+        connect();
         if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
             currentLanguage = getResources().getConfiguration().locale.getLanguage();
             recreate();

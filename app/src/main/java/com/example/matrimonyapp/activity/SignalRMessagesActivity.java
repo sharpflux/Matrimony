@@ -1,12 +1,14 @@
 package com.example.matrimonyapp.activity;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,7 +125,15 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         super.onStop();
     }
 
-
+    private boolean isCheckUserOnlineSelf(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -130,8 +141,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
             chatService = binder.getService();
             mBound = true;
-            chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","50");
-
+            chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","500");
         }
 
         @Override
@@ -145,6 +155,11 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signal_r_messages);
 
         intent = getIntent();
+
+
+        myReceiver = new MyReceiver();
+
+
 
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
         scrollView = findViewById(R.id.scrollView);
@@ -172,52 +187,10 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         mLayoutManager.setStackFromEnd(true);
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.scrollToPosition(chatModelsList.size());
-
-
-        context=this;
-
-        imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                message = editText_message.getText().toString().trim();
-
-                if(!message.equals(""))
-                {
-
-
-                    chatService.Send(connectionId,toUserId, editText_message.getText().toString());
-                   // sendMessage();
-                   // hideSoftKeyboard((Activity)SignalRMessagesActivity.this);
-
-
-                    ChatModel chatModel = new ChatModel();
-                    chatModel.setMessage(message);
-                    chatModel.setSenderId(userModel.getUserId());
-                    chatModel.setReceiverId(toUserId);
-                    chatModelsList.add(0,chatModel);
-                    chatAdapter.notifyItemInserted(0);
-                    editText_message.setText("");
-                    //scrollView.scrollTo(0, scrollView.getBottom()+60);
-                    //recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
-
-                }
-
-            }
-        });
-
-
-        imageView_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         bundle =intent.getExtras();
         if (bundle!=null)
         {
-           connectionId = bundle.getString("connectionId");
+            connectionId = bundle.getString("connectionId");
             toUserId = bundle.getString("toUserId");
             textView_userName.setText(bundle.getString("toUserName"));
 
@@ -230,6 +203,70 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     .into(circleImageView_profilePic);
 
         }
+
+
+
+        context=this;
+
+        imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                message = editText_message.getText().toString().trim();
+
+                if(isCheckUserOnlineSelf(ChatService.class)){
+                    if(!message.equals(""))
+                    {
+                        if(!connectionId.equals("0")) {
+                            chatService.Send(connectionId, toUserId, editText_message.getText().toString());
+                            ChatModel chatModel = new ChatModel();
+                            chatModel.setMessage(message);
+                            chatModel.setSenderId(userModel.getUserId());
+                            chatModel.setReceiverId(toUserId);
+                            chatModelsList.add(0, chatModel);
+                            chatAdapter.notifyItemInserted(0);
+                            editText_message.setText("");
+                        }
+                        else {
+                            Toast.makeText(SignalRMessagesActivity.this,"User is offline", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+                else {
+                    connect();
+                    if(!message.equals(""))
+                    {
+                        if(!connectionId.equals("0")) {
+                            chatService.Send(connectionId, toUserId, editText_message.getText().toString());
+                            ChatModel chatModel = new ChatModel();
+                            chatModel.setMessage(message);
+                            chatModel.setSenderId(userModel.getUserId());
+                            chatModel.setReceiverId(toUserId);
+                            chatModelsList.add(0, chatModel);
+                            chatAdapter.notifyItemInserted(0);
+                            editText_message.setText("");
+                        }
+                        else {
+                            Toast.makeText(SignalRMessagesActivity.this,"User is offline", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+
+
+
+            }
+        });
+
+
+        imageView_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignalRMessagesActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
 
         linearLayout_toolbar.setOnClickListener(new View.OnClickListener() {
@@ -247,21 +284,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             }
         });
 
-       // connect();
-     //   hubProxy.invoke("GetMessage", new Object[]{userModel.getUserId(), toUserId, 1, 50});
-        Intent intent = new Intent(this, ChatService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
-        //Register events we want to receive from Chat Service
-        myReceiver = new MyReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("notifyAdapter");
-        intentFilter.addAction("getallMessages");
-       // intentFilter.addAction("UserList");
-        registerReceiver(myReceiver, intentFilter);
-
-
-
+        connect();
 
         RecyclerView.AdapterDataObserver observer = new RecyclerView.AdapterDataObserver() {
             @Override
@@ -311,6 +334,9 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     chatModel.setReceiverId(userModel.getUserId());
                     chatModelsList.add(0,chatModel);
                     chatAdapter.notifyItemInserted(0);
+                    MediaPlayer mPlayer = MediaPlayer.create(SignalRMessagesActivity.this, R.raw.message_tone);
+                    mPlayer.start();
+
                     //scrollView.scrollTo(0, scrollView.getBottom()+60);
                     //recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
 
@@ -343,10 +369,6 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
                         chatAdapter.notifyDataSetChanged();
                         recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
-                       // mLayoutManager.scrollToPositionWithOffset(0,100);
-                       // scrollView.fullScroll(View.FOCUS_FORWARD);
-                       // recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
-                        //scrollView.scrollTo(0, scrollView.getBottom()+60);
 
                     } catch (JSONException jsonException) {
                         jsonException.printStackTrace();
@@ -382,136 +404,24 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             }
         }
     } // MyReceiver
-
-    void connect() {
-/*        Platform.loadPlatformComponent(new AndroidPlatformComponent());
-        Credentials credentials = new Credentials() {
-            @Override
-            public void prepareRequest(Request request) {
-                request.addHeader("DisplayName", userModel.getFullName()); //get username
-                request.addHeader("FromUserId", userModel.getUserId()); //get username
-            }
-        };
-        String serverUrl="http://sam.sharpflux.com/signalr"; // connect to signalr server
-        hubConnection = new HubConnection(serverUrl);
-        hubConnection.setCredentials(credentials);
-        hubConnection.connected(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-
-        String CLIENT_METHOD_BROADAST_MESSAGE = "getUserList"; // get webapi serv methods
-        hubProxy = hubConnection.createHubProxy("chatHub"); // web api  necessary method name
-        ClientTransport clientTransport = new ServerSentEventsTransport((hubConnection.getLogger()));
-        SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);*/
-
-        //hubProxy = SignalRUserChatsActivity.hubProxy;
-
-
-        /*hubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE, new SubscriptionHandler1<String>() {
-            @Override
-            public void run(String s) {
-                try { // we added the list of connected users
-                    JSONArray jsonArray = new JSONArray(s);
-                    userList = new ArrayList<UserChat>();
-                    user_names = new ArrayList<String>();
-                    user_names.add("Select User");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String username = jsonObject.getString("username");
-                        String connection_id = jsonObject.getString("connectionID");
-                        UserChat user = new UserChat(username, connection_id);
-                        userList.add(user);
-                        user_names.add(username);
-                    }
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ArrayAdapter<String> adapter=new ArrayAdapter<String>(cx,android.R.layout.simple_list_item_1,user_names);
-                            adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-                            users.setAdapter(adapter);
-                        }
-                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, String.class);*/
-
-        hubProxy.on("sendMessage", new SubscriptionHandler2<String, String>() {
-
-            @Override
-            public void run(final String s, final String s2) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                      //  send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
-                       ChatModel chatModel = new ChatModel();
-                       chatModel.setMessage(s);
-                       chatModel.setSenderId(toUserId);
-                       chatModel.setReceiverId(userModel.getUserId());
-                       chatModelsList.add(chatModel);
-                       chatAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
-        },String.class,String.class);
-
-
- hubProxy.on("getallMessages", new SubscriptionHandler1<String>() {
-
-            @Override
-            public void run(final String s) {
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        try {
-
-                            JSONArray jsonArray = new JSONArray(s);
-
-                            for (int i=0; i<jsonArray.length(); i++)
-                            {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                /*if ((jsonObject.getString("FromUserId").equals(userModel.getUserId()) && jsonObject.getString("ToUserId").equals(toUserId))
-                                || (jsonObject.getString("FromUserId").equals(toUserId) && jsonObject.getString("ToUserId").equals(userModel.getUserId())))
-                                {*/
-                                    ChatModel chatModel = new ChatModel();
-                                    chatModel.setMessage(jsonObject.getString("Message"));
-                                    chatModel.setMessageTime(jsonObject.getString("MessageDateTime"));
-                                    chatModel.setSenderId(jsonObject.getString("FromUserId"));
-                                    chatModel.setReceiverId(jsonObject.getString("ToUserId"));
-                                    chatModelsList.add(chatModel);
-
-                                //}
-
-                            }
-
-                            chatAdapter.notifyDataSetChanged();
-
-                        }
-                        catch (JSONException jsonException)
-                        {
-                            jsonException.printStackTrace();
-                        }
-
-
-                        Log.e("MESSAGES", "\n------------------------\n"+s +"\n------------------------\n");
-
-                    }
-                });
-            }
-        },String.class);
-
-
-        /*try {
-            signalRFuture.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.e("SimpleSignalR", e.toString());
-            return;
-        }*/
+    private void connect() {
+        Intent intent = new Intent(this, ChatService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("notifyAdapter");
+        intentFilter.addAction("getallMessages");
+        registerReceiver(myReceiver, intentFilter);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(SignalRMessagesActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
 
     private void hideSoftKeyboard(Activity activity) {
@@ -526,7 +436,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        connect();
         if(!currentLanguage.equals(getResources().getConfiguration().locale.getLanguage())){
             currentLanguage = getResources().getConfiguration().locale.getLanguage();
             recreate();
@@ -538,7 +448,17 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        try {
+            if(myReceiver!=null)
+                unregisterReceiver(myReceiver);
 
+            if (mBound) {
+                unbindService(mConnection);
+                mBound = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

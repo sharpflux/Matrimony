@@ -94,18 +94,26 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
 
-        /*if (mBound) {
-            unbindService(mConnection);
-            mBound = false;
-        }*/
+        try {
+            if(myReceiver!=null)
+                unregisterReceiver(myReceiver);
+
+            if (mBound) {
+                unbindService(mConnection);
+                mBound = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        super.onStop();
     }
+
 
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -174,101 +182,6 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
 
 
 
-    private void readOnlineUsers() {
-        Platform.loadPlatformComponent(new AndroidPlatformComponent());
-        Credentials credentials = new Credentials() {
-            @Override
-            public void prepareRequest(microsoft.aspnet.signalr.client.http.Request request) {
-                request.addHeader("DisplayName", userModel.getFullName());
-                request.addHeader("FromUserId", userModel.getUserId());
-                request.addHeader("ProfilePic", userModel.getProfilePic());
-            }
-        };
-        // connect to signalr server
-        hubConnection = new HubConnection(URLs.URL_CONNECT_SIGNALR);
-        hubConnection.setCredentials(credentials);
-        hubConnection.connected(new Runnable() {
-            @Override
-            public void run() {
-            }
-        });
-
-
-        String CLIENT_METHOD_BROADAST_MESSAGE = "getUserList"; // get webapi serv methods
-        hubProxy = hubConnection.createHubProxy("chatHub"); // web api  necessary method name
-        ClientTransport clientTransport = new ServerSentEventsTransport((hubConnection.getLogger()));
-        SignalRFuture<Void> signalRFuture = hubConnection.start(clientTransport);
-        hubProxy.on(CLIENT_METHOD_BROADAST_MESSAGE, new SubscriptionHandler1<String>() {
-            @Override
-            public void run(String s) {
-                try { // we added the list of connected users
-                    JSONArray jsonArray = new JSONArray(s);
-                    directMessagesModelList = new ArrayList<DirectMessagesModel>();
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String username = jsonObject.getString("DisplayName");
-                        String connection_id = jsonObject.getString("connectionID");
-                        DirectMessagesModel directMessagesModel = new DirectMessagesModel();
-                        directMessagesModel.setUserId(jsonObject.getString("FromUserId"));
-                        directMessagesModel.setProfilePic(jsonObject.getString("ProfilePic"));
-                        directMessagesModel.setUserName(username);
-                        directMessagesModel.setFirebaseUserId(connection_id);
-                        directMessagesModelList.add(directMessagesModel);
-
-
-                        if(jsonObject.getString("FromUserId").equals(userModel.getUserId()))
-                        {
-                            FromConnectionId = connection_id;
-                        }
-
-                    }
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                    //        ArrayAdapter<String> adapter=new ArrayAdapter<String>(cx,android.R.layout.simple_list_item_1,user_names);
-                      //      adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-                        //    users.setAdapter(adapter);
-                            directMessagesAdapter = new DirectMessagesAdapter(SignalRUserChatsActivity.this,directMessagesModelList, true);
-                            recyclerView_directMessage.setAdapter(directMessagesAdapter);
-                            recyclerView_directMessage.setHasFixedSize(true);
-                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
-                            recyclerView_directMessage.setLayoutManager(mLayoutManager);
-
-
-                            directMessagesAdapter.notifyDataSetChanged();
-
-                        }
-                    });
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, String.class);
-
-        hubProxy.on("sendMessage", new SubscriptionHandler2<String ,String>() {
-
-            @Override
-            public void run(final String s, final String s2) {
-                /*mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                       // send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
-                    }
-                });*/
-            }
-        },String.class,String.class);
-        try {
-            signalRFuture.get();
-        } catch (InterruptedException | ExecutionException e) {
-            Log.e("SimpleSignalR", e.toString());
-            return;
-        }
-
-    }
-
 
     @Override
     protected void onResume() {
@@ -309,6 +222,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                                 directMessagesModel.setUserId(jsonObject.getString("ToUserId"));
                                 directMessagesModel.setProfilePic(jsonObject.getString("ProfileImage"));
                                 directMessagesModel.setOnline(jsonObject.getBoolean("IsOnline"));
+                                directMessagesModel.setFirebaseUserId(connection_id);
                                 directMessagesModel.setFromUserId(String.valueOf(jsonObject.getInt("UserId")));
                                 directMessagesModel.setUserName(username);
                                 directMessagesModelList.add(directMessagesModel);
@@ -429,6 +343,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                                 DirectMessagesModel dm = directMessagesModelList.get(d);
                                 if (dm.getUserId().equals(jsonObject.getString("FromUserId")))
                                 {
+                                    dm.setFirebaseUserId(jsonObject.getString("connectionID"));
                                     dm.setOnline(true);
                                 }
 
@@ -454,7 +369,9 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
                                 DirectMessagesModel dm = directMessagesModelList.get(d);
                                 if (dm.getUserId().equals(jsonObject.getString("FromUserId")))
                                 {
+                                    dm.setFirebaseUserId("0");
                                     dm.setOnline(false);
+
                                 }
                                 directMessagesModelList.set(d,dm);
                                 directMessagesAdapter.notifyItemChanged(d);
