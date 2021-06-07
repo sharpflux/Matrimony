@@ -39,6 +39,8 @@ public class URLs {
 
     public static final String URL_GET_USERSUBsCRIBEDORNOT           = MainURL+"api/MembershipApi/MembershipSubscriberCheckbyUser?";
 
+    public static final String URL_GET_ONLINEUSERSGETRECENTCHAT           = MainURL+"api/ChatApi/OnlineUsersGetRecentChat?UserId=";
+
     public static final String URL_GET_BASICDETAILS             = MainURL+"api/Registration/GetUserBasicDetailsAPI?";
     public static final String URL_POST_BASICDETAILS            = MainURL+"api/BasicDetailsAPI/BasicDetailsInsertUpdate"; //"/api/BasicDetailsAPI/BasicDetailsInsertUpdate";
 

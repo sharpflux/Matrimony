@@ -540,7 +540,9 @@ public class PersonalDetailsFragment extends Fragment {
 
                         try {
 
-                            customDialogLoadingProgressBar.dismiss();
+                            if (customDialogLoadingProgressBar != null && customDialogLoadingProgressBar.isShowing()) {
+                                customDialogLoadingProgressBar.dismiss();
+                            }
 
                             //converting response to json object
                             JSONArray jsonArray = new JSONArray(response);

@@ -139,6 +139,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/fluent"
                             android:textSize="13sp"
+                            android:checked="true"
                             android:textColor="@color/text_black"/>
 
                         <RadioButton
@@ -148,7 +149,7 @@
                             android:textSize="13sp"
                             android:layout_marginStart="25dp"
                             android:textColor="@color/text_black"
-                            android:checked="true"
+
                             />
 
                     </RadioGroup>

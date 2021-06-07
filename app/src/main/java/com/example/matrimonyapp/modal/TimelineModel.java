@@ -28,6 +28,7 @@ public class TimelineModel {
 
     //Uri profilePic;
     String profilePic;
+    String userGender;
     Context context;
 
     public TimelineModel()
@@ -65,6 +66,14 @@ public class TimelineModel {
         this.userMaritalStatus = userMaritalStatus;
         this.profilePic = profilePic;
         this.context = context;
+    }
+
+    public String getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(String userGender) {
+        this.userGender = userGender;
     }
 
     public String getUserId() {

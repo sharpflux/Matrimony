@@ -64,6 +64,16 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
 
         final DirectMessagesModel directMessagesModel = list.get(position);
 
+        if(list.get(position).getOnline())
+        {
+            holder.circleImage_activityStatus.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            holder.circleImage_activityStatus.setVisibility(View.GONE);
+        }
+
+
         holder.textView_userId.setText(list.get(position).getUserId());
         holder.textView_firebaseUserId.setText(list.get(position).getFirebaseUserId());
         holder.textView_userName.setText(list.get(position).getUserName());
@@ -108,7 +118,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
         }*/
 
 
-            if(Boolean.parseBoolean(directMessagesModel.getActivityStatus()))
+           /* if(Boolean.parseBoolean(directMessagesModel.getActivityStatus()))
             {
                 holder.circleImage_activityStatus.setVisibility(View.VISIBLE);
             }
@@ -116,7 +126,7 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
             {
                 holder.circleImage_activityStatus.setVisibility(View.GONE);
             }
-
+*/
 
 
 

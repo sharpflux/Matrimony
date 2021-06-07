@@ -39,11 +39,13 @@ public class MainActivity extends AppCompatActivity {
         {
             fragmentName = bundle.getString("fragmentName");
 
-         if( bundle.getString("ShowBackButton").equals("No")){
-                imageView_back.setVisibility(View.GONE);
-            }
-          else {
-                imageView_back.setVisibility(View.VISIBLE);
+
+            if(bundle.getString("ShowBackButton")!=null) {
+                if (bundle.getString("ShowBackButton").equals("No")) {
+                    imageView_back.setVisibility(View.GONE);
+                } else {
+                    imageView_back.setVisibility(View.VISIBLE);
+                }
             }
 
             switch (fragmentName)

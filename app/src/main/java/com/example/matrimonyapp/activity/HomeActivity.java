@@ -641,6 +641,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                                     timelineModel.setProfilePic(userJson.getString("ImageUrl"));
                                     timelineModel.setUserBirthday(userJson.getString("DateOfBirthString"));
                                     timelineModel.setUserMobileNo(userJson.getString("MobileNo"));
+                                    timelineModel.setUserGender(userJson.getString("Gender"));
                                     //timelineModel.setUserOccupation(userJson.getString("OccupationName"));
                                     timelineModel.setUserOccupation("MBA-Marketing");
                                     //timelineModel.setUserQualification(userJson.getString("Qualification"));

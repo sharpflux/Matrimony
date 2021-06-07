@@ -4,9 +4,10 @@ import android.net.Uri;
 
 public class DirectMessagesModel {
 
-    String userId, firebaseUserId, userName, mobileNo, emailId, birthdate, age, gender;
+    String userId, firebaseUserId, userName, mobileNo, emailId, birthdate, age, gender,fromUserId;
     String profilePic, activityStatus;
 
+    Boolean IsOnline;
 
     public DirectMessagesModel() {
 
@@ -25,6 +26,22 @@ public class DirectMessagesModel {
         this.gender = gender;
         this.profilePic = profilePic;
         this.activityStatus = activityStatus;
+    }
+
+    public String getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(String fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+    public Boolean getOnline() {
+        return IsOnline;
+    }
+
+    public void setOnline(Boolean online) {
+        IsOnline = online;
     }
 
     public String getUserId() {

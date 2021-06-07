@@ -79,7 +79,7 @@ public class ChatService extends Service {
 
     @Override
     public void onDestroy() {
-       connection.stop();
+      // connection.stop();
         super.onDestroy();
     }
 
@@ -155,7 +155,7 @@ public class ChatService extends Service {
                         @Override
                         public void run() {
                            // send_message.setText(send_message.getText()+"\n"+s2+" : "+s);
-
+                            Toast.makeText(ChatService.this, s, Toast.LENGTH_LONG).show();
                             Globals.NewMessage=s;
                             sendBroadcast(new Intent().setAction("notifyAdapter"));
                         }
@@ -163,7 +163,7 @@ public class ChatService extends Service {
                 }
             },String.class,String.class);
 
-/*
+
 
 
             proxy.on("getUserList", new SubscriptionHandler1<String>() {
@@ -180,8 +180,20 @@ public class ChatService extends Service {
                     }
                 }
             }, String.class);
-*/
 
+            proxy.on("offlineUser", new SubscriptionHandler1<String>() {
+                @Override
+                public void run(String s) {
+                    try { // we added the list of connected users
+                        JSONObject jsonObj= new JSONObject(s);
+                        Globals.offlineUser=jsonObj;
+                        sendBroadcast(new Intent().setAction("offlineUser"));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, String.class);
 
 
             proxy.on("getallMessages", new SubscriptionHandler2<String, String>() {

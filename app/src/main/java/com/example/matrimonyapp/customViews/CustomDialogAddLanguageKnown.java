@@ -166,9 +166,28 @@ public class CustomDialogAddLanguageKnown extends Dialog {
             public void onClick(View view) {
 
 
+                if (editText_languageKnown.getText().toString().isEmpty()) {
+                    editText_languageKnown.setError("Required");
+                    customDialogLoadingProgressBar.dismiss();
+                    return;
+                }
+                if (textView_languageKnownId.getText().toString().isEmpty()) {
+                    textView_languageKnownId.setError("Required");
+                    customDialogLoadingProgressBar.dismiss();
+                    return;
+                }
                 String language = editText_languageKnown.getText().toString().trim();
+
                 String languageId = textView_languageKnownId.getText().toString().trim();
-                String fluency = ((RadioButton)findViewById(radioGroup_fluency.getCheckedRadioButtonId())).getText().toString();
+                String fluency;
+                if( ((RadioButton)view.findViewById(radioGroup_fluency.getCheckedRadioButtonId()))==null){
+                    fluency="Fluent";
+                }
+                else {
+                    fluency= ((RadioButton)view.findViewById(radioGroup_fluency.getCheckedRadioButtonId()))
+                            .getText().toString();
+                }
+
 
                 if(id.equals("0")) {
                     long res = sqLiteLanguageKnownDetails.insertLanguageKnownDetails("0",

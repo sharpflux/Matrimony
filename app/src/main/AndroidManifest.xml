@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
+
+
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/notify" />
+
+
         <activity android:name=".activity.ImageUploadSelectedActivity"></activity>
         <activity android:name=".activity.SubscriptionPlanActivity" />
         <activity android:name=".activity.SelectLanguageActivity" />

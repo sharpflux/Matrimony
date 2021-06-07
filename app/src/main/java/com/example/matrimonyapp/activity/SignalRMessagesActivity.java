@@ -106,14 +106,20 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        super.onStop();
-        if(myReceiver!=null)
-         unregisterReceiver(myReceiver);
 
-        if (mBound) {
-            unbindService(mConnection);
-            mBound = false;
+        try {
+            if(myReceiver!=null)
+             unregisterReceiver(myReceiver);
+
+            if (mBound) {
+                unbindService(mConnection);
+                mBound = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        super.onStop();
     }
 
 

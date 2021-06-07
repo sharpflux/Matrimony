@@ -240,28 +240,58 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
 
         holder.progressBar.setVisibility(View.VISIBLE);
 
-        Glide.with(context)
-                .load(URLs.MainURL+list.get(position).getProfilePic())
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .placeholder(R.color.quantum_grey100)
-                .error(R.drawable.default_profile)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        holder.progressBar.setVisibility(View.GONE);
-                        return false; // important to return false so the error placeholder can be placed
-                    }
 
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        holder.progressBar.setVisibility(View.GONE);
-                        return false; // important to return false so the error placeholder can be placed
-                    }
+        if(list.get(position).getUserGender().equals("Male")) {
+            Glide.with(context)
+                    .load(URLs.MainURL + list.get(position).getProfilePic())
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(R.color.quantum_grey100)
+                    .error(R.drawable.male)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false; // important to return false so the error placeholder can be placed
+
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false; // important to return false so the error placeholder can be placed
+                        }
 
 
-                })
-                .into(holder.imageView_profilePic);
+                    })
+                    .into(holder.imageView_profilePic);
+        }
+      else  if(list.get(position).getUserGender().equals("Female")) {
+            Glide.with(context)
+                    .load(URLs.MainURL + list.get(position).getProfilePic())
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .placeholder(R.color.quantum_grey100)
+                    .error(R.drawable.female)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false; // important to return false so the error placeholder can be placed
+
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            holder.progressBar.setVisibility(View.GONE);
+                            return false; // important to return false so the error placeholder can be placed
+                        }
+
+
+                    })
+                    .into(holder.imageView_profilePic);
+        }
+
 
 
         holder.textView_userQualification.setText(list.get(position).getUserQualification());
