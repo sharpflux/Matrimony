@@ -224,7 +224,7 @@
     <string name="owner_name">मालिक का नाम </string>
     <string name="service_name">सेवा का नाम</string>
     <string name="service_description">सेवा विवरण</string>
-
+    <string name="chat">बातचीत</string>
 
     <string name="address">पता *</string>
     <string name="address_">पता</string>

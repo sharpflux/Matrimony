@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/root_view"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+        <include  layout="@layout/toolbar_chat" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/shadow_down" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/productListRecyView"
+            android:paddingTop="9.7dp"
+            android:scrollbars="vertical"
+            android:clipToPadding="false"/>
+
+
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/messageInputContainer"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="6dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/input_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/voiceRecordingOrSend"
+        tools:context="com.example.chattutorial.ChannelActivity">
+
+        <ImageButton
+            android:id="@+id/addEmoticon"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
+            android:background="@null"
+            android:src="@drawable/ic_insert_emoticon_black_24dp"
+            android:tint="@color/message_input_button_inactive"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+            android:id="@+id/emojicon_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/addEmoticon"
+            android:imeOptions="actionSend"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:layout_marginStart="12dp"
+            android:hint="Type a message"
+            app:layout_constraintLeft_toRightOf="@+id/addEmoticon"
+            app:layout_constraintRight_toLeftOf="@+id/addAttachment"
+            emojicon:emojiconSize="28sp"/>
+
+        <!--  <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+                android:id="@+id/emojicon_edit_text2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_above="@id/emojicon_edit_text"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:layout_marginStart="12dp"
+                android:hint="Type a message"
+                app:layout_constraintLeft_toRightOf="@+id/addEmoticon"
+                app:layout_constraintRight_toLeftOf="@+id/addAttachment"
+                emojicon:emojiconSize="28sp"/>-->
+
+
+        <!--        <EditText
+                    android:id="@+id/messageInput"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Type a message"
+                    app:layout_constraintLeft_toRightOf="@+id/addEmoticon"
+                    app:layout_constraintRight_toLeftOf="@+id/addAttachment" />-->
+
+        <ImageButton
+            android:id="@+id/addAttachment"
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:visibility="gone"
+            android:src="@drawable/ic_attach_file_black_24dp"
+            android:tint="@color/message_input_button_inactive"
+            app:layout_constraintRight_toLeftOf="@+id/takePicture" />
+
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/takePicture"
+            android:layout_width="22dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:background="@null"
+            android:src="@drawable/ic_camera_alt_black_24dp"
+            android:tint="@color/message_input_button_inactive"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/voiceRecordingOrSend"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/ic_send_black_24dp"
+        app:backgroundTint="@color/project_color"
+        app:fabCustomSize="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/messageInputContainer"
+        app:tint="@color/white" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

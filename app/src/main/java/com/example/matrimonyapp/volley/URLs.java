@@ -82,6 +82,8 @@ public class URLs {
     public static final String URL_POST_IMAGEUPLOADMULTIPLE          = MainURL+"api/Registration/ImageUploadMultiple";
 
 
+    public static final String URL_GET_GETALLMESSAGES           = MainURL+"api/ChatApi/GetMessage?";
+
 
     public static final String URL_POST_GETPROFILES             = MainURL+"api/SetPreferenceNew/GetProfiles"; //api/RegistrationAPINew/SETPreferenceFilter
     public static final String URL_POST_FILTER                  = MainURL+"api/SetPreferenceNew/SetPreferenceGET"; //api/RegistrationAPINew/SETPreferenceFilter

@@ -4,12 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +32,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ImageSelectedAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.service.ImageUploadJobService;
 import com.example.matrimonyapp.utils.MarginDecoration;
 import com.example.matrimonyapp.utils.PictureFacer;
 import com.example.matrimonyapp.adapter.picture_Adapter;
@@ -45,6 +53,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class ImageUploadSelectedActivity extends AppCompatActivity {
 
@@ -57,6 +66,8 @@ public class ImageUploadSelectedActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private UserModel userModel;
     private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
+    JSONArray jsonArraySelectedImages;
+    String selectedImages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +94,31 @@ public class ImageUploadSelectedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 customDialogLoadingProgressBar.show();
                 customDialogLoadingProgressBar.setCancelable(false);
-                UploadImages();
+
+                PersistableBundle extras = new PersistableBundle();
+                extras.putString("selectedImages",selectedImages);
+
+                JobInfo.Builder builder = new JobInfo.Builder(0, new ComponentName(getApplicationContext(), ImageUploadJobService.class));
+                builder.setPersisted(true).setExtras(extras);
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+                    builder.setPeriodic(1*60*1000,60*60*10000);
+                }else {
+                    builder.setPeriodic(1*60*1000);
+                }
+
+                // Start the job
+                JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+                // start and get the result
+                int jobResult = scheduler.schedule(builder.build());
+
+                if(jobResult == JobScheduler.RESULT_FAILURE) {
+                    Log.d("TAG", "Job failed to start");
+                }else if(jobResult == JobScheduler.RESULT_SUCCESS){
+
+                    Log.d("TAG", "Job Running");
+                }
+
+               // UploadImages();
             }
         });
 
@@ -94,10 +129,10 @@ public class ImageUploadSelectedActivity extends AppCompatActivity {
         {
 
             try {
-
-               JSONArray jsonArray = new JSONArray(bundle.getString("result"));
-               for (int i = 0; i < jsonArray.length(); i++) {
-                    PictureFacer student = new Gson().fromJson(jsonArray.get(i).toString(), PictureFacer.class);
+                selectedImages=bundle.getString("result");
+                jsonArraySelectedImages = new JSONArray(selectedImages);
+               for (int i = 0; i < jsonArraySelectedImages.length(); i++) {
+                    PictureFacer student = new Gson().fromJson(jsonArraySelectedImages.get(i).toString(), PictureFacer.class);
                     allpictures.add(student);
                }
 

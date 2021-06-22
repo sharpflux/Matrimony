@@ -4,6 +4,7 @@ public class ChatModel {
 
     String senderId, receiverId, message, messageTime, messageStatus;
 
+    private Boolean isSelected = false;
     public ChatModel() {
     }
 
@@ -13,6 +14,16 @@ public class ChatModel {
         this.receiverId = receiverId;
         this.messageTime = messageTime;
         this.messageStatus = messageStatus;
+    }
+
+    public Boolean IsSelected()
+    {
+        return isSelected;
+    }
+
+    public void setSelected(Boolean selected)
+    {
+        isSelected = selected;
     }
 
     public String getSenderId() {

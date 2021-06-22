@@ -7,6 +7,24 @@
     android:orientation="vertical"
     android:gravity="end"
     >
+
+    <LinearLayout
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,6 +84,7 @@
                     android:layout_gravity="end"
                     >
                 <TextView
+                    android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -76,13 +95,14 @@
                     android:textSize="11sp"
 
                     />
-                <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_marginStart="3dp"
-                    android:src="@drawable/clock"
-                    android:tint="@color/quantum_bluegrey50"
-                    />
+
+                    <ImageView
+                        android:id="@+id/imgMessageStatus"
+                        android:layout_width="16dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="3dp"
+                        android:src="@drawable/clock"
+                        android:tint="@color/quantum_bluegrey50" />
                 </LinearLayout>
 
                 <TextView

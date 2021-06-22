@@ -88,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
 
         chatModelsList = new ArrayList<ChatModel>();
 
-        chatAdapter = new ChatAdapter(this,chatModelsList);
+        chatAdapter = new ChatAdapter(this,chatModelsList,null);
         recyclerView_chat.setAdapter(chatAdapter);
         recyclerView_chat.setHasFixedSize(true);
 

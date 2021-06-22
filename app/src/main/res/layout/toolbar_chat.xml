@@ -7,7 +7,8 @@
     app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp"
-    android:background="@null"
+    android:id="@+id/chatToolbar"
+    android:background="@color/quantum_bluegrey900"
     >
 
     <LinearLayout
@@ -16,6 +17,7 @@
         android:id="@+id/linearLayout_toolbar"
         android:layout_marginTop="0dp"
         android:paddingStart="5dp"
+        android:visibility="visible"
         android:paddingEnd="15dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
@@ -28,7 +30,7 @@
             android:layout_marginStart="10dp"
             android:padding="5dp"
             android:src="@drawable/back"
-            android:tint="@color/black"
+            android:tint="@color/white"
             />
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImageView_profilePic"
@@ -39,15 +41,47 @@
             android:src="@color/codeGray"
             />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="Chats"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLength="15"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:fontFamily="@font/arima_madurai_medium"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="Online"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"
+                android:textSize="11sp" />
+
+        </LinearLayout>
         <TextView
-            android:id="@+id/textView_userName"
+
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="50dp"
             android:layout_marginEnd="5dp"
-            android:text="Chats"
-            android:textColor="@color/black"
+            android:text=""
+            android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:textSize="19sp"
             android:fontFamily="@font/arima_madurai_medium"/>
@@ -58,7 +92,71 @@
             android:layout_marginStart="10dp"
             android:padding="5dp"
             android:src="@drawable/dot_menu"
-            android:tint="@color/black"
+            android:tint="@color/white"
+            android:scaleType="fitXY"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:visibility="gone"
+        android:id="@+id/linearSelectionMode"
+        android:layout_marginTop="0dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="15dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imgSelectionModeBack"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:src="@drawable/back"
+            android:tint="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tvSelectionCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:text="0"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:maxLength="15"
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:fontFamily="@font/arima_madurai_medium"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="5dp"
+            android:text=""
+            android:textColor="@color/white"
+            android:layout_gravity="center_vertical"
+            android:textSize="19sp"
+            android:fontFamily="@font/arima_madurai_medium"/>
+
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:tint="@color/white"
             android:scaleType="fitXY"
             />
 

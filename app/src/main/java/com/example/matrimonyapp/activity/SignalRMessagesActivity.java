@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -16,6 +17,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,25 +28,38 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.adapter.ChatAdapter;
 import com.example.matrimonyapp.adapter.DirectMessagesAdapter;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.helpers.Globals;
 import com.example.matrimonyapp.modal.ChatModel;
 import com.example.matrimonyapp.modal.DirectMessagesModel;
+import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.service.ChatService;
+import com.example.matrimonyapp.utils.EndlessRecyclerViewScrollListener;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
 //import com.fasterxml.jackson.annotation.JsonInclude;
+import com.example.matrimonyapp.volley.VolleySingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import org.json.JSONArray;
@@ -52,13 +68,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
 import microsoft.aspnet.signalr.client.Credentials;
 import microsoft.aspnet.signalr.client.Platform;
 import microsoft.aspnet.signalr.client.SignalRFuture;
-import microsoft.aspnet.signalr.client.http.Request;
 import microsoft.aspnet.signalr.client.http.android.AndroidPlatformComponent;
 import microsoft.aspnet.signalr.client.hubs.HubConnection;
 import microsoft.aspnet.signalr.client.hubs.HubProxy;
@@ -85,10 +104,12 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     HubConnection hubConnection; //Do the signalR definitions
     HubProxy hubProxy;
     private Intent intent;
-
+    boolean isLoading = false;
     LinearLayout linearLayout_toolbar;
-
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     String connectionId="0", toUserId="";
+
+    String PageSize="15";
 
     Handler mHandler=new Handler(); //listener
     private ScrollView scrollView;
@@ -100,7 +121,15 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     private boolean isAtBottom=false;
     private Bundle bundle;
 
+    CheckBox mCheckBox;
+    EmojiconEditText emojiconEditText, emojiconEditText2;
+    EmojiconTextView textView;
+    ImageView emojiButton;
+    ImageView submitButton;
+    View rootView;
+    EmojIconActions emojIcon;
 
+    FloatingActionButton voiceRecordingOrSend;
     @Override
     protected void onStart() {
         super.onStart();
@@ -129,9 +158,11 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i("isMyServiceRunning?", true + "");
                 return true;
             }
         }
+        Log.i("isMyServiceRunning?", false + "");
         return false;
     }
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -141,7 +172,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             ChatService.LocalBinder binder = (ChatService.LocalBinder) service;
             chatService = binder.getService();
             mBound = true;
-            chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","500");
+            //chatService.GetAllMessages(userModel.getUserId(),toUserId,"1","15");
         }
 
         @Override
@@ -156,21 +187,45 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
         intent = getIntent();
 
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(SignalRMessagesActivity.this);
 
         myReceiver = new MyReceiver();
 
 
-
+        voiceRecordingOrSend=findViewById(R.id.voiceRecordingOrSend);
         currentLanguage = getResources().getConfiguration().locale.getLanguage();
         scrollView = findViewById(R.id.scrollView);
         linearLayout_toolbar = findViewById(R.id.linearLayout_toolbar);
         linearLayout_message = findViewById(R.id.linearLayout_message);
         recyclerView_chat = findViewById(R.id.recyclerView_chat);
-        editText_message = findViewById(R.id.editText_message);
+        //editText_message = findViewById(R.id.messageInput);
         textView_userName = findViewById(R.id.textView_userName);
         imageView_back = findViewById(R.id.imageView_back);
         circleImageView_profilePic = findViewById(R.id.circleImageView_profilePic);
-        imageView_sendMessage = findViewById(R.id.imageView_sendMessage);
+        //imageView_sendMessage = findViewById(R.id.imageView_sendMessage);
+        rootView = findViewById(R.id.root_view);
+        emojiButton = (ImageView) findViewById(R.id.addEmoticon);
+
+        emojiconEditText = (EmojiconEditText) findViewById(R.id.emojicon_edit_text);
+        emojIcon = new EmojIconActions(this, rootView, emojiconEditText, emojiButton);
+        //emojIcon.ShowEmojIcon();
+        emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
+            @Override
+            public void onKeyboardOpen() {
+                Log.e("Keyboard", "open");
+            }
+            @Override
+            public void onKeyboardClose() {
+                Log.e("Keyboard", "close");
+            }
+        });
+
+
+        emojIcon.setUseSystemEmoji(false);
+//        textView.setUseSystemDefault(true);
+
+
+
 
         userModel = CustomSharedPreference.getInstance(this).getUser();
 
@@ -178,15 +233,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
         chatModelsList = new ArrayList<ChatModel>();
 
-        chatAdapter = new ChatAdapter(this,chatModelsList);
-        recyclerView_chat.setAdapter(chatAdapter);
-        recyclerView_chat.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(context);
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
-        recyclerView_chat.setLayoutManager(mLayoutManager);
-        recyclerView_chat.scrollToPosition(chatModelsList.size());
         bundle =intent.getExtras();
         if (bundle!=null)
         {
@@ -206,26 +253,65 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
 
 
+
+
+        mLayoutManager= new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
+        mLayoutManager.setStackFromEnd(true);
+        mLayoutManager.setReverseLayout(true);
+        recyclerView_chat.setLayoutManager(mLayoutManager);
+        recyclerView_chat.scrollToPosition(chatModelsList.size());
+
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("1");
+
+
+        initAdapter();
+
+
+
+
+        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                isLoading = true;
+                Toast.makeText(SignalRMessagesActivity.this,String.valueOf(page+1) +" Is Page!", Toast.LENGTH_LONG).show();
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                String sleepTime = String.valueOf(page+1);
+                runner.execute(sleepTime);
+            }
+        });
+
+
+
+
+
         context=this;
 
-        imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
+        voiceRecordingOrSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                message = editText_message.getText().toString().trim();
+                message = emojiconEditText.getText().toString().trim();
 
-                if(isCheckUserOnlineSelf(ChatService.class)){
+                if(chatService!=null){
                     if(!message.equals(""))
                     {
                         if(!connectionId.equals("0")) {
-                            chatService.Send(connectionId, toUserId, editText_message.getText().toString());
+                            chatService.Send(connectionId, toUserId, emojiconEditText.getText().toString());
                             ChatModel chatModel = new ChatModel();
                             chatModel.setMessage(message);
                             chatModel.setSenderId(userModel.getUserId());
                             chatModel.setReceiverId(toUserId);
                             chatModelsList.add(0, chatModel);
                             chatAdapter.notifyItemInserted(0);
-                            editText_message.setText("");
+                            emojiconEditText.setText("");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    chatAdapter.notifyDataSetChanged();
+                                    recyclerView_chat.scrollToPosition(0);
+                                }
+                            });
                         }
                         else {
                             Toast.makeText(SignalRMessagesActivity.this,"User is offline", Toast.LENGTH_LONG).show();
@@ -233,29 +319,22 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    connect();
-                    if(!message.equals(""))
-                    {
-                        if(!connectionId.equals("0")) {
-                            chatService.Send(connectionId, toUserId, editText_message.getText().toString());
-                            ChatModel chatModel = new ChatModel();
-                            chatModel.setMessage(message);
-                            chatModel.setSenderId(userModel.getUserId());
-                            chatModel.setReceiverId(toUserId);
-                            chatModelsList.add(0, chatModel);
-                            chatAdapter.notifyItemInserted(0);
-                            editText_message.setText("");
-                        }
-                        else {
-                            Toast.makeText(SignalRMessagesActivity.this,"User is offline", Toast.LENGTH_LONG).show();
-                        }
-                    }
+                    Toast.makeText(SignalRMessagesActivity.this,"You are offline", Toast.LENGTH_LONG).show();
+
                 }
+
+            }
+        });
+
+/*        imageView_sendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
 
 
 
             }
-        });
+        });*/
 
 
         imageView_back.setOnClickListener(new View.OnClickListener() {
@@ -320,6 +399,14 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     }
 
 
+    private void initAdapter() {
+
+        chatAdapter = new ChatAdapter(this,chatModelsList,null);
+        recyclerView_chat.setAdapter(chatAdapter);
+        recyclerView_chat.setHasFixedSize(true);
+    }
+
+
     private class MyReceiver extends BroadcastReceiver {
 
         @Override
@@ -333,47 +420,44 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                     chatModel.setSenderId(toUserId);
                     chatModel.setReceiverId(userModel.getUserId());
                     chatModelsList.add(0,chatModel);
-                    chatAdapter.notifyItemInserted(0);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            chatAdapter.notifyDataSetChanged();
+                            recyclerView_chat.scrollToPosition(0);
+                        }
+                    });
                     MediaPlayer mPlayer = MediaPlayer.create(SignalRMessagesActivity.this, R.raw.message_tone);
                     mPlayer.start();
-
-                    //scrollView.scrollTo(0, scrollView.getBottom()+60);
-                    //recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
-
                     break;
                 case "getallMessages":
-
                     chatModelsList.clear();
                     JSONArray jsonArray = null;
                     try {
                         jsonArray = new JSONArray(Globals.allMessages);
+                        chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
                         for (int i=0; i<jsonArray.length(); i++)
                         {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                /*if ((jsonObject.getString("FromUserId").equals(userModel.getUserId()) && jsonObject.getString("ToUserId").equals(toUserId))
-                                || (jsonObject.getString("FromUserId").equals(toUserId) && jsonObject.getString("ToUserId").equals(userModel.getUserId())))
-                                {*/
-                                    ChatModel chatModel1 = new ChatModel();
-                                    chatModel1.setMessage(jsonObject.getString("Message"));
-                                    chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
-                                    chatModel1.setSenderId(jsonObject.getString("FromUserId"));
-                                    chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
-                                    chatModelsList.add(chatModel1);
-
-
-
-                            //}
+                            ChatModel chatModel1 = new ChatModel();
+                            chatModel1.setMessage(jsonObject.getString("Message"));
+                            chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
+                            chatModel1.setSenderId(jsonObject.getString("FromUserId"));
+                            chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
+                            chatModelsList.add(chatModel1);
 
                         }
-
-
-                        chatAdapter.notifyDataSetChanged();
-                        recyclerView_chat.smoothScrollToPosition(chatModelsList.size());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                chatAdapter.notifyDataSetChanged();
+                                recyclerView_chat.scrollToPosition(0);
+                            }
+                        });
 
                     } catch (JSONException jsonException) {
                         jsonException.printStackTrace();
                     }
-
 
                     break;
 
@@ -461,6 +545,123 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         }
     }
 
+
+    private void GetAllMessagesApi(Integer PageIndex) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,URLs.URL_GET_GETALLMESSAGES +"fromUserId="+userModel.getUserId()+"&toUserId="+toUserId+"&StartIndex="+PageIndex.toString()+"&PageSize="+PageSize,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //chatModelsList.clear();
+                        customDialogLoadingProgressBar.dismiss();
+                        JSONArray jsonArray = null;
+                        try {
+                            jsonArray = new JSONArray(response);
+                            chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
+                            for (int i=0; i<jsonArray.length(); i++)
+                            {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                ChatModel chatModel1 = new ChatModel();
+                                chatModel1.setMessage(jsonObject.getString("Message"));
+                                chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
+                                chatModel1.setSenderId(jsonObject.getString("FromUserId"));
+                                chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
+                                chatModelsList.add(chatModel1);
+
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    chatAdapter.notifyDataSetChanged();
+                                    recyclerView_chat.scrollToPosition(0);
+                                }
+                            });
+
+                        } catch (JSONException jsonException) {
+                            jsonException.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(SignalRMessagesActivity.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("PageIndex :","1");
+                params.put("PageSize :","50");
+                params.put("UserId :",userModel.getUserId());
+
+
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getInstance(SignalRMessagesActivity.this).addToRequestQueue(stringRequest);
+
+
+
+
+    }
+
+
+
+    class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String[] params) {
+
+
+
+
+            try {
+                GetAllMessagesApi(Integer.valueOf( params[0]));
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+
+            if (!isFinishing() && customDialogLoadingProgressBar != null) {
+                customDialogLoadingProgressBar.setCancelable(false);
+                customDialogLoadingProgressBar.show();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            super.onCancelled(s);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+    }
 
 
 }

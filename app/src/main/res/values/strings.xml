@@ -76,7 +76,7 @@
     <string name="occupation_details">Occupation Details</string>
     <string name="current_service">Current Service</string>
     <string name="name_of_department">Name of Department</string>
-
+    <string name="chat">Chat</string>
     <string name="service">Service </string>
     <string name="non_service">Non - Service </string>
     <string name="govt_job">Government Service </string>

@@ -1,6 +1,9 @@
 package com.example.matrimonyapp.activity;
 
 import android.Manifest;
+import android.app.ActivityManager;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -13,6 +16,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -66,7 +70,9 @@ import com.example.matrimonyapp.modal.NavigationItemListModel;
 import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.service.ChatJobService;
 import com.example.matrimonyapp.service.ChatService;
+import com.example.matrimonyapp.service.SensorService;
 import com.example.matrimonyapp.sqlite.SQLiteRecentlyViewedProfiles;
 import com.example.matrimonyapp.sqlite.SQLiteSetPreference;
 import com.example.matrimonyapp.sqlite.SQLiteVehicleDetails;
@@ -154,7 +160,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     private Handler mHandler;
 
-
+    private ComponentName serviceComponentName;
     //FirebaseAuth firebaseAuth;
     //DatabaseReference databaseReference;
     private CircleImageView circleImageView_headerProfilePic;
@@ -169,6 +175,18 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
     MyReceiver myReceiver;
     ChatService chatService;
     boolean mBound = false;
+
+    Intent mServiceIntent;
+    private SensorService mSensorService;
+    Context ctx;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    public Context getCtx() {
+        return ctx;
+    }
+
+
+
 
     private class MyReceiver extends BroadcastReceiver {
 
@@ -228,6 +246,56 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
             mBound = false;
         }
     };
+    public void scheduleJob(View v) {
+       JobInfo.Builder builder = new JobInfo.Builder(0, serviceComponentName);
+        builder.setPersisted(true);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+            builder.setPeriodic(1*60*1000,60*60*10000);
+        }else {
+            builder.setPeriodic(1*60*1000);
+        }
+
+        // Start the job
+        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        // start and get the result
+        int jobResult = scheduler.schedule(builder.build());
+
+        if(jobResult == JobScheduler.RESULT_FAILURE) {
+            Log.d("TAG", "Job failed to start");
+        }else if(jobResult == JobScheduler.RESULT_SUCCESS){
+
+            Log.d("TAG", "Job Running");
+        }
+
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "onDestroy");
+
+        // ondestroy service not being called
+        stopService(mServiceIntent);
+
+        super.onDestroy();
+    }
+
+    public void cancelJob(View v) {
+        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        //scheduler.cancel(0);
+        List<JobInfo> jobs = scheduler.getAllPendingJobs();
+
+        if(jobs.isEmpty()){
+            Log.d("TAG", "No Job to cancel")   ;
+        }else{
+            int id = jobs.get(0).getId();
+
+            scheduler.cancel(id);
+            Log.d("TAG", "Job stopped");
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,9 +307,14 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         runner2.execute("ProfileChecker");*/
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
 
+        serviceComponentName = new ComponentName(this, ChatJobService.class);
 
-
-
+        ctx = this;
+        mSensorService = new SensorService(getCtx());
+        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
+        if( ! isMyServiceRunning(mSensorService.getClass())) {
+            startService(mServiceIntent);
+        }
 
         init();
 
@@ -267,7 +340,7 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         navigation();
 
-        connect();
+        //connect();
 
         setToolbar();
 
@@ -304,6 +377,20 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
     }
 
+
+    private boolean isMyServiceRunning(Class <?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if(serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i(TAG, "isMyServiceRunning? " + true + "");
+                return true;
+            }
+        }
+
+        Log.i(TAG, "isMyServiceRunning? " + false + "");
+        return false;
+    }
 
     private void connect() {
         Intent intent = new Intent(this, ChatService.class);

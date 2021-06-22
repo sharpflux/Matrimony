@@ -7,7 +7,7 @@
     app:contentInsetStart="0dp"
     app:contentInsetRight="0dp"
     app:contentInsetEnd="0dp"
-    android:background="@null"
+    android:background="@color/quantum_bluegrey900"
     >
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_marginStart="10dp"
             android:padding="5dp"
             android:src="@drawable/back"
-            android:tint="@color/black"
+            android:tint="@color/white"
             />
         <TextView
             android:id="@+id/textView_toolbarHeader"
@@ -37,7 +37,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="5dp"
             android:text="@string/direct"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:textSize="17sp"
             android:fontFamily="serif"/>
