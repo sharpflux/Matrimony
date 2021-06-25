@@ -238,7 +238,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
 
-
+//
     private Integer countSelectedItems() {
         Integer selectedCount= 0;
 
