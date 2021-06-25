@@ -85,8 +85,6 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
         //holder.circleImage_profilePic.setImageURI(list.get(position).getProfilePic());
         Glide.with(context)
                 .load(URLs.MainURL+list.get(position).getProfilePic())
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .circleCrop()
                 .placeholder(R.color.codeGray)
                 .into(holder.circleImage_profilePic);
@@ -107,27 +105,6 @@ public class DirectMessagesAdapter extends RecyclerView.Adapter<DirectMessagesAd
 
             }
         });
-
-/*        if(isChat)
-        {
-            lastMessage(directMessagesModel.getFirebaseUserId(), holder.textView_lastMessage, holder.textView_lastMessageTime);
-            noOfUnseenMessage(directMessagesModel.getFirebaseUserId(), holder.textView_noOfUnseenMessage, holder.relativeLayout_noOfUnseenMessage);
-        }*/
-        /*else
-        {
-            holder.textView_lastMessage.setVisibility(View.GONE);
-        }*/
-
-
-           /* if(Boolean.parseBoolean(directMessagesModel.getActivityStatus()))
-            {
-                holder.circleImage_activityStatus.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                holder.circleImage_activityStatus.setVisibility(View.GONE);
-            }
-*/
 
 
 

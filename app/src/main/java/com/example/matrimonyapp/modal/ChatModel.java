@@ -1,6 +1,6 @@
 package com.example.matrimonyapp.modal;
 
-public class ChatModel {
+public class ChatModel  {
 
     String senderId, receiverId, message, messageTime, messageStatus;
 

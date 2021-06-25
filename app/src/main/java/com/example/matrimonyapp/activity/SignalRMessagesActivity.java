@@ -52,6 +52,7 @@ import com.example.matrimonyapp.modal.TimelineModel;
 import com.example.matrimonyapp.modal.UserChat;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.service.ChatService;
+import com.example.matrimonyapp.service.SensorService;
 import com.example.matrimonyapp.utils.EndlessRecyclerViewScrollListener;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -130,6 +131,18 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     EmojIconActions emojIcon;
 
     FloatingActionButton voiceRecordingOrSend;
+
+    Intent mServiceIntent;
+    private SensorService mSensorService;
+    Context ctx;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    public Context getCtx() {
+        return ctx;
+    }
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -401,7 +414,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
     private void initAdapter() {
 
-        chatAdapter = new ChatAdapter(this,chatModelsList,null);
+        chatAdapter = new ChatAdapter(this,null,null,null);
         recyclerView_chat.setAdapter(chatAdapter);
         recyclerView_chat.setHasFixedSize(true);
     }
@@ -414,6 +427,8 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
             switch (intent.getAction()) {
                 case "notifyAdapter":
+
+
 
                     ChatModel chatModel = new ChatModel();
                     chatModel.setMessage(Globals.NewMessage);
@@ -441,7 +456,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             ChatModel chatModel1 = new ChatModel();
                             chatModel1.setMessage(jsonObject.getString("Message"));
-                            chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
+//                            chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
                             chatModel1.setSenderId(jsonObject.getString("FromUserId"));
                             chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
                             chatModelsList.add(chatModel1);
@@ -489,15 +504,35 @@ public class SignalRMessagesActivity extends AppCompatActivity {
         }
     } // MyReceiver
     private void connect() {
-        Intent intent = new Intent(this, ChatService.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        //Intent intent = new Intent(this, ChatService.class);
+        //bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+        ctx = this;
+        mSensorService = new SensorService(getCtx());
+        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
+        if( ! isMyServiceRunning(mSensorService.getClass())) {
+            startService(mServiceIntent);
+        }
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("notifyAdapter");
         intentFilter.addAction("getallMessages");
         registerReceiver(myReceiver, intentFilter);
     }
 
+    private boolean isMyServiceRunning(Class <?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if(serviceClass.getName().equals(service.service.getClassName())) {
+                Log.i(TAG, "isMyServiceRunning? " + true + "");
+                return true;
+            }
+        }
+
+        Log.i(TAG, "isMyServiceRunning? " + false + "");
+        return false;
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -532,7 +567,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        try {
+       /* try {
             if(myReceiver!=null)
                 unregisterReceiver(myReceiver);
 
@@ -542,7 +577,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
@@ -563,7 +598,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 ChatModel chatModel1 = new ChatModel();
                                 chatModel1.setMessage(jsonObject.getString("Message"));
-                                chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
+                              //  chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
                                 chatModel1.setSenderId(jsonObject.getString("FromUserId"));
                                 chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
                                 chatModelsList.add(chatModel1);

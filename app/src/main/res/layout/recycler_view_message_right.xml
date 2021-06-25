@@ -8,21 +8,19 @@
     android:gravity="end"
     >
 
-    <LinearLayout
-        android:id="@+id/textView"
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/timeText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="HELLO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:padding="2dp"
+        android:background="@drawable/gradient_place_order"
+        android:textColor="@color/white" />
 
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corner"
-            android:textColor="@color/gray" />
-    </LinearLayout>
 
 
     <LinearLayout
@@ -101,7 +99,7 @@
                         android:layout_width="16dp"
                         android:layout_height="14dp"
                         android:layout_marginStart="3dp"
-                        android:src="@drawable/clock"
+                        android:src="@drawable/ic_checked"
                         android:tint="@color/quantum_bluegrey50" />
                 </LinearLayout>
 

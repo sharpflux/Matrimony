@@ -100,7 +100,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
 
-        try {
+     /*   try {
             if(myReceiver!=null)
                 unregisterReceiver(myReceiver);
 
@@ -110,7 +110,7 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         super.onStop();
     }

@@ -42,9 +42,17 @@ import com.example.matrimonyapp.adapter.ChatAdapter;
 import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.helpers.Globals;
 import com.example.matrimonyapp.modal.ChatModel;
+import com.example.matrimonyapp.modal.ChatModelObject;
+import com.example.matrimonyapp.modal.DateItem;
+import com.example.matrimonyapp.modal.DateObject;
+import com.example.matrimonyapp.modal.ListItem;
+import com.example.matrimonyapp.modal.ListObject;
+import com.example.matrimonyapp.modal.MineItem;
+import com.example.matrimonyapp.modal.OtherItem;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.service.ChatJobService;
 import com.example.matrimonyapp.service.ChatService;
+import com.example.matrimonyapp.utils.DateParser;
 import com.example.matrimonyapp.utils.EndlessRecyclerViewScrollListener;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
 import com.example.matrimonyapp.volley.URLs;
@@ -55,14 +63,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
+
+
+// REF
+//https://stackoverflow.com/questions/41447044/divide-elements-on-groups-in-recyclerview-or-grouping-recyclerview-items-say-by
+
+
+//https://www.journaldev.com/12372/android-recyclerview-example
+
+//https://medium.com/@saber.solooki/sticky-header-for-recyclerview-c0eb551c3f68
+
 
 public class ChatTest extends AppCompatActivity {
 
@@ -89,7 +115,7 @@ public class ChatTest extends AppCompatActivity {
     MyReceiver myReceiver;
     ChatService chatService;
     boolean mBound = false;
-
+    List<ListItem> consolidatedList;
     androidx.appcompat.widget.Toolbar chatToolbar;
 
     private void connect() {
@@ -199,43 +225,20 @@ public class ChatTest extends AppCompatActivity {
 
         }
 
-
-
-
-
         chatModelsList = new ArrayList<ChatModel>();
-
-
+        consolidatedList= new ArrayList<>();
 
         recyclerView_chat = findViewById(R.id.productListRecyView);
 
-        LinearLayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
+     /*   LinearLayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
         mLayoutManager.setStackFromEnd(true);
         mLayoutManager.setReverseLayout(true);
-        recyclerView_chat.setLayoutManager(mLayoutManager);
+        recyclerView_chat.setLayoutManager(mLayoutManager);*/
 
-     /*   LinearLayoutManager layoutManager3 = new GridLayoutManager(ChatTest.this,1);
-        productListRecyView.setLayoutManager(layoutManager3);
-        productListRecyView.setItemAnimator(new DefaultItemAnimator());*/
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(ChatTest.this);
 
-        AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute("1");
+        bindRecyclerView();
 
-        initAdapter();
-
-
-
-        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                String sleepTime = String.valueOf(page+1);
-                runner.execute(sleepTime);
-
-            }
-        });
 
         rootView = findViewById(R.id.root_view);
         voiceRecordingOrSend=findViewById(R.id.voiceRecordingOrSend);
@@ -283,9 +286,7 @@ public class ChatTest extends AppCompatActivity {
         voiceRecordingOrSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                 String  message = emojiconEditText.getText().toString().trim();
-
+                String  message = emojiconEditText.getText().toString().trim();
                 if(chatService!=null){
                     if(!message.equals(""))
                     {
@@ -296,8 +297,11 @@ public class ChatTest extends AppCompatActivity {
                             chatModel.setSenderId(userModel.getUserId());
                             chatModel.setReceiverId(toUserId);
                             chatModelsList.add(0, chatModel);
-                            chatAdapter.notifyItemInserted(0);
                             emojiconEditText.setText("");
+                            MineItem mineItem = new MineItem();
+                            mineItem.setChatModelArray(chatModel);//setBookingDataTabs(bookingDataTabs);
+                            consolidatedList.add(0,mineItem);
+                            chatAdapter.notifyItemInserted(0);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -305,7 +309,7 @@ public class ChatTest extends AppCompatActivity {
                                     recyclerView_chat.scrollToPosition(0);
                                 }
                             });
-                        }
+                       }
                         else {
                             Toast.makeText(ChatTest.this,"User is offline", Toast.LENGTH_LONG).show();
                         }
@@ -319,18 +323,39 @@ public class ChatTest extends AppCompatActivity {
             }
         });
 
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("1");
+   }
 
+    private void bindRecyclerView() {
+        chatAdapter = new ChatAdapter(getApplicationContext(),consolidatedList,chatToolbar,chatModelsList);
+       // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
+        mLayoutManager.setStackFromEnd(true);
+        mLayoutManager.setReverseLayout(true);
+        recyclerView_chat.setLayoutManager(mLayoutManager);
+        recyclerView_chat.setItemAnimator(new DefaultItemAnimator());
+        recyclerView_chat.setAdapter(chatAdapter);
+        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+
+               AsyncTaskRunner runner = new AsyncTaskRunner();
+                String sleepTime = String.valueOf(page+1);
+                runner.execute(sleepTime);
+
+            }
+        });
 
     }
+
+
     private void initAdapter() {
-        chatAdapter = new ChatAdapter(getApplicationContext(), chatModelsList,chatToolbar);
+        chatAdapter = new ChatAdapter(getApplicationContext(), consolidatedList,chatToolbar,chatModelsList);
         recyclerView_chat.setAdapter(chatAdapter);
     }
-
-
-
     private void GetAllMessagesApi(final Integer PageIndex) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_GETALLMESSAGES +"fromUserId="+userModel.getUserId()+"&toUserId="+toUserId+"&StartIndex="+PageIndex.toString()+"&PageSize="+"15",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_GETALLMESSAGES +"fromUserId="+userModel.getUserId()+"&toUserId="+toUserId+"&StartIndex="+PageIndex.toString()+"&PageSize="+"30",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -340,7 +365,8 @@ public class ChatTest extends AppCompatActivity {
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = new JSONArray(response);
-                            chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
+
+
                             for (int i=0; i<jsonArray.length(); i++)
                             {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -352,18 +378,48 @@ public class ChatTest extends AppCompatActivity {
                                 chatModelsList.add(chatModel1);
 
                             }
-                            chatAdapter.notifyDataSetChanged();
+
+
+                            chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
+                            HashMap<String, List<ChatModel>> groupedHashMap = groupDataIntoHashMap(chatModelsList);
+
+                            consolidatedList.clear();
+                            for (String date : groupedHashMap.keySet()) {
+                                for (ChatModel chat : groupedHashMap.get(date)) {
+
+                                    if(chat.getSenderId().equals(userModel.getUserId())){
+                                        MineItem mineItem = new MineItem();
+                                        mineItem.setChatModelArray(chat);
+                                        consolidatedList.add(mineItem);
+                                    }
+                                    else {
+                                        OtherItem generalItem = new OtherItem();
+                                        generalItem.setPojoOfJsonArray(chat);
+                                        consolidatedList.add(generalItem);
+
+                                    }
+
+                                }
+
+                                DateItem dateItem = new DateItem();
+                                dateItem.setDate(date);
+                                consolidatedList.add(dateItem);
+
+                            }
+
+                            chatAdapter.setDataChange(consolidatedList);
+
 
 
                             if(PageIndex.equals(1)){
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+
                                         recyclerView_chat.scrollToPosition(0);
                                     }
                                 });
                             }
-
 
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
@@ -381,43 +437,27 @@ public class ChatTest extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-
                 params.put("PageIndex :","1");
                 params.put("PageSize :","50");
                 params.put("UserId :",userModel.getUserId());
-
-
                 return params;
             }
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(ChatTest.this).addToRequestQueue(stringRequest);
-
-
-
-
     }
-
-
-
     class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String[] params) {
-
-
-
-
-            try {
+             try {
                 GetAllMessagesApi(Integer.valueOf( params[0]));
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
-            return null;
+           return null;
         }
 
 
@@ -452,7 +492,44 @@ public class ChatTest extends AppCompatActivity {
 
 
     }
+    private HashMap<String, List<ChatModel>> groupDataIntoHashMap(List<ChatModel> listOfPojosOfJsonArray) {
 
+        HashMap<String, List<ChatModel>> groupedHashMap = new HashMap<>();
+        String DATE_FORMAT_2 = "dd-MMM-yyyy";
+        for (ChatModel pojoOfJsonArray : listOfPojosOfJsonArray) {
+
+
+
+            String dtStart =  pojoOfJsonArray.getMessageTime();
+            SimpleDateFormat fDate = new SimpleDateFormat("MM/dd/yyyy");
+
+
+
+
+            try {
+                 Date date = fDate.parse(dtStart);
+
+                String hashMapKey = DateParser.convertDateToString(date);
+
+                if (groupedHashMap.containsKey(hashMapKey)) {
+                    // The key is already in the HashMap; add the pojo object
+                    // against the existing key.
+                    groupedHashMap.get(hashMapKey).add(pojoOfJsonArray);
+                } else {
+                    // The key is not there in the HashMap; create a new key-value pair
+                    List<ChatModel> list = new ArrayList<>();
+                    list.add(pojoOfJsonArray);
+                    groupedHashMap.put(hashMapKey, list);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+      return groupedHashMap;
+    }
     private class MyReceiver extends BroadcastReceiver {
 
         @Override
@@ -460,12 +537,20 @@ public class ChatTest extends AppCompatActivity {
 
             switch (intent.getAction()) {
                 case "notifyAdapter":
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+                    String currentDateandTime = sdf.format(new Date());
 
                     ChatModel chatModel = new ChatModel();
                     chatModel.setMessage(Globals.NewMessage);
                     chatModel.setSenderId(toUserId);
                     chatModel.setReceiverId(userModel.getUserId());
+                    chatModel.setMessageTime(currentDateandTime);
                     chatModelsList.add(0,chatModel);
+
+                    OtherItem otherItem = new OtherItem();
+                    otherItem.setPojoOfJsonArray(chatModel);//setBookingDataTabs(bookingDataTabs);
+                    consolidatedList.add(0,otherItem);
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
