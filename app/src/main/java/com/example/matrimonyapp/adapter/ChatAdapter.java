@@ -114,6 +114,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
 
+
         switch (viewHolder.getItemViewType()) {
 
 
@@ -235,6 +236,14 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 dateViewHolder.txtTitle.setText(dateItem.getDate());
                 break;
         }
+
+        ChatToolbar.findViewById(R.id.imgDelete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteSelectedItems();
+            }
+        });
+
     }
 
 
@@ -246,7 +255,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             switch (consolidatedList.get(i).getType()) {
                 case ListItem.TYPE_OTHER:
                     OtherItem otherItem   = (OtherItem) consolidatedList.get(i);
-                    if(otherItem.IsSelected())
+                    if(otherItem.getPojoOfJsonArray().IsSelected())
                     {
                         selectedCount=  selectedCount+1;
                     }
@@ -254,7 +263,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     break;
                 case ListItem.TYPE_MINE:
                     MineItem generalItem   = (MineItem) consolidatedList.get(i);
-                   if(generalItem.IsSelected())
+                   if(generalItem.getPojoOfJsonArray().IsSelected())
                    {
                        selectedCount=  selectedCount+1;
                    }
@@ -270,7 +279,46 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return  selectedCount;
     }
 
+    private void deleteSelectedItems() {
 
+        for (int i=0; i< consolidatedList.size(); i++){
+            switch (consolidatedList.get(i).getType()) {
+                case ListItem.TYPE_OTHER:
+                    OtherItem otherItem   = (OtherItem) consolidatedList.get(i);
+                    if(otherItem.getPojoOfJsonArray().IsSelected())
+                    {
+                        consolidatedList.remove(i);
+                        notifyItemRemoved(i);
+                        notifyItemRangeChanged(i, consolidatedList.size());
+                        selectionMode=false;
+                        CountAuxiliar = 0;
+                        ChatToolbar.findViewById(R.id.linearLayout_toolbar).setVisibility(View.VISIBLE);
+                        ChatToolbar.findViewById(R.id.linearSelectionMode).setVisibility(View.GONE);
+                        i--;
+                    }
+
+                    break;
+                case ListItem.TYPE_MINE:
+                    MineItem generalItem   = (MineItem) consolidatedList.get(i);
+                    if(generalItem.getPojoOfJsonArray().IsSelected())
+                    {
+                        consolidatedList.remove(i);
+                        notifyItemRemoved(i);
+                        notifyItemRangeChanged(i, consolidatedList.size());
+                        selectionMode=false;
+                        CountAuxiliar = 0;
+                        ChatToolbar.findViewById(R.id.linearLayout_toolbar).setVisibility(View.VISIBLE);
+                        ChatToolbar.findViewById(R.id.linearSelectionMode).setVisibility(View.GONE);
+                        i--;
+                    }
+
+                    break;
+
+            }
+        }
+
+
+    }
 
     // View holder for general row item
     class MineMessageViewHolder extends RecyclerView.ViewHolder {
