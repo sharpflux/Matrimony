@@ -1,8 +1,10 @@
 package com.example.matrimonyapp.modal;
 
-public class ChatModel  {
+import java.io.Serializable;
 
-    String senderId, receiverId, message, messageTime, messageStatus;
+public class ChatModel implements Serializable {
+
+    String senderId, receiverId, message, messageTime, messageStatus,time;
 
     private Boolean isSelected = false;
     public ChatModel() {
@@ -14,6 +16,14 @@ public class ChatModel  {
         this.receiverId = receiverId;
         this.messageTime = messageTime;
         this.messageStatus = messageStatus;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public Boolean IsSelected()

@@ -12,4 +12,6 @@ public class DateParser {
         strDate = dateFormat1.format(date);
         return strDate;
     }
+
+
 }

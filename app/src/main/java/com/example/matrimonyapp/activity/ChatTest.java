@@ -63,9 +63,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -74,6 +77,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
@@ -328,6 +332,9 @@ public class ChatTest extends AppCompatActivity {
    }
 
     private void bindRecyclerView() {
+
+
+
         chatAdapter = new ChatAdapter(getApplicationContext(),consolidatedList,chatToolbar,chatModelsList);
        // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         LinearLayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
@@ -336,13 +343,13 @@ public class ChatTest extends AppCompatActivity {
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.setItemAnimator(new DefaultItemAnimator());
         recyclerView_chat.setAdapter(chatAdapter);
-        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+      recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
 
                AsyncTaskRunner runner = new AsyncTaskRunner();
-                String sleepTime = String.valueOf(page+1);
-                runner.execute(sleepTime);
+               String sleepTime = String.valueOf(page+1);
+               runner.execute(sleepTime);
 
             }
         });
@@ -365,27 +372,34 @@ public class ChatTest extends AppCompatActivity {
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = new JSONArray(response);
-
-
                             for (int i=0; i<jsonArray.length(); i++)
                             {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 ChatModel chatModel1 = new ChatModel();
                                 chatModel1.setMessage(jsonObject.getString("Message"));
-                                chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
+                                chatModel1.setMessageTime( jsonObject.getString("MessageDateTime"));
+                                chatModel1.setTime(jsonObject.getString("MessageTime"));
                                 chatModel1.setSenderId(jsonObject.getString("FromUserId"));
                                 chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
                                 chatModelsList.add(chatModel1);
 
                             }
 
+                            final  Map<Date, List<ChatModel>> groupedHashMap = getUnSortedMap(chatModelsList);
 
-                            chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
-                            HashMap<String, List<ChatModel>> groupedHashMap = groupDataIntoHashMap(chatModelsList);
+                            Map<Date, List<ChatModel>> reverseSortedMap = new TreeMap<Date, List<ChatModel>>(Collections.reverseOrder());
+                            reverseSortedMap.putAll(groupedHashMap);
+
+
+                          //  final HashMap<String, List<ChatModel>> groupedHashMap = groupDataIntoHashMap(chatModelsList);
+                           // Map<String, List<ChatModel>> sortedMap = new TreeMap<String, List<ChatModel>>(groupedHashMap);
+                           // Map<String, List<ChatModel>> reverseSortedMap = new TreeMap<String, List<ChatModel>>(Collections.reverseOrder());
+                            //reverseSortedMap.putAll(groupedHashMap);
 
                             consolidatedList.clear();
-                            for (String date : groupedHashMap.keySet()) {
-                                for (ChatModel chat : groupedHashMap.get(date)) {
+                            for (Date date : reverseSortedMap.keySet()) {
+
+                                for (ChatModel chat : reverseSortedMap.get(date)) {
 
                                     if(chat.getSenderId().equals(userModel.getUserId())){
                                         MineItem mineItem = new MineItem();
@@ -396,26 +410,21 @@ public class ChatTest extends AppCompatActivity {
                                         OtherItem generalItem = new OtherItem();
                                         generalItem.setPojoOfJsonArray(chat);
                                         consolidatedList.add(generalItem);
-
                                     }
-
                                 }
 
+                                SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+                                String date2 = format.format(Date.parse(date.toString()));
                                 DateItem dateItem = new DateItem();
-                                dateItem.setDate(date);
+                                dateItem.setDate(date2);
                                 consolidatedList.add(dateItem);
-
                             }
-
                             chatAdapter.setDataChange(consolidatedList);
-
-
-
+                          //  chatAdapter.notifyItemRangeInserted(0, consolidatedList.size());
                             if(PageIndex.equals(1)){
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-
                                         recyclerView_chat.scrollToPosition(0);
                                     }
                                 });
@@ -492,24 +501,49 @@ public class ChatTest extends AppCompatActivity {
 
 
     }
+
+
+    private  Map<Date, List<ChatModel>> getUnSortedMap(List<ChatModel> listOfPojosOfJsonArray)
+    {
+
+        Map<Date, List<ChatModel>> groupedHashMap = new HashMap<>();
+
+        for (ChatModel pojoOfJsonArray : listOfPojosOfJsonArray) {
+
+            String DATE_FORMAT_2 = "MM/dd/yyyy";
+            String dtStart = pojoOfJsonArray.getMessageTime();
+            SimpleDateFormat fDate = new SimpleDateFormat (DATE_FORMAT_2, Locale.US);
+
+            try {
+                Date hashMapKey = fDate.parse(dtStart);
+                if (groupedHashMap.containsKey(hashMapKey)) {
+                    groupedHashMap.get(hashMapKey).add(pojoOfJsonArray);
+                } else {
+                    List<ChatModel> list = new ArrayList<>();
+                    list.add(pojoOfJsonArray);
+                    groupedHashMap.put(hashMapKey, list);
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return groupedHashMap;
+    }
     private HashMap<String, List<ChatModel>> groupDataIntoHashMap(List<ChatModel> listOfPojosOfJsonArray) {
 
         HashMap<String, List<ChatModel>> groupedHashMap = new HashMap<>();
         String DATE_FORMAT_2 = "dd-MMM-yyyy";
+        SimpleDateFormat formatter4 = new SimpleDateFormat("E, MMM dd yyyy");
         for (ChatModel pojoOfJsonArray : listOfPojosOfJsonArray) {
-
-
-
             String dtStart =  pojoOfJsonArray.getMessageTime();
-            SimpleDateFormat fDate = new SimpleDateFormat("MM/dd/yyyy");
-
-
-
-
+            SimpleDateFormat fDate = new SimpleDateFormat (DATE_FORMAT_2, Locale.US);
             try {
-                 Date date = fDate.parse(dtStart);
+                // Date date = fDate.parse(dtStart);
 
-                String hashMapKey = DateParser.convertDateToString(date);
+                String hashMapKey =dtStart;//   DateParser.convertDateToString(date);
 
                 if (groupedHashMap.containsKey(hashMapKey)) {
                     // The key is already in the HashMap; add the pojo object
@@ -520,8 +554,9 @@ public class ChatTest extends AppCompatActivity {
                     List<ChatModel> list = new ArrayList<>();
                     list.add(pojoOfJsonArray);
                     groupedHashMap.put(hashMapKey, list);
+
                 }
-            } catch (ParseException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -598,18 +633,13 @@ public class ChatTest extends AppCompatActivity {
 
                         for (int i = 0; i < jsonArray1.length(); i++) {
                             JSONObject jsonObject = null;
-
                             jsonObject = jsonArray1.getJSONObject(i);
                             if (jsonObject.getString("FromUserId").equals(toUserId))
                             {
                                 connectionId = jsonObject.getString("connectionID");
                                 break;
                             }
-
-
                         }
-
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();

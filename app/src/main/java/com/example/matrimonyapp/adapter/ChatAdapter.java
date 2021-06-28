@@ -25,10 +25,14 @@ import com.example.matrimonyapp.volley.CustomSharedPreference;
 /*import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;*/
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -54,7 +58,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.consolidatedList = asList;
         //now, tell the adapter about the update
         notifyDataSetChanged();
+        //notifyItemInserted(asList.size()+1);
     }
+
 
     @Override
     public long getItemId(int position) {
@@ -121,7 +127,8 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case ListItem.TYPE_MINE:
                 final  MineItem generalItem   = (MineItem) consolidatedList.get(position);
                 MineMessageViewHolder generalViewHolder= (MineMessageViewHolder) viewHolder;
-                generalViewHolder.txtTitle.setText(generalItem.getPojoOfJsonArray().getMessage());
+                generalViewHolder.txtTitle.setText(generalItem.getPojoOfJsonArray().getMessage() +" "+position);
+                generalViewHolder.tvTime.setText(generalItem.getPojoOfJsonArray().getTime());
 
                 generalViewHolder.itemView.setBackgroundColor(generalItem.getPojoOfJsonArray().IsSelected() ? Color.parseColor("#A3E7F4") : Color.TRANSPARENT);
 
@@ -173,12 +180,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             case ListItem.TYPE_OTHER:
 
-                chatModel = list.get(position);
               final    OtherItem generalItem2   = (OtherItem) consolidatedList.get(position);
                 OtherMessageViewHolder generalViewHolder2= (OtherMessageViewHolder) viewHolder;
-                generalViewHolder2.txtTitle.setText(generalItem2.getPojoOfJsonArray().getMessage());
+                generalViewHolder2.txtTitle.setText(generalItem2.getPojoOfJsonArray().getMessage()  +" "+position);
 
-
+                generalViewHolder2.tvTime.setText(generalItem2.getPojoOfJsonArray().getTime());
                 generalViewHolder2.itemView.setBackgroundColor(generalItem2.getPojoOfJsonArray().IsSelected() ? Color.parseColor("#A3E7F4") : Color.TRANSPARENT);
 
                 generalViewHolder2.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -231,9 +237,24 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
 
             case ListItem.TYPE_DATE:
+
+
+
                 DateItem dateItem = (DateItem) consolidatedList.get(position);
                 DateViewHolder dateViewHolder = (DateViewHolder) viewHolder;
                 dateViewHolder.txtTitle.setText(dateItem.getDate());
+               /* String DATE_FORMAT_2 = "MM/dd/yyyy";
+                String dtStart = dateItem.getDate();
+                SimpleDateFormat fDate = new SimpleDateFormat (DATE_FORMAT_2, Locale.US);
+                try {
+                    Date date = fDate.parse(dtStart);
+
+                    dateViewHolder.txtTitle.setText(DateFormat.getDateInstance(DateFormat.LONG).format(date).toString());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }*/
+
                 break;
         }
 
@@ -272,8 +293,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             }
         }
-
-
 
 
         return  selectedCount;
@@ -322,22 +341,22 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // View holder for general row item
     class MineMessageViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtTitle;
+        protected TextView txtTitle,tvTime;
 
         public MineMessageViewHolder(View v) {
             super(v);
             this.txtTitle = (TextView) v.findViewById(R.id.textView_message);
-
+            this.tvTime=(TextView)v.findViewById(R.id.tvTime);
         }
     }
 
     class OtherMessageViewHolder extends RecyclerView.ViewHolder {
-        protected TextView txtTitle;
+        protected TextView txtTitle,tvTime;
 
         public OtherMessageViewHolder(View v) {
             super(v);
             this.txtTitle = (TextView) v.findViewById(R.id.textView_message);
-
+            this.tvTime=(TextView)v.findViewById(R.id.tvTime);
         }
     }
 
