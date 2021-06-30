@@ -67,6 +67,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -88,7 +89,6 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
 // REF
 //https://stackoverflow.com/questions/41447044/divide-elements-on-groups-in-recyclerview-or-grouping-recyclerview-items-say-by
 
-
 //https://www.journaldev.com/12372/android-recyclerview-example
 
 //https://medium.com/@saber.solooki/sticky-header-for-recyclerview-c0eb551c3f68
@@ -104,7 +104,7 @@ public class ChatTest extends AppCompatActivity {
 
     EmojiconEditText emojiconEditText, emojiconEditText2;
     EmojiconTextView textView;
-    ImageView emojiButton,imageView_back;
+    ImageView emojiButton, imageView_back;
     ImageView submitButton;
     View rootView;
     EmojIconActions emojIcon;
@@ -112,8 +112,8 @@ public class ChatTest extends AppCompatActivity {
     FloatingActionButton voiceRecordingOrSend;
     private Intent intent;
     CircleImageView circleImageView_profilePic;
-    TextView textView_userName,tvStatus;
-    String connectionId="0", toUserId="";
+    TextView textView_userName, tvStatus;
+    String connectionId = "0", toUserId = "";
 
     //Chat
     MyReceiver myReceiver;
@@ -158,7 +158,7 @@ public class ChatTest extends AppCompatActivity {
     protected void onStop() {
 
         try {
-            if(myReceiver!=null) {
+            if (myReceiver != null) {
                 unregisterReceiver(myReceiver);
                 tvStatus.setText("");
             }
@@ -208,19 +208,18 @@ public class ChatTest extends AppCompatActivity {
         userModel = CustomSharedPreference.getInstance(this).getUser();
         textView_userName = findViewById(R.id.textView_userName);
         imageView_back = findViewById(R.id.imageView_back);
-        tvStatus=findViewById(R.id.tvStatus);
+        tvStatus = findViewById(R.id.tvStatus);
 
-        chatToolbar=findViewById(R.id.chatToolbar);
+        chatToolbar = findViewById(R.id.chatToolbar);
 
-        bundle =intent.getExtras();
-        if (bundle!=null)
-        {
+        bundle = intent.getExtras();
+        if (bundle != null) {
             connectionId = bundle.getString("connectionId");
             toUserId = bundle.getString("toUserId");
             textView_userName.setText(bundle.getString("toUserName"));
 
             Glide.with(ChatTest.this)
-                    .load(URLs.MainURL+bundle.getString("toUserProfilePic"))
+                    .load(URLs.MainURL + bundle.getString("toUserProfilePic"))
                     .skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .circleCrop()
@@ -230,7 +229,7 @@ public class ChatTest extends AppCompatActivity {
         }
 
         chatModelsList = new ArrayList<ChatModel>();
-        consolidatedList= new ArrayList<>();
+        consolidatedList = new ArrayList<>();
 
         recyclerView_chat = findViewById(R.id.productListRecyView);
 
@@ -245,7 +244,7 @@ public class ChatTest extends AppCompatActivity {
 
 
         rootView = findViewById(R.id.root_view);
-        voiceRecordingOrSend=findViewById(R.id.voiceRecordingOrSend);
+        voiceRecordingOrSend = findViewById(R.id.voiceRecordingOrSend);
 
         emojiButton = (ImageView) findViewById(R.id.addEmoticon);
 
@@ -259,6 +258,7 @@ public class ChatTest extends AppCompatActivity {
                 Log.e("Keyboard", "open");
 
             }
+
             @Override
             public void onKeyboardClose() {
                 Log.e("Keyboard", "close");
@@ -287,97 +287,159 @@ public class ChatTest extends AppCompatActivity {
         });
 
 
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute("1");
+
         voiceRecordingOrSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String  message = emojiconEditText.getText().toString().trim();
-                if(chatService!=null){
-                    if(!message.equals(""))
-                    {
-                        if(!connectionId.equals("0")) {
-                            chatService.Send(connectionId, toUserId, emojiconEditText.getText().toString());
-                            ChatModel chatModel = new ChatModel();
-                            chatModel.setMessage(message);
-                            chatModel.setSenderId(userModel.getUserId());
-                            chatModel.setReceiverId(toUserId);
-                            chatModelsList.add(0, chatModel);
-                            emojiconEditText.setText("");
-                            MineItem mineItem = new MineItem();
-                            mineItem.setChatModelArray(chatModel);//setBookingDataTabs(bookingDataTabs);
-                            consolidatedList.add(0,mineItem);
-                            chatAdapter.notifyItemInserted(0);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    chatAdapter.notifyDataSetChanged();
-                                    recyclerView_chat.scrollToPosition(0);
-                                }
-                            });
-                       }
+                String message = emojiconEditText.getText().toString().trim();
+                if (chatService != null) {
+                    if (!message.equals("")) {
+                        //if(!connectionId.equals("0")) {
+
+
+                        Date c = Calendar.getInstance().getTime();
+                        System.out.println("Current time => " + c);
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa");
+                        String time1 = sdf.format(c);
+
+                        //  SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+                        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+                        String formattedDate = df.format(c);
+
+                        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+
+
+                        chatService.Send(connectionId, toUserId, emojiconEditText.getText().toString());
+                        String date2 = format.format(Date.parse(formattedDate.toString()));
+                        if (containsDate(chatModelsList, date2)) {
+                            System.out.println("Data Exist(s)");
+                        } else {
+
+                            DateItem dateItem = new DateItem();
+                            dateItem.setDate(date2);
+                            consolidatedList.add(0, dateItem);
+                        }
+
+
+                        ChatModel chatModel = new ChatModel();
+                        chatModel.setMessage(message);
+                        chatModel.setSenderId(userModel.getUserId());
+                        chatModel.setReceiverId(toUserId);
+                        chatModel.setMessageTime(date2);
+                        chatModel.setTime(time1);
+                        chatModelsList.add(0, chatModel);
+
+                        emojiconEditText.setText("");
+                        MineItem mineItem = new MineItem();
+                        mineItem.setChatModelArray(chatModel);//setBookingDataTabs(bookingDataTabs);
+                        consolidatedList.add(0, mineItem);
+                        chatAdapter.notifyItemInserted(0);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // chatAdapter.setDataChange(consolidatedList);
+                                recyclerView_chat.scrollToPosition(0);
+                            }
+                        });
+                     /*  }
                         else {
                             Toast.makeText(ChatTest.this,"User is offline", Toast.LENGTH_LONG).show();
-                        }
+                        }*/
                     }
-                }
-                else {
-                    Toast.makeText(ChatTest.this,"You are offline", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ChatTest.this, "You are offline", Toast.LENGTH_LONG).show();
 
                 }
 
             }
         });
 
-        AsyncTaskRunner runner = new AsyncTaskRunner();
-        runner.execute("1");
-   }
+    }
+
+    boolean containsDate(ArrayList<ChatModel> list, String Date) {
+        for (ChatModel item : list) {
+            try {
+                if (item.getMessageTime().equals(Date)) {
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return false;
+    }
 
     private void bindRecyclerView() {
-
-
-
-        chatAdapter = new ChatAdapter(getApplicationContext(),consolidatedList,chatToolbar,chatModelsList);
-       // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        LinearLayoutManager mLayoutManager= new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
+        chatAdapter = new ChatAdapter(getApplicationContext(), consolidatedList, chatToolbar, chatModelsList);
+        // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, true);
         mLayoutManager.setStackFromEnd(true);
         mLayoutManager.setReverseLayout(true);
         recyclerView_chat.setLayoutManager(mLayoutManager);
         recyclerView_chat.setItemAnimator(new DefaultItemAnimator());
         recyclerView_chat.setAdapter(chatAdapter);
-      recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager, EndlessRecyclerViewScrollListener.LoadOnScrollDirection.TOP) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-
-               AsyncTaskRunner runner = new AsyncTaskRunner();
-               String sleepTime = String.valueOf(page+1);
-               runner.execute(sleepTime);
-
+               // mViewModel.fetchMessages(page);
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                String sleepTime = String.valueOf(page+1);
+                runner.execute(sleepTime);
             }
         });
 
+       /* recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+
+
+                    AsyncTaskRunner runner = new AsyncTaskRunner();
+                    String sleepTime = String.valueOf(page + 1);
+                    runner.execute(sleepTime);
+
+
+                // chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
+
+            }
+        });*/
+
+
+/*        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                AsyncTaskRunner runner = new AsyncTaskRunner();
+                String sleepTime = String.valueOf(page + 1);
+                runner.execute(sleepTime);
+            }
+        });*/
     }
 
 
     private void initAdapter() {
-        chatAdapter = new ChatAdapter(getApplicationContext(), consolidatedList,chatToolbar,chatModelsList);
+        chatAdapter = new ChatAdapter(getApplicationContext(), consolidatedList, chatToolbar, chatModelsList);
         recyclerView_chat.setAdapter(chatAdapter);
     }
+
     private void GetAllMessagesApi(final Integer PageIndex) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_GETALLMESSAGES +"fromUserId="+userModel.getUserId()+"&toUserId="+toUserId+"&StartIndex="+PageIndex.toString()+"&PageSize="+"30",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_GETALLMESSAGES + "fromUserId=" + userModel.getUserId() + "&toUserId=" + toUserId + "&StartIndex=" + PageIndex.toString() + "&PageSize=" + "20",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         //chatModelsList.clear();
-                        customDialogLoadingProgressBar.dismiss();
+                        //    customDialogLoadingProgressBar.dismiss();
                         JSONArray jsonArray = null;
                         try {
                             jsonArray = new JSONArray(response);
-                            for (int i=0; i<jsonArray.length(); i++)
-                            {
+
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 ChatModel chatModel1 = new ChatModel();
                                 chatModel1.setMessage(jsonObject.getString("Message"));
-                                chatModel1.setMessageTime( jsonObject.getString("MessageDateTime"));
+                                chatModel1.setMessageTime(jsonObject.getString("MessageDateTime"));
                                 chatModel1.setTime(jsonObject.getString("MessageTime"));
                                 chatModel1.setSenderId(jsonObject.getString("FromUserId"));
                                 chatModel1.setReceiverId(jsonObject.getString("ToUserId"));
@@ -385,28 +447,26 @@ public class ChatTest extends AppCompatActivity {
 
                             }
 
-                            final  Map<Date, List<ChatModel>> groupedHashMap = getUnSortedMap(chatModelsList);
+                            final Map<Date, List<ChatModel>> groupedHashMap = getUnSortedMap(chatModelsList);
 
                             Map<Date, List<ChatModel>> reverseSortedMap = new TreeMap<Date, List<ChatModel>>(Collections.reverseOrder());
                             reverseSortedMap.putAll(groupedHashMap);
 
-
-                          //  final HashMap<String, List<ChatModel>> groupedHashMap = groupDataIntoHashMap(chatModelsList);
-                           // Map<String, List<ChatModel>> sortedMap = new TreeMap<String, List<ChatModel>>(groupedHashMap);
-                           // Map<String, List<ChatModel>> reverseSortedMap = new TreeMap<String, List<ChatModel>>(Collections.reverseOrder());
+                            //  final HashMap<String, List<ChatModel>> groupedHashMap = groupDataIntoHashMap(chatModelsList);
+                            // Map<String, List<ChatModel>> sortedMap = new TreeMap<String, List<ChatModel>>(groupedHashMap);
+                            // Map<String, List<ChatModel>> reverseSortedMap = new TreeMap<String, List<ChatModel>>(Collections.reverseOrder());
                             //reverseSortedMap.putAll(groupedHashMap);
 
                             consolidatedList.clear();
+                          //  chatAdapter.notifyItemInserted(consolidatedList.size() - 1);
                             for (Date date : reverseSortedMap.keySet()) {
 
                                 for (ChatModel chat : reverseSortedMap.get(date)) {
-
-                                    if(chat.getSenderId().equals(userModel.getUserId())){
+                                    if (chat.getSenderId().equals(userModel.getUserId())) {
                                         MineItem mineItem = new MineItem();
                                         mineItem.setChatModelArray(chat);
                                         consolidatedList.add(mineItem);
-                                    }
-                                    else {
+                                    } else {
                                         OtherItem generalItem = new OtherItem();
                                         generalItem.setPojoOfJsonArray(chat);
                                         consolidatedList.add(generalItem);
@@ -420,8 +480,9 @@ public class ChatTest extends AppCompatActivity {
                                 consolidatedList.add(dateItem);
                             }
                             chatAdapter.setDataChange(consolidatedList);
-                          //  chatAdapter.notifyItemRangeInserted(0, consolidatedList.size());
-                            if(PageIndex.equals(1)){
+        /*                    int curSize = chatAdapter.getItemCount();
+                            chatAdapter.notifyItemRangeInserted(curSize, chatModelsList.size() - 1);*/
+                            if(PageIndex.equals("1") ) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -429,7 +490,6 @@ public class ChatTest extends AppCompatActivity {
                                     }
                                 });
                             }
-
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
                         }
@@ -439,44 +499,45 @@ public class ChatTest extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChatTest.this,"Something went wrong POST ! ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChatTest.this, "Something went wrong POST ! ", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("PageIndex :","1");
-                params.put("PageSize :","50");
-                params.put("UserId :",userModel.getUserId());
+                params.put("PageIndex :", "1");
+                params.put("PageSize :", "50");
+                params.put("UserId :", userModel.getUserId());
                 return params;
             }
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(ChatTest.this).addToRequestQueue(stringRequest);
     }
+
     class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String[] params) {
-             try {
-                GetAllMessagesApi(Integer.valueOf( params[0]));
+            try {
+                GetAllMessagesApi(Integer.valueOf(params[0]));
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-           return null;
+            return null;
         }
 
 
         @Override
         protected void onPreExecute() {
 
-            if (!isFinishing() && customDialogLoadingProgressBar != null) {
+          /*  if (!isFinishing() && customDialogLoadingProgressBar != null) {
                 customDialogLoadingProgressBar.setCancelable(false);
                 customDialogLoadingProgressBar.show();
-            }
+            }*/
         }
 
         @Override
@@ -498,22 +559,15 @@ public class ChatTest extends AppCompatActivity {
         protected void onCancelled() {
             super.onCancelled();
         }
-
-
     }
 
 
-    private  Map<Date, List<ChatModel>> getUnSortedMap(List<ChatModel> listOfPojosOfJsonArray)
-    {
-
+    private Map<Date, List<ChatModel>> getUnSortedMap(List<ChatModel> listOfPojosOfJsonArray) {
         Map<Date, List<ChatModel>> groupedHashMap = new HashMap<>();
-
         for (ChatModel pojoOfJsonArray : listOfPojosOfJsonArray) {
-
             String DATE_FORMAT_2 = "MM/dd/yyyy";
             String dtStart = pojoOfJsonArray.getMessageTime();
-            SimpleDateFormat fDate = new SimpleDateFormat (DATE_FORMAT_2, Locale.US);
-
+            SimpleDateFormat fDate = new SimpleDateFormat(DATE_FORMAT_2, Locale.US);
             try {
                 Date hashMapKey = fDate.parse(dtStart);
                 if (groupedHashMap.containsKey(hashMapKey)) {
@@ -522,28 +576,26 @@ public class ChatTest extends AppCompatActivity {
                     List<ChatModel> list = new ArrayList<>();
                     list.add(pojoOfJsonArray);
                     groupedHashMap.put(hashMapKey, list);
-
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-
         return groupedHashMap;
     }
+
     private HashMap<String, List<ChatModel>> groupDataIntoHashMap(List<ChatModel> listOfPojosOfJsonArray) {
 
         HashMap<String, List<ChatModel>> groupedHashMap = new HashMap<>();
         String DATE_FORMAT_2 = "dd-MMM-yyyy";
         SimpleDateFormat formatter4 = new SimpleDateFormat("E, MMM dd yyyy");
         for (ChatModel pojoOfJsonArray : listOfPojosOfJsonArray) {
-            String dtStart =  pojoOfJsonArray.getMessageTime();
-            SimpleDateFormat fDate = new SimpleDateFormat (DATE_FORMAT_2, Locale.US);
+            String dtStart = pojoOfJsonArray.getMessageTime();
+            SimpleDateFormat fDate = new SimpleDateFormat(DATE_FORMAT_2, Locale.US);
             try {
                 // Date date = fDate.parse(dtStart);
 
-                String hashMapKey =dtStart;//   DateParser.convertDateToString(date);
+                String hashMapKey = dtStart;//   DateParser.convertDateToString(date);
 
                 if (groupedHashMap.containsKey(hashMapKey)) {
                     // The key is already in the HashMap; add the pojo object
@@ -563,8 +615,9 @@ public class ChatTest extends AppCompatActivity {
 
         }
 
-      return groupedHashMap;
+        return groupedHashMap;
     }
+
     private class MyReceiver extends BroadcastReceiver {
 
         @Override
@@ -580,11 +633,11 @@ public class ChatTest extends AppCompatActivity {
                     chatModel.setSenderId(toUserId);
                     chatModel.setReceiverId(userModel.getUserId());
                     chatModel.setMessageTime(currentDateandTime);
-                    chatModelsList.add(0,chatModel);
+                    chatModelsList.add(0, chatModel);
 
                     OtherItem otherItem = new OtherItem();
                     otherItem.setPojoOfJsonArray(chatModel);//setBookingDataTabs(bookingDataTabs);
-                    consolidatedList.add(0,otherItem);
+                    consolidatedList.add(0, otherItem);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -602,8 +655,7 @@ public class ChatTest extends AppCompatActivity {
                     try {
                         jsonArray = new JSONArray(Globals.allMessages);
                         chatAdapter.notifyItemInserted(chatModelsList.size() - 1);
-                        for (int i=0; i<jsonArray.length(); i++)
-                        {
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             ChatModel chatModel1 = new ChatModel();
                             chatModel1.setMessage(jsonObject.getString("Message"));
@@ -628,14 +680,13 @@ public class ChatTest extends AppCompatActivity {
                     break;
 
                 case "UserList":
-                    JSONArray jsonArray1 =(JSONArray) Globals.userlist;
+                    JSONArray jsonArray1 = (JSONArray) Globals.userlist;
                     try {
 
                         for (int i = 0; i < jsonArray1.length(); i++) {
                             JSONObject jsonObject = null;
                             jsonObject = jsonArray1.getJSONObject(i);
-                            if (jsonObject.getString("FromUserId").equals(toUserId))
-                            {
+                            if (jsonObject.getString("FromUserId").equals(toUserId)) {
                                 connectionId = jsonObject.getString("connectionID");
                                 break;
                             }

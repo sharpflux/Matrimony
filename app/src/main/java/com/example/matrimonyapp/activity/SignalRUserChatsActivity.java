@@ -327,88 +327,83 @@ public class SignalRUserChatsActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
 
-            switch (intent.getAction()) {
-                case "notifyAdapter":
-                    //adapter.notifyDataSetChanged();
-                    break;
+            try {
+                switch (intent.getAction()) {
+                    case "notifyAdapter":
+                        //adapter.notifyDataSetChanged();
+                        break;
 
-                case "OnlineUsers":
-                    JSONArray jsonArrayOnline =(JSONArray) Globals.onlineUserlist;
+                    case "OnlineUsers":
+                        JSONArray jsonArrayOnline = (JSONArray) Globals.onlineUserlist;
 
-                    for (int i = 0; i < jsonArrayOnline.length(); i++) {
-                        JSONObject jsonObject = null;
-                        try {
-                            jsonObject = jsonArrayOnline.getJSONObject(i);
-                            for (int d=0; d<directMessagesModelList.size(); d++)
-                            {
-                                DirectMessagesModel dm = directMessagesModelList.get(d);
-                                if (dm.getUserId().equals(jsonObject.getString("FromUserId")))
-                                {
-                                    dm.setFirebaseUserId(jsonObject.getString("connectionID"));
-                                    dm.setOnline(true);
+                        for (int i = 0; i < jsonArrayOnline.length(); i++) {
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = jsonArrayOnline.getJSONObject(i);
+                                for (int d = 0; d < directMessagesModelList.size(); d++) {
+                                    DirectMessagesModel dm = directMessagesModelList.get(d);
+                                    if (dm.getUserId().equals(jsonObject.getString("FromUserId"))) {
+                                        dm.setFirebaseUserId(jsonObject.getString("connectionID"));
+                                        dm.setOnline(true);
+                                    }
+
+                                    directMessagesModelList.set(d, dm);
+                                    directMessagesAdapter.notifyItemChanged(d);
                                 }
 
-                                directMessagesModelList.set(d,dm);
-                                directMessagesAdapter.notifyItemChanged(d);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-
-                        } catch ( JSONException e) {
-                            e.printStackTrace();
                         }
-                        catch ( Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
 
-                    break;
-                case "offlineUser":
-                    JSONObject jsonObject =(JSONObject) Globals.offlineUser;
+                        break;
+                    case "offlineUser":
+                        JSONObject jsonObject = (JSONObject) Globals.offlineUser;
 
                         try {
-                            for (int d=0; d<directMessagesModelList.size(); d++)
-                            {
+                            for (int d = 0; d < directMessagesModelList.size(); d++) {
                                 DirectMessagesModel dm = directMessagesModelList.get(d);
-                                if (dm.getUserId().equals(jsonObject.getString("FromUserId")))
-                                {
+                                if (dm.getUserId().equals(jsonObject.getString("FromUserId"))) {
                                     dm.setFirebaseUserId("0");
                                     dm.setOnline(false);
 
                                 }
-                                directMessagesModelList.set(d,dm);
+                                directMessagesModelList.set(d, dm);
                                 directMessagesAdapter.notifyItemChanged(d);
                             }
 
-                        } catch ( JSONException e) {
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        catch ( Exception e) {
-                            e.printStackTrace();
+
+
+                        break;
+
+                    case "MyStatus":
+                        for (int i = 0; i < directMessagesModelList.size(); i++) {
+                            DirectMessagesModel dm = directMessagesModelList.get(i);
+                            if (dm.getUserId().equals("4") && Globals.status.equals("true")) {
+                                dm.setActivityStatus("true");
+
+                                directMessagesModelList.set(i, dm);
+                                directMessagesAdapter.notifyItemChanged(i);
+                            } else {
+                                dm.setActivityStatus("false");
+
+                                directMessagesModelList.set(i, dm);
+                                directMessagesAdapter.notifyItemChanged(i);
+                            }
+
                         }
 
-
-                    break;
-
-                case "MyStatus":
-                    for (int i=0; i<directMessagesModelList.size(); i++)
-                    {
-                        DirectMessagesModel dm = directMessagesModelList.get(i);
-                        if (dm.getUserId().equals("4") && Globals.status.equals("true"))
-                        {
-                            dm.setActivityStatus("true");
-
-                            directMessagesModelList.set(i,dm);
-                            directMessagesAdapter.notifyItemChanged(i);
-                        }
-                        else {
-                            dm.setActivityStatus("false");
-
-                            directMessagesModelList.set(i,dm);
-                            directMessagesAdapter.notifyItemChanged(i);
-                        }
-
-                    }
-
-                    break;
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     } // MyReceiver

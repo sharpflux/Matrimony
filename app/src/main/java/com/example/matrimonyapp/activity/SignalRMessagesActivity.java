@@ -283,7 +283,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
 
 
 
-        recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+      /*  recyclerView_chat.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 isLoading = true;
@@ -292,7 +292,7 @@ public class SignalRMessagesActivity extends AppCompatActivity {
                 String sleepTime = String.valueOf(page+1);
                 runner.execute(sleepTime);
             }
-        });
+        });*/
 
 
 

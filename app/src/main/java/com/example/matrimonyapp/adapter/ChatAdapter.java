@@ -127,7 +127,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case ListItem.TYPE_MINE:
                 final  MineItem generalItem   = (MineItem) consolidatedList.get(position);
                 MineMessageViewHolder generalViewHolder= (MineMessageViewHolder) viewHolder;
-                generalViewHolder.txtTitle.setText(generalItem.getPojoOfJsonArray().getMessage() +" "+position);
+                generalViewHolder.txtTitle.setText(generalItem.getPojoOfJsonArray().getMessage());
                 generalViewHolder.tvTime.setText(generalItem.getPojoOfJsonArray().getTime());
 
                 generalViewHolder.itemView.setBackgroundColor(generalItem.getPojoOfJsonArray().IsSelected() ? Color.parseColor("#A3E7F4") : Color.TRANSPARENT);
@@ -158,7 +158,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             generalItem.getPojoOfJsonArray().setSelected(!generalItem.getPojoOfJsonArray().IsSelected());
                             view.setBackgroundColor(generalItem.getPojoOfJsonArray().IsSelected() ? Color.parseColor("#A3E7F4") : Color.TRANSPARENT);
                             lastSelectedPosition = position;
-                            if (chatModel.IsSelected()) {
+                            if (generalItem.getPojoOfJsonArray().IsSelected() ) {
                                 CountAuxiliar++;
                             } else {
                                 CountAuxiliar--;
@@ -182,7 +182,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
               final    OtherItem generalItem2   = (OtherItem) consolidatedList.get(position);
                 OtherMessageViewHolder generalViewHolder2= (OtherMessageViewHolder) viewHolder;
-                generalViewHolder2.txtTitle.setText(generalItem2.getPojoOfJsonArray().getMessage()  +" "+position);
+                generalViewHolder2.txtTitle.setText(generalItem2.getPojoOfJsonArray().getMessage());
 
                 generalViewHolder2.tvTime.setText(generalItem2.getPojoOfJsonArray().getTime());
                 generalViewHolder2.itemView.setBackgroundColor(generalItem2.getPojoOfJsonArray().IsSelected() ? Color.parseColor("#A3E7F4") : Color.TRANSPARENT);
@@ -213,7 +213,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             generalItem2.getPojoOfJsonArray().setSelected(!generalItem2.getPojoOfJsonArray().IsSelected());
                             view.setBackgroundColor(generalItem2.getPojoOfJsonArray().IsSelected() ? Color.parseColor("#A3E7F4") : Color.TRANSPARENT);
                             lastSelectedPosition = position;
-                            if (chatModel.IsSelected()) {
+                            if (generalItem2.getPojoOfJsonArray().IsSelected() ) {
                                 CountAuxiliar++;
                             } else {
                                 CountAuxiliar--;
