@@ -372,7 +372,7 @@ public class ChatTest extends AppCompatActivity {
         }
         return false;
     }
-
+//test
     private void bindRecyclerView() {
         chatAdapter = new ChatAdapter(getApplicationContext(), consolidatedList, chatToolbar, chatModelsList);
         // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
