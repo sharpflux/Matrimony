@@ -5,6 +5,11 @@ public class URLs {
 
     public static final String MainURL                          = "http://matrimonial.sharpflux.com/";
 
+
+    public static final String URL_SLIDER_IMG=MainURL+"api/SliderImageApi/SliderImgApiGET?Search=";
+
+
+
     public static final String URL_POST_REGISTRATION            = MainURL+"api/Registration/RegisterUser";
     public static final String URL_POST_LOGIN                   = MainURL+"api/Users/Login";
     public static final String URL_GET_LOGIN                    = MainURL+"api/Users/Login?";

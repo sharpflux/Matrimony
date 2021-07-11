@@ -52,7 +52,7 @@
         android:layout_marginBottom="0dp"
         android:gravity="center"
         android:background="@drawable/gradient_place_order"
-        android:text="@string/save"
+        android:text="@string/next"
         android:textSize="16dp"
         android:textColor="@color/white" />
 

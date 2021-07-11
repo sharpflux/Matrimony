@@ -318,7 +318,7 @@ public class SetPreferencesActivity extends AppCompatActivity {
         radioGroup_jobType = findViewById(R.id.radioGroup_jobType);
 
 
-        include_toolbar.setBackgroundColor(Color.WHITE);
+     //   include_toolbar.setBackgroundColor(Color.WHITE);
         textView_toolbarHeader.setText("Set Preferences");
         state_builder_id = new StringBuilder();
 
@@ -754,11 +754,11 @@ public class SetPreferencesActivity extends AppCompatActivity {
 
                                 JSONObject jsonParent = jsonObject.getJSONObject("Root").getJSONObject("Parent");
 
-                                rangeBar_ageRange.setRangePinsByValue(Float.parseFloat(jsonParent.getString("AgeMin")),
+                                /*rangeBar_ageRange.setRangePinsByValue(Float.parseFloat(jsonParent.getString("AgeMin")),
                                         Float.parseFloat(jsonParent.getString("AgeMax")));
 
                                 rangeBar_heightRange.setRangePinsByValue(Float.parseFloat(jsonParent.getString("HeightMin")),
-                                        Float.parseFloat(jsonParent.getString("HeightMax")));
+                                        Float.parseFloat(jsonParent.getString("HeightMax")));*/
 
 
 

@@ -50,7 +50,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-
+    <string name="next">Next</string>
     <string name="change_profile_photo">Change Profile Photo</string>
     <string name="remove_profile_photo">Remove Profile Photo</string>
     <string name="mobile_no_on_another_account">This mobile no. is on another account</string>
@@ -111,6 +111,7 @@
     <string name="religious_details">Religious Details </string>
     <string name="basic_details">Basic Details </string>
     <string name="family_details">Family Details </string>
+    <string name="profile_for">Create Profile for </string>
     <string name="gothram">Gothram </string>
     <string name="mother_tongue">Mother Tongue</string>
     <string name="language">Language</string>
@@ -361,6 +362,8 @@
     <string name="register">Register</string>
     <string name="backToLogIn">Back to LogIn</string>
     <string name="total_no_of_mama">Total No. of Mama</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

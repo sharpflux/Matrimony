@@ -112,8 +112,8 @@ public class BasicDetailsFragment extends Fragment  {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_basic_details, container, false);
 
@@ -136,7 +136,6 @@ public class BasicDetailsFragment extends Fragment  {
             SimpleDateFormat formatter = new SimpleDateFormat(myFormat);
             try {
                 Date date = formatter.parse(userModel.getBirthdate());
-
                 editText_birthdate.setText(formatter.format(date));
             } catch (ParseException e) {
                 e.printStackTrace();

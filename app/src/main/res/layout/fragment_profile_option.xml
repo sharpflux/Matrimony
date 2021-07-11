@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <RadioGroup
+            android:id="@+id/first_group"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioSelf"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:text="Self"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/checkbox_self"
+                android:checked="true"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioRelative"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_weight="1"
+                android:text="Relative"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/checkbox_relative"
+                android:checked="false"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+
+
+
+
+        </RadioGroup>
+
+        <RadioGroup
+
+            android:id="@+id/second_group"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/first_group"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioSon"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="Son"
+                android:gravity="center"
+                android:drawableTop="@drawable/checkbox_brother"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioDaughter"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_weight="1"
+                android:text="Doughter"
+                android:button="@null"
+                android:gravity="center"
+                android:drawableTop="@drawable/checkbox_sister"
+                android:checked="false"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+
+        </RadioGroup>
+
+        <RadioGroup
+
+            android:id="@+id/third_group"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/second_group"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioBrother"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Brother"
+                android:drawableTop="@drawable/checkbox_son"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioSister"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="Sister"
+                android:gravity="center"
+                android:drawableTop="@drawable/checkbox_daughter"
+                android:checked="false"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+
+        </RadioGroup>
+
+
+        <RadioGroup
+            android:id="@+id/four_group"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/third_group"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioAgent"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:text="Client"
+                android:drawableTop="@drawable/checkbox_agent"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:background="@drawable/border"
+                android:layout_width="0dp"
+                android:layout_columnWeight="1"
+                android:id="@+id/radioFriend"
+                android:padding="30dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="-1dp"
+                android:layout_weight="1"
+                android:button="@null"
+                android:text="Friend"
+                android:gravity="center"
+                android:drawableTop="@drawable/checkbox_friend"
+                android:checked="false"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:buttonTint="@color/gray"
+                android:onClick="onRadioButtonClicked"/>
+
+
+        </RadioGroup>
+
+
+
+</RelativeLayout>

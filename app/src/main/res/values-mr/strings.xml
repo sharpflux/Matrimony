@@ -4,7 +4,7 @@
     <string name="tag_line">आपला परिपूर्ण जोडीदाराचा शोध येथे संपेल ...</string>
     <string name="rate_app" >रेट अॅप</string>
     <string name="subscription_plan" >सदस्यता योजना</string>
-
+    <string name="next">पुढे</string>
     <string name="upload_image">प्रतिमा अपलोड </string>
     <string name="mobile">मोबाईल क्र. *</string>
     <string name="mobile_">मोबाईल क्र. </string>
@@ -29,6 +29,7 @@
     <string name="birth_district">जन्म जिल्हा </string>
     <string name="accurate">अचूक</string>
     <string name="approx">साधारण</string>
+    <string name="profile_for">यासाठी प्रोफाइल तयार करा</string>
     <string name="city">शहर *</string>
     <string name="village">गाव</string>
     <string name="state">राज्य *</string>

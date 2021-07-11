@@ -365,7 +365,6 @@ public class SignalRMessagesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
                 if (bundle!=null) {
                     Intent intent = new Intent(SignalRMessagesActivity.this, ViewProfileDetailsActivity.class);
                     intent.putExtra("userId", toUserId);

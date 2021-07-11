@@ -5,6 +5,9 @@
     <string name="rate_app" >एप्लिकेशन का मूल्यांकन करें</string>
     <string name="subscription_plan" >सदस्यता योजना</string>
 
+    <string name="next">अगला</string>
+
+    <string name="profile_for">के लिए प्रोफ़ाइल बनाएं</string>
     <string name="mobile">मोबाइल नंबर *</string>
     <string name="mobile_">मोबाइल नंबर</string>
     <string name="alt_mobile">वैकल्पिक मोबाइल नंबर दर्ज करें</string>

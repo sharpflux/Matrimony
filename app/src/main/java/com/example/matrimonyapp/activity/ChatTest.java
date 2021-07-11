@@ -314,13 +314,15 @@ public class ChatTest extends AppCompatActivity {
 
                         chatService.Send(connectionId, toUserId, emojiconEditText.getText().toString());
                         String date2 = format.format(Date.parse(formattedDate.toString()));
-                        if (containsDate(chatModelsList, date2)) {
+                        if (containsDate(chatModelsList, formattedDate)) {
                             System.out.println("Data Exist(s)");
                         } else {
 
-                            DateItem dateItem = new DateItem();
-                            dateItem.setDate(date2);
-                            consolidatedList.add(0, dateItem);
+                            if (!containsDate(chatModelsList, date2)) {
+                                DateItem dateItem = new DateItem();
+                                dateItem.setDate(date2);
+                                consolidatedList.add(0, dateItem);
+                            }
                         }
 
 
@@ -328,7 +330,7 @@ public class ChatTest extends AppCompatActivity {
                         chatModel.setMessage(message);
                         chatModel.setSenderId(userModel.getUserId());
                         chatModel.setReceiverId(toUserId);
-                        chatModel.setMessageTime(date2);
+                        chatModel.setMessageTime(formattedDate);
                         chatModel.setTime(time1);
                         chatModelsList.add(0, chatModel);
 
@@ -372,7 +374,7 @@ public class ChatTest extends AppCompatActivity {
         }
         return false;
     }
-//test
+
     private void bindRecyclerView() {
         chatAdapter = new ChatAdapter(getApplicationContext(), consolidatedList, chatToolbar, chatModelsList);
         // RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -480,16 +482,18 @@ public class ChatTest extends AppCompatActivity {
                                 consolidatedList.add(dateItem);
                             }
                             chatAdapter.setDataChange(consolidatedList);
-        /*                    int curSize = chatAdapter.getItemCount();
-                            chatAdapter.notifyItemRangeInserted(curSize, chatModelsList.size() - 1);*/
-                            if(PageIndex.equals("1") ) {
+                            if(PageIndex.equals(1)){
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+
                                         recyclerView_chat.scrollToPosition(0);
                                     }
                                 });
                             }
+
+
+
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
                         }

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.matrimonyapp">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ChatTest"></activity>
-
+        <activity android:name=".activity.LoginOptionActivity"></activity>
+        <activity android:name=".activity.MulitRegistrationActivity" />
+        <activity android:name=".activity.ChatTest" />
         <activity android:name=".activity.ImageUploadSelectedActivity" />
-
         <activity android:name=".activity.SubscriptionPlanActivity" />
         <activity android:name=".activity.SelectLanguageActivity" />
         <activity android:name=".activity.ViewAllActivity" />
@@ -80,10 +79,10 @@
             android:launchMode="singleInstance" />
         <activity android:name=".activity.SecondActivity" />
         <activity android:name=".activity.MainActivity" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/notify" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -100,41 +99,33 @@
                 <action android:name="com.example.matrimonyapp.service.servicerestarted" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:name=".receiver.SensorRestartBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+            <intent-filter>
+                <action android:name="com.arvi.ActivityRecognition.RestartSensor" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".service.ChatService"
             android:exported="false" />
-
         <service
             android:name=".service.ChatJobService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
         <service
             android:name=".service.ImageUploadJobService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
-
         <service
-            android:name="com.example.matrimonyapp.service.SensorService"
+            android:name=".service.SensorService"
             android:enabled="true"
-            android:stopWithTask="false">
-        </service>
-
-        <receiver
-            android:name="com.example.matrimonyapp.receiver.SensorRestartBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true"
-            android:label="RestartServiceWhenStopped">
-            <intent-filter>
-                <action android:name="com.arvi.ActivityRecognition.RestartSensor"/>
-            </intent-filter>
-        </receiver>
-
-
-
+            android:stopWithTask="false" />
         <service
             android:name=".service.MyFirebaseMessagingService"
             android:enabled="true"
@@ -144,6 +135,7 @@
             </intent-filter>
         </service>
     </application>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission
         android:name="org.apache.http.legacy"
         android:required="false" />
@@ -164,6 +156,5 @@
         tools:ignore="ProtectedPermissions" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
 
 </manifest>

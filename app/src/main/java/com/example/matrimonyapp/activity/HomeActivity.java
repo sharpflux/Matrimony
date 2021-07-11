@@ -254,7 +254,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         }else {
             builder.setPeriodic(1*60*1000);
         }
-
         // Start the job
         JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         // start and get the result
@@ -303,35 +302,64 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
         setContentView(R.layout.activity_home);
         mHandler = new Handler();
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(HomeActivity.this);
-      /*  AsyncTaskRunner runner2 = new AsyncTaskRunner();
-        runner2.execute("ProfileChecker");*/
+
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-
-        serviceComponentName = new ComponentName(this, ChatJobService.class);
-
         ctx = this;
-        mSensorService = new SensorService(getCtx());
-        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
-        if( ! isMyServiceRunning(mSensorService.getClass())) {
-            startService(mServiceIntent);
-        }
+        serviceComponentName = new ComponentName(this, ChatJobService.class);
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+
+                new Thread(new Runnable() {
+                    public void run(){
+
+                        mSensorService = new SensorService(getCtx());
+                        mServiceIntent = new Intent(getCtx(), mSensorService.getClass());
+                        if( ! isMyServiceRunning(mSensorService.getClass())) {
+                            startService(mServiceIntent);
+                        }
+                    }
+                }).start();
+
+
+
+            }
+        });
+
+
 
         init();
 
-        FirebaseMessaging.getInstance().getToken() .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
 
-                        // Get new FCM registration token
-                        String token = task.getResult();
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
 
-                        //Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    public void run(){
+
+                        FirebaseMessaging.getInstance().getToken() .addOnCompleteListener(new OnCompleteListener<String>() {
+                            @Override
+                            public void onComplete(@NonNull Task<String> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                                    return;
+                                }
+
+                                // Get new FCM registration token
+                                String token = task.getResult();
+
+                                //Toast.makeText(HomeActivity.this, token, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
-                });
+                }).start();
+
+
+
+            }
+        });
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("All");
