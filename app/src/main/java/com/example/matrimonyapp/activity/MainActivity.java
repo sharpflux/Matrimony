@@ -17,6 +17,7 @@ import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.fragment.BasicDetailsFragment;
 import com.example.matrimonyapp.fragment.FamilyDetailsFragment;
 import com.example.matrimonyapp.fragment.PersonalDetailsFragment;
+import com.example.matrimonyapp.fragment.PrimaryInfoFragment;
 import com.example.matrimonyapp.fragment.ProfessionalDetailsFragment;
 import com.example.matrimonyapp.fragment.ProfileOptionFragment;
 import com.example.matrimonyapp.fragment.QualificationDetailsFragment;
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
       final   FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
         Bundle bundle = getIntent().getExtras();
-        fragment = new ProfileOptionFragment();
+       // fragment = new ProfileOptionFragment();
+
+        fragment = new PrimaryInfoFragment();
 
 
 

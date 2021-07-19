@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="primary_details">प्राथमिक तपशील </string>
     <string name="app_name">जोडीदार माझा</string>
     <string name="tag_line">आपला परिपूर्ण जोडीदाराचा शोध येथे संपेल ...</string>
     <string name="rate_app" >रेट अॅप</string>

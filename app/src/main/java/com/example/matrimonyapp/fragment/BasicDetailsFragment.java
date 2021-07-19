@@ -115,14 +115,14 @@ public class BasicDetailsFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_basic_details, container, false);
+        view= inflater.inflate(R.layout.fragment_basic_details_new, container, false);
 
         context = getContext();
         mHandler = new Handler();
         init();
         ((RadioButton)radioGroup_birthTimeType.getChildAt(0)).setChecked(true);
 
-        if(userModel!=null)
+        if(userModel.getFullName()!=null)
         {
             editText_firstName.setText(userModel.getFullName());
             //editText_birthdate.setText(userModel.getBirthdate());
@@ -141,11 +141,13 @@ public class BasicDetailsFragment extends Fragment  {
                 e.printStackTrace();
             }
 
+            AsyncTaskLoad getTask = new AsyncTaskLoad();
+            getTask.execute("getDetails");
+
         }
 
 
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
+
 
 
         FieldValidation fieldValidation = new FieldValidation(context);
@@ -503,9 +505,9 @@ public class BasicDetailsFragment extends Fragment  {
     private void init()
     {
 
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
+       /* if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
             startActivity(new Intent(getContext(), LoginActivity.class));
-        }
+        }*/
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
@@ -893,8 +895,8 @@ public class BasicDetailsFragment extends Fragment  {
     void getDetails()
     {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URLs.URL_GET_BASICDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs.URL_GET_BASICDETAILS+"UserId="+userModel.getUserId()+"&Language="+userModel.getLanguage(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -1037,6 +1039,7 @@ public class BasicDetailsFragment extends Fragment  {
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
+
     }
 
 
@@ -1168,14 +1171,14 @@ public class BasicDetailsFragment extends Fragment  {
 
     }
 
-    @Override
+    /*@Override
     public void onResume() {
         super.onResume();
 
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
+        //AsyncTaskLoad getTask = new AsyncTaskLoad();
+        //getTask.execute("getDetails");
 
-    }
+    }*/
 
     private class AsyncTaskLoad extends AsyncTask<String, String, String> {
 
@@ -1604,9 +1607,7 @@ public class BasicDetailsFragment extends Fragment  {
 
         @Override
         protected void onPreExecute() {
-
-
-            customDialogLoadingProgressBar.show();
+            //customDialogLoadingProgressBar.show();
 
         }
 

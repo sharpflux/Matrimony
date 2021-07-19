@@ -51,9 +51,9 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp"
         android:gravity="center"
-        android:background="@drawable/gradient_place_order"
+        android:background="@drawable/ripple"
         android:text="@string/next"
-        android:textSize="16dp"
+        android:textSize="18.3sp"
         android:textColor="@color/white" />
 
 </RelativeLayout>

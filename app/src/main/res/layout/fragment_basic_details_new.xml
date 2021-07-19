@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16.7dp"
+            android:layout_marginRight="16.7dp"
+            android:layout_marginTop="18dp"
+            android:orientation="vertical">
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+                >
+
+
+
+                <EditText
+                    android:id="@+id/editText_firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/full_name"
+                    android:inputType="textCapWords"
+                    android:singleLine="true"
+                    android:digits="@string/only_text_with_space"
+                    android:textColor="@color/text_black"
+                    android:textSize="15sp" />
+
+
+
+
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="13dp"
+                >
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup_gender"
+                    android:orientation="horizontal"
+
+                    android:theme="@style/RadioButtonTheme"
+
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        android:textColor="@color/text_black"
+                        android:textSize="13sp"
+                        android:clickable="false"
+
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"
+                        android:textSize="13sp"
+                        android:layout_marginStart="25dp"
+                        android:textColor="@color/text_black"
+                        android:clickable="false"/>
+
+                </RadioGroup>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/birth_details"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey_4a"
+                android:textAllCaps="true"
+                />
+            <LinearLayout
+                android:id="@+id/LinearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                tools:context=".MainActivity">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    style="@style/TextLabel"
+
+                    >
+
+                    <EditText
+                        android:id="@+id/editText_birthdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:hint="@string/birthdate1"
+                        android:inputType="none"
+                        android:clickable="false"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"/>
+
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    style="@style/TextLabel"
+
+                    >
+
+                    <EditText
+                        android:id="@+id/editText_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:hint="@string/age"
+                        android:inputType="text"
+                        android:maxLength="10"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"/>
+
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:layout_marginTop="15dp"
+
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextLabel"
+                    android:layout_weight="1"
+                    >
+
+
+
+                    <EditText
+                        android:id="@+id/editText_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:hint="@string/time"
+                        android:inputType="text"
+                        android:textColor="@color/text_black"
+                        android:textSize="15sp"
+                        android:focusable="false"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioGroup_birthTimeType"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="30dp"
+                    android:theme="@style/RadioButtonTheme"
+                    android:layout_marginEnd="20dp"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/accurate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/accurate"
+                        android:checked="true"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_black"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/approx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/approx"
+                        android:textSize="13sp"
+                        android:layout_marginStart="15dp"
+                        android:textColor="@color/text_black"
+                        android:layout_gravity="center_vertical"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel" >
+
+                <EditText
+                    android:id="@+id/editText_birthPlace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="10"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/birth_place"
+                    android:inputType="number"
+                    android:textSize="15sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_birthCountry"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/birth_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_birthCountryId"
+                android:visibility="gone"
+                android:text="@string/_0"
+                />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_birthState"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/birth_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_birthStateId"
+                android:visibility="gone"
+                android:text="@string/_0"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_birthCity"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/birth_city_taluka"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_birthCityId"
+                android:visibility="gone"
+                android:text="@string/_0"
+                />
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_bloodGroup"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/blood_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_bloodGroupId"
+                android:visibility="gone"
+                android:text="0"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/contactDetails"
+                android:textSize="13sp"
+                android:textColor="@color/grey_4a"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_mobileNo"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_altMobileNo"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/alt_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_emailId"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_altEmailId"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/alt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/permanent_address"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/grey_4a"
+                android:textAllCaps="true"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_country"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_countryId"
+                android:visibility="gone"
+                android:text="@string/_0"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_state"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_stateId"
+                android:text="@string/_0"
+                android:visibility="gone"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_city"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_cityId"
+                android:text="@string/_0"
+                android:visibility="gone"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_village"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/village"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nextFocusRight="@id/editText_district"
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_address"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nextFocusRight="@id/editText_district"
+                    android:inputType="textMultiLine"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_postalCode"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/postal_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nextFocusRight="@id/editText_district"
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingStart="08dp"
+                android:paddingBottom="10dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                >
+                <CheckBox
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/is_address_same"
+                    android:id="@+id/checkBox_isAddressSame"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_black"
+                    android:layoutDirection="rtl"
+                    android:button="@drawable/custom_checkbox"
+                    android:gravity="left"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/current_address"
+                android:textSize="13sp"
+                android:textColor="@color/grey_4a"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_currentCountry"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_currentCountryId"
+                android:visibility="gone"
+                android:text="@string/_0"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_currentState"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/state"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:nextFocusRight="@id/editText_district"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_currentStateId"
+                android:text="@string/_0"
+                android:visibility="gone"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_currentCity"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nextFocusRight="@id/editText_district"
+                    android:inputType=""
+                    android:singleLine="true"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_currentCityId"
+                android:text="@string/_0"
+                android:visibility="gone"
+                />
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_currentVillage"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/village"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nextFocusRight="@id/editText_district"
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_currentAddress"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                style="@style/TextLabel"
+
+                >
+
+                <EditText
+                    android:id="@+id/editText_currentPostalCode"
+                    android:layout_gravity="center"
+                    android:paddingStart="08dp"
+                    android:textColor="@color/text_black"
+                    android:hint="@string/postal_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textSize="15sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

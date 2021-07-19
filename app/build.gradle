@@ -169,6 +169,10 @@ dependencies {
     implementation 'com.razorpay:checkout:1.6.6'
 
 
+
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:17.4.0'
+
 }
 
 //apply plugin: 'com.google.gms.google-services'

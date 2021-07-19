@@ -110,6 +110,7 @@
     <string name="religion">Religion </string>
     <string name="religious_details">Religious Details </string>
     <string name="basic_details">Basic Details </string>
+    <string name="primary_details">Primary Details </string>
     <string name="family_details">Family Details </string>
     <string name="profile_for">Create Profile for </string>
     <string name="gothram">Gothram </string>
@@ -120,7 +121,7 @@
     <string name="marathi">Marathi</string>
     <string name="hindi">Hindi</string>
 
-
+    <string name="server_client_id">AIzaSyCmJT50yDk7P-all4Qf-V_YWDWJY3bXYpo</string>
     <string name="institue_university">Name of Institute or University</string>
     <string name="name_of_institute">Name of Institute</string>
     <string name="percentage">Percentage</string>
