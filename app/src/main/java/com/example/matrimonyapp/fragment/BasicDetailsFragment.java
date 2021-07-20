@@ -81,6 +81,7 @@ public class BasicDetailsFragment extends Fragment  {
             textView_cityId, textView_currentCityId;
 //textView_districtId, textView_talukaId, textView_currentDistrictId, textView_currentTalukaId,textView_birthDistrictId, textView_birthTalukaId,
     private View view;
+    private boolean isLoggedIn;
 
     private CheckBox checkBox_isAddressSame;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -141,8 +142,12 @@ public class BasicDetailsFragment extends Fragment  {
                 e.printStackTrace();
             }
 
-            AsyncTaskLoad getTask = new AsyncTaskLoad();
-            getTask.execute("getDetails");
+            isLoggedIn = CustomSharedPreference.getInstance((MainActivity)getActivity()).isLoggedIn();
+            if(isLoggedIn)
+            {
+                AsyncTaskLoad getTask = new AsyncTaskLoad();
+                getTask.execute("getDetails");
+            }
 
         }
 
@@ -305,10 +310,15 @@ public class BasicDetailsFragment extends Fragment  {
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");
+//                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+//                insertTask.execute("insertDetails");
 
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.addToBackStack(null);
 
+                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
+                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
+                fragmentTransaction.commit() ;
 
             }
         });

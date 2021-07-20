@@ -111,9 +111,9 @@ public class CustomDialogAddMama extends Dialog {
 
         setContentView(R.layout.custom_dialog_add_mama);
 
-        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
-            context.startActivity(new Intent(context, LoginActivity.class));
-        }
+//        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
+//            context.startActivity(new Intent(context, LoginActivity.class));
+//        }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 

@@ -103,9 +103,9 @@ public class CustomDialogViewLanguageKnown extends Dialog {
 
         setContentView(R.layout.custom_dialog_view_language_known);
 
-        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
-            context.startActivity(new Intent(context, LoginActivity.class));
-        }
+//        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
+//            context.startActivity(new Intent(context, LoginActivity.class));
+//        }
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(context);
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();

@@ -50,6 +50,7 @@ import java.util.Map;
 import me.abhinay.input.CurrencyEditText;
 import me.abhinay.input.CurrencySymbols;
 
+
 public class CustomDialogAddLanguageKnown extends Dialog {
 
 
@@ -101,9 +102,9 @@ public class CustomDialogAddLanguageKnown extends Dialog {
 
         setContentView(R.layout.custom_dialog_add_language_known);
 
-        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
-            context.startActivity(new Intent(context, LoginActivity.class));
-        }
+//        if (!CustomSharedPreference.getInstance(context).isLoggedIn()) {
+//            context.startActivity(new Intent(context, LoginActivity.class));
+//        }
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(context);
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();

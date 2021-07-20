@@ -74,7 +74,7 @@ public class QualificationDetailsFragment extends Fragment {
             editText_gradCourse, editText_gradNameOfInstitute, editText_gradPer,
             editText_pgCourse, editText_pgNameOfInstitute, editText_pgPer,*/
 
-
+    private boolean isLoggedIn=false;
     private ImageView imageView_back,imageView_addEducation;
 
 /*    String sscNameOfInstitute, sscPer,hscNameOfInstitute, hscPer,
@@ -144,9 +144,9 @@ public class QualificationDetailsFragment extends Fragment {
             }
         });
 
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
+//        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
+//            startActivity(new Intent(getContext(), LoginActivity.class));
+//        }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
         stringBuilder_education = new StringBuilder();
@@ -165,6 +165,8 @@ public class QualificationDetailsFragment extends Fragment {
         tvHeadingEducationDetails=view.findViewById(R.id.tvHeadingEducationDetails);
 
         bundle = getArguments();
+        isLoggedIn = CustomSharedPreference.getInstance(getContext()).isLoggedIn();
+
 
 
         dataFetcher = new DataFetcher("Qualification",getContext());
@@ -257,8 +259,12 @@ public class QualificationDetailsFragment extends Fragment {
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
         customDialogLoadingProgressBar.setCancelable(false);
 
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
+        if (isLoggedIn) {
+            AsyncTaskLoad getTask = new AsyncTaskLoad();
+            getTask.execute("getDetails");
+        }
+
+
 
 
         textView_saveAndContinue = ((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
@@ -266,9 +272,9 @@ public class QualificationDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-
-                        AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                        insertTask.execute("insertDetails");
+//
+//                        AsyncTaskLoad insertTask = new AsyncTaskLoad();
+//                        insertTask.execute("insertDetails");
 
 
                /* getActivity().runOnUiThread(new Runnable() {
@@ -278,13 +284,13 @@ public class QualificationDetailsFragment extends Fragment {
                 });*/
 
 
-              /*  ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
+                ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
                 //professionalDetailsFragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, professionalDetailsFragment);
-                fragmentTransaction.commit() ;*/
+                fragmentTransaction.commit() ;
 
             }
         });

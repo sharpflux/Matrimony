@@ -107,7 +107,7 @@ public class PersonalDetailsFragment extends Fragment {
     private ArrayList<AddPersonModel> addPersonModelArrayList_languageKnown;
     private SQLiteLanguageKnownDetails sqLiteLanguageKnownDetails;
     private StringBuilder stringBuilder_language;
-
+    private boolean isLoggedIn=false;
     public PersonalDetailsFragment() {
         // Required empty public constructor
     }
@@ -122,9 +122,9 @@ public class PersonalDetailsFragment extends Fragment {
         //bundle = getArguments();
         context = getContext();
 
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
+//        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
+//            startActivity(new Intent(getContext(), LoginActivity.class));
+//        }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
@@ -221,9 +221,14 @@ public class PersonalDetailsFragment extends Fragment {
 
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+        isLoggedIn = CustomSharedPreference.getInstance((MainActivity)getActivity()).isLoggedIn();
 
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
+
+        if(isLoggedIn)
+        {
+            AsyncTaskLoad getTask = new AsyncTaskLoad();
+            getTask.execute("getDetails");
+        }
 
         return view;
 
@@ -371,8 +376,8 @@ public class PersonalDetailsFragment extends Fragment {
                 bundle.putString("diet",diet);
                 bundle.putString("livesWithFamily",livesWithFamily);
 */
-                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");
+/*                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");*/
 /*
                 UploadImageFragment uploadImageFragment = new UploadImageFragment();
                 uploadImageFragment.setArguments(bundle);
@@ -382,7 +387,11 @@ public class PersonalDetailsFragment extends Fragment {
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
                 fragmentTransaction.commit() ;*/
 
-
+                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
+                fragmentTransaction.commit();
 
             }
         });

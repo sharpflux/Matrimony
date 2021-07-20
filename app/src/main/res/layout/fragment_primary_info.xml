@@ -30,8 +30,6 @@
                 style="@style/TextLabel"
                 >
 
-
-
                     <EditText
                         android:id="@+id/editText_fullName"
                         android:layout_width="match_parent"
@@ -210,7 +208,7 @@
                     <EditText
                         android:id="@+id/editText_password"
                         android:layout_gravity="center"
-                        android:paddingStart="08dp"
+                        android:paddingStart="0dp"
 
                         android:textColor="@color/text_black"
                         android:hint="@string/password"
@@ -265,7 +263,7 @@
                     <EditText
                         android:id="@+id/editText_confirmPassword"
                         android:layout_gravity="center"
-                        android:paddingStart="08dp"
+                        android:paddingStart="0dp"
                         android:textColor="@color/text_black"
                         android:hint="@string/confirm_password"
                         android:inputType="textPassword"

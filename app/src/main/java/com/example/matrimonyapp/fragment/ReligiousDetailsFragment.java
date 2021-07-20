@@ -57,6 +57,7 @@ public class ReligiousDetailsFragment extends Fragment {
     editText_motherTongue;
     public Context context;
     private ImageView imageView_back;
+    private boolean isLoggedIn;
 
     String caste, subCaste, religion, otherCaste, gothram, dosh;
     CheckBox checkBox_otherCaste;
@@ -80,9 +81,7 @@ public class ReligiousDetailsFragment extends Fragment {
 
         context = getContext();
 
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
+
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
@@ -124,9 +123,13 @@ public class ReligiousDetailsFragment extends Fragment {
         checkBox_otherCaste = view.findViewById(R.id.checkBox_otherCaste);
 
         bundle=getArguments();
+        isLoggedIn = CustomSharedPreference.getInstance((MainActivity)getActivity()).isLoggedIn();
+        if(isLoggedIn)
+        {
+            AsyncTaskLoad getTask = new AsyncTaskLoad();
+            getTask.execute("getDetails");
+        }
 
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
 
         //Toast.makeText(getContext()," -- "+bundle.getString("fullName"))
 
@@ -168,8 +171,18 @@ public class ReligiousDetailsFragment extends Fragment {
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");
+/*                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");*/
+
+
+                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
+                fragmentTransaction.commit() ;
+
             }
         });
 

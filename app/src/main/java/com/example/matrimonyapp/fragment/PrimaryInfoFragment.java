@@ -339,10 +339,10 @@ public class PrimaryInfoFragment extends Fragment  implements
 
             if (!mobile.isEmpty() && !email.isEmpty() && !birthdate.isEmpty()  && !age.isEmpty()&& !confirmpassword.isEmpty()&& !password.isEmpty()&& confirmpassword.equals(password)) {
                 txt_saveAndContinue.setEnabled(true);
-                txt_saveAndContinue.setBackgroundColor(Color.parseColor("#cb2470"));
+               // txt_saveAndContinue.setBackgroundColor(Color.parseColor("#cb2470"));
             } else {
                 txt_saveAndContinue.setEnabled(true);
-                txt_saveAndContinue.setBackgroundColor(Color.parseColor("#bdc0c6"));
+               // txt_saveAndContinue.setBackgroundColor(Color.parseColor("#bdc0c6"));
             }
         }
 

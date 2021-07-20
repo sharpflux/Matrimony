@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
@@ -61,7 +62,7 @@ public class ProfessionalDetailsFragment extends Fragment {
 //editText_companyCountry, editText_companyState,editText_companyDistrict, editText_companyTaluka,
     public Context context;
     private ImageView imageView_back;
-
+    private boolean isLoggedIn=false;
     private RadioGroup radioGroup_currentService;
     private CardView cardView_governmentService, cardView_privateService;
     private Handler mHandler;
@@ -90,10 +91,10 @@ public class ProfessionalDetailsFragment extends Fragment {
         bundle = getArguments();
         context = getContext();
         mHandler = new Handler();
-
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
+        isLoggedIn = CustomSharedPreference.getInstance(getContext()).isLoggedIn();
+//        if (!) {
+//            startActivity(new Intent(getContext(), LoginActivity.class));
+//        }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
@@ -219,9 +220,11 @@ public class ProfessionalDetailsFragment extends Fragment {
 
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+        if (CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
+            AsyncTaskLoad getTask = new AsyncTaskLoad();
+            getTask.execute("getDetails");
+        }
 
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
 
 
         showPopUp(editText_country, "Country");
@@ -343,6 +346,11 @@ public class ProfessionalDetailsFragment extends Fragment {
                                 Toast.makeText(getContext(),"Professional details saved successfully!", Toast.LENGTH_SHORT).show();
 
                                 getActivity().finish();
+
+                                if(isLoggedIn)
+                                {
+                                    getContext().startActivity((new Intent(getContext(), HomeActivity.class)));
+                                }
 
                                 /*UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();

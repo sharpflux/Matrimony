@@ -123,7 +123,7 @@ public class FamilyDetailsFragment extends Fragment {
 
     private AddPersonAdapter addPersonAdapter_sibling, addPersonAdapter_mama, addPersonAdapter_property,
             addPersonAdapter_farm, addPersonAdapter_vehicle;
-
+    private boolean isLoggedIn=false;
     private SQLiteSiblingDetails sqLiteSiblingDetails;
     private SQLiteMamaDetails sqLiteMamaDetails;
     private SQLitePropertyDetails sqLitePropertyDetails;
@@ -159,9 +159,9 @@ public class FamilyDetailsFragment extends Fragment {
         bundle = getArguments();
 
         mHandler = new Handler();
-        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-        }
+//        if (!CustomSharedPreference.getInstance(getContext()).isLoggedIn()) {
+//            startActivity(new Intent(getContext(), LoginActivity.class));
+//        }
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
 
@@ -249,9 +249,11 @@ public class FamilyDetailsFragment extends Fragment {
         stringBuilder_vehicle = new StringBuilder();
         stringBuilder_extraInfo = new StringBuilder();
 
-
-        AsyncTaskLoad getTask = new AsyncTaskLoad();
-        getTask.execute("getDetails");
+        isLoggedIn = CustomSharedPreference.getInstance(getContext()).isLoggedIn();
+        if (isLoggedIn) {
+            AsyncTaskLoad getTask = new AsyncTaskLoad();
+            getTask.execute("getDetails");
+        }
 
 
         // Sibling recycleView
