@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.LoginOptionActivity">
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="196dp"
-        android:clipToPadding="false"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearlayout_bottomLayout"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:paddingBottom="0dp">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="horizontal">
 
             <FrameLayout
@@ -59,38 +59,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/linearlayout_bottomLayout"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:paddingBottom="40dp">
+
+
+        android:layout_marginBottom="20dp">
 
         <LinearLayout
-            android:layout_marginLeft="10.7dp"
-            android:layout_marginTop="26.3dp"
-            android:layout_marginRight="10.7dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="0dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal" >
 
-            <Button
-                android:background="@drawable/gradient_place_order"
+
+            <TextView
+                android:background="@drawable/gradient_rounded_corners"
                 android:layout_weight="1"
-                android:id="@+id/btnLogin"
+                android:id="@+id/textView_login"
                 android:layout_width="0dp"
-                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+
+                android:paddingVertical="12dp"
+                android:gravity="center"
                 android:text="@string/login" />
-            <Button
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/rectangle_gray_border"
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:background="@drawable/rounded_corners_grey_border_radius4"
                 android:layout_weight="1"
-                android:id="@+id/btnReg"
+                android:id="@+id/textView_register"
                 android:layout_width="0dp"
-                android:textStyle="bold"
-                android:textColor="@color/red_btn_bg_color"
-                android:layout_height="wrap_content"
+
+                android:textColor="@color/project_color"
+                android:layout_height="45dp"
+                android:paddingVertical="12dp"
+                android:gravity="center"
                 android:text="@string/register" />
 
         </LinearLayout>
@@ -98,32 +106,30 @@
         <LinearLayout
             android:id="@+id/linearGoogleLogin"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10.7dp"
-            android:layout_marginTop="26.3dp"
-            android:layout_marginRight="10.7dp"
-            android:padding="6dp"
-            android:background="@drawable/rectangle_gray_border"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="15dp"
+            android:paddingVertical="12dp"
+            android:gravity="center"
+
+            android:background="@drawable/rounded_corners_grey_border_radius4"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="21dp"
+
+                android:fontFamily="@font/sfpro_display_medium"
                 android:src="@drawable/g" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="31dp"
-                android:fontFamily="@font/sfpro_display_medium"
-                android:letterSpacing="0.0525"
-                android:paddingTop="8dp"
-                android:paddingBottom="10dp"
-                android:text="CONTINUE WITH GOOGLE"
+                android:layout_marginStart="10dp"
+                android:text="Continue with Google"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                />
         </LinearLayout>
 
 

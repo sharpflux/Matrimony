@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,6 +40,7 @@ public class OtpFragment extends Fragment {
 
     EditText et1, et2, et3, et4;
     private EditText[] editTexts;
+    TextView txt_saveAndContinue;
     TextView btn;
 View view;
 
@@ -85,6 +88,7 @@ View view;
         et2 = view.findViewById(R.id.et2);
         et3 = view.findViewById(R.id.et3);
         et4 = view.findViewById(R.id.et4);
+        txt_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
         editTexts = new EditText[]{et1, et2, et3, et4};
 
@@ -99,9 +103,26 @@ View view;
         et3.setOnKeyListener(new PinOnKeyListener(2));
         et4.setOnKeyListener(new PinOnKeyListener(3));
 
+        txt_saveAndContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(new BasicDetailsFragment());
+
+            }
+        });
+
         TextView tv=((MainActivity)getActivity()).findViewById(R.id.textView_toolbar);
         tv.setText(getContext().getResources().getString(R.string.verify_otp));
         return  view;
+    }
+
+    public void replaceFragment(Fragment destFragment)
+    {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+        fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+        fragmentTransaction.commit();
     }
 
 

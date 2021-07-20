@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -60,7 +61,9 @@ public class LoginOptionActivity extends AppCompatActivity {
     ArrayList<sliderModel> sliderModelArrayList;
     Timer timer;
     Handler handler = new Handler();
-    Button btnLogin,btnReg;
+    TextView textView_login,textView_register;
+
+
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int RC_SIGN_IN = 007;
@@ -82,8 +85,8 @@ public class LoginOptionActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewPager);
         indicator = findViewById(R.id.indicator);
-        btnLogin=findViewById(R.id.btnLogin);
-        btnReg=findViewById(R.id.btnReg);
+        textView_login=findViewById(R.id.textView_login);
+        textView_register=findViewById(R.id.textView_register);
         linearGoogleLogin=findViewById(R.id.linearGoogleLogin);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -98,16 +101,18 @@ public class LoginOptionActivity extends AppCompatActivity {
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        textView_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
                 Intent intent = new Intent(LoginOptionActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
 
-        btnReg.setOnClickListener(new View.OnClickListener() {
+        textView_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginOptionActivity.this, MainActivity.class);

@@ -7,8 +7,14 @@
         <item name="colorPrimaryDark">@color/quantum_bluegrey900</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
-
+        <item name="android:fontFamily">@font/arima_madurai_medium</item>
+        <item name="fontFamily">@font/arima_madurai_medium</item>
     </style>
+
+    <style name="customTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/arima_madurai_medium</item>
+    </style>
+
     <style name="formTextInputLayout">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/text_black</item>
@@ -138,29 +144,29 @@
 
     <style name="TextLabel">
 
-      <!--  <item name="android:textColorHint">@color/text_black</item>
+        <item name="android:textColorHint">@color/text_black</item>
         <item name="android:textSize">15sp</item>
         <item name="android:inputType">text</item>
 
         <item name="colorAccent">@color/black</item>
         <item name="colorControlNormal">#ebebeb</item>
         <item name="colorControlActivated">#9e2e90</item>
-        <item name="android:layout_marginTop">10dp</item>-->
+        <item name="android:layout_marginTop">10dp</item>
 
 
 
 
 
         <!-- Hint color and label color in FALSE state -->
-        <item name="android:textColorHint">@color/text_black</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:inputType">text</item>
-        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
-        <item name="colorAccent">@color/black</item>
-        <item name="colorControlNormal">#ebebeb</item>
-        <item name="colorControlActivated">#cb2470</item>
-        <item name="android:layout_marginTop">10dp</item>
-        <item name="fontFamily">@font/sfpro_text_medium</item>
+<!--        <item name="android:textColorHint">@color/text_black</item>-->
+<!--        <item name="android:textSize">15sp</item>-->
+<!--        <item name="android:inputType">text</item>-->
+<!--        &lt;!&ndash; Label color in TRUE state and bar color FALSE and TRUE State &ndash;&gt;-->
+<!--        <item name="colorAccent">@color/black</item>-->
+<!--        <item name="colorControlNormal">#ebebeb</item>-->
+<!--        <item name="colorControlActivated">@color/project_color</item>-->
+<!--        <item name="android:layout_marginTop">10dp</item>-->
+<!--        <item name="fontFamily">@font/sfpro_text_medium</item>-->
 
     </style>
 

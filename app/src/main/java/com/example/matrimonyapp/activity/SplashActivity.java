@@ -72,7 +72,7 @@ public class SplashActivity extends AppCompatActivity {
                         if (CustomSharedPreference.getInstance(getApplicationContext()).isLoggedIn()) {
                             finish();
                           //  startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                            startActivity(new Intent(getApplicationContext(), LoginOptionActivity.class));
+                            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         }
                         else
                         {
