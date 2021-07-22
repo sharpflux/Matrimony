@@ -203,7 +203,6 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                 AsyncTaskLoad insertTask = new AsyncTaskLoad();
                 insertTask.execute("insertDetails");
-
             }
         });
         editText_income.setOnClickListener(new View.OnClickListener() {
@@ -240,6 +239,20 @@ public class ProfessionalDetailsFragment extends Fragment {
         return view;
     }
 
+    void replaceFragment(Fragment destFragment)
+    {
+//        ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
+        if(userModel.getUserType().equals("OldUser")){
+            getActivity().onBackPressed();
+        }
+        else {
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+            fragmentTransaction.commit();
+        }
+    }
 
     private void showPopUp(final EditText editText, final String urlFor)
     {
@@ -345,12 +358,13 @@ public class ProfessionalDetailsFragment extends Fragment {
 
                                 Toast.makeText(getContext(),"Professional details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                getActivity().finish();
+                                replaceFragment(new ReligiousDetailsFragment());
+                                //getActivity().finish();
 
-                                if(isLoggedIn)
-                                {
-                                    getContext().startActivity((new Intent(getContext(), HomeActivity.class)));
-                                }
+//                                if(isLoggedIn)
+//                                {
+//                                    getContext().startActivity((new Intent(getContext(), HomeActivity.class)));
+//                                }
 
                                 /*UploadDocumentsFragment uploadDocumentsFragment = new UploadDocumentsFragment();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -477,7 +491,7 @@ public class ProfessionalDetailsFragment extends Fragment {
                             {
                                 professionalDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -625,8 +639,6 @@ public class ProfessionalDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
                             "SalaryPackageId", "SalaryPackageName", editText_income,
                             textView_income, getContext(), customDialogLoadingProgressBar);
-
-
                 }
 
                 return params[0];

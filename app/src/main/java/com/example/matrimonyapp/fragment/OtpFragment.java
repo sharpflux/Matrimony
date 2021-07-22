@@ -1,7 +1,10 @@
 package com.example.matrimonyapp.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,8 +21,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.MainActivity;
+import com.example.matrimonyapp.activity.VerifyOtpActivity;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
+import com.example.matrimonyapp.modal.UserModel;
+import com.example.matrimonyapp.volley.CustomSharedPreference;
+import com.example.matrimonyapp.volley.URLs;
+import com.example.matrimonyapp.volley.VolleySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +60,16 @@ public class OtpFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String fullName, gender, birthdate, mobileNo,
+            emailId, age, password, language="en";
 
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     EditText et1, et2, et3, et4;
     private EditText[] editTexts;
     TextView txt_saveAndContinue;
     TextView btn;
+    private Bundle bundle;
+    Context context;
 View view;
 
     public OtpFragment() {
@@ -59,19 +87,29 @@ View view;
     // TODO: Rename and change types and number of parameters
     public static OtpFragment newInstance(String param1, String param2) {
         OtpFragment fragment = new OtpFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+        bundle.putString("UserType","NewUser");
+        fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+         bundle = getArguments();
+        if (bundle != null) {
+            fullName = bundle.getString("fullName");
+            mobileNo = bundle.getString("mobileNo");
+            emailId = bundle.getString("emailId");
+            birthdate = bundle.getString("birthdate");
+            age = bundle.getString("age");
+            gender = bundle.getString("gender");
+            password = bundle.getString("password");
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 =
+
         }
     }
 
@@ -81,7 +119,7 @@ View view;
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_otp, container, false);
 
-
+        context = getContext();
 
         btn = ((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
         et1 = view.findViewById(R.id.et1);
@@ -89,6 +127,8 @@ View view;
         et3 = view.findViewById(R.id.et3);
         et4 = view.findViewById(R.id.et4);
         txt_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
+
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(context);
 
         editTexts = new EditText[]{et1, et2, et3, et4};
 
@@ -106,8 +146,8 @@ View view;
         txt_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new BasicDetailsFragment());
-
+               // replaceFragment(new BasicDetailsFragment());
+                registerUser();
             }
         });
 
@@ -116,11 +156,110 @@ View view;
         return  view;
     }
 
+    public void registerUser()
+    {
+        if (bundle != null) {
+            fullName = bundle.getString("fullName");
+            mobileNo = bundle.getString("mobileNo");
+            emailId = bundle.getString("emailId");
+            birthdate = bundle.getString("birthdate");
+            age = bundle.getString("age");
+            gender = bundle.getString("gender");
+            password = bundle.getString("password");
+
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                    URLs.URL_POST_REGISTRATION,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            try {
+
+                                //converting response to json object
+                                JSONObject jsonObject = new JSONObject(response);
+
+
+                                if (jsonObject.getString("message").equals("Success")) {
+
+                                    UserModel userModel = new UserModel(jsonObject.getString("UserId"),
+                                            fullName,
+                                            mobileNo,
+                                            emailId,
+                                            birthdate,
+                                            age,
+                                            gender,
+                                            "0",
+                                            language,
+                                            "NewUser"
+                                            );
+
+                                    CustomSharedPreference.getInstance(context).saveUser(userModel);
+
+                                    replaceFragment(new BasicDetailsFragment());
+
+                                    /*registerFirebaseUser(fullName, mobileNo, birthdate, age, gender, emailId,
+                                            password, jsonObject.getString("UserId"));*/
+
+//                                    Intent intent = new Intent(context, HomeActivity.class);
+//                                    startActivity(intent);
+
+                                } else {
+                                    // Toast.makeText(getApplicationContext(),"Sorry for the inconvenience \n Please try again!",Toast.LENGTH_SHORT).show();
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(context, "Something went wrong please try again", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("UserId", "0");
+                    params.put("FullName", fullName);
+                    params.put("MobileNo", mobileNo);
+                    params.put("EmailId", emailId);
+                    params.put("Gender", gender);
+                    params.put("DateOfBirth", birthdate);
+                    params.put("Age", age);
+                    params.put("AgentId", String.valueOf("0"));
+                    params.put("RegisterBy", "Self");
+                    //params.put("MembershipId", "1");
+                    params.put("ProfileImage", "0");
+                    params.put("Password", password);
+                    params.put("LanguageType", language);
+                    return params;
+
+
+                }
+            };
+
+            VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+
+        }
+
+    }
+
     public void replaceFragment(Fragment destFragment)
     {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+        Bundle bundle = new Bundle();
+        bundle.putString("UserType","NewUser");
+        destFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
         fragmentTransaction.commit();
     }
@@ -258,4 +397,62 @@ View view;
             return false;
         }
     }
+
+    private class AsyncTaskLoad extends AsyncTask<String, String, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            publishProgress("Sleeping..."); // Calls onProgressUpdate()
+
+            try {
+
+                //customDialogLoadingProgressBar.dismiss();
+
+                if(params[0].equals("verifyMobileNo"))
+                {
+                    //verifyMobileNo();
+
+                }
+                else if(params[0].equals("getOTP"))
+                {
+                   // getOtp();
+                }
+
+
+
+
+                return params[0];
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                //resp = e.getMessage();
+            }
+            return params[0];
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            customDialogLoadingProgressBar.dismiss();
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            customDialogLoadingProgressBar.show();
+
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+
+        }
+
+    }
+
+
+
 }

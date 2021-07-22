@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/quantum_grey100"
+    android:background="@color/white"
     >
-
+<!--    android:background="@color/quantum_grey100"-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
 
@@ -24,12 +24,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                app:cardElevation="0.5dp"-->
+<!--                >-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +37,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -155,9 +154,9 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:id="@+id/rulerValuePicker_height"
-                    android:background="@color/white"
                     app:indicator_color="@color/text_black"
                     app:indicator_interval="5dp"
+                    android:background="@color/white"
                     app:indicator_width="1dp"
                     app:max_value="245"
                     app:min_value="90"
@@ -168,7 +167,7 @@
                     />
 
             </LinearLayout>
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 <!--                <com.tistory.dwfox.dwrulerviewlibrary.view.LineRulerView
                     android:layout_width="match_parent"
@@ -183,12 +182,12 @@
                     />
                 -->
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                app:cardElevation="0.5dp"-->
+<!--                >-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,7 +195,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -256,7 +254,7 @@
                         />
 
             </LinearLayout>
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
 
@@ -270,12 +268,12 @@
                     android:layout_marginStart="15dp"
                     android:textAllCaps="true"
                     />
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:cardElevation="0.5dp"
-                    >
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:cardElevation="0.5dp"-->
+<!--                    >-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -283,7 +281,6 @@
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:background="@color/white"
                         android:orientation="vertical"
                         android:gravity="center"
                         >
@@ -329,14 +326,14 @@
 
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+<!--                </androidx.cardview.widget.CardView>-->
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                app:cardElevation="0.5dp"-->
+<!--                >-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -344,7 +341,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -365,8 +361,6 @@
                         android:maxLines="1"
                         android:focusable="false"
                         android:clickable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
 
@@ -402,8 +396,6 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -437,8 +429,6 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -472,8 +462,6 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -507,8 +495,6 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -526,15 +512,15 @@
                     />
 
             </LinearLayout>
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                app:cardElevation="0.5dp"-->
+<!--                >-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -542,7 +528,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -613,15 +598,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
-            </androidx.cardview.widget.CardView>
+<!--            </androidx.cardview.widget.CardView>-->
 
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
-                >
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                app:cardElevation="0.5dp"-->
+<!--                >-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -629,7 +614,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -650,8 +634,6 @@
                         android:textSize="15sp"
                         android:focusable="false"
                         android:clickable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -665,65 +647,17 @@
                     />
 
             </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="25dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/diet"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
+<!--            </androidx.cardview.widget.CardView>-->
 
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/radioGroup_diet"
-                        android:orientation="horizontal"
-                        android:theme="@style/RadioButtonTheme"
-                        >
 
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:id="@+id/radioButton_veg"
-                            android:text="Veg"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_black"
-                            android:layout_gravity="center_vertical"
-                            android:checked="true"/>
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/radioButton_nonVeg"
-                            android:text="Non-Veg"
-                            android:textSize="13sp"
-                            android:layout_marginStart="15dp"
-                            android:textColor="@color/text_black"
-                            android:layout_gravity="center_vertical"/>
-
-                    </RadioGroup>
-
-
-                </LinearLayout>-->
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                app:cardElevation="0.5dp"
-                >
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                app:cardElevation="0.5dp"-->
+<!--                >-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -731,7 +665,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -750,48 +683,11 @@
                     />
 
             </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-               <!-- <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_weight="1"
-                        android:text="@string/lives_with_family"
-                        android:textColor="@color/text_black"
-                        android:textSize="15sp" />
-
-                    <com.suke.widget.SwitchButton
-                        android:layout_width="45dp"
-                        android:layout_height="27dp"
-                        android:id="@+id/switchButton_livesWithFamily"
-                        android:layout_marginEnd="03dp"
-                        app:sb_button_color="#8f329b"
-                        app:sb_checked="false"
-                        app:sb_checked_color="#8f329b"
-                        app:sb_checkline_color="@color/transparent"
-                        app:sb_checkline_width="0dp"
-                        app:sb_uncheck_color="#ebebeb"
-                        app:sb_uncheckcircle_radius="0dp" />
-
-                </LinearLayout>-->
-
+<!--            </androidx.cardview.widget.CardView>-->
 
 
 
             </LinearLayout>
-
-            <!--"TextInputLayout" is used with a styling theme...-->
-
-
-
 
 
 

@@ -273,8 +273,8 @@ public class QualificationDetailsFragment extends Fragment {
             public void onClick(View view) {
 
 //
-//                        AsyncTaskLoad insertTask = new AsyncTaskLoad();
-//                        insertTask.execute("insertDetails");
+            AsyncTaskLoad insertTask = new AsyncTaskLoad();
+            insertTask.execute("insertDetails");
 
 
                /* getActivity().runOnUiThread(new Runnable() {
@@ -284,13 +284,7 @@ public class QualificationDetailsFragment extends Fragment {
                 });*/
 
 
-                ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
-                //professionalDetailsFragment.setArguments(bundle);
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, professionalDetailsFragment);
-                fragmentTransaction.commit() ;
 
             }
         });
@@ -300,6 +294,20 @@ public class QualificationDetailsFragment extends Fragment {
 
     }
 
+    void replaceFragment(Fragment destFragment)
+    {
+        if(userModel.getUserType().equals("OldUser")){
+            getActivity().onBackPressed();
+        }
+        else {
+            //ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+            fragmentTransaction.commit();
+        }
+    }
 
     private void insertDetails()
     {
@@ -411,8 +419,8 @@ public class QualificationDetailsFragment extends Fragment {
                                 getDetails();
 
                                 Toast.makeText(getContext(),"Qualification details saved successfully!", Toast.LENGTH_SHORT).show();
-
-                                getActivity().finish();
+                                replaceFragment(new ProfessionalDetailsFragment());
+                                //getActivity().finish();
 
                                 /*ProfessionalDetailsFragment professionalDetailsFragment = new ProfessionalDetailsFragment();
                                 professionalDetailsFragment.setArguments(bundle);
@@ -513,8 +521,6 @@ public class QualificationDetailsFragment extends Fragment {
 
                                     addPersonModelArrayList_education.clear();
 
-
-
                                     JSONArray jsonArray_education = jsonObject.getJSONArray("LowerQualificationLST");
 
                                     for(int j=0; j< jsonArray_education.length(); j++) {
@@ -576,7 +582,7 @@ public class QualificationDetailsFragment extends Fragment {
                                 customDialogLoadingProgressBar.dismiss();
 
                                 if (getContext() != null) {
-                                    Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
                                 }
 
                                 customDialogLoadingProgressBar.dismiss();

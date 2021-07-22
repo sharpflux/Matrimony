@@ -1,10 +1,13 @@
 package com.example.matrimonyapp.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.InputType;
@@ -26,20 +30,38 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.activity.SignUp;
+import com.example.matrimonyapp.activity.VerifyOtpActivity;
+import com.example.matrimonyapp.customViews.CustomDialogAccountExists;
+import com.example.matrimonyapp.customViews.CustomDialogLoadingProgressBar;
 import com.example.matrimonyapp.modal.UserModel;
 import com.example.matrimonyapp.utils.AppSignatureHashHelper;
 import com.example.matrimonyapp.utils.SMSReceiver;
 import com.example.matrimonyapp.volley.CustomSharedPreference;
+import com.example.matrimonyapp.volley.URLs;
+import com.example.matrimonyapp.volley.VolleySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,21 +75,26 @@ public class PrimaryInfoFragment extends Fragment  implements
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    CustomDialogAccountExists customDialogAccountExists;
+    private CustomDialogLoadingProgressBar customDialogLoadingProgressBar;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    EditText editText_fullName, email_et,editText_birthdate,editText_age,editText_password,editText_confirmPassword;
+    EditText editText_fullName, editText_mobileNo, editText_emailId,editText_birthdate,editText_age,editText_password,editText_confirmPassword;
     TextView txt_saveAndContinue;
+    RadioGroup radioGroup_gender;
 
     ImageView password_show, password_hide,password_show1,password_hide1;
     FrameLayout frame_eye,frame_eye1;
     private int passwordNotVisible = 1;
     private int ConfirmpasswordNotVisible = 1;
     String TAG = "PhoneActivityTAG";
-
+    String fullName, gender, birthdate, mobileNo,
+            emailId, age, password;
     String wantPermission = Manifest.permission.READ_PHONE_STATE;
     private static final int PERMISSION_REQUEST_CODE = 1;
+
+    Context context;
 
     private UserModel userModel;
 
@@ -111,9 +138,11 @@ public class PrimaryInfoFragment extends Fragment  implements
         view= inflater.inflate(R.layout.fragment_primary_info, container, false);
 
         editText_fullName = view.findViewById(R.id.editText_fullName);
-        email_et = view.findViewById(R.id.editText_emailId);
+        editText_mobileNo = view.findViewById(R.id.editText_mobileNo);
+        editText_emailId = view.findViewById(R.id.editText_emailId);
         editText_birthdate = view.findViewById(R.id.editText_birthdate);
         editText_age= view.findViewById(R.id.editText_age);
+        radioGroup_gender= view.findViewById(R.id.radioGroup_gender);
         txt_saveAndContinue=((MainActivity)getActivity()).findViewById(R.id.txt_saveAndContinue);
 
         editText_password = view.findViewById(R.id.editText_password);
@@ -122,12 +151,12 @@ public class PrimaryInfoFragment extends Fragment  implements
         password_show = (ImageView) view.findViewById(R.id.password_show);
         password_hide = (ImageView) view.findViewById(R.id.password_hide);
 
-
+        context = getContext();
         frame_eye1 = (FrameLayout) view.findViewById(R.id.frame_eye1);
         password_show1 = (ImageView) view.findViewById(R.id.password_show1);
         password_hide1 = (ImageView) view.findViewById(R.id.password_hide1);
 
-
+        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(context);
 
         frame_eye.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +198,7 @@ public class PrimaryInfoFragment extends Fragment  implements
 
 
         editText_fullName.addTextChangedListener(change);
-        email_et.addTextChangedListener(change);
+        editText_emailId.addTextChangedListener(change);
         editText_birthdate.addTextChangedListener(change);
         editText_age.addTextChangedListener(change);
         editText_password.addTextChangedListener(change);
@@ -187,7 +216,21 @@ public class PrimaryInfoFragment extends Fragment  implements
         txt_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new OtpFragment());
+
+                if(editText_password.getText().toString().equals(editText_confirmPassword.getText().toString()))
+                {
+                    if(checkRequiredFields(editText_fullName, editText_mobileNo, editText_birthdate, editText_password, editText_confirmPassword)) {
+                        // verifyMobileNo();
+                        AsyncTaskLoad runner = new AsyncTaskLoad();
+                        runner.execute("verifyMobileNo");
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(context, getResources().getString(R.string.password_confirm_password_doesnt_match), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -201,7 +244,7 @@ public class PrimaryInfoFragment extends Fragment  implements
 
         if (user != null) {
             editText_fullName.setText(user.getFullName());
-            email_et.setText(user.getEmailId());
+            editText_emailId.setText(user.getEmailId());
         }
 
         //startSMSListener();
@@ -213,6 +256,21 @@ public class PrimaryInfoFragment extends Fragment  implements
         return  view;
     }
 
+    private boolean checkRequiredFields(EditText ...editText) {
+        boolean flag = true;
+        for (EditText temp_editText: editText) {
+
+            if(temp_editText.getText().toString().equals(""))
+            {
+                temp_editText.setError("This is required field", getResources().getDrawable(R.drawable.ic_error_outline_black_24dp));
+                flag = false;
+
+            }
+
+        }
+        return flag;
+
+    }
 
     public void replaceFragment(Fragment destFragment)
     {
@@ -220,6 +278,28 @@ public class PrimaryInfoFragment extends Fragment  implements
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+
+
+
+        fullName = editText_fullName.getText().toString().trim();
+        mobileNo = editText_mobileNo.getText().toString().trim();
+        emailId = editText_emailId.getText().toString().trim();
+        birthdate = editText_birthdate.getText().toString().trim();
+        age = editText_age.getText().toString().trim();
+        password = editText_password.getText().toString().trim();
+        gender = ((RadioButton)getActivity().findViewById(radioGroup_gender.getCheckedRadioButtonId()))
+                .getText().toString();
+
+        Bundle bundle = new Bundle();
+//        intent.putExtra("OTP",obj.getString("OTP"));
+        bundle.putString("fullName",fullName);
+        bundle.putString("mobileNo",mobileNo);
+        bundle.putString("emailId",emailId);
+        bundle.putString("birthdate",birthdate);
+        bundle.putString("age",age);
+        bundle.putString("gender",gender);
+        bundle.putString("password",password);
+        destFragment.setArguments(bundle);
         fragmentTransaction.commit();
     }
 
@@ -264,6 +344,136 @@ public class PrimaryInfoFragment extends Fragment  implements
         }
     }
 
+    void getOtp()
+    {
+        mobileNo = editText_mobileNo.getText().toString().trim();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URLs.URL_GET_OTP+"MobileNo="+mobileNo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+                            JSONObject obj = new JSONObject(response);
+
+
+                            if (!obj.getBoolean("error") && obj.getString("message").equals("Success")) {
+
+
+                               replaceFragment(new OtpFragment());
+
+
+                            }
+                            else{
+                               Toast.makeText(context, "Sorry for inconvenience, \nPlease try again!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                       /* */
+
+                        //  ---  progressDialog.dismiss();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                //params.put("OTPMobileNo", mobileNo);
+                return params;
+            }
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0,DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+    }
+    void verifyMobileNo()
+    {
+
+        mobileNo = editText_mobileNo.getText().toString().trim();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URLs.URL_POST_VERIFYMOBILE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            //converting response to json object
+                            JSONObject obj = new JSONObject(response);
+
+
+                            if (obj.getBoolean("error")) {
+
+                                getOtp();
+
+                            }
+                            else{
+
+                                customDialogAccountExists = new CustomDialogAccountExists(context);
+
+                                customDialogAccountExists.show();
+
+                                customDialogAccountExists.textView_createNew.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                        editText_fullName.requestFocus();
+                                        editText_fullName.setText("");
+                                        editText_mobileNo.setText("");
+                                        editText_emailId.setText("");
+                                        editText_birthdate.setText("");
+                                        editText_age.setText("");
+                                        editText_password.setText("");
+                                        editText_confirmPassword.setText("");
+                                        radioGroup_gender.clearCheck();
+                                        customDialogAccountExists.dismiss();
+
+                                    }
+                                });
+
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context,"Error in SignUP verifyMobile"+error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("OTPMobileNo", mobileNo);
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+
+
+
+    }
 
     private  void  ShowCalendar(){
         editText_birthdate.setOnClickListener(new View.OnClickListener() {
@@ -330,7 +540,7 @@ public class PrimaryInfoFragment extends Fragment  implements
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             String mobile = editText_fullName.getText().toString().trim();
-            String email = email_et.getText().toString().trim();
+            String email = editText_emailId.getText().toString().trim();
             String birthdate = editText_birthdate.getText().toString().trim();
             String age = editText_age.getText().toString().trim();
             String password = editText_password.getText().toString().trim();
@@ -366,4 +576,62 @@ public class PrimaryInfoFragment extends Fragment  implements
     public void onOTPReceivedError(String error) {
 
     }
+
+    private class AsyncTaskLoad extends AsyncTask<String, String, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            publishProgress("Sleeping..."); // Calls onProgressUpdate()
+
+            try {
+
+                //customDialogLoadingProgressBar.dismiss();
+
+                if(params[0].equals("verifyMobileNo"))
+                {
+                    verifyMobileNo();
+
+                }
+                else if(params[0].equals("getOTP"))
+                {
+                   getOtp();
+                }
+
+
+
+
+                return params[0];
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                //resp = e.getMessage();
+            }
+            return params[0];
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            customDialogLoadingProgressBar.dismiss();
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            customDialogLoadingProgressBar.show();
+
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+
+        }
+
+    }
+
+
+
 }

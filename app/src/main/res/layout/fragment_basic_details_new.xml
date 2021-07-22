@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/quantum_grey100">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
                 >
 
 
@@ -40,7 +40,6 @@
                     android:hint="@string/full_name"
                     android:inputType="textCapWords"
                     android:singleLine="true"
-                    android:digits="@string/only_text_with_space"
                     android:textColor="@color/text_black"
                     android:textSize="15sp" />
 
@@ -113,7 +112,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
 
                     >
 
@@ -138,7 +137,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
 
                     >
 
@@ -173,7 +172,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
                     android:layout_weight="1"
                     >
 
@@ -231,7 +230,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel" >
+                android:theme="@style/TextLabel" >
 
                 <EditText
                     android:id="@+id/editText_birthPlace"
@@ -240,7 +239,6 @@
                     android:maxLength="10"
                     android:textColor="@color/text_black"
                     android:hint="@string/birth_place"
-                    android:inputType="number"
                     android:textSize="15sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -252,7 +250,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -284,7 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -314,7 +312,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -349,7 +347,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -391,7 +389,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -403,10 +401,8 @@
                     android:hint="@string/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType=""
+                    android:inputType="number"
                     android:singleLine="true"
-                    android:clickable="false"
-                    android:focusable="false"
                     android:textSize="15sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -416,7 +412,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -428,10 +424,8 @@
                     android:hint="@string/alt_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType=""
+                    android:inputType="number"
                     android:singleLine="true"
-                    android:clickable="false"
-                    android:focusable="false"
                     android:textSize="15sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -442,7 +436,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -456,8 +450,6 @@
                     android:layout_height="wrap_content"
                     android:inputType=""
                     android:singleLine="true"
-                    android:clickable="false"
-                    android:focusable="false"
                     android:textSize="15sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -466,7 +458,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -480,8 +472,6 @@
                     android:layout_height="wrap_content"
                     android:inputType=""
                     android:singleLine="true"
-                    android:clickable="false"
-                    android:focusable="false"
                     android:textSize="15sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -500,7 +490,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -531,7 +521,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -562,7 +552,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -593,7 +583,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -616,7 +606,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -638,7 +628,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -663,7 +653,6 @@
                 android:paddingTop="10dp"
                 android:paddingStart="08dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 >
@@ -699,7 +688,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -730,7 +719,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -762,7 +751,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -796,7 +785,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -818,7 +807,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -839,7 +828,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 

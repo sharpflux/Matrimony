@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
                 >
 
                     <EditText
@@ -52,10 +52,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel" >
+                android:theme="@style/TextLabel" >
 
                 <EditText
-                    android:id="@+id/mobileNo"
+                    android:id="@+id/editText_mobileNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="10"
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                style="@style/TextLabel"
+                android:theme="@style/TextLabel"
 
                 >
 
@@ -103,7 +103,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
 
                     >
 
@@ -128,7 +128,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
 
                     >
 
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
 
                     >
 
@@ -256,7 +256,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    style="@style/TextLabel"
+                    android:theme="@style/TextLabel"
 
                     >
 

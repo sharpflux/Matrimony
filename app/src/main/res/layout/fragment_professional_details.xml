@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/quantum_grey100"
+    android:background="@color/white"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical">
 
 
@@ -39,7 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    app:cardElevation="0.5dp"
+                    app:cardBackgroundColor="@color/transparent"
+                    app:cardElevation="0dp"
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -48,7 +49,6 @@
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="5dp"
-                        android:background="@color/white"
                         android:orientation="vertical"
                         android:gravity="center"
                         >
@@ -103,7 +103,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    app:cardElevation="0.5dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/transparent"
                     android:id="@+id/cardView_governmentService"
                     >
                     <LinearLayout
@@ -112,8 +113,7 @@
                         android:paddingTop="10dp"
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
-                        android:paddingBottom="10dp"
-                        android:background="@color/white"
+                        android:paddingBottom="0dp"
                         android:orientation="vertical"
                         android:gravity="center"
                         >
@@ -165,7 +165,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="0.5dp"
+                app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/transparent"
                     android:id="@+id/cardView_privateService"
                     android:visibility="gone"
                 >
@@ -176,7 +177,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -223,8 +223,7 @@
                         android:maxLines="1"
                         android:clickable="false"
                         android:focusable="false"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/drawable_arrow_color"
+
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -244,17 +243,17 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:cardElevation="0.5dp"
+                    android:layout_marginTop="0dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/transparent"
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
+                        android:paddingTop="0dp"
                         android:paddingStart="20dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="10dp"
-                        android:background="@color/white"
                         android:orientation="vertical"
                         android:gravity="center"
                         >
@@ -327,8 +326,6 @@
                                 android:textSize="15sp"
                                 android:clickable="false"
                                 android:focusable="false"
-                                android:drawableEnd="@drawable/ic_action_arrow_down"
-                                android:drawableTint="@color/drawable_arrow_color"
                                 />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -362,7 +359,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="20dp"
-                app:cardElevation="0.5dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/transparent"
                 >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -371,7 +369,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
-                android:background="@color/white"
                 android:orientation="vertical"
                 android:gravity="center"
                 >
@@ -391,9 +388,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_country"
                         android:hint="@string/country"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/text_gray"
-
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:nextFocusRight="@id/editText_district"
@@ -423,8 +417,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_state"
                         android:hint="@string/_state"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/text_gray"
+
 
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
@@ -456,9 +449,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/editText_city"
                         android:hint="@string/_city"
-                        android:drawableEnd="@drawable/ic_action_arrow_down"
-                        android:drawableTint="@color/gray"
-
                         android:textColor="@color/text_black"
                         android:textSize="15sp"
                         android:clickable="false"
@@ -527,23 +517,6 @@
                     />-->
             </LinearLayout>
             </androidx.cardview.widget.CardView>
-<!--
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="30dp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
-
-
-
-
-
-
-                </LinearLayout>
--->
 
 
 

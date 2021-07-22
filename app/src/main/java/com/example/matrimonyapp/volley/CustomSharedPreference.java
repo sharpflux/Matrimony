@@ -29,6 +29,7 @@ public class CustomSharedPreference {
     private static final String KEY_USERID = "USERID";
     private static final String KEY_PROFILEPIC= "PROFILEPIC";
     private static final String KEY_LANGUAGE = "LANGUAGE";
+    private static final String KEY_USERTYPE = "USERTYPE";
 
     private static CustomSharedPreference instance;
 
@@ -80,6 +81,7 @@ public class CustomSharedPreference {
         editor.putString(KEY_GENDER,userModel.getGender());
         editor.putString(KEY_PROFILEPIC,userModel.getProfilePic());
         editor.putString(KEY_LANGUAGE,userModel.getLanguage());
+        editor.putString(KEY_USERTYPE,userModel.getUserType());
 
         editor.apply();
 
@@ -103,7 +105,9 @@ public class CustomSharedPreference {
                 sharedPreferences.getString(KEY_AGE, null),
                 sharedPreferences.getString(KEY_GENDER, null),
                 sharedPreferences.getString(KEY_PROFILEPIC, null),
-                sharedPreferences.getString(KEY_LANGUAGE, null)
+                sharedPreferences.getString(KEY_LANGUAGE, null),
+                sharedPreferences.getString(KEY_USERTYPE, null)
+
         );
     }
 

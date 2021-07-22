@@ -604,7 +604,8 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
        AsyncTaskRunner runner = new AsyncTaskRunner();
        runner.execute("GetDetails");
-
+        AsyncTaskRunner profileChecker = new AsyncTaskRunner();
+        profileChecker.execute("ProfileChecker");
     }
 
 
@@ -977,16 +978,13 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
         @Override
         protected void onPreExecute() {
-
-            if (!isFinishing() && customDialogLoadingProgressBar != null) {
-                customDialogLoadingProgressBar.setCancelable(false);
                 customDialogLoadingProgressBar.show();
-            }
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            customDialogLoadingProgressBar.dismiss();
         }
 
         @Override
@@ -1015,7 +1013,6 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
 
                         try {
 
-
                             Log.d("RESPONSE",response);
 
                             arrayList_dailyRecommendations.clear();
@@ -1026,12 +1023,27 @@ public class HomeActivity extends AppCompatActivity  {//implements SimpleGesture
                             {
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                                 if(!jsonObject.getString("FragmentName").equals("COMPLETED")){
-                                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                    intent.putExtra("fragmentName",jsonObject.getString("FragmentName"));
-                                    intent.putExtra("ShowBackButton","No");
-                                    startActivity(intent);
-                                    finish();
+                                    CustomSharedPreference customSharedPreference = CustomSharedPreference.getInstance(HomeActivity.this);
+                                    UserModel userModel = customSharedPreference.getUser();
+                                    if(!jsonObject.getString("FragmentName").equals("Family")){
+                                        userModel.setUserType("NewUser");
+                                        customSharedPreference.saveUser(userModel);
+                                        Toast.makeText(getApplicationContext(), "Please complete profile first", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        intent.putExtra("fragmentName",jsonObject.getString("FragmentName"));
+                                        intent.putExtra("ShowBackButton","No");
+                                        startActivity(intent);
+                                        finish();
+
+                                    }
+                                    else{
+
+                                        userModel.setUserType("OldUser");
+                                        customSharedPreference.saveUser(userModel);
+
+                                    }
+
                                 }
 
                             }

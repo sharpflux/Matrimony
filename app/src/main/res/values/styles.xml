@@ -149,7 +149,8 @@
         <item name="android:inputType">text</item>
 
         <item name="colorAccent">@color/black</item>
-        <item name="colorControlNormal">#ebebeb</item>
+        <item name="colorControlNormal">@color/quantum_grey300</item>
+<!--        <item name="colorControlNormal">#ebebeb</item>-->
         <item name="colorControlActivated">#9e2e90</item>
         <item name="android:layout_marginTop">10dp</item>
 

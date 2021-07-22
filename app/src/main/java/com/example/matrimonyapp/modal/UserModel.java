@@ -2,13 +2,14 @@ package com.example.matrimonyapp.modal;
 
 public class UserModel {
 
-    private String userId, fullName, mobileNo, emailId, birthdate, age, gender, profilePic, language;
+    private String userId, fullName, mobileNo, emailId, birthdate, age, gender, profilePic,
+            language, userType;
 
     public UserModel() {
     }
 
     public UserModel(String userId, String fullName, String mobileNo, String emailId, String birthdate,
-                     String age, String gender, String profilePic, String language) {
+                     String age, String gender, String profilePic, String language, String userType) {
         this.userId = userId;
         this.fullName = fullName;
         this.mobileNo = mobileNo;
@@ -18,6 +19,8 @@ public class UserModel {
         this.gender = gender;
         this.profilePic = profilePic;
         this.language = language;
+        this.userType = userType;
+
     }
 
     public String getUserId() {
@@ -90,5 +93,13 @@ public class UserModel {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 }

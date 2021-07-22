@@ -73,6 +73,8 @@ public class BasicDetailsFragment extends Fragment  {
 // editText_taluka, editText_district,editText_currentDistrict, editText_currentTaluka,editText_birthDistrict,editText_birthTaluka,
     private ImageView imageView_back;
 
+    CustomSharedPreference customSharedPreference;
+
     private RadioGroup radioGroup_gender, radioGroup_birthTimeType;
 
     private TextView textView_saveAndContinue;
@@ -310,15 +312,10 @@ public class BasicDetailsFragment extends Fragment  {
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-//                insertTask.execute("insertDetails");
+                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(null);
 
-                ReligiousDetailsFragment religiousDetailsFragment = new ReligiousDetailsFragment();
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, religiousDetailsFragment);
-                fragmentTransaction.commit() ;
 
             }
         });
@@ -327,6 +324,24 @@ public class BasicDetailsFragment extends Fragment  {
 
     }
 
+    void replaceFragment()
+    {
+
+        if(userModel.getUserType().equals("OldUser")){
+            getActivity().onBackPressed();
+        }
+        else{
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+
+            PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+            fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
+            fragmentTransaction.commit() ;
+
+        }
+
+    }
     private void showPopUp(final EditText editText, final String urlFor)
     {
         editText.setOnClickListener(new View.OnClickListener() {
@@ -520,6 +535,8 @@ public class BasicDetailsFragment extends Fragment  {
         }*/
 
         userModel = CustomSharedPreference.getInstance(getContext()).getUser();
+
+        customSharedPreference = CustomSharedPreference.getInstance(context);
 
         customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
 
@@ -824,7 +841,8 @@ public class BasicDetailsFragment extends Fragment  {
 
                                 Toast.makeText(context,"Basic details saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                getActivity().finish();
+                                replaceFragment();
+                                //getActivity().finish();
 
 
                                 /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -838,7 +856,7 @@ public class BasicDetailsFragment extends Fragment  {
                             else
                             {
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!",Toast.LENGTH_SHORT).show();
                             }
 
 

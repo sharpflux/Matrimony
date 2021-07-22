@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.matrimonyapp.R;
+import com.example.matrimonyapp.activity.HomeActivity;
 import com.example.matrimonyapp.activity.LoginActivity;
 import com.example.matrimonyapp.activity.MainActivity;
 import com.example.matrimonyapp.adapter.DataFetcher;
@@ -171,22 +172,33 @@ public class ReligiousDetailsFragment extends Fragment {
         textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-/*                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");*/
+                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");
 
-
-                PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, personalDetailsFragment);
-                fragmentTransaction.commit() ;
 
             }
         });
 
 
+    }
+
+    void replaceFragment(Fragment destFragment)
+    {
+//        Intent intent = new Intent(getActivity(), HomeActivity.class);
+//        getActivity().startActivity(intent);
+//        getActivity().finish();
+
+        if(userModel.getUserType().equals("OldUser")){
+            getActivity().onBackPressed();
+        }
+        else {
+            //FamilyDetailsFragment familyDetailsFragment = new FamilyDetailsFragment();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+            fragmentTransaction.commit();
+        }
     }
 
     void showPopUp(EditText editText, final String urlFor, final TextView textView_id)
@@ -222,8 +234,9 @@ public class ReligiousDetailsFragment extends Fragment {
                             {
                                 getDetails();
                                 Toast.makeText(getContext(),"Religious details saved successfully!", Toast.LENGTH_SHORT).show();
-                                getActivity().finish();
+                                //getActivity().finish();
 
+                                replaceFragment(new FamilyDetailsFragment());
                                 /*PersonalDetailsFragment personalDetailsFragment = new PersonalDetailsFragment();
 
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -261,7 +274,7 @@ public class ReligiousDetailsFragment extends Fragment {
                 params.put("SubCasteId",textView_subCasteId.getText().toString());
                 params.put("OtherCommunity",String.valueOf(checkBox_otherCaste.isChecked()));
                 params.put("Gothram",editText_gothram.getText().toString());
-                params.put("Dosh",editText_dosh.getText().toString());
+                params.put("Dosh","0");
                 params.put("MotherTongueId",textView_motherTongueId.getText().toString());
                 params.put("LanguageType",userModel.getLanguage());
                 return params;
@@ -311,7 +324,7 @@ public class ReligiousDetailsFragment extends Fragment {
                             else
                             {
                                 religionDetailsId = 0;
-                                Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(),"Invalid Details GET! ",Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -395,7 +408,7 @@ public class ReligiousDetailsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-
+            customDialogLoadingProgressBar.dismiss();
         }
 
 

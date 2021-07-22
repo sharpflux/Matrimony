@@ -83,7 +83,7 @@ public class FamilyDetailsFragment extends Fragment {
     private Context context;
     private TextView textView_fatherQualificationId, textView_fatherOccupationId, textView_fatherStateId,
             textView_fatherCountryId, textView_fatherCityId, textView_saveAndContinue,
-            textView_motherQualificationId, textView_motherOccupationId, textView_familyIncome;
+            textView_motherQualificationId, textView_motherOccupationId, textView_familyIncome,textView_fatherIncome;
 
     private EditText editText_fatherName, editText_fatherMobileNo, editText_fatherQualification,
             editText_fatherOccupation, editText_fatherState, editText_fatherCountry, editText_fatherCity,
@@ -154,7 +154,6 @@ public class FamilyDetailsFragment extends Fragment {
 
         context = getContext();
 
-        customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
 
         bundle = getArguments();
 
@@ -173,6 +172,7 @@ public class FamilyDetailsFragment extends Fragment {
         textView_fatherQualificationId = view.findViewById(R.id.textView_fatherQualificationId);
         editText_fatherOccupation = view.findViewById(R.id.editText_fatherOccupation);
         editText_fatherIncome = view.findViewById(R.id.editText_fatherIncome);
+        textView_fatherIncome = view.findViewById(R.id.textView_fatherIncome);
 
         editText_fatherState = view.findViewById(R.id.editText_fatherState);
         textView_fatherStateId = view.findViewById(R.id.textView_fatherStateId);
@@ -332,6 +332,7 @@ public class FamilyDetailsFragment extends Fragment {
         showPopup(editText_fatherOccupation, "FatherOccupation");
         showPopup(editText_motherOccupation, "MotherOccupation");
         showPopup(editText_familyIncome, "FamilyIncome");
+        showPopup(editText_fatherIncome, "FatherIncome");
 
 
         onClickListener();
@@ -466,162 +467,133 @@ public class FamilyDetailsFragment extends Fragment {
 
     public void onClickListener() {
 
-        radioGroup_motherServiceType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                radioGroup_motherServiceType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, int id) {
 
-                if (id == R.id.radioButton_serviceWoman) {
+                        if (id == R.id.radioButton_serviceWoman) {
 
-                    textInputLayout_motherOccupation.setVisibility(View.VISIBLE);
-                    textInputLayout_motherOccupation.requestFocus();
-                } else if (id == R.id.radioButton_housewife) {
+                            textInputLayout_motherOccupation.setVisibility(View.VISIBLE);
+                            textInputLayout_motherOccupation.requestFocus();
+                        } else if (id == R.id.radioButton_housewife) {
 
-                    textInputLayout_motherOccupation.setVisibility(View.GONE);
-                    editText_motherOccupation.setText("");
-                    editText_motherOccupation.clearFocus();
-                    textView_motherOccupationId.setText("0");
+                            textInputLayout_motherOccupation.setVisibility(View.GONE);
+                            editText_motherOccupation.setText("");
+                            editText_motherOccupation.clearFocus();
+                            textView_motherOccupationId.setText("0");
 
-                }
+                        }
 
-            }
-        });
-
-
-        imageView_addVehicle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CustomDialogAddVehicle customDialogAddVehicle = new CustomDialogAddVehicle(getContext(), "0", "0",
-                        addPersonAdapter_vehicle, addPersonModelArrayList_vehicle, 0);
-                customDialogAddVehicle.show();
-
-            }
-        });
+                    }
+                });
 
 
-        imageView_addProperty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                imageView_addVehicle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(getContext(), "0", "0",
-                        addPersonAdapter_property, addPersonModelArrayList_property, 0);
-                customDialogAddProperty.show();
+                        CustomDialogAddVehicle customDialogAddVehicle = new CustomDialogAddVehicle(getContext(), "0", "0",
+                                addPersonAdapter_vehicle, addPersonModelArrayList_vehicle, 0);
+                        customDialogAddVehicle.show();
 
-            }
-        });
-
-        linearlayout_editDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), CustomDialogAddFarm.id, "0",
-                        addPersonAdapter_farm, addPersonModelArrayList_farm, 0);
-
-                customDialogAddFarm.show();
-
-            }
-        });
-
-        imageView_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fragmentManager = getFragmentManager();
-
-                if (fragmentManager.getBackStackEntryCount() > 0)
-                {
-
-                    fragmentManager.popBackStack();
-                }
-                else
-                {
-                    getActivity().finish();
-                }
-            }
-        });
+                    }
+                });
 
 
-        imageView_addSibling.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                imageView_addProperty.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0", "0",
-                        addPersonAdapter_sibling, addPersonModelArrayList_sibling, 0);
-                customDialogAddSibling.show();
+                        CustomDialogAddProperty customDialogAddProperty = new CustomDialogAddProperty(getContext(), "0", "0",
+                                addPersonAdapter_property, addPersonModelArrayList_property, 0);
+                        customDialogAddProperty.show();
 
-            }
-        });
+                    }
+                });
 
+                linearlayout_editDetails.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-        imageView_addMama.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                        CustomDialogAddFarm customDialogAddFarm = new CustomDialogAddFarm(getContext(), CustomDialogAddFarm.id, "0",
+                                addPersonAdapter_farm, addPersonModelArrayList_farm, 0);
 
-                customDialogAddMama = new CustomDialogAddMama(getContext(), "0", "0",
-                        addPersonAdapter_mama, addPersonModelArrayList_mama, 0);
-                customDialogAddMama.show();
+                        customDialogAddFarm.show();
 
-            }
-        });
+                    }
+                });
 
+                imageView_back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-        textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                        FragmentManager fragmentManager = getFragmentManager();
 
-                AsyncTaskLoad runner = new AsyncTaskLoad();
-                runner.execute("insertDetails");
-/*
-                fatherName = editText_fatherName.getText().toString();
-                fatherMobileNo = editText_fatherMobileNo.getText().toString();
-                fatherOccupationId = editText_fatherOccupation.getText().toString();
-                fatherAnnualIncome= editText_fatherAnnualIncome.getText().toString();
-                //fatherProperty= editText_fatherProperty.getText().toString();
-                fatherAddress= editText_fatherAddress.getText().toString();
-                motherName= editText_motherName.getText().toString();
-                motherMobileNo= editText_motherMobileNo.getText().toString();
-                motherOccupation= editText_motherOccupation.getText().toString();
-                motherAnnualIncome= editText_motherAnnualIncome.getText().toString();
+                        if (fragmentManager.getBackStackEntryCount() > 0)
+                        {
 
-                relative1= editText_relative1.getText().toString();*/
-                /*relative2= editText_relative2.getText().toString();
-                relative3= editText_relative3.getText().toString();
-                relative4= editText_relative4.getText().toString();*/
-
-                /*= view.findViewById(R.id.);
-                = view.findViewById(R.id.);*/
+                            fragmentManager.popBackStack();
+                        }
+                        else
+                        {
+                            getActivity().finish();
+                        }
+                    }
+                });
 
 
+                imageView_addSibling.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        customDialogAddSibling = new CustomDialogAddSibling(getContext(), "0", "0",
+                                addPersonAdapter_sibling, addPersonModelArrayList_sibling, 0);
+                        customDialogAddSibling.show();
+
+                    }
+                });
 
 
-/*                if(bundle!=null)
-                {
-                    bulinearlayout_addMoreFarmndle.putString("fatherName",fatherName);
-                    bundle.putString("fatherMobileNo",fatherMobileNo);
-                    bundle.putString("fatherOccupation",fatherOccupationId);
-                    bundle.putString("fatherAnnualIncome",fatherAnnualIncome);
+                imageView_addMama.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        customDialogAddMama = new CustomDialogAddMama(getContext(), "0", "0",
+                                addPersonAdapter_mama, addPersonModelArrayList_mama, 0);
+                        customDialogAddMama.show();
+
+                    }
+                });
 
 
-                }*/
+                textView_saveAndContinue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        AsyncTaskLoad runner = new AsyncTaskLoad();
+                        runner.execute("insertDetails");
+
+        //                replaceFragment();
+
+                        getActivity().finish();
+
+                    }
+                });
 
 
-/*                bundle.putString("",);
-                bundle.putString("",);*/
-
-/*                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
-                //qualificationDetailsFragment.setArguments(bundle);
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                fragmentTransaction.commit();*/
-
-                getActivity().finish();
-
-            }
-        });
+    }
 
 
+    void replaceFragment()
+    {
+        if(userModel.getUserType().equals("OldUser")){
+            getActivity().onBackPressed();
+        }
+        else {
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            getActivity().startActivity(intent);
+            getActivity().finish();
+        }
     }
 
 
@@ -642,13 +614,13 @@ public class FamilyDetailsFragment extends Fragment {
         fatherName = editText_fatherName.getText().toString().trim();
         if (editText_fatherName.getText().toString().isEmpty()) {
             editText_fatherName.setError("Required");
-            customDialogLoadingProgressBar.dismiss();
+            //customDialogLoadingProgressBar.dismiss();
             return;
         }
         fatherMobileNo = editText_fatherMobileNo.getText().toString().trim();
         if (editText_fatherMobileNo.getText().toString().isEmpty()) {
             editText_fatherMobileNo.setError("Required");
-            customDialogLoadingProgressBar.dismiss();
+            //customDialogLoadingProgressBar.dismiss();
             return;
         }
         fatherQualificationId = textView_fatherQualificationId.getText().toString().trim();
@@ -672,7 +644,7 @@ public class FamilyDetailsFragment extends Fragment {
         fatherAddress = editText_fatherAddress.getText().toString().trim();
         if (editText_fatherAddress.getText().toString().isEmpty()) {
             editText_fatherAddress.setError("Required");
-            customDialogLoadingProgressBar.dismiss();
+            //customDialogLoadingProgressBar.dismiss();
             return;
         }
 
@@ -680,7 +652,7 @@ public class FamilyDetailsFragment extends Fragment {
 
         if (fatherCountryId.equals("0")) {
             editText_fatherCountry.setError("Required");
-            customDialogLoadingProgressBar.dismiss();
+            //customDialogLoadingProgressBar.dismiss();
             return;
         }
 
@@ -742,8 +714,8 @@ public class FamilyDetailsFragment extends Fragment {
                                 //getDetails();
 
                                 Toast.makeText(context, "Family details saved successfully!", Toast.LENGTH_SHORT).show();
-
-                                getActivity().finish();
+                                replaceFragment();
+                                //getActivity().finish();
 
 /*                                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
                                 //qualificationDetailsFragment.setArguments(bundle);
@@ -769,7 +741,7 @@ public class FamilyDetailsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Something went wrong POST ! ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Something went wrong! ", Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
                     }
                 }) {
@@ -1134,7 +1106,7 @@ public class FamilyDetailsFragment extends Fragment {
                                     getSiblingDetailsXML(jsonObject);
                                     //getFarmDetailsXML(jsonObject);
                                     getPropertyDetailsXML(jsonObject);
-
+                                    customDialogLoadingProgressBar.dismiss();
 
 
                                 }
@@ -1388,7 +1360,13 @@ public class FamilyDetailsFragment extends Fragment {
 
                 if(params[0].equals("getDetails"))
                 {
-                    getDetails();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            getDetails();
+                        }
+                    });
+
 
                 }
                 else if(params[0].equals("insertDetails"))
@@ -1525,8 +1503,12 @@ public class FamilyDetailsFragment extends Fragment {
                     dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
                             "SalaryPackageId", "SalaryPackageName", editText_familyIncome,
                             textView_familyIncome, getContext(), customDialogLoadingProgressBar);
-
-
+                }
+                else if(params[0].equals("FatherIncome"))
+                {
+                    dataFetcher.loadList(URLs.URL_GET_SALARY+"Language="+userModel.getLanguage(),
+                            "SalaryPackageId", "SalaryPackageName", editText_fatherIncome,
+                            textView_fatherIncome, getContext(), customDialogLoadingProgressBar);
                 }
 
                 return params[0];
@@ -1577,19 +1559,14 @@ public class FamilyDetailsFragment extends Fragment {
                 }
             }
 
+
         }
 
 
         @Override
         protected void onPreExecute() {
-
-
-            if (!getActivity().isFinishing() && customDialogLoadingProgressBar != null) {
-                customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
-                customDialogLoadingProgressBar.show();
-            }
-
-
+            customDialogLoadingProgressBar = new CustomDialogLoadingProgressBar(getContext());
+            customDialogLoadingProgressBar.show();
         }
 
 

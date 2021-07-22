@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 textView_signUp.setEnabled(false);
-                Intent intent = new Intent(LoginActivity.this, SignUp.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
 

@@ -376,8 +376,7 @@ public class PersonalDetailsFragment extends Fragment {
                 bundle.putString("diet",diet);
                 bundle.putString("livesWithFamily",livesWithFamily);
 */
-/*                AsyncTaskLoad insertTask = new AsyncTaskLoad();
-                insertTask.execute("insertDetails");*/
+
 /*
                 UploadImageFragment uploadImageFragment = new UploadImageFragment();
                 uploadImageFragment.setArguments(bundle);
@@ -387,14 +386,29 @@ public class PersonalDetailsFragment extends Fragment {
                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, uploadImageFragment);
                 fragmentTransaction.commit() ;*/
 
-                QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
-                fragmentTransaction.commit();
+                AsyncTaskLoad insertTask = new AsyncTaskLoad();
+                insertTask.execute("insertDetails");
+
+
 
             }
         });
+    }
+
+    void replaceFragment(Fragment destFragment)
+    {
+
+        if(userModel.getUserType().equals("OldUser")){
+            getActivity().onBackPressed();
+        }
+        else {
+            //QualificationDetailsFragment qualificationDetailsFragment = new QualificationDetailsFragment();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
+            fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, destFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     void showPopUp(EditText editText, final String urlFor)
@@ -483,8 +497,8 @@ public class PersonalDetailsFragment extends Fragment {
                                 fragmentTransaction.replace(R.id.dynamic_fragment_frame_layout, qualificationDetailsFragment);
                                 fragmentTransaction.commit();
 */
-
-                                getActivity().finish();
+                                replaceFragment(new QualificationDetailsFragment());
+                                //getActivity().finish();
 
                             }
                             else
@@ -644,7 +658,7 @@ public class PersonalDetailsFragment extends Fragment {
                             {
                                 personalDetailsId = 0;
                                 customDialogLoadingProgressBar.dismiss();
-                                Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!" ,Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getContext(),"Sorry for the inconvenience \nPlease try again!" ,Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

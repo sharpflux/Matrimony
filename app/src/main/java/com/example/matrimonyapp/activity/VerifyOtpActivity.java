@@ -318,7 +318,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
                                             age,
                                             gender,
                                             "0",
-                                            language);
+                                            language,
+                                            "NewUser");
 
                                     CustomSharedPreference.getInstance(getApplicationContext()).saveUser(userModel);
 
